@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS スナップイン</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="サーバーを管理するための IIS スナップインについて説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="Options">IIS スナップイン</a></h1>
+
+<p>インターネット インフォメーション サービス スナップインでは、Web サイトまたは FTP サイトのコンテンツおよびアクセスを制御するための、サーバー管理機能を提供します。たとえば、企業のイントラネットまたはインターネットにサイトをアップロードする前にそのサイトをテストする場合、このツールを使用して、実際に運用するサーバー上と同一の設定でテストを行うことができます。インターネット インフォメーション サービス スナップインには、次の機能が含まれます。</p>
+
+<ul>
+<li>FTP サイトの管理、アプリケーションの分離、MIME タイプのマップ、または追加スクリプト エンジンの指定</li>
+<li>新しい仮想ディレクトリを作成するためのウィザード</li>
+<li>ネットワーク上でインターネット インフォメーション サービスのインストールを管理する機能</li>
+</ul>
+
+<H3>IIS スナップインを開くには</H3>
+
+<strong>方法 1</strong>
+<ol>
+<li>[スタート] メニューの [コントロール パネル] をクリックします。</li>
+<li>[管理ツール] を開きます。 
+<li>[インターネット インフォメーション サービス] を開きます。</li>
+</ol>
+
+<strong>方法 2</strong>
+<ol>
+<li>デスクトップの [マイ コンピュータ] を右クリックして、[管理] をクリックします。
+<li>[サービスとアプリケーション] を開いて、[インターネット インフォメーション サービス] をクリックします。</li>
+</ol>
+
+<p>また、%SystemRoot%\System32\inetsrv\inetmgr.exe へのショートカットを作成しても、開くことができます。ショートカットを作成する手順の詳細については、[スタート] メニューの Windows 2000 のヘルプで、&quot;ショートカットの追加&quot; というキーワードを検索してください。 
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;インターネット インフォメーション サービス スナップインは、Windows&nbsp;2000 のほかの管理機能と統合された IIS&nbsp;5.1 の管理ツールです。以前のリリースでは、このツールは &quot;インターネット サービス マネージャ&quot; と呼ばれていました。 </p>
+
+<p>このオプションの詳細については、「<a href="iinewtp2.htm">管理</a>」を参照してください。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

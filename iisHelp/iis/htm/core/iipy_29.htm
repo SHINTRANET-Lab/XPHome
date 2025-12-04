@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[サイト オペレータ] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック"><p>
+<strong>[サイト オペレータ] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、サイトに対するオペレータ権限を持つ Windows のユーザー アカウントを定義するときに使用します。</p>
+
+<p><strong>[Web サイト オペレータ]</strong></p>
+
+<p>オペレータの一覧にユーザー アカウントを追加するには、[追加] をクリックします。</p>
+
+<p>選択したユーザー アカウントを削除するには、[削除] をクリックします。</p>
+
+<p>オペレータは、次のような Web サイトの管理作業を行うことができます。</p>
+
+<ul>
+<li>Web サーバーのアクセス権およびログの収集を設定する。</li>
+
+<li>既定の Web ドキュメントおよびフッターを変更する。</li>
+
+<li>Web コンテンツの有効期限、HTTP ヘッダー、およびコンテンツの規制機能を有効にする。</li>
+</ul>
+
+<p>オペレータ権限を持つユーザーでも、Administrator 権限を持たない場合は、次のような特別な管理作業を行うことはできません。</p>
+
+<ul>
+<li>Web サイトの識別情報を変更する。</li>
+
+<li>匿名ユーザーの名前とパスワードを再構成する。</li>
+
+<li>帯域幅を調整する。</li>
+
+<li>仮想ディレクトリを作成する。または仮想ディレクトリのパスを変更する。</li>
+
+<li>アプリケーションの分離を選択する。または選択を解除する。</li>
+</ul>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

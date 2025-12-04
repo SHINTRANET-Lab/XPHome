@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS メタベースの紹介</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_introduction_to_the_iis_metabase"></A><SUP></SUP>IIS メタベースの紹介</H1>
+
+<P>メタベースは、IIS のほとんどの構成情報を格納するリポジトリです。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aint94dh.htm">メタベース構造</A>」では、メタベース内のデータの構成について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aint59pv.htm">キー名とパス</A>」では、メタベース キーへアクセスする方法について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aint0p0l.htm">プロパティの継承</A>」では、構成作業を簡素化して必要な記憶領域を削減するメタベースの機能について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aint9055.htm">メタベースのセキュリティと信頼性</A>」では、メタベースに影響を与えるキーのセキュリティと信頼性について概説します。</li>
+</UL>
+
+<P><B>関連項目</B>
+
+<UL type=disc>
+	<LI>「<a href="..\core\iitasks.htm">メタベースのバックアップ</a>」では、メタベースのバックアップの概念と手順について説明します。</li>
+
+	<LI>「<a href="..\core\iirestore.htm">メタベースを復元する</a>」では、メタベースの復元の概念、手順、および考慮事項について説明します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

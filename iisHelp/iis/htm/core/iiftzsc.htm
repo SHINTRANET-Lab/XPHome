@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html DIR=LTR><head><title>IIS で Fortezza セキュリティを使用する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="スマート カードなどの Fortezza セキュリティ機能の概念と使用方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+<h1><A NAME="H1_448399553"></A>IIS で Fortezza セキュリティを使用する</h1>
+
+<h2><A NAME="H2_448399642"></A>Fortezza とは</h2>
+
+<p>一般に &quot;Fortezza&quot; と呼ばれる米国政府のセキュリティ標準が、IIS でサポートされています。この標準は、メッセージの機密性、整合性、認証、およびメッセージ、コンポーネント、システムに対するアクセス制御を提供する暗号メカニズムを備え、Defense Message System セキュリティ アーキテクチャを実現しています。これらの機能は、サーバーとブラウザ ソフトウェア、および PCMCIA カード ハードウェアを使って実装できます。Fortezza は、米国政府内部で広く使われているメカニズムです。詳細については、<a HREF="http://go.microsoft.com/fwlink/?linkid=1769" target="_blank">Infosec</a> を参照してください。</p>
+
+<h2><A NAME="H2_448400416"></A>Fortezza を使用する</h2>
+
+<p>次の手順で Fortezza セキュリティを IIS に実装します。これにより Fortezza スキーマが IIS に完全に統合されるため、Fortezza セキュリティの標準に準拠して操作できます。</p>
+
+<h3>Fortezza 証明書を使用するには</h3>
+
+<p>Fortezza カードは、PCMCIA カードの一種であり、ノートブック型コンピュータなどの小型デバイスで使用されているものと似ています。このカードには、カードのユーザーを認証するユーザー証明書が入っています。この証明書の機能は、IIS のサーバー証明書やクライアント証明書の機能とほぼ同じです。Fortezza 証明書を IIS で使用できるようにするには、これらの証明書をコピーして、コンピュータ上の安全な場所に保管する必要があります。</p>
+
+<ol>
+	<li><A HREF="http://www.microsoft.com/isapi/redir.dll?prd=microsoft security&clcid=0x0411" target="_blank">Microsoft Web サイト</A> http://www.microsoft.com/security/ から Schannel.dll の非エクスポート コピーを取得します。</li>
+	<li>カード リーダーとそのドライバをインストールします。詳細については、カード リーダーのマニュアルを参照してください。</li>
+	<LI>カード リーダーの製造元が提供する Cryptographic Service Provider (CSP) をインストールします。詳細については、カード リーダーのマニュアルを参照してください。</LI>
+	<LI>コマンドラインから <STRONG>Fortutil.exe</STRONG> を実行します。</LI>
+</ol>
+
+<P>このユーティリティには、カード証明書とその関連情報のインストール、確認、および削除を行う機能が備わっています。この機能を有効にするには、次に示すコマンドをコマンド ラインに入力します。</P>
+
+<TABLE BORDER="1" CELLSPACING="2" CELLPADDING="2">
+<TR BGCOLOR="#C0C0C0">
+	<TD ALIGN="CENTER"><STRONG>アクション</STRONG></TD>
+	<TD ALIGN="CENTER"><STRONG>コマンド</STRONG></TD>
+	<TD ALIGN="CENTER"><STRONG>パラメータ</STRONG></TD>
+
+</TR>
+
+<TR>
+	<TD><STRONG>証明書の追加</STRONG></TD>
+	<TD><code>fortutil.exe /a</code></TD>
+	<TD>Web サイト名、カードのシリアル番号、PIN、カード パーソナリティ</TD>
+
+</TR>
+<TR>
+	<TD><STRONG>証明書の確認</STRONG></TD>
+	<TD><code>fortutil.exe /q</code></TD>
+	<TD>Web サーバー名</TD>
+</TR>
+<TR>
+	<TD><STRONG>証明書の削除</STRONG></TD>
+	<TD><code>fortutil.exe /r</code></TD>
+	<TD>Web サイト名</TD>
+</TR>
+<TR>
+	<TD><STRONG>ヘルプの表示</STRONG></TD>
+	<TD><code>fortutil.exe /?</code></TD>
+	<TD>なし</TD>
+</TR>
+</TABLE>
+
+
+<p><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;サーバーにコピーした Fortezza 証明書は、サーバー証明書ウィザード、証明書信頼リスト ウィザード、または Windows 証明書機能の中で証明書として使用できます。</p>
+
+
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;Web サービスの実行中にカードをカード リーダーから取り外し、その後再挿入した場合、SSL 接続エラーが発生する可能性があります。これらのエラーが発生した場合は、カード リーダーにカードを入れた状態で Web サービスを再開します。</P>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

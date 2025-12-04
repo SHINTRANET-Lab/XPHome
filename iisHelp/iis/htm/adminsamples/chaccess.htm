@@ -1,0 +1,108 @@
+<html dir=LTR><head><title>アクセス制限の変更 (chaccess)</title>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="アクセス制限を変更する管理スクリプト (chaccess) の概念と使用方法について説明します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1 ALIGN="left">アクセス制限の変更 (chaccess)</h1>
+
+<p><strong>概要</strong></p>
+
+<p>1 組の指定されたコンピュータ上の特定のノードで許可されるアクセスの種類を変更します。たとえば、このスクリプトを使って、ディレクトリ、仮想ディレクトリ、またはファイルの読み取り属性や実行属性を制御できます。</p>
+
+<p><strong>用法</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+<td valign="TOP">chaccess</td> <td>-a ADSPATH -computer|-c COMPUTER1, COMPUTER2,...<br>[+read|-read]<br> [+write|-write]<br> [+script|-script]<br> [+execute|-execute]<br> [+browse|-browse]<br> [-verbose|-v]<br> [--help|-?]</td>
+</tr>
+</table>
+
+<p><strong>パラメータ</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+<td valign="TOP">-a ADSPATH</td> <td>コンピュータ相対パス名です。-a w3svc/1 のように指定します。</td>
+</tr>
+
+<tr>
+<td valign="TOP">-Computer</td> <td>カンマで区切り、変更の対象となるコンピュータ名を列挙します。-c Machine1,Machine2,Machine3 のように指定します。指定したすべてのコンピュータに、指定したパスが存在することが前提なので注意が必要です。コンピュータを指定しない場合は、LocalHost を指定したと見なされます。</td>
+</tr>
+
+<tr>
+<td>+-write</td> <td>このノードに対する書き込みアクセス権を有効/無効にします。</td>
+</tr>
+
+<tr>
+<td>+-script</td> <td>このノードに対するスクリプト アクセス権を有効/無効にします。</td>
+</tr>
+
+<tr>
+<td>+-execute</td> <td>このノードに対する実行アクセス権を有効/無効にします。</td>
+</tr>
+
+<tr>
+<td>+-browse</td> <td>このノードに対するディレクトリ参照を有効/無効にします。</td>
+</tr>
+
+<tr>
+<td>-verbose</td> <td>処理中のステータス情報を表示します。</td>
+</tr>
+</table>
+
+<p><STRONG>使用例</STRONG></p>
+
+<p>chaccess -a w3svc/1/ROOT +read -write +script +browse</p>
+
+<p>chaccess -c MACHINE1,MACHINE2 -a w3svc/1/ROOT +read -write +script +browse</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

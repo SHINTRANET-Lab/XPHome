@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>クライアント証明書を取得する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="証明機関と呼ばれる、信頼できる第三者機関からクライアント証明書を取得する方法について説明します。証明機関が要求する識別情報は、取得しようとする証明書の種類によって異なる場合があります。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37688504">クライアント証明書を取得する</a></h1>
+
+<p>クライアント証明書は、&quot;証明機関&quot; と呼ばれる信頼できる第三者機関から入手できます。証明機関は、証明書を発行する前に身元を確認する場合があります。証明機関が要求する識別情報は、取得しようとする証明書の種類によって異なることがあります。これらの証明書の取得方法および実装方法は、使用するブラウザに依存します。ここでは、Internet Explorer Version&nbsp;3.0 以降での手順のみを説明します。その他のブラウザでクライアント証明書を取得および実装する方法については、使用するブラウザのマニュアルを参照してください。</p>
+
+<big>クライアント証明書を取得するには</big><br>
+
+<ol>
+<li>証明機関を選択します。証明機関を選ぶ際には、次の点を考慮する必要があります。</li>
+
+<ul>
+<li>その証明機関は、よく知られた信頼できる組織ですか。</li>
+<li>その証明機関は、身元確認のためにどのような種類の情報を要求していますか。ほとんどの証明機関は、氏名、住所、組織名、電子メール アドレスなどの詳細な識別情報の提示を求めます。</li>
+<li>その証明機関には、クライアント証明書の要求を受け付ける Web サイトがありますか。</li>
+<li>発行される証明書は、使用するブラウザおよびサーバーと互換性がありますか。</li>
+</ul>	
+
+<p>インターネット インフォメーション サービス向けの証明書発行サービスを提供している証明機関の一覧については、「<a href="iiocrsc.htm">サーバー証明書を取得する</a>」を参照してください。<br>
+
+<li>証明機関から示された具体的な申し込み方法を確認します。</li>
+<li>証明書を申し込みます。クライアント証明書の中には、証明書の要求を行ったコンピュータと Web ブラウザでのみ有効となるものがあります。その場合は、証明書をインストールするコンピュータからオンラインで申し込む必要があります。</li> 
+<li>有効なクライアント証明書を受け取ったら、Web ブラウザのセキュリティ機能を使用して証明書をインストールします。(Web ブラウザによっては、クライアント証明書のことを &quot;ブラウザ&quot; 証明書または &quot;個人&quot; 証明書と呼ぶ場合があります。)</li>
+</ol>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

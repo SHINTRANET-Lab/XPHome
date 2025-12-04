@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR>
+<head>
+<title>FTP メッセージとディレクトリ表示スタイルを設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="Description" CONTENT="FTP サイトのディレクトリ表示スタイルと、FTP の接続時、切断時、または最大接続時の各メッセージを設定する方法について説明します。" >
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1><A NAME="H1_325765885"></A>FTP メッセージとディレクトリ表示スタイルを設定する</h1>
+
+<p>FTP サイトをセットアップするときに、サイトの詳細情報をユーザーに示すメッセージを設定することができます。メッセージには、ユーザーが最初に FTP サイトへログオンしたときに表示する接続時のメッセージや、ログオフするときに表示する切断時のメッセージがあります。また、最大接続数に達したことをユーザーに通知するメッセージを表示することもできます  (FTP の最大接続数は、[FTP サイト] プロパティ シートで設定できます)。</p>
+
+<big>FTP の接続時、切断時、または最大接続時の各メッセージを設定するには</big><br>
+ 	
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、メッセージを設定する FTP サイトを選択します。</li>
+<li>サイトを右クリックして、[プロパティ] をクリックします。</li>
+<li>[メッセージ] プロパティ シートをクリックします。</li>
+<li>接続時、切断時、または最大接続時のメッセージを、対応するテキスト ボックスに入力します。</li>
+</ol>
+
+<p>FTP サイトのディレクトリ表示スタイルを設定することもできます。ディレクトリ表示スタイルは、FTP クライアントが LIST 操作を送信したときに使用される形式を定義します。ディレクトリ表示スタイルは、MS-DOS または UNIX のいずれかです。既定のディレクトリ表示スタイルは、MS-DOSです。</p>
+
+<p>既定の MS-DOS ディレクトリ表示の形式は、2 桁の年、月、日です。<a href="../asp/apro1k9x.htm">FtpDirBrowseShowLongDate</a> メタベース プロパティを有効にすることにより、この設定を 4 桁に変更することができます。</p>
+
+<p>UNIX の表示形式では、FTP サーバーの年とファイルの日付 (年) が違う場合、4 桁の年が表示されますが、FTP サーバーの年とファイルの日付 (年) が同じ場合は、年は表示されません。</p>
+
+<big>FTP サイトのディレクトリ表示スタイルを設定するには</big><br>
+ 	
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、ディレクトリ表示スタイルを設定する FTP サイトを選択します。</li>
+<li>サイトを右クリックして、[プロパティ] をクリックします。</li>
+<li>[ホーム ディレクトリ] プロパティ シートをクリックします。</li>
+<li>[ディレクトリの表示スタイル] の [UNIX] または [MS-DOS] をクリックします。</li>
+</ol>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

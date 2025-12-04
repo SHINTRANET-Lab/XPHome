@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[パフォーマンス] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック"><p>
+
+<strong>[パフォーマンス] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、メモリおよび帯域幅の使用に関連するプロパティを設定する場合に使用します。</p>
+
+<p><strong>[チューニング]</strong></p>
+
+<p>サイトへの 1 日の予想接続数に合わせて、この設定を調整します。設定した数が実際の接続数をわずかに上回っていれば、接続は高速に処理され、サーバーのパフォーマンスが向上します。設定した数が実際の接続数を大きく上回っている場合は、サーバーのメモリが無駄に使用され、サーバー全体のパフォーマンスが低下します。</p>
+
+<p><strong> [プロセス調整を使用可能にする]</strong></p>
+
+<p>このチェック ボックスをオンにすると、この Web サイトのアウト プロセス アプリケーションに対する CPU の使用率が制限されます。このチェック ボックスをオンにして、[制限を設定する] チェック ボックスをオフにすると、割り当てられた使用率を超過している場合のみ、イベント ログにイベントが書き込まれます。</p>
+
+<p>[制限を設定する] チェック ボックスをオンにすると、制限を超過する場合があります。サイトが、割り当てられた使用率を 150% 以上超過すると、アプリケーション プロセスがアイドルに設定されます。200% 以上超過した場合は、Web サイト上のすべてのアウトプロセス アプリケーションが停止します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

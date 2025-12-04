@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>管理者用リファレンス</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="レジストリ構成とメタベース構成のプロパティと、IIS の Windows イベントについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="iisadminref">管理者用リファレンス</a></h1>
+
+<p>ここでは、レジストリ構成プロパティ、メタベース、IIS の Windows イベント、カウンタ、タイムアウト、およびログ収集プロパティの詳細について説明します。このリファレンスは、管理作業用です。</p>
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><A HREF="iiregtop.htm">レジストリ</A></strong>」では、IIS レジストリ キーの構成プロパティについて説明します。</li>
+<li>「<strong><A HREF="iimbstop.htm">メタベース</A></strong>」では、メタベースの構成プロパティについて説明します。</li>
+<li>「<strong><A HREF="iievents.htm">IIS の Windows イベント</A></strong>」は、IIS によって Windows のイベント ログに記録されるイベントの一覧です。</li>
+<li>「<strong>その他のリファレンス</strong>」は、タイムアウトやログ収集プロパティの既定の設定、およびカウンタに関する情報のリファレンスです。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>定期的なサーバー管理については、「<a href="iisvadm.htm">サーバーの管理</a>」を参照してください。</li>
+<li>IIS Admin オブジェクトについては、「<a href="../asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</a>」を参照してください。</li>
+<li>管理スクリプトについては、「<a href="../adminsamples/default.htm">管理スクリプト</a>」を参照してください。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+ref, references, pages, reference, list, lists, table, tables, property, properties, config, configure, configuration, metabase, registry, default, defaults, keys, paths, event, events, log, logs, logging, entries, subkey, regedt32.exe, registry, editor, global, parameters, ftp, nt, counter, counters, time out, timeout, timeouts, time-outs, redirect, service-specific, syntax, settings, keywords
+</layer></span></font>
+</body>
+</html>

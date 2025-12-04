@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Active Server Pages の紹介</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="HTML 作成、スクリプト作成、アプリケーション開発における Active Server Pages の基本的な使用方法など、Active Server Pages について説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37763863">Active Server Pages の紹介</a></h1>
+
+
+<p>Microsoft&reg Active Server Pages (ASP) は、動的で対話型の Web サーバー アプリケーションの作成および実行に使用できる &quot;サーバー側スクリプトの作成&quot; 環境です。ASP では、HTML ページ、スクリプト コマンド、および COM コンポーネントを組み合わせて、対話型の Web ページや強力な Web ベースのアプリケーションを作成できます。ASP アプリケーションは、開発や修正が容易です。</p>
+
+<h2><a name="H2_37764454">HTML 作成者にとっての利点</a></h2>
+
+<p>HTML 作成者は、ASP で記述されたサーバー側のスクリプトを使用して、複雑で実用的な Web アプリケーションの作成をすぐに開始できます。HTML フォームからの情報をデータベースへ格納したり、利用者の設定によって Web サイトを細かくカスタマイズしたり、ブラウザによって HTML 機能を使い分けたりする必要性をこれまでに経験したことがあれば、ASP が提供するソリューションの魅力は容易に理解できます。以前は、たとえば、Web サーバーからユーザーが入力した情報を処理するには、Perl や C などの言語を習得して従来のコモン ゲートウェイ インターフェイス (CGI) アプリケーションを作成する必要がありました。ASP を使えば、HTML ドキュメントにいくつかの簡単なサーバー側のスクリプトを直接埋め込むだけで、HTML フォームから情報を収集し、データベースに格納することができます。Microsoft VBScript または Microsoft&reg; JScript&reg; (JScript は Microsoft の ECMA 262 言語仕様を実装した言語) などのスクリプト言語についての知識が既にある場合は、ASP を習得するのは簡単です。
+
+<p>ASP をすぐに使用する場合は、「<a href="ASPtut00.htm">ASP チュートリアル</a>」を参照してください。サーバー側のスクリプトの作成に関する詳しい情報については、以下に説明します。</p>
+
+<h2><a name="H2_37765707">熟練した Web スクリプト作成者にとっての利点</a></h2>
+
+<p>ASP は、言語に依存しないように設計されています。このため、VBScript、JScript、PERL などのスクリプト言語についての知識が既にある場合は、Active Server Pages をすぐに使用できます。また、ASP ページでは、COM に準拠しているスクリプト エンジンをインストールすることで、任意のスクリプト言語を使用することができます。ASP には、VBScript および JScript 用のスクリプト エンジンが付属していますが、サードパーティから入手可能な PERL、REXX、および Python 用のスクリプト エンジンをインストールすることもできます。</p>
+
+<h2><a name="H2_37766314">Web 開発者およびプログラマにとっての利点</a></h2>
+
+<p>Visual Basic、C++、Java などのプログラミング言語でバックエンド Web アプリケーションを開発する場合、ASP は Web アプリケーションをすばやく作成するための柔軟な方法です。スクリプトを追加して、アプリケーションの魅力的な HTML インターフェイスを作成できるだけでなく、独自の COM コンポーネントを作成することもできます。アプリケーションのビジネス ロジックは、カプセル化して再利用可能なモジュールにすることによって、スクリプトやほかのコンポーネント、さらにほかのプログラムから呼び出すことができます。</p>
+
+<h2><a name="theactiveserverpagesmodel">Active Server Pages のモデル</a></h2>
+
+<p>サーバー側のスクリプトの実行は、ブラウザが Web サーバーの .asp ファイルを要求したときに開始されます。ブラウザからの要求を受け取った Web サーバーが ASP を呼び出すと、ASP は要求されたファイルを最後まで読み取り、スクリプト コマンドがあればそれを実行して Web ページをブラウザに返します。</p>
+
+<p>スクリプトは、クライアント上ではなくサーバー上で実行されるため、ブラウザに送信される HTML ページの生成に関する作業は、すべて Web サーバーで実行されます。サーバー側スクリプトをそのままコピーすることはできません。 これは、スクリプトの結果のみがブラウザに返されるためです。ユーザーは、ブラウザに表示されているページを作成したスクリプト コマンドを表示することはできません。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR>
+<head>
+<title>変更箇所</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="既定の設定の変更、新しいプロパティ、インストールされるファイルの場所など、IIS 4.0、IIS 5.0、および IIS 5.1 間の主な相違点について説明します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name ="whatschanged">変更箇所</a></h1>
+
+<p> ここでは、IIS&nbsp;4.0、IIS&nbsp;5.0、および IIS&nbsp;5.1 の既定の動作および設定に関する、重要な変更箇所について説明します。</p>
+
+<p>IIS&nbsp;5.1 の新機能については、「<a href="iifeats.htm">機能</a>」を参照してください。</p>
+
+<p><a href="#administration">管理</a></p>
+<p><a href="#progadm">プログラムによる管理</a></p>
+<p><a href="#asp">Active Server Pages (ASP)</a></p>
+<p><a href="#regandmet">レジストリ</a></p>
+<p><a href="#security">セキュリティ</a></p>
+
+<p><a href="#docs">マニュアル</a></p>
+
+<h2><a name="administration">管理</a></h2>
+
+<ul>
+<li>IIS&nbsp;4.0 では、アプリケーションをインターネット サービスと同じプロセス、または別のプロセスで実行していました。IIS&nbsp;5.0 および 5.1 では、アプリケーションをプール プロセスにグループ化して、パフォーマンスと拡張性を向上させることができるようになりました。詳細については、「アプリケーションについて」の「<a href="iiwarndc.htm#app_2">アプリケーション保護</a>」を参照してください。 </li>
+
+<li>[アプリケーションのマッピング] プロパティ シートには、特定のファイル タイプにマップされたアプリケーションによって処理される HTTP (Hypertext Transfer Protocol) 動詞の一覧が表示されます。この動詞の一覧が、IIS&nbsp;4.0 からの変更箇所です。IIS&nbsp;4.0 では、この一覧に、&quot;排除される&quot; 動詞、つまり処理されない動詞が表示されていました。この変更は、プロトコルに追加される新しい HTTP 動詞に対応するために行われました。アプリケーションのマッピングの詳細については、「<a href="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。</li>
+
+<li>カスタム エラー ファイルの場所が変わりました。詳細については、「<a href="iierrdtl.htm#custerrinstall">詳細なカスタム エラー メッセージを有効にする</a>」を参照してください。</li>
+
+<li>インターネット サービス マネージャは、[スタート] メニューからアクセスできなくなりました。IIS を管理するには、<a href="iiabuti.htm">IIS スナップイン</a> を開きます。
+</li>
+</ul>
+
+<h2><a name="progadm">プログラムによる管理</a></h2>
+
+<p>「<a href="../asp/adsi5ga8.htm">IIS 5.1 の ADSI の変更</a>」を参照してください。</p>
+
+<h2><a name="asp"></a>Active Server Pages (ASP)</h2>
+
+<p>「<A HREF="../asp/iiwachng.htm">ASP における重要な変更箇所</A>」を参照してください。</p>
+
+<h2><a name="regandmet">レジストリ</a></h2>
+
+
+以前の IIS インストール環境からアップグレードする際に、次のレジストリ キーが削除されます。
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\INetMgr <br> &nbsp;&nbsp;&nbsp;\InstalledBy </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\InetMgr <br> &nbsp;&nbsp;&nbsp;\Parameters <br> &nbsp;&nbsp;&nbsp;&nbsp;\AddOnTools <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\&Key Manager </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\INetMgr <br> &nbsp;&nbsp;&nbsp;\Parameters <br> &nbsp;&nbsp;&nbsp;&nbsp;\x </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\INetMgr <br> &nbsp;&nbsp;&nbsp;\Parameters <br> &nbsp;&nbsp;&nbsp;&nbsp;\AddOnServices <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\Gopher </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\INetStp <br> &nbsp;&nbsp;&nbsp;\SetupID </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\Windows <br> &nbsp;&nbsp;&nbsp;\CurrentVersion <br> &nbsp;&nbsp;&nbsp;&nbsp;\URL <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\Prefixes <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ftp </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\Windows <br> &nbsp;&nbsp;&nbsp;\CurrentVersion <br> &nbsp;&nbsp;&nbsp;&nbsp;\Setup <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\OC Manager <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\mts_mmc </p>
+
+<p>HKEY_LOCAL_MACHINE\SOFTWARE <br> &nbsp;\Microsoft <br> &nbsp;&nbsp;\Windows <br> &nbsp;&nbsp;&nbsp;\CurrentVersion <br> &nbsp;&nbsp;&nbsp;&nbsp;\Setup <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\OC Manager <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\Subcomponents<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_w3samp<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_common<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_ismcore<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_pwmcore<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_asp<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_sdk<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\iis_doc_mm</p>
+
+<h2><a name="security">セキュリティ</a></h2>
+<ul>
+<li>IIS&nbsp;4.0 で提供されていたセキュリティ機能の多くは、IIS&nbsp;5.0 および 5.1 で簡略化されました。IIS&nbsp;5.0 には、アクセス許可ウィザード、サーバー証明書ウィザード、および証明書信頼リスト ウィザードの 3 つの新しいセキュリティ機能ウィザードがあります。これらのウィザードを使用して、Web と NTFS のセキュリティ設定の同期化、サーバー証明書の取得とインストール、および証明書信頼リストの作成と変更を行うことができます。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</li>
+<li>[このリソースに索引を付ける] チェック ボックスは、既定で有効になっています。</li>
+<li>ASP ページやその他のスクリプトの &quot;ソース コード&quot; へアクセスできるようにする [スクリプト ソース アクセス] チェック ボックスが新しく追加され、既定で無効になっています。このチェック ボックスは、[読み取り] または [書き込み] チェック ボックスのいずれかがオンになっている場合にのみ利用できます。</li>
+<li>FrontPage を使ってサーバーのサイトを管理できるようにするための [FrontPage Web] チェック ボックスは、IIS スナップインでは設定できなくなりました。 この機能は、既定で有効になっています。</li>
+</ul>
+
+
+
+<h2><a name="docs">マニュアル</a></h2>
+
+<p>「<a href="iistpov.asp">Windows&nbsp;NT&nbsp;Option Pack のマニュアル</a>」を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

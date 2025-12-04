@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ロテータ スケジュール ファイル</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><a name="_rotator_schedule_file"></a>ロテータ スケジュール ファイル</H2>
+
+<P>ロテータ スケジュール ファイルには、Ad Rotator コンポーネントがさまざまな広告イメージの管理と表示に使用する情報が含まれます。ロテータ スケジュール ファイルでは、広告スペースのサイズ、使用するイメージ ファイル、各ファイルを表示する時間の割合など、広告に関する詳細情報を指定できます。</P>
+
+<P>ロテータ スケジュール ファイルは 2 つの部分から構成されます。最初の部分では、ローテーション スケジュールの対象となるすべての広告イメージに適用されるパラメータを設定します。2 番目の部分では、個々の広告に対するファイルと格納場所の情報、および各広告の表示時間の割合を指定します。2 つの部分は 1 つのアスタリスク (*) だけが入った行によって区切ります。</P>
+
+<P>最初の部分は、4 つのグローバル パラメータを含みます。各パラメータは、キーワードと値から構成されます。いずれのパラメータも省略可能です。グローバル パラメータに値を指定しない場合、Ad Rotator では既定値が使用されます。この場合、ファイルの先頭行には、アスタリスク (*) を 1 つだけ指定します。</P>
+
+<P>ロテータ スケジュール ファイルを変更した後に、変更を有効にするには IIS サービスを再起動する必要があります。</P>
+
+<H6>構文 </H6>
+
+<P>[REDIRECT URL]</P>
+
+<P>[WIDTH numWidth]</P>
+
+<P>[HEIGHT numHeight]</P>
+
+<P>[BORDER numBorder]</P>
+
+<P><B>*</B></P>
+
+<P><I>adURL</I></P>
+
+<P><I>adHomePageURL</I></P>
+
+<P><I>Text</I></P>
+
+<P><I>impressions</I> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>URL</I></DT>
+
+<DD>リダイレクトを実装するダイナミック リンク ライブラリ (.dll) またはアプリケーション (.asp) ファイルへのパスを指定します。このパスは、フル パス (http://MyServer/MyDir/redirect.asp) または仮想ディレクトリへの相対パス (/MyDir/redirect.asp) で指定できます。<br>
+</DD>
+
+<DT><I>numWidth</I></DT>
+
+<DD>ページ上の広告の幅をピクセル単位で指定します。既定値は 440 ピクセルです。<br>
+</DD>
+
+<DT><I>numHeight</I></DT>
+
+<DD>ページ上の広告の高さをピクセル単位で指定します。既定値は 60 ピクセルです。<br>
+</DD>
+
+<DT><I>numBorder</I></DT>
+
+<DD>広告を囲むハイパーリンク枠の太さをピクセル単位で指定します。既定値は 1 ピクセルです。このパラメータを 0 に指定すると、広告は枠で囲まれません。<br>
+</DD>
+
+<DT><I>adURL</I></DT>
+
+<DD>広告イメージ ファイルの場所です。<br>
+</DD>
+
+<DT><I>adHomePageURL</I></DT>
+
+<DD>広告主のホーム ページの場所です。広告主がホーム ページを持っていない場合、この行にはハイフン (-) を指定し、この広告にはリンクがないことを示します。<br>
+</DD>
+
+<DT><I>Text</I></DT>
+
+<DD>ブラウザがグラフィックスをサポートしていない場合、またはグラフィックス機能がオフになっている場合に表示されるテキストです。<br>
+</DD>
+
+<DT><I>impressions</I></DT>
+
+<DD>0 ～ 10000 の数値で、広告の相対的な重み付けを示します。 
+
+<P>たとえば、ロテータ スケジュール ファイルに 3 つの広告があり、<i>impressions</i> がそれぞれ 2、3、5 に設定されているとします。この場合、最初の広告の表示時間は全体の 20%、2 番目の広告の表示時間は全体の 30%、3 番目の広告の表示時間は全体の 50% になります。
+</DD>
+</DL>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>すべての項目の impressions パラメータの合計が 10000 を超える場合は、<A HREF="/iishelp/iis/htm/asp/comp4z90.htm"><B>GetAdvertisement</B></A> メソッドを呼び出してロテータ スケジュール ファイルに初めてアクセスしたときに、エラーが生成されます。</P>
+
+<H6>例 </H6>
+
+<P>次のスクリプトは、ロテータ スケジュール ファイルを使用してさまざまな広告を表示し、リダイレクト ファイルをインクルードする方法を示しています。</P>
+
+<P>--- Adrot.txt ---</P>
+
+<PRE><CODE>REDIRECT Adredir.asp 
+WIDTH 340
+HEIGHT 100 
+BORDER 1 
+*
+http://www.microsoft.com/library/homepage/images/init_win2k.gif 
+http://www.microsoft.com/windows2000/guide/professional/overview/
+Introducing Microsoft Windows XP Professional!
+20
+http://www.microsoft.com/library/homepage/images/init_dotnet.gif 
+-
+Sponsored by Flyteworks
+20 
+http://www.microsoft.com/library/homepage/images/init_office.gif
+http://www.microsoft.com/office/
+The Tools of Microsoft Office 2000
+80 
+http://www.microsoft.com/library/homepage/images/ts_001025msnexp.gif
+http://explorer.msn.com/home.htm
+MSN Explorer!  It's here at last!
+10 
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

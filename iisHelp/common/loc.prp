@@ -1,0 +1,37 @@
+
+#
+# General Error Messages
+err.propload=プロパティの読み込み時エラーです。
+err.badurl=無効な URL:
+
+#
+# Contents Properties
+#
+cnt.load=読み込み中
+cnt.load.status=目次を読み込み中...
+cnt.load.elementname=HHC ファイルを読み込み中...
+cnt.load.status2=目次を読み込み中
+cnt.load.success=目次の HHC ファイルの読み込みに成功。
+cnt.load.err=読み込み時エラー
+cnt.merge.err=マージ時エラー
+cnt.merge.elementname=セクションを読み込み中...
+cnt.merge.errelement=セクションが詠み込めません
+cnt.merge.success=セクションの読み込みに成功しました。
+
+#
+# Index Properties
+#
+idx.load.err=読み込み時エラー
+idx.load.success=索引の読み込みに成功しました。
+idx.load.elementname=HHK ファイルを読み込み中...
+idx.load.status=索引の HHK ファイルを読み込み中...
+idx.load.status2=索引の HHK ファイルを読み込み中
+idx.display=トピックの表示
+
+#
+# Related Topics
+#
+rel.dlgcaption=関連のあるトピック
+rel.display=トピックの表示
+rel.cancel=ダイアログをキャンセル
+rel.label=これはとても長い説明です。トピックをクリックして、表示部分をクリックしてください。

@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML dir=LTR><HEAD><TITLE>認証を有効にし、構成する</TITLE>
+<SCRIPT language=JavaScript>
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT>
+
+<SCRIPT language=VBScript>
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META 
+content="Web サーバーの匿名認証、基本認証、ダイジェスト認証、高度ダイジェスト認証、および統合 Windows 認証のセキュリティ メソッドを有効にし、構成する方法について説明します。制限のある Web サイト、ディレクトリ、ファイルへのアクセスをユーザーに許可する前に、認証によってその身元を確認することができます。" 
+name=description>
+<META content="text/html; charset=shift_jis" http-equiv=Content-Type>
+<META 
+content='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))' 
+http-equiv=PICS-Label>
+<META content=JA name=MS.LOCALE>
+<META content="インターネット インフォメーション サービス" name=MS-IT-LOC>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff text=#000000><FONT face=ＭＳ Ｐゴシック>
+
+<H1><A name=procedure>認証を有効にし、構成する</A></H1>
+<P>ここでは、認証を有効にし、匿名認証、基本認証、ダイジェスト認証、高度ダイジェスト認証、および統合 Windows 認証の設定を構成する具体的な手順について説明します。これらの認証方法を初めて使用する場合は、先に「<A  href="iiabasc.htm">認証について</A>」を参照してから、サーバーで認証を有効にし、構成することをお勧めします。</P>
+
+<ul>
+<li><A href="iiauths.htm#selectauth">認証を有効にする</A></li>
+<li><A href="iiauths.htm#enableanon">匿名認証を構成する</A></li>
+<li><A href="iiauths.htm#enablebasic">基本認証を構成する</A></li>
+<li><A href="iiauths.htm#enabledigest">ダイジェスト認証を構成する</A></li>
+<li><A href="#enableadvanceddigest">高度ダイジェスト認証を構成する</A></li>
+<li><A href="iiauths.htm#enableNTLM">統合 Windows 認証を構成する</A></li>
+</ul>
+
+<H2><A name=selectauth>認証を有効にする</A></H2>
+<P>Web サイトや FTP サイト、仮想ディレクトリ、またはファイルに対し、必要に応じて認証設定を有効にすることができます。匿名認証と統合 Windows 認証は、既定で有効になっています。</P>
+<H3><a name="EnableWWW">WWW 認証方法を有効にするには</H3></a>
+<OL>
+<LI>認証方法に適切な Windows ユーザー アカウントを作成します。必要に応じて、そのアカウントを Windows ユーザー グループに追加します。Windows ユーザー アカウントの作成方法の詳細については、「<a href="iintfsc.htm">NTFS でファイルを保護する</a>」を参照してください。 
+<LI>アクセスを制御するディレクトリまたはファイルに対して、NTFS のアクセス権を構成します。詳細については、「<a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a>」を参照してください。 
+<LI><a href="iiabuti.htm">IIS スナップイン</a>で、サイト、ディレクトリ、またはファイルを選択し、そのプロパティ シートを開きます。 
+<LI>[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックします。[匿名アクセスおよび認証コントロール] の [編集] をクリックします。 
+<LI>[認証方法] ダイアログ ボックスで、設定を選択します。 </LI></OL>
+<P><STRONG>注</STRONG></P>
+  <UL>
+<LI>ユーザーの認証に基本認証のみを使用するには、ほかのチェック ボックスをすべてオフにします。</li> 
+<LI>Web サーバーでは、次のいずれかの条件が満たされる場合、基本認証、ダイジェスト認証、または統合 Windows 認証方法のみが使用されます。</li>
+  <UL>
+<LI>[匿名アクセス] チェック ボックスがオフになっている。</LI>
+	<LI>匿名認証に失敗した。</LI>
+	<LI>ファイルおよびディレクトリへのアクセスが NTFS のアクセス権で制限されている。</LI></UL>
+</UL>
+<H3>FTP 認証方法を有効にするには</H3>
+<p>ダイジェスト認証および統合 Windows 認証を FTP サイトで使用することはできません。FTP サイトの場合、認証はサイト レベルで設定する必要があります。 
+<OL>
+<LI>「<a href="#EnableWWW">WWW 認証方法を有効にするには</a>」の手順 1. ～ 3. を実行してください。 
+<LI>[セキュリティ アカウント] プロパティ シートをクリックし、[匿名接続を許可する] チェック ボックスをオンにします。 
+<LI>[ユーザー名] ボックスと [パスワード] ボックスに、匿名ログオンで使用するユーザー名とパスワードを入力します。ユーザー名は、匿名ユーザー アカウントの名前で、通常は IUSR_<em>computername</em> と指定します。パスワードを変更するには、[IIS によるパスワードの管理を許可する] チェック ボックスをオフにします。 
+<LI>Windows ユーザー アカウントと同じパスワードを使用する場合は、[IIS によるパスワードの管理を許可する] チェック ボックスをオンにします。 
+<P><strong>注</strong>&nbsp;&nbsp;&nbsp;パスワードの同期化ができるのは、匿名ユーザー アカウントがローカル コンピュータで定義され、ネットワーク上のほかのコンピュータでは匿名アカウントとして機能しない場合に限られます。</P>
+<LI>すべてのユーザーを匿名ユーザーとしてログオンさせる場合は、[匿名接続のみを許可する] チェック ボックスをオンにします。 
+<LI>[OK] をクリックします。 
+<LI>匿名アカウントに対して、NTFS の適切なアクセス権を設定します。詳細については、「<a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a>」を参照してください。 </LI></OL>
+
+
+
+<P><STRONG><FONT color=#0000ff>重要</FONT></STRONG>&nbsp;&nbsp;&nbsp;Web サイトまたは仮想ディレクトリのセキュリティ設定を変更した場合、そのサイトまたはディレクトリの子レベルに関するセキュリティ設定をリセットするかどうかを確認するメッセージが表示されます。リセットを選択した場合、子レベルのセキュリティ設定は親のサイトまたはディレクトリから継承されます。プロパティ設定の詳細については、「<A href="iivsovr.htm">Web サイトおよび FTP サイトについて</A>」の「プロパティおよびサイトのプロパティの継承」を参照してください。</P>
+
+<H2><A name=enableanon>匿名認証を構成する</A></H2>
+<P>既定の設定では、IUSR_<EM>computername</EM> アカウントは、Windows ユーザー グループの Guests アカウントに含まれています。複数の匿名アカウントを作成して、各 Web サイトや FTP サイト、ディレクトリ、またはファイルに割り当てることができます。アカウントに異なるアクセス権を与えたり、アカウントを異なる Windows ユーザー グループに割り当てたりすることで、公開された Web または FTP コンテンツの異なる領域への匿名アクセスをユーザーに許可することができます。</P>
+<P>匿名アカウントには、ローカル ログオンするユーザー権利が必要です。アカウントにローカル ログオンの権利がない場合、IIS は匿名要求に応えることができません。ドメイン コントローラでは、IUSR_<em>computername</em> アカウントは、既定でこの権利を割り当てられていません。匿名要求を許可するには、アカウントをローカル ログオンに変更する必要があります。</P>
+<P>IUSR_<em>computername</em> アカウントのセキュリティ権限は、Windows で変更することもできます。ただし、匿名ユーザー アカウントに特定のリソースへのアクセス権限がない場合、そのリソースへの匿名接続の確立は Web サーバーによって拒否されます。詳細については、「<A href="iiwspsc.htm">Web サーバーのアクセス権を設定する</A>」を参照してください。</P>
+
+
+<H3><A name=toenableanon>匿名認証を有効にするには</A></H3>
+
+<OL>
+<LI><a href="iiabuti.htm">IIS スナップイン</a>で、サイト、ディレクトリ、またはファイルを選択し、そのプロパティ シートを開きます。 
+<LI>[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックします。セキュリティ設定を変更するレベルに応じて、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートが表示されます。 
+<li>[匿名アクセスおよび認証コントロール] の [編集] をクリックします。[認証方法] ダイアログ ボックスが表示されます。
+<LI>[匿名アクセス] チェック ボックスをオンにします。 
+</ol>
+
+
+<H3><A name=changeanon>匿名認証に使用するアカウントを変更するには</A></H3>
+<OL>
+<LI><a href="iiabuti.htm">IIS スナップイン</a>で、サイト、ディレクトリ、またはファイルを選択し、そのプロパティ シートを開きます。 
+<LI>[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックします。セキュリティ設定を変更するレベルに応じて、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートが表示されます。 
+<li>[匿名アクセスおよび認証コントロール] の [編集] をクリックします。[認証方法] ダイアログ ボックスが表示されます。
+<LI>[匿名アクセス] チェック ボックスをオンにして、[編集] をクリックします。[匿名ユーザー アカウント] ダイアログ ボックスが表示されます。
+<LI>匿名アクセスに使用する有効な Windows ユーザー アカウントを入力するか、[参照] をクリックしてアカウントを選択します。 
+<LI>アカウントのパスワードを入力するには、[IIS によるパスワードの管理を許可する] チェック ボックスをオフにします。 </LI></OL>
+  
+<P><FONT COLOR="#0000ff"><strong>重要</strong></FONT>&nbsp;&nbsp;&nbsp;IUSR_<em>computername</em> アカウントを変更すると、Web サーバーのすべての匿名要求の処理に影響します。このアカウントを変更する際には、細心の注意が必要です。</P>
+
+<H2><A name=enablebasic>基本認証を構成する</A></H2>
+<P>基本認証を有効にしても、Web サーバーがユーザーを認証するように自動的には構成されません。Windows ユーザー アカウントは、以前説明したとおりに作成し、NTFS アクセス権を適切に設定する必要があります。</P>
+<P>基本認証を使用してユーザーを適切に認証するには、Windows ユーザー アカウントに、ローカル ログオンのユーザー権限が必要です。基本認証では、ローカル ユーザー、つまりサーバーに物理的にログオンしているユーザーとして見せかけるために、この権限が必要になります。既定では、Windows プライマリ ドメイン コントローラ (PDC) 上ではユーザー アカウントはローカル ログオンユーザー権限を与えられていません。Active Directory Service Interface (ADSI) を使用して、ユーザーにローカル ログオン権限を与えることができます。詳細については、『Active Server Pages ガイド』の「<A href="../asp/apro1zms.htm">LogonMethod</A>」を参照してください。</P>
+
+<P>
+<P><STRONG><font color=#0000ff>重要</font></STRONG>&nbsp;&nbsp;&nbsp;基本認証方式では、ユーザー名とパスワードは暗号化されていない状態でネットワークに転送されます。Web サーバーの暗号化機能を基本認証と組み合わせて使うことで、ネットワークに転送されるユーザー アカウント情報を保護することができます。詳細については、「<a href="iicrysc.htm">暗号化について</a>」を参照してください。</P>
+
+<H3><A name=toenablebasic>基本認証を有効にするには</A></H3>
+
+<OL>
+<LI><a href="iiabuti.htm">IIS スナップイン</a>で、サイト、ディレクトリ、またはファイルを選択し、そのプロパティ シートを開きます。 
+<LI>[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックします。セキュリティ設定を変更するレベルに応じて、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートが表示されます。 
+<li>[認証済みアクセス] セクションで、[基本認証] チェック ボックスをオンにします。
+</ol>
+
+<P>既定のログオン ドメインを選択する必要があります。詳細については、「<a href="iidlgsc.htm">既定のログオン ドメインを設定する</a>」を参照してください。
+
+<H2><A name=enabledigest>ダイジェスト認証を構成する</A></H2>
+
+ダイジェスト認証の最低要件については、「<a href="iiabasc.htm#bdigestRequirements">ダイジェスト認証の要件</a>」を参照してください。IIS サーバー上でダイジェスト認証を有効にするには、次の 2 つを実行する必要があります。
+<ul>
+<li><a href="#EnablingDigestForDomainServers">Windows ドメイン サーバーでダイジェスト認証を有効にする</a></li>
+<li><a href="#DigestRealmName">領域名を構成する</a></li> 
+</ul>
+
+<h3><a name=EnablingDigestForDomainServers>Windows ドメイン サーバーでダイジェスト認証を有効にするには</h3> 
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>を開きます。</li>
+<li>Web サイト、仮想ディレクトリ、またはフォルダを選択します。</li>
+<li>[操作] メニューの [プロパティ] をクリックします。</li>
+<li>[ディレクトリ セキュリティ] プロパティ シートをクリックします。</li>
+<li>[匿名アクセスおよび認証コントロール] の [編集] をクリックします。</li>
+<li>[Windows ドメイン サーバーでダイジェスト認証を使用する] チェック ボックスをオンにします。</li>
+</ol>
+
+<h3><A name=DigestRealmName>領域名を構成する</A></h3>
+
+<a href="#Table1">表 1</a> で示すように、メタベースのあらゆるレベルから領域名を構成できます。子ノードを明示的に構成していない場合、構成済みの最も近い上位レベルから構成が継承されます。
+
+<p><a name="Table1"><b>表 1</b></a>
+<table border ="1" cellpadding ="5" cellspacing="1" width = "100%">
+<tr align="CENTER" bgcolor="#C0C0C0" bordercolor="#000000">
+<td><strong>メタベース レベル</strong></td>
+<td><strong>説明</strong></td>
+</tr>
+<tr>
+	<td><b>W3SVC</b></td>
+	<td>W3SVC レベル (または IISWebService レベル) は、高度ダイジェスト認証が構成できる場合のメタベース内の最上位レベルです。このレベルで設定される構成は、特定の構成設定を持たない下位レベルによって継承されます。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i></td>
+	<td>W3SVC/<i><b>n</b></i> レベル (または IISWebServer レベル) は、特定の Web サイトです。<i><b>n</b></i> は、サイトの番号を示します。サイトの番号は 1 から始まります。既定の Web サイトは 1 です。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root</b></td>
+	<td>W3SVC/<i><b>n</b></i>/Root レベル (または IISWebVirtualDir レベル) は、Web サイトの開始位置です。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir</b></td>
+	<td>W3SVC/<i><b>n</b></i>/ROOT/WebVirtualDir レベル (または IISWebVirtualDir レベル) は、Web サイト内の仮想ディレクトリです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir/webdir</b></td>
+	<td>W3SVC/<i><b>n</b></i>/Root/WebVirtualDir/WebDir レベル (または IISWebDirectory レベル) は、Web サイト内の仮想ディレクトリ内の物理ディレクトリです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir/file</b></td>
+	<td>W3SVC/<i><b>n</b></i>/ROOT/WebVirtualDir レベル内の個々のファイルです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir/webdir/file</b></td>
+	<td>W3SVC/<i><b>n</b></i>/Root/WebVirtualDir/WebDir レベル内の個々のファイルです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+</table>
+
+<p>IIS サーバー上では、1 つまたは複数の領域名を構成することができます。複数の領域名を使用する場合は、メタベースの別レベルで構成する必要があります。複数の領域名を構成することにより、たとえば、仮想ディレクトリ sales には ドメイン 1 のメンバにアクセスを許可し、仮想ディレクトリ engineering にはドメイン 2 のメンバにアクセスを許可することができます。これが特に有効となるのは、ドメイン 1 とドメイン 2 の間に信頼関係がない場合です。ドメインの詳細については、Windows XP のオンライン マニュアルを参照してください。</p>
+
+<p>メタベース内の子ノードに領域名が構成されていない場合、子ノードでは領域名が構成されている最も近い上位レベルから領域名を継承します。領域名が構成されていない場合、IIS ではそのコンピュータ名が領域名として送信されます。IIS がそのコンピュータ名を領域名として送信し、しかも Active Directory が有効な Windows XP ドメイン コントローラ上で IIS が 実行されていない場合は、ダイジェスト認証が失敗します。IIS をドメイン コントローラ上で実行することも可能ですが、セキュリティ上の危険とパフォーマンスの問題から、お勧めできません。</p>
+
+<h4>領域名を構成するには</h4>
+<ol>
+<li>コマンド プロンプトを開きます。</li> 
+<li>「<b>cscript.exe <i>x:</i>\inetpub\adminscripts\adsutil.vbs set <i>level</i>/realm <i>realm_name</i></b>」と入力します。</li><br>
+<ul>
+<li><i><b>x:</b></i> は、IIS がインストールされているドライブです。<br> 
+<li><i><b>level</b></i> は、領域名を構成するメタベースのレベルです。<br>
+<li><i><b>realm_name</b></i> は、クライアントを認証する領域/ドメインの名前です。<br>
+</ul>
+<li><B>Enter</B> キーを押します。</li>
+</ol>
+
+<h4>例</h4>
+既定の Web サイト (既定の Web サイトは 1) を、領域名 redmond で構成するとします。IIS は c: ドライブにインストールされています。 
+
+<ol>
+<li>コマンド プロンプトで、「<b>cscript.exe c:\inetpub\adminscripts\adsutil.vbs set w3svc/1/realm redmond</b>」と入力します。
+<li><B>Enter</B> キーを押します。
+</ol>
+
+<p>コマンド プロンプトでは、次のように表示されます。<br>
+&nbsp;&nbsp;&nbsp;realm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &#60string> &nbsp;&nbsp; "redmond"
+
+<H2><A name=enableadvanceddigest>高度ダイジェスト認証を構成する</A></H2>
+
+
+高度ダイジェスト認証の最低要件については、「<a href="iiabasc.htm#advanceddigestRequirements">高度ダイジェスト認証の要件</a>」を参照してください。IIS サーバー上で高度ダイジェスト認証を有効にするには、次の 3 つを実行する必要があります。
+
+<ul>
+<li><a href="#AdvancedEnablingDigestForDomainServers">Windows ドメイン サーバーでダイジェスト認証を有効にする</a></li>
+<li><a href="#AdvancedRealmName">領域名を構成する</a></li> 
+<li><a href="#AdvancedUseDigestSSP">UseDigestSSP メタベース プロパティを設定する</a></li>
+</ul>
+<p><FONT COLOR="#0000ff"><strong>重要</strong></FONT>&nbsp;&nbsp;&nbsp;最初の 2 つの手順を実行しても UseDigestSSP メタベース キーが構成されなかった場合、高度ダイジェスト認証ではなく、ダイジェスト認証が使用されます。</p>
+
+<h3><a name=AdvancedEnablingDigestForDomainServers>Windows ドメイン サーバーで高度ダイジェスト認証を有効にするには</a></h3> 
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>を開きます。</li>
+<li>Web サイト、仮想ディレクトリ、またはフォルダを選択します。</li>
+<li>[操作] メニューの [プロパティ] をクリックします。</li>
+<li>[ディレクトリ セキュリティ] プロパティ シートをクリックします。</li>
+<li>[匿名アクセスおよび認証コントロール] の [編集] をクリックします。</li>
+<li>[Windows ドメイン サーバーでダイジェスト認証を使用する] チェック ボックスをオンにします。</li>
+</ol>
+
+
+<h3><A name=AdvancedRealmName>領域名を構成する</A></h3>
+
+<a href="#Table2">表 2</a> で示すように、メタベースのあらゆるレベルから領域名を構成できます。子ノードを明示的に構成していない場合、構成済みの最も近い上位レベルから構成が継承されます。
+
+<p><a name="Table2"><b>表 2</b></a>
+<table border ="1" cellpadding ="5" cellspacing="1" width = "100%">
+<tr align="CENTER" bgcolor="#C0C0C0" bordercolor="#000000">
+<td><strong>メタベース レベル</strong></td>
+<td><strong>説明</strong></td>
+</tr>
+<tr>
+	<td><b>W3SVC</b></td>
+	<td>W3SVC レベル (または IISWebService レベル) は、高度ダイジェスト認証が構成できる場合のメタベース内の最上位レベルです。このレベルで設定される構成は、特定の構成設定を持たない下位レベルによって継承されます。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i></td>
+	<td>W3SVC/<i><b>n</b></i> レベル (または IISWebServer レベル) は、特定の Web サイトです。<i><b>n</b></i> は、サイトの番号を示します。サイトの番号は 1 から始まります。既定の Web サイトは 1 です。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root</b></td>
+	<td>W3SVC/<i><b>n</b></i>/Root レベル (または IISWebVirtualDir レベル) は、Web サイトの開始位置です。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir</b></td>
+	<td>W3SVC/<i><b>n</b></i>/ROOT/WebVirtualDir レベル (または IISWebVirtualDir レベル) は、Web サイト内の仮想ディレクトリです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir/webdir</b></td>
+	<td>W3SVC/<i><b>n</b></i>/Root/WebVirtualDir/WebDir レベル (または IISWebDirectory レベル) は、Web サイト内の仮想ディレクトリ内の物理ディレクトリです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir/file</b></td>
+	<td>W3SVC/<i><b>n</b></i>/ROOT/WebVirtualDir レベル内の個々のファイルです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+<tr>
+	<td><b>W3SVC/<i><b>n</b></i>/root/vdir/webdir/file</b></td>
+	<td>W3SVC/<i><b>n</b></i>/Root/WebVirtualDir/WebDir レベル内の個々のファイルです。<i><b>n</b></i> は、サイトの番号を示します。</td>
+</tr>
+</table>
+
+<p>IIS サーバー上では、1 つまたは複数の領域名を構成することができます。複数の領域名を使用する場合は、メタベースの別レベルで構成する必要があります。複数の領域名を構成することにより、たとえば、仮想ディレクトリ sales には ドメイン 1 のメンバにアクセスを許可し、仮想ディレクトリ engineering にはドメイン 2 のメンバにアクセスを許可することができます。これが特に有効となるのは、ドメイン 1 とドメイン 2 の間に信頼関係がない場合です。ドメインの詳細については、Windows XP のオンライン マニュアルを参照してください。</p>
+
+<p>メタベース内の子ノードに領域名が構成されていない場合、子ノードでは領域名が構成されている最も近い上位レベルから領域名を継承します。領域名が構成されていない場合、IIS ではそのコンピュータ名が領域名として送信されます。IIS がそのコンピュータ名を領域名として送信し、しかも Active Directory が有効な Windows XP ドメイン コントローラ上で IIS が 実行されていない場合は、高度ダイジェスト認証が失敗します。IIS をドメイン コントローラ上で実行することも可能ですが、セキュリティ上の危険とパフォーマンスの問題から、お勧めできません。</p>
+
+<h4>領域名を構成するには</h4> 
+<ol>
+<li>コマンド プロンプトを開きます。
+<li>「<b>cscript.exe <i>x:</i>\inetpub\adminscripts\adsutil.vbs set <i>level</i>/realm <i>realm_name</i></b>」と入力します。</li><br>
+<ul>
+<li><i><b>x:</b></i> は、IIS がインストールされているドライブです。<br> 
+<li><i><b>level</b></i> は、領域名を構成するメタベースのレベルです。<br>
+<li><i><b>realm_name</b></i> は、クライアントを認証する領域/ドメインの名前です。<br>
+</ul>
+<li><B>Enter</B> キーを押します。</li>
+</ol>
+
+<h4>例</h4>
+既定の Web サイト (既定の Web サイトは 1) を、領域名 redmond で構成するとします。IIS は c: ドライブにインストールされています。 
+
+<ol>
+<li>コマンド プロンプトで、「<b>cscript.exe c:\inetpub\adminscripts\adsutil.vbs set w3svc/1/realm redmond</b>」と入力します。
+<li><B>Enter</B> キーを押します。</li>
+
+<p>コマンド プロンプトでは、次のように表示されます。<br>
+&nbsp;&nbsp;&nbsp;realm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &#60string> &nbsp;&nbsp; "redmond"</ol>
+
+<h3><a name=AdvancedUseDigestSSP>UseDigestSSP メタベース プロパティを設定する</a></h3>
+<p>高度ダイジェスト認証では、UseDigestSSP というメタベース キーが使用されます。このメタベース キーにより、ダイジェスト認証と高度ダイジェスト認証の Security Support Provider Interface (SSPI) コードを切り替えます。キーが設定されると、有効なプロパティ値は、1 (TRUE)、0 (FALSE)、または empty のいずれかになります。プロパティが TRUE に設定されると、高度ダイジェスト認証用の新しい SSPI コードが使用されます。それ以外の場合 (FALSE、empty、または未設定)、ダイジェスト認証の SSPI コードが使用されます。</p> 
+
+<a href="#Table2">表 2</a> で示すように、メタベースのあらゆるレベルで UseDigestSSP メタベース プロパティを構成できます。子ノードを明示的に構成していない場合、構成済みの最も近い上位レベルから構成が継承されます。
+
+<h4>UseDigestSSP メタベース プロパティを構成するには</h4>
+<ol>
+<li>コマンド プロンプトを開きます。
+<li>「<b>cscript /nologo %SystemDrive%\inetpub\adminscripts\adsutil.vbs SET <i>level</i>/UseDigestSSP True</b>」と入力します。</li>
+<ul>
+<li><i><b>level</b></i> は、UseDigestSSP キーが常駐するメタベースのレベルです。</li>
+</ul>
+<li><B>Enter</B> キーを押します。</li>
+</ol>
+
+<p>UseDigestSSP メタベース キーの詳細については、アルファベット順のプロパティ リストで「<a href="../asp/apro5nao.htm">UseDigestSSP</a>」を参照してください。</p>
+  
+<h4>例</h4>
+<p>この例により、UseDigestSSP メタベース キーが w3svc/1 レベルで構成されているかどうかを確認できます。</p>
+<ol>
+<li>コマンド プロンプトを開きます。
+<li>「<B>cscript /nologo %SystemDrive%\inetpub\adminscripts\adsutil.vbs GET w3svc/1/UseDigestSSP</b>」と入力します。
+<li><B>Enter</B> キーを押します。
+</ol>
+<ul>
+<li>UseDigestSSP メタベース キーがメタベースの w3svc/1 レベルで構成されていない場合、コマンド プロンプトでは次のように表示されます。<br>&nbsp;&nbsp;&nbsp;The parameter "UseDigestSSP" is not set at this node.</p>
+
+<li>UseDigestSSP キーが対象のノード (この例では w3svc/1 レベル) で設定されている場合、コマンド プロンプトでは次のように表示されます。<br>
+&nbsp;&nbsp;&nbsp;UseDigestSSP&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp; (BOOLEAN)&nbsp;&nbsp;&nbsp; True</ul>
+
+
+
+
+
+<H2><A name=enableNTLM>統合 Windows 認証を構成する</A></H2>
+<P>統合 Windows 認証は、Microsoft Internet Explorer Version&nbsp;2.0 以降でのみサポートされています。統合 Windows 認証は、プロキシ サーバーやほかのファイアウォール アプリケーションを通しては、機能しません。ユーザーの資格情報に問題があるなどの理由で、統合 Windows 認証が失敗すると、ブラウザはユーザーに対してユーザー名とパスワードの入力を要求します。</P>
+<HR class=iis SIZE=1>
+
+<P align=center><EM><A href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</A></EM></P></FONT></BODY></HTML>

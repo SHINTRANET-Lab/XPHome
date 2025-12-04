@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0041)file://\\catbox\iisuevss\temp\iicorcon.htm -->
+<HTML dir=LTR><HEAD><TITLE>リモート共有への接続を管理する</TITLE>
+<SCRIPT language=JavaScript>
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT>
+
+<SCRIPT language=VBScript>
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META 
+content="ASP テンプレートのキャッシュ ファイルに含まれるデータを常に最新の状態に保つため、IIS から Windows XP を実行しているコンピュータのリモート共有への接続を管理する方法を説明します。" 
+name=DESCRIPTION>
+<META content="text/html; charset=shift_jis" http-equiv=Content-Type>
+<META 
+content='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))' 
+http-equiv=PICS-Label>
+<META content=JA name=MS.LOCALE>
+<META content="インターネット インフォメーション サービス" name=MS-IT-LOC>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff text=#000000>
+
+<H1><A name=H1_448394830></A>リモート共有への接続を管理する</H1>
+
+<P>Web サイトが、Windows 2000 以降を実行しているリモート コンピュータ上で共有する仮想ディレクトリに接続している場合、IIS では SMB (Server Message Block) ワークコンテキストを使用して、リモート コンピュータでのディレクトリ変更通知を検出します。IIS は変更通知をリッスンします。変更通知により、ASP テンプレート キャッシュおよび IIS 静的ファイル キャッシュのファイルは破棄され、リモート共有上の変更された最新のファイルと置き換えられます。キャッシュが無効になっている場合、IIS はユーザーから要求が出されるたびにリモート共有からコンテンツを取得する必要があります。また ASP ページでは、含まれるスクリプトをコンパイルする必要があります。これは効率的な処理方法ではありません。
+
+<p>特に指定しない限り Windows XP は、50 SMB のワーク コンテキスト要求に対応しますが、最大 2,048 SMB まで設定することができます。リモート コンピュータでは受信できる SMB の数に制限があるため、キャッシュ ファイルの自動更新は失敗することがあります。次に示すエラーは、SMB 呼び出しが失敗したことを示します。
+<ul>
+<li>RPC 1792 - The remote procedure call failed and did not execute.
+<li>Netlogon 5719 - Unable to find domain controller.</ul>
+
+<p>SMB 呼び出しが失敗すると、ASP テンプレート キャッシュの変更されていない古い ASP スクリプト、および IIS 静的ファイル キャッシュの古い静的ページが引き続き提供されます。このような場合、IIS を再起動しないとキャッシュは更新されません。リモート共有への接続に関する問題を管理するには、次の方法があります。</P>
+<ul>
+<li><A href="#structuring">仮想ディレクトリを構成する</a>
+<li><A href="#moving">  コンテンツを移動する</a>
+<li><A href="#raising">リモート サーバーの接続制限を増やす</a>
+<li><A href="#turning">ASP テンプレート キャッシュをオフにする</a></ul>
+
+<h2><a name="structuring">仮想ディレクトリを構成する</a></h2>
+<p>多数の仮想ディレクトリを作成して単一のリモート コンピュータからデータを取得する場合、仮想ディレクトリを同じレベルに多数作成するのではなく、階層の多いツリーを作成します。IIS は、仮想ディレクトリの上位レベルにあるサブディレクトリの変更であれば、監視することができます。たとえば、単一のリモート サーバーにアクセスする 2,500 の仮想ディレクトリからデータを取得する必要がある場合、最上位レベルに 25 の仮想ディレクトリを作成し、それぞれに 100 のサブディレクトリを作成します。このような仮想ディレクトリのツリーでは、Windows XP の既定である &quot;クライアントにつき 50 接続&quot; という制限数より、リモート接続を減らすことができます。
+</p>
+<h2><a name="moving">コンテンツを移動する</a></h2>
+<p>動的データおよび静的ファイル データの接続制限に関する問題は、次のいずれかの方法で解決できます。</p>
+<ul>
+<li>コンテンツをより多くのリモート サーバーに分散する。
+<li>データの一部またはすべてをローカル サーバーに移動する。</ul>
+<p>複数のリモート サーバーにコンテンツを分散することにより、サイトの仮想ディレクトリを再構成することなく、問題を解決できることがあります。たとえば、サイトで 3,000 の仮想ディレクトリを 1 つのリモート サーバーに接続していると仮定します。コンテンツの半分を第 2 のリモート サーバーに移動した場合、半分の仮想ディレクトリが第 2 のリモート サーバーに接続できることになり、各リモート サーバーへの接続数は、1,500 に減少します。</p>
+
+<p>コンテンツの一部をローカルに保存し、必要なプロシージャ コールの総数を減らすことでも、同様の効果が期待できます。すべてのコンテンツをローカル サーバーに移動または複製すれば、リモート共有への接続管理に関連した問題は解消し、UNC ディレクトリの変更をリッスンする必要もなくなります。</p>
+
+<h2><a name="raising"></a>リモート サーバーの接続制限を増やす</h2>
+<p>リモート コンピュータにおける接続制限を、クライアントごとに最大の 2,048 接続まで増やすことで、接続制限の問題は解決することがあります。これにより、サイトからサーバーへの同時接続数が増加します。 </p>
+<p>接続数を最大にするには、サーバーのレジストリで 2 つのキーを設定する必要があります。</p>
+<UL>
+<li>レジストリ内で次のパスを指定します。<br><br> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters<br><br>
+
+<LI>MaxMpxCt を 2,048 に設定します。このレジストリ キーは、1 つのクライアントに対してサーバーが許容する、同時要求の最大数を指定します。リモート サーバーからデータを要求するとき、IIS はクライアントとして機能します。
+<LI>MaxWorkItems を 8,192 に設定します。このレジストリ キーは、サーバーが割り当てることのできる受信バッファの最大数を指定します。このバッファは、作業項目とも呼ばれます。この数値に到達した場合、サーバーではフロー制御が必要になり、パフォーマンスが低下します。MaxWorkItems は、少なくとも MaxMpxCt の 4 倍に設定してください。</LI></UL>
+<p>レジストリ変更の詳細については、RegEdt32.exe のヘルプ項目「レジストリ情報の追加と削除」および「レジストリ情報の編集」を参照してください。</p>
+
+<H2><a name="turning">ASP テンプレート キャッシュをオフにする</a></h2>
+<P>以上の方法で接続制限の問題が解決されない場合は、ASP テンプレート キャッシュと IIS 静的ファイル キャッシュのいずれか、または両方を無効にすれば、リモート サーバーに接続して変更をリッスンする必要はなくなります。ただし、この方法では著しくパフォーマンスが低下し、クライアントへのページ配信が遅くなります。</P>
+
+<p><b>ASP テンプレート キャッシュをオフにするには</b></P>
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたは分離プロセスで動作するアプリケーションの開始点ディレクトリを選択します。
+<li>ディレクトリのプロパティ シートを開き、[アプリケーションの設定] セクションで [構成] をクリックします。[構成] が有効でない場合、そのディレクトリまたは開始点には分離プロセスで動作するアプリケーションが含まれていません。[作成] をクリックして、新しいアプリケーションを作成できます。</p>
+
+<li>[キャッシュのオプション] タブをクリックします。[キャッシュのオプション] タブが使用できない場合は、[アプリケーションの設定] セクションの [アプリケーション保護] が [高 (分離プロセス)] に設定されていることを確認します。[アプリケーション保護] を [高 (分離プロセス)] に設定し、次に [適用] をクリックして設定を有効にします。</p>
+
+<li>[ASP ファイルのキャッシュ] の [ASP ファイルをキャッシュしない] をオンにします。
+<li>[OK] をクリックします。</li>
+<li>IIS を再起動します。</li></ol>
+
+<p><b>IIS ファイル キャッシュをオフにするには</b></p>
+<ol>
+<li>次のレジストリ パスを指定します。<br><br> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\InetInfo\Parameters<br><br>
+
+<li>DisableMemoryCache を 1 に設定します。
+<li>IIS を再起動します。</li></ol>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+  
+</font></body></html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsIPSecurity</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iisipsecurity"></A><SUP></SUP>IIsIPSecurity</H2>
+
+<P>IIsIPSecurity オブジェクトは、IP アドレスおよびドメイン アドレス別にアクセス権を設定するカスタム ADSI オブジェクトです。</P>
+
+<P>IIsIPSecurity のブール型プロパティである GrantByDefault によって、ユーザーによるアクセスが既定で許可されるか、または拒否されるかが決まります。</P>
+
+<P>GrantByDefault を TRUE に設定すると、アクセスを拒否するように指定したものを除くすべての IP アドレスとインターネット ドメインがアクセスを許可されます。特定の IP アドレスおよびドメインに対してアクセスを拒否するには、IPDeny プロパティおよび DomainDeny プロパティを使用します。</P>
+
+<P><span class=le><B>注</B></span></B>&nbsp;&nbsp;&nbsp;IPDeny および DomainDeny は、GrantByDefault が TRUE に設定されている場合のみ有効です。</P>
+
+<P>GrantByDefault を FALSE に設定すると、アクセスを許可するように指定したものを除くすべての IP アドレスおよびドメインが、既定でアクセスを拒否されます。特定の IP およびドメインに対してアクセスを許可するには、IPGrant プロパティおよび DomainGrant プロパティを使用します。</P>
+
+<P><span class=le><B>注</B></span></B>&nbsp;&nbsp;&nbsp;IPGrant および DomainGrant は、GrantByDefault が FALSE に設定されている場合のみ有効です。</P>
+
+<H6>ADsPath</H6>
+
+<P>サーバーのルート仮想ディレクトリの場合、
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVVC/<I>N</I>/ROOT</DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<P>特定の仮想ディレクトリの場合、
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/<I>N</I>/ROOT/<I>vdirName</I></DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<H6>構文</H6>
+
+<P><I>varReturn</I> = <I>object</I>.<I>Method</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>varReturn</I></DT>
+
+<DD>メソッドからの戻り値を受け取る変数です。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIsIPSecurity オブジェクトを含んでいる変数です。<BR>
+</DD>
+
+<DT><I>Method</I></DT>
+
+<DD>選択したオブジェクト メソッドです。</DD>
+</DL>
+
+<H6>有効な場所</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+<TD width=50%>/LM/W3SVC/ </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+<TD width=50%>/LM/W3SVC/1 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore136t.htm"><B>IIsWebFile</B></A></TD>
+<TD width=50%>/LM/W3SVC/1/ROOT/<I>vdirName</I>/<I>text.htm</I> </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+<TD width=50%>/LM/W3SVC/1/ROOT/<I>vdirName</I>/<I>subdirectory</I> </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore20mq.htm"><B>IIsFtpVirtualDir</B></A></TD>
+<TD width=50%>/LM/SMFTPSVC/1/ROOT/<I>vdirName</I></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore32n9.htm"><B>IIsFtpService</B></A></TD>
+<TD width=50%>/LM/SMFTPSVC/ </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore43si.htm"><B>IIsFtpServer</B></A></TD>
+<TD width=50%>/LM/SMFTPSVC/1 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+<TD width=50%>/LM/W3SVC/1/ROOT/Samples </TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIsIPSecurity のプロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore05ix.htm"><B>IPDeny</B></A></TD>
+<TD width=50%>このメソッドは、サーバーへのアクセスを拒否されている IP アドレスの配列にアクセスします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore0hro.htm"><B>IPGrant</B></A></TD>
+<TD width=50%>このメソッドは、サーバーへのアクセスを許可されている IP アドレスの配列にアクセスします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore97cp.htm"><B>DomainDeny</B></A></TD>
+<TD width=50%>このメソッドは、サーバーへのアクセスを拒否されているドメインの配列にアクセスします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore9qpg.htm"><B>DomainGrant</B></A></TD>
+<TD width=50%>このメソッドは、サーバーへのアクセスを許可されているドメインの配列にアクセスします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore588k.htm"><B>GrantByDefault</B></A></TD>
+<TD width=50%>このブール型プロパティによって、アクセスが既定で許可されるかどうかが決まります。GrantByDefault が TRUE に設定されている場合は、IPDeny プロパティおよび DomainDeny プロパティを使用して、特定の IP アドレスおよびドメインからのアクセスを拒否できます。GrantByDefault が FALSE に設定されている場合は、IPGrant プロパティおよび DomainGrant プロパティを使って、特定の IP アドレスおよびドメインからのアクセスを許可できます。
+<P><B>注</B>&nbsp;&nbsp;&nbsp;このプロパティは、IIsIPSecurity オブジェクトのコンテキストで使用される場合のみ有効です。</P>
+</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メタベース プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi57hv.htm">ADSI オブジェクト プロパティ</A></TD>
+<TD width=50%>複数のオブジェクトで有効な一連のプロパティです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2k1l.htm"><B>IPSecurity</B></A></TD>
+<TD width=50%>このプロパティは、URL に対する IP アクセスの制限を指定します。このプロパティを使用し、クライアント ブラウザの IP アドレスまたは DNS ホスト名をもとに、そのブラウザに対してアクセスを許可または拒否することができます。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

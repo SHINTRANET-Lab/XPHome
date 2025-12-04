@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>クライアント証明書を有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="制限のあるディレクトリやファイルにアクセスを試みるユーザーに対して、クライアント証明書を提示してログオンするように要求する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="enablingcertificates">クライアント証明書を有効にする</a></h1>
+
+<p>Web サイトにアクセスしようとするユーザーに対して、クライアント証明書を提示してログオンするよう要求できます。ただし、クライアント証明書を要求するだけでは、権限のないアクセスからコンテンツを保護したことにはなりません。クライアント証明書を所有するユーザーであればだれでも、セキュリティで保護された接続を確立してサーバーのリソースにアクセスできます。Web のコンテンツを権限のないアクセスから保護するには、次のいずれかを行う必要があります。</p>
+
+<ul>
+<li>クライアント証明書の要求に加えて、基本認証、ダイジェスト認証、または統合 Windows 認証を使用します。</li>
+<li>クライアント証明書に対する Windows&nbsp;のアカウント マッピングを作成します。詳細については、「<a href="iimapsc.htm">ユーザー アカウントにクライアント証明書をマップする</a>」を参照してください。</li>
+</ul>
+
+<p><strong><font color="#0000FF">重要</font></strong></p>
+
+<ul>
+<li>Web サーバーでクライアント証明書を処理するには、あらかじめ、サーバー証明書をインストールし、サーバーのセキュリティで保護された通信機能を有効にする必要があります。認証と証明書の詳細については、「<a href="iiabasc.htm">認証について</a>」および「<a href="iiocrsc.htm">サーバー証明書を取得する</a>」を参照してください。</li>
+<li>特定の Web サイトのプロパティを設定しようとすると、Web サイトのディレクトリおよびファイルに個別に設定されているプロパティをリセットするかどうかを確認するメッセージが表示されます。プロパティのリセットを選択すると、それまでのセキュリティの設定は新しい設定に置き換えられます。ディレクトリのセキュリティ プロパティを設定するときに、サブディレクトリあるいはファイルのセキュリティ プロパティが既に設定されている場合も、同様の確認が行われます。プロパティの設定の詳細については、「<a href="iivsovr.htm">Web サイトおよび FTP サイトについて</a>」の「プロパティおよびサイトのプロパティの継承」を参照してください。</li>
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>クライアント証明書を有効にするには</big><br>
+
+<ol>	
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+<li>サーバーの証明書を取得していない場合は、[ディレクトリ セキュリティ] プロパティ シートをクリックし、[セキュリティ保護された通信] の [サーバー証明書] をクリックします。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</li>
+<li>既にサーバー証明書を取得している場合は、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックし、[セキュリティ保護された通信] の [編集] をクリックします。</li>
+<li>[セキュリティ保護された通信] ダイアログ ボックスの [保護されたチャンネル (SSL) を要求する] チェック ボックスをオンにします。セキュリティで保護されたチャンネルを要求すると、ユーザーはセキュリティで保護されたリンク、つまり URL が https:// で始まるリンクを使用しないとサイトに接続できなくなります。</li>
+<li>[クライアント証明書] で次のいずれかをクリックして、クライアント証明書の認証を有効にします。</li>
+
+<ul>
+<li>[クライアント証明書を受諾する]&nbsp;&nbsp;クライアント証明書を提示してリソースにアクセスできますが、証明書を要求されることはありません。</li>
+<li>[クライアント証明書を要求する]&nbsp;&nbsp;リソースに接続する前に、サーバーからクライアント証明書の提示を求められます。有効なクライアント証明書を持たないユーザーは、アクセスを拒否されます。</li>
+<li>[クライアント証明書を無視する]&nbsp;&nbsp;クライアント証明書の有無に関係なく、ユーザーはアクセスを許可されます。</li>
+</ul>
+
+</ol>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

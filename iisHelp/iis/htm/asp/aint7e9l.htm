@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS をプログラム管理する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_administering_iis_programmatically"></A><SUP></SUP>IIS をプログラム管理する</H1>
+
+<P>インターネット インフォメーション サービス (IIS) は、スクリプトまたはアプリケーションから構成設定にアクセスするための、強力なプログラミング ツールを提供しています。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aint735a.htm">プログラム管理の概要</A>」では、メタベースについて、および管理アプリケーションを作成するための予備知識について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</A>」では、VBScript、JScript、C++、Visual Basic などのオートメーション対応言語を使って、スクリプトまたはアプリケーションからメタベースへアクセスする方法について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aore50h1.htm">プログラム管理リファレンス</A>」は、IIS で使用可能なプログラム管理オブジェクトおよびインターフェイスに関するリファレンスです。</li>
+</UL>
+
+<P>詳細については、Platform SDK の 「Advanced Programmatic Administration」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

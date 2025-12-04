@@ -1,0 +1,84 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>要求をディレクトリにリダイレクトする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META name="DESCRIPTION" content="ブラウザの要求を、ほかのファイル、ディレクトリ、および Web サイトにリダイレクトする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37693895">要求をディレクトリにリダイレクトする</a></h1>
+
+<p>あるディレクトリ内にある複数のファイルへの要求を、別のディレクトリ、別の Web サイト、または別のディレクトリの別のファイルにリダイレクトできます。ブラウザが元の URL のファイルを要求すると、Web サーバーは新しい URL を使用してページを要求するようブラウザに通知します。</p>
+
+<big>ほかのディレクトリまたは Web サイトに要求をリダイレクトするには</big><!--</p>--><br>
+
+<ol>
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはディレクトリを選択し、そのプロパティ シートを開きます。</li>
+<li>[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li>[URL へのリダイレクト] をクリックします。</li>
+<li>[リダイレクト先] ボックスに、リダイレクト先のディレクトリまたは Web サイトの URL を入力します。たとえば、/Catalog ディレクトリのファイルに対する要求をすべて /NewCatalog ディレクトリにリダイレクトするには、「<strong>/NewCatalog</strong>」と入力します。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+<big>すべての要求を単一のファイルにリダイレクトするには</big><!--</p>--><br>
+
+<ol>
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはディレクトリを選択し、そのプロパティ シートを開きます。</li>
+<li>[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li>[URL へのリダイレクト] をクリックします。</li>
+<li>[リダイレクト先] ボックスに、リダイレクト先のファイルの URL を入力します。</li>
+<li>[上で入力した URL] チェック ボックスをオンにし、Web サーバーがリダイレクト先の URL に元のファイル名を追加しないようにします。</li>
+</ol>
+
+<p>リダイレクト先の URL では、ワイルドカードとリダイレクトの変数を使用して、元の URL をリダイレクト先の URL に変換する方法を細かく制御できます。詳細については、「<A HREF="iiabdsk.htm">リダイレクト リファレンス</A>」を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

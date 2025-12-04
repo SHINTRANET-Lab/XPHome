@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>セキュリティ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="認証、アクセス制御、暗号化、証明書、監査など、セキュリティの概要についての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="Security">セキュリティ</a></h1>
+
+<p>コンピュータに適切なセキュリティ対策がなされていると、悪意のある第三者による外部からの侵入だけでなく、制限されている情報に一般ユーザーが偶然アクセスしたり、誤って重要なファイルを改変するなどの、さまざまなセキュリティ上の問題を軽減したり、取り除くことができます。</p>
+
+<p> ここでは、Web サイトを適切に保護し、その他の重要なセキュリティ機能を実現するために、Web サーバーおよび Windows の両方を構成する方法について説明します。</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><a href="iiabtsc.htm">セキュリティについて</a></strong>」では、Web サーバーのセキュリティ機能の概念を紹介します。ここには、強力なセキュリティで保護された Secure Sockets Layer (SSL) 機能の使い方を学習するためのヒントが用意されています。</li>
+<li>「<strong><a href="iisckl.htm">IIS セキュリティ チェックリスト</a></strong>」は、Windows の設定、IIS Web のアクセス権、および物理的なセキュリティなどのコンピュータの保護対策の一覧です。</li>
+<li>「<strong><a href="iiathsc.htm">認証</a></strong>」では、制限付きのコンテンツへの接続を試みるユーザーを識別する方法について説明します。</li>
+<li>「<strong><a href="iiaclsc.htm">アクセス制御</a></strong>」では、ファイルやディレクトリに対するユーザーからのアクセスおよび操作を制御する方法について説明します。</li>
+<li>「<strong><a href="iiencsc.htm">暗号化</a></strong>」では、SSL 暗号化機能を使って、情報のプライバシーを保護する方法について説明します。</li>
+<li>「<strong><a href="iicerts.htm">証明書</a></strong>」では、証明書と SSL 機能を使って、安全な接続を確立する方法について説明します。</li>
+<li>「<strong><a href="iiaudsc.htm">監査</a></strong>」では、セキュリティの動きを監視し、不正侵入や権限のないアクセスを防ぐ方法について説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>サーバー アプリケーションを分離し、Web サーバーのプロセスから独立したプロセスで実行する方法については、「<a href="iiisol.htm">アプリケーションを分離する</a>」を参照してください。</li>
+<li>使用中のコンピュータのネットワーク名とアドレスを確認する方法については、「<a href="iiverid.htm">コンピュータの識別情報を確認する</a>」を参照してください。</li>
+<li>ASP アプリケーションのセキュリティについては、「<a href="../asp/eadg4n77.htm">IIS アプリケーションのセキュリティ問題</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+security, secure, lock down, lock-down, lockdown, insecure, risk, hack, hacker, hackers, crack, cracker, crackers, exploit, firewall, unauthorized, illegal, steal, sniff, sniffs, sniffer, satan, checklist, weakness, weaknesses, vulnerable, vulnerability, gap, hole, open, spoof, fraud, defraud, fraudulent, false, bogus, virus, deface, attack, denial of service, denial-of-service, exe, .exe, executable, script, overload, spam, harrass, flood, syn flood, syn-flood, synflood, buffer overrun, buffer overload, long url, attack, attacks, breach, defeat, circumvent, overwrite, password, links, more information passwords, identity, identify, identification, logon, log on, credentials, control, user, users, authenticate, digest authentication, challenge/response, basic, ntlm, digest, control, restrict, deny, keep out, safe, confidential, sensitive, secret, protect, shield, hide, hidden, defend, defense, defending, against, defeat, stop, prevent, prevention, file, files, directory, ntfs, user account, nt account, permission, permissions, privilege, privileges, admin, administrator, operator, invalid, valid, directories, share, shared, public, private, privacy, access, limit, limited, encrypt, encryption, encrypted, hash, hashed, scramble, scrambled, intercept, code, coder, md5, kerberos, base64, digital, cleartext, clear, text, certificate, server certificate, personal certificate, certification provider, authority, certify, certified, base-64, base64, base 64, key, key, 40 bit, 40-bit, 128 bit, 128-bit, cipher, cypher, ssl, secure sockets layer, fortezza, track, audit, monitor, monitoring, detect, detection, alert, notify, false, repeated, unsuccessful attempts, intrude, intruder, intrusion, sneak, log, logs, logging, attempt, attempts, gain entry, enter, upload, trojan horse, back orifice, backorifice, html.internal, wizard, wizards, trust, trusted, account, accounts
+</layer></span></font>
+</body>
+</html>

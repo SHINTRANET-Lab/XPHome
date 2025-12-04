@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS Admin オブジェクトの概要</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_iis_admin_objects_overview"></A><SUP></SUP>IIS Admin オブジェクトの概要</H1>
+
+<P>IIS Admin オブジェクトは、IIS メタベースに格納されている IIS 構成値を、ASP ページやカスタム アプリケーションから変更するために使用する COM オートメーション オブジェクトです。たとえば、ASP ページにスクリプトを記述することで、AccessRead、AccessWrite、および AccessExecute の各プロパティにアクセス権を設定できます。メタベースの詳細については、「<A HREF="/iishelp/iis/htm/asp/aint1aud.htm">IIS メタベースの紹介</A>」を参照してください。</P>
+
+<P>個々の IIS Admin オブジェクトは、メタベース内のキーに対応し、メタベースにおけるそのキーのパスによって参照されます。各オブジェクトはプロパティを持ち、各プロパティはメタベースに格納されます。IIS Admin オブジェクトを使って、IIS の構成を操作することができます。つまり、プロパティの変更、新しい仮想ディレクトリの追加、新しい Web サイトの追加などが可能です。 </P>
+
+<P>IIS Admin オブジェクトのプロパティを変更すると、対応するメタベース プロパティの値が変更されるため、ローカル コンピュータ (LM)、FTP サーバー (FTPSVC)、Web サーバー (W3SVC) などの、IIS の個々の要素を構成することができます。メタベースは、構造が階層的であり、プロパティ継承機能を備えているため、単一ファイルや単一サーバー、またはすべての Web サーバーやすべての FTP サーバーという単位でのプロパティの構成、またはその他多数のオブジェクト グループに共通のプロパティの構成が容易です。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aogu6pkp.htm">オブジェクト階層構造</A>」では、IIS Admin オブジェクトとメタベースの関係、およびアプリケーションから IIS Admin オブジェクトへアクセスする方法について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aogu2ek3.htm">ADSI の機能</A>」では、IIS の管理に使用する ADSI の標準プロパティおよびメソッドを、IIS Admin オブジェクトがどのように実装するかを説明します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

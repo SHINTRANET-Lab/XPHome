@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>トランザクション Web アプリケーションを設計する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_designing_transacted_web_applications"></A><SUP></SUP>トランザクション Web アプリケーションを設計する</H1>
+
+<P>ビジネスのプロセスと、物理的なトランザクションを区別することは、トランザクション Web アプリケーションの設計で最も重要な概念の 1 つです。ビジネス プロセスは、たとえば、販売注文の処理など、多くの企業で日常的に行われる業務プロセスです。物理トランザクションは、ビジネス プロセスの記録に使用されるデータ リソースを実際に更新する作業に相当します。通常、1 つのビジネス プロセスは、複数の物理トランザクションから構成されます。</P>
+
+<P>たとえば、販売注文の処理は、少なくとも、次の 3 つの手順に分けられます。
+
+<UL type=disc>
+	<LI>製品がすぐに出荷できるかどうかを確認する</li>
+
+	<LI>支払いを受け取る</li>
+
+	<LI>注文をコミットする</li>
+</UL>
+
+<P>これらの手順はそれぞれ 1 つ以上の物理トランザクションを表します。</P>
+
+<P>物理トランザクションの数はシステムの設計に応じて異なります。インターネットはコネクションレスな性質を持つため、上記の手順を複数の独立した物理トランザクションに分けることが必要になります。物理トランザクションが開始されると、トランザクションが完了するまで、そのほかのユーザーはトランザクションに関係するリソースを更新できません。上記の販売注文プロセス全体が 1 つの物理トランザクションにまとめられていると仮定します。あるユーザーが欲しい製品を指定して、トランザクションを開始すると、このユーザーのアカウントはロックされ、また、在庫品データベースではこの製品は入手不可能であるとマークされます。このユーザーは注文をコミットするまで、ブラウザを実行したままにして、ほかの作業をすることができます。この注文全体が 1 つの物理トランザクションとして扱われるため、ユーザーがコミットするか、ビジネス ルールに従ってシステムがこの注文を拒否するまで、すべてのリソースはロックされたままになります。このような設計は、Web に公開するトランザクション プロセス システムには適していません。</P>
+
+<P>トランザクション Web アプリケーションの設計の要件は、常にビジネス プロセスの観点で示される可能性があります。したがって、ビジネス プロセスを物理トランザクションに分割するための設計テクニックを確立することが大切です。物理トランザクションが必ず 1 つの .asp ファイルで実行されるようにすることは、このような重要なテクニックの 1 つです。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>ビジネス プロセスは複数の .asp ファイルにわたっても支障ありませんが、物理トランザクションは 1 つの .asp ファイルでなければなりません。</P>
+
+<P>もう 1 つの設計テクニックとして、トランザクション リソースでステータス コードを使用し、トランザクションが保留されているか、コミットされたかを表すことができます。ステータス コードを使用すると、注文を実際にコミットしなくても、リソースを確保することができます。このビジネス プロセスが完了したら、保留されているリソースのステータス コードを変更して、新たに物理トランザクションを開始し、これらのリソースをコミットすることができます。ここでは、The Crawford &amp; Sons Custom Bicycle Company という会社を例に、これら 2 つのテクニックが、トランザクション Web アプリケーションの実装にどのような影響を与えるかを説明します。</P>
+<span style="display:none"><LAYER VISIBILITY=HIDE> (The following words are used by Search; they are not intended to be displayed on the page.) MSMQ </layer></span>
+<H4>The Crawford &amp; Sons の Web アプリケーション</H4>
+
+<P>The Crawford &amp; Sons Custom Bicycle Company は、オーダーメードの自転車を製造し、北米全体に出荷しています。この会社では、Web アプリケーションを通じて自転車の注文を受けようと決定しました。顧客レコードと在庫レコードの維持管理には Microsoft SQL Server が使用されています。また、データ コンポーネントとビジネス ロジック コンポーネントは開発済みで、コンポーネント サービスに登録されています。さて、この会社では、1 つのビジネス プロセスの範囲内で、顧客がこれらのコンポーネントにアクセスできるようにするための .asp ファイルを開発する必要があります。Web アプリケーション設計を構成する物理トランザクションと .asp ファイルは次の図のようになります。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/transcook.gif" ALT="トランザクションの例" BORDER=0></P>
+
+<P>この販売注文アプリケーションは、Login.asp、Credit.asp、Inventory.asp、Commit.asp という 4 種類の .asp ファイルから構成されています。各物理トランザクションは、独立した .asp ファイルで表されていることに注意してください (各 .asp ファイルには @Transaction = Required ディレクティブが含まれます)。Login、Credit、Inventory は、それぞれ Sales Order という COM コンポーネントと対話します。Sales Order により、注文を受け付ける 3 種類の手順を行うメソッドが公開されます。</P>
+
+<P>顧客が注文をコミットする準備が整ったとき、つまり、ビジネス プロセスが完了すると、Commit.asp により、論理トランザクション全体が 1 つの物理トランザクションにグループ化され、データ リソースのステータス コードが &quot;pending&quot; から &quot;complete&quot; に変更されます。この設計は、Web のコネクションレスな性質と、統一されたビジネス プロセスをユーザーに提供するための必要事項の両方に対応しています。</P>
+
+<P>コンポーネント サービス トランザクションの詳細については「<A HREF="iiaptran.htm">トランザクションを理解する</A>」、および Platform SDK の「Component Services and Message Queuing」のマニュアルを参照してください。トランザクション スクリプトの例については、Platform SDK の IIS セクションにある <b>ASP Samples</b> または <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[FTP サイト] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[FTP サイト] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、サーバーの識別パラメータを設定するときに使用します。サーバー名、ドメイン名、および IP アドレスは省略可能です。</p>
+
+<p><strong>[識別]</strong></p>
+
+<p><strong>[説明]</strong></p>
+
+<p>サーバー名には、任意の名前を使用できます。この名前は、主にサーバーを識別し、整理するために使用します。</p>
+
+<p><strong>[IP アドレス]</strong></p>
+
+<p>このボックスにアドレスを表示するには、あらかじめコントロール パネルでアドレスを定義しておく必要があります。詳細については、Windows のマニュアルを参照してください。</p>
+
+<p><strong>[TCP ポート]</strong></p>
+
+<p>サービスを実行するポートを指定します。</p>
+
+<p>既定値はポート 21 です。ポートの値は、任意の重複しない TCP ポート番号に変更できますが、あらかじめクライアントにそのポート番号を通知しておく必要があります。通知せずに変更すると、クライアントはサーバーに接続できなくなります。</p>
+
+<p><strong>[接続]</strong></p>
+
+<p><strong>[無制限]</strong></p>
+
+<p>サーバーへの同時接続数を無制限にします。</p>
+
+<p><strong>[最大接続数]</strong></p>
+
+<p>サーバーへの同時接続を許可する最大数を設定します。</p>
+
+<p><strong>[接続のタイムアウト]</strong></p>
+
+<p>サーバーが、反応のないユーザーの接続を切断するまでの時間を設定します。これにより、HTTP プロトコルが接続の解除に失敗しても、すべての接続が切断されます。</p>
+
+<p><strong>[ログを収集する]</strong></p>
+
+<p>このチェック ボックスをオンにすると、FTP サイトのログ収集が有効になります。これにより、ユーザーの利用状況を詳細に記録し、さまざまな形式でログを作成できます。ログの収集を有効にし、[アクティブ ログ形式] ボックスでログの形式を選択します。選択できる形式は、次のとおりです。</p>
+
+<ul>
+<li><strong>[Microsoft IIS ログ ファイル形式]</strong>  固定の ASCII 形式です。</li>
+<li><strong>[W3C 拡張ログ ファイル形式]</strong>  カスタマイズ可能な ASCII 形式です。既定で選択されています。</li>
+<li><strong>[ODBC ログ]</strong> (Windows 2000 Server でのみ使用可能) データベースにログ収集される固定の形式です。</li>
+</ul>
+
+<p>ログ ファイルの作成条件 (毎週、ファイル サイズ別など) を構成する場合、または W3C 拡張形式や ODBC 形式のログ収集のプロパティを構成する場合は、[プロパティ] をクリックし、設定します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

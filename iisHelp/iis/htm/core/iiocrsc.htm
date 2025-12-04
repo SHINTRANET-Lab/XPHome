@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サーバー証明書を取得する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="サーバー証明書を取得し、Web サーバーの SSL 機能を有効にする方法について説明します。サーバー証明書によって、ユーザーはサーバーを認証し、Web コンテンツの有効性を確認し、セキュリティで保護された接続を確立します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37718888">サーバー証明書を取得する</a></h1>
+
+<p>サーバー証明書を取得する方法には、<a href="#certserver">独自に証明書を発行する</a>方法と、<a href="#CAcerts">証明機関</a>から取得する方法の 2 つがあります。ここでは、サーバーに証明書を実装する手順について説明します。証明書の詳細については、「<a href="iiabcsc.htm">証明書について</a>」を参照してください。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;証明書とキー ペアの安全対策は重要です。この 2 つは &quot;必ず&quot; ディスクにバックアップして、安全な場所に保管してください。
+
+<ul>
+<li><a href="#certserver">独自のサーバー証明書を発行するには</a></li>
+<li><a href="#CAcerts">証明機関からサーバー証明書を取得するには</a></li>
+<li><a href="#savekeys">サーバー証明書とプライベート キーのバックアップ コピーを作成するには</a>
+</li>
+</ul>
+
+<a name="certserver"></a><big>独自のサーバー証明書を発行するには</big><br>
+
+<p>独自のサーバー証明書を発行するかどうかを決定する際には、次の点を考慮する必要があります。</p>
+<ul>
+
+<li>証明書サービスが提供する機能を考慮する。Microsoft 証明書サービス&nbsp;2.0 では、証明書の形式を複数使用することが可能で、証明書に関連する活動の監査またはログの収集を実行できる。</li> 
+<li>独自の証明書を発行する場合のコストを、証明機関から証明書を購入する場合のコストと比較する。</li>
+<li>証明書サービスの理解と導入、さらに既存のセキュリティ システムやセキュリティ ポリシーとの統合のための準備期間が必要になる場合がある。</li>
+</ul>
+
+<ol>
+<li>証明書サービスを使って、証明書の発行と管理を行うカスタマイズ可能なサービスを構築します。イントラネット用にサーバー証明書を作成して、組織の中で証明書管理のポリシーを完全に制御することが可能です。詳細については、Microsoft 証明書サービスのマニュアルを参照してください。</li>
+
+<li><a href="iikeysc.htm#TheWebServerCertificateWizard">サーバー証明書ウィザード</a>を使って、サーバー証明書の要求とインストールを行います。</li>
+</ol>
+
+<p><strong>注</strong>
+<ul>
+<LI>サーバー証明書のオンライン要求は、エンタプライズ証明書サービスに対してのみ可能です。IIS サーバー証明書ウィザードは、同じコンピュータ上のスタンドアロン証明書サービスを認識しません。オフライン証明書要求を使って、要求をファイルに保存し、オフライン要求として処理します。詳細については、証明書サービスのマニュアルを参照してください。ローカルのエンタプライズ証明書サービスを使ったオンライン登録には影響しません。</LI>
+<LI>SGC 証明書を開く際に、[全般] タブに &quot;情報不足のため、この証明書を検証できません。&quot; というメッセージが表示される場合があります。このメッセージが表示されるのは、SGC 証明書と Windows がデータをやりとりするためであり、必ずしも、証明書に問題があるということを意味するものではありません。</LI>
+</UL>
+
+
+<p class="bigfix">&nbsp;</p>
+
+<a name="CAcerts"></a><big>証明機関からサーバー証明書を取得するには</big><br>
+
+<p>現在のサーバー証明書を置き換える場合、新しい証明書の要求が完了するまで IIS は旧証明書を使用します。</p>
+
+<ol>	
+<li>ビジネス ニーズに合うサービスを提供している証明機関を探し、サーバー証明書を要求します。</li>
+
+
+<p>証明機関を選ぶ際には、次の点を考慮する必要があります。</p>
+
+<ul>       
+<li>その証明機関は、サーバーにアクセスするすべてのブラウザと互換性がある証明書を発行できるかどうか。</li>
+<li>その証明機関は信頼できる組織かどうか。</li>
+<li>その証明機関は、どのように身元を確認するか。</li>
+<li>その証明機関には、サーバー証明書ウィザードで生成される要求などの、オンラインの証明書要求を受信するシステムがあるかどうか。</li>
+<li>初めて証明書を取得する際にかかるコスト、また更新その他のサービスにかかるコスト。</li>
+<li>その証明機関は、証明書を利用する組織または会社の業務分野に精通しているかどうか。<br>
+</li>
+</ul>
+
+	
+<li><a href="iikeysc.htm">サーバー証明書ウィザード</a>を使って、証明機関に送信する証明書要求を作成します。</li>
+<li>証明機関に要求を送信します。証明機関は、要求を処理して証明書を発行します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;証明機関によっては、要求を処理する前または証明書を発行する前に、身元確認を要求する場合があります。</p>
+<li><a href="iikeysc.htm">サーバー証明書ウィザード</a>を使って、取得した証明書をインストールします。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;<a href="iiabuti.htm">IIS スナップイン</a>でサーバー証明書ウィザードを使用してサーバーに割り当てるサーバー証明のオンライン要求を送信すると、証明機関 (CA) に割り当てられた証明書がサーバーにインストールされます。&quot;Issued Certificates&quot; フォルダに、サーバーに対して発行された証明書が表示されますが、その証明書は実際は CA に対して発行されています。</p>
+<p>この問題に対処するには、証明要求を作成しているときにオフラインにします。サーバー証明書ウィザードで、[証明書の要求を作成して後で送信する] を選択します。[オンライン証明期間に直ちに要求を送信する] は選択しないでください。
+</p>
+
+</ol>
+
+<h3><a name="savekeys">サーバー証明書とプライベート キーのバックアップ コピーを作成するには</a></h3>
+
+<p>IIS の旧バージョンでは、キー マネージャを使ってサーバー証明書をバックアップしていました。このバージョンでは、キー マネージャに代わってサーバー証明書ウィザードを使用します。IIS は Windows と密接に連動するため、証明書管理ツールを使って、サーバー証明書をエクスポートおよびバックアップすることができます。</p>
+
+
+<big>サーバー証明書をバックアップするには</big><br>
+<ol>
+<li>正しい証明書ストアを特定します。通常は、証明書マネージャのローカル コンピュータのストアです。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;証明書マネージャが MMC にインストールされていない場合は、<a href="#installCertManager">インストール</a>してください。</p>
+<li>個人ストアで証明書を選択します。</li>
+<li>[操作] メニューの [タスク] をポイントし、[エクスポート] をクリックします。</li>
+<li>Certificate Manager Export ウィザードまたは証明書のエクスポート ウィザードで、[はい、秘密キーをエクスポートします] をクリックします。</li>
+<li>ウィザードの既定の設定をそのまま使用します。画面の指示に従って、証明書バックアップ ファイルのパスワードを入力します。</li>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;[正しくエクスポートされたときは秘密キーを削除する] はクリック &quot;しないで&quot; ください。これを選択すると、現在使用中のサーバー証明書が使用できなくなります。</p>
+
+<li>ウィザードを終了すると、サーバー証明書のバックアップ コピーがエクスポートされます。</li>
+</ol>
+
+<big><a name="installCertManager">MMC に証明書マネージャを追加するには</a></big><br>
+
+<p>証明書マネージャが既に MMC にインストールされている場合は、MMC に正しいローカル コンピュータの証明書ストアが示されます。</p>
+<ol>
+<li>MMC コンソールを開き、[ファイル] メニューの [スナップインの追加と削除] をクリックします。</li>
+<li>[追加] をクリックします。</li>
+<li>[証明書] をクリックします。</li>
+<li>[追加] をクリックします。</li>
+<li>[コンピュータの管理] をクリックします。</li>
+<li>[ローカル コンピュータ] をクリックします。</li>
+<li>[完了] をクリックします。</li>
+</ol>
+
+<h3>サーバー証明書とアップグレード</h3>
+<p>IIS 5.1 がサーバー証明書を使用する方法が変更されたため、Microsoft Windows XP にアップグレードした後にサーバー証明書の削除と再割り当てに問題が発生する場合があります。この問題に対処するには、次の Visual Basic スクリプトを使用してメタベース設定を変更し、証明書を削除します。さらに、IIS のサーバー証明書ウィザードを使用して証明書を再割り当てします。</p>
+<code><STRONG>'Set Machinename to the name of the machine or localhost<br>
+Set PathObj = GetObject("IIS://" &amp; MachineName &amp; "/w3svc")<br>
+PathObj.PutEx 1, "SSLCertHash", ""<br>
+PathObj.PutEx 1, "SSLStoreName", ""<br>
+PathObj.Setinfo</STRONG></code><br><br>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=LTR>
+<HEAD>
+
+<TITLE>#echo</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービスのリファレンス ページです。#echo ディレクティブは、環境変数の値を HTML ページへ挿入するよう、Web サーバーに命令します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><font face="ＭＳ Ｐゴシック">
+
+<H2><A NAME="_k2_echo"></A><SUP></SUP>#echo</H2>
+
+<P><strong>#echo</strong> ディレクティブは、サーバー変数の値を表示するよう、Web サーバーに命令します。ディレクティブは、HTML のコメント デリミタで囲む必要があります。</P>
+
+<P>既定値では、このディレクティブは STM ページでのみ使用できます。ASP ページでは使用できません。ASP ページの場合、<a href="../asp/vbob5vsj.htm"><b>Request.ServerVariables</b></a> コレクションを使ってサーバー変数にアクセスできます。</P>
+<H6>構文</H6>
+
+<P><strong>&lt;!-- #echo var = </strong><em>VariableName</em> <strong>--&gt;</strong></P>
+
+<H6>パラメータ</H6>
+
+<P class=dt><em>VariableName</em></P>
+
+<P class=indent>挿入する値の変数の名前を指定します。変数は、次のいずれか 1 つを指定できます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all width=100%>
+
+<TR VALIGN="top">
+<TD width=20%><STRONG>変数</STRONG></TD>
+<TD width=80%><STRONG>意味</STRONG></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>ALL_HTTP</TD>
+<TD width=80%>この表の変数に解析されていないすべての HTTP ヘッダーです。これらの変数は、HTTP_<em>header field name</em> という形式をとります。ヘッダーは、NULL で終了する文字列です。各ヘッダーは、キャリッジ リターン ライン フィードで区切られます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>AUTH_TYPE</TD>
+<TD width=80%>使用されている認証の種類が含まれます。たとえば、基本認証が使用されている場合、文字列は「Basic」になり、統合認証の場合は、「Negotiate」になります。ほかの認証方法の場合は、ほかの文字列になります。Web サーバーには新しい認証の種類を追加できるため、使用されるすべての文字列を列挙することはできません。文字列が空の場合、認証は使用されていません。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>AUTH_PASSWORD</TD>
+<TD width=80%>クライアントの認証ダイアログ ボックスに入力された値です。この変数は、基本認証が使用されている場合にのみ利用できます。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>AUTH_USER</TD>
+<TD width=80%>クライアントの認証ダイアログ ボックスに入力された値です。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>CONTENT_LENGTH</TD>
+<TD width=80%>スクリプトがクライアントから受け取る予定のバイト数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>CONTENT_TYPE</TD>
+<TD width=80%>POST 要求の本文に含まれる情報のコンテンツの種類です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>DOCUMENT_NAME</TD>
+<TD width=80%>現在のファイル名です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>DOCUMENT_URI</TD>
+<TD width=80%>現在のドキュメントへの仮想パスです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>DATE_GMT</TD>
+<TD width=80%>グリニッジ標準時 (GMT) における現在の日付です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>DATE_LOCAL</TD>
+<TD width=80%>現地のタイム ゾーンにおける現在の日付です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>GATEWAY_INTERFACE</TD>
+<TD width=80%>Web サーバーで使用される CGI 仕様のリビジョンです。リビジョンは、CGI/<em>revision</em> という形式で返されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>HTTP_ACCEPT</TD>
+<TD width=80%>特殊な場合の HTTP ヘッダーです。accept フィールドの値が、カンマ (,) で区切られ、連結されます。たとえば、HTTP ヘッダーに、次のような行が含まれるとします。
+<P><CODE>&nbsp;&nbsp;&nbsp;accept: */*; q=0.1<BR>
+ &nbsp; accept: text/html<BR>
+ &nbsp; accept: image/jpeg</CODE></P>
+
+<P>この場合、HTTP_ACCEPT 変数には、次の値が格納されます。</P>
+
+<P><CODE>&nbsp;&nbsp;&nbsp;*/*; q=0.1, text/html, image/jpeg</CODE></P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>LAST_MODIFIED</TD>
+<TD width=80%>現在のドキュメントが、最後に修正された日付です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>PATH_INFO</TD>
+<TD width=80%>クライアントの指定による追加パス情報です。この変数は、URL のスクリプト名の後ろにあり、クエリ文字列 (存在する場合) の前にある部分から構成されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>PATH_TRANSLATED</TD>
+<TD width=80%>PATH_INFO の値ですが、仮想パスはディレクトリの指定に展開されています。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>QUERY_STRING</TD>
+<TD width=80%>このスクリプトを参照する URL において、疑問符 (?) の後に続く情報です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>QUERY_STRING_UNESCAPED</TD>
+<TD width=80%>エスケープされていないクエリ文字列、つまり URL にエンコードされていないクエリ文字列です。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>REMOTE_ADDR</TD>
+<TD width=80%>要求を送信したクライアントまたはクライアントのエージェント (ゲートウェイまたはファイアウォール) の IP アドレスです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>REMOTE_HOST</TD>
+<TD width=80%>要求を送信したクライアントまたはクライアントのエージェント (ゲートウェイまたはファイアウォール) のホスト名です。IIS 2.0 および 3.0 では、このパラメータに対して IP アドレスを返しました。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>REMOTE_USER</TD>
+<TD width=80%>クライアントがサーバーによる認証を受けた場合は、クライアントのユーザー名が入ります。アプリケーション上で匿名アクセスが有効になっている場合は、空文字列が返されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>REQUEST_METHOD</TD>
+<TD width=80%>HTTP 要求のメソッドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>SCRIPT_NAME</TD>
+<TD width=80%>実行されるスクリプト プログラムの名前です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>SERVER_NAME</TD>
+<TD width=80%>自己参照 URL の中に指定するサーバーのホスト名または IP アドレスです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>SERVER_PORT</TD>
+<TD width=80%>要求を受信した TCP/IP ポートです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>SERVER_PORT_SECURE</TD>
+<TD width=80%>0 または 1 の文字列です。要求が安全なポートで処理された場合、値は 1 になります。それ以外の場合、値は 0 になります。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>SERVER_PROTOCOL</TD>
+<TD width=80%>この要求に関連した情報検索プロトコルの名前とバージョンです。通常は、HTTP/1.0 となります。プロトコルは、name/version の形式で返されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>SERVER_SOFTWARE</TD>
+<TD width=80%>要求に応答する Web サーバーの名前とバージョンです。サーバー情報は、name/version の形式で返されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>URL</TD>
+<TD width=80%>URL のベース部分を示します。パラメータ値は含まれません。Web サーバーが、ヘッダーから URL を解析したとき、この値は決定されます。</TD>
+</TR>
+</TABLE>&nbsp;<font face="ＭＳ Ｐゴシック">
+
+<P><strong><font color="#0000FF">重要</strong></font>&nbsp;&nbsp;&nbsp;このディレクティブが入ったファイルには、SSI インタプリタにマップされるファイル名拡張子を使う必要があります。拡張子が異なると、Web サーバーはディレクティブを処理しません。既定では、ファイル名拡張子 .stm、.shtm、および .shtml が SSI インタプリタ (ssinc.dll) にマップされます。</P>
+
+<P>#echo ディレクティブを使用する STM ページは、それ自身または ASP ページから Response.Redirect を使用して実行する必要があります。STM ページを ASP ページから Server.Transfer、Server.Execute、または #include を使用して呼び出すと、STM ページが ssinc.dll ではなく asp.dll を通過するよう強制されるため、機能しません。</P>
+
+<P><a href="iiabuti.htm">IIS スナップイン</a>をインストールしている場合、既定の拡張子マッピングを変更して新しいマッピングを追加できます。詳細については、「<A HREF="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。ファイル拡張子を複数の実行可能ファイルにマップすることはできないため、このディレクティブを ASP ファイルでは使用できません。ASP ファイルは、既に asp.dll にマップされていて、そのまま保持する必要があります。</P>
+
+<H6><b>例</b></H6>
+
+<p>この例では、#echo ディレクティブを使用して URL を FORM ステートメントの ACTION 値に挿入します。</p>
+
+<p>--- Echo.asp ---</p>
+
+<pre>&lt;FORM NAME=&quot;RunEcho&quot; METHOD=&quot;POST&quot; ACTION=&quot;Echo.asp&quot;&gt;
+&lt;INPUT TYPE=&quot;SUBMIT&quot; VALUE=&quot;Run the #echo Directive&quot; NAME=&quot;RunEcho&quot;&gt;
+&lt;/FORM&gt;
+&lt;%
+If Len(Request.Form(&quot;RunEcho&quot;)) Then
+  Response.Redirect(&quot;Echo.stm?Echo.asp&quot;)
+End If
+%&gt;
+</pre>
+
+<p>--- Echo.stm ---</p>
+
+<pre>&lt;H3&gt;Inside Echo.stm&lt;/H3&gt;
+AUTH_TYPE is &lt;!-- #echo var=&quot;AUTH_TYPE&quot;--&gt;&lt;BR&gt;
+&lt;FORM NAME=&quot;Return&quot; METHOD=&quot;POST&quot; ACTION=&quot;&lt;!-- #echo var=&quot;QUERY_STRING&quot;--&gt;&quot;&gt;
+&lt;INPUT TYPE=&quot;SUBMIT&quot; VALUE=&quot;Return to Previous Page&quot; NAME=&quot;Return&quot;&gt;
+&lt;/FORM&gt;
+</pre>
+
+</font>
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

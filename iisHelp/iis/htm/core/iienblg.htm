@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ログの収集を有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web サイトおよび FTP サイトについてログの収集を有効にし、収集するログの形式を指定する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37698079">ログの収集を有効にする</a></h1>
+
+<p>個別の Web サイトおよび FTP サイトについてログの収集を有効にし、収集するログの形式を指定することができます。サイトのログ収集を有効にすると、サイトのすべてのディレクトリでのログ収集が有効になりますが、ディレクトリの単位でそれを無効にすることができます。</p>
+ 
+<big>Web サイトまたは FTP サイトのログの収集を有効にするには</big><!--</p>--><br>
+
+<ol>
+<li>Web サイトまたは FTP サイトを選択し、そのプロパティ シートを開きます。</li>
+<li>[Web サイト] プロパティ シートまたは [FTP サイト] プロパティ シートで、[ログ収集を有効にする] チェック ボックスをオンにします。</li>
+<li>[アクティブ ログ形式] ボックスの一覧で、形式を選択しクリックします。既定では、[ログ収集を有効にする] チェック ボックスがオンに設定され、形式には [W3C 拡張ログ ファイル形式] が選択されています。収集する項目は、[時間]、[クライアント IP アドレス]、[メソッド]、[URI Stem]、および [プロトコルの状態] の各フィールドが有効になっています。 </li>
+
+
+
+<li>[適用] をクリックします。</li>
+
+<li>[OK] をクリックします。</li>
+</ol>
+
+<big>サイトの特定のディレクトリについてログの収集を無効または有効にするには</big><!--</p>--><br>
+
+<ol>
+<li>ディレクトリを選択し、そのプロパティ シートを開きます。</li>
+<li>[ホーム ディレクトリ] プロパティ シートまたは [ディレクトリ] プロパティ シートの [ログ アクセス] チェック ボックスを確認します。既定では、チェック ボックスはオンになっています。</li>
+<li>ディレクトリでログの収集を行わない場合には、チェック ボックスをオフにします。ログの収集を行う場合には、チェック ボックスをオンにします。この設定は、プロセス総計に影響しません。</li>
+</ol>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>指定可能なログ ファイル形式については、「<a href="iiabtlg.htm">サイトの利用状況のログ収集について</a>」を参照してください。</li>
+<li>W3C 拡張形式のログを収集するフィールドの設定については、「<a href="iiconlg.htm">W3C 拡張形式のログ収集をカスタマイズする</a>」を参照してください。</li>
+<li>ログ収集の頻度とログ サイズについては、「<a href="iinamlg.htm">ログ ファイルを保存する</a>」を参照してください。</li>
+<li>ログ プロパティの参照リストについては、「<a href="iiintlg.htm">ログ収集プロパティ リファレンス</a>」を参照してください。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

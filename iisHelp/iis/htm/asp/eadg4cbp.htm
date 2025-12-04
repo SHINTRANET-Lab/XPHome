@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>クライアント/サーバー アーキテクチャでの構築</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_building_on_the_client_server_architecture"></A><SUP></SUP>クライアント/サーバー アーキテクチャでの構築</H1>
+
+<P>Web ベース アプリケーションの構築に関する詳細を説明する前に、Web の構造モデルと、このモデルにおけるブラウザとサーバーの役割について、復習します。</P>
+
+<P>一般に、アプリケーションは、クライアント アプリケーションまたはサーバー アプリケーションのいずれかに分類できます。クライアント アプリケーションは、サーバーに対しサービスとデータを要求します。また、サーバー アプリケーションはクライアントからの要求に応えます。初期の 2 層 (クライアント/サーバー) アプリケーションは大規模なデータベースにアクセスするために開発されたもので、ユーザー インターフェイスからデータを操作するためのルールがクライアント アプリケーションに組み込まれていました。サーバーの仕事は、単に、データの記憶と取得に関する要求をできるだけ多く処理することだけでした。</P>
+
+<P>2 層アプリケーションは、スタンドアロン システムの機能の多くを実行します。2 層アプリケーションによって、ユーザー インターフェイスが表示され、ユーザーからの入力が収集、処理されます。また、要求された処理が実行され、要求のステータスも報告されます。このコマンド シーケンスは必要に応じて、何回でも繰り返すことができます。サーバーから提供されるのは、データへのアクセスなので、クライアントは自分のローカル リソースを使用して、これらの処理のほとんどを実行します。クライアント アプリケーションは、データがどこにあるか、データベース内でどのように整理されているかなどの情報を持っていなければなりません。いったん取得されたデータに書式を設定し、ユーザーに対して表示する責任はクライアントにあります。 </P>
+
+<P>クライアント/サーバー モデルの主要な利点の 1 つに、複数のユーザーが同じアプリケーション データに同時にアクセスを許可され、1 台のコンピュータで行われた更新が、即座に、このサーバーにアクセスしているコンピュータすべてで使用できるようになるというものがありました 。しかし、クライアントの数が増えると、クライアントからの要求ですぐにサーバーはいっぱいになってしまいます。また、処理ロジックの多くは、アプリケーションの重要な部分と密接に関係しているので、ビジネス ルールを変更すると、高いコストと長い時間をかけて、ソース コードを変更しなければなりませんでした。容易で柔軟な 2 層化された製品が今後も多くの小規模ビジネス アプリケーションで使用され続ける一方、より高速なデータ アクセスと、より迅速な開発スケジュールが必要とされているシステム開発には分散アプリケーションを作成する新しい方法が必要になってきました。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

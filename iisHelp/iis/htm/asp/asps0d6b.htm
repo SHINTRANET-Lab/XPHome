@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>プログラム管理の例</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_programmatic_administration_examples"></A><SUP></SUP>プログラム管理の例</H1>
+
+<P>ここで紹介するサンプルでは、IIS が提供する ADSI インターフェイスを使用して、IIS のインストール環境を管理するスクリプトの作成方法を示します。</P>
+
+<P>Microsoft<sup>&reg;</sup> Visual Basic<sup>&reg;</sup> Scripting Edition (VBScript) や JScript<sup>&reg;</sup> などのスクリプト言語を使用して、時間のかかる管理作業を自動化することができます。ここで提供するいくつかの簡単なサンプル スクリプトは、ローカル コンピュータ上で実行することを目的として VBScript および JScript で作成されたもので、Windows スクリプト ホスト (WSH) によって実行されます。これらのサンプルでは、一般的な作業を行うための基本的なテクニックを示します。
+
+<UL type=disc>
+	<LI><A HREF="/iishelp/iis/htm/asp/asps716a.htm">ログ収集モジュールの列挙</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/asps90qh.htm">メタベース バックアップ ユーティリティ</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/asps4m7t.htm">メタベース バックアップ復元ユーティリティ</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/asps2242.htm">Web サーバー作成ツール</A></li>
+</UL>
+
+<P>WSH スクリプトを呼び出す一般的な形式は、コマンド ラインからスクリプトを実行するための Cscript.exe <I>ScriptName</I>、またはウィンドウからスクリプトを実行するための Wscript.exe <I>ScriptName</I> です。Cscript.exe とスクリプト、または Wscript.exe とスクリプトを実行するバッチ ファイルを作成することもできます。WSH の詳細については、Windows スクリプト ホストのマニュアルを参照してください。</P>
+
+<P><span class=le><B>重要&nbsp;&nbsp;&nbsp;</B></span>サンプル スクリプトを実行するには、これらのスクリプトのほとんどが IIS の機能にアクセスするため、IIS をローカルにインストールする必要があります。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

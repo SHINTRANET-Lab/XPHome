@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>セッションを管理する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ユーザーが Web アプリケーションにアクセスしている間の、ASP によるユーザー情報の保持について説明します。ASP がユーザー セッションを管理することにより、アプリケーションは単一セッションの間、同じ情報にアクセスすることができます。">
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="H1_37683573">セッションを管理する</a></h1>
+
+
+<p>Web アプリケーションの開発を成功させるうえでの課題の 1 つは、利用中、つまり &quot;セッション&quot; 中のユーザーがアプリケーションのページ間を移動する間もユーザー情報を保持することです。HTTP は、状態を保持しないプロトコルです。つまり、Web サーバーは、ページに対する各 HTTP 要求を独立した要求として扱います。サーバーでは、前の要求が現在の要求の数秒前にあった場合でも、前の要求に関する情報は保持していません。このように、前の要求に関する情報を保持できないため、オンライン カタログなどのアプリケーションを作成することが困難になります。このようなアプリケーションでは、ユーザーがカタログ内のさまざまなページ間を移動している間に選択したカタログ項目を追跡することが必要になる場合があるためです。</p>
+
+<p>ASP は、セッション情報を管理する際の問題に対して、独自の解決方法を提供します。ASP の <A HREF="vbob12d0.htm"><strong>Session</strong></A> オブジェクト、およびサーバーによって生成された特殊なユーザー ID を使うと、各利用ユーザーを識別し、情報を収集する高機能なアプリケーションを作成できます。アプリケーションは、この情報を使用してユーザーの設定や選択項目を追跡できます。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;ASP では、HTTP cookie という方法を使用してユーザー ID を割り当てます。HTTP cookie は、ユーザーのブラウザに格納される小さなファイルです。したがって、cookie をサポートしないブラウザ用のアプリケーションを作成する場合、またはユーザー側で cookie を拒否するようにブラウザを設定する可能性がある場合は、ASP のセッション管理機能を使用しないでください。</p>
+
+
+<h2><a name="H2_37685211">セッションの開始と終了</a></h2>
+
+<p>セッションは、次の 4 とおりの方法で開始できます。</p>
+
+<ul>
+<li>新しいユーザーが、アプリケーションの .asp ファイルを識別する URL を要求し、そのアプリケーションの Global.asa ファイルに <A HREF="glob6t84.htm">Session_OnStart</A> プロシージャが含まれている。</li>
+<li>ユーザーが <strong>Session</strong> オブジェクトに値を格納する。</li>
+<li>サーバーが受け取った要求に含まれている <A HREF="#H2_37687121">SessionID cookie</A> が無効である場合、新しいセッションが自動的に開始される。</li>
+<li>ユーザーがアプリケーションの .asp ファイルを要求し、アプリケーションの Global.asa ファイルが &lt;OBJECT&gt; タグを使用してセッション スコープを持つオブジェクトのインスタンスを作成する。&lt;OBJECT&gt; タグを使ったオブジェクトのインスタンス作成の詳細については、「<a href="iiwacomu.htm">コンポーネントとオブジェクトを使用する</a>」を参照してください。</li>
+
+</ul>
+
+<p>指定された時間内に、ユーザーがアプリケーションのページを要求または更新しない場合、セッションは自動的に終了します。この値の既定値は 20 分です。アプリケーションの既定値を変更するには、<a href="javascript://" onclick="Activate(); return false">インターネット インフォメーション サービス スナップイン</a>の [アプリケーションのオプション] プロパティ シートの [<A HREF="vbob04vo.htm">セッションのタイムアウト</A>] プロパティを設定します。
+
+<script language="javascript"> <!-- function Activate() { if (navigator.appName == "Microsoft Internet Explorer"){ window.open("../core/iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350'); } else if (navigator.appName == "Netscape") { window.open("../core/iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200'); } } //--> </script> この値は、Web アプリケーションの要件とサーバーのメモリ容量に合わせて設定します。たとえば、Web アプリケーションを閲覧するユーザーは各ページに数分しかとどまらないと予想される場合、セッション タイムアウトの値を既定値より大幅に小さくすることができます。セッション タイムアウトの時間を長くすると、利用できるセッションの数が増え、サーバーのメモリ リソースを圧迫する場合があります。</p>
+
+<p>特定のセッションに対し、アプリケーションの既定のタイムアウトより短いタイムアウト間隔に設定するには、<strong>Session </strong> オブジェクトの <strong>Timeout</strong> プロパティを設定することもできます。たとえば、次のスクリプトは、タイムアウト間隔を 5 分に設定します。</p>
+
+<pre>&lt;%  Session.Timeout = 5  %&gt;</pre>
+
+<p>また、既定値、つまり <strong>Session Timeout</strong> プロパティで設定された値より長いタイムアウト間隔に設定することもできます。</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;<STRONG>Timeout</STRONG> は、状態を保持しているセッションにのみ適用されます。&quot;状態を保持しないセッション&quot; の間は、<STRONG>Session</STRONG> オブジェクトにコンテンツや静的オブジェクトはありません。このタイプのセッションは、要求が処理されると自動的に終了し、同じブラウザから次の要求があった時点で再作成されます。<p>  
+
+<P>また、<strong>Session</strong> オブジェクトの <A HREF="vbob5tpq.htm"><strong>Abandon</strong></A> メソッドを使用して、セッションを意図的に終了することもできます。たとえば、フォーム上に [終了] ボタンを置き、その ACTION パラメータを次のコマンドが含まれている .asp ファイルの URL に設定します。</p>
+
+<pre>&lt;% Session.Abandon %&gt;</pre>
+
+<P><strong>注</strong>&nbsp;&nbsp;&nbsp;<STRONG>Session.Abandon</STRONG> を開始する前に実行キューに入れられたユーザーの要求は、中止されるセッションのコンテキストとして実行されます。<STRONG>Session.Abandon</STRONG> の実行が完了すると、新しい要求があっても、このセッションには関連付けられません。</P>
+
+
+<h2><a name="H2_37687121">SessionID と cookie について</a></h2>
+
+<p>ユーザーが特定のアプリケーション内で最初に .asp ファイルを要求したときに、ASP は &quot;SessionID&quot; を生成します。複雑なアルゴリズムによって作成された数値である SessionID は、各ユーザーのセッションを一意に識別します。新しいセッションの開始時に、サーバーはユーザーの Web ブラウザに SessionID を cookie として格納します。</p> 
+
+<p>SessionID cookie は、ロッカー キーに似ています。 ユーザーがセッション中にアプリケーションとやり取りするとき、ASP はサーバー上の "ロッカー" にユーザーに関する情報を格納します。ロッカー キーによってロッカーの中身を利用できるように、ユーザーの SessionID cookie によって、その情報にアクセスすることができます。 ユーザーの SessionID cookie は、HTTP 要求ヘッダーの中で送信されます。ASPは、ページに対する要求を受け取るたびに、HTTP 要求ヘッダーの SessionID cookie を調べます。</p>
+
+<p>ASP はユーザーのブラウザに SessionID cookie を格納した後は、ユーザーが別の .asp ファイルを要求または、ほかのアプリケーションで実行されている .asp ファイルを要求する場合でも、同じ cookie を再利用してセッションを追跡します。同様に、ユーザーが意図的にセッションを中止したり、意図的にセッションをタイムアウトにしてから、別の .asp ファイルを要求する場合でも、ASP は同じ cookie を使用して新しいセッションを開始します。唯一、ユーザーが新しい SessionID cookie を受け取るのは、サーバー管理者がサーバーを再起動してメモリに格納された SessionID の設定を消去するか、ユーザーが Web ブラウザを再起動した場合のみです。</p>  
+
+<p>SessionID cookie を再利用することにより、ASP はブラウザに送信する cookie の数を最小限にとどめます。さらに、ASP アプリケーションにセッション管理は必要ないと判断した場合には、ASP によるセッションの追跡をやめ、SessionID cookie をユーザーに送信しないように設定できます。</p> 
+
+<p>次の場合、ASP はセッション cookie を送信しません。</p>
+
+<ul>
+<li>アプリケーションのセッション状態が無効に設定されている場合。</li>
+<li>ASP ページがセッションレスに定義されている場合。 つまり、ページに<pre>&lt;%@ EnableSessionState=False %&gt;</pre> タグが設定されている場合。詳細については、「<a href="#sessionlessasp">セッションレス ASP ページ</a>」を参照してください。</li>
+</ul>
+
+<p>また、SessionID cookie は、Web サイトの複数回の利用にわたって長期的にユーザーを追跡することを目的としているわけではないことにも注意してください。サーバー コンピュータのメモリに格納された SessionID 情報は、簡単に失われます。Web アプリケーションを利用するユーザーを長期にわたって追跡する場合は、ユーザーの Web ブラウザに特殊な cookie を格納し、データベースに cookie 情報を保存して、ユーザーの識別情報を作成する必要があります。詳細については、「<a href="#usingcookies">cookie の使い方</a>」を参照してください。</p>
+
+<h2><a name="sessionobject"><strong>Session</strong> オブジェクトに対してデータを格納および削除する</a></h2>
+
+<p><strong>Session</strong> オブジェクトは、情報を格納できる、動的な関連配列を備えています。<strong>Session</strong> オブジェクトには、スカラ変数およびオブジェクト変数を格納できます。</p>
+
+<p><strong>Session</strong> オブジェクトに変数を格納するには、<strong>Session</strong> オブジェクトの名前付きエントリに値を代入します。たとえば、次のコマンドは、<strong>Session</strong> オブジェクトに 2 つの新しい変数を格納します。</p>
+
+<pre>&lt;% 
+  Session("FirstName") = "Jeff"
+  Session("LastName") = "Smith" 
+%&gt;</pre>
+
+<p><strong>Session</strong> オブジェクトから情報を取得するには、名前付きエントリにアクセスします。たとえば、Session("FirstName") の現在の値を表示するには、次のように指定します。</p>
+
+<pre>Welcome &lt;%= Session("FirstName") %&gt;</pre>
+
+<p><strong>Session</strong> オブジェクトにユーザー設定を格納し、後でその設定情報にアクセスして、ユーザーに返すページを決定することができます。たとえば、アプリケーションの最初のページで、ユーザーがテキスト専用バージョンのコンテンツを指定できるようにしておけば、この設定を、アプリケーション内でユーザーが引き続き利用するすべてのページに対して適用することができます。</p>
+
+<pre>&lt;% If Session("ScreenResolution") = "Low" Then %&gt; 
+  This is the text version of the page.
+&lt;% Else %&gt; 
+  This is the multimedia version of the page.
+&lt;% End If %&gt;</pre>
+
+<p>また、<strong>Session</strong> オブジェクトにオブジェクト インスタンスを格納することもできます。 ただし、その場合、サーバーのパフォーマンスに影響することがあります。詳細については、「<a href="iiwaobu.htm">オブジェクトのスコープを設定する</a>」を参照してください。</p>
+
+<p><strong>Session</strong> オブジェクトに格納されている項目は、ときどき削除することをお勧めします。たとえば、オンライン ストアを利用するユーザーの気が変わり、一度購入すると決めたいくつもの商品の購入をやめ、まったく別の商品を購入することは、よくあることです。このような場合、不適切な値を削除して、<strong>Session</strong> オブジェクトを更新した方が便利です。</p> 
+
+<p><strong>Session</strong> オブジェクトの <A HREF="vbob8my6.htm"><strong>Contents</strong></A> コレクションには、セッションに格納されている変数、つまり HTML &lt;OBJECT&gt; タグを使わずに格納された変数すべてが含まれています。<strong>Contents</strong> コレクションの <A HREF="vbob155x.htm"><strong>Remove</strong></A> メソッドを使用して、セッションの状態に追加された変数への参照を選択し、削除することができます。次のスクリプトは、<strong>Remove</strong> メソッドを使用して項目を削除する方法を示しています。 このスクリプトでは、ユーザーの割引率の情報を <strong>Session</strong> オブジェクトから削除します。</p>
+
+<pre>&lt;%
+  If Session.Contents("Purchamnt") &lt;= 75 then 
+    Session.Contents.Remove("Discount")
+  End If 
+%&gt;</pre>
+
+<p>必要に応じて、<strong>Contents</strong> コレクションの <A HREF="vbob8bu4.htm"><strong>RemoveAll</strong></A> メソッドを使用して、セッションに格納されている変数すべてを完全に削除することもできます。</p>
+
+<pre>Session.Content.RemoveAll()</pre>
+
+<strong>Remove</strong> メソッドを使用する場合、削除する項目は名前またはインデックスで選択できます。次のスクリプトは、<strong>Session</strong> オブジェクトに格納されている値をすべて調べ、条件に応じてインデックスで指定した値を削除する方法を示しています。
+
+
+<pre>&lt;%
+  For Each intQuote in Session.Contents
+    If Session.Contents(intQuote) &lt; 200 Then
+      Session.Contents.Remove(intQuote)  
+    End If
+  Next
+%&gt;</pre>
+
+<h2><a name="H2_37691818">複数のサーバー全体のセッションを管理する</a></h2>
+
+<p>ASP のセッション情報は、Web サーバーに格納されます。ブラウザは、セッション情報にアクセスするために、同じ Web サーバーにページを要求する必要があります。Web サーバーのクラスタ (ここでは、多数の Web サーバーがユーザー要求に応答する責任を共有しています) では、ユーザー要求が常に同じサーバーに送られるわけではありません。その代わり、特殊なソフトウェアが、サイトの URL に対するすべての要求を空いているサーバーに分配します。 このプロセスは、&quot;負荷分散&quot; と呼ばれています。Web サーバーのクラスタでは負荷分散を行うため、セッション情報を保持することは困難です。</p>
+
+<p>負荷分散が行われているサイトで ASP セッション管理を使用するには、ユーザー セッション内のすべての要求を同じ Web サーバーに向ける必要があります。それには、<A HREF="glob6t84.htm"><strong>Session_OnStart</strong></A> プロシージャを作成し、<strong>Response</strong> オブジェクトを使用して、ユーザーのセッションが実行されている特定の Web サーバーにブラウザをリダイレクトするという方法があります。アプリケーション ページ内のすべてのリンクが相対 URL である場合、ページに対するそれ以降の要求は同じサーバーに向けられます。</p>
+
+<p>たとえば、ユーザーがサイトの一般的な URL (http://www.microsoft.com) を要求してアプリケーションにアクセスする場合、負荷の分散を行うソフトウェアは、特定のサーバー (server3.microsoft.com など) に要求を向けます。ASP はそのサーバー上に新しいユーザー セッションを作成し、<strong>Session_OnStart</strong> プロシージャで、ブラウザは指定されたサーバーにリダイレクトされます。</p>
+
+<pre>&lt;% Response.Redirect("http://server3.microsoft.com/webapps/firstpage.asp") %&gt;</pre>
+
+<p>指定されたページをブラウザが要求すると、元の URL に特定のサーバー名が参照されていない限り、それ以降の要求はすべて同じサーバーに向けられます。</p>
+
+<h2><a name="usingcookies">cookie の使い方</a></h2>
+
+<p>cookie は、ユーザーを識別するために、Web サーバーがユーザーの Web ブラウザに埋め込むトークンです。次に同じブラウザがページを要求するとき、ブラウザは Web サーバーから受け取った cookie を送信します。cookie を使うと、一連の情報をユーザーに関連付けることができます。ASP スクリプトでは、<strong>Response</strong> オブジェクトと <strong>Request</strong> オブジェクトの <A HREF="vbob87j9.htm"><strong>Cookies</strong></A> コレクションを使用して cookie の値の取得および設定ができます。</p>
+
+<h3><a name="H3_37694204">cookie を設定する</a></h3>
+
+<p>cookie の値を設定するには、<strong>Response.Cookies</strong> を使用します。cookie がまだ存在しない場合、<strong>Response.Cookies</strong> は新しい cookie を作成します。たとえば、cookie 名 (&quot;VisitorID&quot;) と関連値 (&quot;49&quot;) をブラウザに送信するには、次のコマンドを使います。 このコマンドは、Web ページの &lt;HTML&gt; タグより前に置く必要があります。</p>
+
+<pre>&lt;% Response.Cookies("VisitorID") = 49 %&gt;</pre>
+
+<p>現在のユーザー セッション中にのみ cookie を使う場合、必要なことはブラウザに cookie を送信することだけです。 ただし、ユーザーがブラウザを再起動した後もユーザーを識別する場合は、ブラウザを使用してクライアント コンピュータのハード ディスクのファイルに cookie を強制的に格納する必要があります。cookie を保存するには、<strong>Response.Cookies</strong> の <strong>Expires</strong> 属性を使い、日付を将来の日付に設定します。</p>
+
+<pre>&lt;%
+  Response.Cookies("VisitorID") = 49 
+  Response.Cookies("VisitorID").Expires = "December 31, 2001" 
+%&gt;</pre>
+
+<p>cookie には複数の値を設定でき、そのような cookie を &quot;インデックス付き cookie&quot; と呼びます。インデックス付き cookie の値には、キーが割り当てられます。 cookie のキー値は特定の値を設定できます。たとえば、次のように指定します。</p>
+
+<pre>&lt;% Response.Cookies("VisitorID")("49") = "Travel" %&gt;</pre>
+
+
+<p>既存の cookie にキー値があっても、<strong>Response.Cookies</strong> でキー名が指定されていない場合、既存のキー値は削除されます。同様に、既存の cookie にキー値がなくても、<strong>Response.Cookies</strong> でキー名と値が指定されている場合、cookie の既存の値は削除され、新しいキーと値の組み合わせが作成されます。</p>
+
+<h3><a name="H3_37696008">cookie を取得する</a></h3>
+
+<p>cookie の値を取得するには、<strong>Request.Cookies</strong> コレクションを使用します。たとえば、ユーザーの HTTP 要求で <code>VisitorID=49</code> と設定されている場合、次のステートメントによって値 <code>49</code> を取得できます。</p>
+
+<pre>&lt;%= Request.Cookies("VisitorID") %&gt;</pre>
+
+<p>同様に、インデックス付き cookie からキー値を取得するには、キー名を使います。たとえば、ユーザーのブラウザが次の情報を HTTP 要求ヘッダーで送信した場合、</p>
+
+<pre>Cookie: VisitorID=49=Travel</pre>
+
+<p>次のステートメントは、値 <code>Travel</code> を返します。</p>
+
+<pre>&lt;%= Request.Cookies("VisitorID")("49") %&gt;</pre>
+
+<h3><a name="settingcookiepaths">cookie のパスを設定する</a></h3>
+
+<p>ASP によってユーザーの Web ブラウザに格納された各 cookie には、それぞれパス情報が入っています。ブラウザが、cookie に指定されたパスと同じ場所に格納されているファイルを要求すると、ブラウザは自動的に cookie をサーバーに送ります。cookie のパスの既定値は、もともと cookie を生成した .asp ファイルを含むアプリケーションの名前に対応します。たとえば、<em>UserApplication</em> というアプリケーションに含まれる .asp ファイルが cookie を生成したとします。 この場合、ユーザーの Web ブラウザがそのアプリケーションにあるファイルを取得するたびに、ブラウザは <em>UserApplication</em> によって作成された cookie、およびパス <em>/UserApplication</em> を含むその他の cookie を転送します。</p>
+
+<p>cookie に対し、既定のアプリケーション パス以外のパスを指定するには、ASP の <strong>Response.Cookies</strong> コレクションの <strong>Path</strong> 属性を使用できます。たとえば、次のスクリプトは、<code>Purchases</code> という cookie にパス SalesApp/Customer/Profiles/ を割り当てます。</p>
+
+<pre>&lt;%
+  Response.Cookies("Purchases") = "12" 
+  Response.Cookies("Purchases").Expires = "January 1, 2001" 
+  Response.Cookies("Purchases").Path = "/SalesApp/Customer/Profiles/"
+%&gt;</pre>
+
+<p><code>Purchases</code> cookie を含む Web ブラウザがパス /SalesApp/Customer/Profiles/ またはそのサブディレクトリにあるファイルを要求するごとに、ブラウザは Purchases cookie をサーバーに転送します。</p>
+
+<p>Microsoft Internet Explorer Version&nbsp;4.0 以降や Netscape のブラウザなど、多くの Web ブラウザは、cookie のパスの大文字と小文字を区別します。したがって、要求されたファイルのパスと格納された cookie のパスの大文字と小文字が異なる場合、ブラウザは cookie をサーバーに送信しません。たとえば、ASP にとっては、仮想ディレクトリ /TRAVEL と /travel は同じ ASP アプリケーションですが、URL の大文字と小文字を区別するブラウザにとっては、/TRAVEL と /travel は 2 つの異なるアプリケーションです。.asp ファイルを示すすべての URL の大文字と小文字が同じであることを確認し、ユーザーのブラウザが、格納された cookie を確実に転送するようにしてください。</p> 
+
+<p>次のステートメントを使用して cookie のパスを設定すると、ブラウザがサーバーのファイルを要求したときは、アプリケーションやパスに関係なく、常にユーザーの Web ブラウザが cookie を転送するようにできます。</p>
+
+<code>Response.Cookies("Purchases").Path = "/"</code>
+
+<p>ただし、cookie に重要な情報が入っていて、特定のアプリケーションの外からはアクセスできないようにしている場合があるので注意してください。 その場合、アプリケーションを区別せずにサーバーに cookie を転送するよう設定すると、セキュリティ上の問題が発生することがあります。</p>
+
+<h3><a name="H3_37697847">cookie を使わずに状態を保存する</a></h3>
+
+<p>すべてのブラウザが cookie をサポートしているわけではありません。また、cookie をサポートしているブラウザでも、ユーザーによっては cookie のサポートを無効にしていることがあります。アプリケーションが cookie をサポートしていないブラウザに応答する必要がある場合は、ASP セッション管理は使用できません。</p>
+
+<p>ASP セッション管理を使わない場合、独自のメカニズムを作成してアプリケーションのページ間で情報の受け渡しを行う必要があります。一般に、次の 2 とおりの方法があります。</p>
+
+<ul>
+<li>URL のクエリ文字列にパラメータを追加します。たとえば、次のように指定します。</li>
+
+<pre>http://MyServer/MyApp/start.asp?name=Jeff</pre>
+
+<p>ただし、フォームが GET メソッドを使用して送信された場合、一部のブラウザではクエリ文字列で渡された明示的パラメータを廃棄します。</p>
+
+<li>フォームに隠しフィールドの値を追加します。たとえば、次の HTML フォームには、隠しコントロールが含まれています。 このコントロールは実際のフォームには表示されず、ユーザーの Web ブラウザにも表示されません。フォームは、HTTP POST メソッドを使用して、ユーザーから提供された情報と共に、ユーザーの識別値を渡します。</li>
+
+<pre>&lt;FORM METHOD="POST" ACTION="/scripts/inform.asp"&gt;
+&lt;INPUT TYPE="text" NAME="city" VALUE=""&gt;
+&lt;INPUT TYPE="text" NAME="country/region" VALUE =""&gt;
+&lt;INPUT TYPE="hidden" NAME="userid" VALUE= &lt;%= UserIDNum(i) %&gt;
+&lt;INPUT TYPE="submit"  VALUE="Enter"&gt;</pre>
+
+<p>このメソッドを HTML フォームとしてコーディングするには、ユーザー情報を渡すすべてのリンク先を指定する必要があります。</p>
+
+</ul>
+
+<p>ASP のセッション管理を使わない場合、アプリケーションのセッション サポートは無効にしてください。セッションが有効になっている場合、ASP はページを要求するすべてのブラウザに SessionID cookie を送信します。セッション サポートを無効にするには、<a href="javascript://" onclick="Activate(); return false">インターネット インフォメーション サービス スナップイン</a>の [アプリケーションのオプション] プロパティ シートで [セッションの状態を有効にする] チェック ボックスをオフにします。
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("../core/iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("../core/iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script></p> 
+
+<h2><a name="sessionlessasp">セッションレス ASP ページ</a></h2>
+
+<p>ASP では、セッションレス ページを作成することもできます。セッションレス ページを使うと、セッションの追跡を必要とする ASP ページが利用されるときまで、セッションの作成を遅らせることができます。</p>  
+
+<p>セッションレス ページでは、次の処理は &quot;行いません&quot;。</p>
+
+<ul>
+<li><strong>Session_OnStart </strong>プロシージャの実行</li>
+<li>セッション ID cookie の送信</li>
+<li><strong>Session</strong> オブジェクトの作成</li>
+<li>&lt;OBJECT&gt; タグを使用して作成された組み込み <strong>Session</strong> オブジェクトまたはセッション スコープ オブジェクトへのアクセス</li>
+<li>ほかのセッション要求との順次実行</li>
+</ul>
+
+<p>.asp ファイルをセッションレスとして構成するには、次のコマンドを使います。</p>
+
+<pre>&lt;%@ EnableSessionState=False %&gt;</pre>
+
+<p>このスクリプトは .asp ファイルの先頭行に置き、ほかのスクリプトはその後に置きます。このタグを省略した場合、既定値としてセッションの追跡が有効になります。</p>
+
+<p>セッションレス ASP ページでは、潜在的に時間がかかるセッション活動がないため、ほとんどの場合、サーバーの応答が改善されます。たとえば、2 つの HTML フレームが入った ASP ページの場合を考えてみます。フレーム 1 とフレーム 2 は、1 つのフレームセット内にあります。フレーム 1 には、複雑なスクリプトを実行する .asp ファイルが含まれ、フレーム 2 には、単純な .asp ファイルが含まれます。ASP は、セッション要求を &quot;順番に&quot; 実行するため、フレーム 1 のスクリプトの実行が完了するまで、フレーム 2 の内容は見ることができません。しかし、フレーム 1 の .asp ファイルをセッションレスにした場合、ASP 要求は順次実行されず、フレーム 1 の内容の実行が終了する前に、ブラウザはフレーム 2 の内容を表示します。</p>
+
+<p>残念ながら、異なるフレームに対する複数の要求がどのように処理されるかは、最終的にはユーザーの Web ブラウザの構成に依存します。Web ブラウザによっては、.asp ファイルの構成がセッションレスであるにも関わらず、要求が順次実行される場合もあります。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Status コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_status_component"></a>Status コンポーネント</H1>
+
+<P>Status コンポーネントは、サーバー ステータス情報を含んだプロパティを持つ Status オブジェクトを作成します。 </P>
+
+<H6>ファイル名</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=22%>status.dll</TD>
+<TD width=78%>Status コンポーネントです。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>Status</I><B> = Server.CreateObject( "MSWC.Status" )</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Status</I></DT>
+
+<DD>Server.CreateObject を呼び出して作成する Status オブジェクトの名前を指定します。<BR>
+</DD>
+
+<DT></DT>
+</DL>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>Windows プラットフォームの場合、Status オブジェクトのプロパティはいずれも文字列 &quot;unavailable&quot; を返します。</P>
+
+<P>Status オブジェクトを使用する必要があるのは、Status オブジェクトのプロパティを使用する、Macintosh 上で開発された ASP スクリプトを実行する場合だけです。 </P>
+
+<P>次の表は、Macintosh 上に実装される Status オブジェクトのプロパティです。次のコードを使用してアクセスできます。</P>
+
+<P><CODE><I>Val</I> = <I>Status</I><B>.</B><I>Property</I></CODE></P>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=40%><B>VisitorsSinceStart</B></TD>
+<TD width=60%>サーバー起動後の重複しない利用者 (IP アドレスまたはドメイン名) 数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>RequestsSinceStart</B></TD>
+<TD width=60%>サーバー起動後の要求数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>ActiveHTTPSessions</B></TD>
+<TD width=60%>現在の HTTP 接続数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>HighHTTPSessions</B></TD>
+<TD width=60%>サーバー起動後の同時 HTTP 接続の最大数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>ServerVersion</B></TD>
+<TD width=60%>パーソナル Web サーバーのバージョンを表す文字列です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>StartTime</B></TD>
+<TD width=60%>サーバーが起動した時刻です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>StartDate</B></TD>
+<TD width=60%>サーバーが起動した日付です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>FreeMem</B></TD>
+<TD width=60%>サーバーが利用できる未使用メモリ量です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>FreeLowMem</B></TD>
+<TD width=60%>サーバー起動後の、サーバーが利用できる未使用メモリ量の最低値です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>VisitorsToday</B></TD>
+<TD width=60%>午前 0 時以降の重複しない利用者 (IP アドレスまたはドメイン名) 数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>RequestsToday</B></TD>
+<TD width=60%>午前 0 時以降の要求数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>BusyConnections</B></TD>
+<TD width=60%>サーバーが処理可能な最大接続数を既に処理していたために拒否された総要求数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>RefusedConnections</B></TD>
+<TD width=60%>認証が無効だったために拒否された総要求数です。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>TimedoutConnections</B></TD>
+<TD width=60%>要求が受信されないまま閉じられた総接続数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>Ktransferred</B></TD>
+<TD width=60%>サーバー起動後にサーバーが送信した総キロバイト数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>TotalRequests</B> </TD>
+<TD width=60%>管理ツールでステータス カウンタがリセットされてから受信した総要求数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>CurrentThreads</B></TD>
+<TD width=60%>アクティブな HTTP 接続数と、現在接続を処理していない接続スレッド プール内のスレッド数の合計です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>AvailableThreads</B></TD>
+<TD width=60%>現在接続を処理していない接続スレッド プール内のスレッド数です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>RecentVisitors</B></TD>
+<TD width=60%>最近の 32 人の重複しない利用者を一覧にした HTML のテーブルです。このテーブルには、各利用者のドメイン名 (ドメイン名を利用できない場合は IP アドレス)、および各利用者が生成した要求数が含まれます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><B>PopularPages</B></TD>
+<TD width=60%>最近利用された 32 ページを一覧にした HTML のテーブルです。このテーブルには、各ページの URL、および各ページに対する要求数が含まれます。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

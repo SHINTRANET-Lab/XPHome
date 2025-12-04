@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>CpuLoggingMask</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_cpuloggingmask"></A>CpuLoggingMask</H3>
+
+<P>このメタベース プロパティは、IIS ログ ファイルに書き込むプロセス総計フィールドおよびプロセス調整フィールドを指定します。有効になったすべてのフィールドは、すべてのプロセス総計ログに書き込まれます。ログ収集されたすべての値は、ログ収集が発生するリセット間隔中に関するものです。</P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;IIS のプロセス総計では、Windows Job オブジェクトを使用してプロセス全体の CPU 時間を監視するため、プロセス総計は IIS から独立したプロセスに分離されているアプリケーションのみのログ収集および調整を行います。</P>
+
+<P>このプロパティに含まれるフラグは、次のとおりです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2jtz.htm"><B>CpuEnableLogging</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro15np.htm"><B>CpuEnableProcType</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro92yb.htm"><B>CpuEnableActiveProcs</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8ss3.htm"><B>CpuEnableTerminatedProcs</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro87p0.htm"><B>CpuEnableEvent</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1h9v.htm"><B>CpuEnableTotalProcs</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro852d.htm"><B>CpuEnableKernelTime</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1bxh.htm"><B>CpuEnableUserTime</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1hir.htm"><B>CpuEnablePageFaults</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<P>CpuLoggingMask に含まれるフラグを、次の表で説明する 16 進数値を使用して直接操作し、ログ収集マスク フラグを変更することもできます。</P>
+
+<P>プロセス調整およびプロセス総計は、ほかのメタベース プロパティにより個別に調整されます。プロセス総計を有効にするには、<A HREF="/iishelp/iis/htm/asp/apro2jtz.htm">CpuEnableLogging</A> (CpuLoggingMask のメンバ) を TRUE に設定し、少なくともほかに 1 つの CpuLoggingMask プロパティを TRUE に設定する必要があります。また、<A HREF="/iishelp/iis/htm/asp/apro0eib.htm">CpuLoggingOptions</A> のメンバ フラグを少なくとも 1 つ設定し、<A HREF="/iishelp/iis/htm/asp/apro02ss.htm">CpuLoggingInterval</A> を 0 以外の値に設定して、<A HREF="/iishelp/iis/htm/asp/apro7hus.htm">CpuAppEnabled</A> または <A HREF="/iishelp/iis/htm/asp/apro709w.htm">CpuCgiEnabled</A> のいずれかを必要に応じて TRUE に設定します。</P>
+
+<P>プロセス調整を正常にアクティブにするには、<A HREF="/iishelp/iis/htm/asp/apro7vdw.htm">CpuLimitsEnabled</A> を TRUE に設定し、<A HREF="/iishelp/iis/htm/asp/apro7e9g.htm">CpuLimitLogEvent</A>、<A HREF="/iishelp/iis/htm/asp/apro0mm1.htm">CpuLimitPriority</A>、<A HREF="/iishelp/iis/htm/asp/apro65rk.htm">CpuLimitProcStop</A>、<A HREF="/iishelp/iis/htm/asp/apro9k85.htm">CpuLimitPause</A> のプロパティのうち少なくとも 1 つを TRUE に設定しておく必要があります。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%>長整数型</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定値</TD>
+<TD width=50%>すべてのメンバーフラグ = TRUE</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>継承</TD>
+<TD width=50%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース識別子</TD>
+<TD width=50%><B>MD_CPU_LOGGING_MASK</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ユーザー タイプ</TD>
+<TD width=50%><B>IIS_MD_UT_SERVER</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定のビットマスク設定
+<P class=atl><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;既定では、複数ビットが設定されます。</P>
+</TD>
+<TD width=50%><B>MD_CPU_ENABLE_LOGGING</B>
+<P><B>MD_CPU_ENABLE_EVENT</B></P>
+
+<P><B>MD_CPU_ENABLE_PROC_TYPE</B></P>
+
+<P><B>MD_CPU_ENABLE_USER_TIME</B></P>
+
+<P><B>MD_CPU_ENABLE_KERNEL_TIME</B></P>
+
+<P><B>MD_CPU_ENABLE_PAGE_FAULTS</B></P>
+
+<P><B>MD_CPU_ENABLE_TOTAL_PROCS</B></P>
+
+<P><B>MD_CPU_ENABLE_ACTIVE_PROCS</B></P>
+
+<P><B>MD_CPU_ENABLE_TERMINATED_PROCS</B></P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定のビットマスク値</TD>
+<TD width=50%>0x800000FF</TD>
+</TR>
+</TABLE><BR>
+
+<H6>ビットマスク値</H6>
+
+<TABLE border=0 cellpadding=5 cols=3 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>定数</B></TD>
+<TD class=blue width=18%><B>値</B></TD>
+<TD class=blue width=32%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_LOGGING</B></TD>
+<TD width=18%>0x80000000</TD>
+<TD width=32%>プロセス総計が有効かどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_EVENT</B></TD>
+<TD width=18%>0x00000001</TD>
+<TD width=32%>開始、停止、およびサイト プロセス調整などのサイト イベントをログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_PROC_TYPE</B></TD>
+<TD width=18%>0x00000002</TD>
+<TD width=32%>プロセス タイプをログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_USER_TIME</B></TD>
+<TD width=18%>0x00000004</TD>
+<TD width=32%>ユーザー CPU 時間の総計を、CPU 総時間の割合として、1/1000 パーセント単位でログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_KERNEL_TIME</B></TD>
+<TD width=18%>0x00000008</TD>
+<TD width=32%>カーネル CPU 時間の総計を、CPU 総時間の割合として、1/1000 パーセント単位でログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_PAGE_FAULTS</B></TD>
+<TD width=18%>0x00000010</TD>
+<TD width=32%>ページ フォルトの総数をログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_TOTAL_PROCS</B></TD>
+<TD width=18%>0x00000020</TD>
+<TD width=32%>プロセスの総数をログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_ACTIVE_PROCS</B></TD>
+<TD width=18%>0x00000040</TD>
+<TD width=32%>アクティブなプロセスの総数をログ収集します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_CPU_ENABLE_TERMINATED_PROCS</B></TD>
+<TD width=18%>0x00000080</TD>
+<TD width=32%>終了したプロセスの総数をログ収集します。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

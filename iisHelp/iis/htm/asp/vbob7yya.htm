@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>AddHeader</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_addheader"></A><SUP></SUP>AddHeader</H4>
+
+<P>AddHeader メソッドは、クライアントへ送信する応答に新しい HTML ヘッダーと値を追加します。同じ名前の既存のヘッダーは置き換えません。いったん追加されたヘッダーは削除できません。</P>
+
+<H6>構文</H6>
+
+<P>Response.<B>AddHeader</B> <I>HeaderName</I>, <I>HeaderValue</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>HeaderName</I></DT>
+
+<DD>新しいヘッダーの名前を指定する文字列です。<BR>
+</DD>
+
+<DT><I>HeaderValue</I></DT>
+
+<DD>新しいヘッダーの初期値を指定する文字列です。</DD>
+</DL>
+
+<H6>注</H6>
+
+<P>以降の要求で応答ヘッダーをサーバーに返信するようにクライアントが構成されている場合、Request.ServerVariables を使用してカスタム ヘッダー値を取得できます。カスタム ヘッダー名には、&quot;HTTP_&quot; が先頭に付加されます。たとえば、次のコードでヘッダーを追加したとします。</P>
+
+<PRE><CODE>&lt;% Response.AddHeader "CustomHeader", "CustomValue" %&gt;</CODE></PRE>
+
+<P>次のコードにより、特定のクライアントが次回の要求でサーバーにヘッダーを返信すると、そのヘッダーを取得できます。</P>
+
+<PRE><CODE>&lt;% ReturnedValue = Request.ServerVariables("HTTP_CustomHeader") %&gt;</CODE></PRE>
+
+<P>名前があいまいになるのを避けるために、<i>HeaderName</i> にはアンダスコア (_) 文字を含めないでください。ServerVariables コレクションは、ヘッダー名の中のアンダスコアをダッシュ記号として解釈します。たとえば、次のスクリプトでは、サーバーは MY-HEADER という名前のヘッダーを探します。</P>
+
+<PRE><CODE>&lt;% Request.ServerVariables("HTTP_MY_HEADER") %&gt;</CODE></PRE>
+
+<P>Response オブジェクトの別のメソッドで同じ機能が実現できる場合は、そのメソッドを使用するようにしてください。たとえば、カスタム値を送信し、クライアント側の構成に依存することなく以降の要求で Web アプリケーションにその値を返信させるには、Response.Cookies および Request.Cookies を使用できます。あるいは、Response.CacheControl を使用して、応答にキャッシュ制御を設定することもできます。</P>
+
+<P>HTTP プロトコルではコンテンツの前にヘッダーをすべて送信する必要があるため、ASP スクリプトが出力を生成する前に、送信されるすべてのヘッダーを変更する必要があります。IIS 4.0 の場合は、出力 (HTML コードや <A HREF="/iishelp/iis/htm/asp/vbob2w2t.htm">Write</A> メソッドによって生成される出力) をクライアントに送信する前に、スクリプトで AddHeader  を呼び出す必要があります。IIS 5.0 以降では、応答のバッファ処理が既定でオンになっています。このため、AddHeader メソッドは、<A HREF="/iishelp/iis/htm/asp/vbob74tk.htm">Flush</A> を呼び出す前であれば、スクリプトの任意の場所で呼び出すことができます。応答のバッファ処理を有効または無効にするには、<A HREF="/iishelp/iis/htm/asp/apro719q.htm">AspBufferingOn</A> メタベース プロパティを設定するか、ASP スクリプトで Response.Buffer を呼び出します。</P>
+
+<P>以上のスクリプトの例を次の .asp ファイルに示します。</P>
+
+<PRE><CODE>&lt;HTML&gt;
+Here's some text on your Web page.
+' This header tells proxy servers using HTTP/1.0 not to cache this request.
+&lt;% Response.AddHeader "Pragma", "no-cache" %&gt;
+&lt;% Response.Flush %&gt; 
+&lt;% Response.Write("Pragma is set to no-cache") %&gt; 
+&lt;/HTML&gt;</CODE></PRE>
+
+<P>この例では、ページは既定でバッファに格納されているため、ASP ページ上のスクリプトがすべて処理されるか、または <A HREF="/iishelp/iis/htm/asp/vbob74tk.htm">Flush</A> メソッドが呼び出されるまで、サーバーはクライアントに出力を送信しません。上の例で AddHeader を Flush の後で呼び出した場合は、ランタイム エラーが発生します。</P>
+
+<H6>例</H6>
+
+<P>AddHeader を使用すると、WWW-Authenticate ヘッダーなどで、同じヘッダーの複数のコピーを値を変えて送信することができます。次の例は、AddHeader メソッドを使用して、クライアントが基本認証を使用するように要求します。</P>
+
+<PRE><CODE>&lt;% Response.Addheader "WWW-Authenticate", "BASIC" %&gt;</CODE></PRE>
+
+<P>上のスクリプトは、使用する認証の種類をクライアント ブラウザに通知するだけです。アプリケーションで基本認証を有効にすることを Web サーバーに通知するものではありません。</P>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob74tk.htm"><B>Flush</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob2w2t.htm"><B>Write</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob1fsi.htm"><B>Buffer</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Content Linking コンポーネントのメソッド</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_content_linking_methods"></A><SUP></SUP>Content Linking コンポーネントのメソッド</H2>
+
+<P>NextLink オブジェクトに含まれるメソッドは、次のとおりです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp8xv8.htm">GetListCount</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルにリンクされている項目数を計算します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp9dq0.htm">GetListIndex</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている現在のページのインデックスを取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp7cby.htm">GetNextDescription</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている次のページの説明を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp34a4.htm">GetNextURL</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている次のページの URL を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp2wby.htm">GetNthDescription</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている <i>N</i> 番目のページの説明を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp8oa4.htm">GetNthURL</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている <i>N</i> 番目のページの URL を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp1j8u.htm">GetPreviousDescription</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている直前のページの説明行を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp0ir0.htm">GetPreviousURL</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている直前のページの URL を取得します。</TD>
+</TR>
+</TABLE><BR>
+
+<UL type=disc></UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

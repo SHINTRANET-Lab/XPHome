@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP による Web 対話機能</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_web_interactivity_using_asp"></A><SUP></SUP>ASP による Web 対話機能</H1>
+
+<P>ASP を使用して、有用な Web ベース アプリケーションを簡単に作成できます。次の例では、対話型 ASP アプリケーションを作成するためのテクニックをいくつか示します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps3oz8.asp">POST によるユーザー フォーム インプット</A>」では、Request.Form コレクションを使用してフォームの値を取得するためのテクニックを示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps9aur.asp">HTTP サーバー変数</A>」では、ASP スクリプトからサーバー変数の情報にアクセスするためのテクニックを示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps2kdv.asp">Cookie を使用する</A>」では、スクリプトで Response.Cookies コレクションを使用して、cookie を設定および読み込む方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps4j72.asp">有効期限の情報を設定する</A>」では、Response.Expires および Response.ExpiresAbsolute プロパティを使用して、リソースの有効期限を設定する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps4m7b.asp">クライアント側スクリプト作成</A>」では、クライアント側スクリプト作成に ASP を組み合わせて実行する、簡単なタスクを示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps7hpv.asp">フィールドに値を代入する</A>」では、ASP を使用して、フォームのフィールドに値を入れるためのテクニックを示します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

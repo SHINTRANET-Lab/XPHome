@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>メタベースのセキュリティと信頼性</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_metabase_security_and_reliability"></A><SUP></SUP>メタベースのセキュリティと信頼性</H2>
+
+<H6>メタベースのアクセス制御</H6>
+
+<P>既定では、メタベース キーの値は、&quot;metabase.bin&quot; というディスク ファイルに格納されます。メタベースは、IIS 開始時にディスクからロードされ、IIS 終了時にディスクに格納されます。また、IIS 実行中に定期的に保存されます。このファイルは、不正に使用されないように保護する必要があります。このファイルは NTFS パーティションに格納し、Windows セキュリティを使用して保護することをお勧めします。</P>
+
+<P>metabase.bin は、inetsrv ディレクトリに格納されます。このファイルは、移動や名前の変更が可能です。また、IIS が開始するときにこのファイルの場所を知らせる Windows レジストリの設定を変更できます。メタベース ファイルの場所または名前を変更するには、IIS を停止してから移動または名前の変更を行い、レジストリ キー LOCAL_MACHINE\SOFTWARE\Microsoft\INetMgr\Parameters を変更する必要があります。さらに、このキーに MetadataFile という REG_SZ 値を追加します。MetadataFile は、ドライブ名とファイル名を含む、メタベース ファイルの新しい完全なパスを指定します。</P>
+
+<H6>メタベースの信頼性</H6>
+
+<P>メタベースには、独自のカスタム バックアップ ポリシーを実装するか、または専用のバックアップ ツールを作成することができます。アプリケーションでは、<A HREF="/iishelp/iis/htm/asp/aore2xpu.htm">IIsComputer</A> オブジェクト (IIS Admin オブジェクトの場合)、または IMSAdminBase (IIS Admin Base オブジェクトの場合) が提供するメソッドを使って、メタベースのバックアップを管理できます。長期記憶域に複数のバックアップ バージョンを格納し、任意のバックアップ バージョンからメタベースを復元できます。また、バックアップ バージョンを列挙および削除することができます。</P>
+
+<P><span class=le><B>重要&nbsp;&nbsp;&nbsp;</B></span>メタベースのバックアップおよび復元機能は、IIS 5.1 で更新されています。レガシー メタベース バックアップは、バージョンの作成が目的であって、コンピュータ間での複製が目的ではありません。レガシー メタベースのバックアップは、そのバックアップを作成したコンピュータ上でのみ復元できます。メタベースのバックアップの作成および復元の詳細については、「<a href="..\core\iitasks.htm">メタベースのバックアップ</a>」および「<a href="..\core\iirestore.htm">メタベースを復元する</a>」を参照してください。</P>
+
+<P>詳細については、Platform SDK の 「Advanced Programmatic Administration」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

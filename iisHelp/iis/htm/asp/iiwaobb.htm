@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>組み込み ASP オブジェクト</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Active Server Pages によって提供される、組み込みオブジェクトについて概要を説明します。これらのオブジェクトはインスタンス生成を必要としません。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37775607">組み込み ASP オブジェクト</a></h1>
+
+
+<p>Active Server Pages ではいくつかの組み込みオブジェクトが提供されています。これらの組み込みオブジェクトを使用して、ブラウザ要求で送信された情報の収集、ブラウザへの応答、およびユーザーが選択した設定などの特定ユーザーに関する情報の格納を簡単に行うことができます。ここでは、各組み込みオブジェクトについて簡単に説明します。</p>
+
+<h2><a name="H2_37776108">Application オブジェクト</a></h2>
+
+<p><strong><a href="vbob8zw4.htm">Application</a></strong> オブジェクトは、指定されたアプリケーションのすべてのユーザーの間で情報を共有するときに使用します。</p>
+
+<h2><a name="H2_37776283">Request オブジェクト</a></h2>
+
+<p><strong><a href="vbob5ulw.htm">Request</a></strong> オブジェクトは、HTTP 要求によって渡された情報にアクセスするときに使用します。HTTP 要求によって渡された情報には、POST メソッドまたは GET メソッドを使って HTML フォームから渡されたパラメータ、cookie、およびクライアント証明書が含まれます。Request オブジェクトは、ファイルのアップロードなど、サーバーに送信されたバイナリ データにアクセスするときにも使用できます。</p>
+
+
+<h2><a name="H2_37776813">Response オブジェクト</a></h2>
+
+<p><strong><a href="vbob5sj8.htm">Response</a></strong> オブジェクトは、ユーザーに送信する情報を制御するときに使用します。これには、ブラウザに情報を直接送信する場合、ブラウザをほかの URL にリダイレクトする場合、または cookie の値を設定する場合が含まれます。</p>
+
+<h2><a name="H2_37777094">Server オブジェクト</a></h2>
+
+<p><a href="vbob7838.htm"><strong>Server</strong></a> オブジェクトは、サーバー上のメソッドおよびプロパティにアクセスするときに使用します。このうち、最もよく使われるメソッドは、COM コンポーネントのインスタンスを生成するメソッド (<strong>Server.CreateObject</strong>) です。このほかに、文字列に対して URL エンコードまたは HTML エンコードを適用するメソッド、仮想パスを物理パスにマップするメソッド、スクリプトがタイム アウトするまでの時間を設定するメソッドなどがあります。</p>
+
+<h2><a name="H2_37777518">Session オブジェクト</a></h2>
+
+<p><strong><a href="vbob12d0.htm">Session</a></strong> オブジェクトは、特定のユーザー セッションで必要になる情報を格納するときに使用します。Session オブジェクトに格納された変数は、アプリケーション内でこの特定のユーザーが別のページにジャンプした場合でも破棄されません。これらの変数は、アプリケーション内でユーザーがページにアクセスしている間中、存続します。Session オブジェクトのメソッドを使用して、セッションを明示的に終了したり、アイドル セッションがタイムアウトするまでの時間を設定したりすることもできます。</p>
+
+<h2><a name="H2_37778059">ObjectContext オブジェクト</a></h2>
+
+<p><strong><a href="vbob554k.htm">ObjectContext</a></strong> オブジェクトは、ASP スクリプトによって開始されたトランザクションをコミットまたは中止するときに使用します。</p>
+
+
+<H2>ASPError オブジェクト</H2>
+
+<P><STRONG><A HREF="vbob1dtg.htm">ASPError</A></STRONG> オブジェクトは、ASP のエラーをトラップし、より多くのエラー情報をユーザーに返すときに使用します。</P>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

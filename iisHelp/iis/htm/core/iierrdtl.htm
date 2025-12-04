@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>詳細なカスタム エラー メッセージを有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="詳細なカスタム エラー メッセージを有効にする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><A NAME="H1_19117967">詳細なカスタム エラー メッセージを有効にする</A></h1>
+
+<p>IIS には、既定の HTTP&nbsp;1.1 エラー メッセージよりも多くの情報や &quot;わかりやすい&quot; フィードバックを返す独自のカスタム エラー メッセージのセットが用意されています。たとえば、既定の HTTP&nbsp;1.1 404 エラー メッセージに含まれるステートメント &quot;Object Not Found&quot; は、次のように拡張されます。&quot;Web サーバーは要求したファイルやスクリプトを見つけることができません。URL を確認し、パスが正しいことを確認してください。この問題が続く場合には、Web サーバーの管理者に問い合わせてください。&quot;この詳細なカスタム エラー メッセージは、既定では、IIS スナップインの  [既定の Web サイト] に設定されています。</p>
+
+<big>詳細なカスタム エラー メッセージを構成するには</big><br>
+
+<ol> 
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、HTTP エラー メッセージをカスタマイズする Web サイト、仮想ディレクトリ、ディレクトリ、またはファイルを選択し、[プロパティ] をクリックします。</li>
+<li>[カスタム エラー] プロパティ シートをクリックします。</li>
+<li>変更する既定の HTTP エラー メッセージをクリックします。</li>
+<li>[プロパティの編集] をクリックします。</li>
+<li>[メッセージの種類] ボックスの一覧の [ファイル] をクリックします。</li>
+<li>[参照] をクリックし、ドライブ名:\WINNT\help\iisHelp\common\ファイル名 を参照します。</li>
+</ol>
+
+<p>わかりやすいエラー メッセージは、既定では、ドライブ名:\WINNT\Help\iisHelp\common にインストールされています。ファイル名には、個々の HTTP エラーに対応する番号が使われています。たとえば、400.htm、401-1.htm などです。</p>
+
+<p><a name="custerrinstall"></a><strong>カスタム エラーのインストール先 - IIS&nbsp;4.0 から IIS&nbsp;5.1 へ</strong></p>
+
+<p>IIS&nbsp;4.0 から IIS&nbsp;5.1 にアップグレードしているユーザーで、以前に IIS&nbsp;4.0 で ドライブ名:\WINNT\Help\common ディレクトリに独自のカスタム エラー ファイルを作成しているか、インストール済みのカスタム エラー ファイルを変更している場合、それらのファイルは ドライブ名:\WINNT\Help\iisHelp\common ディレクトリに移動しており、ファイル名の拡張子は .bak に変更されています。IIS&nbsp;5.1 では、以前のカスタム エラーを取得し、再使用することができます。たとえば、IIS&nbsp;4.0 でインストールされていたカスタム エラー ファイル 400.htm は、現在では 400.bak という名前で、ドライブ名:\WINNT\Help\iisHelp\common ディレクトリに (IIS&nbsp;5.1 の新しいカスタム エラー ファイルと共に) 置かれています。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

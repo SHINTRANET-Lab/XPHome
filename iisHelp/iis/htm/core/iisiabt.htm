@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サーバー側インクルードについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="サーバー側インクルード機能について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+
+<h1><a name="H1_37751888">サーバー側インクルードについて</a></h1>
+
+<p>Web コンテンツをユーザーに送る直前に、テキスト、グラフィックス、またはアプリケーション コンテンツを Web ページにインクルードするには、サーバー側インクルード (SSI) ディレクティブを使用します。SSI を使い、タイムスタンプ、著作権情報、顧客が記入して返すフォームなどをインクルードできます。ファイルのインクルードによって、テキストやグラフィックスを多くのファイルに繰り返し取り込むことが容易にできます。各ファイルにコンテンツを入力するのではなく、コンテンツをインクルード ファイルに保存します。インクルード ファイルは、Web サーバーに該当する Web ページにコンテンツを挿入するよう命令する簡単なステートメントを使って呼び出します。さらに、インクルード ファイルを使用すると、一箇所の内容を変更するだけで済みます。</p>
+
+<p>SSI ディレクティブが入ったファイルには特殊な処理が必要なため、SSI ファイルには SSI 用のファイル名拡張子を付ける必要があります。既定の拡張子は、.stm、.shtm、および .shtml です。Web サーバーが認識する一覧に拡張子を追加できます。詳細については、「<a href="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。</p>
+
+<p>Web サーバーでは、Web ページの処理中に SSI ディレクティブを処理します。Web サーバーは、SSI ディレクティブに達すると、インクルード ファイルの内容を直接 HTML ページに挿入します。インクルード ファイルに SSI ディレクティブが入っている場合、そのファイルもまた挿入されます。ファイルのインクルードに使用される基本的なディレクティブのほかに、SSI ディレクティブを使って、ファイル サイズなどのファイルに関する情報の挿入、またはアプリケーションやシェル コマンドの実行ができます。</p>
+
+<P>詳細については、「<a href="iisiref.htm">サーバー側インクルード リファレンス</a>」を参照してください。</P>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS アプリケーションのセキュリティ問題</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_security_ramifications_for_iis_applications"></A><SUP></SUP>IIS アプリケーションのセキュリティ問題</H1>
+
+<P>Web サイトの安全確保は Web 開発者にとって非常に重要な課題であり、潜在的に最も不明確になる可能性のある課題の 1 つでもあります。安全なシステムを構築するには注意深い計画が必要で、Web サイト管理者とプログラマは、サイトを安全に保つためのオプションについてよく理解していることが大切です。また、さまざまなセキュリティ サブシステムがどのように関わりあっているかを理解する必要もあります。</P>
+
+<P>ここでは、ASP、コンポーネント、ISAPI 開発者が直面するセキュリティ問題の概要について説明します。Web サイトの安全確保に関する基本原理については、「<A HREF="../core/iisecsa.htm">セキュリティ</A>」を参照してください。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg3r1s.htm">ASP でクライアント証明書にアクセスする</A>」では、サーバー側スクリプトを使用してクライアント証明書にアクセスする方法について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg3wqc.htm">セキュリティ コンテキストを渡す</A>」では、要求処理にかかわる可能性のあるさまざまなセキュリティ コンテキストについて概要を説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg2v3n.htm">その他のセキュリティ対策</A>」では、IIS アプリケーションのセキュリティに関するいろいろな問題について説明します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

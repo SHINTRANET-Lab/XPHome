@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADSI オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_k2_adsi_objects"></A><SUP></SUP>ADSI オブジェクト</H4>
+
+<P>各 IIS Admin オブジェクトは、ADSI 標準によって定義された IADs インターフェイスを実装します。IIS Admin オブジェクトの IADs インターフェイスには、次の基本機能があります。
+
+<UL type=disc>
+	<LI>メタベースの特定のノード上の構成プロパティを簡単に設定および取得します。たとえば、特定の Web サイトのアクセス権 (AccessFlags) を変更することができます。</li>
+
+	<LI>オブジェクトの親コンテナ オブジェクトのパスを取得します。</li>
+
+	<LI>ディレクトリ ツリー内でオブジェクト インスタンスを一意に識別する情報をバインドします。</li>
+
+	<LI>オブジェクトのスキーマ定義へのパスを提供します。</li>
+
+	<LI>オブジェクトの名前とタイプを示す識別情報を提供します。</li>
+
+	<LI>名前空間のプロパティを取得します。</li>
+
+	<LI>単純で暗黙的なキャッシング システムを提供します。</li>
+</UL>
+
+<P>IIS Admin オブジェクトは、IADs インターフェイスを実装することで、IIS 固有のメタベース プロパティに加えて、Name、ADsPath、Class、GUID、Parent、および Schema の各プロパティをサポートします。また、IIS の構成管理に必要なメソッドに加えて、IADs、GetInfo、SetInfo、Get、Put、GetEx、および PutEx の各メソッドもサポートされます。IIS Admin オブジェクトが提供する ADSI のプロパティとメソッドの詳細については、「<A HREF="/iishelp/iis/htm/asp/adsi0aat.htm">ADSI リファレンス</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

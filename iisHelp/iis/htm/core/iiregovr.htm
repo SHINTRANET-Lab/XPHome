@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>レジストリについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="レジストリ ディレクトリの編集によってのみ構成できる IIS 設定の概要をはじめ、システム レジストリについて説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37746072">レジストリについて</a></h1>
+
+<p>インターネット サービスを構成するには、<a href="iiabuti.htm">IIS スナップイン</a>を使用します。<a href="iiabuti.htm">IIS スナップイン</a>の構成にはないレジストリ内の構成パラメータには、サービス固有のエントリと、IIS およびすべてのサービスに適用されるグローバル エントリがあります。</p>
+
+<p>インターネット サーバーの設定を変更する場合は、できる限り <a href="iiabuti.htm">IIS スナップイン</a>を使用してください。レジストリの変更を有効にするには、対象となるサービスを再開する必要があります。グローバル エントリの場合は、すべてのサービスを再開する必要があります。</p>
+
+<p><strong><font color="Blue">重要</font></strong>&nbsp;&nbsp;&nbsp;レジストリ エディタの使い方を誤ると、Web サイトや FTP サイトに障害が起きるなどの問題が生じます。誤った設定を行うと、Web サイトや FTP サイトの構成が壊れることがあります。レジストリ エントリの編集は、ユーザー インターフェイスで調整できない設定を変更する場合のみ行ってください。レジストリを直接編集するときは、常に注意が必要です。</p>
+
+<p>旧バージョンの IIS に存在した多数のレジストリ キーは、"メタベース" と呼ばれる、高速アクセスが可能な階層構造のデータベースに移行されています。移行されていないレジストリ キーは、インターネット サービスの開始と、これまでのバージョンの IIS との互換性を保つために使われます。新しい情報は、すべてメタベースに書き込まれます。詳細については、「<a href="iimbstop.htm">メタベース</a>」を参照してください。</p>
+
+<h2><a name="H2_37748139">レジストリ プロパティ テーブルのキー</a></h2>
+
+<p>レジストリのプロパティを表形式で表します。構成情報の編成は、次のとおりです。</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>識別子 :</strong>  レジストリのプロパティを表す名前 (DWORD)。<br> <strong>データ型 :</strong>  データのさまざまな型を示す DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong>  プロパティに設定できる値の範囲<br><strong>既定値 :</strong>  ユーザーによる変更がない場合にプロパティに設定される値</td></tr>
+<tr><td width=100%>プロパティの説明と、プロパティの変更による効果</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

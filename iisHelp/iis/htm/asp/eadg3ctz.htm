@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADO の概要</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_ado_overview"></A><SUP></SUP>ADO の概要</H1>
+
+<P>ActiveX<sup>&reg;</sup> Data Objects (ADO) は OLE DB データ ソースに対し、共通するプログラミング モデルを提供します。ADO は、基本的にはデータ ソースと通信するために使用される属性やメソッドを公開するオブジェクトの集まりです。ADO では、汎用の OLE DB プロバイダを使用して、特定のデータ ソースにしかない機能へのアクセスが行われます。また、オープン データベース コネクティビティ (ODBC) ドライバへのアクセスを提供する特定の OLE DB プロバイダを含む、ネイティブの OLE DB プロバイダも使用されます。そのほかの上位レベルのデータ アクセス メソッドに対するニーズを置き換えるように設計された ADO は、ODBC 準拠のドライバがある限り、リレーショナル データベース、Indexed Sequential Access Method (ISAM) データベース、階層型データベースなどのあらゆる種類のデータ ソースにアクセスできます。</P>
+
+<P>ADO は使用が容易で、高速であり、メモリのオーバーヘッドも低いため、サーバー側スクリプトの作成には理想的です。実際、ASP アプリケーションでは、データ アクセス技術として ADO の使用が推奨されています。ADO は、サーバー側スクリプトやビジネス コンポーネントから直接呼び出すことができます。</P>
+
+<P>初期のデータ アクセス メソッドと異なり、ADO では、階層を移動しなくても、オブジェクトを作成できます。つまり、ほとんどの ADO オブジェクトは個別に作成できるので、異なる状況で同じオブジェクトを柔軟に再利用し、メモリの消費を抑えることができます。また、ADO では ODBC データ リソースに対する ODBC 3.0 接続プーリングと、OLE DB プロバイダのセッション プーリングが有効利用されます。これにより、各ユーザーに対して新しい Connection オブジェクトを作り続けるという、非常にリソースを消費する作業を省略することができます。</P>
+
+<P>ただし、ADO からクライアントにリモート データを提供することはできません。いったんデータが取り出され、ブラウザに送信されてしまうと、ユーザーがこのデータを操作したり、クライアント アプリケーションで変更したりすることは簡単にはできません。フィルタやレコードの修正などのデータ操作は、実際のデータ操作オブジェクトが存在するサーバーで行う必要があります。アプリケーションの設計要件に、クライアントによるデータの操作が含まれている場合は、「<A HREF="/iishelp/iis/htm/asp/eadg9mp1.htm">RDS によるリモート データ バインド</A>」を参照してください。</P>
+
+<P>Microsoft の Universal Data Access モデルの基礎である OLE DB は、データにアクセスするための標準的な方法をプログラムに提供する COM インターフェイスの集まりです。アプリケーションがどのように ADO 機能を使用するかは、部分的には、このデータの OLE DB プロバイダが存在するかどうかによって決定されます。ADO は OLE DB と共に使用するように設計されていて、ほとんどの場合、ADO コンポーネントは OLE DB を通じて、データベースと通信します。また、使用できる OLE DB プロバイダがない場合は、ADO を使用して、直接 ODBC ドライバと通信することも可能です。OLE DB プロバイダを通じて ADO を使用する場合に影響を受ける分野については、次のトピックを参照してください。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg2hnz.htm">ADO でストアド プロシージャを使用する</A>」では、ストアド プロシージャを使用する際に考慮すべき問題について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg8v73.htm">ADO のクライアント ネットワーク ライブラリを選択する</A>」では、ネットワーク ライブラリの選択と、これによるデータベース アクセス速度への影響に関する問題について説明します。</li>
+</UL>
+
+<P>ADO の詳細については、Platform SDK の「ADO SDK」を参照してください。パフォーマンスに関する情報については、「<A HREF="/iishelp/iis/htm/asp/perf7xnp.htm">データ アクセス パフォーマンス</A>」を参照してください。ADO の使用例については、Platform SDK の IIS セクションにある <b>ASP Samples</b> または <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS 5.1 で変更された ADSI のプロパティ</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_k2_adsi_properties_changed_in_iis_5.0"></A><SUP></SUP>IIS 5.1 で変更された ADSI のプロパティ</H4>
+
+<P>今回のプロパティの変更は 1 箇所のみです。詳細については、IIS&nbsp;5.1 の<A HREF="/iishelp/iis/htm/asp/apro1cms.htm">アルファベット順のプロパティ リスト</A>を確認してください。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>このリリースの後で実装された項目については、Platform SDK を参照してください。</P>
+
+<H6>ScriptMaps 構文変更</H6>
+
+<P>ScriptMaps プロパティの構文は、動詞を除外するのではなく必要な動詞を含むように変更されました (以前のバージョンでは、除外する動詞を一覧にすることは可能でしたが、構文に動詞は必ありませんでした)。除外するのではなく、含むように変更されたため、このプロパティの構文に動詞が必要となります。詳細については、「<A HREF="/iishelp/iis/htm/asp/apro9tkj.htm">ScriptMaps</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

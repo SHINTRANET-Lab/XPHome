@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Content Linking コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_content_linking_component"></a>Content Linking コンポーネント</H1>
+
+<P>Content Linking コンポーネントは NextLink オブジェクトを作成します。このオブジェクトは URL の一覧を管理することで、Web サイトのページを書籍のページのように扱えるようにします。Content Linking コンポーネントを使用すると、目次、および前後の Web ページへのリンクを自動的に生成し、更新できます。これは、オンライン新聞、フォーラム メッセージの一覧などのアプリケーションに理想的な機能です。 </P>
+
+<P>Content Linking コンポーネントは、リンクされた Web ページの一覧が入ったコンテンツ リンク リスト ファイルを参照します。このリスト ファイルは、Web サーバーに格納されています。</P>
+
+<H6>ファイル名</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=31%>nextlink.dll </TD>
+<TD width=69%>Content Linking コンポーネントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/comp39lx.htm">コンテンツ リンク リスト ファイル</A></TD>
+<TD width=69%>Web ページの一覧が入ったテキスト ファイルです。Web ページは表示順に並んでいます。このファイルは、Web サーバーの仮想パスに置く必要があります。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>NextLink</I> <B>= Server.CreateObject( "MSWC.NextLink" )</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>NextLink </I></DT>
+
+<DD>Server.CreateObject を呼び出して作成するオブジェクトの名前を指定します。</DD>
+</DL>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp8xv8.htm">GetListCount</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルにリンクされている項目数を計算します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp9dq0.htm">GetListIndex</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている現在のページのインデックスを取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp7cby.htm">GetNextDescription</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている次のページの説明を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp34a4.htm">GetNextURL</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている次のページの URL を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp2wby.htm">GetNthDescription</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている <i>N</i> 番目のページの説明を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp8oa4.htm">GetNthURL</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている <i>N</i> 番目のページの URL を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp1j8u.htm">GetPreviousDescription</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている直前のページの説明行を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=34%><A HREF="/iishelp/iis/htm/asp/comp0ir0.htm">GetPreviousURL</A></TD>
+<TD width=66%>コンテンツ リンク リスト ファイルに設定されている直前のページの URL を取得します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>例</H6>
+
+<P>次の例は、目次を作成します。この例を実行するには、Default Web Site フォルダの Data サブフォルダ内に Content Schedule File を作成する必要があります。たとえば、Default Web Site が C:\Inetpub\Wwwroot にマップされている場合は、C:\Inetpub\Wwwroot\Data\NextLink.txt 内にリスト ファイルを作成する必要があります。</P>
+
+<P>--- NextLink.asp ---</P>
+
+<PRE><CODE>&lt;%
+   Set NextLink = Server.CreateObject("MSWC.NextLink")   
+   ListFile = "/data/nextlink.txt"
+   count = NextLink.GetListCount(ListFile) 
+   I = 1 
+%&gt; 
+&lt;UL&gt;
+&lt;% Do While (I &lt;= count) %&gt;  
+     &lt;LI&gt;
+     &lt;A HREF="&lt;%=NextLink.GetNthURL(ListFile, I)%&gt;"&gt; 
+     &lt;%= NextLink.GetNthDescription(ListFile, I) %&gt;
+     &lt;/A&gt;
+     &lt;/LI&gt;
+     &lt;% I = (I + 1) %&gt;
+&lt;% Loop %&gt;  
+&lt;/UL&gt;
+&lt;!-- #include FILE = "nextlink.inc" --&gt;
+
+ </CODE></PRE>
+
+<P>次のスクリプトは、ASP ファイルに Previous Page リンクと Next Page リンクを追加します。&nbsp;このファイルを、次の行を使用して<U>コンテンツ リンク リスト ファイル</U>に一覧表示されている各ファイルに含めてください。</P>
+
+<P>&lt;!-- #include FILE = "nextlink.inc" --&gt;</P>
+
+<P>--- NextLink.inc ---</P>
+
+<PRE><CODE>&lt;BR&gt;
+&lt;%
+   Set NextLink = Server.CreateObject ("MSWC.NextLink")
+   ListFile = "/data/nextlink.txt"
+   Index = NextLink.GetListIndex(ListFile)
+%&gt;
+
+&lt;TABLE BORDER=0 CELLPADDING=6&gt;
+&lt;TR&gt;&lt;TD&gt;
+
+&lt;% If (Index &gt; 1) Then %&gt; 
+     &lt;A HREF="&lt;%=NextLink.GetPreviousURL(ListFile)%&gt;"&gt;
+     Previous Page
+     &lt;/A&gt;
+&lt;% Else %&gt;
+     Previous Page
+&lt;% End If %&gt; 
+
+&lt;/TD&gt;&lt;TD&gt;
+
+&lt;% If 0 = Index Then %&gt;
+     &lt;A HREF="&lt;%=NextLink.GetNthURL(ListFile, 1)%&gt;"&gt;
+     Next Page
+     &lt;/A&gt;
+&lt;% ElseIf (Index &lt; NextLink.GetListCount(ListFile)) Then %&gt; 
+     &lt;A HREF="&lt;%=NextLink.GetNextURL(ListFile)%&gt;"&gt;
+     Next Page
+     &lt;/A&gt; 
+&lt;% Else %&gt;
+     Next Page
+&lt;% End If %&gt;
+
+&lt;/TD&gt;&lt;TD&gt;
+
+&lt;% If Not 0 = Index Then %&gt;
+     &lt;A HREF="nextlink.asp"&gt;
+     Back to Table of Contents
+     &lt;/A&gt;
+&lt;% End If %&gt;
+
+&lt;/TD&gt;&lt;/TR&gt;
+&lt;/TABLE&gt;
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

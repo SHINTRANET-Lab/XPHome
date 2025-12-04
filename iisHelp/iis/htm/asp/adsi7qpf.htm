@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADSI コンテナ オブジェクト メソッド</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_adsi_container_object_methods"></A><SUP></SUP>ADSI コンテナ オブジェクト メソッド</H2>
+
+<P>IIS Admin オブジェクトの ADSI コンテナ オブジェクト メソッドはメタベース内のキーを操作します。コンテナ オブジェクトの中で IIS Admin オブジェクトを作成、削除、および移動することで、キーを作成、削除、および移動できます。コンテナ オブジェクト メソッドを使用して、仮想ディレクトリやサーバーなど格納されたオブジェクトを列挙することもできます。</P>
+
+<P>IIS Admin オブジェクトおよびメタベース キーを操作する ADSI コンテナ オブジェクト メソッドは、次のとおりです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=24%><B>メソッド</B></TD>
+<TD class=blue width=76%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi5eud.htm"><B>CopyHere</B></A></TD>
+<TD width=76%>オブジェクトをコンテナにコピーします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi0j8l.htm"><B>Create</B></A></TD>
+<TD width=76%>コンテナに新しいオブジェクトを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi9iat.htm"><B>Delete</B></A></TD>
+<TD width=76%>コンテナからオブジェクトを削除します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi91kk.htm"><B>GetObject</B></A></TD>
+<TD width=76%>コンテナ内のオブジェクトにアクセスします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi9hb9.htm"><B>MoveHere</B></A></TD>
+<TD width=76%>オブジェクトをコンテナにコピーし、コピー元のオブジェクトを削除します。</TD>
+</TR>
+</TABLE><BR>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>IIS Admin オブジェクトの 1 つがコンテナ オブジェクトである場合、そのオブジェクトは、独自の ADSI オブジェクト プロパティおよびメソッドと共に、IIS 固有のメソッドおよび関連付けされたメタベース プロパティを保持します。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

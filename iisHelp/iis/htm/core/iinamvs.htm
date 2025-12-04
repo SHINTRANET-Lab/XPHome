@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web サイトに名前を付ける</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サイトに名前を付ける方法について説明します。推奨される IP アドレス、ホスト ヘッダー名のサポート、1 つのコンピュータで複数のサイトをホストする ISP についても説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37716416">Web サイトに名前を付ける</a></h1>
+
+<p>各Web サイト、つまり仮想サーバーには、サイトの内容がわかる名前と共に、1 つまたは複数のホスト ヘッダー名を設定できます。ホスト ヘッダー名を使うと、1 つのコンピュータ上で複数のドメイン名を運用できるようになります。ホスト ヘッダー名をサポートしていないブラウザもあります。Internet Explorer&nbsp;3.0 以降、および Netscape Navigator&nbsp;2.0 以降では、ホスト ヘッダー名をサポートしていますが、どちらのブラウザも、それ以前のバージョンではホスト ヘッダー名をサポートしていません。</p>
+
+<p>ホスト ヘッダーをサポートしていない旧バージョンのブラウザで利用者がサイトにアクセスした場合、既定のサイトが有効になっていれば、その IP アドレスの既定の Web サイトが利用者に提供されます。このサイトは、利用者が要求したサイトと異なる場合があります。また、どのようなブラウザからの要求であっても、要求したサイトが停止している場合は、代わりに既定の Web サイトが提供されます。したがって、既定の Web サイトの内容は、慎重に検討する必要があります。一般に ISP では、顧客の Web サイトではなく、ISP 自体のホーム ページを既定サイトとして提供し、停止中のサイトへの要求が、間違ったサイトに届かないようにします。さらに既定のサイトには、旧バージョンのブラウザでホスト ヘッダー名を使用できるようにするスクリプトを置くことができます。</p>
+
+<big>Web サイトに名前を付けるには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトを選択し、プロパティ シートを開きます。</li>
+<li>[Web サイト] プロパティ シートの [説明] ボックスに、サイトの内容を説明する名前を入力します。</li>
+</ol>
+
+<big><a name="host">ホスト ヘッダー名を割り当てるには</a></big><!--</p>--><br>
+
+<ol>
+
+<li> 静的 IP アドレスに対する新しいサイト名のマッピングを名前解決システム (通常は、DNS) に追加する場合は、システム管理者に依頼してください。</li> 
+<li>[Web サイト] プロパティ シートの [詳細] をクリックします。</li>
+<li>[複数の Web サイトの詳細構成] プロパティ シートの [追加] をクリックして、Web サイトに IP アドレス、TCP ポート、およびホスト ヘッダー名を割り当てます。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ホスト ヘッダーは暗号化クライアント要求に含まれているため、SSL (Secure Sockets Layer) を使用した場合、ホスト ヘッダーは機能しません。ただし、サーバーごとに複数のサーバー証明書、複数の IP アドレス、および複数の SSL ポートを設定することができます。<br><!--</p>-->
+</ol>
+
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ログ収集モジュールの列挙</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_logging_module_enumerator"></A><SUP></SUP>ログ収集モジュールの列挙</H1>
+
+<H6>概要</H6>
+
+<P>複数のログ収集モジュールを使用する場合は、準備をしていないと問題が多発する可能性があります。このサンプル ツールでは、ログ収集管理ツールを独自に作成するためのテクニックをいくつか紹介します。</P>
+
+<P>このサンプル ツールには、2 つの異なる機能があります。コマンドライン引数を指定しないでこのツールを呼び出した場合は、サーバー上のメタベース内に現在エントリを持つすべてのログ収集モジュールが一覧表示されます。IIS://LocalHost/W3SVC/3 などの ADsPath を指定した場合、このツールはそのメタベース ノードのアクティブなログ収集モジュールを判別して、そのログ収集モジュールに関する情報を提供します。</P>
+
+<H6>コードの説明</H6>
+
+<P>利用可能なログ収集モジュールを一覧表示するには、GetObject メソッドを呼び出して、メタベースの IIS://LocalHost/Logging ノードにアクセスします。次に、For ... Each ループを使用して、そのノードで検出されたモジュールを列挙します。</P>
+
+<P>特定のサーバーのログ収集モジュールに関する情報の取得は、もう少し複雑です。サーバーが現在使用するログ収集モジュールを示すサーバー レベルのプロパティは LogPluginClsId のみであるため、この値を //LocalHost レベルで取得したすべてのモジュールと 1 つずつ比較して一致するものを検出しなければなりません。</P>
+
+<P>GetObject を使用して、//LocalHost レベルで提供されるログ収集モジュールの一覧にアクセスします。ログ収集モジュールの CLSID と、このメイン リスト内の各ログ収集モジュールの CLSID とを比較して、一致するものを検出します。一致するものが検出された場合は、スクリプトがそのログ収集モジュールに関するすべての情報を提供します。どの CLSID も一致しなかった場合、スクリプトはエラーを表示して処理を中止します。</P>
+
+<H6>スクリプトの場所</H6>
+
+<P>このスクリプトは、インターネット サービス ディレクトリ内の ...\iissamples\sdk\admin\logenum.vbs にあります。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

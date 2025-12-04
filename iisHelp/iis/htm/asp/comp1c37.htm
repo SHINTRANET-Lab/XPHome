@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Get</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_get_counters"></A><SUP></SUP>Get</H2>
+
+<P>Get メソッドは、指定された名前のカウンタの現在の値を返します。指定されたカウンタが存在しない場合は、カウンタを作成し、値を 0 に設定します。</P>
+
+<H6>構文</H6>
+
+<P><I>Counters</I><B>.Get(</B><I>CounterName</I><B>)</B></P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>CounterName</I></DT>
+
+<DD>カウンタの名前を表す文字列です。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>カウンタの値を表示するには、<CODE>&lt;%= Counters.Get(<I>CounterName</I>) %&gt;</CODE> を使用します。次のスクリプトは、好きな色についての人気投票の結果を表示します。 </P>
+
+<P>--- Counters_Get.asp ---</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Voting for Colors&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;%
+  vote = Request.QueryString("color")
+  ' The Counters object was instantiated in Global.asa.
+  Counters.Increment(vote &amp; "counter") 
+%&gt;
+&lt;H3&gt;Vote for your Favorite Color:&lt;/H3&gt;
+&lt;FORM NAME="Voting for Colors" METHOD="GET" ACTION="Counters_Get.asp"&gt;
+&lt;input type="RADIO" NAME="color" VALUE="red"&gt;Red
+&lt;input type="RADIO" NAME="color" VALUE="green"&gt;Green
+&lt;input type="RADIO" NAME="color" VALUE="blue"&gt;Blue
+&lt;BR&gt;&lt;INPUT TYPE="SUBMIT" VALUE="Submit Vote"&gt;
+&lt;/FORM&gt;
+&lt;H3&gt;Current Vote Tally:&lt;/H3&gt;
+Red: &lt;% =Counters.Get("redcounter") %&gt;&lt;BR&gt;
+Green: &lt;% = Counters.Get("greencounter") %&gt;&lt;BR&gt; 
+Blue: &lt;% = Counters.Get("bluecounter") %&gt;&lt;BR&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp46lv.htm"><B>Increment</B></A>、<A HREF="/iishelp/iis/htm/asp/comp02cz.htm"><B>Remove</B></A>、<A HREF="/iishelp/iis/htm/asp/comp1q0j.htm"><B>Set</B></A> </P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

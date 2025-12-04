@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>オブジェクト階層構造</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_object_hierarchy"></A><SUP></SUP>オブジェクト階層構造</H2>
+
+<P>IIS Admin オブジェクトは、IIS メタベースに定義されている IIS の構造を反映した階層構造で構成されます。オブジェクトがほかのオブジェクトを含んで、次の図に示すようなオブジェクト構造を作成します。IIS の構造とメタベースの詳細については、「<A HREF="/iishelp/iis/htm/asp/aint1aud.htm">IIS メタベースの紹介</A>」の中の「<A HREF="/iishelp/iis/htm/asp/aint94dh.htm">メタベース構造</A>」で説明されています。ほとんどのオブジェクトは、親オブジェクトの特性を継承しますが、スキーマを拡張して実装した固有の特性を子オブジェクトに設定することもできます。このオブジェクト階層を使って、特定の IIS 要素の構成設定にアクセスできます。図に示されている構造は、IIS のインストール環境によって多少変わる可能性があります。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/metastru.gif" ALT="IIS のオブジェクト階層" BORDER=0></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

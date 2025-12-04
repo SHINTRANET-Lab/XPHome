@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>プロセスの再利用</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="プロセスの再利用についての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="primarynodetoplevel">プロセスの再利用</a></h1>
+
+<p>ここでは、プロセスの再利用、構成可能イベント、メタベースの異なるレベルで設定を構成する理由、および構成設定の継承方法について説明し、最後にセットアップに関する考慮事項について説明します。</p>
+
+<p>ここでは、次の項目について説明します。</p>
+<ul>
+<li>「<strong><a href="iioopapr.htm">プロセスの再利用について</a></strong>」では、プロセスの再利用とそれにより解決される問題の概要について説明します。また、アプリケーションの再利用方法および構成可能イベントを紹介します。</li>
+
+<li>「<strong><a href="iiooplai.htm">レベルと継承</a></strong>」では、プロセスの再利用が構成可能であるメタベースのレベルおよび構成設定の継承方法について説明します。</li>
+
+<li>「<strong><a href="iioopcpr.htm">再利用イベントを構成する</a></strong>」では、プロセス再利用イベントの構成方法について説明します。</li>
+
+<li><strong><a href="iioopsc.htm">セットアップに関する考慮事項</a></strong>」では、Windows 2000 のクリーン インストールと Windows 2000 へのアップグレードにおける既定のメタベース キーの違いについて説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+<ul>
+<li>アプリケーションを構成する方法については、「<a href="iiwarndb.htm">アプリケーションを構成する</a>」を参照してください。</li>
+<li>メタベースのプロパティ リストについては、「<a href="../asp/apro1cms.htm">アルファベット順のプロパティ リスト</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+configure, configuration, configuring, web app, web apps, web applications, program, programs, programmer, develop, developer, code, coder, coders, development, application root, directory, starting-point directory, create, write, map, mapping, mappings, associate, associating, association, file name, filename, extension, dll, .dll, .exe, exe, isolate, isolated, isolation, out of process, out-of-process, oop, out-of-proc, crash, reliable, stable, reliability, stability, availability, available, uptime, downtime, protection, separate, memory space, cgi, script, time out, time-out, times out, time-outs, timeouts, cache, caching, isapi, extensions, scriptless asp, flow control, enhanced, objects, self-tuning, fine-tune, tune-up, tune up, automatic, threads, error-handling, line, number, .asp, file, server scriptlets, business logic, reusable, com, components, j++, vb, vba, visual basic, jscript, javascript, filters, install, set up, setup, asp, active server pages, automate, administration tasks, properties, property sheet, start, stop, starting, stopping, pause, pausing, debug, debugging, step through, errors, links, more information
+</layer></span></font>
+</body>
+</html>

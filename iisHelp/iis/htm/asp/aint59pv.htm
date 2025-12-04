@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>キー名とパス</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_key_names_and_paths"></A><SUP></SUP>キー名とパス</H2>
+
+<P>メタベース キーは、メタベースにおける位置で、ファイル システムのディレクトリに相当します。メタベース パスは、スラッシュ (/) で区切られたキーの並びで、メタベースにおけるキーの位置を特定します。メタベースのキー名は、それぞれのメタベース パスで修飾されない限り一意ではありません。これは、同じ名前のファイルを異なるディレクトリに配置できることと同様です。</P>
+
+<P>メタベース キーのパスと IIS Admin オブジェクトを使用して、そのキーに関連付けられた特定の IIS Admin オブジェクトにアクセスすることができます。IIS Admin オブジェクトは、ADsPath と呼ばれる Active Directory Service Interfaces (ADSI) のパスを使って、キーに関連付けられたオブジェクトを参照します。このパスは &quot; IIS://&quot; で始まり、次に「LocalHost」または特定のコンピュータ名を使用して、メタベースの最上位キーに関連付けられた IIsComputer オブジェクトを参照します。IIS Admin オブジェクトの詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</A>」を参照してください。</P>
+
+<P>ほかのメタベース キーに関連付けられているオブジェクトへのパスは、コンピュータ キーへの ADsPath を拡張したものです。たとえば、IIS インストール環境における 1 番目の Web サイトの ADsPath は、IIS://LocalHost/W3SVC/1 です。パス IIS://<I>ComputerName</I>/W3SVC/1 を使って、別のコンピュータ上のメタベースにアクセスすることもできます。</P>
+
+<P>各 Web サイトは サーバー インスタンスであり、パスではその番号で参照されます。たとえば、&quot;IIS://LocalHost/MSFTPSVC/3&quot; は、3 番目の FTP サーバー インスタンスを表し、IIS://<I>ComputerName</I>/W3SVC/4 は、4 番目の Web サーバー インスタンスを表します。</P>
+
+<P>各 Web サイトには、ルート仮想ディレクトリが関連付けられています。サーバー インスタンスに関連付けられているその他すべての仮想ディレクトリとディレクトリは、このルート仮想ディレクトリに従属します。ルート仮想ディレクトリの名前は、ROOT です。&quot;IIS://LocalHost/MSFTPSVC/3/ROOT&quot; は、ローカル コンピュータ上の 3 番目の FTP サーバーのルート仮想ディレクトリを表し、&quot;IIS://LocalHost/W3SVC/4/ROOT&quot; は、同じコンピュータ上の 4 番目の Web サーバーのルート仮想ディレクトリを表します。</P>
+
+<P>サーバー インスタンスのルート仮想ディレクトリより下の構造を設定するには、仮想ディレクトリ、ディレクトリ、およびファイルを追加します。FTP サーバーの場合は、メタベース プロパティを仮想ディレクトリ レベルで設定できます。Web サーバーの場合は、プロパティをディレクトリおよびファイルのレベルで設定できます。たとえば、IIS://LocalHost/W3SVC/2/ROOT/MyVdir1/Dir1/File1 というパスを使って、読み取りアクセス権、書き込みアクセス権、実行アクセス権などのファイル プロパティを設定できます。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

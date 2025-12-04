@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>トランザクション処理テクノロジ</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_transaction_processing_technology"></A><SUP></SUP>トランザクション処理テクノロジ</H1>
+
+<P>ASP をトランザクションに利用できるようにした主要なテクノロジは、コンポーネント サービスです。コンポーネント サービスにより、IIS に対して、コンポーネント インスタンスをホストするためのトランザクション サービスと環境が提供されます。この環境には、個々のコンポーネント インスタンスに対して、属性を作成できるという利点があります。ASP スクリプトを IIS でコンパイルすると、IIS Web Application Manager (IISWAM) の新しいインスタンスが作成されます。IISWAM はアプリケーションを管理するために、IIS によって使用される COM コンポーネントです。この ASP スクリプトに @TRANSACTION ディレクティブが含まれていると、IISWAM インスタンスがトランザクション環境内で宣言され、適切なトランザクション プロパティが設定されます。たとえば、ASP スクリプトに @TRANSACTION = Required と記述した場合、コンポーネント サービスに対し、作成された IISWAM のインスタンスはトランザクションの中で実行されなければならないと伝えることになります。この ASP スクリプトにより作成されるインスタンスが、コンポーネント サービスで登録されているほかのコンポーネントである場合、これらのインスタンスは同じトランザクションの一部としてコンポーネント サービスにより処理されます。次の図は、ASP と IISWAM の関係を示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/iiswam.gif" ALT="IIS Web Application Manager (IISWAM)" BORDER=0></P>
+
+<P>コンポーネント サービスは、異なる 2 つの階層によってトランザクション サービスを IIS に提供します。コンポーネント サービスは、最下層で Microsoft<sup>&reg;</sup> 分散トランザクション コーディネータ (MS DTC) と連携し、信頼のおけるトランザクション処理システムの条件である ACID (Atomic - 原子性、Consistent - 一貫性、Isolated - 独立、Durable - 永続性) を保証します。コンポーネント サービスは、コンポーネント インスタンスを、リソース マネージャとリソース ディスペンサという 2 つのメカニズムによって、MS DTC にリンクします。</P>
+
+<P>リソース マネージャは永続的なデータを管理するシステム サービスです。コンポーネント サービスは、Microsoft SQL Server 6.5 などの OLE トランザクション プロトコル、または X/Open DTP XA 標準のどちらかが実装されたリソース マネージャです。リソース ディスペンサはコンポーネントと共に機能して、ステータス情報を共有するという点ではリソース マネージャに似ています。しかし、ここで共有される情報は永続的なものではありません。たとえば、リソース ディスペンサを使用して、標準 ODBC インターフェイスを使用するコンポーネントに対するデータベース接続プールを管理することができます。ODBC 3.0 ドライバ マネージャは、ODBC 接続のためのリソース ディスペンサです。</P>
+
+<P>コンポーネント サービス トランザクションの詳細については、「<A HREF="iiaptran.htm">トランザクションを理解する</A>」、および Platform SDK の「Component Services and Message Queuing」のマニュアルを参照してください。トランザクション スクリプトの例については、Platform SDK の IIS セクションにある <b>ASP Samples</b> または <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> を参照してください。</P>
+<span style="display:none"><LAYER VISIBILITY=HIDE> (The following words are used by Search; they are not intended to be displayed on the page.) MSMQ </layer></span><hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ログ収集プロパティ リファレンス</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="ログ収集について説明します。W3C 拡張ログ収集形式のプロパティとその値の一覧も示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+
+<h1><a name="H2_448399201"></a>ログ収集プロパティ リファレンス</h1>
+
+<p>このトピックでは、ログ収集プロパティの定義と、W3C 拡張ログ収集形式でのプロパティの値の一覧を表示します。ここでは、次の項目について説明します。</p>
+
+<ul>
+<li><strong><a href="#W3CExtendedLoggingDefinitions">W3C 拡張ログ収集の定義</a></strong> W3C 拡張ログ ファイル形式で使用できる一般的なプロパティ</li>
+<li><strong><a href="#ProcessAccountingLoggingDefinitions">プロセス総計ログ収集の定義</a></strong> W3C 拡張ログ ファイルに記述されるプロセス総計用の追加プロパティ</li> 
+<li><strong><a href="#MicrosoftIISLogDefinitions">Microsoft IIログ定義</a></strong>&nbsp;&nbsp;Microsoft IIS ログ ファイル形式で使用できる一般的なプロパティ</li> 
+<li><strong><a href="#NCSACommonLogFileFormat">NCSA 共通ログ ファイル形式</a></strong>&nbsp;&nbsp;NCSA 共通ログ ファイル形式で使用できる一般的なプロパティ</li> 
+</ul>
+
+<p>W3C 拡張ログ形式の詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank><b>World Wide Web Consortium の Web サイト</b></a>を参照してください。</p>
+
+<h2><a name="extendedprops"></a><a name="W3CExtendedLoggingDefinitions">W3C 拡張ログ収集の定義</a></h2>
+<table border="1" cellpadding="2" cellspacing="0" width="50%">
+<tr>
+<th width="10%" bgcolor="#C0C0C0" align="Left" valign="top"><strong>プレフィックス</strong></th>
+<th width="40%" align="CENTER" valign="TOP" bgcolor="#C0C0C0"><strong>意味</strong></th>
+</tr>
+<tr>
+<td valign="top"><strong>s-</strong></td>
+<td valign="top">サーバーの処理</td>
+</tr>
+<tr>
+<td valign="top"><strong>c-</strong></td>
+<td valign="top">クライアントの処理</td>
+</tr>
+<tr>
+<td valign="top"><strong>cs-</strong></td>
+<td valign="top">クライアントのサーバーに対する処理</td>
+</tr>
+<tr>
+<td valign="top"><strong>sc-</strong></td>
+<td valign="top">サーバーのクライアントに対する処理</td>
+</tr>
+</table>
+<br><br>
+
+
+<table border="1" cellpadding="5" cellspacing="1" width="90%">
+<tr>
+<th width="20%" bgcolor="#C0C0C0" align="Left" valign="top">フィールド</th>
+<th width="10%" bgcolor="#C0C0C0" align="Left" valign="top">ログ ファイル中のフィールド名</th>
+<th width="70%" bgcolor="#C0C0C0" align="Left" valign="top">説明</th>
+</tr>
+
+<tr>
+<td valign="top">日付</td>
+<td valign="top"><code>date</code></td>
+<td valign="top">アクティビティが発生した日付です。</td>
+</tr>
+
+<tr>
+<td valign="top">時間</td>
+<td valign="top"><code>time</code></td>
+<td valign="top">アクティビティが発生した時刻です。</td>
+</tr>
+
+<tr>
+<td valign="top">クライアント IP アドレス</td>
+<td valign="top"><code>c-ip</code></td>
+<td valign="top">サーバーにアクセスしたクライアントの IP アドレスです。</td>
+</tr>
+
+<tr>
+<td valign="top">ユーザー名</td>
+<td valign="top"><code>cs-username</code></td>
+<td valign="top">サーバーにアクセスした、認証されているユーザーの名前です。ハイフン (-) で表される匿名ユーザーは含まれません。</td>
+</tr>
+
+<tr>
+<td valign="top">サービス名</td>
+<td valign="top"><code>s-sitename</code></td>
+<td valign="top">クライアントによってアクセスされたインターネット サービスとインスタンス番号です。</td>
+</tr>
+
+<tr>
+<td valign="top">サーバー名</td>
+<td valign="top"><code>s-computername</code></td>
+<td valign="top">ログ エントリが生成されたサーバーの名前です。</td>
+</tr>
+
+<tr>
+<td valign="top">サーバー IP アドレス</td>
+<td valign="top"><code>s-ip</code></td>
+<td valign="top">ログ エントリが生成されたサーバーの IP アドレスです。</td>
+</tr>
+
+<tr>
+<td valign="top">サーバー ポート</td>
+<td valign="top"><code>s-port</code></td>
+<td valign="top">クライアントが接続したポート番号です。</td>
+</tr>
+
+<tr>
+<td valign="top">メソッド</td>
+<td valign="top"><code>cs-method</code></td>
+<td valign="top">GET メソッドなどの、クライアントが実行しようとした処理です。</td>
+</tr>
+
+<tr>
+<td valign="top">URI Stem</td>
+<td valign="top"><code>cs-uri-stem</code></td>
+<td valign="top">Default.htm などの、アクセスされたリソースです。</td>
+</tr>
+
+<tr>
+<td valign="top">URI クエリ</td>
+<td valign="top"><code>cs-uri-query</code></td>
+<td valign="top">クライアントが実行しようとしたクエリです。</td>
+</tr>
+
+<tr>
+<td valign="top">プロトコルの状態</td>
+<td valign="top"><code>sc-status</code></td>
+<td valign="top">HTTP または FTP 関連の処理の状態です。</td>
+</tr>
+
+<tr>
+<td valign="top">Win32 の状態</td>
+<td valign="top"><code>sc-win32-status</code></td>
+<td valign="top">Windows 関連の処理の状態です。</td>
+</tr>
+
+<tr>
+<td valign="top">送信バイト数</td>
+<td valign="top"><code>sc-bytes</code></td>
+<td valign="top">サーバーが送信したバイト数です。</td>
+</tr>
+
+<tr>
+<td valign="top">受信バイト数</td>
+<td valign="top"><code>cs-bytes</code></td>
+<td valign="top">サーバーが受信したバイト数です。</td>
+</tr>
+
+<tr>
+<td valign="top">所要時間</td>
+<td valign="top"><code>time-taken</code></td>
+<td valign="top">処理にかかった時間です。</td>
+</tr>
+
+<tr>
+<td valign="top">プロトコル バージョン</td>
+<td valign="top"><code>cs-version</code></td>
+<td valign="top">クライアントが使用したプロトコルの (HTTP、FTP) バージョンです。HTTP では、HTTP&nbsp;1.0 または HTTP&nbsp;1.1 のいずれかです。
+</td>
+</tr>
+
+<tr>
+<td valign="top">ホスト</td>
+<td valign="top"><code>cs-host</code></td>
+<td valign="top">ホスト ヘッダーの内容を表示します。
+</td>
+</tr>
+
+<tr>
+<td valign="top">ユーザー エージェント</td>
+<td valign="top"><code>cs(User-Agent)</code></td>
+<td valign="top">クライアントが使用したブラウザです。</td>
+</tr>
+
+<tr>
+<td valign="top">Cookie</td>
+<td valign="top"><code>cs(Cookie)</code></td>
+<td valign="top">送受信された cookie の内容です。</td>
+</tr>
+
+<tr>
+<td valign="top">履歴</td>
+<td valign="top"><code>cs(Referer)</code></td>
+<td valign="top">ユーザーが利用した直前のサイトです。このサイトが、現在のサイトへのリンクを提供しました。</td>
+</tr>
+</table>
+
+
+<h2><a name="cpuprops"></a><a name="ProcessAccountingLoggingDefinitions">プロセス総計ログ収集の定義</a></h2>
+
+<table width="90%" border="1" cellspacing="1" cellpadding="5">
+<tr>
+<th width="20%" bgcolor="#C0C0C0" align="Left" valign="top">フィールド</th>
+<th width="10%" bgcolor="#C0C0C0" align="Left" valign="top">ログ ファイル中のフィールド名</th>
+<th width="70%" bgcolor="#C0C0C0" align="Left" valign="top">説明</th>
+</tr>
+
+<tr>
+<td valign="top">プロセス イベント</td>
+<td valign="top"><code>s-event</code></td>
+<td valign="top">発生したイベントです。Site-Stop、Site-Start、Site-Pause、Periodic-Log、Interval-Start、Interval-End、Interval-Change、Log-Change-Int/Start/Stop、Eventlog-Limit、Priority-Limit、Process-Stop-Limit、Site-Pause-Limit、Eventlog-Limit-Reset、Priority-Limit-Reset、Process-Stop-Limit-Reset、Site-Pause-Limit-Reset のいずれかです。これらの値の説明については、<a href="#valuesdescription">ここをクリック</a>してください。</td>
+</tr>
+
+<tr>
+<td valign="top">プロセスの種類</td>
+<td valign="top"><code>s-process-type</code></td>
+<td valign="top">イベントを発生させたプロセスの種類で、CGI またはアウトプロセス アプリケーションです。記録される種類は、CGI、Application、または All です。</td>
+</tr>
+
+<tr>
+<td valign="top">ユーザーの総使用時間</td>
+<td valign="top"><code>s-user-time</code></td>
+<td valign="top">現在の間隔内にサイトが使用した User Mode プロセッサ時間の累計 (%) です。</td>
+</tr>
+
+<tr>
+<td valign="top">カーネルの総使用時間</td>
+<td valign="top"><code>s-kernel-time</code></td>
+<td valign="top">現在の間隔内にサイトが使用した Kernel Mode プロセッサ時間の累計 (%) です。</td>
+</tr>
+
+<tr>
+<td valign="top">ページ違反の総数</td>
+<td valign="top"><code>s-page-faults</code></td>
+<td valign="top">メモリ ページ違反になったメモリ参照の総数です。</td>
+</tr>
+
+<tr>
+<td valign="top">プロセスの総数</td>
+<td valign="top"><code>s-total-procs</code></td>
+<td valign="top">現在の間隔内に作成された CGI およびアウト プロセス アプリケーションの総数です。</td>
+</tr>
+
+<tr>
+<td valign="top">有効なプロセス</td>
+<td valign="top"><code>s-active-procs</code></td>
+<td valign="top">ログが記録されたときに実行されていた CGI およびアウト プロセス アプリケーションの総数です。</td>
+</tr>
+
+<tr>
+<td valign="top">切断されたプロセスの総数</td>
+<td valign="top"><code>s-stopped-procs</code></td>
+<td valign="top">現在の間隔内にプロセス調整のために停止された CGI およびアウト プロセス アプリケーションの総数です。</td>
+</tr>
+</table><br>
+
+
+<a name="valuesdescription"></a>
+<table width="70%" border="1" cellspacing="0" cellpadding="2">
+<tr>
+<th width="25%" bgcolor="#C0C0C0" align="Left" valign="top">値</th>
+<th width="75%" align="CENTER" valign="TOP" bgcolor="#C0C0C0">意味</th>
+</tr>
+<tr>
+<td valign="top">Site-Stop</td>
+<td valign="top">Web サイトが何らかの理由で停止されました。</td>
+</tr>
+<tr>
+<td valign="top">Site-Start</td>
+<td valign="top">Web サイトが開始または再開されました。</td>
+</tr>
+<tr>
+<td valign="top">Site-Pause</td>
+<td valign="top">Web サイトが一時停止されました。</td>
+</tr>
+<tr>
+<td valign="top">Periodic-Log</td>
+<td valign="top">定期的に定義されるログ エントリです。収集の間隔は管理者が指定します。</td>
+</tr>
+<tr>
+<td valign="top">Reset-Interval-Start</td>
+<td valign="top">リセット間隔が開始しました。</td>
+</tr>
+<tr>
+<td valign="top">Reset-Interval-End</td>
+<td valign="top">リセット間隔が満了し、リセットされました。</td>
+</tr>
+<tr>
+<td valign="top">Reset-Interval-Change</td>
+<td valign="top">Web サイトの管理者がリセット間隔の値を変更しました。</td>
+</tr>
+<tr>
+<td valign="top">Log-Change-Int/Start/Stop</td>
+<td valign="top">次のイベントのいずれかが発生しました。ログ間隔の変更。間隔イベントの実行。サイトの停止、開始、または一時停止。</td>
+</tr>
+<td valign="top">Eventlog-Limit</td>
+<td valign="top">CGI またはアウト プロセス アプリケーションが管理者の設定したイベント ログの制限値に達したために、Web サイトのイベント ログが作成されました。</td>
+</tr>
+</tr>
+<td valign="top">Priority-Limit</td>
+<td valign="top">CGI またはアウト プロセス アプリケーションが管理者の設定した低優先度の制限値に達したために、その優先順位が低く設定されました。</td>
+</tr>
+</tr>
+<td valign="top">Process-Stop-Limit</td>
+<td valign="top">CGI またはアウト プロセス アプリケーションが管理者の設定したプロセス停止の制限値に達したために、Web サイトがアプリケーションを停止しました。</td>
+</tr>
+</tr>
+<td valign="top">Site-Pause-Limit</td>
+<td valign="top">CGI またはアウト プロセス アプリケーションが管理者の設定したサイト一時停止の制限値に達したために、Web サイトが一時停止されました。</td>
+</tr>
+</tr>
+<td valign="top">Eventlog-Limit-Reset</td>
+<td valign="top">リセット間隔が満了になりました。または、イベント ログの制限が手動でリセットされました。</td>
+</tr>
+</tr>
+<td valign="top">Priority-Limit-Reset</td>
+<td valign="top">リセット間隔が満了になりました。または、優先度の制限が手動でリセットされました。</td>
+</tr>
+</tr>
+<td valign="top">Process-Stop-Limit-Reset</td>
+<td valign="top">リセット間隔が満了になりました。または、プロセス停止の制限が手動でリセットされました。</td>
+</tr>
+</tr>
+<td valign="top">Site-Pause-Limit-Reset</td>
+<td valign="top">リセット間隔が満了になりました。または、サイト一時停止の制限が手動でリセットされました。</td>
+</tr>
+</table>
+
+<h2><a name="extendedprops"></a><a name="MicrosoftIISLogDefinitions">Microsoft IIS ログ定義</a></h2>
+<a name="valuesdescription"></a>
+<table width="70%" border="1" cellspacing="0" cellpadding="2">
+<tr>
+<th width="25%" bgcolor="#C0C0C0" align="Left" valign="top">フィールド</th>
+<th width="75%" align="CENTER" valign="TOP" bgcolor="#C0C0C0">説明</th>
+</tr>
+<tr>
+<td valign="top">クライアントの IP アドレス</td>
+<td valign="top">要求を行ったクライアント マシンの IP アドレスです。</td>
+</tr>
+<tr>
+<td valign="top">ユーザー名</td>
+<td valign="top">サーバーにアクセスした、認証されているユーザーの名前です。ハイフン (-) で表される匿名ユーザーは含まれません。</td>
+</tr>
+<tr>
+<td valign="top">日付</td>
+<td valign="top">アクティビティが発生した日付です。</td>
+</tr>
+<tr>
+<td valign="top">時間</td>
+<td valign="top">アクティビティが発生した時刻です。</td>
+</tr>
+<tr>
+<td valign="top">サービスとインスタンス</td>
+<td valign="top">Web サイト インスタンスは W3SVC#、FTP サイト インスタンスは MSFTPSVC# と表示されます。# は、サイトのインスタンスです。</td>
+</tr>
+<tr>
+<td valign="top">コンピュータ名</td>
+<td valign="top">サーバーの NetBios 名です。</td>
+</tr>
+<tr>
+<td valign="top">サーバーの IP アドレス</td>
+<td valign="top">要求が処理されたサーバーの IP アドレスです。</td>
+</tr>
+<tr>
+<td valign="top">所要時間</td>
+<td valign="top">処理にかかった時間です。</td>
+</tr>
+</tr>
+<td valign="top">送信バイト数</td>
+<td valign="top">サーバーに送信されたバイト数です。</td>
+</tr>
+</tr>
+<td valign="top">受信バイト数</td>
+<td valign="top">サーバーから受信したバイト数です。</td>
+</tr>
+<td valign="top">サービスのステータス コード</td>
+<td valign="top">HTTP または FTP のステータス コードです。</td>
+</tr>
+</tr>
+<td valign="top">Windows のステータス コード</td>
+<td valign="top">Windows 関連の処理の状態です。</td>
+</tr>
+</tr>
+<td valign="top">要求の種類</td>
+<td valign="top">サーバーが受信した要求の種類です (例、GET および PASS)。</td>
+</tr>
+</tr>
+<td valign="top">操作の対象</td>
+<td valign="top">操作の対象であった URL です。</td>
+</tr>
+</tr>
+<td valign="top">パラメータ</td>
+<td valign="top">スクリプトに渡されるパラメータです。</td>
+</tr>
+</tr>
+</table>
+
+<h2><a name="extendedprops"></a><a name="NCSACommonLogFileFormat">NCSA 共通ログ ファイル形式</a></h2>
+<a name="valuesdescription"></a>
+<table width="70%" border="1" cellspacing="0" cellpadding="2">
+<tr>
+<th width="25%" bgcolor="#C0C0C0" align="Left" valign="top">フィールド</th>
+<th width="75%" align="CENTER" valign="TOP" bgcolor="#C0C0C0">説明</th>
+</tr>
+<tr>
+<td valign="top">リモート ホスト アドレス</td>
+<td valign="top">要求を行ったクライアント マシンの IP アドレスです。</td>
+</tr>
+<tr>
+<td valign="top">リモート ログ名</td>
+<td valign="top">この値は常にハイフン (-) です。</td>
+</tr>
+<tr>
+<td valign="top">ユーザー名</td>
+<td valign="top">認証されたユーザーの場合は Domain\username の形式で、匿名ユーザーの場合はハイフン (-) です。</td>
+</tr>
+<tr>
+<td valign="top">日付</td>
+<td valign="top">アクティビティが発生した日付です。</td>
+</tr>
+<tr>
+<td valign="top">時刻と GMT オフセット</td>
+<td valign="top">アクティビティが発生した時刻と GMT オフセットです。</td>
+</tr>
+<tr>
+<td valign="top">要求およびバージョン</td>
+<td valign="top">使用された要求の種類、対象であった URL、スクリプトに渡されたパラメータ (ある場合)、およびクライアントが使用した HTTP バージョンです。</td>
+</tr>
+<tr>
+<td valign="top">サーバーのステータス コード</td>
+<td valign="top">HTTP のステータス コードです。</td>
+</tr>
+<tr>
+<td valign="top">送信バイト数</td>
+<td valign="top">サーバーがクライアントに送信したバイト数です。 </td>
+</tr>
+</table>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>W3C 拡張形式のログ収集をカスタマイズする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="W3C 拡張形式のログ収集フィールドを指定する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="logproperties">W3C 拡張形式のログ収集をカスタマイズする </a></h1>
+
+<p>Web サイトまたは FTP サイトに W3C 拡張ログ ファイル形式を使用する場合、ログを収集するフィールド (項目) を選択してログをカスタマイズできます。管理に必要なフィールドを使用して詳細な情報を収集する一方で、不要なフィールドは省略してログのサイズを抑えることができます。</p>
+
+<big>W3C 拡張形式のログ収集をカスタマイズするには</big><!--</p>--><br>
+
+<ol>
+<li>Web サイトまたは FTP サイトを選択し、そのプロパティ シートを開きます。</li>
+
+<li>[ログ収集を有効にする] が無効になっている場合は、チェック ボックスをオンにして有効にし、[W3C 拡張ログ ファイル形式] をクリックします。</li>
+
+<li>[プロパティ] をクリックします。</li>
+
+<li>[拡張プロパティ] プロパティ シートで、ログを収集するフィールドをクリックします。</li>
+
+<li>[適用] をクリックします。</li>
+</ol>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>W3C 拡張ログ ファイル形式については、「<a href="iiabtlg.htm">サイトの利用状況のログ収集について</a>」を参照してください。</li>
+<li>ログ収集の頻度とログ サイズについては、「<a href="iinamlg.htm">ログ ファイルを保存する</a>」を参照してください。</li>
+<li>ログ プロパティの参照リストについては、「<a href="iiintlg.htm">ログ収集プロパティ リファレンス</a>」を参照してください。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

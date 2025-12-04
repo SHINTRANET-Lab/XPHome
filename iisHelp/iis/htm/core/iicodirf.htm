@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web ページにフッターを追加する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="送信するすべての Web ページの下部に HTML 形式のファイルを自動的に挿入するように、Web サーバーを構成する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37692420">Web ページにフッターを追加する</a></h1>
+
+<p>Web サーバーが送信するすべての Web ページの下部に HTML 形式のファイルを自動的に挿入するよう、Web サーバーを構成することができます (ASP ページに対するフッターの追加は、サポートされません)。たとえば、Web ページに簡単なメッセージ文やロゴ画像を追加するための HTML 書式命令を入れることができます。詳細については、「<a href="iihtmat.htm">Web サイト管理について</a>」および「<a href="iisiwelc.htm">サーバー側インクルード</a>」を参照してください。</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ドキュメント フッターを使用すると、Web サーバーのパフォーマンスが低下する場合があります。 特に、頻繁にアクセスされる Web ページの場合は、その可能性があります。</p>
+
+<big>Web ページにフッターを追加するには</big><br>
+
+<ol>
+<li>HTML でフッター ファイルを作成し、Web サーバーのハード ディスクに保存します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;フッター ファイルは、完全な HTML ドキュメントである必要はありません。フッターの内容を表示する書式に必要な HTML だけを入れるようにします。たとえば、各 Web ページの下部に組織名を追加するフッター ファイルには、テキスト、およびそのテキストのフォントと色を表示するために必要な HTML タグを入れるようにします。</p>
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、ディレクトリ、またはファイルを選択し、そのプロパティ シートを開きます。</li>	
+<li>[ドキュメント] タブをクリックし、[ドキュメント フッターを有効にする] チェック ボックスをオンにします。</li>						
+<li>テキスト ボックスに、フッター ファイルの完全なローカル パスを入力するか、[参照] をクリックしてファイルを選択します。</li>	
+</ol>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

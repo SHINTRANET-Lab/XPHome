@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ナビゲーションのヘルプ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS のヘルプ内をナビゲーションする方法">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1>IIS のヘルプ機能を使用する</h1>
+<p>インターネット インフォメーション サービスのオンライン マニュアルには、必要な情報を簡単に検索するための機能がいくつかあります。IIS のヘルプは、マウスまたは<a href="#keyboard">キーボードを使用する</a>ことによってナビゲーションできます。</p>
+
+<p><strong>目次</strong></p>
+
+<ul>
+<li>使用できるすべての機能とトピックが記載された目次を、ナビゲーションのウィンドウに表示します。</li>
+<li>最上位レベルのトピック タイトルを選択またはクリックすると、そのセクションの内容を記述するページがトピックのウィンドウに表示されます。</li>
+<li>トピック タイトルのプラス記号を選択またはクリックすると、目次が開いてそのセクションのすべてのトピックが表示されます。</li>
+</ul>
+
+<p><strong>検索</strong></p>
+
+<ul>
+<li>ナビゲーション ウィンドウの [検索] タブで、[検索文字列] テキスト ボックスに単語または句を入力して [検索] ボタンを選択します。</li>
+<li>[検索の種類] テキスト ボックスから検索の種類を選択します。既定の [標準検索] では、語または句のいくつかのバリエーションを検索します。[完全一致]、[いずれかの語を含む]、[すべての語を含む]、または [論理検索] を選択して、検索の範囲を限定することができます。</li>
+</ul>
+
+<p><strong>索引</strong></p>
+
+<ul>
+<li>ナビゲーション ウィンドウの [索引] タブで、テキスト ボックスに語を入力して、その語に最も近いキーワードを表示します。</li>
+<li>キーワードをダブルクリックするか、キーワードを選択して <B>Enter</B> キーを押すと、そのファイルを表示するか、またはキーワードに関連する情報が含まれたトピックの一覧を表示します。</li>
+</ul>
+
+<p><strong>印刷</strong></p>
+
+<p> <img src="../../misc/print.gif" border="0" alt="[印刷] ボタン"> 必要に応じてトピックを印刷するには、[印刷] を選択するか、クリックします。</p>
+
+<p><strong>索引および検索の結果で目次を同期する</strong></p>
+<p>索引ツールまたは検索ツールからトピックを選択した後で、そのトピックが目次内のどこに表示されるかを確認できます。[索引] タブまたは [検索] タブからトピックを表示すると、トピックはマニュアル ウィンドウの右側ウィンドウに表示されます。  
+<ul>
+<li>[索引] タブまたは [検索] タブからトピックを表示した後に、[目次] タブを選択またはクリックして、[同期] <img src="../../misc/synch.gif" border="0" alt="[同期] ボタン"> ボタンを選択またはクリックします。
+
+</ul>
+
+<h1><a name="keyboard">キーボードを使用した IIS ヘルプのナビゲーション方法</a></h1>
+<P><B>Tab</B> キーをナビゲーション キーとして使用できます。</P>
+<ul>
+	<li><B>Tab</B> キーを押すと、ウィンドウからウィンドウに移動でき、目次を含むウィンドウの [目次]、[索引]、および [検索] の各タブを含めて、各ウィンドウ内のリンクを移動できます。</li> 
+	<li><B>Shift + Tab</B> キーを押すと、移動の方向が逆になります。</li>
+</ul>
+
+<p><strong>目次ウィンドウからトピックまたは項目を選択する</strong></p>
+<ul>
+	<li>トピックまたは項目を選択して <B>Enter</B> キーを押すと、表示されます。選択した項目が目次内の親項目の場合は、含まれるトピックが表示されます。</li> 
+	<li>目次内を移動するには、<B>↑</B> キーまたは <B>↓</B> キーを使用するか、<B>PageUp</B> キーおよび <B>PageDown</B> キーを使用します。</li>
+</ul>
+
+<p><strong>索引ウィンドウからトピックを選択する</strong></p>
+<ul>
+	<li>テキスト ボックスに用語を入力するか、表示されている索引から検索する用語を選択します。</li> 
+	<li><B>Alt + D</B> キーを押すと、トピックまたは追加の選択肢が表示されます。</li>
+</ul>
+
+<p><strong>検索ウィンドウからトピックを選択する</strong></p>
+<ul>
+	<li>[検索文字列] テキスト ボックスに検索する用語を入力します。</li> 
+	<li><B>Tab</B> キーを押してリスト ボックスに移動し、<B>Alt + ↑</B> キーまたは <B>Alt + ↓</B> キーを押して検索の種類を選択します。</li>
+	<li><B>Tab</B> キーを使用して [検索] ボタンに移動し、<B>Enter</B> キーを押して検索結果を表示します。</li>
+</ul>
+
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</font>
+</body>
+</html>

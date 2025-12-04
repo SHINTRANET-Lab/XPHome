@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>パフォーマンスとセキュリティをテストする</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_performance_and_scalability_testing"></A><SUP></SUP>パフォーマンスとセキュリティをテストする</H1>
+
+<P>Web アプリケーションの開発プロジェクトには、注意深い計画と開発が不可欠です。しかし、確かな拡張性を備えた Web アプリケーションを作成するためには、拡張性問題について、厳密で定期的なテストを実施することが重要です。Web アプリケーションの開発中に、予想できなかった何らかの拡張性問題が発生することはよくあります。これらの問題を見つけて解決するための唯一の方法は、綿密で十分なテストを実施することです。</P>
+
+<P>一般に拡張性とパフォーマンスの最も有効なテストは、&quot;実用時の&quot; 設定において実際に受けるストレスと類似した状態にアプリケーションを置く方法をとります。</P>
+
+<P><B>Microsoft</B><sup>&reg;</sup><B> Web Application Stress Tool</B> は、複数のブラウザが Web アプリケーションによってページを要求する状態のシミュレーションを行うためのツールです。このツールによって、各種インターネット サービスのさまざまな負荷を作り出すことができ、Web サイトのパフォーマンスに関するデータ収集を行おうとするユーザーに、豊富な機能を提供します。</P>
+
+<P><B>Web Application Stress Tool</B> は、Windows 2000 リソース キットに付属の CD-ROM で提供されています。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

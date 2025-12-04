@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Web アプリケーションを開発する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_developing_web_applications"></A><SUP></SUP>Web アプリケーションを開発する</H1>
+
+<P>このガイドでは、Web アプリケーション設計の概要について説明し、コンポーネントや ISAPI 拡張の構築、データ アクセス、Web ベースのトランザクション、およびパフォーマンスに関するより高度なトピックを紹介します。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg8qpj.htm">Web アプリケーションの概要</A>」では、IIS プログラミング モデルについて紹介します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg8e43.htm">設計に関する決定事項</A>」では、Web アプリケーションを設計する場合に、考慮しなければならない重要な問題点について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg3l80.htm">ASP でデータにアクセスする</A>」では、Microsoft<sup>&reg;</sup> ActiveX<sup>&reg;</sup> Data Objects (ADO) を使用して Web ページからデータにアクセスする方法について紹介します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg8nlf.htm">トランザクション処理</A>」では、Windows 2000 以降で提供される IIS サービスとコンポーネント サービスが、Web ベースのトランザクションを提供するためにどのように動作するかの概要を説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg4n77.htm">IIS アプリケーションのセキュリティ問題</A>」では、セキュリティ保護されたデータへのアクセス時、および提供時に、Web 開発者が直面する問題について紹介します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg7r5f.htm">開発テクノロジ</A>」では、XML やダイナミック HTML などの、最新 Web 技術について復習します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/perf6o37.htm">拡張性のある Web アプリケーションを開発する</A>」では、Web アプリケーション設計に関する決定事項が、サーバーのパフォーマンスに与える影響について説明します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

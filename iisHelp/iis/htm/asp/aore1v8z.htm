@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>EnumBackups</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_enumbackups"></A><SUP></SUP>EnumBackups</H3>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore2xpu.htm">IIsComputer</A> オブジェクトの EnumBackups メソッドは、1 つまたは複数のバックアップ場所に格納されているメタベースのバックアップを列挙します。その際、各バックアップの場所、バージョン番号、および日付が取得されます。</P>
+
+<H6>構文</H6>
+
+<P><B>IIsComputer</B>.<B>EnumBackups</B> <I>BkupLocIn</I>, <I>IndexIn</I>, <I>BkupVerOut</I>, <I>BkupLocOut</I>, <I>BkupDateTimeOut</I> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>BkupLocIn</I></DT>
+
+<DD>バックアップ場所を指定する 100 字以内の文字列です。空の文字列を指定すると、すべてのバックアップ場所が検索されます。<BR>
+</DD>
+
+<DT><I>IndexIn</I></DT>
+
+<DD>列挙するバックアップのインデックスを指定します。インデックスは 0 から始まり、MD_ERROR_DATA_NOT_FOUND が返されるまで 1 ずつ増加します。<BR>
+</DD>
+
+<DT><I>BkupVerOut</I></DT>
+
+<DD>列挙されたバックアップのバージョン番号を受け取ります。<BR>
+</DD>
+
+<DT><I>BkupLocOut</I></DT>
+
+<DD>列挙されたバックアップのバックアップ場所を受け取ります。<BR>
+</DD>
+
+<DT><I>BkupDateTimeOut</I></DT>
+
+<DD>バックアップの日付と時刻を、旧 GMT (グリニッジ標準時) である協定世界時 (UTC) で受け取ります。</DD>
+</DL>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;%@ LANGUAGE=VBScript %&gt; 
+&lt;SCRIPT LANGUAGE = "JScript" RUNAT = SERVER&gt; 
+  var TempDate = new Date(); 
+  TempDif = TempDate.getTimezoneOffset(); 
+  Session("sTempDif") = TempDif; 
+&lt;/SCRIPT&gt; 
+&lt;% 
+  Dim CompObj, Index, Version, Location, GMTDate, LocDate, MinDif 
+  MinDif = Session("sTempDif") 
+  On Error Resume Next 
+  Set CompObj = GetObject("IIS://LocalHost") 
+  Index = 0 
+' Iterate until method returns an error. 
+  Do While True 
+    ' Empty location input string means enumerate all locations. 
+    CompObj.EnumBackups "", Index, Version, Location, GMTDate 
+    If Err.Number &lt;&gt; 0 Then 
+      ' If error returned, no more backups to enumerate. 
+      Exit Do 
+    End If 
+    Response.Write Version &amp; ", " 
+    Response.Write Location &amp; ", " 
+    Response.Write GMTDate &amp; ", "
+    ' Convert to server local date and time. 
+    LocDate = DateAdd("n", (-MinDif), GMTDate) 
+    Response.Write "(" &amp; LocDate &amp; ")" 
+    Response.Write "&lt;BR&gt;" 
+    Index = Index + 1 
+  Loop 
+%&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore32cw.htm"><B>Backup</B></A>、<A HREF="/iishelp/iis/htm/asp/aore79rk.htm"><B>DeleteBackup</B></A>、<A HREF="/iishelp/iis/htm/asp/aore5ucl.htm"><B>Restore</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

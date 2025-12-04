@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS コンポーネントをインストールする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS コンポーネントのインストールとアンインストールについて説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="installing">IIS コンポーネントをインストールする</a></h1>
+
+
+<p>インターネット インフォメーション サービスでは、必要に応じて有効または無効にできる各種のコンポーネントを提供しています。ここでは、これらのコンポーネントの詳細、およびコンポーネントが現在の IIS 設定に及ぼす影響について説明します。また、インストールの方法についても説明します。</p>
+
+<p><h2>共通コンポーネント </h2>
+<p>IIS をインストールする際、特に指定しない限り [IIS 共通コンポーネント] オプションはオンになっています。サーバー環境のセキュリティを強化したい場合、一部の共通コンポーネントを選択しないことも可能です。ただし、[IIS 共通コンポーネント] オプションをオフにした場合、すべての共通コンポーネントが選択されず、IIS がコンピュータにインストールされません。したがって、IIS をコンピュータにインストールする場合、このオプションはオンのままにします。IIS と同時にインストールされるサービスおよびコンポーネントを制限するには、共通コンポーネント以下に表示される個々のコンポーネントをオフにします。</p>
+
+<p><h2>マニュアル</h2> 
+<p>IIS をインストールする際、特に指定しない限り [IIS マニュアル] オプションはオンになっています。IIS のオンライン マニュアルには、「はじめに」、「管理」、および「Active Server Pages ガイド」の完全版が含まれています。これらのマニュアルでは、IIS のさまざまな機能、ツール、および管理オプションを理解するための情報を提供しています。また、IIS Web サーバーのパフォーマンスを管理、監視、および改善するための手順も説明しています。IIS のオンライン マニュアルを検索するか、目次または索引を利用してトピックを参照してください。</p>
+
+<p>プライマリ IIS Web サーバーから複数の IIS Web サーバーを管理するように設定された環境では、すべてのサーバーにマニュアルをインストールする必要はありません。これにより、IIS の設定および機能が影響を受けることはありません。</p>
+
+<p>オンライン マニュアルがインストールされている場合、ブラウザのアドレス バーに「http://localhost/iisHelp/」と入力して <B>Enter</B> キーを押すと、IIS のオンライン マニュアルが表示されます。</p>
+
+<h2>FTP (ファイル転送プロトコル) サービス (既定では無効)</h2> 
+<p>FTP (ファイル転送プロトコル) は、インターネットなどの TCP/IP (Transmission Control Protocol/Internet Protocol) を使用したネットワーク上のリモート コンピュータ システム間でファイルをコピーするために使用されます。このプロトコルを使用すると、リモート システム上のファイルやディレクトリの一覧表示など、ファイルに対する作業に FTP コマンドを使用することもできます。IIS では、FTP を有効にすることで Web ブラウザを介したファイルの転送が可能になります。</p>
+
+<p>FTP の詳細については、次の項目を参照してください。</p>
+<ul>
+<li><a href="iivsovr.htm">Web サイトおよび FTP サイトについて</a></li>
+<li><a href="iitstart.htm">IIS によるサイトのクイック セットアップ (FTP サイトにコンテンツを公開するには)</a></li>
+</ul>
+
+<p><h2>FrontPage Server Extensions </h2>
+<p>FrontPage Server Extensions では、FrontPage をオーサリング環境として使用することにより、Web サイトをグラフィカル インターフェイスで表示し、管理することができます。FrontPage により、サーバー上で迅速に Web サイトを作成したり、Web ページを作成および編集してリモートで IIS へ送信することもできます。FrontPage でサイトを作成している間は、IIS との接続が維持された状態で Web ファイルの保存および変更が行われるので、作成しているサイトをいつでも参照することができます。FrontPage Server Extensions をインストールしない場合は、すべての Web コンテンツを手動でコピーして設定を構成する必要があります。また場合によっては、FrontPage で登録済みのアプリケーションを手動で登録する必要もあります。Microsoft FrontPage Server Extensions では、Microsoft Clustering のリソースはサポートしていません。</p>
+
+<p>詳細については、次の項目を参照してください。</p>
+<ul>
+<li>Windows XP オンライン マニュアルの「FrontPage Server Extensions」</li> 
+<li><a href="iihowat.htm">オーサリング ツールの選択</a></li>
+<li>または、<a HREF="http://www.microsoft.com/japan/office/frontpage/" target="_blank">FrontPage の Web サイト</a>を参照してください。</li>
+</ul>
+
+<p><h2>インターネット インフォメーション サービス スナップイン</h2> 
+<p>インターネット サービス マネージャは、<a href="iiabuti.htm">インターネット インフォメーション サービス スナップイン</a>という名前に変更されています。IIS スナップインは、Web サイトを管理するためのグラフィカル ユーザー インターフェイスです。また、IIS スナップインは MMC (Microsoft 管理コンソール) のスナップインです。つまり、MMC の機能に追加されるアプリケーションであり、MMC を利用したほかの管理アプリケーションと同様に、MMC のウィンドウ内に表示されます。IIS スナップインがなくてもサーバーの管理はできますが、inetpub\adminscripts\adsutil.vbs などの用意されたスクリプトを使用するか、またはサイト、アプリケーション、仮想ディレクトリ、およびセキュリティ設定を作成する IIS API を呼び出す独自のスクリプトを使用する必要があります。Web サービスおよび FTP サービスでは、IIS スナップインが必須です。</p>   
+
+<p>詳細については、次の項目を参照してください。 </p>
+<ul>
+<li type="1"><a href="iiabuti.htm">IIS スナップイン</a></li> 
+<li type="1"><a href="iinewtp2.htm">管理</a></li>
+</ul>
+
+<p>
+
+<p><h2>SMTP (既定では無効)</h2> 
+<p>Simple Mail Transfer Protocol (SMTP) を使用すると、IIS と連携して機能するイントラネット メール サービスをセットアップできます。SMTP は、ネットワーク上のあるコンピュータから別のコンピュータへメッセージを送信するための TCP/IP プロトコルです。このプロトコルは、インターネットでの電子メールの伝送に使用されます。</p>
+
+<p>SMTP がインストール済みの場合、ブラウザのアドレス バーで「file:\\%systemroot%\help\mail.chm」と入力して <B>Enter</B> キーを押せば、製品マニュアルを表示できます。</p>
+
+<p><h2>Visual InterDev RAD Remote Deployment Support</h2> 
+<p>強力な Web アプリケーション開発ツールである Microsoft Visual InterDev を使用して、最先端の Web サイトを迅速に構築することができます。Visual InterDev の統合データベース ツールによって、OLE DB データ ソースおよびオープン データベース コネクティビティ (ODBC) に準拠したデータベースに、Web サイトを簡単に接続できます。Visual Interdev RAD Remote Deployment Support では、Web サーバー上のアプリケーションをリモートに配置できます。</p>
+
+<p>詳細については、次の項目を参照してください。 </p>
+<ul>
+<li><a href="iihowat.htm">オーサリング ツールの選択</a></li> 
+<li type="1"><a href="iiwebcon.htm">Web サイト管理</a></li>
+<li>または、<a HREF="http://www.microsoft.com/isapi/redir.dll?prd=vinterdev&ar=home&pver=6.0" target="_blank">Visual InterDev の Web サイト</a>を参照してください。</li>
+</ul>
+
+<p><h2>World Wide Web サービス</h2>
+<p>IIS は、インターネットおよび World Wide Web にページを提供します。IIS がその主要なサービスを実行するためには、このコンポーネントをインストールしておく必要があります。このオプションをオフにした場合、インターネット インフォメーション サービスは使用できません。</p> 
+
+<p>World Wide Web サーバーには、次の仮想ディレクトリが含まれます。</p>
+
+<p><h3>MSADC 仮想ディレクトリ</h3>
+このディレクトリには、クライアント側のデータ アクセスを Web ページで提供するために必要な ADO (ActiveX Data Objects) が含まれます。サーバー側 ASP (Active Server Pages) から ADO へアクセスする場合、これらのファイルは必要ありません。このディレクトリは、MSRDS (Microsoft Remote Data Service) とも呼ばれます。
+
+<p><h3>プリンタ仮想ディレクトリ</h3>
+<p>Windows XP では、サーバー上のすべてのプリンタは、簡単にアクセスできる Web サイト (http://localhost/printers/) に、動的に一覧表示されます。このサイトを参照して、プリンタおよびプリンタのジョブを監視できます。任意の Windows コンピュータからこのサイトを介してプリンタに接続することも可能です。</p> 
+
+<p><h3>スクリプト仮想ディレクトリ</h3>
+<p>使用するスクリプトは、できる限りこのディレクトリに格納します。</p>
+
+<p><h3>リモート デスクトップ Web 接続仮想ディレクトリ</h3>
+
+<p>ターミナル サービスは Windows XP の機能の一部です。あるコンピュータのデスクトップからほかのコンピュータにアクセスして、&quot;リモート デスクトップ&quot; とよばれるデスクトップの共有や、複数アプリケーションをホストする &quot;ターミナル サーバー&quot; といった機能を実現します。ターミナル サービスのリモート デスクトップを使用すると、IIS などの Windows XP サービスをサーバー コンソールから操作するのと同じように、リモートで管理できます。Windows XP では、このリモート デスクトップは特に指定しない限り有効になっています。ターミナル サービスを利用する場合、リモート コンピュータ上に MMC または IIS スナップインをインストールする必要はありません。</p> 
+
+<p>ターミナル サービス クライアント ソフトウェアは、古いコンピュータや UNIX ワークステーションなど Windows 以外のコンピュータでも利用できます。ただし、Windows 以外のクライアントでは、サード パーティ製のアドオン ソフトウェアが必要です。Windows XP の組み込みリモート デスクトップ接続クライアント ソフトウェアでは、LAN、PPTP、ダイアルアップなど、ネットワークを介した接続が可能です。</p> 
+
+<p>リモート デスクトップ Web 接続では、Web 上でターミナル サービス クライアント接続を展開するための Web 制御およびサンプル ページを提供します。Web サーバー上でリモート デスクトップ Web 接続を展開すれば、Internet Explorer と TCP/IP 接続だけで、クライアント コンピュータからターミナル サーバーおよびほかのリモート デスクトップへのリモート接続が確立されます。</p>
+
+<p>詳細については、C:\%Windir%\Help に既定でインストールされるリモート デスクトップ Web 接続のマニュアル (Rdesktop.chm) を参照してください。Windows 2000 Server の場合、C:\%Windir%\Help にターミナル サーバーのマニュアル (Termsrv.chm) がインストールされます。</p>
+
+<h2>IIS コンポーネントをインストールするには</h2><br>
+<ol>
+
+<li>[スタート] をクリックし、[設定] をポイントして、[コントロール パネル] をクリックします。次に、[プログラムの追加と削除] をダブルクリックします。</li>
+<li>[Windows コンポーネントの追加と削除] をクリックします。Windows コンポーネント ウィザードが表示されます。</li>
+
+<li>インターネット インフォメーション サービスは、特に指定しない限り Windows XP Professional にはインストールされません。[インターネット インフォメーション サービス (IIS)] をオフにした場合、IIS はコンピュータにインストールされません。このオプションをオンにした場合、IIS およびそのコンポーネントが同時にインストールされます。</li>
+<li>[詳細] をクリックします。[コンポーネントの追加と削除] ダイアログ ボックスの [インターネット インフォメーション サービス] に、IIS のサブコンポーネントの一覧が表示されます。</li> 
+
+<p>特に指定しない限り、次のコンポーネントがインストールされます。</p>
+<ul>共通コンポーネント</ul>
+<ul>マニュアル</ul>
+<ul>FrontPage 2000 Server Extensions</ul>
+<ul>インターネット インフォメーション サービス スナップイン</ul>
+<ul>SMTP サービス</ul>
+<ul>World Wide Web サービス</ul>
+<p></p>
+<li>インストールする IIS のコンポーネントを選択します。コンポーネントを選択したら、[詳細] ボタンが表示されているかどうかを確認します。</li> 
+<li type="1">選択したコンポーネントに対して [詳細] ボタンが表示されていれば、クリックします。該当するサブコンポーネントのダイアログ ボックスが表示されます。</li> 
+<li type="1">インストールするサブコンポーネントを選択し、[OK] をクリックします。</li>
+<li type="1">Windows コンポーネント ウィザードに戻り、[次へ] をクリックします。</li>
+<li type="1">選択した IIS のコンポーネントがインストールされます。</li>
+
+</ol>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>IIS のインストールの詳細については、「<a href="iiiisin.htm">IIS のインストール</a>」を参照してください。</li>
+<li>IIS に関してよく寄せられる質問については、「<a href="iifaq.htm">よく寄せられる質問</a>」を参照してください。</li>
+
+
+</font>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</body>
+</html>

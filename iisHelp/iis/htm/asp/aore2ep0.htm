@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>BackupWithPassword</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_backupwithpassword"></A><SUP></SUP>BackupWithPassword</H3>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore2xpu.htm">IIsComputer</A> オブジェクトの Backup メソッドは、メタベースを指定した場所にバックアップします。その際、バックアップ場所の名前を 100 文字以内で指定し、有効なパスワードを指定します。1 つのバックアップ場所に、複数のメタベース バックアップを格納できます。</P>
+
+<H6>構文</H6>
+
+<P><B>IIsComputer</B>.<B>BackupWithPassword</B> <I>BackupLocation</I>, <I>BackupVersion</I>, <I>BackupFlags, BackupPassword</I>  </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>BackupLocation</I></DT>
+
+<DD>バックアップ場所を指定する 100 字以内の文字列です。格納のメカニズムは、IIS が決定します。空の文字列を指定すると、バックアップは既定の場所に格納されます。<BR>
+</DD>
+
+<DT><I>BackupVersion</I></DT>
+
+<DD>バックアップに割り当てるバージョン番号を指定します。MD_BACKUP_MAX_VERSION と同じか、またはそれより小さい番号である必要があります。設定可能な値は次のいずれかです。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_BACKUP_HIGHEST_VERSION</B></TD>
+<TD width=50%>指定したバックアップ場所に格納されているバックアップ バージョンの中で、番号が最も大きいものを上書きします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_BACKUP_NEXT_VERSION</B></TD>
+<TD width=50%>指定したバックアップ場所における次のバックアップ バージョン番号を使用します。</TD>
+</TR>
+</TABLE><BR>
+
+<BR>
+</DD>
+
+<DT><I>BackupFlags</I></DT>
+
+<DD>次のうち、必要なフラグを指定します。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_BACKUP_FORCE_BACKUP</B></TD>
+<TD width=50%>MD_BACKUP_SAVE_FIRST で指定した SaveData 操作が失敗した場合でも、バックアップを強制的に実行します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_BACKUP_OVERWRITE</B></TD>
+<TD width=50%>指定したバックアップ場所に、名前とバージョンが同じであるバックアップが存在する場合でもバックアップを実行し、必要に応じて上書きします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_BACKUP_SAVE_FIRST</B></TD>
+<TD width=50%>バックアップの前に SaveData 操作を実行します。フラグが指定されていない場合は、既定値になります。</TD>
+</TR>
+</TABLE><BR>
+
+<BR>
+</DD>
+
+<DT><I>BackupPassword</I></DT>
+</DL>
+
+<P>任意指定。暗号化されていない有効なパスワード。</P>
+
+<H6>解説</H6>
+
+<P>バックアップ格納メカニズムは IIS が決定します。必ずしも指定するバックアップ場所の名前によって、特定のディレクトリ、ファイル、またはデータベースの格納メカニズムが決まるわけではありません。メタベース バックアップは system32\inetsrv\MetaBack ディレクトリにファイルとして格納されています。</P>
+
+<P><span class=le><B>重要&nbsp;&nbsp;&nbsp;</B></span>メタベースのバックアップおよび復元機能は、バージョン化が目的であって、コンピュータ間での複製が目的ではありません。ただし、プロセスを開始するコンピュータのバックアップと復元に制限する必要はありません。メタベースのバックアップの詳細については、IIS の製品マニュアルの「メタベースのバックアップ」を参照してください。</P>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;% 
+  Dim ComputerObj, iFlags 
+  Set ComputerObj = GetObject("IIS://LocalHost") 
+  'Backup to next available version number. 
+  'Set flags to save the metabase first and 
+  'force the backup even if save fails. 
+  iFlags = (MD_BACKUP_SAVE_FIRST or MD_BACKUP_FORCE_BACKUP) 
+  ComputerObj.BackupWithPassword "MyBackups", MD_BACKUP_NEXT_VERSION, iFlags, "MyP@ssWOrd" 
+%&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore79rk.htm"><B>DeleteBackup</B></A>、<A HREF="/iishelp/iis/htm/asp/aore1v8z.htm"><B>EnumBackups</B></A>、<A HREF="/iishelp/iis/htm/asp/aore0tpg.htm"><B>RestoreWithPassword</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

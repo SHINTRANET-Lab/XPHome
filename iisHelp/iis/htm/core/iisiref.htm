@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=LTR>
+<HEAD>
+
+<TITLE>サーバー側インクルード リファレンス</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT=" サーバー側インクルードのリファレンス ページの参照先を示します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_server-side_includes_reference"></A><SUP></SUP>サーバー側インクルード リファレンス</H1>
+
+<P>静的 Web ページで特定のタスクを実行するためにサーバー側インクルード (SSI) ディレクティブを使用します。静的 Web ページは、大規模な ASP ページよりもわずかに速く実行します。SSI ディレクティブを使用すると、ファイルの内容を Web ページに含めることができ、ファイルに関する情報、サーバー変数、または CGI ファイルや ISAPI アプリケーションなどの実行可能ファイルからの出力を含めることができます。</P>
+
+<P>実行可能ファイルを含めることを除き、これらタスクのすべては ASP スクリプトを使用して実行できます。Web ページ内でほかのタスクに ASP スクリプトを使用する必要がある場合は、これらのタスクに ASP ソリューションを使用する必要があります。#include ディレクティブを除き、SSI ディレクティブと ASP スクリプトを一緒に使用することはできません。</P>
+
+<P><strong>注</strong>&nbsp;&nbsp;サーバー側の時刻および日付関数では、オペレーティング システム ロケールではなく C ライブラリ ロケールで設定される言語を使用します。C ライブラリ ロケールは通常は英語に設定されています。</P>
+
+<P>このセクションの各部について説明します。
+
+<UL type=disc>
+	<LI>「<STRONG><A HREF="iisicfg.htm">#config</A></STRONG>」は、SSI エラー メッセージに使用される文字列および #flastmod や #fsize によって返される日付とファイル サイズに使用される形式を指定します。 </li>
+
+	<LI>「<STRONG><A HREF="iisieco.htm">#echo</A></STRONG>」は、サーバー変数の値を HTML ページに挿入します。 </li>
+
+	<LI>「<STRONG><A HREF="iisiexc.htm">#exec</A></STRONG>」は、アプリケーションまたはシェル コマンドを実行し、その結果を HTML ページに挿入します。 </li>
+
+	<LI>「<STRONG><A HREF="iisiflm.htm">#flastmod</A></STRONG>」は、#config ディレクティブで書式設定されたファイルの変更日付を Web ページに挿入します。 </li>
+
+	<LI>「<STRONG><A HREF="iisifsz.htm">#fsize</A></STRONG>」は、#config ディレクティブで書式設定されたファイルのサイズを Web ページに挿入します。 </li>
+
+	<LI>「<STRONG><A HREF="iisiinc.htm">#include</A></STRONG>」は、ファイルを Web ページにインクルードします。このディレクティブは、ASP ファイルと STM ファイルで使用できる唯一のディレクティブです。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

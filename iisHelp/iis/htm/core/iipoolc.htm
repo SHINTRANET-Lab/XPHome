@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アプリケーションをキャッシュする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="CGI スクリプトのタイムアウトの設定、ISAPI DLL のキャッシュ、ASP ページのキャッシュ サイズの変更方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37719647">アプリケーションをキャッシュする</a></h1>
+
+<p>サーバーで実行される Web アプリケーションのいくつかの設定を調整することによって、サーバーのパフォーマンスを細かく調節できます。要求の数や要求が行われた時刻などの利用状況データのログを収集すると、調整方法を決定する際の参考になります。サーバーの利用状況のログ収集の詳細については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。パフォーマンスの問題の詳細については、「<a href="iiabtpm.htm">パフォーマンス チューニングについて</a>」を参照してください。</p>
+
+<p>ここでは、次の設定について説明します。</p>
+
+<ul>
+<li>CGI スクリプトのタイムアウトを設定する</li>
+<li>ISAPI アプリケーションをキャッシュする</li>
+<li>ASP スクリプト ファイルをキャッシュする</li>
+</ul>
+
+<h2><a name="H2_37720440">CGI スクリプトのタイムアウトを設定する</a></h2>
+
+<p>接続のタイムアウト以外に、CGI スクリプトにもタイムアウト値を設定できます。タイムアウト値は、CGI スクリプトの実行に対して与えられる時間です。タイムアウトの設定は、Web サイト全体の CGI アプリケーションに継承されます。設定の変更は、Web サイト全体または分離アプリケーション単位で可能です。</p>
+
+<big>タイムアウト値を設定するには</big><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で [コンピュータ] アイコンを右クリックし、ショートカット メニューから [プロパティ] をクリックして、プロパティ シートを開きます。 </li>
+
+<li>[マスタ プロパティ] で [WWW サービス] をクリックし、[編集] をクリックします。</li>
+<li>[ホーム ディレクトリ] タブをクリックします。</li>
+<li> [構成] をクリックします。</li>
+<li>[<a href="iipy_35.htm">処理オプション</a>] タブをクリックし、[CGI スクリプトのタイムアウト] ボックスにタイムアウトの時間を入力します。</li>
+</ol>
+
+<h2><a name="H2_37722380">ISAPI アプリケーションをキャッシュする</a></h2>
+
+<p>ISAPI の DLL をロードしてキャッシュすると、それ以降の要求を処理する際に DLL を呼び出す必要がなくなります。キャッシュが行われない場合、DLL は実行終了後にアンロードされます。キャッシュすることにより、DLL がロードされる時間を節約できます。さらに、Active Server Pages を含む ISAPI アプリケーションの大部分は、キャッシュすることによりパフォーマンスが向上します。ISAPI アプリケーションのデバッグ時など、特別な場合にのみこのオプションをオフにします。</p>
+
+<big>キャッシュを有効にするには</big><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li> [構成] をクリックします。</li>
+<li>[<a href="iipy_34.htm">マッピング</a>] タブをクリックし、[ISAPI アプリケーションをキャッシュする] チェック ボックスをオンにします。</li>
+</ol>
+
+<h2><a name="cachingaspscriptfiles">ASP スクリプト ファイルをキャッシュする</a></h2>
+
+<p> ASP は、ASP スクリプトを含むファイルを処理し、これらのファイルをキャッシュに格納して、キャッシュ ファイルをクライアントに提供します。キャッシュに格納されている ASP スクリプトは、呼び出すたびに処理する必要がないため、ASP ファイルをキャッシュすることによってパフォーマンスが向上します。また、すべてのアプリケーションで、アプリケーション保護が [低 (IIS プロセス)] または [中 (プール)] に設定されているキャッシュするファイルの数を変更するか、アプリケーションごとに、[高 (分離プロセス)] に設定されているキャッシュするファイルの数を変更することにより、さらにパフォーマンスを向上させることができます。</p>
+
+<p><strong>ASP ファイルのキャッシュの設定を変更するには</strong></p>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、仮想ディレクトリ、またはディレクトリを選択し、プロパティ ページを選択します。</li>
+<li>Web サイト、仮想ディレクトリ、あるいはディレクトリを選択するには、[ホーム ディレクトリ]、[仮想ディレクトリ]、または [ディレクトリ] タブをクリックします。</li>
+<li>[アプリケーションの設定] セクションで、[アプリケーション保護] を [高 (分離プロセ)] に設定し、[適用] をクリックします。
+<li>[構成] をクリックします。 </li>
+
+<p><strong>注</strong> &nbsp;&nbsp;[構成] が有効でない場合、そのディレクトリまたは開始点には分離プロセスで動作するアプリケーションが含まれていません。[作成] をクリックして、新しいアプリケーションを作成できます。</P>
+<li>[キャッシュのオプション] タブをクリックします。
+<li>すべての要求された .asp ファイルをキャッシュするには、[すべての要求された ASP ファイルをキャッシュする] をクリックします。メモリにキャッシュしておくファイルの最大数を設定するには、テキスト ボックスに値を入力します。この値を超えた場合、ファイルはディスク キャッシュに保持されます。</li>
+<li>キャッシュする ASP ファイルの総数を制限するには、[メモリにキャッシュされる ASP ファイルの数] をクリックし、テキスト ボックスに値を入力します。</li>
+<li>キャッシュをオフにするには、[ASP ファイルをキャッシュしない] をオンにします。</li>
+</ol>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>パフォーマンス チューニング</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="サーバーのパフォーマンス チューニングについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37722482">パフォーマンス チューニング</a></h1>
+
+<p>インターネット インフォメーション サービス 5.1 の同時クライアント接続は、10 に制限されています。同時クライアント接続が 10 であれば、パフォーマンス チューニングは通常は必要ありません。このため、次の情報は数千の同時クライアント接続を処理できる製品である Windows 2000 Server および Windows 2000 DataCenter 以降を使用するユーザー向けです。IIS 5.1 のパフォーマンス チューニングに興味がある場合は、Active Server Pages (ASP) を使用したアプリケーション作成のパフォーマンス向上も考慮してください。詳細については、「<a href="../asp/aspguide.htm">Active Server Pages ガイド</a>」を参照してください。</p>
+
+<p>ここでは、サーバーとサイト両方のパフォーマンスを監視するための、Windows&nbsp;XP ツールの選択方法および使用方法について説明します。また、さまざまな設定を調整して、全体のパフォーマンスを向上させる方法についても説明します。IIS では、2 つの方法でパフォーマンスを設定できます。1 つは、<a href="iiabuti.htm">IIS スナップイン</a>を使用する方法、もう 1 つはプログラムを使用して、メタベースの設定を直接変更する方法です。ここでは、<a href="iiabuti.htm">IIS スナップイン</a>を使用してパフォーマンス設定を変更する方法のみを説明します。</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<a href="iiabtpm.htm">パフォーマンス チューニングについて</a>」では、パフォーマンスに関する概念を説明します。</li>
+
+<li>「<a href="iiabcap.htm">ネットワーク容量</a>」では、ネットワーク容量のプランニングの方法と、接続のパフォーマンスを最大限に引き出す方法について説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>プログラムを使った管理については、「<a href="../asp/aint7e9l.htm">IIS をプログラム管理する</a>」を参照してください。</li>
+<li>サイトのコンテンツの選択がパフォーマンスに与える影響については、「<a href="iiwarndb.htm">アプリケーションを構成する</a>」を参照してください。</li>
+<li>Web サイトのトラフィックを追跡する方法については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</li>
+</ul>
+
+<hr><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+perf, perform, performance, capacity, able, capability, planning, perfmon, modify, customize, customise, tune, tuning, fine-tune, tweak, improve, enhance, speed up, more, additional, greater, ram, memory, cpu, speed, volume, handle, load, connection, connections, pool, pooling, http, keep alive, keep-alive, keepalive, keep-alives, keepalives, estimate, calculate, how many, how much, disk drive, add, adding, utilize, utility, utilities, bandwidth, throttle, throttling, process, processor, oop, out-of-process, utilize, application, time out, timeouts, time-outs, limit, compress, compressed, limiting, http compression, cache, network, web, internet, intranet, server, applications, requirements, load, loading, loaded, heavy, light, big, bigger, e-mail, email, capability, links, more information, job object 
+</layer></span></font>
+</body>
+</html>

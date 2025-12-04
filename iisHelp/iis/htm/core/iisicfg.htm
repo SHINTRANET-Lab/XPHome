@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=LTR>
+<HEAD>
+
+<TITLE>#config</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービスのリファレンス ページです。#config ディレクティブは、クライアント ブラウザに返されるエラー メッセージ、日付、およびファイル サイズの形式を指定します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><font face="ＭＳ Ｐゴシック">
+
+<H2><A NAME="_k2_config"></A>#config</H2>
+
+<P><b> #config</b> ディレクティブは、SSI エラー メッセージに使用される文字列および #flastmod や #fsize によって返される日付とファイル サイズに使用される形式を指定します。ディレクティブは、HTML のコメント デリミタで囲む必要があります。</P>
+
+<P>既定値では、このディレクティブは STM ページでのみ使用できます。ASP ページでは使用できません。このタスクを ASP スクリプトで実行するには、<b>FileSystemObject</b> オブジェクトを使用します。これについては、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&amp;pver=6.0&amp;ar=scripting" target="_blank">MSDN</a> の VBScript または JScript の項に記載されています。</P>
+
+<h6><STRONG>構文</STRONG></h6>
+
+<P><strong>&lt;!-- #config </strong><em>Output</em><strong> = </strong><em>String</em> <strong>--&gt;</strong></P>
+
+<h6><STRONG>パラメータ</STRONG></h6>
+
+<P><em>Output</em></P>
+
+<P>書式設定する出力を指定します。出力は、次のいずれか 1 つを指定できます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all width=100%>
+
+<TR VALIGN="top">
+<TD width=20%><STRONG>出力</STRONG></TD>
+<TD width=80%><STRONG>意味</STRONG></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>ERRMSG</TD>
+<TD width=80%>SSI ディレクティブの処理中にエラーが発生したとき、クライアント ブラウザに返されるメッセージを無効にします。既定では、エラー メッセージは、エラーの状況を詳しく示すデバッグ情報を提供します。詳細情報の出力を抑えるには、&quot;SSI エラーが発生しました。&quot; などの簡潔なエラー メッセージを指定します。<i>String</i> パラメータには、新しいエラー メッセージを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>TIMEFMT</TD>
+<TD width=80%>#flastmod ディレクティブでクライアント ブラウザに返す日付の書式を指定します。String パラメータには、書式を指定します。String に書式トークンを指定して、日付の個々の部分 (曜日、月など) を抽出できます (書式トークンは、ANSI C の strftime 関数で使うトークンと同じものです)。
+<p><font face="ＭＳ Ｐゴシック"><strong>注</strong>&nbsp;&nbsp;次の時刻および日付関数では、オペレーティング システム ロケールではなく C ライブラリ ロケールで設定される言語を使用します。C ライブラリ ロケールは通常は英語に設定されています。</font></p>
+<P>%a</P>
+
+<P>曜日の省略名 (Mon など)。</P>
+
+<P>%A</P>
+
+<P>曜日の完全名 (Monday など)。 </P>
+
+<P>%b</P>
+
+<P>月の省略名 (Feb など)。</P>
+
+<P>%B</P>
+
+<P>月の完全名 (February など)。</P>
+
+<P>%c</P>
+
+<P>C ロケールに従った日付と時刻の表記 (05/06/01 12:51:32 など)。</P>
+
+<P>%d</P>
+
+<P>10 進数で表した 1 か月の中の日 (01 ～ 31)。</P>
+
+<P>%H</P>
+
+<P>24 時間形式の時間 (00 ～ 23)。</P>
+
+<P>%I</P>
+
+<P>12 時間形式の時間 (01 ～ 12)。</P>
+
+<P>%j</P>
+
+<P>10 進数で表した 1 年の中の日 (001 ～ 366)。</P>
+
+<P>%m</P>
+
+<P>10 進数で表した月 (01 ～ 12)。</P>
+
+<P>%M</P>
+
+<P>10 進数で表した分 (00 ～ 59)。</P>
+
+<P>%p</P>
+
+<P>12 時間形式の場合、現在の C ロケールで午前/午後を表す記号 (PM など)。</P>
+
+<P>%S</P>
+
+<P>10 進数で表した秒 (00 ～ 59)。</P>
+
+<P>%U</P>
+
+<P>10 進数で表した 1 年の中の週。日曜日を週の最初の日とします (00 ～ 51)。</P>
+
+<P>%w</P>
+
+<P>10 進数で表した曜日。日曜日を週の最初の日とします(0 ～ 6)。</P>
+
+<P>%W</P>
+
+<P>10 進数で表した 1 年の中の週。月曜日を週の最初の日とします (00 ～ 51)。</P>
+
+<P>%x</P>
+
+<P>C ロケールに従った日付表示 (05/06/01 など)。</P>
+
+<P>%X</P>
+
+<P>C ロケールに従った時刻表示 (12:51:32 など)。</P>
+
+<P>%y</P>
+
+<P>10 進数で表した西暦の下 2 桁 (01 など)。</P>
+
+<P>%Y</P>
+
+<P>10 進数で表した 4 桁の西暦 (2001 など)。</P>
+
+<P>%z, %Z</P>
+
+<P>タイムゾーン名またはその省略形。タイムゾーンが不明な場合は文字が入りません。</P>
+
+<P>%%</P>
+
+<P>パーセント記号。</P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=18%>SIZEFMT</TD>
+<TD width=82%>#fsize ディレクティブの出力を、ファイル サイズをキロバイト単位またはバイト単位で表示するよう構成します。String パラメータには、2 つの値のいずれかを指定できます。"ABBREV" を指定すると、ファイル サイズはキロバイト単位で表示されます。"BYTES" を指定すると、ファイル サイズはバイト単位で表示されます。</TD>
+</TR>
+</TABLE><BR>
+
+<P><strong><font color="#0000FF">重要</strong></font>&nbsp;&nbsp;&nbsp;このディレクティブが入ったファイルには、SSI インタプリタにマップされるファイル名拡張子を使う必要があります。拡張子が異なると、Web サーバーはディレクティブを処理しません。既定では、ファイル名拡張子 .stm、.shtm、および .shtml が SSI インタプリタ (ssinc.dll) にマップされます。</P>
+
+<P>#echo ディレクティブを使用する STM ページは、それ自身または ASP ページから Response.Redirect を使用して実行する必要があります。STM ページを ASP ページから Server.Transfer、Server.Execute、または #include を使用して呼び出すと、STM ページが ssinc.dll ではなく asp.dll を通過するよう強制されるため、機能しません。</P>
+
+<P><a href="iiabuti.htm">IIS スナップイン</a>をインストールしている場合、既定の拡張子マッピングを変更して新しいマッピングを追加できます。<font face="ＭＳ Ｐゴシック">
+
+詳細については、「<A HREF="iiwarndf.htm">アプリケーションのマッピングを設定する</A>」を参照してください。
+
+</font>ファイル拡張子を複数の実行可能ファイルにマップすることはできないため、このディレクティブを ASP ファイルでは使用できません。ASP ファイルは、既に asp.dll にマップされていて、そのまま保持する必要があります。</P>
+
+<H6><b>例</b></H6>
+
+<p>--- SSI.stm ---</p>
+
+<PRE>&lt;!-- #config ERRMSG = &quot;An error occurred processing a directive.&quot; --&gt;</PRE>
+
+<PRE>SSI.stm was last formatted on 
+&lt;!-- #config TIMEFMT = &quot;%A, the %d of %B, %Y, at %H:%M&quot; --&gt;
+&lt;!-- #flastmod FILE = &quot;ssi.stm&quot; --&gt;
+&lt;BR&gt;
+
+The size of SSI.stm in bytes is
+&lt;!-- #config SIZEFMT = &quot;BYTES&quot; --&gt;
+&lt;!-- #fsize FILE = &quot;ssi.stm&quot; --&gt;
+&lt;BR&gt;&lt;BR&gt;
+
+This line will print out the ERRMSG configured above&lt;BR&gt;
+&lt;!-- #config SIZEFMT = &quot;BYTE&quot; --&gt;
+</PRE>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

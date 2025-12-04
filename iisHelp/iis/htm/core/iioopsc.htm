@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>セットアップに関する考慮事項</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="プロセスの再利用におけるセットアップに関する考慮事項について説明します。メタベース設定はオペレーティング システムをクリーン インストールしたか、アップグレードしたかによって異なります。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="SetupConsiderations">セットアップに関する考慮事項</a></h1>
+
+ここでは、IIS 4.0 または 5.0 からのアップグレードとオペレーティング システムのクリーン インストール間で異なるプロセス再利用の既定の構成設定について説明します。クリーン インストールとは、以前のバージョンからアップグレードするのではなく、オペレーティング システムの新しいコピーをインストールすることを意味します。 
+
+<h2>アップグレード</h2>
+IIS 5.1 にアップグレードするときに、次の例で<b>太字</b>で示されているように、プロセス再利用に固有のメタベース キー名が書き込まれます。IIS では次にプロパティをゼロに設定してこれらの機能を無効にします。 
+
+<p><strong>メタベースの構成例</strong></p>
+<p>
+/W3SVC<br> &nbsp;&nbsp;&nbsp;AppIsolated             = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartTime</b>     = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartRequests</b> = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>ShutdownTimeLimit</b> = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;…other default site/app settings…<br>
+</p>
+
+<p>PeriodicRestartTime、PeriodicRestartRequests、および ShutdownTimeLimit の各プロパティは、W3SVC レベルで定義されます。PeriodicRestartSchedule プロパティは定義されません。
+
+
+<h2>クリーン インストール</h2>
+
+次の例は、クリーン インストール後の既定のプロセス再利用構成を示しています。 
+
+<p><strong>メタベースの構成例 (クリーン インストール)</strong><p>
+
+/W3SVC<br> &nbsp;&nbsp;&nbsp;AppIsolated             = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartTime</b>     = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartRequests</b> = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>ShutdownTimeLimit</b> = (INTEGER) 600<br> &nbsp;&nbsp;&nbsp;…other default site/app settings…<br>
+
+<p>PeriodicRestartTime、PeriodicRestartRequests、および ShutdownTimeLimit の各プロパティは、W3SVC レベルで定義され、それぞれのパラメータは既定値に設定されます。PeriodicRestartTime および PeriodicRestartRequests 既定値はゼロで、これらのイベントが無効になっていることに注意してください。PeriodicRestartSchedule プロパティは定義されません。
+<h2><a name="RelatedResources">関連リソース</a></h2>
+
+<ul>
+<li>「<a href="iioopcre.htm">再利用イベントを構成する</a>」&nbsp;&nbsp;&nbsp;アプリケーションを異なるプロセスで実行するように構成する方法を手順を追って説明しています。</li>
+<li>「<a href="iiooplai.htm">レベルと継承</a>」&nbsp;&nbsp;&nbsp;プロセスの再利用が構成できるメタベースのレベルについて説明し、構成設定の継承について説明しています。</li>
+<li>「<a href="iiwarndc.htm">アプリケーションについて</a>」&nbsp;&nbsp;&nbsp;アプリケーションに関する概念、開始点、およびアプリケーションを実行できる異なるプロセスについて説明しています。</li>
+<li>「<a href="iiisol.htm">アプリケーションを分離する</a>」&nbsp;&nbsp;&nbsp;アプリケーションを異なるプロセスで実行するよう構成する方法を手順を追って説明しています。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<script language="javascript">
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</script>
+
+</font>
+</body>
+</html>

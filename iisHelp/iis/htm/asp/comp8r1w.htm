@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ChooseContent</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_choosecontent"></A><SUP></SUP>ChooseContent</H2>
+
+<P>ChooseContent メソッドは、<A HREF="/iishelp/iis/htm/asp/comp0mw5.htm">コンテンツ スケジュール ファイル</A>から HTML コンテンツ文字列を取得し、これを現在のページに表示します。ユーザーがページを開いたり読み込み直したりしてスクリプトが実行されるたびに、ChooseContent メソッドは新しいコンテンツ文字列を取得します。</P>
+
+<H6>構文</H6>
+
+<P><I>ContRot</I><B> .ChooseContent( </B><I>content-schedule-path </I><B>) </B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>content-schedule-path</I></DT>
+
+<DD>コンテンツ スケジュール ファイルの格納場所を指定します。
+
+<P>このパラメータは、相対パスまたは仮想パスとして指定します。たとえば、コンテンツ スケジュール ファイル ContRot.txt、および ChooseContent メソッドを呼び出した .asp ファイルが、両方ともディレクトリ /MyApp/Data/ にある (MyApp はサーバー上の仮想ディレクトリ) 場合、<i>content-schedule-path</i> にはフル仮想パス (/MyApp/Data/ConRot.txt)、または相対パス (ContRot.txt) のいずれかを指定できます。
+
+
+<P class=tl><U>Content Rotator コンポーネント</U>は、Server.MapPath メソッドを呼び出し、指定されたパスを物理ディレクトリにマップします。詳細については、「<A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A>」のリファレンス ページを参照してください。
+</DD>
+</DL>
+
+<H6>戻り値 </H6>
+
+<P>コンテンツ スケジュール ファイルの HTML コンテンツ文字列を返します。</P>
+
+<P><span class=le><B>注</B></span></P>
+
+<P><U>Content Rotator コンポーネント</U>は、乱数ジェネレータを使用して、重み付けされたコンテンツ文字列の中から表示する文字列を選択するため、同じ文字列が繰り返し表示される場合があります。特に繰り返しが発生しやすいのは、コンテンツ スケジュール ファイル内のエントリが少ない場合、またはほかのエントリに比べ、特定のエントリの重み付けが著しく大きい場合です。</P>
+
+<H6>例</H6>
+
+<P>次の例は、/Data/ 仮想ディレクトリの ContRot.txt ファイルから新しいヒントを取得します。</P>
+
+<P>--- ContRot.asp ---</P>
+
+<PRE><CODE>&lt;% 
+  Set objContRot = Server.CreateObject("MSWC.ContentRotator") 
+%&gt;
+&lt;%= objContRot.ChooseContent("/Data/ContRot.txt") %&gt;  </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

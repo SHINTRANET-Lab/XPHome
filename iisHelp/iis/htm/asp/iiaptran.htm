@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>トランザクションを理解する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="トランザクション内でスクリプトを実行する方法について説明します。 スクリプトの一部が失敗した場合には、それを含むトランザクション全体が中止されます。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37683987">トランザクションを理解する</a></h1>
+
+
+<p>ビジネス アプリケーションでは、トランザクション内でスクリプトやコンポーネントを実行する機能が必要となる場合がよくあります。&quot;トランザクション&quot; とは、多くの手順 (発注、在庫調査、請求書作成など) を含んでいる場合でも、全体として成功または失敗する 1 つのサーバー操作です。トランザクション内で実行される サーバー側スクリプトを作成し、スクリプトの一部が失敗した場合でも、トランザクション全体が中止されるようにすることができます。</p>
+
+<p>ASP のトランザクション処理は、コンポーネント サービスのトランザクション処理環境が基になっています。コンポーネント サービスのトランザクション処理環境は、企業ネット、インターネット、およびイントラネット用に、高性能で拡張性があり堅牢なサーバー アプリケーションを開発、導入、および管理するためのトランザクション処理システムです。このトランザクション処理環境は、コンポーネント ベースの分散アプリケーションを開発する際のアプリケーション プログラミング モデルを定義します。また、このようなアプリケーションを導入し管理するための実行時環境も提供します。</p>
+
+<p>トランザクション スクリプトの作成に必要な機能は、Web サーバーに組み込まれています。コンポーネント サービスをインストールすると、コンポーネントをパッケージ化してトランザクション内で実行することもできます。</p>
+
+<h2><a name="H2_37685449">トランザクションについて</a></h2>
+
+<p>&quot;トランザクション&quot; は、複数の処理のすべてが成功しなければすべて元に戻すように扱われる操作です。トランザクション処理は、データベースを更新する際の信頼性を高めるために使用されます。1 つのデータベースに対して多数の関連する変更を行う場合、または複数のデータベースを同時に更新する場合は、すべての変更が確実に実行されるようにする必要があります。変更が一部でも失敗した場合は、データベースのテーブルを元の状態に戻さなければなりません。</p>  
+
+<p>コンポーネント サービスを使わない場合は、要求された変更を手動で追跡し、変更が失敗した場合にデータを元に戻すためのスクリプトとコンポーネントを記述する必要があります。コンポーネント サービスを使うと、トランザクションを必要とするスクリプトとコンポーネントを宣言し、コンポーネント サービスにトランザクションの調整を任せるだけで済みます。トランザクション処理は、データベース アクセスにのみ適用されます。 コンポーネント サービスは、ファイル システムへの変更やトランザクションを使用しないその他のリソースへの変更をロールバックすることはできません。アプリケーションがアクセスするデータベースは、コンポーネント サービスでサポートされている必要があります。現在、コンポーネント サービスは、SQL Server、および X/Open コンソーシアムの XA プロトコルをサポートするすべてのデータベースをサポートしています。コンポーネント サービスは、ほかのデータベースに対するサポートを今後も広げていく予定です。</p>  
+
+<p><A HREF="vbob9waa.htm"><STRONG>Server.Transfer</STRONG></A> メソッドおよび <A HREF="vbob9pid.htm"><STRONG>Server.Execute</STRONG></A> メソッドを使用すると、1 つのトランザクションを複数の ASP ページにわたって使用することができます。値に Required が指定された @TRANSACTION ディレクティブを含んだスクリプトが、<STRONG>Server.Transfer</STRONG> メソッドまたは  <STRONG>Server.Execute</STRONG> メソッドで呼び出された場合、呼び出し元の .asp ファイルのトランザクションが実行されている場合は、スクリプトは呼び出し元の .asp ファイルのトランザクションをそのまま続行します。呼び出し元の .asp ファイルのトランザクションが実行されていない場合は、呼び出された .asp ファイルは自動的に新しいトランザクションを作成します。</P>
+
+<P>たとえば、次のスクリプトはトランザクションを開始します。</P>
+
+<pre>&lt;%@ TRANSACTION=Required %&gt;
+
+&lt;%
+  .
+  .
+  .	
+  'End transaction.
+  Server.Transfer("/BookSales/EndTrans.asp")		
+%&gt;</pre>
+
+<P>次のスクリプトは、同じくトランザクションを初期化する別のスクリプトを呼び出します。</P>
+
+<pre>&lt;%@ TRANSACTION=Required%&gt;
+
+&lt;%
+  'Instantiate a custom component to close transactions.
+  Set objSale = Server.CreateObject("SalesTransacted.Complete")
+  .
+  .
+  .
+%&gt;
+</pre>
+
+<P>ただし、2 つのスクリプト間の対話から構成されるトランザクションは 1 つのみです。<STRONG>Server.Transfer</STRONG> および <STRONG>Server.Execute</STRONG> を使用してスクリプトを作成する方法の詳細については、「<A HREF="iiwacont.htm">ブラウザにコンテンツを送信する</A>」を参照してください。</P>
+
+
+<h2><a name="H2_37686692">トランザクション スクリプトを宣言する</a></h2>
+
+<p>ページをトランザクションとして宣言すると、ページ上で使用されるスクリプト コマンドとオブジェクトは、同じトランザクション コンテキスト内で実行されます。コンポーネント サービスは、トランザクションの作成とトランザクションの成功 (コミット) または失敗 (中止) の判断に関する詳細の処理を行います。ページをトランザクションとして宣言するには、ページの先頭行に <A HREF="dire5t0u.htm">@TRANSACTION</A>ディレクティブを追加します。</p>
+
+<pre>&lt;%@ TRANSACTION = <em>value</em> %&gt;</pre>
+
+<p><EM>value</EM> 引数の詳細については、<A HREF="dire5t0u.htm">@TRANSACTION</A>ディレクティブのリファレンスを参照してください。</p>
+
+<p>@TRANSACTION ディレクティブは、ページの先頭行に置く必要があります。 それ以外の行に置くとエラーが発生します。このディレクティブは、トランザクションで実行されるページすべてに追加する必要があります。現在のトランザクションは、スクリプトの処理が終了した時点で終了します。</p>
+
+<p>大部分のアプリケーションでは、ある一定の操作のみにトランザクション コンテキストを必要とします。たとえば、航空会社のサイトでは、航空券購入と座席予約にトランザクション スクリプトを使用します。それ以外のスクリプトは、トランザクション コンテキストを使用しなくても安全に実行できます。トランザクションは、トランザクション処理が必要なページにのみ使用する必要があるため、アプリケーションの Global.asa ファイルをトランザクションとして宣言することはできません。</p>
+
+<p>トランザクションが中止された場合、コンポーネント サービスはトランザクションをサポートするリソースに行われた変更をすべてロールバックします。現在、データベース サーバーのみがトランザクションを完全にサポートしています。これは、企業アプリケーションにとって、データベースのデータが最も重要であるためです。コンポーネント サービスは、ハード ディスク上のファイル、ASP のセッション変数とアプリケーション変数、およびコレクションへの変更はロール バックしません。ただし、後で説明するように、トランザクション イベントを作成することで、変数とコレクションを元に戻すスクリプトを作成できます。また、スクリプトで明示的にトランザクションをコミットする、またはファイルへのデータの書き込みなどが失敗した場合に中止することもできます。</p> 
+
+<h2><a name="H2_37689450">スクリプトをコミットまたは中止する</a></h2>
+
+<p>コンポーネント サービスは、トランザクション処理を追跡して、トランザクションが正常に終了したか失敗したかを判別します。スクリプトでは、<strong>ObjectContext.SetAbort</strong> を呼び出して、トランザクションの中止を明示的に宣言できます。たとえば、コンポーネントがエラーを返した場合、ビジネス ルールに反する場合 (口座の残高が 0 を下回った場合など)、またはファイルの読み書きなどの非トランザクション処理が失敗した場合に、スクリプトはトランザクションを中止できます。また、トランザクションが完了する前にページがタイムアウトした場合にも、トランザクションは中止されます。</p>
+
+<h2><a name="H2_37690014">トランザクション イベントを作成する</a></h2>
+
+<p>スクリプト自体は、トランザクションが成功したか失敗したかを判別できません。ただし、トランザクションがコミットまたは中止されるときに呼び出されるイベントを作成することはできます。たとえば、銀行口座に振込みを行うスクリプトがあり、トランザクションの状態によって、ユーザーに異なるページを返すとします。その場合、<strong>OnTransactionCommit</strong> イベントおよび <strong>OnTransactionAbort</strong> イベントを使ってユーザーへの異なる応答を作成できます。</p>
+
+<pre>&lt;%@ TRANSACTION=Required %&gt;
+
+&lt;%
+  'Buffer output so that different pages can be displayed.
+  Response.Buffer = True
+%&gt;
+
+&lt;HTML&gt;
+  &lt;BODY&gt;
+  &lt;H1&gt;Welcome to the online banking service&lt;/H1&gt;
+
+
+  &lt;%
+    Set BankAction = Server.CreateObject("MyExample.BankComponent")
+    BankAction.Deposit(Request("AcctNum"))
+  %&gt;
+
+  &lt;P&gt;Thank you.  Your transaction is being processed.&lt;/P&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+
+&lt;%
+  'Display this page if the transaction succeeds.
+  Sub OnTransactionCommit()
+%&gt;
+  &lt;HTML&gt;
+    &lt;BODY&gt;
+
+    Thank you.  Your account has been credited.
+
+    &lt;/BODY&gt;
+  &lt;/HTML&gt;
+
+&lt;%
+  Response.Flush()
+  End Sub
+%&gt;
+
+&lt;%
+  'Display this page if the transaction fails.
+  Sub OnTransactionAbort()
+    Response.Clear()
+%&gt;		
+  &lt;HTML&gt;
+    &lt;BODY&gt;
+
+    We are unable to complete your transaction.
+
+    &lt;/BODY&gt;
+  &lt;/HTML&gt;
+&lt;%
+    Response.Flush()
+  End Sub
+%&gt;</pre>
+
+<h2><a name="H2_37691717">コンポーネント サービス スナップインにコンポーネントを登録する</a></h2>
+
+<p>コンポーネントをトランザクションで利用するには、COM+ アプリケーションにコンポーネントを登録し、トランザクションを要求するように構成する必要があります。たとえば、注文を処理するスクリプトが、在庫データベースを更新するコンポーネントと支払いデータベースを更新するコンポーネントを呼び出すとします。 その場合、両方のコンポーネントを 1 つのトランザクション コンテキストで実行する必要があります。コンポーネント サービスは、一方のコンポーネントが失敗すると、注文全体がロールバックされ、どちらのデータベースも更新されないようにします。一部のコンポーネントは、トランザクションを必要としません。 たとえば、Ad Rotator コンポーネントは、トランザクションを必要としません。</p>
+
+<p>トランザクション コンポーネントを登録し、構成するには、コンポーネント サービス スナップインを使用します。コンポーネントは、COM+ アプリケーションに登録する必要があります。コンポーネントは、IIS インプロセス COM+ アプリケーションに入れずに、独自の COM+ アプリケーションを作成してください。通常、1 つの Library アプリケーションにすべてのコンポーネントを入れます。Library アプリケーションのコンポーネントは、複数の ASP アプリケーションが使用でき、ASP アプリケーション プロセスで実行されます。</p>
+
+<p>また、Server アプリケーションにトランザクション コンポーネントを登録することもできます。 Server アプリケーションは、サーバー上で常に独立したプロセスとして実行される COM+ アプリケーションです。役割ベースのセキュリティを使う場合、またはリモート コンピュータのアプリケーションからコンポーネントにアクセスできるようにする場合は、Server アプリケーションにトランザクション コンポーネントを登録します。</p>
+
+<p>コンポーネント サービス スナップインを使用するには、コンポーネント サービスがインストールされている必要があります。</p>
+
+<h2><a name="H2_37693171">オブジェクトのスコープ</a></h2>
+
+<p>一般に、COM コンポーネントから作成されたオブジェクトを ASP の <strong>Application</strong> オブジェクトまたは <strong>Session</strong> オブジェクトには格納しないでください。トランザクションが完了すると、COM オブジェクトは非アクティブ化されます。<strong>Session</strong> オブジェクトと <strong>Application</strong> オブジェクトは、複数の ASP ページにわたって使用できることを目的とするオブジェクト インスタンスです。 したがって、<strong>Session</strong> オブジェクトと <strong>Application</strong> オブジェクトには、トランザクション終了時に解放されるオブジェクトを格納しないようにします。</p>
+
+<p>ASP スクリプトは、宣言されたトランザクションのルート (開始点) です。トランザクション ASP ページで使用されるすべての COM オブジェクトは、トランザクションの一部と見なされます。トランザクションが完了すると、ページで使用された COM オブジェクトは、<strong>Session</strong> オブジェクトまたは <strong>Application</strong> オブジェクトに格納されたオブジェクトも含め、すべて非アクティブ化されます。その後、別のトランザクション ページからセッションスコープまたはアプリケーションスコープのオブジェクトを呼び出そうとすると、エラーが発生します。</p>
+
+<h2><a name="queuingtransactions">トランザクションをキューに配置する</a></h2>
+
+<p>リモート サーバーのデータベースを更新するとき、ネットワークの遅延または障害のために、トランザクションの完了が遅れる、または中止されることがあります。トランザクションのすべての部分がコミットされる必要があるため、アプリケーションでは、リモート サーバーからのコミット メッセージまたは中止メッセージを待ち続けることがあります。 また、データベースの更新が送信されないため、トランザクションを中止することもあります。</p>
+
+<p>このような場合、同時完了が必要な更新では、トランザクションを中止するか、トランザクションのすべての部分がコミットするまで、トランザクションの完了を遅らせます。たとえば、航空券注文アプリケーションでは、顧客の銀行口座の借方への記入と航空会社の銀行口座の貸方への記入を同時に完了する必要があります。特定の更新処理がトランザクションにとって必要である一方、ほかの更新処理より後でもかまわない場合は、更新が完了するまで顧客を待たせないようにすることも可能です。たとえば、航空券注文のトランザクションには、食品サービス業者に特別食の要求を送ったり、顧客のマイレージを更新したりする処理が含まれることもあります。これらの処理は完了する必要がありますが、完了が後になってもかまいません。</p>
+
+<p>メッセージ キュー サービスでは、リモート サーバーに配信されるトランザクション メッセージに 1 つまたは一連の更新を含めることができます。ネットワークがその時点で利用できない場合でも、メッセージ キュー サービスによって、更新がリモート サーバーに配信されることが保証されます。アプリケーションはコミット メッセージを受け取り、トランザクションを続行することができます。</p>
+ 
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+MSMQ
+</layer></span>
+
+</font>
+</body>
+</html>

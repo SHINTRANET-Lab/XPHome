@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>MoveHere</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_k2_movehere"></A><SUP></SUP>MoveHere</H4>
+
+<P>ADSI コンテナ オブジェクトの MoveHere メソッドは、オブジェクトをコンテナに移動し、移動元のオブジェクトを削除します。</P>
+
+<H6>構文</H6>
+
+<P>Set <I>MovedObj</I> = <I>Object</I>.<B>MoveHere</B>( <I>SourceName</I>,<I>NewName</I> )</P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>MovedObj</I></DT>
+
+<DD>コンテナに移動されたオブジェクトにアクセスします。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIS Admin オブジェクトを含んでいます。<BR>
+</DD>
+
+<DT><I>SourceName</I></DT>
+
+<DD>移動元のオブジェクトの名前です。<BR>
+</DD>
+
+<DT><I>NewName</I></DT>
+
+<DD>移動先のオブジェクトの名前です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P><I>MovedObj</I> 変数には、コンテナに残っているオブジェクトへのポインタが格納されます。</P>
+
+<P>MoveHere メソッドは、CopyHere の後に Delete を実行する操作に相当します。</P>
+
+<P>移動されるコンテナ内のオブジェクトがアプリケーションの一部である場合、MoveHere メソッドは、アプリケーション定義を無効にしてからオブジェクトを移動します。<A HREF="/iishelp/iis/htm/asp/aore8v5e.htm">IIsWebVirtualDir</A> オブジェクトおよび <A HREF="/iishelp/iis/htm/asp/aore1jw9.htm">IIsWebDirectory</A> オブジェクトの AppDisable メソッドを参照してください。</P>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;% 
+  Dim ToVDirObj, FromVDirObj, RootVDirObj 
+'Get the root virtual directory object for a server. 
+  Set RootVDirObj = GetObject("IIS://<I>LocalHost</I>/W3SVC/3/ROOT") 
+'Get the object to be moved. 
+  Set FromVDirObj = GetObject("IIS://<I>LocalHost</I>/W3SVC/3/ROOT/VDir1") 
+'Move the object and give it a new name. 
+  Set ToVdirObj = RootVDirObj.<B>MoveHere</B>("VDir1", "VDir2") 
+'Release the source object because it has been deleted. 
+  Set FromVDirObj = nothing 
+%&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/adsi91kk.htm"><B>GetObject</B></A>、<A HREF="/iishelp/iis/htm/asp/adsi0j8l.htm"><B>Create</B></A>、<A HREF="/iishelp/iis/htm/asp/adsi9iat.htm"><B>Delete</B></A>、<A HREF="/iishelp/iis/htm/asp/adsi5eud.htm"><B>CopyHere</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ExpiresAbsolute</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_expiresabsolute"></A><SUP></SUP>ExpiresAbsolute</H4>
+
+<P>ExpiresAbsolute プロパティは、ブラウザにキャッシュされているページの有効期限が切れる日付と時刻を指定します。ユーザーがこの日付と時刻までに同じページに戻ってきた場合は、キャッシュされているページが表示されます。時刻が指定されていない場合は、指定日付の午前 0 時にページ キャッシュが無効になります。日付が指定されていない場合は、スクリプトが実行された日の指定時刻にページ キャッシュが無効になります。</P>
+
+<H6>構文</H6>
+
+<P><B>Response.ExpiresAbsolute </B>[<B>=</B> [<I>date</I>] [<I>time</I>]]</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>date</I></DT>
+
+<DD>ページの有効期限が切れる日付を指定します。Expires ヘッダーで送信される値は、RFC-1123 の日付形式に準拠します。</br>
+</DD>
+
+<DT><I>time</I></DT>
+
+<DD>ページの有効期限が切れる時刻を指定します。この値は、Expires ヘッダーが送信される前に GMT に変換されます。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>同じページでこのプロパティを複数回設定した場合は、有効期限が最も早く切れる日付または時刻が適用されます。</P>
+
+<H6>例</H6>
+
+<P>次の例は、2001 年 5 月 31 日午後 1 時 30 分 15 秒にページのキャッシュが無効になるように指定します。</P>
+
+<PRE><CODE>&lt;% Response.ExpiresAbsolute=#May 31,2001 13:30:15# %&gt; 
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob8o4z.htm"><B>Expires</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

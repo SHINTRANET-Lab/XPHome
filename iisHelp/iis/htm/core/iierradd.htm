@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>カスタム エラー メッセージを追加する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="カスタム HTTP エラー メッセージを追加する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37701508">カスタム エラー メッセージを追加する</a></h1>
+
+<p>IIS スナップインの [カスタム エラー] プロパティ シートを使用して、カスタム エラー メッセージをファイルまたは URL にマップできます。</p>
+
+<p><big>ファイルへのマッピングでエラー メッセージをカスタマイズするには</big></p>
+ 
+<ol>
+<li>カスタム エラー メッセージを収めたファイルを作成し、ディレクトリに置きます。</li>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、HTTP エラー メッセージをカスタマイズする Web サイト、仮想ディレクトリ、ディレクトリ、またはファイルを選択し、[プロパティ] をクリックします。</li>
+<li>[カスタム エラー] プロパティ シートをクリックします。</li>
+<li>変更する HTTP エラーをクリックします。</li>
+<li>[プロパティの編集] をクリックします。</li>
+<li>[メッセージの種類] ボックスの一覧の [ファイル] をクリックします。</li>
+<li>カスタマイズしたエラー メッセージを指すパス名およびファイル名を入力するか、または [参照] をクリックしてコンピュータのハード ディスクにあるファイルを指定します。</li>
+<li>[OK] をクリックします。</li>
+</ol>
+
+<p><big>URL へのマッピングでエラー メッセージをカスタマイズするには</big></p>
+ 
+<ol>
+<li>カスタム エラー メッセージを収めたファイルを作成し、仮想ディレクトリに置きます。</li>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、HTTP エラー メッセージをカスタマイズする Web サイト、仮想ディレクトリ、ディレクトリ、またはファイルを選択し、[プロパティ] をクリックします。</li>
+<li>[カスタム エラー] プロパティ シートをクリックします。</li>
+<li>変更する HTTP エラーをクリックします。</li>
+<li>[プロパティの編集] をクリックします。</li>
+<li>[メッセージの種類] ボックスの一覧の [URL] をクリックします。</li>
+<li>カスタマイズしたエラー メッセージを指す URL を入力します。URL には、仮想ディレクトリ名から始まる URL へのパスを入力します。</li>
+<li>[OK] をクリックします。</li>
+</ol>
+
+<p><strong>注</strong></p>
+
+<ul>
+<li>カスタム エラーを処理するように ASP ファイルを定義した場合、スクリプトはコンテキストを渡す URL として呼び出されます。たとえば、Handle405.asp という名前の .asp ファイルが HTTP 405 エラーを処理するように設定されている場合、ユーザーが Example.htm にアクセスを試みて 405 エラーが発生すると、Web ブラウザでユーザーが「<strong>http://example.microsoft.com/handle405.asp?405;http://example.microsoft.com/example.htm</strong>」と入力した場合と同じように Handle405.asp ファイルが実行されます。</li>
+
+<li>静的なカスタム エラー ファイル (HTML ファイル) を使用する場合は、常に [ファイル] オプションを選択する必要があります。ISAPI または ASP を使って、エラーを処理するアプリケーションを開発する場合は、[URL] オプションを選択します。エラー状態は、URL のパラメータとしてアプリケーションに渡されるので、HTTP ヘッダーの状態は、アプリケーション側で設定する必要があることに注意してください。アプリケーション側で設定していないと、HTTP 応答の状態は &quot;HTTP&nbsp;1.1 200 OK&quot; になります。</li>
+
+<li>Windows で Internet Explorer&nbsp;5.0 を使用している場合、Internet Explorer では、次のカスタム エラーを Internet Explorer 自身が持っている HTTP エラーに置き換える可能性があります。カスタム エラーのファイル サイズが次に示すサイズより小さい場合、カスタム エラーは使用されません。
+
+<p>403、405、410 には、256 バイトより大きいファイル サイズが必要です。<br> 400、404、406、408、409、500、500.12、500.13、500.15、501、505 には、512 バイトより大きいファイル サイズが必要です。</p></li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

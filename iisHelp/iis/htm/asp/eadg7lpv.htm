@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>アプリケーションの境界を定義する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_defining_application_boundaries"></A><SUP></SUP>アプリケーションの境界を定義する</H1>
+
+<P>ASP をベースにしたアプリケーションは、ASP ページと COM コンポーネントの集まりです。アプリケーションを定義する場合、Web サイトのアプリケーション開始点ディレクトリを指定するには、インターネット インフォメーション サービス スナップインを使用します。Web サイトの開始点ディレクトリの下にあるファイルやフォルダはすべて、アプリケーションの一部であるとみなされます。したがって、ディレクトリ構造を使用して、&quot;アプリケーション境界&quot; を定め、アプリケーションの範囲を定義することができます。1 つの Web サイトに複数のアプリケーションを配置し、それぞれのアプリケーションを異なる構成にすることが可能です。</P>
+
+<P>Web アプリケーションを開発する上で、開発者が直面する最も重要な作業の 1 つに、複数の ASP ページを 1 つの Web アプリケーションにまとめる方法を決めるという作業があります。IIS では、アプリケーションの識別には &quot;名前空間&quot; の概念が使用されます。名前空間は、メモリの領域を、わかりやすい名前と関連付ける方法です。これにより、関連する複数のファイルを 1 つのグループとして認識できます。アプリケーションの名前空間を定義するのに仮想ディレクトリが使用されます。次の図は、この概念を示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/isapi2.gif" ALT="アプリケーションの名前空間" BORDER=0></P>
+
+<P>アプリケーションの境界内にあるスクリプト、および ISAPI 拡張 DLL は 独立した 1 つの単位を形成し、常に 1 つのサーバー インプロセスで実行されます。IIS 管理者はプール プロセス (既定のプロセス) として、アプリケーションを IIS と同じサーバー プロセスで実行するか、または独立プロセスでアプリケーションを実行することにより、このアプリケーションを分離することができます。後者は、特に、開発とテストに有効な手段です。</P>
+
+<P>アプリケーションとコンポーネントの分離の詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg7j8u.htm">プロセスの分離により開発を簡素化する</A>」を参照してください。</P>
+
+<P>シングル プロセスでのアプリケーションの実行に加えて、コンポーネントを分離プロセス、またはプール プロセスで実行することにより、これらのコンポーネントを呼び出す .asp ファイルからコンポーネントを分離することもできます。分離プロセスは、コンポーネントのデバッグに適した構成です。プール プロセスでは、膨大な量の分離プロセスの維持に必要なオーバーヘッドなしに、サーバーを保護できます。コンポーネント自身のプロセスで、これらのコンポーネントを実行するには、新しいアプリケーションを作成し、コンポーネント サービス管理ツールを使用して、このアプリケーションにコンポーネントを追加する必要があります。</P>
+
+<P>アプリケーションの構成方法には、次の 5 種類が考えられます。
+
+<OL>
+	<LI>.asp ファイルとコンポーネントをすべて、IIS と同じプロセスに入れる。この構成では、パフォーマンスが高速化されます。</li>
+
+	<LI>.asp ファイルとコンポーネントをすべて 1 つのプロセスに入れ、IIS を別のプロセスに入れる。</li>
+
+	<LI>.asp ファイルとコンポーネントをすべてプール プロセスに、IIS を別のプロセスに入れて、特別なアプリケーションは分離プロセスに入れる。</li>
+
+	<LI>.asp ファイルすべてと IIS を 1 つのプロセスに入れて、コンポーネントを別のプロセスに入れる。</li>
+
+	<LI>.asp ファイルすべて、コンポーネント、IIS をそれぞれ個別にコンポーネントに入れる。</li>
+</OL>
+
+<P>プロセスの境界はメモリの異なる領域を表すので、ある境界から別の境界を呼び出すことは、IIS に余分な作業を要求することになります。プロセス境界にまたがって呼び出しを行うメカニズムは、&quot;マーシャリング&quot; と呼ばれます。マーシャリングされた呼び出しは、シングル プロセスでの呼び出しに比べると遅くなります。したがって、プール アプリケーションおよび分離アプリケーションは、IIS プロセスを共有するアプリケーションほど高速には実行されません。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

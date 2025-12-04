@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>WebDAV について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion	
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="WebDAV の概念とその強力な Web 発行機能について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="AboutWebDAV">WebDAV について</a></h1>
+
+<p>WebDAV (Web Distributed Authoring and Versioning) は、HTTP/1.1 の拡張機能であり、これによりクライアントは Web のリソースを発行、ロック、管理することができます。WebDAV を IIS に統合することにより、クライアントは以下のことができるようになりました。</p>
+
+<ul>
+<li><strong>リソースを操作する</strong>&nbsp;&nbsp;サーバー上の WebDAV 発行ディレクトリで、リソースを操作します。たとえば、アクセス権の与えられているユーザーは、この機能によって、WebDAV ディレクトリ内でファイルをコピーしたり移動したりすることができます。</li>
+<li><strong>プロパティを修正する</strong>&nbsp;&nbsp;特定のリソースに関連するプロパティを修正します。たとえば、ユーザーはファイルのプロパティ情報の書き込みや取得を行うことができます。</li>
+<li><strong>リソースのロックおよびロック解除を行う</strong>&nbsp;&nbsp;リソースのロックおよびロック解除によって、複数のユーザーが同時にファイルを参照でき、修正は 1 人のユーザーのみが行えるようにします。</li>
+<li><strong>検索を行う</strong>&nbsp;&nbsp; WebDAV ディレクトリ内でコンテンツおよびファイルのプロパティの検索を行います。</li>
+</ul>
+
+<p>WebDAV 発行ディレクトリのサーバーへのセットアップは、<a href="iiabuti.htm">IIS スナップイン</a>による仮想ディレクトリのセットアップと同じように簡単です。発行ディレクトリをセットアップすると、アクセス権のあるユーザーは、サーバーに対するドキュメントの発行、またディレクトリ内のファイルの操作を行えるようになります。WebDAV ディレクトリのセットアップを行う場合、Windows XP&nbsp;Professional をインストールしておく必要があります。</p>
+
+<h2>WebDAV クライアント</h2>
+
+<p>次の Microsoft 製品のいずれか、あるいは業界標準 WebDAV プロトコルをサポートするクライアントを通して WebDAV 発行ディレクトリにアクセスすることができます。</p>  
+
+<ul>
+<li><strong>Windows XP</strong>&nbsp;&nbsp;&nbsp;ネットワーク プレースの追加ウィザードによって、WebDAV サーバーに接続し、WebDAV ディレクトリの内容を、ローカル コンピュータのファイル システムの一部であるかのように表示します。接続後、ファイルのドラッグ アンド ドロップやファイル プロパティの取得や修正など、ファイル システムに関わるいろいろな作業を行うことができます。</li>
+<li><strong>Internet Explorer&nbsp;5</strong>&nbsp;&nbsp;&nbsp;WebDAV ディレクトリに接続し、Windows XP と同様のファイル システム作業を行うことができます。</li>
+<li><strong>Office 2000</strong>&nbsp;&nbsp;&nbsp;Office&nbsp;2000 のアプリケーションによって、ドキュメントを直接、WebDAV ディレクトリに、作成、発行、編集、保存することができます。</li>
+</ul>
+
+<h2>WebDAV での検索</h2>
+
+<p>WebDAV ディレクトリに接続すると、ディレクトリ内のファイルのコンテンツおよびプロパティをすばやく検索することができます。たとえば、&quot;テーブル&quot; という言葉のあるファイル、あるいは &quot;フレッド&quot; という人物によって書かれたファイルを検索することができます。</p>
+
+<h2>統合セキュリティ</h2>
+
+<p>WebDAV は、Windows XP と IIS に統合されているため、この両方のセキュリティ機能を取り入れています。この機能の中には、<a href="iiabuti.htm">IIS スナップイン</a>の IIS アクセス権と NTFS ファイル システムの随意アクセス制御リスト (DACL) があります。IIS のセキュリティについては、「<a href="iisecsa.htm">セキュリティ</a>」を参照してください。</p>
+
+<p> アクセス権を持つクライアントによる、WebDAV ディレクトリに対する書き込みなどがあるため、アクセスできるユーザーをいつでも制御できるようにすることは重要です。アクセスを制御するために、IIS には、Kerberos&nbsp;5 認証プロトコルをサポートし強化された、統合 Windows 認証があります。統合 Windows 認証を選択することにより、アクセス権を持つクライアントのみが、イントラネット上の WebDAV ディレクトリにアクセスし、書き込みを行えるようにすることができます。Kerberos&nbsp;5 認証プロトコルがどのように IIS 統合 Windows 認証と共に機能するかについての詳細は、「<a href="iiabasc.htm#challenge">統合 Windows 認証</a>」を参照してください。Kerberos プロトコルの一般的な機能については、Microsoft Windows XP Server のマニュアルの「Kerberos v5 認証」を参照してください。</p>
+
+<p>また、IIS ではダイジェスト認証および高度ダイジェスト認証をサポートしています。ダイジェストおよび高度ダイジェスト認証は、Windows ドメイン サーバーのために作られたもので、パスワードおよびインターネット上の情報の伝送に関して、より強固なセキュリティを提供します。ダイジェスト認証については、「<a href="iiabasc.htm#digest">ダイジェスト認証</a>」と「<a href="iiauths.htm#enabledigest">ダイジェスト認証を構成する</a>」を参照してください。高度ダイジェスト認証については、「<a href="iiabasc.htm#advancedDigest">高度ダイジェスト認証</a>」と「<a href="iiauths.htm#enableadvanceddigest">高度ダイジェスト認証を構成する</a>」を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

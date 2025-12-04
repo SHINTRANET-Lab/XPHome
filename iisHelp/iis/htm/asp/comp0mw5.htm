@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>コンテンツ スケジュール ファイル</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><a name="_content_schedule_file"></a>コンテンツ スケジュール ファイル</H2>
+
+<P>コンテンツ スケジュール ファイルには、ContentRotator コンポーネントが、指定されたコンテンツの管理と表示に使用する情報が含まれます。</P>
+
+<P>このファイルでは、任意の数の HTML コンテンツ文字列エントリを指定できます。各エントリは 2 つの要素で構成されます。&nbsp;1 つは 二重パーセント記号 (%%) で始まる相対的な重み付けとコメントを指定した行で、これらの行の各項目は TAB 文字で区切る必要があります。もう 1 つは、HTML コンテンツ自体です。各行はキャリッジ リターンで終了します。</P>
+
+<P>コンテンツ スケジュール ファイルを変更した後に、変更を有効にするには IIS サービスを再起動する必要があります。</P>
+
+<H6>構文</H6>
+
+<P>%% [#<I>Weight</I>] [//<I>Comments</I>]</P>
+
+<P><I>ContentString</I></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Weight</I></DT>
+
+<DD>HTML コンテンツ文字列の相対的な重み付けを示す 0 ～ 10000 の数値を指定する、省略可能なパラメータです。特定のコンテンツ文字列が Content Rotator コンポーネントによって表示される可能性は、そのコンテンツ文字列の <I>Weight</I> を、コンテンツ スケジュール ファイルの全エントリの <I>Weight</I> 値の合計で割った値で表すことができます。
+
+<P>たとえば、コンテンツ スケジュール ファイルに 3 つのコンテンツ文字列が含まれていて、それぞれの重み付けが 1、3、および 4 である場合、各コンテンツ文字列の表示時間は、1 番目のコンテンツ文字列が 1/8 の時間、2 番目の文字列が 3/8 の時間、3 番目の文字列が 1/2 の時間となります。
+
+
+<P><I>Weight</I> に 0 を指定すると、そのコンテンツ エントリは無視されます。
+
+
+<P><I>Weight</I> を指定しない場合の既定値は 1 です。
+
+
+<P>すべての重み付け値の合計が 10000 を超える場合に、GetAllContent または ChooseContent メソッドのいずれかを呼び出してスケジュール ファイルにアクセスすると、エラーが生成されます。 <BR>
+</DD>
+
+<DT><I>Comments</I></DT>
+
+<DD>エントリに関するコメントを指定する、省略可能なパラメータです。このコメントは開発用であり、ユーザーには表示されません。複数行のコメントが必要な場合は、追加する各コメント行の行頭に行デリミタ (%%) を記述し、その後ろにコメント デリミタ (//) を記述する必要があります。<br>
+</DD>
+
+<DT><I>ContentString</I></DT>
+
+<DD>Content Rotator コンポーネントが表示する HTML コンテンツです。たとえば、テキスト行、イメージ、サウンドなどを表現できます。 
+
+<P><I>ContentString</I> には、複数の行を指定できます。Content Rotator コンポーネントは、二重パーセント記号 (%%) で囲まれた内容それぞれを 1 つの HTML コンテンツ文字列と見なします。
+</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>次に示すのは、コンテンツ スケジュール ファイルの例です。コンテンツ文字列には HTML タグを使用できるため、テキスト、イメージ、ハイパーリンクなど、HTML で表現できるコンテンツはすべて表示できることに注意してください。</P>
+
+<P>--- ContRot.txt ---</P>
+
+<PRE><CODE>%% // Because no value is set for Weight, the default value is 1.
+Don't run with scissors.
+
+%% #2 // Content can be more that one line long.
+%% // Additional line of comments.
+%% // Yet another line of comments.
+&lt;FONT FACE="ARIAL,HELVETICA" SIZE="2"&gt;
+  Be like a
+  &lt;H1&gt;duck&lt;/H1&gt;
+  calm on the surface, paddling like mad underneath.
+&lt;/FONT&gt;
+
+%% #3 // This is our favorite image, so show it most often.
+&lt;IMG SRC="http://zone.msn.com/graphics/hotgames_msn.gif"&gt;
+
+%% 
+Here's the &lt;A HREF="/data/controt.txt"&gt;secret link&lt;/A&gt; to your content file.
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

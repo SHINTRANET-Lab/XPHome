@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Cookies</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_cookies_response"></A><SUP></SUP>Cookies</H4>
+
+<P>Cookies コレクションは cookie の値を設定します。指定された cookie が存在しない場合は、新しい cookie が作成されます。cookie が存在する場合は、新しい値を受け取り、古い値を破棄します。</P>
+
+<H6>構文</H6>
+
+<P>Response.<b>Cookies</b>( <i>cookie</i> )[( <i>key</i> )|.<i>attribute</i>] = <i>value</i> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>cookie</I></DT>
+
+<DD>cookie の名前です。<br>
+</DD>
+
+<DT><I>Key</I></DT>
+
+<DD>省略可能なパラメータです。<I>key</i> を指定した場合、cookie は辞書とみなされ、<i>key</i> には <i>value</i> が設定されます。<br>
+</DD>
+
+<DT><I>attribute</I></DT>
+
+<DD>cookie に関する情報を指定します。次のいずれかを属性パラメータに指定できます。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=25%><B>名前</B></TD>
+<TD class=blue width=75%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>Domain</TD>
+<TD width=75%>書き込み専用です。指定した場合、cookie はこのドメインへの要求のみに送られます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>Expires</TD>
+<TD width=75%>書き込み専用です。cookie の有効期限が切れる日付です。セッション終了後に cookie がクライアントのディスク上に格納されるようにするには、この日付を設定する必要があります。この属性が、現在の日付よりも後の日付に設定されていない場合は、セッションの終了時に cookie の有効期限が切れます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>HasKeys</TD>
+<TD width=75%>読み取り専用です。cookie にキーが含まれているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>Path </TD>
+<TD width=75%>書き込み専用です。指定した場合、cookie はこのパスへの要求だけに送られます。この属性が設定されていない場合は、アプリケーション パスが使われます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>Secure</TD>
+<TD width=75%>書き込み専用です。cookie が保護されているかどうかを指定します。</TD>
+</TR>
+</TABLE><BR>
+
+<BR>
+</DD>
+
+<DT><I>value</I></DT>
+
+<DD><i>key</i> または <i>attribute</i> に割り当てる値を指定します。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>次のスクリプトのように、キーを付けて cookie を作成したとします。</P>
+
+<PRE><CODE>&lt;% 
+  Response.Cookies("mycookie")("type1") = "sugar"
+  Response.Cookies("mycookie")("type2") = "ginger snap"
+%&gt; 
+ </CODE></PRE>
+
+<P>すると、次のヘッダーが送信されます。</P>
+
+<PRE><CODE>Set-Cookie:MYCOOKIE=TYPE1=sugar&amp;TYPE2=ginger+snap
+ </CODE></PRE>
+
+<P>この後、キーを指定せずに <CODE>myCookie</CODE> への割り当てを行うと、<CODE>type1</CODE> および <CODE>type2</CODE> は破棄されます。この例を次に示します。</P>
+
+<PRE><CODE>&lt;% Response.Cookies("myCookie") = "chocolate chip" %&gt; 
+ </CODE></PRE>
+
+<P>この例で、<CODE>type1</CODE> と <CODE>type2</CODE> のキーおよびその値は破棄され、<CODE>myCookie</CODE> という cookie の値は <CODE>chocolate chip</CODE> になります。 </P>
+
+<P>逆に、キーを付けて cookie を呼び出すと、cookie に含まれているキー以外の値が破棄されます。たとえば、上のコードの後で次のように Response.Cookies を呼び出します。</P>
+
+<PRE><CODE>&lt;% Response.Cookies("myCookie")("newType") = "peanut butter" %&gt; 
+ </CODE></PRE>
+
+<P>すると、値 <CODE>chocolate chip</CODE> は破棄され、<CODE>newType</CODE> に <CODE>peanut butter</CODE> が設定されます。</P>
+
+<P>cookie がキーを持っているかどうかを調べるには、次の構文を使います。</P>
+
+<PRE><CODE>&lt;%= Response.Cookies("myCookie").HasKeys %&gt; 
+ </CODE></PRE>
+
+<P><CODE>myCookie</CODE> が cookie 辞書であれば前の値は TRUE に評価され、そうでなければ FALSE に評価されます。</P>
+
+<P>ループを使用すると cookie の属性を設定できます。たとえば、すべての cookie の有効期限が特定の日付に切れるように設定するには、次の構文を使います。</P>
+
+<PRE><CODE>&lt;% 
+  For Each cookie in Response.Cookies
+    Response.Cookies(cookie).Expires = #July 4, 1997#
+  Next
+%&gt; 
+ </CODE></PRE>
+
+<P>また、ループを使って、コレクション内のすべての cookie の値や、cookie 内のすべてのキーを設定することもできます。ただし、キーを持っていない cookie に対してはループが実行されません。これを防ぐには、.HasKeys の構文を使用して cookie がキーを持っているかどうかを先にチェックしておきます。この例を次に示します。</P>
+
+<PRE><CODE>&lt;% 
+  If Not Response.Cookies(cookie).HasKeys Then
+    'Set the value of the cookie. 
+    Response.Cookies(cookie) = ""
+  Else
+    'Set the value for each key in the cookie collection.
+    For Each key in Response.Cookies(cookie)
+      Response.Cookies(cookie)(key) = ""
+    Next
+%&gt; 
+ </CODE></PRE>
+
+<H6>例</H6>
+
+<P>次の例は、cookie への値の設定方法と、その属性への値の割り当て方法を示したものです。</P>
+
+<PRE><CODE>&lt;%
+  Response.Cookies("Type") = "Chocolate Chip"
+  Response.Cookies("Type").Expires = "July 31, 2001"
+  Response.Cookies("Type").Path = "/"
+%&gt;
+</CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob0z3o.htm"><B>Request.Cookies</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

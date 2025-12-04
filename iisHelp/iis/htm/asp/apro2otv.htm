@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>DirBrowseFlags</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_dirbrowseflags"></A><SUP></SUP>DirBrowseFlags</H3>
+
+<P>このプロパティには、ディレクトリ表示の有効/無効、表示する情報の種類、およびデフォルト ページの有無を制御するフラグが含まれます。</P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;クライアントがファイル名を指定せずにこのディレクトリにアクセスした場合、<A HREF="/iishelp/iis/htm/asp/apro7x9f.htm">EnableDefaultDoc</A> フラグが TRUE に設定されていると、サーバーによって、プロパティ <A HREF="/iishelp/iis/htm/asp/apro7ag3.htm">DefaultDoc</A> に指定されているファイルが検索されます。また、このディレクトリに既定のファイルが存在しないときに <A HREF="/iishelp/iis/htm/asp/apro13on.htm">EnableDirBrowsing</A> フラグが TRUE に設定されていると、ディレクトリの表示が有効になります。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%>長整数型</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定値</TD>
+<TD width=50%>1073741886</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>継承</TD>
+<TD width=50%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<P>このプロパティに含まれるディレクトリ表示フラグは、次のとおりです。 </P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9q79.htm"><B>DirBrowseShowDate</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro0bhh.htm"><B>DirBrowseShowTime</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6vxq.htm"><B>DirBrowseShowExtension</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7x9f.htm"><B>EnableDefaultDoc</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9of9.htm"><B>DirBrowseShowLongDate</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro13on.htm"><B>EnableDirBrowsing</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4put.htm"><B>DirBrowseShowSize</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース識別子</TD>
+<TD width=50%><B>MD_DIRECTORY_BROWSING</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ユーザー タイプ</TD>
+<TD width=50%><B>IIS_MD_UT_FILE</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定のビットマスク設定</TD>
+<TD width=50%><B>MD_DIRBROW_SHOW_DATE</B>
+<P><B>MD_DIRBROW_SHOW_TIME</B></P>
+
+<P><B>MD_DIRBROW_SHOW_SIZE</B></P>
+
+<P><B>MD_DIRBROW_SHOW_EXTENSION</B></P>
+
+<P><B>MD_DIRBROW_LOADDEFAULT</B></P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定のビットマスク値</TD>
+<TD width=50%>0x4000001E</TD>
+</TR>
+</TABLE><BR>
+
+<H6>ビットマスク値</H6>
+
+<TABLE border=0 cellpadding=5 cols=3 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>定数</B></TD>
+<TD class=blue width=18%><B>値</B></TD>
+<TD class=blue width=32%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_SHOW_DATE</B></TD>
+<TD width=18%>0x00000002</TD>
+<TD width=32%>日付を表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_SHOW_TIME</B></TD>
+<TD width=18%>0x00000004</TD>
+<TD width=32%>時刻を表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_SHOW_SIZE</B></TD>
+<TD width=18%>0x00000008</TD>
+<TD width=32%>ファイル サイズを表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_SHOW_EXTENSION</B></TD>
+<TD width=18%>0x00000010</TD>
+<TD width=32%>ファイル名の拡張子を表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_LONG_DATE</B></TD>
+<TD width=18%>0x00000020</TD>
+<TD width=32%>日付を長い形式で表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_LOADDEFAULT</B></TD>
+<TD width=18%>0x40000000</TD>
+<TD width=32%>既定のページが存在する場合は、そのページを読み込みます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_DIRBROW_ENABLED</B></TD>
+<TD width=18%>0x80000000</TD>
+<TD width=32%>ディレクトリの表示を有効にします。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

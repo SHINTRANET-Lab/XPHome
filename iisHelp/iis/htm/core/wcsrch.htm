@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>WebDAV ディレクトリを検索する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="サーバーにインデックス サービスをセットアップし、ユーザーによる WebDAV ディレクトリのコンテンツとファイル プロパティの検索を可能にする方法について、説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="SearchingaWebDAVDirectory">WebDAV ディレクトリを検索する</a></h1>
+
+<p>WebDAV 発行ディレクトリを作成した後、ユーザーによるコンテンツとファイル プロパティの検索を可能にすることができます。</p>
+
+<big>検索のために発行ディレクトリを設定するには</big><br>
+
+<ol>
+<li>クライアントがリソース プロパティを検索できるように設定する場合は、NTFS 用にフォーマットされたドライブにそのディレクトリがあることを確認します。</li>
+<p>FAT ファイル システム用にフォーマットされているドライブにディレクトリがある場合は、リソースのコンテンツの検索が可能ですが、リソース プロパティの検索はできません。</p>
+<li>コマンド プロンプトで次のように入力することにより、サーバー上でインデックス サービスが実行されていることを確認します。</li>
+<p><code>net start cisvc</code></p>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、WebDAV ディレクトリの [仮想ディレクトリ] プロパティをチェックし、[このリソースに索引を付ける] と [読み取り] が選択されていることを確認します。</li>
+<p>[このリソースに索引を付ける] が選択されていない場合、そのディレクトリに対するカタログがインデックス サービスにより生成されず、検索を行うことができません。[読み取り] が選択されていない場合、クライアントは検索を実行できますが、その結果を参照することができません。仮想ディレクトリへの IIS アクセス権の設定の詳細については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</p>
+</ol>
+
+<h2>検索ツールの作成</h2>
+
+<p>Microsoft 製品に実装されている WebDAV では、クライアントがディレクトリのコンテンツまたはプロパティ、あるいは両方を検索するためのツールを作成することができます。次の例は、ツール作成のための基本的な検索コマンドです。</p>
+
+<PRE>
+SEARCH /webdav HTTP/1.1
+Host: iis
+Content-Type: text/xml
+Content-Length: 157
+
+&lt;?xml version="1.0"?&gt;
+&lt;g:searchrequest xmlns:g="DAV:"&gt;
+  &lt;g:sql&gt; Select "DAV:displayname"
+                FROM SCOPE()
+  &lt;/g:sql&gt;
+&lt;/g:searchrequest&gt;
+</PRE>
+
+<p>検索ツールの作成の詳細については、Microsoft&reg;『Platform SDK』を参照してください。</p>
+
+<h2>プロパティの検索</h2>
+
+<p>サーバー定義とユーザー定義の 2 種類のプロパティがあります</p>
+
+<p><strong>サーバー定義プロパティ</strong>&nbsp;&nbsp;サーバーにより作成、維持されるプロパティです。これらのプロパティは読み取り専用であり、修正することはできません。ドキュメントが作成された日付、最後に修正された日付が含まれます。</p>
+
+<p><strong>ユーザー定義プロパティ</strong>&nbsp;&nbsp;ユーザーにより作成、修正されるプロパティです。ドキュメントのタイトルと作者名が含まれます。ユーザー定義プロパティに基づき、クライアントがドキュメントの検索を行う場合、プロパティを作成、または既に存在することを確認する必要があります。</p>
+
+<p>ユーザーが定義、修正する既存のプロパティと共に、独自の "カスタム プロパティ" を作成することができます。これは、ドキュメントを作成する際に用いたリソースに任意の名前を付け、"Source" というカスタム プロパティを作成できるということを意味しています。これにより、ユーザーは、ある特定のソースから作成されたすべてのドキュメントをサイト上で検索することができます。次の例は、リソースに「Library of Congress」という名前をつけたプロパティを示しています。</p>
+
+<PRE>
+where contains ("Source", "Library of Congress")
+</PRE>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;現在、WebDAV は、文字列のカスタム プロパティの検索のみ対応しています。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

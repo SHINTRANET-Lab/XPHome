@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS Admin オブジェクト リファレンス</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_iis_admin_objects_reference"></A><SUP></SUP>IIS Admin オブジェクト リファレンス</H1>
+
+<P>ここでは、各 IIS Admin オブジェクトのリファレンス ページを示します。各ページでは、ADSI コンテナ情報、オブジェクトの ADsPath、オブジェクトがアクセスできるメタベース プロパティを掲載し、オブジェクトに固有の追加メソッドがあればそれも紹介しています。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>各 IIS Admin オブジェクトには、KeyType と呼ばれるプロパティがあります。これは、所定の ADSI オブジェクトが表す IIS Admin オブジェクトのタイプを正確に指定するプロパティです。このキー タイプが使用できなかったり、無効である場合は、IIS は一般的なタイプである IIsObject を指定します。KeyType を使用すると、ADSI オブジェクトを有効なオブジェクトに変更し、ほかの IIS 固有のプロパティおよびメソッドにアクセスすることができます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore4qia.htm"><B>IIsCertMapper</B></A></TD>
+<TD width=50%>Windows アカウントへ証明書をマップします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore4mcz.htm"><B>IIsCompressionSchemes</B></A></TD>
+<TD width=50%>HTTP 1.1 圧縮方式のグローバル設定です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore6sh1.htm"><B>IIsCompressionScheme</B></A></TD>
+<TD width=50%>個々の圧縮方式の設定です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore2xpu.htm"><B>IIsComputer</B></A></TD>
+<TD width=50%>IIS 構成のグローバル設定を作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore6r8l.htm"><B>IIsCustomLogModule</B></A></TD>
+<TD width=50%>カスタム ログ収集情報フィールドのノードのプロパティを設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore0drm.htm"><B>IIsFilter</B></A></TD>
+<TD width=50%>特定のフィルタに関する情報を提供します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore4h6b.htm"><B>IIsFilters</B></A></TD>
+<TD width=50%>フィルタを管理します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore5yzz.htm"><B>IIsFtpInfo</B></A></TD>
+<TD width=50%>IIsFtpService で設定したプロパティに加えて、FTP サーバーの構成プロパティを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore43si.htm"><B>IIsFtpServer</B></A></TD>
+<TD width=50%>1 台の FTP サーバーの構成プロパティを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore32n9.htm"><B>IIsFtpService</B></A></TD>
+<TD width=50%>すべての FTP サーバーに共通する設定プロパティを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore20mq.htm"><B>IIsFtpVirtualDir</B></A></TD>
+<TD width=50%>個々の FTP 仮想ディレクトリのプロパティを設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore0ard.htm"><B>IIsIPSecurity</B></A></TD>
+<TD width=50%>IP アドレスとドメイン アドレスによるアクセス権の設定に使用できるカスタム ADSI オブジェクトです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore60yt.htm"><B>IIsLogModule</B></A></TD>
+<TD width=50%>特定のログ収集モジュールに関する情報を含みます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore5pyr.htm"><B>IIsLogModules</B></A></TD>
+<TD width=50%>インストールされたログ収集モジュールに関する情報を含みます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8m5s.htm"><B>IIsMimeMap</B></A></TD>
+<TD width=50%>MIME マッピングを管理します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore2u3p.htm"><B>IIsMimeType</B></A></TD>
+<TD width=50%>有効な MIME の種類を列挙した一覧を操作します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+<TD width=50%>Web ディレクトリごとのプロパティを設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore136t.htm"><B>IIsWebFile</B></A></TD>
+<TD width=50%>Web ファイルごとのプロパティを設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8din.htm"><B>IIsWebInfo</B></A></TD>
+<TD width=50%>IIsWebService で設定したプロパティに加えて、Web サーバーの構成プロパティを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+<TD width=50%>1 台の Web サーバー の構成プロパティを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+<TD width=50%>すべての Web サーバーに共通する設定プロパティを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+<TD width=50%>個々の Web 仮想ディレクトリのプロパティを設定します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore0vhv.htm"><B>定数</B></A></TD>
+<TD width=50%>IIS Admin オブジェクトと一緒に使用する定数の一覧です。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

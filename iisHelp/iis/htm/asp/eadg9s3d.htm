@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS のコア機能</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iis_core_functionality"></A><SUP></SUP>IIS のコア機能</H2>
+
+<P>IIS は、Web アプリケーションの構築に使用する基本的な機能を定義します。Active Server Pages (ASP) およびそのほかの Microsoft テクノロジは、この基本機能を拡張してアプリケーション開発のための機能を豊富に備えた環境を作り出しました。基本的なサーバー機能が ISAPI から公開されます。ISAPI の詳細については、Microsoft Platform SDK で説明されています。</P>
+
+<P>IIS が提供するコア機能は、次のとおりです。
+
+<UL type=disc>
+	<LI>HTTP 接続の確立と維持</li>
+
+	<LI>HTTP 要求の読み取りと HTTP 応答の書き込み</li>
+
+	<LI>HTTP ヘッダーの変更</li>
+
+	<LI>クライアント証明書情報の取得</li>
+
+	<LI>非同期接続の管理</li>
+
+	<LI>URL (Uniform Resource Locator) の物理パスへのマッピング</li>
+
+	<LI>アプリケーションの管理と実行</li>
+
+	<LI>ファイルの転送</li>
+</UL>
+
+<P>ASP は、COM アーキテクチャへのリンクを設定し、さらに Windows DNA の他の部分へのリンクを設定することにより、この機能を拡張します。同様に、ISAPI を使用して機能のカスタム セットを定義することにより、IIS アーキテクチャを拡張することができます。IIS のコア機能、ASP、および拡張されたアーキテクチャの関係を次の図に示します。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/iisarch.gif" ALT="IIS のアーキテクチャ" BORDER=0></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

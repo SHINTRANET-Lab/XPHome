@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>@LANGUAGE</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="__language"></A><SUP></SUP>@LANGUAGE</H2>
+
+<P>@LANGUAGE ディレクティブを使用して、スクリプトのコマンドの解釈に使用する言語を設定できます。スクリプト言語は、IIS にインストールされている任意のスクリプト エンジンに設定できます。既定のスクリプト言語は、VBScript です。したがって、スクリプトに @LANGUAGE ディレクティブを指定していない場合、スクリプトは VBScript エンジンによって解釈されます。</P>
+
+<H6>構文</H6>
+
+<P>&lt;% <B>@LANGUAGE</B> = <I>scriptengine</I> %&gt;</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>scriptengine </I></DT>
+
+<DD>スクリプトをコンパイルするスクリプト エンジンです。IIS には、VBScript と JScript の 2 つのスクリプト エンジンが提供されています。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>既定のスクリプト言語は、IIS Admin オブジェクトの <A HREF="/iishelp/iis/htm/asp/apro531h.htm">AspScriptLanguage</A> プロパティによって変更できます。このプロパティは、Web サービス、Web サーバー、仮想ディレクトリ、または Web ディレクトリに適用できます。詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

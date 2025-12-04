@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Session_OnEnd</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_session_onend"></A><SUP></SUP>Session_OnEnd</H3>
+
+<P>Session_OnEnd イベントは、セッションが破棄されたとき、またはタイムアウトになったときに発生します。サーバー組み込みオブジェクトのうち、<A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm">Application</A> オブジェクト、<A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server</A> オブジェクト、および <A HREF="/iishelp/iis/htm/asp/vbob12d0.htm">Session</A> オブジェクトだけが利用できます。 </P>
+
+<H6>構文</H6>
+
+<P><B>&lt;SCRIPT LANGUAGE=</B><I>ScriptLanguage</I> <B>RUNAT=Server&gt; </B><BR> <B>Sub Session_OnEnd</B><BR> ... <BR> <B>End Sub</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<P><B>&lt;/SCRIPT&gt;</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>ScriptLanguage</I></DT>
+
+<DD>イベント スクリプトの作成に使うスクリプト言語を指定します。VBScript や JScript など、サポートされている任意のスクリプト言語を選択できます。複数のイベントが同じスクリプト言語を使う場合、単独の &lt;SCRIPT&gt; タグ セットの下に一緒に指定できます。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>Session_OnEnd スクリプトの中で <A HREF="/iishelp/iis/htm/asp/vbob98iw.htm">MapPath</A><B> </B>メソッドを呼び出すことはできません。</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/glob6t84.htm"><B>Session_OnStart</B></A>、<A HREF="/iishelp/iis/htm/asp/glob6zc4.htm"><B>Application_OnEnd</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ホーム ディレクトリを変更する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サイトまたは FTP サイトのホーム ディレクトリを変更する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="changingthehomedirectory">ホーム ディレクトリを変更する</a></h1>
+
+<p>各 Web サイトには、ホームディレクトリが 1 つ必要です。同じコンピュータに Web サイトと FTP サイトの両方をセットアップする場合は、WWW と FTP の各サービスに、それぞれ異なるホーム ディレクトリを指定する必要があります。WWW サービスの既定のホーム ディレクトリは、C:\Inetpub\Wwwroot です。FTP サービスの既定のホーム ディレクトリは、C:\Inetpub\Ftproot です。ほかのディレクトリをホーム ディレクトリに指定することもできます。</p>
+
+<big>ホーム ディレクトリを変更するには</big><br>
+
+<ol> 
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたは FTP サイトを選択し、そのプロパティ シートを開きます。</li>
+<li> [ホーム ディレクトリ] タブをクリックし、ホーム ディレクトリの場所を指定します。次のいずれかをホーム ディレクトリとして選択できます。</li>
+
+<ul>
+<li>そのコンピュータにあるディレクトリ</li>
+<li>別のコンピュータにある共有ディレクトリ </li>
+<li>URL へのリダイレクト </li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;この URL を要求したブラウザは、新しい URL に転送されます。FTP のディレクトリはリダイレクトできません。<br>
+</ul>
+
+<li> テキスト ボックスに、ホーム ディレクトリのパス名、共有名、または URL を入力します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ネットワーク共有のディレクトリを指定する場合、リソースにアクセスするためのユーザー名とパスワードの入力が必要な場合があります。IUSR_<em>computername</em> が推奨されるアカウントです。サーバーの管理者アクセス権が与えられているアカウントを使うと、クライアントからサーバーを操作できるようになります。このことは、ネットワークのセキュリティ上たいへん危険です。<br>
+</ol>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC
+</layer></span>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>PICS</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_pics"></A><SUP></SUP>PICS</H4>
+
+<P>PICS プロパティは、pics-label 応答ヘッダーに値を追加します。</P>
+
+<H6>構文</H6>
+
+<P>Response.<B>PICS</B>(<I>PICSLabel</I>)</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>PICSLabel</I></DT>
+
+<DD>適切に書式設定された PICS ラベルを表す文字列です。<I>PICSLabel</I> に指定した値は、応答ヘッダーの pics-label に追加されます。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>.asp ファイルに次のように記述したとします。</P>
+
+<PRE><CODE>&lt;% 
+Response.PICS("(PICS-1.1 &lt;http://www.rsac.org/ratingv01.html&gt; labels on " &amp; chr(34) &amp; "1997.01.05T08:15-0500" &amp; chr(34) &amp; " until" &amp; chr(34) &amp; "1999.12.31T23:59-0000" &amp; chr(34) &amp; " ratings (v 0 s 0 l 0 n 0))") 
+%&gt; 
+</CODE></PRE>
+
+<P>この場合、次のヘッダーが追加されます。</P>
+
+<PRE><CODE>PICS-label:(PICS-1.1 &lt;http://www.rsac.org/ratingv01.html&gt; labels on "1997.01.05T08:15-0500" until "1999.12.31T23:59-0000" ratings (v 0 s 0 l 0 n 0))
+</CODE></PRE>
+
+<H6>解説</H6>
+
+<P>PICS プロパティは、指定した文字列が有効な PICS ラベルかどうかにかかわらず、任意の文字列をヘッダーに挿入します。</P>
+
+<P>Response.PICS を含むタグが同じページ内に複数存在する場合、各インスタンスは直前の Response.PICS で設定した PICS ラベルを置換します。結果として、PICS ラベルは、ページの一番最後の Response.PICS インスタンスに指定した値で設定されます。</P>
+
+<P>PICS ラベルには引用符が含まれているので、各引用符を <CODE>" &amp; chr(34) &amp; "</CODE> で置換する必要があります。</P>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

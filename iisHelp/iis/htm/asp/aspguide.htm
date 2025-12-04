@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR><HEAD><title>Active Server Pages ガイド</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR=#FFFFFF TEXT=#000000><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="_Active_Server_Pages_Guide">Active Server Pages ガイド</a></h1>
+
+
+<p>Active Server Pages ガイドへようこそ。ここでは、ASP ページの作成方法と Web アプリケーションの開発方法について、詳細に説明します。また、ASP や ISAPI アプリケーションからのアクセスを実現するコンポーネントの作成に利用できる、特殊なイベント メソッドおよびインターフェイスについても説明します。さらに、カスタム IIS 構成データを保存する方法と、組み込みオブジェクトを使用してデータを操作する方法について説明します。最後に、IIS と対話するさまざまな方法を示すスクリプトのライブラリおよびプログラム例を紹介します。</p>
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><a href="iiwawelc.htm">Active Server Pages</a></strong>」では、Active Server Pages の作成方法と、IIS プログラミング プラットフォームを理解するうえで重要な概念について説明します。</li>
+<li>「<strong><a href="eadg01v7.htm">Web アプリケーションを開発する</a></strong>」では、分散アプリケーション向けの Microsoft アーキテクチャに IIS を組み込む方法の概念、および HTTP 接続で公開するアプリケーションの設計および実装の詳細について説明します。</li>
+<li>「<strong><a href="aint7e9l.htm">IIS をプログラム管理する</a></strong>」では、IIS 構成をプログラム形式で管理するために役立つ概要と参考資料を紹介します。</li>
+<li>「<strong><a href="vbob6zkv.htm">ASP 組み込みオブジェクト</a></strong>」では、ASP 組み込みオブジェクトのプロパティとメソッドについて説明します。</li>
+
+<li>「<strong><a href="comp275c.htm">ASP で利用可能なコンポーネント</a></strong>」では、ASP にインストールして使用できるさまざまなコンポーネントについて説明します。</li>
+<li>「<strong><a href="scri8mcl.htm">スクリプト リファレンス</a></strong>」では、@ ディレクティブ や Global.asa などに関するさまざまなリファレンスを提供します。</li>
+<li>「<strong><a href="asps6hmb.htm">ASPの例</a></strong>」から、<a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> にある ASP サンプル スクリプトにリダイレクトすることができます。</li>
+
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

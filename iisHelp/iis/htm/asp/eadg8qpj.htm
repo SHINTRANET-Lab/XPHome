@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Web アプリケーションの概要</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_web_applications_an_overview"></A><SUP></SUP>Web アプリケーションの概要</H1>
+
+<P>オープン インターネット標準によって、分散コンピューティングのアーキテクチャは変化しました。Web の基本言語である HTML は、ユーザー インターフェイスの要素を表すための一般的な言語になりました。スクリプト言語と Java アプレットを複数のプラットフォームにまたがってサポートし、また埋め込み COM コンポーネントをサポートすることにより、ユーザーが対話的に使用するために、動的な要素を静的なテキストと組み合わせることが可能になりました。しかし Web テクノロジは、単にインターネット上で使用されるだけでなく、次に示すように、ビジネス上の用途にも適用されています。
+
+<UL type=disc>
+	<LI>コンポーネントベースの開発環境の作成</li>
+
+	<LI>企業内でのアプリケーションの配布</li>
+
+	<LI>新しいアプリケーションの迅速な作成とカスタマイズ</li>
+
+	<LI>通常の Web ブラウザを用いてリモートで実行するデータベースの更新</li>
+
+	<LI>Web アプリケーションへのトランザクション処理の追加</li>
+
+	<LI>ビジネス情報の共有</li>
+
+	<LI>リソースの管理とリモートでのシステム管理</li>
+</UL>
+
+<P>ここでは、Web アプリケーションの構築に役に立つ一般的な概念について説明します。ここで説明する項目は、次のとおりです。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg4cbp.htm">クライアント/サーバー アーキテクチャでの構築</A>」では、従来のクライアント/サーバー設計モデルについて簡単に説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg6dv2.htm">新しいシステム デザイン</A>」では、クライアント/サーバー モデルの拡張機能としての、<I> n</I> 階層システム設計および分散システム設計を紹介します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg1s9x.htm">Windows DNA</A>」では、Web アプリケーション構築のための Microsoft のアーキテクチャである、Microsoft Windows DNA について概要を説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg26ed.htm">IIS アーキテクチャ</A>」では、IIS コンポーネントおよびプログラミング モデルについて説明します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

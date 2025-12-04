@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Random</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_random"></A><SUP></SUP>Random</H2>
+
+<P>Random メソッドは、&ndash;32768 と 32767 の間の整数を返します。このメソッドは Rnd 関数と似ていますが、整数を返す点が異なります。正の乱数 (整数) を得るには、Abs 関数を使用してください。特定の値より小さい乱数 (整数) を得るには、Mod 関数を使用してください。</P>
+
+<H6>構文</H6>
+
+<P><I>oTools</I><B>.Random</B></P>
+
+<H6>例</H6>
+
+<P>--- Tools_Random.asp ---</P>
+
+<PRE><CODE>&lt;%
+Set oTools = Server.CreateObject("MSWC.Tools")
+%&gt;
+
+&lt;H3&gt;Generating Unique Customer Passwords&lt;/H3&gt;
+
+&lt;P&gt;Between -32768 and 32767:
+&lt;B&gt;&lt;%= oTools.Random %&gt;&lt;/B&gt;
+&lt;P&gt;Between 0 and 32767:
+&lt;B&gt;&lt;%= (Abs(oTools.Random)) %&gt;&lt;/B&gt;
+&lt;P&gt;Between 0 an 99:
+&lt;B&gt;&lt;%= (Abs(oTools.Random)) Mod 100 %&gt;&lt;/B&gt;
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp1d9v.htm"><B>FileExists</B></A>、<A HREF="/iishelp/iis/htm/asp/comp0gkt.htm"><B>ProcessForm</B></A> </P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

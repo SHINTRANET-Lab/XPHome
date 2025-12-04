@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADSI オブジェクト データ型と Base オブジェクト データ型</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_adsi_vs._base_object_data_types"></A>ADSI オブジェクト データ型と Base オブジェクト データ型</H2>
+
+<P>ADSI プロパティ データ型はスクリプト作成レベルで使用できますが、IIS Admin Base オブジェクト データ型は、IIS Admin Base オブジェクトを使用するコードを記述する時にだけ使用します。この違いは、Microsoft<sup>&reg;</sup> JScript<sup>&reg;</sup> や、Visual Basic<sup>&reg;</sup> Scripting Edition (VBScript) などのスクリプト言語を C や C++ のような言語と比較した場合、データ型の実装が異なるところから由来します。</P>
+
+<P>ADSI データ型と対応する IIS Admin Base オブジェクトのデータ型については、次の表を参照してください。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>ADSI データ型</B></TD>
+<TD class=blue width=50%><B>Base オブジェクト データ型</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>長整数型、ブール型、整数型</TD>
+<TD width=50%>DWORD_METADATA</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>文字列型</TD>
+<TD width=50%>STRING_METADATA</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ExpandSz</TD>
+<TD width=50%>EXPANDSZ_METADATA</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>IPSec、NTACL</TD>
+<TD width=50%>BINARY_METADATA</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>リスト型</TD>
+<TD width=50%>MULTISZ_METADATA</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>MimeMapList</TD>
+<TD width=50%>MULTISZ_METADATA</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

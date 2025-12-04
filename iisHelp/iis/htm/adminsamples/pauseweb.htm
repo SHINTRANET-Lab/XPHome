@@ -1,0 +1,88 @@
+<html dir=LTR><head><title>Web サーバーの一時停止 (pauseweb)</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="Web サーバーを一時停止する管理スクリプト (pauseweb) の概念と使用方法を説明します。">
+ 
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1 align="left">Web サーバーの一時停止 (pauseweb)</h1>
+
+<p><strong>概要</strong></p>
+
+<p>Web サーバーを一時停止します。</p>
+
+<p><strong>用法</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+<td valign="TOP">pauseweb</td> <td>&lt;--ADSPath|-a server1[,server2,server3...]&gt;<br> [--computer|-c COMPUTER1[,COMPUTER2...]]<br> [--verbose|-v]<br> [--help|-?]</td>
+</tr>
+</table>
+
+<p><strong>パラメータ</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+<td>-a SERVERx</td> <td>一時停止するサーバーの番号です。</td>
+</tr>
+<tr>
+<td valign="TOP">-Computer</td> <td>カンマで区切り、コンピュータ名を列挙します。-c Machine1,Machine2,Machine3 のように指定します。<br>指定したすべてのコンピュータに、指定したパスが存在することが前提です。コンピュータを指定しない場合は、LocalHost を指定したと見なされます。</td>
+</tr>
+</table>
+
+<P><STRONG>使用例</STRONG></P>
+
+<p>pauseweb -a 1,2 </p>
+
+<p>pauseweb -c MACHINE1,MACHINE2,MACHINE3 -a 1,2 </p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

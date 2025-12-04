@@ -1,0 +1,630 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Active Server Pages イベント</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS の Windows イベントによってログ収集される ASP イベントのメッセージとその ID の一覧を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="ftpevents">Active Server Pages イベント</a></h1>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">100</td>
+<td>"メモリ不足" 必要なメモリを割り当てられません。</td>
+</tr>
+<tr>
+<td align="center">101</td>
+<td>"予期しないエラーです" 関数が | を返しました。</td>
+</tr>
+<tr>
+<td align="center">102</td>
+<td>"文字列を入力してください" 関数の入力として文字列が必要です。</td>
+</tr>
+<tr>
+<td align="center">103</td>
+<td>"数字の入力を予期しています" 関数は数字の入力を予期しています。</td>
+</tr>
+<tr>
+<td align="center">104</td>
+<td>"操作は許可されません"</td>
+</tr>
+<tr>
+<td align="center">105</td>
+<td>"インデックスが範囲外です" 配列インデックスが範囲外です。</td>
+</tr>
+<tr>
+<td align="center">106</td>
+<td>"型が不一致です" 処理できないデータ型がありました。</td>
+</tr>
+<tr>
+<td align="center">107</td>
+<td>"スタックのオーバーフローです" 処理されているデータが制限を越えています。</td>
+</tr>
+<tr>
+<td align="center">108</td>
+<td>"オブジェクトの作成に失敗しました" オブジェクト '%s' を作成中にエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">109</td>
+<td>"メンバーが見つかりません"</td>
+</tr>
+<tr>
+<td align="center">110</td>
+<td>"不明な名前です"</td>
+</tr>
+<tr>
+<td align="center">111</td>
+<td>"不明なインターフェイスです"</td>
+</tr>
+<tr>
+<td align="center">112</td>
+<td>"パラメータが足りません"</td>
+</tr>
+<tr>
+<td align="center">113</td>
+<td>"スクリプトがタイムアウトしました" スクリプトを実行する時間の制限を超えました。この制限時間は、プロパティ Server.ScriptTimeout に新しい値を指定するか、IIS 管理ツールの値を変更することによって変更できます。</td>
+</tr>
+<tr>
+<td align="center">114</td>
+<td>"フリー スレッド化されたオブジェクトではありません" Application オブジェクトはフリー スレッド化されたオブジェクトしか受け付けません。オブジェクト '%s' はフリー スレッド化されたオブジェクトではありません。</td>
+</tr>
+<tr>
+<td align="center">115</td>
+<td>"予期しないエラーです" 外部オブジェクトでトラップできるエラー (%X) が発生しました。スクリプトの実行を続行できません。</td>
+</tr>
+<tr>
+<td align="center">116</td>
+<td>"Script デリミタの終わりがありません" Script ブロックに Script タグの終わり (%&gt;) がありません。</td>
+</tr>
+<tr>
+<td align="center">117</td>
+<td>"Script タグの終わりがありません" Script ブロックに Script タグの終わり (&lt;/SCRIPT&gt;) かタグ シンボルの終わり (&gt;) がありません。</td>
+</tr>
+<tr>
+<td align="center">118</td>
+<td>"Object タグの終わりがありません" Object ブロックに Object タグの終わり (&lt;/OBJECT&gt;) かタグ シンボルの終わり (&gt;) がありません。</td>
+</tr>
+<tr>
+<td align="center">119</td>
+<td>"Classid 属性または Progid 属性がありません" オブジェクト インスタンス '|' は Object タグ内に有効な Classid または Progid を必要とします。</td>
+</tr>
+<tr>
+<td align="center">120</td>
+<td>"無効な Runat 属性です" Script タグまたは Object タグの Runat 属性の値で有効なものは 'Server' のみです。</td>
+</tr>
+<tr>
+<td align="center">121</td>
+<td>"Object タグのスコープが無効です" オブジェクト インスタンス '|' は、アプリケーション スコープやセッション スコープを持つことができません。アプリケーション スコープやセッション スコープを持つオブジェクト インスタンスを作成するには、Global.asa ファイルに Object タグを置いてください。</td>
+</tr>
+<tr>
+<td align="center">122</td>
+<td>"Object タグのスコープが無効です" オブジェクト インスタンス '|' には、アプリケーション スコープまたはセッション スコープが必要です。これは Global.asa ファイル内で作成されたすべてのオブジェクトに適用されます。</td>
+</tr>
+<tr>
+<td align="center">123</td>
+<td>"Id 属性がありません" Object タグの必要な Id 属性がありません。</td>
+</tr>
+<tr>
+<td align="center">124</td>
+<td>"Language 属性がありません" Script タグの必要な Language 属性がありません。</td>
+</tr>
+<tr>
+<td align="center">125</td>
+<td>"属性の終わりがありません" '|' 属性の値に終わりのデリミタがありません。</td>
+</tr>
+<tr>
+<td align="center">126</td>
+<td>"インクルード ファイルが見つかりません" インクルード ファイル '|' が見つかりませんでした。</td>
+</tr>
+<tr>
+<td align="center">127</td>
+<td>"HTML コメントの終わりがありません" HTML コメントかサーバー側インクルードに終わりのタグ (--&gt;) がありません。</td>
+</tr>
+<tr>
+<td align="center">128</td>
+<td>"File 属性または Virtual 属性がありません" インクルード ファイルの名前を指定するには、File 属性または Virtual 属性を使用しなければなりません。</td>
+</tr>
+<tr>
+<td align="center">129</td>
+<td>"不明なスクリプト言語です" スクリプト言語 '|' がサーバー上に見つかりません。</td>
+</tr>
+<tr>
+<td align="center">130</td>
+<td>"無効な File 属性です" File 属性 '|' の最初の文字には、スラッシュや円記号を使用できません。</td>
+</tr>
+<tr>
+<td align="center">131</td>
+<td>"許可されていない親パスです" 親ディレクトリを示す '..' は、インクルード ファイル '|' に含められません。</td>
+</tr>
+<tr>
+<td align="center">132</td>
+<td>"コンパイル エラーです" The Active Server Pages '|' を処理できませんでした。</td>
+</tr>
+<tr>
+<td align="center">133</td>
+<td>"無効な ClassID 属性です" Object タグに無効な ClassID '|' があります。</td>
+</tr>
+<tr>
+<td align="center">134</td>
+<td>"無効な ProgID 属性です" オブジェクトに無効な ProgID '|' があります。</td>
+</tr>
+<tr>
+<td align="center">135</td>
+<td>"多重インクルードです" ファイル '|' はそれ自身の中に (おそらく間接的に) インクルードされています。インクルード ファイルのほかの Include ステートメントを確認してください。</td>
+</tr>
+<tr>
+<td align="center">136</td>
+<td>"無効なオブジェクト インスタンス名です" オブジェクト インスタンス '|' は予約名を使おうとしています。その名前は Active Server Pages の組み込みオブジェクトによって使われています。</td>
+</tr>
+<tr>
+<td align="center">137</td>
+<td>"無効なグローバル スクリプトです" Script ブロックは許可された Global.asa のプロシージャである必要があります。&lt;% ... %&gt; 内のスクリプト ディレクティブは Global.asa ファイル内では許可されません。許可されているプロシージャ名は Application_OnStart、Application_OnEnd、Session_OnStart、Session_OnEnd です。</td>
+</tr>
+<tr>
+<td align="center">138</td>
+<td>"ネストした Script ブロックです" Script ブロックを別の Script ブロック内に置くことはできません。</td>
+</tr>
+<tr>
+<td align="center">139</td>
+<td>"ネストしたオブジェクトです" Object タグを別の Object タグ内に置くことはできません。</td>
+</tr>
+<tr>
+<td align="center">140</td>
+<td>"ページ コマンドの順序が不正です" Active Server Pages のファイル内では @ コマンドが最初でなければなりません。</td>
+</tr>
+<tr>
+<td align="center">141</td>
+<td>"ページ コマンドが繰り返されました" @ コマンドは、Active Server Pages のファイル内で一度しか使えません。</td>
+</tr>
+<tr>
+<td align="center">142</td>
+<td>"スレッド トークン エラー" スレッド トークンを開けませんでした。</td>
+</tr>
+<tr>
+<td align="center">143</td>
+<td>"無効なアプリケーション名です" 有効なアプリケーション名が見つかりませんでした。</td>
+</tr>
+<tr>
+<td align="center">144</td>
+<td>"初期化エラーです" ページ レベルのオブジェクト リストが初期化中に失敗しました。</td>
+</tr>
+<tr>
+<td align="center">145</td>
+<td>"新しい Application の作成に失敗しました" 新しい Application を追加できませんでした。</td>
+</tr>
+<tr>
+<td align="center">146</td>
+<td>"新しい Session の作成に失敗しました" 新しい Session を追加できませんでした。</td>
+</tr>
+<tr>
+<td align="center">147</td>
+<td>"Server Error"</td>
+</tr>
+<tr>
+<td align="center">148</td>
+<td>"Server Too Busy"</td>
+</tr>
+<tr>
+<td align="center">149</td>
+<td>"Application Restarting" The request cannot be processed while the application is being restarted.</td>
+</tr>
+<tr>
+<td align="center">150</td>
+<td>"アプリケーション ディレクトリのエラーです" アプリケーション ディレクトリを開けませんでした。</td>
+</tr>
+<tr>
+<td align="center">151</td>
+<td>"変更通知エラーです" 変更通知イベントを作成できませんでした。</td>
+</tr>
+<tr>
+<td align="center">152</td>
+<td>"Security Error" An error occurred while processing a user's security credentials.</td>
+</tr>
+<tr>
+<td align="center">153</td>
+<td>"スレッド エラーです" 新しいスレッドの要求に失敗しました。</td>
+</tr>
+<tr>
+<td align="center">154</td>
+<td>"HTTP ヘッダーの書き込みエラーです" HTTP ヘッダーをクライアントのブラウザに書き込めませんでした。</td>
+</tr>
+<tr>
+<td align="center">155</td>
+<td>"ページ内容の書き込みエラーです" ページ内容をクライアントのブラウザに書き込めませんでした。</td>
+</tr>
+<tr>
+<td align="center">156</td>
+<td>"ヘッダーのエラーです" HTTP ヘッダーは既にクライアントのブラウザに書き込まれています。HTTP ヘッダーの修正はページ内容を書き込む前に行われなければなりません。</td>
+</tr>
+<tr>
+<td align="center">157</td>
+<td>"バッファリングがオンです" バッファリングが既にオンになっている場合はオフにはできません。</td>
+</tr>
+<tr>
+<td align="center">158</td>
+<td>"URL がありません" URL が必要です。</td>
+</tr>
+<tr>
+<td align="center">159</td>
+<td>"バッファリングがオフです" バッファリングをオンにしてください。</td>
+</tr>
+<tr>
+<td align="center">160</td>
+<td>"ログ エラー" ログへのエントリ書き込みエラーです。</td>
+</tr>
+<tr>
+<td align="center">161</td>
+<td>"データ型のエラーです" Variant 変数を String 変数に変換できませんでした。</td>
+</tr>
+<tr>
+<td align="center">162</td>
+<td>"Cookie を修正できません" Cookie  'ASPSessionID' を修正できません。Cookie 名が予約されています。</td>
+</tr>
+<tr>
+<td align="center">163</td>
+<td>"カンマの使い方が無効です" ログ エントリ内でカンマは使えません。別のデリミタを選択してください。</td>
+</tr>
+<tr>
+<td align="center">164</td>
+<td>"TimeOut の値が無効です" 無効な TimeOut の値が指定されました。</td>
+</tr>
+<tr>
+<td align="center">165</td>
+<td>"SessionID エラーです" SessionID 文字列を作成できません。</td>
+</tr>
+<tr>
+<td align="center">166</td>
+<td>"オブジェクトが初期化されていません" 初期化されていないオブジェクトにアクセスしようとしました。</td>
+</tr>
+<tr>
+<td align="center">167</td>
+<td>"Session 初期化エラーです" Session オブジェクトの初期化中にエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">168</td>
+<td>"許可されていないオブジェクトの使い方です" 組み込みオブジェクトは Session オブジェクト内に格納できません。</td>
+</tr>
+<tr>
+<td align="center">169</td>
+<td>"オブジェクトの情報が足りません" 情報の不足したオブジェクトは Session オブジェクト内に格納できません。オブジェクトのスレッド モデル情報が必要です。</td>
+</tr>
+<tr>
+<td align="center">170</td>
+<td>"Session の削除エラーです" Session を正しく削除しませんでした。</td>
+</tr>
+<tr>
+<td align="center">171</td>
+<td>"Path がありません" MapPath メソッドには Path パラメータを指定しなければなりません。</td>
+</tr>
+<tr>
+<td align="center">172</td>
+<td>"無効な Path です" MapPath メソッドの Path パラメータは仮想パスでなければなりません。物理パスが使われていました。</td>
+</tr>
+<tr>
+<td align="center">173</td>
+<td>"無効な Path の文字です" 無効な文字が MapPath メソッドの Path パラメータで指定されました。</td>
+</tr>
+<tr>
+<td align="center">174</td>
+<td>"無効な Path の文字です" 無効な '/' または '\\' が MapPath メソッドの Path パラメータに見つかりました。</td>
+</tr>
+<tr>
+<td align="center">175</td>
+<td>"許可されていない Path の文字です" '..' 文字は MapPath メソッドの Path パラメータ内では許可されていません。</td>
+</tr>
+<tr>
+<td align="center">176</td>
+<td>"パスが見つかりません" MapPath メソッドの Path パラメータに対応する、既存のパスがありませんでした。</td>
+</tr>
+<tr>
+<td align="center">177</td>
+<td>"Server.CreateObject に失敗しました"</td>
+</tr>
+<tr>
+<td align="center">178</td>
+<td>"Server.CreateObject アクセス エラー" 許可を確認中に Server.CreateObject の呼び出しに失敗しました。このオブジェクトへのアクセスは拒否されます。</td>
+</tr>
+<tr>
+<td align="center">179</td>
+<td>"Application の初期化エラーです" Application オブジェクトの初期化中にエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">180</td>
+<td>"許可されていないオブジェクトの使い方です" 組み込みオブジェクトは Application オブジェクト内に格納できません。</td>
+</tr>
+<tr>
+<td align="center">181</td>
+<td>"無効なスレッド モデルです" アパートメント スレッド モデルを使用するオブジェクトは Application オブジェクト内に格納できません。</td>
+</tr>
+<tr>
+<td align="center">182</td>
+<td>"オブジェクトの情報が足りません" 情報の不足したオブジェクトは Application オブジェクト内に格納できません。オブジェクトのスレッド モデル情報が必要です。</td>
+</tr>
+<tr>
+<td align="center">183</td>
+<td>"Cookie キーが空です" キーが空の Cookie は格納できません。</td>
+</tr>
+<tr>
+<td align="center">184</td>
+<td>"Cookie の名前がありません" Cookie には名前を指定しなければなりません。</td>
+</tr>
+<tr>
+<td align="center">185</td>
+<td>"既定のプロパティがありません" オブジェクトの既定のプロパティがありません。</td>
+</tr>
+<tr>
+<td align="center">186</td>
+<td>"証明解析エラーです"</td>
+</tr>
+<tr>
+<td align="center">187</td>
+<td>"オブジェクトの追加競合です" アプリケーションにオブジェクトを追加できませんでした。別のオブジェクト追加要求によって、アプリケーションがロックされていました。</td>
+</tr>
+<tr>
+<td align="center">188</td>
+<td>"許可されていないオブジェクトの使い方です" Object タグを使用して作成されたオブジェクトは組み込みセッションに追加できません。</td>
+</tr>
+<tr>
+<td align="center">189</td>
+<td>"許可されていないオブジェクトの使い方です" Object タグを使用して作成されたオブジェクトを組み込みアプリケーションに追加できません。</td>
+</tr>
+<tr>
+<td align="center">190</td>
+<td>"予期しないエラーです" 外部オブジェクトのリリース中にトラップできるエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">191</td>
+<td>"予期しないエラーです" 外部オブジェクトの OnStartPage メソッド内でトラップできるエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">192</td>
+<td>"予期しないエラーです" 外部オブジェクトの OnEndPage メソッド内でトラップできるエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">193</td>
+<td>"OnStartPage に失敗しました" 外部オブジェクトの OnStartPage メソッド内でエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">194</td>
+<td>"OnEndPage に失敗しました" 外部オブジェクトの OnEndPage メソッド内でエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">195</td>
+<td>"無効な Server Method Call です" Server オブジェクトのこのメソッドは Session_OnEnd と Application_OnEnd 中に呼び出せません。</td>
+</tr>
+<tr>
+<td align="center">197</td>
+<td>"許可されていないオブジェクトの使用法です" アパートメント モデルの動作を持つオブジェクトを Application 固有オブジェクトに追加できません。</td>
+</tr>
+<tr>
+<td align="center">198</td>
+<td>Server shutting down. Cannot process request.</td>
+</tr>
+<tr>
+<td align="center">199</td>
+<td>"許可されていないオブジェクトの使い方です" JScript オブジェクトをセッションに追加できません。</td>
+</tr>
+<tr>
+<td align="center">200</td>
+<td>"範囲外の 'Expires' の属性です" 'Expires' に与えられた日付と時刻は 1980 年 1 月 1 日以前のものか、2038年 1 月 19 日の  3:14:07 GMT 以降のものです。</td>
+</tr>
+<tr>
+<td align="center">201</td>
+<td>"無効なスクリプト言語です" このアプリケーションで指定されている既定のスクリプト言語は無効です。</td>
+</tr>
+<tr>
+<td align="center">202</td>
+<td>"コード ページがありません" コード ページの属性がありません。</td>
+</tr>
+<tr>
+<td align="center">203</td>
+<td>"無効なコード ページです" 指定されたコード ページの属性は無効です。</td>
+</tr>
+<tr>
+<td align="center">205</td>
+<td>"変更通知" 変更通知のイベントの作成に失敗しました。</td>
+</tr>
+<tr>
+<td align="center">206</td>
+<td>"BinaryRead を呼び出せません" Request.Form コレクションを使用した後は、BinaryRead を呼び出せません。</td>
+</tr>
+<tr>
+<td align="center">207</td>
+<td>"Request.Form を使用できません" BinaryRead を呼び出した後は、Request.Form を使用できません。</td>
+</tr>
+<tr>
+<td align="center">208</td>
+<td>"一般的な Request コレクションを使用できません" BinaryRead を呼び出した後は、一般的な Request コレクションを使用できません。</td>
+</tr>
+<tr>
+<td align="center">209</td>
+<td>"TRANSACTION プロパティの不正な値です" TRANSACTION プロパティの値は REQUIRED、REQUIRES_NEW、SUPPORTED または NOT_SUPPORTED のみです。</td>
+</tr>
+<tr>
+<td align="center">210</td>
+<td>"メソッドが対応されていません" このメソッドはまだ対応されていません。</td>
+</tr>
+<tr>
+<td align="center">211</td>
+<td>"オブジェクトがスコープ外です" 有効でない組み込み ASP オブジェクトが参照されました。</td>
+</tr>
+<tr>
+<td align="center">212</td>
+<td>"バッファをクリアできません" クライアントのデバッグが有効である間は、Response.Flush の後の Response.Clear は許可されていません。</td>
+</tr>
+<tr>
+<td align="center">214</td>
+<td>"無効な Path パラメータです" Path パラメータが最長を超えています。</td>
+</tr>
+<tr>
+<td align="center">215</td>
+<td>"ENABLESESSIONSTATE プロパティの不正な値です" ENABLESESSIONSTATE プロパティの値は TRUE または FALSE のみです。</td>
+</tr>
+<tr>
+<td align="center">216</td>
+<td>"MSDTC サービスが実行されていません" MSDTC サービスが実行されていない場合は、Transactional Web ページを実行できません。</td>
+</tr>
+<tr>
+<td align="center">217</td>
+<td>"Object タグ内の無効なスコープです" Object スコープは Page、Session または Application でなければなりません。</td>
+</tr>
+<tr>
+<td align="center">218</td>
+<td>"LCID がありません" LCID 属性がありません。</td>
+</tr>
+<tr>
+<td align="center">219</td>
+<td>"無効な LCID です" 指定された LCID は有効ではありません。</td>
+</tr>
+<tr>
+<td align="center">220</td>
+<td>"Requests for GLOBAL.ASA Not Allowed" Requests with the URL pointing to GLOBAL.ASA are not allowed.</td>
+</tr>
+<tr>
+<td align="center">221</td>
+<td>"無効な @ コマンド ディレクティブです" 指定された '|' のオプションは不明または無効です。</td>
+</tr>
+<tr>
+<td align="center">222</td>
+<td>"無効な TypeLib の指定です" METADATA タグが無効なタイプ ライブラリの指定を含んでいます。</td>
+</tr>
+<tr>
+<td align="center">223</td>
+<td>"TypeLib が見つかりません" METADATA タグがどのレジストリ エントリにも一致しないタイプ ライブラリの指定を含んでいます。</td>
+</tr>
+<tr>
+<td align="center">224</td>
+<td>"TypeLib を読み込めません" METADATA タグで指定されたタイプ ライブラリを読み込めません。</td>
+</tr>
+<tr>
+<td align="center">225</td>
+<td>"TypeLib をラップできません" METADATA タグで指定されたタイプ ライブラリから、タイプ ライブラリのラップ オブジェクトを作成できません。</td>
+</tr>
+<tr>
+<td align="center">226</td>
+<td>"StaticObject を変更できません" StaticObject コレクションはランタイムで変更できません。</td>
+</tr>
+<tr>
+<td align="center">227</td>
+<td>"Server.Execute に失敗" Server.Execute の呼び出しに失敗しました。</td>
+</tr>
+<tr>
+<td align="center">228</td>
+<td>"Server.Execute エラー" ページの読み込み中に、Server.Execute の呼び出しに失敗しました。</td>
+</tr>
+<tr>
+<td align="center">229</td>
+<td>"Server.Transfer に失敗" Server.Transfer の呼び出しに失敗しました。</td>
+</tr>
+<tr>
+<td align="center">230</td>
+<td>"Server.Transfer エラー" ページの読み込み中に、Server.Transfer の呼び出しに失敗しました。</td>
+</tr>
+<tr>
+<td align="center">231</td>
+<td>"Server.Execute エラー" 無効な形式の URL または完全認証されている絶対 URL が使用されました。相対 URL を使用してください。</td>
+</tr>
+<tr>
+<td align="center">232</td>
+<td>"無効な Cookie が指定されています" METADATA タグに無効な cookie が指定されています。</td>
+</tr>
+<tr>
+<td align="center">233</td>
+<td>"cookie スクリプト ソースを読み込めません" METADATA タグで指定されている cookie スクリプトのソース ファイルを読み込めません。</td>
+</tr>
+<tr>
+<td align="center">234</td>
+<td>"無効なインクルード ディレクティブです" サーバー側インクルード ディレクティブが Script ブロックに含まれていない可能性があります。&lt;SCRIPT&gt; タグの SRC= 属性を使用してください。</td>
+</tr>
+<tr>
+<td align="center">235</td>
+<td>"Server.Transfer エラー" 無効な形式の URL または完全認証されている絶対 URL が使用されました。相対 URL を使用してください。</td>
+</tr>
+<tr>
+<td align="center">236</td>
+<td>"無効な Cookie が指定されています" METADATA タグに無効な SRC パラメータが含まれているか、または見つかりません。</td>
+</tr>
+<tr>
+<td align="center">237</td>
+<td>"無効な Cookie が指定されています" METADATA タグに無効な NAME パラメータが含まれているか、または見つかりません。</td>
+</tr>
+<tr>
+<td align="center">238</td>
+<td>"属性値がありません" '|' 属性には値が指定されませんでした。</td>
+</tr>
+<tr>
+<td align="center">239</td>
+<td>"ファイルを処理できません" UNICODE 形式の ASP ファイルがサポートされていません。</td>
+</tr>
+<tr>
+<td align="center">240</td>
+<td>"スクリプト エンジンの例外が発生しました" ScriptEngine が例外 '%X' ('%s' 内の '%s' で) の発生原因です。</td>
+</tr>
+<tr>
+<td align="center">241</td>
+<td>"CreateObject の例外が発生しました" '%s' の CreateObject が例外 %X の発生原因です。</td>
+</tr>
+<tr>
+<td align="center">242</td>
+<td>"Query OnStartPage Interface の例外が発生しました" クエリ オブジェクト '%s''s OnStartPage または OnEndPage メソッドが例外 %X の発生原因です。</td>
+</tr>
+<tr>
+<td align="center">243</td>
+<td>"Request に IStream を使用できません" Request.Form コレクションまたは Request.BinaryRead を使用した後で、Request オブジェクトに IStream は使用できません。</td>
+</tr>
+</table>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;イベント ログまたは Web ブラウザにメッセージが表示されるときは、上記一覧の中の %s、%X、%1、%2 などの記号の部分には、実際に発生したときのエラーの詳細が記載されます。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

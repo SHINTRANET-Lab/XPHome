@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[拡張プロパティ]</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[拡張プロパティ]</strong></p>
+
+<p>ログに記録するフィールド (項目) を選択することで、W3C 拡張形式のログ収集をカスタマイズすることができます。ログのサイズを小さく抑えるには、不要なフィールドを除外します。</p> 
+
+<p>選択できるフィールドは、次のとおりです。</p>
+<ul>
+<li><strong>[日付]</strong>  アクティビティが発生した日付です。</li>
+<li><strong>[時間]</strong>  アクティビティが発生した時刻です。</li>
+</ul>
+
+<p><strong>[拡張プロパティ]</strong></p>
+
+<ul>
+<li><strong>[クライアント IP アドレス]</strong>  サーバーにアクセスしたクライアントの IP アドレスです。</li>
+<li><strong>[ユーザー名]</strong>  サーバーにアクセスしたユーザーの名前です。</li>
+<li><strong>[サービス名]</strong>  クライアント コンピュータで実行されていたインターネット サービスです。</li>
+<li><strong>[サーバー名]</strong>  ログ エントリが生成されたサーバーの名前です。</li>
+<li><strong>[サーバー IP アドレス]</strong>  ログ エントリが生成されたサーバーの IP アドレスです。</li>
+<li><strong>[サーバー ポート]</strong>  クライアントの接続先のポート番号です。</li>
+<li><strong>[メソッド]</strong>  クライアントが実行しようとした GET コマンドなどの処理です。</li>
+<li><strong>[URI Stem]</strong>  HTML ページ、CGI プログラム、スクリプトなどの、アクセスされたリソースです。</li>
+<li><strong>[URI クエリ]</strong>  クライアントが実行を試みたクエリです。これは検索に使われた 1 つまたは複数の文字列です。</li>
+<li><strong>[プロトコルの状態]</strong>  HTTP 関連の処理の状態です。</li>
+<li><strong>[Win32 の状態]</strong>  Windows 関連の処理の状態です。</li>
+<li><strong>[送信バイト数]</strong>  サーバーが送信したバイト数です。</li>
+<li><strong>[受信バイト数]</strong>  サーバーが受信したバイト数です。</li>
+<li><strong>[所要時間]</strong>  処理にかかった時間です。</li>
+<li><strong>[プロトコル バージョン]</strong>  クライアントが使用するプロトコル (HTTP、FTP) のバージョンです。HTTP の場合は、HTTP 1.0 または HTTP 1.1 になります。</li>
+<li><strong>[ユーザー エージェント]</strong>  クライアントが使用したブラウザです。</li>
+<li><strong>[Cookie]</strong>  送受信された cookie の内容です。</li>
+<li><strong>[履歴]</strong>  ユーザーがサイトを訪れる前に表示していたリンク元のサイトです。</li>
+</ul>
+
+<p><strong>[プロセス総計]</strong></p>
+
+<ul>
+<li><strong>[プロセス イベント]</strong>  イベントを発生させたプロセスの種類で、CGI またはアウトプロセス アプリケーションのいずれかです。記録される種類は、CGI、Application、または All です。</li>
+<li><strong>[プロセスの種類]</strong>  発生したイベントです。イベントの種類は、次のとおりです。Site-Stop、Site-Start、Site-Pause、Periodic-Log、Interval-Start、Interval-End、Interval-Change、Update、Eventlog-Limit、Priority-Limit、Process-Stop-Limit、Site-Pause-Limit、Eventlog-Limit-Reset、Priority-Limit-Reset、Process-Stop-Limit-Reset、Site-Pause-Limit。</li>
+
+<ul>
+<li><strong>Site-Stop</strong>  Web サイトが停止されました。</li> 
+<li><strong>Site-Start</strong>  Web サイトが開始または再開されました。</li> 
+<li><strong>Site-Pause</strong>  Web サイトが一時停止されました。</li> 
+<li><strong>Periodic-Log</strong>  管理者が指定した間隔で定期的に記録されるログです。</li> 
+<li><strong>Reset Interval-Start</strong> リセット間隔が開始しました。</li> 
+<li><strong>Reset Interval-End</strong>  リセット間隔の終わりに達し、リセットされました。</li> 
+<li><strong>Reset Interval-Change</strong>  Web サイトの管理者が、リセット間隔の値を変更しました。</li> 
+<li><strong>Update</strong>  次のいずれかのイベントが発生しました。ログの間隔の変更。Interval イベントの発生、あるいはサイトの停止、開始、または一時停止。</li> 
+<li><strong>Eventlog-Limit</strong>  CGI およびアウト プロセス アプリケーションに対する Web サイトの CPU 使用率が、管理者が設定したイベント ログの制限に達したため、Web サイトのイベント ログが作成されました。</li> 
+<li><strong>Priority-Limit</strong>  管理者が設定した低優先度の制限に達したため、Web サイトの CGI またはアウト プロセス アプリケーションの優先度が "低" に設定されました。</li> 
+<li><strong>Process-Stop-Limit</strong>  管理者が設定したプロセス停止の制限に達したため、Web サイトの CGI またはアウト プロセス アプリケーションが停止されました。</li> 
+<li><strong>Site-Pause-Limit</strong>  管理者が設定したサイト一時停止の制限に達したため、CGI またはアウト プロセス アプリケーションを持つ Web サイトが一時停止されました。</li> 
+<li><strong>Eventlog-Limit-Reset</strong>  リセット間隔が終了、またはイベント ログの制限が、手動で変更されました。</li> 
+<li><strong>Priority-Limit-Reset</strong>  リセット間隔が終了、または優先度の制限が、手動で変更されました。</li> 
+<li><strong>Process-Stop-Limit-Reset</strong>  リセット間隔が終了、またはプロセス停止の制限が、手動で変更されました。</li> 
+<li><strong>Site-Pause-Limit</strong>  リセット間隔が終了、またはサイトの一時停止の制限が、手動で変更されました。</li>
+</ul>
+
+<li><strong>[ユーザーの総使用時間]</strong>  サイトが現在の間隔の中で使用した、ユーザー モードのプロセッサ時間の累計です。単位は秒です。</li>
+<li><strong>[カーネルの総使用時間]</strong>  サイトが現在の間隔の中で使用した、カーネル モードのプロセッサ時間の累計です。単位は秒です。</li>
+<li><strong>[ページ違反の総数]</strong>  メモリ ページ フォルトを起こしたメモリ参照の総数です。</li>
+<li><strong>[プロセスの総数]</strong>  現在の間隔の中で作成された、CGI またはアウト プロセス アプリケーションの総数です。</li>
+<li><strong>[有効なプロセス]</strong>  ログが記録されたときに実行されていた、CGI およびアウト プロセス アプリケーションの総数です。</li>
+<li><strong>[切断されたプロセスの総数]</strong>  現在の間隔の中で、プロセス調整のために停止された CGI およびアウト プロセス アプリケーションの総数です。</li>
+</ul>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

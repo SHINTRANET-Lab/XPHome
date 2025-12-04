@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>その他のセキュリティ対策</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_additional_security_considerations"></A><SUP></SUP>その他のセキュリティ対策</H1>
+
+<H3>レジストリの問題</H3>
+
+<P>IIS アプリケーションの多くは、ほかのソフトウェア コンポーネントにより提供されるリソースを必要としています。たとえば、ISAPI 拡張 DLL が、サードパーティのソフトウェア会社から提供されるオートメーション サーバーを呼び出したり、CGI アプリケーションが、Microsoft<sup>&reg;</sup> Visual Basic<sup>&reg;</sup> で構築されたプログラムを起動したりすることもあります。これらのコンポーネントは、適切に実行するために必要な固定情報をレジストリに格納していることがあります。これらのコンポーネントを標準のデスクトップで使用する場合、レジストリ情報は Windows コンピュータに現在ログオンしているユーザーのプロファイルから読み込まれます。このようなアプリケーションを IIS で起動すると、IIS アプリケーションでは、既定のユーザー プロファイルが使用されるため、問題が発生することがよくあります。既定のユーザー プロファイルには特定のユーザーではなく、すべてのユーザーに共通する標準の情報が記述されています。したがって、ユーザー 1 が自分のデスクトップからあるコンポーネントを実行すると、レジストリにあるユーザー 1 のプロファイルから情報が読み込まれるので、期待通りの動作が行われます。同じアプリケーションでも IIS から起動した場合は、ユーザー 1 のプロファイルへアクセスできないので、まったく実行できない可能性があります。基本認証や、統合 Windows 認証を使用して、IIS でユーザー 1 のアカウントを偽装したとしても同じ現象が起こります。</P>
+
+<H3>デスクトップの問題</H3>
+
+<P>Windows NT 4.0 および Windows 2000 以降では、1 台のコンピュータに複数のデスクトップが存在するというコンセプトを採用しています。デスクトップは、コンピュータにログオンしたときに表示される画面であると考えることができます。デスクトップにより、コンピュータのユーザーが送信するマウス メッセージやキーボード メッセージがすべて受信され、一定の範囲内で、アプリケーションどうしが対話できるようになります。たとえば、デスクトップのあるアプリケーションから、同じデスクトップにある別のアプリケーションへメッセージをポストできます。複数のデスクトップをサポートしているということは、ほかのデスクトップが複数実行されていることを意味します。これらのデスクトップはユーザーからは見えず、また、これらのデスクトップに対してキーボード メッセージやマウス メッセージを送信する方法もありません。これは無駄なコンセプトのように思えるかもしれませんが、実際のところ、Windows サービスとして実行されるアプリケーションの多くは、デスクトップの提供する機能を必要とする一方、対話的なユーザーのデスクトップとのやり取りは必要としていないのです。したがって、サービスの 1 つ 1 つが、現在ログオンしているユーザーによって干渉されることのない、独自のデスクトップを持っているのです。</P>
+
+<P>たとえば、メッセージ ボックスの表示など、使用している IIS アプリケーションがデスクトップと何らかの形で対話している場合、このメッセージ ボックスは IIS によって、コンピュータのモニタでは見えない位置に表示されます。同じように、IIS アプリケーションは対話型デスクトップ上のアプリケーションへメッセージを送信したり、ポストしたりできません。使用している IIS アプリケーションを、対話型デスクトップと対話させる必要がある場合は、名前付きパイプなど、別の形のプロセス間通信を使用する必要があります。詳細については、Platform SDK の「Windows Base Services」の「Interprocess Communication」を参照してください。</P>
+
+<H3>ISAPI フィルタの DLL</H3>
+
+<P>ISAPI フィルタの DLL は IIS サービスの本来のコンテキストで実行されます。ISAPI 拡張 DLL とは異なります。既定では、すべてのサービスは、インストールされているコンピュータの Local System アカウントで実行されます。Local System アカウントは、明示的に拒否されているものを除き、ローカル コンピュータにあるほとんどすべてのリソースへのアクセスが許可されていますが、ネットワークに存在するこのほかのコンピュータにあるリソースへのアクセスは許可されていません。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>新しいシステム デザイン</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_the_new_system_design"></A><SUP></SUP>新しいシステム デザイン</H1>
+
+<P>現在のクライアント/サーバー アプリケーションは、従来のクライアント/サーバー アプリケーションとは異なるシステムで、&quot;複数層アプリケーション&quot; という新しい名前で呼ばれています。複数層アプリケーションは &quot;n 層&quot; アーキテクチャとも呼ばれます。このモデルでは、処理はクライアントとサーバーの間で分散され、ビジネス ロジックは中間の層に存在します。ほとんどのシステムでは次の 3 つの主要タスクが行われています。これらのタスクは、&quot;n&quot; 層モデルの各層に対応します。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=21%><B>タスク</B></TD>
+<TD class=blue width=79%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=21%>ユーザー インターフェイスと操作</TD>
+<TD width=79%>次の図で &quot;第 1 層&quot; と表示されている層で、ユーザーが経験するもの全体を構成します。この層では、ユーザーがアプリケーションの操作、データ入力、要求に対する応答の表示を行うためのグラフィカル インターフェイスが提供されるだけではなく、データがクライアントに到着してからの、データ操作と書式設定も管理されます。Web アプリケーションでは、ブラウザがこの層のタスクを実行します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=21%>ビジネス ロジック</TD>
+<TD width=79%>インターフェイス層とデータ サービス層の間の第 2 層は分散アプリケーション開発者の領域です。アプリケーションの処理を管理するルールを表すビジネス ロジックにより、ユーザーが、データに接続されます。このルールによって制御される機能は、日常業務をまねたもので、1 つのタスクであることも、また、複数の連続したタスクであることもあります。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=21%>データ サービス</TD>
+<TD width=79%>下の図で第 3 層で表されているデータ サービスは、アプリケーション データへのアクセスを管理、提供する構造化データ ストア (SQL、Oracle データベース)、または非構造化データ ストア (Microsoft<sup>&reg;</sup> Exchange、Microsoft<sup>&reg;</sup> Message Queuing) から提供されています。1 つのアプリケーションで、1 つ以上のデータ ストアからのサービスを受けることができます。</TD>
+</TR>
+</TABLE><BR>
+
+<P>3 層アーキテクチャでは、機能の主要な部分がそれぞれ分離されているので、プレゼンテーションは処理ルールやビジネス ロジックからは独立していて、データとも別になっています。このモデルでは、事前により多くの分析および設計を行う必要がありますが、維持にかかる経費を大きく削減できるので、長期的に見ると、機能的な柔軟性を高めることができます。次の図は、新しいシステム設計のさまざまな層をサービスする Microsoft のテクノロジを示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/3tier.gif" ALT="3 層アーキテクチャ" BORDER=0></P>
+<span style="display:none"><LAYER VISIBILITY=HIDE> (The following words are used by Search; they are not intended to be displayed on the page.) MSMQ </layer></span><hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

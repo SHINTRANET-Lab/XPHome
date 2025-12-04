@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>インターナショナル クライアントに適応させる</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_accommodating_international_clients"></A><SUP></SUP>インターナショナル クライアントに適応させる</H1>
+
+<P>情報をインターネットやイントラネット経由で配布する利点の 1 つに、さまざまな国や地域に住むユーザーがアクセスできる国際的な Web サイトを作成できるということがあります。ユーザーは自国語に翻訳されたページを要求し、この言語に対応したブラウザを使用して、ページの内容を読むことができます。</P>
+
+<P>異なる複数の言語で記述されたページを含む Web サイトを作成する場合、ブラウザと Web サーバーの間、または、ASP スクリプトと COM コンポーネントの間で受け渡しされる文字列を変換する必要がある場合があります。Web サイトにあるページがすべて、Web サーバーで使用されている既定の文字セットで書かれている場合は、ASP により自動変換が行われます。しかし、異なる言語を使用するブラウザのために、異なる文字セットを使用してページを作成した場合は、文字列をどのように変換するかを指定する ASP コマンドを使用する必要があります。たとえば、あるサイトに日本語文字セットが含まれるページと、中国語文字セットが含まれるページが混在する場合、特定のページにある文字列を処理する際に、ASP で使用する文字セットを指定しなければなりません。</P>
+
+<P>また、ASP では、通貨、時刻、日付、数字などの表示を、そのロケールの文化的慣習に合わせるためのコマンドも用意されています。文字列変換コマンドと同様に、ロケール コマンドも、スクリプトで Web サーバーとブラウザの既定のロケールが使用されない場合のみ使用します。</P>
+
+<P>国際的な Web サイトを構築するには、さまざまな設計シナリオが考えられます。予算と時間を考慮した上で、これらのシナリオを適宜組み合わせるのが効果的です。考えられる 3 つのシナリオを次に示します。</P>
+
+<P><B>シナリオ 1 - 各 Web ページの翻訳</B></P>
+
+<P>Web ページの翻訳をローカライズ業者に依頼する場合、すべてのページを翻訳対象にすることは必ずしも経済的なソリューションではありません。ただし、静的コンテンツの占める割合が大きい場合には、ほかのシナリオよりサーバー プロセスの要求が高速化できます。
+
+<OL>
+	<LI>サポートする各言語に対し、翻訳済みの Web ページを格納するサブ フォルダを作成します。</li>
+
+	<LI>ルート フォルダの ASP ファイルを使用して、ブラウザで使用できる言語を調べ、翻訳済みの Web ページを対応するサブ フォルダにリダイレクトします。サイトでブラウザの言語をサポートしていない場合は、各サブ フォルダの開始ページへのリンクを示し、クライアント側で言語を選択できるようにします。Request.ServerVariables(&quot;HTTP_ACCEPT_LANGUAGE&quot;) を使用して、ブラウザで使用できる言語を調べます。</li>
+
+	<LI>一部の言語では複数のロケールが含まれるため、ロケールは動的に設定します。たとえば、英語のコードページは 1252 ですが、ロケールは英国で 2057、米国で 1033、カナダで 4105 になります。</li>
+</OL>
+
+<P><B>シナリオ 2 - データベースに格納したテキスト セグメントの翻訳</B></P>
+
+<P>Web サイトが比較的小規模であったり、頻繁にコンテンツが更新される場合、テキスト セグメント全体をデータベースに格納することもできます。データベースは、セグメントのコードページによってインデックスが作成されます。SQL は、それぞれのコードページによって文字列を処理します。Access では、Response.BinaryWrite で出力される Unicode 文字列が処理されます。データベースに格納したテキスト セグメントを翻訳する際は、単一のファイルをローカライズ業者に支給します。データベース呼び出しは単純なクエリであるため、ページの送信速度にほとんど影響がありません。
+
+<OL>
+	<LI>各 ASP ファイルで、ブラウザが使用できる言語を調べ、適切な言語に翻訳されているデータベース内のテキスト セグメントを挿入します。Request.ServerVariables(&quot;HTTP_ACCEPT_LANGUAGE&quot;) を使用して、ブラウザで使用できる言語を調べます。</li>
+
+	<LI>一部の言語では複数のロケールが含まれるため、ロケールは動的に設定します。例については、シナリオ 1 の手順 3 を参照してください。</li>
+</OL>
+
+<P><B>シナリオ 3 - 翻訳ツールの使用</B></P>
+
+<P>個々のロケールは特定の翻訳ツールで対応していないことがあり、翻訳結果にエラーが出ることもあるため、翻訳したすべてのページに対して校正が必要です。
+
+<UL type=disc>
+	<LI>Web ページのグラフィックスや書式を維持しながら、ページをその場で翻訳する Web サービスを利用するという方法もあります。<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=translation&pver=1.0&ar=altavista" target=_blank>Alta Vista</a> では、ドキュメント翻訳ツールをダウンロードできるほか、送信した Web ページを翻訳するためのオンライン ツールもあります。</li>
+</UL>
+
+<P>Windows 2000 での IIS 5.0 のリリース以降、いくつかの変更がなされました。UTF-8 サポートは、日本語などの代理文字を含むマルチバイト系の文字全体に拡張されています。IIS 組み込みオブジェクトは、異なるコードページで使用される文字列を格納および取得できるようになりました。たとえば、フォーム データおよびサーバー変数には、Web サーバーの既定ではないコードページを使用してエンコードした文字列を含めることができます。Ad Rotator や Content Rotator など、IIS 組み込みのコンポーネントでも、各国の文字をサポートしています。最後に、Response オブジェクトのプロパティに CodePage および LCID、メタベース プロパティに AspLCID が新しく加わっています。これに伴って、ページで設定されるコードページとロケールの階層構造も変更されています。詳細については、次のトピックを参照してください。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg6e7n.htm">文字列変換のコード ページを設定する</A>」には、ASP で使用される文字列を変換するサンプル コードがあります。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg9s8i.htm">ロケール識別子を設定する</A>」では、通貨、時刻、日付の表示に使用される書式の変更方法について説明します。</li>
+
+	<LI>グローバライズとローカライズの記事および事例については、「<a href="http://www.microsoft.com/isapi/redir.dll?prd=technet&ar=iis" target=_blank>TechNet</a>」を参照してください。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

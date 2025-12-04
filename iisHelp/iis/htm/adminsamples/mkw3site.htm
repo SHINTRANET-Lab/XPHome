@@ -1,0 +1,103 @@
+<html dir=LTR><head><title>Web サイトの作成 (mkw3site)</title>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="Web サイトを作成する管理スクリプト (mkw3site) の概念と使用方法について説明します。">
+ 
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1 ALIGN="left">Web サイトの作成 (mkw3site)</h1>
+
+<p><strong>概要</strong></p>
+
+<p>Web サイトを作成します。</p>
+
+<p><strong>用法</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+<td valign="TOP">mkw3site</td> <td>&lt;--RootDirectory|-r ROOT DIRECTORY&gt;<br> &lt;--Comment|-t SERVER COMMENT&gt;<br> [--computer|-c COMPUTER1[,COMPUTER2...]]<br>[--port|-o PORT NUM]<br> [--IPAddress|-i IP ADDRESS]<br> [--admin|-a ADMINISTRATOR]<br> [--HostName|-h HOST NAME]<br> [--DontStart]<br> [--help|-?]</td>
+</tr>
+</table>
+
+<p><strong>パラメータ</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+<tr>
+<td valign="TOP"><em>IP ADDRESS</em></td> <td>新しいサーバーに割り当てる IP アドレスです。(省略可能)</td>
+</tr>
+<tr>
+<td valign="TOP"><em>COMPUTER1, COMPUTER2,...</em></td> <td>サイトを作成するコンピュータを列挙します。このパラメータは、複数のコンピュータを同じ設定で構成する場合に使用します。コンピュータを指定しない場合は、LocalHost を指定したと見なされます。</td>
+</tr>
+<tr>
+<td valign="TOP"><em>ROOT DIRECTORY</em></td> <td>新しいサーバーのルート ディレクトリへのフル パスです。</td>
+</tr>
+<tr>
+<td valign="TOP"><em>SERVER COMMENT</em></td> <td>Microsoft 管理コンソール (MMC) に表示される名前です。</td>
+</tr>
+<tr>
+<td valign="TOP"><em>ADMINISTRATOR</em></td> <td>サーバーの管理者として割り当てられるユーザーの名前です。</td>
+</tr>
+<tr>
+<td valign="TOP"><em>PORT NUM</em></td> <td>新しいサーバーのバインド先となるポートの番号です。</td>
+</tr>
+<tr>
+<td valign="TOP"><em>HOST NAME</em></td> <td>このサイトに割り当てるホスト名です。<br>警告 : サーバーの検索用に DNS が設定されている場合は、ホスト名のみを指定してください。</td>
+</tr>
+<tr>
+<td valign="TOP"><em>DONTSTART</em></td> <td>この引数を指定すると、Web サーバーの作成後にスクリプトが実行されません。</td>
+</tr>
+</table>
+
+<p><STRONG>使用例</STRONG></p>
+
+<p>Mkw3site -rootdirectory d:\someplace -t NewServer -hostname www.domain.com</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

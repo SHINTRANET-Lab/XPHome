@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>テキスト エディタで Web ページを作成する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="メモ帳などのテキスト エディタを使用して Web ページを作成する方法を紹介します。基本的な HTML タグの一覧も示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="usinganeditor">テキスト エディタで Web ページを作成する</a></h1>
+
+<p>Web ページは、メモ帳などの標準のテキスト エディタで、<EM>HTML タグ</EM> を使用して作成できます。HTML タグは、Web ブラウザにドキュメントの表示方法を指示する書式命令です。HTML のタグは、2 つの不等号 (&lt; と &gt;) で囲まれた語句が対になったもので構成されます。たとえば、&lt;B&gt;Hello World&lt;/B&gt; という HTML コードにより、Web ブラウザには &quot;Hello World&quot; という言葉が太字で <b>Hello World</b> のように表示されます。</p>
+
+<p>タグを入れ子にして、複数の属性を使用することもできます。たとえば、斜体を &quot;World&quot; という語句だけに指定し、文全体は太字にするには、&lt;B&gt;Hello &lt;I&gt;World&lt;/I&gt;&lt;/B&gt; と記述します。これで、<b>Hello <i>World</i></b> のように表示されます。タグを重ね合わせないように注意してください。たとえば、&lt;B&gt;Hello &lt;I&gt;World&lt;/B&gt;&lt;/I&gt; という HTML 構文は誤りであるためブラウザによっては、正常な結果が得られないことがあります。</p>
+
+
+<big>テキスト エディタで Web ページを作成するには</big><!--</p>--><br>
+
+<ol>
+<li>通常のテキスト (ASCII) エディタで、重要な HTML ヘッダーと書式情報をブラウザに示す Web ページの基本的な骨格、つまりテンプレートを作成します。次のタグを入力します。</li>
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+  &lt;TITLE&gt;  &lt;/TITLE&gt;
+&lt;/HEAD&gt;
+  &lt;BODY&gt;
+
+  &lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+<li>Web ページのタイトルを &lt;TITLE&gt; タグの間に記述します。このタイトルは、Web ブラウザのタイトル バーに表示され、Web ページには表示されません。タイトルには、Web ページの内容を簡単に説明するものを選びます。</li>
+<li>Web ブラウザに表示するテキストやそのほかのコンテンツは、&lt;BODY&gt; タグの間に記述します。</li> 
+<li>作成した HTML ファイルに、.htm という拡張子を付けて保存します。テキスト エディタの機能により、ドキュメントに .txt 拡張子が自動的に付かないように注意します。次に、Web ブラウザでファイルを開き、変更内容を確認します。</li>
+<li>ほかに必要な要素または書式設定を Web ページに追加します。次の HTML タグの表を参考にしてください。手順 4. を繰り返し、変更内容を確認します。</li>
+</ol>
+
+<p><strong>ヒント</strong>&nbsp;&nbsp;&nbsp;HTML を理解して十分に使いこなすには、インターネット上のさまざまな Web サイトから参照できる HTML 仕様を詳しく調べる必要があります。さらに、Web ブラウザのソース表示機能を使えば、ほとんどの Web ページの HTML ソース ファイルを表示することができます。この機能を利用すれば、ほかの HTML 作成者が Web ページの設計に使用している手法を習得できます。</p>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="95%">
+<tr>
+<th width="40%" bgcolor="#C0C0C0">HTML タグ</th>
+<th width="60%" bgcolor="#C0C0C0">説明</th>
+</tr>
+
+<tr>
+<td>&lt;P&gt; &lt;/P&gt;</td>
+<td>段落の開始と終了を指定します。 </td>
+</tr>
+
+<tr>
+<td>&lt;H<em>n</em>&gt; &lt;/H<em>n&gt;</em> </td>
+<td>見出しの開始と終了を指定します。値 <em>n</em> は、1 から 6 までの整数で、異なるフォント サイズを指定します。</td>
+</tr>
+
+<tr>
+<td>&lt;U&gt; &lt;/U&gt; </td>
+<td> 下線付きテキストの開始と終了を指定します。</td>
+</tr>
+
+<tr>
+<td>&lt;UL&gt; &lt;/UL&gt;</td>
+<td>番号なしリストの開始と終了を指定します。リストの各項目は、&lt;LI&gt; タグで始めます。 </td>
+</tr>
+
+<tr>
+<td>&lt;OL&gt; &lt;/OL&gt;</td>
+<td>番号付きリストの開始と終了を指定します。リストの各項目は、&lt;LI&gt; タグで始めます。 </td>
+</tr>
+
+<tr>
+<td>&lt;LI&gt;</td>
+<td>リストの項目を示します。終了タグは必要ありません。</td>
+</tr>
+
+<tr>
+<td>&lt;B&gt; &lt;/B&gt;</td>
+<td>太字の開始と終了を指定します。</td>
+</tr>
+
+<tr>
+<td>&lt; IMG SRC=<EM>image file</EM>&gt;</td>
+<td>Web ページに画像を挿入します。</td>
+</tr>
+
+<tr>
+<td>&lt; BGSOUND SRC=<EM>sound file</EM>&gt;</td>
+<td>ページを読み込んだ後、バックグラウンド サウンドが再生されます。&nbsp;<strong>注&nbsp;&nbsp;&nbsp;</strong>この機能は、Microsoft Internet Explorer Version&nbsp;2.0 以降でのみサポートされます。</td>
+</tr>
+
+<tr>
+<td>&lt;FONT SIZE=<EM>n</EM> FACE=<EM>font type</EM>&gt; &lt; /FONT &gt;</td>
+<td>サイズ、色、書体など、テキストのフォント特性の開始と終了を指定します。</td>
+</tr>
+
+<tr>
+<td>&lt;A HREF=<em>file</em> &gt; &lt;/A&gt;</td>
+<td>ファイル内の別の場所、または別のドキュメントへのハイパーリンクを作成します。たとえば、次の構文で作成されるリンクでは、ユーザーがそのリンクをクリックすると、別の HTML ドキュメントが表示されます。  &lt;a href="mainpage.html"&gt; Go back to main page. &lt;/a&gt;</td>
+</tr>
+
+<tr>
+<td>&lt;HTML&gt; &lt;/HTML&gt;</td>
+<td>ファイルの内容が、HTML 言語で記述されていることを示します。普通、HTML ドキュメントの最初と最後のタグとして使用します。</td>
+</tr>
+
+<tr>
+<td>&lt;HEAD&gt; &lt;/HEAD&gt;</td>
+<td>ドキュメント タイトルやそのほかの記述情報などが、HTML ドキュメントのヘッダー情報に含まれています。Web ブラウザおよび Web ページ検索プログラムが、この情報を使用します。このタグの間に文は挿入しません。</td>
+</tr>
+
+<tr>
+<td>&lt;TITLE&gt; &lt;/TITLE&gt;</td>
+<td>HTML ドキュメントのタイトルを示します。タイトルは、Web ブラウザのタイトル バーに表示されますが、本文中には表示されません。</td>
+</tr>
+
+<tr>
+<td>&lt;BODY&gt; &lt;/BODY&gt;</td>
+<td>Web ページに表示する内容が入ります。</td>
+</tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

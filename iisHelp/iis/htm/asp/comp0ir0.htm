@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>GetPreviousURL</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_getpreviousurl"></A><SUP></SUP>GetPreviousURL</H3>
+
+<P>GetPreviousURL メソッドは、コンテンツ リンク リスト ファイル内の直前の項目の URL を返します。 </P>
+
+<H6>構文</H6>
+
+<P><I>NextLink</I><B>.GetPreviousURL( </B><I>listURL </I><B>)</B>  </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>listURL</I></DT>
+
+<DD>コンテンツ リンク リスト ファイルの格納場所です。</DD>
+</DL>
+
+<H6>戻り値</H6>
+
+<P>このメソッドは、コンテンツ リンク リスト ファイル内の直前の項目の URL を含む文字列を返します。コンテンツ リンク リスト ファイルに現在のページが指定されていない場合は、ファイルの先頭ページの URL を返します。</P>
+
+<H6>例</H6>
+
+<P>詳細な例は、<U>Content Linking コンポーネント</U>の下部に示されています。</P>
+
+<P>--- NextLink_GetPreviousURL.asp ---</P>
+
+<PRE><CODE>&lt;%
+  ListFile = "/Data/NextLink.txt"
+  Set objNextLink = Server.CreateObject("MSWC.NextLink")   
+  PreviousPageURL = objNextLink.GetPreviousURL(ListFile) 
+  ThisPageIndex = objNextLink.GetListIndex(ListFile) 
+  If 0 = ThisPageIndex Then
+    Response.Write "This page is not listed in your Content Linking List file.&lt;BR&gt;"
+  ElseIf ThisPageIndex &gt; 1 Then
+    Response.Write "The URL of the previous page is&lt;BR&gt;"
+    %&gt;&lt;A HREF="&lt;%=PreviousPageURL%&gt;"&gt;&lt;%=PreviousPageURL%&gt;&lt;/A&gt;&lt;%
+  Else
+    Response.Write "You are already at the beginning of the list.&lt;BR&gt;"
+  End If
+%&gt;
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp34a4.htm"><B>GetNextURL</B></A>、<B> <A HREF="/iishelp/iis/htm/asp/comp8oa4.htm">GetNthURL</A></B>、<B> <A HREF="/iishelp/iis/htm/asp/comp1j8u.htm">GetPreviousDescription</A></B></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

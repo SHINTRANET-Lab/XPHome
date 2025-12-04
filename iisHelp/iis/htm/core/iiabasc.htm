@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>認証について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web サーバーの認証によるセキュリティ機能の概要について説明します。認証は、制限のあるコンテンツへの接続を確立する前に、ユーザーの身元を確認するために使用されます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37675702">認証について</a></h1>
+
+<p>ユーザーがサーバー上の情報にアクセスする前に、有効な Microsoft Windows のユーザー アカウント名とパスワードの入力を要求できます。この識別プロセスは、&quot;認証&quot; と呼ばれています。認証は、IIS のほとんどの機能と同様に、Web サイト、ディレクトリ、またはファイル レベルで設定することができます。IIS では、サーバー上のコンテンツへのアクセスを制御するため、次の認証方式が提供されています。</p>
+
+<H3>WWW 方式</H3>
+	<ul>
+		<li><a href="#Anonymous">匿名認証</a></li>
+		<li><a href="#basic">基本認証</a></li>
+		<li><a href="#Digest">ダイジェスト認証</a></li>
+		<li><a href="#advancedDigest">高度ダイジェスト認証</a></li>
+		<li><a href="#challenge">統合 Windows 認証</a></li>
+		<li><a href="#ssl">証明書認証</a></li>
+	</ul>
+	
+<H3>FTP 方式</H3>
+	<ul>
+		<li><a href="#ftp_anon">匿名 FTP 認証</a></li>
+		<li><a href="#ftp_nonanon">基本 FTP 認証</a></li>
+	</ul>
+
+<p>認証の設定については、「<a href="iiauths.htm">認証を有効にし、構成する</a>」を参照してください。</p>
+
+<br>
+<center><strong>認証方式の概要</strong></center><br>
+
+<table width="100%" cellspacing="2" cellpadding="2" bordercolor="#000000" frame="BORDER">
+<tr align="CENTER" bgcolor="#C0C0C0" bordercolor="#000000">
+<td><strong>認証方式</strong></td>
+<td><strong>セキュリティ レベル</strong></td>
+<td><strong>パスワードの送信方法</strong></td>
+	<td><strong>プロキシ サーバーおよびファイアウォール経由での使用</strong></td>
+<td><strong>クライアント要件</strong></td>
+</tr>
+<tr>
+<td><a href="#Anonymous">匿名認証</a></td>
+<td>なし</td>
+<td>N/A</td>
+<td>可</td>
+<td>ブラウザ</td>
+</tr>
+<tr>
+<td><a href="#basic">基本認証</a></td>
+<td>低</td>
+<td>Base64 でエンコードしたクリア テキスト</td>
+<td>可 (ただし、Base64 でエンコードしたクリア テキストは暗号化されないため、プロキシ サーバーまたはファイアウォール経由でクリア テキストのパスワードを送信すれば、セキュリティ上のリスクが伴う)</td>
+<TD>ほとんどのブラウザ</td>
+</tr>
+<tr>
+<td><a href="#digest">ダイジェスト認証</a></td>
+<td>中</td>
+<td>ハッシュ化</td>
+<td>可</td>
+<td>Internet Explorer 5.0 以降</td>
+</tr>
+<tr>
+<td><a href="#advancedDigest">高度ダイジェスト認証</a></td>
+<td>中</td>
+<td>ハッシュ化</td>
+<td>可</td>
+<td>Internet Explorer 5.0 以降</td>
+</tr>
+<tr>
+<td><a href="#challenge">統合 Windows 認証</a></td>
+<td>高</td>
+<td>NTLM 使用ならハッシュ化、<br>Kerberos 使用なら Kerberos チケット</td>
+<td>不可 (ただし、PPTP 接続で使用すれば可)</td>
+<td>NTLM の場合 Internet Explorer 2.0 以降、Kerberos の場合 Internet Explorer 5.0 以降を搭載した Windows 2000 以降</td>
+</tr>
+<tr>
+<td><a href="#ssl">証明書認証</a></td>
+<td>高</td>
+<td>N/A</td>
+<td>可 (SSL 接続を使用)</td>
+<td>Internet Explorer および Netscape</td>
+</tr>
+<tr>
+<td><a href="#ftp_anon">匿名 FTP 認証</a></td>
+<td>なし</td>
+<td>N/A</td>
+<td>可</td>
+<td>任意の FTP クライアント</td>
+</tr>
+<tr>
+<td><a href="#ftp_nonanon">基本 FTP 認証</a></td>
+<td>低</td>
+<td>クリア テキスト</td>
+<td>可</td>
+<TD>任意の FTP クライアント</td></td>
+</tr>
+</table><br><br>
+
+
+<h2><a name="Anonymous">匿名認証</a></h2> 
+<p>匿名認証では、ユーザーはユーザー名やパスワードを入力せずに、Web サイトや FTP サイトの公開領域にアクセスできます。ユーザーが一般の Web サイトや FTP サイトに接続しようとすると、Web サーバーはその接続を IUSR_<em>computername</em> という Windows ユーザー アカウントに割り当てます。この <em>computername</em> は、IIS を実行しているサーバー名です。既定の設定では、IUSR_<em>computername</em> アカウントは、Windows ユーザー グループの Guests アカウントに含まれています。Guests グループには、NTFS のアクセス権によって決まるセキュリティ制限があり、これによって一般のユーザーが利用できるアクセス レベルとコンテンツの種類が指定されています。</p>
+
+<p>サーバー上に複数のサイトがある場合や、別のアクセス権が必要な領域がサイトにある場合は、複数の匿名アカウントを作成して、各 Web サイトや FTP サイト、ディレクトリ、またはファイルにそれぞれ割り当てることができます。アカウントに異なるアクセス権を与えたり、アカウントを異なる Windows ユーザー グループに割り当てたりすることで、公開された Web または FTP コンテンツの異なる領域への匿名アクセスをユーザーに許可することができます。</p>
+
+<p>次のプロセスでは、IIS によって IUSR_<em>computername</em> アカウントがどのように使用されるかを説明します。</p>
+	<ol>
+	<li>IUSR_<em>computername</em> アカウントが、セットアップ過程で IIS コンピュータの Guests グループに追加されます。</li>
+	<li>IIS は、要求を受け取ると、コードを実行したりファイルにアクセスしたりする前に、IUSR_<em>computername</em> アカウントを偽装します。IIS では IUSR_<em>computername</em> アカウントのユーザー名およびパスワードが分かっているため、このアカウントを偽装することができます。</li>
+	<li>IIS は、IUSR_<em>computername</em> アカウントがファイルへのアクセスを許可されているかどうかを調べるために、NTFS ファイルおよびディレクトリのアクセス権を確認してから、ページをクライアントに返します。
+	<li>アクセスが許可されている場合、認証は完了し、ユーザーはリソースを使用できます。
+	<li>アクセスが許可されていない場合、IIS は別の認証方式を試します。別の認証方式が選択されていない場合は、&quot;HTTP 403 Access Denied&quot; というエラー メッセージがブラウザに返されます。</li>
+	</ol>
+	
+<P><FONT COLOR="#0000ff"><strong>重要</strong></FONT>&nbsp;&nbsp;&nbsp;
+
+IIS では、匿名認証が有効になっていると、ほかの認証方式を有効にしている場合でも、必ず最初に匿名認証によってユーザーの認証を試みます。</p>
+
+
+<p>匿名認証に使用されるアカウントは、<a href="iiabuti.htm">IIS スナップイン</a>から、Web サーバー サービス レベル、または個別の仮想ディレクトリおよびファイルに対して変更できます。匿名アカウントには、ローカル ログオンするユーザー権利が必要です。アカウントにローカル ログオンの権利がない場合、IIS は匿名要求に応えることができません。IIS のインストールでは、IUSR_<em>computername</em> アカウントにローカル ログオン権限が与えられます。既定では、ドメイン コントローラ上の IUSR_<em>computername</em> アカウントに、ゲスト アカウントを与えることができません。匿名ログオンを許可するには、IUSR_<em>computername</em> アカウントをローカル ログオンに変更する必要があります。</p>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;Active Directory Service Interface (ADSI) では、ローカル ログオン権限の条件をプログラムによって変更できます。詳細については、「Active Server Pages ガイド」の「<A HREF="../asp/apro1zms.htm">LogonMethod</A>」を参照してください。</P>
+
+<p>また、Microsoft 管理コンソール (MMC) のグループ ポリシー スナップインを使用して、Windows の IUSR_<em>computername</em> アカウントのセキュリティ権限を変更することもできます。ただし、匿名ユーザー アカウントに特定のファイルやリソースへのアクセス権がない場合は、Web サーバーはリソースへの匿名接続の確立を拒否します。詳細については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</p>
+
+<p><FONT COLOR="#0000ff"><strong>重要</strong></FONT>&nbsp;&nbsp;&nbsp;IUSR_<em>computername</em> アカウントを変更した場合、Web サーバーが処理するすべての匿名 HTTP 要求に影響が現れます。このアカウントを変更する際には、細心の注意が必要です。</p>
+
+<h2><a name="basic">基本認証</a></h2> 
+
+<p>基本認証方式は、ユーザー名とパスワードの情報を収集する手段として広く使われている業界標準の方式です。</p>
+
+<h3>クライアント認証プロセス</h3>
+<ol>
+<li>Web ブラウザ Internet Explorer では、ユーザーに割り当てられた Windows アカウントのユーザー名およびパスワード (資格情報) を入力するためのダイアログ ボックスが表示されます。</li>
+
+<li>次に、Web ブラウザが、ユーザーの資格情報を使用してサーバーへの接続の確立を試みます。クリア テキストのパスワードは、Base64 でのエンコードを経て、ネットワーク上に送信されます。</li>
+
+<P><FONT COLOR="#0000ff"><strong>重要</strong></FONT>&nbsp;&nbsp;&nbsp;Base64 でのエンコードは、暗号化とは異なります。Base64 でエンコードされたパスワードがネットワーク上でネットワーク スニッファによって傍受された場合、権限のない第三者によってパスワードが簡単に解読され、再使用される可能性があります。</p>
+
+<li>ユーザーの資格情報が拒否された場合、Internet Explorer では資格情報の再入力を促す認証ダイアログ ウィンドウが表示されます。Internet Explorer の場合、ユーザーは 3 回まで接続を試みることができ、接続が失敗するとエラー メッセージが表示されます。</li>
+
+<li>Web サーバーによってユーザー名とパスワードが有効な Microsoft Windows ユーザー アカウントと一致することが確認されると、接続が確立されます。</li>
+</ol>
+	
+<p>基本認証の設定については、「<a href="iiauths.htm">認証を有効にし、構成する</a>」を参照してください。</p>
+
+<p>基本認証の利点は、基本認証が HTTP の仕様の一部であり、ほとんどのブラウザでサポートされていることです。欠点は、基本認証を使用している Web ブラウザでは、パスワードが暗号化されていない形式で転送されることです。ほかのユーザーが、ネットワーク上の通信を監視することで容易にパスワードを傍受し、一般に入手できるツールによって容易に解読する可能性があります。このため、基本認証は、専用回線や Secure Sockets Layer (SSL) 接続など、ユーザーと Web サーバー間の接続が安全であると確信できる場合にのみ使用することをお勧めします。詳細については、「<a href="iiencsc.htm">暗号化</a>」を参照してください。</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;<a href="#challenge">統合 Windows 認証</a>は、基本認証より優先して使用されます。ブラウザはユーザーにユーザー名とパスワードの入力を求める前に、統合 Windows 認証を選択し、最新の Windows ログオン情報の使用を試みます。現在は、Internet Explorer Version&nbsp;2.0 以降でのみ、統合 Windows 認証をサポートしています。</p>
+
+<h2><a name="Digest">ダイジェスト認証</a></h2> 
+
+ダイジェスト認証は、基本認証と同じ機能を提供します。ただし、ダイジェスト認証は、ネットワーク上でユーザーの資格情報が転送される方法に関して、セキュリティが強化されています。ダイジェスト認証では、ネットワーク上で資格情報を <a href="sec_auth_md5hash.htm" target=new>MD5 ハッシュ</a>として転送します。これは、メッセージ ダイジェストとも呼ばれ、元のユーザー名とパスワードがハッシュから解読されることはありません。ダイジェスト認証は、WebDAV (Web Distributed Authoring and Versioning) ディレクトリで使用できます。 
+
+<p>クライアント ソフトウェアの追加インストールは不要ですが、ダイジェスト認証は、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank>World Wide Web Consortium の Web サイト</A>の <B>RFC 2617</B> 仕様で定義されている HTTP 1.1 プロトコルに依存しています。ダイジェスト認証は HTTP 1.1 準拠が要件であるため、一部のブラウザではサポートされません。HTTP 1.1 非準拠のブラウザがダイジェスト認証を使用してサーバーからファイルを要求した場合、サーバーではクライアントに対してダイジェスト資格情報を要求します。HTTP 1.1.非準拠のクライアントではダイジェスト認証がサポートされないため、この要求を拒否します。</p>
+
+<h3><a name="bdigestRequirements">ダイジェスト認証の要件</a></h3>
+IIS サーバーでダイジェスト認証を有効にする前に、次の最低要件がすべて満たされていることを確認します。ドメイン管理者のみが、ドメイン コントローラ (DC) 要件が満たされていることを確認できます。DC が次の要件を満たしているかどうか不明である場合、ドメイン管理者に問い合わせてください。
+<ul>
+<li>ダイジェスト認証で保護されているリソースにアクセスするすべてのクライアントで、Internet Explorer 5.0 以降が使用されている。</li> 
+<li>ユーザーおよび IIS サーバーが、同一ドメインのメンバであるか、その信頼を得ている。</li>
+<li>ユーザーが、DC の Active Directory に格納されている有効な Windows ユーザー アカウントを所有している。 </li>
+<li>ドメインに Windows 2000 以降の DC が存在する。</li> 
+<li>IIS サーバーが Windows 2000 以降である。</li>
+</ul> 
+
+<h3>クライアント認証プロセス</h3>
+次の手順は、ダイジェスト認証を使用したクライアント認証の概要を示しています。
+ 
+<img src="SecAuthAD01.gif" align="right" alt="ダイジェスト認証のクライアント認証">
+
+<ol>
+<li type="1">クライアントが IIS サーバーのファイルを要求します。</li>
+<li type="1">IIS サーバーでは要求を拒否し、クライアントに次の情報を送信します。</li>
+<ul>
+<li type="1">ダイジェスト認証が使用されている</li>
+<li type="1">領域名</li>
+</ul>
+<li type="1">Internet Explorer では、ユーザーに資格情報 (ユーザー名とパスワード) の入力が要求されます。資格情報は領域名と結合され、MD5 ハッシュが作成されます。今回は MD5 ハッシュが送信され、IIS サーバーに対してファイル要求を再発行します。</li> 
+<li type="1">IIS サーバーがハッシュを受信し、クライアントのハッシュを確認するためにドメイン コントローラに送信します。</li>
+<li>ドメイン コントローラでは、IIS サーバーに認証結果を通知します。</li> 
+<li>クライアントが認証されたら、IIS は要求されたドキュメントまたはデータをクライアントに送信します。</li>
+</ol>
+
+<p><FONT COLOR="#0000ff"><strong>重要</strong></FONT>&nbsp;&nbsp;&nbsp; ダイジェスト認証は、Active Directory に格納されている要求側ユーザー パスワードのクリア テキスト コピーが DC に存在する場合にのみ完了します。DC はパスワードのクリア テキスト コピーを格納しているため、Active Directory は物理的な不正アクセスとネットワーク上の不正アクセスの両方から保護されている必要があります。</p>
+
+<h2><a name="advancedDigest">高度ダイジェスト認証</a></h2>
+高度ダイジェスト認証は、ユーザーの資格情報がドメイン コントローラ (DC) で格納される方式を除き、ダイジェスト認証と同じです。高度ダイジェスト認証がダイジェスト認証よりセキュリティが強化されているのは、ネットワーク上でユーザーの資格情報を <a href="sec_auth_md5hash.htm" target=new>MD5 ハッシュ</a>として送信するだけでなく、DC の Active Directory でもユーザーの資格情報を <a href="sec_auth_md5hash.htm" target=new>MD5 ハッシュ</a> (メッセージ ダイジェスト) として格納するためです。資格情報は Active Directory に MD5 ハッシュとして格納されるので、DC にアクセスできる第三者によってユーザーのパスワードが検出される可能性はありません。高度ダイジェスト認証は WebDAV (Web Distributed Authoring and Versioning) ディレクトリで使用でき、ダイジェスト認証と置き換えることはできません。
+
+<p>クライアント ソフトウェアの追加インストールは不要ですが、高度ダイジェスト認証は、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank>World Wide Web Consortium の Web サイト</a>の <B>RFC 2617</B> 仕様で定義されている HTTP 1.1 プロトコルに依存しています。高度ダイジェスト認証は HTTP 1.1 プロトコルに依存するため、一部のブラウザではサポートされません。HTTP 1.1 非準拠のブラウザがダイジェスト認証を使用してサーバーからファイルを要求した場合、サーバーではクライアントに対してダイジェスト資格情報を要求します。HTTP 1.1.非準拠のクライアントではダイジェスト認証がサポートされないため、この要求を拒否します。
+
+<h3><a name="advanceddigestRequirements">高度ダイジェスト認証の要件</a></h3>
+
+IIS サーバーで高度ダイジェスト認証を有効にする前に、次の最低要件がすべて満たされていることを確認します。ドメイン管理者のみが、ドメイン コントローラ (DC) 要件が満たされていることを確認できます。DC が次の要件を満たしているかどうか不明である場合、ドメイン管理者に問い合わせてください。
+<ul>
+<li>ダイジェスト認証で保護されているリソースにアクセスするすべてのクライアントで、Internet Explorer 5.0 以降が使用されている。</li> 
+<li>ユーザーおよび IIS サーバーが、同一ドメインのメンバであるか、その信頼を得ている。</li>
+<li>ユーザーが、DC の Active Directory に格納されている有効な Windows ユーザー アカウントを所有している。 </li>
+<li>ドメインに Windows の DC が存在する。</li> 
+<li>IIS サーバーが Windows XP である。</li> 
+</ul>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;高度ダイジェスト認証は、DC および IIS サーバーの両方で Windows XP が実行されている場合にのみ有効です。DC または IIS サーバーのどちらかで Windows 2000 以前が実行されている場合、IIS ではユーザーに警告することなく既定で<a href="#digest">ダイジェスト認証</a>になります。</p> 
+
+<h3><a name="ClientAuthAD">クライアント認証プロセス</a></h3>
+
+次の手順では、高度ダイジェスト認証を使用したクライアント認証の概要を示します。
+
+<p><img src="SecAuthAD01.gif" align="right" alt="ダイジェスト認証のクライアント認証"></p>
+
+<ol>
+<li type="1">クライアントが IIS サーバーのファイルを要求します。</li>
+
+<li type="1">IIS サーバーは最初の要求を拒否し、クライアントに次の情報を送信します。</li>
+<ul>
+<li type="1">ダイジェスト認証が使用されている</li>
+<li type="1">領域名</li>
+</ul>
+
+<li type="1">Internet Explorer では、ユーザーに資格情報 (ユーザー名とパスワード) の入力が要求されます。資格情報は領域名と結合され、MD5 ハッシュが作成されます。今回は HTTP 要求のヘッダー内で MD5 ハッシュが送信され、IIS サーバーに対してファイル要求を再発行します。</li> 
+
+<li type="1">IIS サーバーがクライアントのハッシュを受信し、確認のためにドメイン コントローラに送信します。</li>
+
+<li>ドメイン コントローラでは、クライアントのハッシュが Active Directory に格納されているコピーと比較されます。ハッシュ値が一致した場合、ドメイン コントローラでは、IIS サーバーにクライアントが認証されたことを通知します。</li> 
+
+<li>IIS サーバーは要求されたファイルをクライアントに送信します。</li>
+</ol>
+
+<p><b>注</b>&nbsp;&nbsp;&nbsp;手順 2. では、IIS サーバーからクライアント (Internet Explorer) に、高度ダイジェスト認証ではなくダイジェスト認証が使用されていることを通知します。これは、ダイジェスト認証と高度ダイジェスト認証の両方とも、IIS サーバーとクライアント間で同一のダイジェスト認証アルゴリズムが使用されているためです。 
+ 
+<ul>
+<li type="1">高度ダイジェスト認証の構成については、「<a href="iiauths.htm#enableadvanceddigest">高度ダイジェスト認証を構成する</A>」を参照してください。</li>
+<li type="1">ダイジェスト認証の詳細については、「<a href="#digest">ダイジェスト認証</a>」および <a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank>World Wide Web Consortium の Web サイト</a>で定義されている <B>RFC 2617</B> 仕様を参照してください。</li>
+<li type="1">Active Directory またはドメイン コントローラの詳細については、Windows XP オンライン マニュアルを参照してください。</li>
+</ul>
+
+
+<h2><a name="challenge">統合 Windows 認証</a></h2>
+
+<p>統合 Windows 認証は、ユーザー名およびパスワードがハッシュ化されてからネットワーク上で転送される安全な認証形式です。以前は、&quot;NTLM&quot; または &quot;Windows&nbsp;NT チャレンジ/レスポンス認証&quot; と呼ばれていました。統合 Windows 認証を有効にした場合、ユーザーのブラウザは、ハッシングを使用して Web サーバーと暗号化された情報を交換し、パスワードを知っていることを証明します。</p>
+
+<p>統合 Windows 認証では、Kerberos&nbsp;v5 認証と NTLM 認証が使用されます。Active Directory サービスが Windows 2000 以降のドメイン コントローラにインストールされており、ユーザーのブラウザで Kerberos&nbsp;v5 認証プロトコルがサポートされる場合、Kerberos&nbsp;v5 認証が使用されます。それ以外の場合は、NTLM 認証が使用されます。</p>
+
+<p>Kerberos&nbsp;v5 認証プロトコルは、Windows&nbsp;2000 の分散サービス アーキテクチャの一機能です。Kerberos&nbsp;v5 認証が機能するには、クライアントとサーバーの両方にキー配布センター (KDC) への信頼された接続があり、ディレクトリ サービスとの互換性があることが必要です。Kerberos および NTLM の詳細については、Windows XP オンライン マニュアルを参照してください。</p>
+
+
+<h3>統合 Windows 認証プロセス</h3>
+次の手順は、統合 Windows 認証を使用したクライアント認証の概要を示しています。
+<ol>
+	<li>基本認証とは異なり、統合 Windows 認証では、最初にユーザー名とパスワードの入力を要求しません。統合 Windows 認証では、クライアント コンピュータ上にある最新の Windows ユーザー情報が使用されます。</li>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;Internet Explorer Version&nbsp;4.0 以降では、必要に応じて最初にユーザー情報の入力を要求するように構成できます。詳細については、Internet Explorer のマニュアルを参照してください。</P>
+
+	<li>最初に認証処理がユーザーの識別に失敗した場合、ブラウザはユーザーに対して Windows ユーザー アカウントのユーザー名とパスワードの入力を要求します。入力された情報は、統合 Windows 認証によって処理されます。</li>
+	<li>Internet Explorer は、ユーザーが有効なユーザー名とパスワードを入力するか、またはダイアログ ボックスを閉じるまで、ユーザーに繰り返し入力を要求します。</li>
+</ol>
+
+<p>統合 Windows 認証は安全な認証ですが、制限が 2 つあります。</p>
+<OL>
+<LI>Internet Explorer Version&nbsp;2.0 以降でのみ、この認証方式をサポートしています。</li>
+<LI>統合 Windows 認証は、HTTP プロキシ接続では機能しません。</li>
+</OL>
+<p>このため、統合 Windows 認証は、イントラネット環境で使用することをお勧めします。イントラネット環境の場合、ユーザーのコンピュータと Web サーバー コンピュータは同じドメイン内にあり、管理者は、すべてのユーザーが Microsoft Internet Explorer Version&nbsp;2.0 以降を使用していることを確認できます。</p>
+
+
+<h2><a name="ssl">証明書認証</a></h2>
+
+<p>Web サーバーの Secure Sockets Layer (SSL) セキュリティ機能を 2 種類の認証に対して使用することもできます。&quot;サーバー証明書&quot; を使用すると、クレジット カード番号などの個人的な情報を転送する前のユーザーによる Web サイトの認証が可能になります。また、&quot;クライアント証明書&quot; を使用して、Web サイトの情報を要求しているユーザーを認証することもできます。SSL では、ログオン処理中にユーザーの Web ブラウザから送られる、暗号化されたデジタル識別情報の内容を確認することで認証が行われます。(クライアント証明書は、信頼できる第三者機関から取得します。)サーバー証明書には、通常 Web サイトや証明書を発行した組織についての情報が含まれています。クライアント証明書には、通常ユーザーや証明書を発行した組織についての識別情報が含まれています。詳細については、「<a href="iiabcsc.htm">証明書について</a>」を参照してください。</p>
+
+<h3><a name="H4_37683048">クライアント証明書のマッピング</a></h3>
+<p>Windows ユーザー アカウントは、ファイルなどのリソースへアクセスするときに必要なので、クライアント証明書を Web サーバー上の Windows ユーザー アカウントに関連付ける、すなわち &quot;マップ&quot; することができます。証明書マップを作成して有効にすると、ユーザーがクライアント証明書を使ってログオンするたびに、Web サーバーはそのユーザーを適切な Windows アカウントに自動的に関連付けます。この方法では、クライアント証明書を使ってログオンするユーザーを、基本認証、ダイジェスト認証、または統合 Windows 認証のいずれも使わずに、自動的に認証できます。1 つのクライアント証明書を 1 つの Windows ユーザー アカウントにマップすることも、複数のクライアント証明書を 1 つのアカウントにマップすることもできます。たとえば、サーバー上に独自の Web サイトを所有している複数の部門または業務がある場合、多対一のマッピングを使用して、各部門または企業のすべてのクライアント証明書を独自の Web サイトにマップすることができます。この方法では、各サイトは関連付けられているクライアントにのみアクセスを提供します。詳細については、「<a href="iimapsc.htm">ユーザー アカウントにクライアント証明書をマップする</a>」を参照してください。</p>
+
+<h2><a name="ftp_anon">FTP 認証</a></h2>
+
+<H3>匿名 FTP 認証</H3>
+
+<P>FTP サーバーを構成して、FTP リソースへの匿名アクセスを許可できます。リソースに対して匿名 FTP 認証を選択すると、そのリソースに対するすべての要求は、ユーザーにユーザー名やパスワードの入力を要求することなく、受け付けられます。これは、IIS によって、IUSR_<em>computername</em> と呼ばれる Windows ユーザー アカウントが自動的に作成されるためです。 <em>computername</em> は、IIS を実行しているサーバー名です。匿名 FTP 認証は Web ベースの匿名認証と似ています。匿名 FTP 認証が有効な場合、基本 FTP 認証が使用可能な場合でも、IIS は常にこの認証方式を最初に使用します。詳細については、「<A HREF="#Anonymous">匿名認証</A>」を参照してください。</P>
+
+
+<H3><a name="ftp_nonanon">基本 FTP 認証</a></H3>
+<p>基本 FTP 認証を使用して Web サーバーへの FTP 接続を確立するには、ユーザーは有効な Windows ユーザー アカウントに対応するユーザー名とパスワードを使用してログオンする必要があります。FTP サーバーがユーザーを識別できない場合、サーバーはエラー メッセージを返します。FTP 認証では、ユーザーはパスワードとユーザー名を暗号化されていない形式でネットワークに転送するため、安全ではありません。詳細については、「<a href="iiacnsc.htm">アクセス制御について</a>」を参照してください。</p>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

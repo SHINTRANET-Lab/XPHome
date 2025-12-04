@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ScriptTimeout</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_scripttimeout"></A><SUP></SUP>ScriptTimeout</H4>
+
+<P>ScriptTimeout プロパティは、スクリプトを実行できる最大時間を指定します。 </P>
+
+<P>この時間を過ぎたスクリプトは終了します。サーバー コンポーネントの処理時間は、タイムアウトの対象にはなりません。 </P>
+
+<H6>構文</H6>
+
+<P>Server.<B>ScriptTimeout </B>= <I>NumSeconds</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>NumSeconds</I></DT>
+
+<DD>スクリプトを実行できる最大秒数を指定します。この時間を過ぎたスクリプトは、サーバーによって終了されます。既定値は 90 秒です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>Web サービスまたは Web サーバーの ScriptTimeout の既定値は、メタベース内の <A HREF="/iishelp/iis/htm/asp/apro1cmt.htm">AspScriptTimeout</A> プロパティを使用して設定できます。ScriptTimeout プロパティには、メタベース内で指定した値よりも小さい値を設定することはできません。たとえば、NumSeconds に 10 を設定しても、メタベースの設定が既定値の 90 秒であれば、スクリプトは 90 秒後にタイムアウトになります。ただし、NumSeconds に 100 を設定した場合は、スクリプトは 100 秒後にタイムアウトになります。</P>
+
+<P>メタベースの使い方の詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</A>」を参照してください。</P>
+
+<H6>例</H6>
+
+<P>次の例は、サーバーのスクリプトの処理時間が 100 秒を超えた場合に、スクリプトをタイムアウトとして終了します。</P>
+
+<PRE><CODE>&lt;% Server.ScriptTimeout = 100 %&gt;
+ </CODE></PRE>
+
+<P>次の例は、ScriptTimeout プロパティの現在の値を取得して変数 <CODE>TimeOut</CODE> に格納します。</P>
+
+<PRE><CODE>&lt;% TimeOut = Server.ScriptTimeout %&gt;
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A></P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/apro1cmt.htm"><B>AspScriptTimeout</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

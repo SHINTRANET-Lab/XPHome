@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS を再起動する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS を再起動する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="restart">IIS を再起動する</a></h1>
+
+<p>IIS では、アプリケーションに問題が生じた際に、コンピュータを停止させ、再起動することができます。複数のインターネット サービスが 1 つのプロセスとして実行されているため、インターネット サービスはほかの Windows サービスとは異なる方法で停止および再開します。インターネット サービスを再開するには、コンピュータ管理サービス スナップインではなく、<a href="iiabuti.htm">IIS スナップイン</a>を使用します。アプリケーションに問題が生じた場合、安全な再起動によって IIS は自動的に再起動します。IIS を自動的に再起動させたくなければ、以下の「<a href="#relirestart">安全な再起動を無効にするには</a>」を参照してください。</p> 
+
+<big>IIS を再起動するには</big><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、IIS を再起動させる [コンピュータ] アイコンをクリックし、[操作] をクリックします。 
+<li>[IIS を再起動します] をクリックします。[停止/開始/再起動] ダイアログ ボックスが表示されます。</li>
+<li> ドロップダウン メニューで、[インターネット サービスを再起動します] をクリックします。</li>
+
+<p><b>注</b>&nbsp;&nbsp;[インターネット サービスを開始します]、[インターネット サービスを停止します]、[コンピュータを再起動します] などのオプションもあります。インターネット サービスを停止するには、安全な再起動を無効にする必要があります。</p>
+
+<li type="1">[OK] をクリックします。IIS は、選択したコンピュータで Web サービスを再開します。</li>
+</ol>
+
+
+<h3>安全な再起動</h3>
+<p>Inetinfo.exe プロセスが異常終了した場合、または Windows タスク マネージャや Kill.exe を使用してインターネット サービスを停止した場合、安全な再起動によってインターネット サービスが自動的に再開されます。既定では、安全な再起動が有効になっています。自動的に再起動する機能を抑制するには、安全な再起動を無効にする必要があります。</p>
+
+<p><big><a name="relirestart">安全な再起動を無効にするには</a></big></p>
+<ol>
+<li>[マイ コンピュータ] を右クリックして、[管理] をクリックします。[コンピュータの管理] ウィンドウが表示されます。</li>.
+    
+<li>左側のウィンドウの [サービスとアプリケーション] ツリーを展開して、[サービス] をクリックします。すべての Windows サービスが、右側のウィンドウに表示されます。</li> 
+    
+<li>[IIS Admin Service] を右クリックし、[プロパティ] をクリックします。[IIS Admin Service のプロパティ] ダイアログ ボックスが表示されます。</li>
+<li>[回復] タブをクリックし、それぞれのドロップダウン メニューで [何もしない] をクリックします。</li>
+<li>[OK] をクリックします。 </li>
+</ol>
+
+<h3>コマンド ラインから IIS を再起動する</h3>
+<p>コマンド プロンプトと Iisreset.exe を使用することにより、IIS を再起動したり、安全な再起動を無効にすることができます。次に、コマンド ラインの使用方法およびパラメータを説明します。</p>
+
+<font face="courier">
+<table border="0" cellpadding="4" cellspacing="1" width="95%">
+
+<tr>
+<td align="Left" valign="top" colspan="2"><a name="timeout"><strong>iisreset [コンピュータ名]</strong><br>&nbsp;</a></td>
+</tr>
+
+<tr>
+<td valign="Top">/RESTART</td>
+<td valign="Top">すべてのインターネット サービスを停止してから、再開します。</td>
+</tr>
+
+<tr>
+<td valign="Top">/START </td>
+<td valign="Top">すべてのインターネット サービスを開始します。</td>
+</tr>
+
+<tr>
+<td valign="Top">/STOP</td>
+<td valign="Top">すべてのインターネット サービスを停止します。</td>
+</tr>
+
+<tr>
+<td valign="Top">/REBOOT </td>
+<td valign="Top">コンピュータを再起動します。</td>
+</tr>
+
+<tr>
+<td valign="Top">/REBOOTONERROR&nbsp;&nbsp</td>
+<td valign="Top">インターネット サービスの開始、停止、または再開の際にエラーが発生した場合に、コンピュータを再起動します。</td>
+</tr>
+
+<tr>
+<td valign="Top">/NOFORCE</td>
+<td valign="Top">インターネット サービスを正常に停止できなかった場合、サービスの終了強制は行いません。</td>
+</tr>
+
+<tr>
+<td valign="Top">/TIMEOUT:val</td>
+<td valign="Top"><a href="iitime.htm#timetable">タイムアウト値</a>を秒数で指定します。この値は、インターネット サービスが正常に停止するまでの待ち時間を表します。/REBOOTONERROR パラメータが指定されている場合、タイムアウトを過ぎると、コンピュータが再起動されます。 既定値は、再開は 20 秒、停止は 60 秒、再起動は 0 秒です。</td>
+</tr>
+
+<tr>
+<td valign="Top">/STATUS</td>
+<td valign="Top">すべてのインターネット サービスのステータスを表示します。</td>
+</tr>
+
+<tr>
+<td valign="Top">/ENABLE </td>
+<td valign="Top">ローカル システム上でのインターネット サービスの再開を有効にします。</td>
+</tr>
+
+<tr>
+<td valign="Top">/DISABLE</td>
+<td valign="Top">ローカル システム上でのインターネット サービスの再開を無効にします。</td>
+</tr>
+
+</table>
+</font>
+
+
+<p><strong>関連項目</strong></p>
+
+各 Web サイトおよび FTP サイトの開始および停止については、「<a href="iiststp.htm">サイトを開始および停止する</a>」を参照してください。
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

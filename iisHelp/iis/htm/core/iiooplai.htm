@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>レベルと継承</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="プロセスの再利用が構成できるメタベースのレベルについて、また構成設定の継承について説明しています。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="LevelsAndInheritance">レベルと継承</a></h1>
+
+プロセス再利用イベントは、ユーザー インターフェイス (UI) を使用するか、またはメタベースを直接編集することによって IIS メタベースのさまざまなレベルで構成できます。プロセス再利用に構成されるすべてのプロパティは、下位レベルが特別に構成される場合を除き、IIS メタベースの下位レベルによって継承されます。
+
+<ul>
+<li>プールされたアプリケーションは、W3SVC レベルでその他すべてのプールされたアウトプロセス アプリケーションとともに構成されます。</li>
+<li>分離されたアプリケーションは、関連する Web サイトの AppRoot レベルで構成されます。</li>
+</ul>
+
+<p><strong>メタベース キー</strong><p>
+
+<p>プロセス再利用には、4 つの固有のメタベース キーがあります。次に示されている最初の 3 つのキーは UI から構成できます。4 番目のキー ShutdownTimeLimit は、メタベースを直接編集することによってのみ構成できます。
+
+<ul>
+<li> <strong>PeriodicRestartRequests</strong><br> このプロパティは、アプリケーションで処理する要求の数を示します。その数に達した後に、アプリケーションが再利用されます。詳細については、「<a href="../asp/apro5myb.htm">PeriodicRestartRequests</a>」を参照してください。
+</li>
+<li><strong>PeriodicRestartTime</strong><br> このプロパティは、アプリケーションで要求に応答する期間を分で示します。この期間に達した後に、IIS によって分離されたアプリケーションが再利用されます。詳細については、「<a href="../asp/apro6xb9.htm">PeriodicRestartTime</a>」を参照してください。
+</li>
+<li><strong>PeriodicRestartSchedule</strong><br> このプロパティは、時刻を 24 時間形式で指定します。この時刻になると、アプリケーションが再利用されます。</li> 詳細については、「<a href="../asp/apro6zj9.htm">PeriodicRestartSchedule</a>」を参照してください。
+</li>
+<li><strong>ShutdownTimeLimit</strong><br> このプロパティは、IIS が古い DLLHost.exe プロセス内で実行中のすべての古いアプリケーション要求を終了するのを待機する再利用しきい値に達した後の時間を秒数で指定します。ShutdownTimeLimit に達すると、IIS は古い DLLHost を終了します。詳細については、「<a href="../asp/apro0y44.htm">ShutdownTimeLimit</a>」を参照してください。</li>
+</ul>
+
+<H2>アプリケーション セキュリティ</H2>
+UI を使用しないでプロセス再利用を構成するときには、AppIsolated キーのパラメータ値がアプリケーションのセキュリティ レベルを通知するため、<strong>AppIsolated</strong> メタベース キーについて理解している必要があります。次のこの情報を使用してプロセス再利用設定を作成する場所を決定します。アプリケーションは、セキュリティ レベルとともに、メタベースのさまざまなレベルで構成できます。セキュリティ レベルは、アプリケーションがプロセス再利用設定を取得する場所を決定します。 
+
+<p>
+<table width="60%" align="CENTER" cellspacing="2" cellpadding="2" bordercolor="#000000" frame="BORDER">
+
+<tr align="CENTER" bgcolor="#C0C0C0" bordercolor="#000000">
+<td width="50%" bgcolor="#C0C0C0"><strong>アプリケーション保護</strong></td>	
+<td width="50%" bgcolor="#C0C0C0">&nbsp;&nbsp;&nbsp;<strong>メタベース設定</strong></td>
+
+<tr bordercolor="#000000">
+	<td align="LEFT" valign="TOP">&nbsp;&nbsp;&nbsp;<strong>低 (IIS)</strong></td>
+	<td align="CENTER" valign="TOP">AppIsolated = 0</td>
+</tr>
+<tr>
+	<td align="LEFT" valign="TOP">&nbsp;&nbsp;&nbsp;<strong>中 (プール)</strong></td>
+	<td align="CENTER" valign="TOP">AppIsolated = 2</td>
+</tr>
+<tr>
+	<td align="LEFT" valign="TOP">&nbsp;&nbsp;&nbsp;<strong>高 (分離)</strong></td>
+	<td align="CENTER" valign="TOP">AppIsolated = 1</td>
+</tr>
+</table></p>
+
+
+<p>次のメタベース構成例は、さまざまなメタベース レベルでプロセス再利用の構成に使用されるメタベース キーを<b>太字</b>で示しています。</p> 
+
+<H2>メタベースの構成例</H2><p>
+
+/W3SVC<br> &nbsp;&nbsp;&nbsp;AppIsolated             = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartTime</b>     = (INTEGER) 60<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartRequests</b> = (INTEGER) 10000<br> &nbsp;&nbsp;&nbsp;<b>PeriodicRestartSchedule</b> = (STRING) “03:30” “21:30”<br> &nbsp;&nbsp;&nbsp;<b>ShutdownTimeLimit</b> = (INTEGER) 6000<br> &nbsp;&nbsp;&nbsp;…other default site/app settings…<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/W3SVC/1<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ShutdownTimeLimit</b> = (INTEGER) 700<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/W3SVC/1/root<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AppIsolated = (INTEGER) 2<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PeriodicRestartTime</b> = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;…other app settings…<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/W3SVC/1/root/isolatedApp<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AppIsolated = (INTEGER) 1<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PeriodicRestartTime</b> = (INTEGER) 600<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PeriodicRestartRequests</b> = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>ShutdownTimeLimit</b> = (INTEGER) 900<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;…other app settings…<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/W3SVC/1/root/PooledApp<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AppIsolated = (INTEGER) 2<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;…other app settings…<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/W3SVC/1/root/PooledApp/WebDir<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/W3SVC/1/root/inprocApp<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AppIsolated = (INTEGER) 0<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;…other app settings…<br>
+
+<p>
+
+<H2><a name=UnderstandingTheExample>メタベースの構成例を理解する</strong></a></H2>
+
+<ul>
+<Li>W3SVC レベルは IISWebService レベルとも呼ばれ、プロセス再利用を構成できるメタベースの最高レベルです。このレベルで設定される構成は、特定の構成設定を持たない下位レベルによって継承されます。すべてのプールされたアプリケーションの再利用イベントは、このレベルで構成されます。
+<p>
+<li>W3SVC/<i>n</i> レベルは、IISWebServer レベルとも呼ばれ、特定の Web サイトです。&quot;<i>n</i>&quot; はサイトの数です。サイトは、1 から順に番号が付けられます。プロセス再利用設定はこのレベルで UI を使用して構成することはできません。前述の例では、/W3SVC/1/root レベルで、PeriodicRestartTime イベントがゼロ パラメータを設定することによって無効になっています。特に PeriodicRestartTime キーを設定されていない下位レベルは、このレベルから設定を継承します。
+<p>
+<li>W3SVC/<i>n</i>/Root レベルは、IISWebVirtualDir レベルとも呼ばれ、Web サイトの開始点です。&quot;<i>n</i>&quot; はサイトの数です。分離されたアプリケーションの Process Recycling イベントは、構成することも、このレベルの特定の Web サイトに対して無効にすることもできます。 
+<p>
+<li>W3SVC/<i>n</i>/ROOT/WebVirtualDir レベルは、IISWebVirtualDir レベルとも呼ばれ、Web サイト内の仮想ディレクトリです。&quot;<i>n</i>&quot; は、サイトの数です。前述の例では、/W3SVC/1/root/IsolatedApp レベル (IsolatedApp は仮想ディレクトリの名前) が、<b>PeriodicRestartRequests</b> 設定がゼロ パラメータになっていることを示しています。ゼロ パラメータは、このレベルで、PeriodicRestartRequests イベントを無効にします。それ以外の場合は、/W3SVC/1/root/IsolatedApp レベルは /W3SVC レベルの設定 10000 を継承します。
+<p>
+<li>W3SVC/<i>n</i>/Root/WebVirtualDir/WebDir レベルは、IISWebDirectory レベルとも呼ばれ、Web サイト内の仮想ディレクトリ内の物理ディレクトリです。&quot;<i>n</i>&quot; は、サイトの数です。前述の例では、/W3SVC/1/root/PooledApp/WebDir が、Web サイト 1 内の PooledApp 仮想ディレクトリ内の WebDir ディレクトリを示しています。
+WebDir が AppIsolated = 2 (プール) 設定を /W3SVC/1/root/PooledApp レベルから継承するので、WebDir レベルはプロセス再利用構成設定を W3SVC レベルから継承します。<p>
+<li>前述の例では、/W3SVC/2/root/isolatedApp が PeriodicRestartSchedule を除く各再利用イベントに対してプロセス再利用設定を構成しています。PeriodicRestartSchedule が構成されている次に高いレベルは W3SVC レベルであるので、PeriodicRestartSchedule は W3SVC レベルから継承され、再利用は毎日 03:30 AM と 9:30 PM に発生します。
+<p>
+</ul>
+
+<p>アプリケーションの作成およびセキュリティ レベルの設定の詳細については、「<a href="iiwarndc.htm">アプリケーションについて</a>」を参照してください。アプリケーションの開始点と境界の設定については、「<a href="../asp/eadg7lpv.htm">アプリケーションの境界を定義する</a>」を参照してください。 
+
+<h2><a name="RelatedResources">関連リソース</a></h2>
+
+<ul>
+<li>「<a href="iiwarndc.htm">アプリケーションについて</a>」&nbsp;&nbsp;&nbsp;アプリケーションに関する概念、開始点、およびアプリケーションを実行できる異なるプロセスについて説明しています。</li>
+<p>
+<li>「<a href="iiisol.htm">アプリケーションを分離する</a>」&nbsp;&nbsp;&nbsp;アプリケーションを異なるプロセスで実行するよう構成する方法を手順を追って説明しています。</li>
+<p>
+<li>「<a href="../asp/eadg7lpv.htm">アプリケーションの境界を定義する</a>」&nbsp;&nbsp;&nbsp;アプリケーションの開始点と境界の設定について説明しています。 
+<p>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

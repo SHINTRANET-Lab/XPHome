@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ダイナミック HTML</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_dynamic_html"></A><SUP></SUP>ダイナミック HTML</H1>
+
+<P>Internet Explorer 4.0 から、ダイナミック HTML (DHTML) が導入されました。DHTML を使用すると、より機能豊富な HTML を作成し、クライアントのイベントに応答することができます。DHTML を有効利用するために HTML ページをアップグレードすることにより、ユーザー経験を豊かにするだけではなく、サーバー リソースをより効果的に使用する Web アプリケーションを構築することもできます。 </P>
+
+<P>ドキュメント オブジェクト モデル (DOM) のプロパティを設定することにより、DHTML で HTML ページの外観を制御できます。DOM は、Microsoft が World Wide Web Consortium (W3C) に対して標準として提案したモデルです。DHTML は、DOM プロパティを動的に変更するためのイベント モデルを公開しています。次の例は、HTML ページを &lt;DIV&gt; タグでさらに区切り、ユーザーが入力ボタンをクリックしたときに、ウィンドウが分割されるようにディスプレイ スタイル プロパティを設定します。</P>
+
+<PRE><CODE>&lt;SCRIPT LANGUAGE = "VBScript"&gt; 
+
+Sub showit()
+  'This subroutine is called when the user clicks a select button.
+  'It displays text in the hidden DIV.
+  document.all.MyDiv.style.display = ""
+End Sub
+
+&lt;/SCRIPT&gt;
+
+&lt;DIV ID= "MyDiv" style="display: 'none'" &gt; 
+This is some hidden text.
+&lt;/DIV&gt;
+&lt;Select id= "Showit" onclick=showit&gt;
+</CODE></PRE>
+
+<P>DHTML の詳細については、<a HREF="http://www.microsoft.com/japan/developer/library/default.asp" target="_blank"><b>MSDN Online</b></a> を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

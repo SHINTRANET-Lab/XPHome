@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>レジストリ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="構成レジストリについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="registry">レジストリ</a></h1>
+
+<p>構成レジストリには、Windows オペレーティング システムとあらゆるサービスの動作環境を定義する値が格納されています。これらの値を変更するには、コントロール パネル、Windows セットアップ、<a href="iiabuti.htm">IIS スナップイン</a>などのグラフィカル ツールを使用します。また、Windows のレジストリ エディタ (Regedt32.exe) ユーティリティを使用すると、構成レジストリを直接変更できます。 </p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><A HREF="iiregovr.htm">レジストリについて</A></strong>」では、レジストリに関する概念を紹介します。</li>
+<li>「<strong><A HREF="iiregglo.htm">グローバル レジストリ エントリ</A></strong>」では、インターネット サービスをグローバルに制御するパラメータについて説明します。</li>
+<li>「<strong><A HREF="iiregssp.htm">サービス固有のレジストリ エントリ</A></strong>」では、インターネット サービスごとにレジストリに格納され、サービス固有の動作を定義するパラメータについて説明します。</li>
+<li>「<strong><A HREF="iiregwww.htm">WWW サービスのレジストリ エントリ</A></strong>」では、WWW サービス専用のパラメータについて説明します。</li>
+<li>「<strong><A HREF="iiregftp.htm">FTP サービスのレジストリ エントリ</A></strong>」では、FTP サービス専用のパラメータについて説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>メタベースについては、「<a href="iimbstop.htm">メタベース</a>」を参照してください。</li>
+<li>定期的なサーバー管理については、「<a href="iisvadm.htm">サーバーの管理</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC
+</layer></span>
+
+</font>
+</body>
+</html>

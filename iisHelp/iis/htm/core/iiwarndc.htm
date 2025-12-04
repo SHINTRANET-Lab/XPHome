@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アプリケーションについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web アプリケーションについて説明します。アプリケーション ディレクトリ構造の図と、分離 (アウト プロセス) アプリケーションについての説明も示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37777278">アプリケーションについて</a></h1>
+
+<p> IIS &quot;アプリケーション&quot; は、Web サイトで定義された一連のディレクトリの中で実行される任意のファイルを指します。アプリケーションを作成するときは、<a href="iiabuti.htm">IIS スナップイン</a>を使って、&quot;アプリケーション ルート&quot; とも呼ばれるアプリケーションの &quot;開始点ディレクトリ&quot; を Web サイトに指定します。Web サイトの開始点ディレクトリの下にあるすべてのファイルおよびディレクトリは、別の開始点ディレクトリが見つかるまで、そのアプリケーションの一部と見なされます。つまり、ディレクトリの境界を使ってアプリケーションの範囲を定義します。</p>
+
+<h2><a name="app_1">アプリケーションの開始点</a></h2>
+
+<p><a href="iiabuti.htm">IIS スナップイン</a>では、アプリケーションの開始点はパッケージのアイコンで表されます。次の図は、/SiteAdmin という開始点ディレクトリを持つアプリケーションを示しています。</p>
+
+<img src="iiwarnd1.gif" alt="IIS スナップインに表示されるアプリケーションのディレクトリ構造。アプリケーションの開始点はパッケージのアイコンで表されます。" align="bottom" width="144" height="100">
+
+<p>\Login、\Order、および \SetupDB の各ディレクトリ内のファイルは、/SiteAdmin アプリケーションの一部と見なされます。 </p>
+
+<p>Web サイトごとに複数のアプリケーションを定義できます。この場合、インターネット インフォメーション サービスのインストール時に作成された既定の Web サイトが、アプリケーションの開始点になります。</p>
+
+<p>インターネット インフォメーション サービスは、ASP、ISAPI、CGI、IDC、および SSI の各アプリケーションをサポートしています。各アプリケーションは、ファイル間で情報を共有できます。たとえば、ASP アプリケーションは、ページ全体を通じてコンテキスト フロー、セッションの状態、および変数の設定を共有できます。</p>
+
+<h2><a name="app_2">アプリケーション保護</a></h2>
+
+<p>IIS&nbsp;5.1 には、3 種類のアプリケーション保護レベルが用意されています。アプリケーション保護は、アプリケーションが実行されるプロセスを参照します。IIS&nbsp;4.0 では、Web サービスと同じプロセス (Inetinfo.exe) または Web サービスから独立したプロセス (DLLHost.exe) のいずれかでアプリケーションを実行するように設定できました。IIS&nbsp;5.0 および 5.1 には 3 番目のオプションがあり、プール プロセス (DLLHost.exe の別のインスタンス) でもアプリケーションを実行できます。</p>
+
+<p>アプリケーションが誤動作して障害が発生し、作動中のプロセスが応答しなくなった場合、これら 3 種類のオプションがそれぞれ異なる保護レベルを提供します。既定では、Web サービス (Inetinfo.exe) はそれ自体のイン プロセスで動作し、ほかのアプリケーションはプールされた単一のプロセス (DLLHost.exe) 内で動作します。さらに、優先順位の高いアプリケーションを分離プロセス (DLLHost.exe の別のインスタンス) として実行するように設定できます。パフォーマンス上の理由により、10 個を超える分離アプリケーションを実行しないでください。</p>
+
+<p>次の図は、アプリケーション保護のプロパティを設定するときに使用するプロパティ シートです。</p>
+
+<img src="iiwarnd4.gif" alt="[ホーム ディレクトリ] プロパティ シート" > 
+
+<p> アプリケーションの保護は、アプリケーションの開始点ディレクトリでのみ設定できます。 </p>
+
+<h2>アプリケーション パフォーマンス</h2>
+
+<p>パフォーマンスとアプリケーションの保護レベルは、両方を十分に満たすことのできないトレードオフの関係にあります。Web サービスのプロセス (inetinfo.exe) でアプリケーションを実行するとパフォーマンスは向上しますが、アプリケーションが誤動作した場合に Web サービスが利用できなくなるリスクが増大します。inetinfo.exe はそれ自体のプロセス内で実行し、重要なアプリケーションはそれら自体のプロセス内で実行し、そのほかのアプリケーションは共有のプール プロセス内で実行するように構成することをお勧めします。詳細については、「<a href="../asp/eadg7lpv.htm">アプリケーションの境界を定義する</a>」を参照してください。</p>
+
+<p> コンポーネントのプロセス オプションは、コンポーネント サービス管理ツールで設定できます。詳細については、コンポーネント サービスのマニュアルを参照してください。 </p>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+icons
+</layer></span>
+
+</font>
+</body>
+</html>

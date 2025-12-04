@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>AuthPersistence</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_authpersistence"></A><SUP></SUP>AuthPersistence</H3>
+
+<P>このプロパティは、接続要求全体に対する認証の継続性を指定します。このプロパティを設定するには、対応するサブフラグを TRUE に設定することをお勧めします。サブフラグを TRUE に設定すると、自動的に AuthPersistence にバイナリ値が設定されます。</P>
+
+<P>AuthPersistSingleRequest が TRUE に設定されている場合、認証は単一の要求に対してのみ継続されます。AuthPersistSingleRequestIfProxy が TRUE に設定されている場合、要求がプロキシ要求で、その要求が Microsoft Proxy Server によって処理されていなければ、認証は単一の要求に対してのみ継続されます (つまり、Proxy Server と IIS がローカル コンピュータで動作中のときは、要求はリモート サーバーへ送られます)。AuthPersistSingleRequestAlwaysIfProxy が TRUE に設定されている場合、要求がプロキシによるものであれば、認証は単一の要求に対して有効です。</P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;AuthPersistence のサブフラグは、一度に 1 つしか TRUE に設定できません。サブフラグは、AuthPersistSingleRequest、AuthPersistSingleRequestIfProxy、および  AuthPersistSingleRequestAlwaysIfProxy です。これらの 3 つのプロパティのいずれかが TRUE に設定されると、ほかの 2 つのプロパティは自動的に FALSE に設定されます。AuthPersistence の値は、TRUE に設定されているサブフラグの値と必ず同じものになります。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%>長整数型</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定値</TD>
+<TD width=50%>&amp;H00000080 (または AuthPersistSingleRequestIfProxy=TRUE)</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>継承</TD>
+<TD width=50%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<P>この単一プロパティには、次のファイル アクセス許可フラグが含まれています。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3038.htm"><B>AuthPersistSingleRequest</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4ry1.htm"><B>AuthPersistSingleRequestAlwaysIfProxy</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro06m1.htm"><B>AuthPersistSingleRequestIfProxy</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I>/<I>WebFile</I></B></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore136t.htm"><B>IIsWebFile</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース識別子</TD>
+<TD width=50%><B>MD_AUTHORIZATION_PERSISTENCE</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ユーザー タイプ</TD>
+<TD width=50%><B>IIS_MD_UT_FILE</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定のビットマスク設定</TD>
+<TD width=50%><B>MD_AUTH_SINGLEREQUESTIFPROXY</B></TD>
+</TR>
+</TABLE><BR>
+
+<H6>ビットマスク値</H6>
+
+<TABLE border=0 cellpadding=5 cols=3 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>定数</B></TD>
+<TD class=blue width=16%><B>値</B></TD>
+<TD class=blue width=34%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_AUTH_SINGLEREQUEST</B></TD>
+<TD width=16%>0x00000040</TD>
+<TD width=34%>認証は単一の要求に対して有効です。IIS は要求の最後に認証をリセットし、次のセッション要求時に再認証を要求します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_AUTH_SINGLEREQUESTIFPROXY</B></TD>
+<TD width=16%>0x00000080</TD>
+<TD width=34%>認証は単一の要求に対して有効です。現在認証されている要求がプロキシによるもので、IIS が MSPROXY を実行しているという特別のケースでない限り、IIS は要求の最後に認証をリセットします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_AUTH_SINGLEREQUESTALWAYSIFPROXY</B></TD>
+<TD width=16%>0x00000100</TD>
+<TD width=34%>認証は単一の要求に対して有効です。現在認証されている要求が任意のタイプのプロキシによるものであれば、IIS は要求の最後に認証をリセットし、次のセッション要求時に再認証を要求します。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

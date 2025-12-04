@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>DeleteBackup</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_deletebackup"></A><SUP></SUP>DeleteBackup</H3>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore2xpu.htm">IIsComputer</A> オブジェクトの DeleteBackup メソッドは、バックアップ場所からメタベースのバックアップを削除します。</P>
+
+<H6>構文</H6>
+
+<P><B>IIsComputer</B>.<B>DeleteBackup</B> <I>BackupLocation</I>, <I>BackupVersion</I> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>BackupLocation</I></DT>
+
+<DD>バックアップ場所を指定する 100 字以内の文字列です。空の文字列を指定すると、既定の場所からバックアップが削除されます。<BR>
+</DD>
+
+<DT><I>BackupVersion</I></DT>
+
+<DD>バックアップ場所から削除されるバックアップのバージョン番号、または次の定数を指定します。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_BACKUP_HIGHEST_VERSION</B></TD>
+<TD width=50%>指定したバックアップ場所に存在するバックアップの中から、バージョン番号が最も高いバックアップを削除します。</TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;% 
+  Dim ComputerObj 
+  Set ComputerObj = GetObject("IIS://LocalHost") 
+  'Delete version 1 backup. 
+  ComputerObj.DeleteBackup "MyBackups", 1 
+%&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore32cw.htm"><B>Backup</B></A>、<A HREF="/iishelp/iis/htm/asp/aore1v8z.htm"><B>EnumBackups</B></A>、<A HREF="/iishelp/iis/htm/asp/aore5ucl.htm"><B>Restore</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

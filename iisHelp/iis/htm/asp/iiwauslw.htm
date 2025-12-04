@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ASP ページを構築する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="スクリプト作成と Active Server Pages の基礎について、またサーバー側スクリプトや Web アプリケーションの作成方法についての参照先を示します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="usingscriptinglanguages">ASP ページを構築する</a></h1>
+
+
+<p>ASP は、COM 準拠のスクリプト言語やプログラミング言語でサーバー側スクリプトを作成するための、強力で拡張性の高いフレームワークを提供します。ここでは、スクリプト言語を使用した .asp ファイルの基本的な作成方法を紹介します。ループの作成からデータベースの操作およびトランザクションの処理まで、広範囲にわたる基本的なプログラミング作業を実行する方法を学習します。スクリプト作成の初心者、熟練者を問わず、ここで採り上げるトピックを開発目標にすることができます。 つまり、より洗練された ASP の利用方法を提案し、開発を促進することが、各トピックの目的です。ASP を利用すると、より高性能で保守性の高いアプリケーションの開発が可能になります。</p>
+
+<p>以下のトピックでは、スクリプト作成とプログラミングの概念についても一部紹介しますが、スクリプト言語の学習が目的ではありません。Microsoft の各スクリプト言語 (Microsoft VBScript および Microsoft JScript) にはマニュアルが付属しており、書店で入手できるスクリプト作成関連書籍も多数あります。初めてスクリプトを作成する場合は、書籍、クラスの受講、およびインターネット資源を利用してスクリプト言語を習得することをお勧めします。</p>
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><a href="iiwabasi.htm">ASP ページを作成する</a></strong>」では、ASP ファイルについて説明し、ページにスクリプト コマンドを追加する方法を紹介します。</li>
+<li>「<strong><a href="iiwascln.htm">スクリプト言語を使用する</a></strong> 」では、主要スクリプト言語の設定方法およびサーバー スクリプトでの VBScript と JScript の使い方について説明します。 </li>
+<li>「<strong><a href="iiwavar.htm">変数と定数を使用する</a></strong>」では、ASP スクリプトでの変数の使用について紹介し、定数の定義にアクセスする方法について説明します。</li>
+<li>「<strong><a href="iiwabs.htm">クライアント側のスクリプトと対話する</a></strong>」では、クライアント側スクリプトを作成して対話を行う、サーバー側のスクリプトを記述する方法について説明します。</li>
+<li>「<strong><a href="iiwaproc.htm">プロシージャを記述する</a></strong>」では、プロシージャ (関数およびサブルーチン) の定義方法、およびサーバー側スクリプトからプロシージャを呼び出す方法について説明します。</li>
+<li>「<strong><a href="iiwacoll.htm">コレクションを使用する</a></strong>」では、ループを使ったコレクションへのアクセスなど、組み込みオブジェクトのコレクション内の要素にアクセスする方法について説明します。 </li>
+<li>「<strong><a href="iiwaform.htm">ユーザーからの入力を処理する</a></strong>」では、HTML フォームから集まる情報の収集方法と処理方法について説明します。</li>
+<li>「<strong><a href="iiwacomu.htm">コンポーネントとオブジェクトを使用する</a></strong>」では、COM コンポーネントが提供するオブジェクトのインスタンスを作成する方法、ASP の組み込みオブジェクトを使用する方法、およびオブジェクトのメソッドとプロパティを使用する方法について説明します。</li>
+<li>「<strong><a href="iiwaobu.htm">オブジェクトのスコープを設定する</a></strong>」では、オブジェクトのスコープ (有効範囲) について説明し、セッション スコープまたはアプリケーション スコープが設定されたオブジェクトを作成する方法を示します。 </li>
+<li>「<strong><a href="iiwacont.htm">ブラウザにコンテンツを送信する</a></strong>」では、ブラウザへのページの送信を制御する方法について説明します。</li>
+<li>「<strong><a href="iiwainc.htm">ファイルをインクルードする</a></strong>」では、<strong>#include</strong> ステートメントを使用してファイルの内容を .asp ファイルに挿入する方法について説明します。</li>
+<li>「<strong><a href="iiapsess.htm">セッションを管理する</a></strong>」では、ユーザーに関する情報を保持する方法を説明します。</li>
+<li>「<strong><a href="iiwadata.htm">データ ソースにアクセスする</a></strong>」では、ASP および Microsoft ActiveX データ オブジェクト (ADO) を使用して、データベースから情報を取得する方法について説明します。</li>
+<li>「<strong><a href="iiaptran.htm">トランザクションを理解する</a></strong>」では、トランザクション コンテキスト上でスクリプトを実行する方法を説明します。ビジネス アプリケーションやクレジット カードのアプリケーションでは、トランザクション内でスクリプトおよびコンポーネントを実行する機能を必要とすることがよくあります。</li>
+<li>「<strong><a href="iiwadbug.htm">ASP スクリプトをデバッグする</a></strong>」では、Microsoft Script Debugger を使用してスクリプトのエラーを発見し、発見したエラーを取り除く方法について説明します。</li>
+<li>「<strong><a href="iiwaobb.htm">組み込み ASP オブジェクト</a></strong>」では、ASP の組み込みオブジェクトの概要を示し、詳細な情報へのリンクを提供します。</li>
+<li>「<strong><a href="iiwaref.htm">Active Server Pages のオブジェクトのクイック リファレンス ページ</a></strong>」では、</li> ASP 組み込みオブジェクトのクィック リファレンス情報を含みます。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>高度なスクリプトの集合体、すなわちアプリケーションのプログラム開発については、「<a href="eadg01v7.htm">Web アプリケーションを開発する</a>」を参照してください。</li>
+<li>Web アプリケーションの設計については、「<a href="eadg8e43.htm">設計に関する決定事項</a>」を参照してください。</li>
+
+</ul>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

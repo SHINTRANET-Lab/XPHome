@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>AspLogErrorRequests</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_asplogerrorrequests"></A><SUP></SUP>AspLogErrorRequests</H3>
+
+<P>このプロパティは、Web サーバーが、失敗したクライアント要求を、Windows イベント ログ ファイルに書き込むかどうかを制御します。AspLogErrorRequests が TRUE に設定されている場合、ASP エラー要求の標準セットがログに記録されます。これらのエラーの一覧については、「<A HREF="#_k2_asp_error_list">ASP エラー一覧</A>」を参照してください。</P>
+
+<P>AspLogErrorRequests が TRUE で、<A HREF="/iishelp/iis/htm/asp/apro9zfr.htm">AspErrorsToNTLog</A> が FALSE の場合、ASP エラーは IIS ログに送られます。これらのエラーが深刻である場合、または IIS へのログ記録が前に失敗している場合は、それぞれのエラーは Windows イベント ログに送られます。</P>
+
+<P>AspLogErrorRequests が FALSE の場合、これらのエラーは IIS ログにだけ送られ、Windows イベント ログには送られません。</P>
+
+<P>AspLogErrorRequests および <A HREF="/iishelp/iis/htm/asp/apro9zfr.htm">AspErrorsToNTLog</A> が TRUE の場合、ASP 関連のエラーはすべて、Windows イベント ログと IIS ログの両方に送られます。</P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;IIS ログ ファイルに ASP エラーをまったく記録しないようにするには、ログ収集すべてを無効にする必要があります。手順については、「<A HREF="/iishelp/iis/htm/asp/apro1g9z.htm">DontLog</A>」プロパティおよび「<A HREF="/iishelp/iis/htm/asp/apro0gkl.htm">LogType</A>」プロパティを参照してください。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%>ブール型</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定値</TD>
+<TD width=50%>TRUE</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>継承</TD>
+<TD width=50%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース識別子</TD>
+<TD width=50%><B>MD_ASP_LOGERRORREQUESTS</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%><B>DWORD_METADATA</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ユーザー タイプ</TD>
+<TD width=50%><B>IIS_MD_UT_WAM</B></TD>
+</TR>
+</TABLE><BR>
+
+<H6><A NAME="_k2_asp_error_list"></A>ASP エラー一覧</H6>
+
+<P><A HREF="#_k2_asplogerrorrequests">AspLogErrorRequests</A> が TRUE に設定されている場合に、Windows イベント ログに記録される ASP エラーの一覧は、次のとおりです。</P>
+
+<TABLE border=0 cellpadding=5 cols=3 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=33%><B>ASP エラー コード</B></TD>
+<TD class=blue width=33%><B>ASP error</B></TD>
+<TD class=blue width=34%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0100</TD>
+<TD width=33%>メモリ不足</TD>
+<TD width=34%>必要なメモリを割り当てられません。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0101</TD>
+<TD width=33%>予期しないエラーです</TD>
+<TD width=34%>関数が | を返しました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0102</TD>
+<TD width=33%>文字列を入力してください</TD>
+<TD width=34%>関数の入力として文字列が必要です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0103</TD>
+<TD width=33%>数字の入力を予期しています</TD>
+<TD width=34%>関数は数字の入力を予期しています。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0104</TD>
+<TD width=33%>操作は許可されません</TD>
+<TD width=34%>操作は許可されません</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0105</TD>
+<TD width=33%>インデックスが範囲外です</TD>
+<TD width=34%>配列インデックスが範囲外です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0106</TD>
+<TD width=33%>型が不一致です</TD>
+<TD width=34%>処理できないデータ型がありました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0107</TD>
+<TD width=33%>スタックのオーバーフローです</TD>
+<TD width=34%>処理されているデータが制限を越えています。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0115</TD>
+<TD width=33%>予期しないエラーです</TD>
+<TD width=34%>外部オブジェクトでトラップできるエラー (%X) が発生しました。スクリプトの実行を続行できません。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0190</TD>
+<TD width=33%>予期しないエラーです</TD>
+<TD width=34%>外部オブジェクトのリリース中にトラップできるエラーが発生しました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0191</TD>
+<TD width=33%>予期しないエラーです</TD>
+<TD width=34%>外部オブジェクトの OnStartPage メソッド内でトラップできるエラーが発生しました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0192</TD>
+<TD width=33%>予期しないエラーです</TD>
+<TD width=34%>外部オブジェクトの OnEndPage メソッド内でトラップできるエラーが発生しました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0193</TD>
+<TD width=33%>OnStartPage に失敗しました</TD>
+<TD width=34%>外部オブジェクトの OnStartPage メソッド内でエラーが発生しました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0194</TD>
+<TD width=33%>OnEndPage に失敗しました</TD>
+<TD width=34%>外部オブジェクトの OnEndPage メソッド内でエラーが発生しました。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0240</TD>
+<TD width=33%>スクリプト エンジンの例外が発生しました</TD>
+<TD width=34%>ScriptEngine が例外 '%X' ('%s' 内の '%s' で) の発生原因です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0241</TD>
+<TD width=33%>CreateObject の例外が発生しました</TD>
+<TD width=34%>'%s' の CreateObject が例外 %X の発生原因です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=33%>ASP 0242</TD>
+<TD width=33%>Query OnStartPage Interface の例外が発生しました</TD>
+<TD width=34%>クエリ オブジェクト '%s''s OnStartPage または OnEndPage メソッドが例外 %X の発生原因です。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/apro9zfr.htm"><B>AspErrorsToNTLog</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

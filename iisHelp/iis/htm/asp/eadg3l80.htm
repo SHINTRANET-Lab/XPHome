@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP でデータにアクセスする</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_accessing_data_with_asp"></A><SUP></SUP>ASP でデータにアクセスする</H1>
+
+<P>ASP では、Web 開発者に対して、インターネット アプリケーションや、イントラネット アプリケーションで使用される OLE DB データベース プロバイダと対話するための、柔軟で使用の容易な、拡張性のあるメソッドが提供されます。ASP と Microsoft Data Access Components (MDAC) を使用することは、最初に Microsoft Access を使用してソリューションを開発してから、Microsoft SQL Server 6.5 にスケール アップすることを意味するだけではなく、OLE DB プロバイダを持つどんなデータベースにでもアクセスできることを表します。さらに、コンポーネント サービスを愛用すると、Web ベースのトランザクションをサポートする、拡張性の高い複数階層にわたるアプリケーションを作成することができます。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg3ctz.htm">ADO の概要</A>」では、ActiveX<sup>&reg;</sup> データ オブジェクトの概要について、簡単に説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg9mp1.htm">RDS によるリモート データ バインド</A>」では、リモート データ サービスとクライアント側のデータ バインディングについて紹介します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

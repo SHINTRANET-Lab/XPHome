@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>FTP サービス イベント</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS の Windows イベントで、ログに書き込まれる FTP サービス イベントのメッセージおよびその ID の一覧を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="ftpevents">FTP サービス イベント</a></h1>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>FTP サーバーはセキュリティを初期化できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>FTP サーバーはソケット ライブラリを初期化できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">4 </td>
+<td>FTP サーバーは、メモリ不足のため初期化できませんでした。このデータはエラーです。 </td>
+</tr>
+<tr>
+<td align="center"> 5</td>
+<td>FTP サーバーは、FTP/TCP サービスを見つけられませんでした。このデータはエラーです。 </td>
+</tr>
+<tr>
+<td align="center">6 </td>
+<td>FTP サーバーは、メイン接続ソケットを作成できませんでした。このデータはエラーです。 </td>
+</tr>
+<tr>
+<td align="center">7 </td>
+<td>FTP サーバーは、メイン接続スレッドを作成できませんでした。このデータはエラーです。 </td>
+</tr>
+<tr>
+<td align="center">8 </td>
+<td>FTP サーバーは、ホスト %1 のユーザーに対してクライアント ワーカー スレッドを作成できませんでした。このユーザーとの接続は終了します。このデータはエラーです。 </td>
+</tr>
+<tr>
+<td align="center">9 </td>
+<td>システム サービスの呼び出しに失敗しました。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">10 </td>
+<td>ホスト %2 のユーザー %1 は、%3 秒間アクティブでなかったのでタイムアウトしました。</td>
+</tr>
+<tr>
+<td align="center">11 </td>
+<td>%1 からの匿名ログオン要求をホスト %2 で受信しました。</td>
+</tr>
+<tr>
+<td align="center">12 </td>
+<td>%1 からのユーザー ログオン要求をホスト %2 で受信しました。</td>
+</tr>
+<tr>
+<td align="center">13 </td>
+<td>ユーザー %1 はログオンに失敗しました。ホーム ディレクトリ %2 にアクセスできませんでした。</td>
+</tr>
+<tr>
+<td align="center">14 </td>
+<td>ユーザー %1 は、セキュリティが変更されたため現在のディレクトリ %2 へのアクセスを拒否されました。</td>
+</tr>
+<tr>
+<td align="center">1000 </td>
+<td>FTP パフォーマンスの統計を収集できません。サービスによって返されたエラー コードは DWORD 0 のデータです。</td>
+</tr>
+</table>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;イベント ログまたは Web ブラウザにメッセージが表示されるときは、上記一覧の中の %s、%X、%1、%2 などの記号の部分には、実際に発生したときのエラーの詳細が記載されます。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html DIR=LTR>
+<head>
+<title>[認証方法]</title>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 dir=ltr>
+<font face="ＭＳ Ｐゴシック">
+
+<p><a name="hidd_authentication"></a><strong>[認証方法]</strong></p>
+
+<p>このダイアログ ボックスは、ユーザーを識別、つまり &quot;認証&quot; するように Web サーバーを構成するために使用します。これにより、権限のないユーザーがアクセスの制限されたコンテンツに Web (HTTP) 接続することを防ぎます。認証処理では、ユーザーが、特定の Web サイト、ディレクトリ、またはファイルにアクセスするための、適切な Windows ファイルシステムのアクセス権が付加されている、有効な Windows ユーザー アカウントを持っているかどうかを確認します。</p>
+ 
+<p><strong>[匿名接続]</strong></p>
+
+<p>ユーザーが匿名で接続できるようにするには、このチェック ボックスをオンにします。有効な Windows ユーザー アカウントである匿名アカウントまたはゲスト アカウントでユーザーがログオンできます。</p> 
+
+<p><strong>[認証済みアクセス]</strong></p>
+
+<p><strong>[基本認証]</strong></p>
+
+<p>ユーザーの識別に広く使用されている業界標準の基本認証方式を、Web サーバーで有効にするには、このチェック ボックスをオンにします。</p>
+
+<p><font color="#0000FF"><strong>重要</strong></font>&nbsp;&nbsp;&nbsp;基本認証では、パスワードが暗号化されずにネットワーク上を伝送されます。そのため、悪意のある第三者がネットワーク監視ツールを使用して、ユーザー名とパスワードを意図的に傍受するおそれがあります。</p>
+
+<p><strong>[編集]</strong></p>
+
+<p>ドメイン名を明示しないユーザーに対し、ローカル ドメインではなく、既定のログオン ドメインと見なすように Web サーバーを構成するには、[編集] をクリックして設定します。</p>
+
+<p><strong>[ダイジェスト認証]</strong></p>
+
+<p>IIS&nbsp;5.0 および 5.1 で新しく導入されたこの方式では、パスワードではなくハッシュ値をネットワーク上に送ります。この方式は、プロキシ サーバーやその他のファイアウォールで使用することができます。</p>
+
+<p><strong>[統合 Windows 認証]</strong></p>
+
+<p>統合 Windows 認証処理では、Web サーバーは、ユーザーの Internet Explorer Web ブラウザと暗号情報をやり取りします。</p>
+
+<p>統合 Windows 認証をいったん有効にすると、Web サーバーは、次の場合のみこの認証処理を使用します。</p>
+
+<ul>
+<li>匿名アクセスが無効になっている。</li>
+<li>Windows ファイル システムのアクセス権が設定されているために、制限されたコンテンツへの接続時に Windows ユーザー名とパスワードの入力が必要となり、その結果匿名アクセスが拒否されている。</li>
+</ul>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

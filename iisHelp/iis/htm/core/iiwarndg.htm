@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ISAPI フィルタをインストールする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サイトに ISAPI フィルタをインストールする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="installingisapifilters">ISAPI フィルタをインストールする</a></h1>
+
+<p>ISAPI フィルタは、Web サーバーが HTTP 要求を受け取った際に応答するプログラムです。ただし、ISAPI 拡張とは異なり、ISAPI フィルタは常にサーバー プロセスで実行されます。ISAPI フィルタは、クライアントからの要求ではなく、Web サーバーのイベントによって呼び出される点がアプリケーションとは異なります。ISAPI フィルタを特定の Web サーバーのイベントに関連付けると、その関連付けられたイベントが発生するたびにフィルタが呼び出されます。たとえば、読み取りまたは書き込みのイベントが発生したときにフィルタを呼び出して、クライアントに返すデータを暗号化することができます。</p>
+
+<p>サーバーのすべてのサイトに適用されるフィルタ (グローバル フィルタ) をインストールすることも、個々の Web サイトに適用されるフィルタをインストールすることもできます。グローバル フィルタとサイト フィルタの両方をインストールした場合は、2 つのフィルタ リストがマージされてサイトに適用されます。</p>
+
+<p>同じイベントに対して複数のフィルタが登録されている場合、フィルタは順番に呼び出されます。優先順位の高いフィルタは、優先順位の低いフィルタより先に実行されます。同じ優先順位のフィルタが複数ある場合は、マスタ プロパティで設定されたグローバル フィルタが、サイト レベルで設定されたフィルタより先に実行されます。同じ優先順位で同じ継承レベルにあるフィルタは、読み込まれた順序で実行されます。フィルタが読み込まれる順序は、Web サーバーまたは Web サイトのプロパティ シートで変更できます。</p> 
+
+<big>Web サーバーまたは Web サイトにフィルタを追加するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サーバーまたは Web サイトを選択し、プロパティ シートを開きます。</li>
+<li>[ISAPI フィルタ] タブを選択します。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;Web サイトにフィルタを追加する場合、Web サーバーのマスタ プロパティから継承されたグローバル フィルタは表示されません。両方のフィルタが実行されていても、Web サイトにインストールされたフィルタだけが表示されます。</p>
+
+<li>[追加] をクリックします。</li>
+<li>[フィルタ名] ボックスにフィルタの名前を入力します。[実行ファイル] ボックスに DLL ファイルの名前を入力するか、[参照] をクリックしてファイルを選択します。</li>
+<li>[OK] をクリックします。</li>
+<li> フィルタが読み込まれる順序を変更するには、上下の矢印をクリックします。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;フィルタが読み込まれる順序を変更できるのは、同じ優先順位のときだけです。</p>
+
+<li>グローバル フィルタを追加または変更した場合は、Web サーバーを停止、再起動して新しいフィルタをメモリに読み込む必要があります。Web サイト レベルで追加したフィルタは、追加時に自動的に読み込まれます。</li>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;HTTP 要求によってフィルタの登録先のイベントが発生すると、それがファイル、CGI アプリケーション、または ISAPI 拡張のいずれに対する要求であっても、要求に含まれるデータがフィルタに渡されます。</p>
+
+<hr class="iis" size="1"><p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

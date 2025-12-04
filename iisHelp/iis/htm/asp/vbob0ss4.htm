@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>CreateObject</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_createobject"></A><SUP></SUP>CreateObject</H4>
+
+<P>CreateObject メソッドは、サーバー コンポーネントのインスタンスを作成します。コンポーネントに OnStartPage メソッドと OnEndPage メソッドが実装されている場合は、この時点で OnStartPage メソッドが呼び出されます。サーバー コンポーネントの詳細については、「<A HREF="/iishelp/iis/htm/asp/comp275c.htm">ASP で利用可能なコンポーネント</A>」を参照してください。</P>
+
+<H6>構文</H6>
+
+<P>Server.<B>CreateObject</B>( <I>progID</I> )</P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>progID</I></DT>
+
+<DD>作成するオブジェクトの種類を指定します。<i>progID</i> の形式は [<i>Vendor</i>.]<i>Component</i>[.<i>Version</i>] です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>既定では、Server.CreateObject メソッドで作成されたオブジェクトはページ スコープを持ちます。つまり、これらのオブジェクトは、サーバーが現在の ASP ページの処理を完了した時点で自動的に破棄されます。</P>
+
+<P>セッション スコープまたはアプリケーション スコープを持つオブジェクトを作成するには、Global.asa で &lt;OBJECT&gt; タグを使用して SCOPE 属性を SESSION または APPLICATION に設定するか、あるいはオブジェクトをセッション変数かアプリケーション変数に格納します。</P>
+
+<P>たとえば、次のスクリプトでセッション変数に格納したオブジェクトは、<A HREF="/iishelp/iis/htm/asp/vbob12d0.htm">Session</A> オブジェクトが破棄されたとき、つまり、セッションがタイムアウトになるか、または <A HREF="/iishelp/iis/htm/asp/vbob5tpq.htm">Abandon</A> メソッドが呼び出されたときに、破棄されます。</P>
+
+<PRE><CODE>&lt;% Set Session("ad") = Server.CreateObject("MSWC.AdRotator")%&gt;
+ </CODE></PRE>
+
+<P>また、変数を <CODE>Nothing</CODE> に設定するか、または下の例のように新しい値を設定することで、オブジェクトを破棄することもできます。1 番目の例ではオブジェクト <CODE>ad</CODE> を解放しています。2 番目の例では <CODE>ad</CODE> を文字列に置換しています。</P>
+
+<PRE><CODE>&lt;% Session("ad") = Nothing %&gt;
+&lt;% Session("ad") = "some other value" %&gt;
+ </CODE></PRE>
+
+<P>組み込みオブジェクトと同じ名前のオブジェクト インスタンスは作成できません。たとえば、次の例はエラーを返します。</P>
+
+<PRE><CODE>&lt;% Set Response = Server.CreateObject("Response") %&gt; 
+ </CODE></PRE>
+
+<H6>例</H6>
+
+<PRE><CODE>&lt;% Set MyAd = Server.CreateObject("MSWC.AdRotator") %&gt; 
+ </CODE></PRE>
+
+<P>この例は、MSWC.AdRotator コンポーネントとして <CODE>MyAd</CODE> というサーバー コンポーネントを作成しています。このコンポーネントは 、Web ページ上の広告の交換を自動的に行うために使用します。 </P>
+
+<P>サーバー コンポーネントの詳細については、Platform SDK を参照してください。</P>
+
+<H6>対象</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

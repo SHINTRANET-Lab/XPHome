@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>GetMapping</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_getmapping"></A><SUP></SUP>GetMapping</H3>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore4qia.htm">IIsCertMapper</A> オブジェクトの GetMapping メソッドは、既存の証明書マッピングから証明書およびマッピング データを取得します。マッピングの検索方法には、証明書による検索、名前による検索、Windows アカウントによる検索、および数値文字列のインデックスによる検索の 4 種類があります。取得したマッピングは、指定したパラメータ変数に返されます。</P>
+
+<H6>構文</H6>
+
+<P>IIsCertMapper.<B>GetMapping</B> <I>IMethod</I>,<I>vKey</i>,<I>vCert</I>,<I>NtAcct</I>,<I>NtPwd</I>,<I>strName</I>,<i>IEnabled</I> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>IMethod</I></DT>
+
+<DD>マッピングの検索に使用する方法を指定します。有効な検索方法は、1、2、3、または 4 です。検索方法 1 は証明書による検索、2 は名前による検索、3 は Windows アカウントによる検索、および 4 は 1 から始まる数値文字列のインデックス (&quot;1&quot;、&quot;2&quot; など) による検索です。<BR>
+</DD>
+
+<DT><I>vKey</I></DT>
+
+<DD><I>IMethod</I> で指定した検索で使用するキーを指定します。検索方法 1 の場合は、<I>vKey</I> で証明書を指定します。検索方法 2 の場合は、<I>vKey</I> で名前を指定します。検索方法 3 の場合は、<I>vKey</I> で Windows のアカウントを指定します。検索方法 4 の場合は、<I>vKey</I> で数値文字列のインデックス ("1"、"2" など) を指定します。<BR>
+</DD>
+
+<DT><I>vCert</I></DT>
+
+<DD>返された証明書を受け取ります。<BR>
+</DD>
+
+<DT><I>NtAcct</I></DT>
+
+<DD>返された Windows アカウントを受け取ります。<BR>
+</DD>
+
+<DT><I>NtPwd</I></DT>
+
+<DD>返された Windows アカウントのパスワードを受け取ります。<BR>
+</DD>
+
+<DT><I>strName</I></DT>
+
+<DD>返された Windows アカウントのわかりやすい名前を受け取ります。<BR>
+</DD>
+
+<DT><I>IEnabled</I></DT>
+
+<DD>有効なマッピングの場合は戻り値 TRUE を受け取り、無効なマッピングの場合は FALSE を受け取ります。</DD>
+</DL>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;% 
+  Dim CertObj, vCert, NtAcct, NtPwd, strName, IEnabled 
+  Set CertObj = GetObject("IIS://..<I>path</I>../IIsCertMapper") 
+  'Search by Windows account. 
+  CertObj.GetMapping 3, "MYACCT", vCert, NtAcct, NtPwd, strName, IEnabled 
+%&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore3mqv.htm"><B>CreateMapping</B></A>、<A HREF="/iishelp/iis/htm/asp/aore2s13.htm"><B>DeleteMapping</B></A>、<A HREF="/iishelp/iis/htm/asp/aore4his.htm"><B>SetAcct</B></A>、<A HREF="/iishelp/iis/htm/asp/aore5e78.htm"><B>SetEnabled</B></A>、<A HREF="/iishelp/iis/htm/asp/aore7d7p.htm"><B>SetName</B></A>、<A HREF="/iishelp/iis/htm/asp/aore5msk.htm"><B>SetPwd</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

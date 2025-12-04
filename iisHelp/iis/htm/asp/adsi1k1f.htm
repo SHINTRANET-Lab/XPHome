@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS パフォーマンス機能</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_k2_iis_performance_features"></A><SUP></SUP>IIS パフォーマンス機能</H4>
+
+<H6>サイトのソケット プーリング</H6>
+
+<P>IIS 4.0 では、各 Web サイトが異なる IP アドレスにバインドされていました。つまり、各サイトが独自にソケットを持ち、ほかの IP アドレスにバインドされたサイトとソケットを共有しませんでした。各サイトの開始時に作成されるこれらのソケットは、非ページ メモリ (RAM) を大量に消費する可能性があります。そのため、複数のサイトが開始されるとコンピュータの RAM が不足し、コンピュータに作成された IP アドレスにバインドされるサイトの数が制限されます。</P>
+
+<P>IIS 5.0 では、同じポート番号を共有する異なる IP アドレスにバインドされたサイトが、同じソケット群を共有するように変更されました。その結果、同じコンピュータ上の IP アドレスに、IIS&nbsp;4.0 のときよりも多くのサイトをバインドできるようになりました。IIS 5.1 では、開始されたすべてのサイトが共有ソケットを柔軟に使用できるようにすることで、リソースの消費を減らしています。</P>
+
+<P>IIS&nbsp;5.0 以上のバージョンでは、これが既定の動作となります。通常、この動作を変更する必要はありません。ただし、専用のソケットを必要とする重要なサイトでは、<A HREF="/iishelp/iis/htm/asp/apro9zon.htm">DisableSocketPooling</A> を TRUE に設定して、IIS&nbsp;4.0 の動作に戻すことができます。この変更は必ずサイト レベルのみで行い、ほかのサイトがそのまま新しいソケット プーリング機能を利用できるようにします。</P>
+
+<H6>ソケット プーリング、パフォーマンス、およびセキュリティの問題</H6>
+
+<P>次のいずれかに当てはまる場合は、ソケット プーリングを無効にする場合があります。
+
+<UL type=disc>
+	<LI>多くのサイトをホストしていない場合 </li>
+
+	<LI>特殊なセキュリティ問題がある場合 </li>
+</UL>
+
+<P>ソケット プーリングにより、IIS&nbsp;5.1 がすべての IP アドレスを待機するようになります。これにより、複数ネットワークの安全なドメインのセキュリティ リスクが発生する可能性があります。また、帯域幅調整およびパフォーマンス調整の両方が、例えば、ポート 80 など、同じポートに対して構成されたすべての Web サイトに適用します。帯域幅調整またはパフォーマンス調整をサイト ベースで実行する場合は、各サイトに独自の IP アドレスがなければならず、ソケット プーリングを無効にする必要があります。ホスト ヘッダーを使用する Web サイトは、個別に調整することはできません。</P>
+
+<P>ソケット プーリングを無効にするには、コマンド プロンプトで次のように入力します。</P>
+
+<P><B>cscript c:\inetpub\adminscripts\adsutil.vbs set w3svc/disablesocketpooling true</B></P>
+
+<P>コマンド プロンプトは、次のように応答します。</P>
+
+<P><B>disablesocketpooling : (BOOLEAN) True</B></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

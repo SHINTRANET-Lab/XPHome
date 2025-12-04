@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アクセス制御について</title>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="FTP サイト または Web サイトのコンテンツに対するユーザーのアクセスを許可または拒否する Web サーバーの機能について説明します。WebDAV についても説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="aboutauthentication">アクセス制御について</a></h1>
+  
+<p>Web サーバーを安全に稼働させるためには、Web および FTP のコンテンツに対するユーザー アクセスを適切に制御することが重要です。Windows や IIS のセキュリティ機能を使用することで、Web および FTP のコンテンツに対するユーザー アクセスを効果的に制御できます。Web サイトおよび FTP サイト全体から個々のファイルまで、さまざまなレベルでアクセスを制御することが可能です。</p>
+
+<ul>
+<li><a href="#anonaccess">匿名アクセス</a></li>
+<li><a href="#dav">WebDAV</a></li>
+<li><a href="#overviewaccess">アクセス制御のしくみ</a></li>
+<li><a href="#guidelines">アクセスの制御に関するガイドライン</a></li>	
+</ul>
+
+<h2><a name="anonaccess">匿名アクセス</a></h2>
+
+<p>匿名アクセスは、ほとんどの Web サイトで使用されているアクセス制御方法です。匿名アクセスを使うと、どのユーザーも Web サイトの公開された領域にアクセスできますが、Web サーバーの重要な管理機能やプライベートな情報には、権限のないユーザーはアクセスすることはできません。  </p>
+
+<p>Web サーバーを美術館にたとえると、匿名アクセスを許可するということは、一般公開されているギャラリーや展示品を来場者が自由に鑑賞してもよいことを意味します。一方、事務室や学芸員室など、部外者に入られては困る特定の部屋には鍵が掛かっているはずです。同じように、Web サーバーの匿名アクセスを構成する場合、NTFS のアクセス権を適用することで、一般ユーザーがプライベートなファイルやディレクトリにアクセスすることを防ぐことができます。NTFS のアクセス権については、後の「<a href="#NTFSpermissions">NTFS のアクセス権</a>」を参照してください。</p>
+
+<p>既定の設定では、すべてのユーザーは匿名アカウントを使って Web サーバーにログオンします。インストールの際に、サーバーには、IUSR_<em>computername</em> という名前の特別な匿名ユーザー アカウントが作成されます。たとえば、コンピュータ名が SalesDept1 の場合、匿名アカウント名は IUSR_SalesDept1 になります。サーバーに複数の Web サイトがある場合、すべてのサイトで同じ匿名ユーザー ログオン アカウントを使用することも、サイトごとに異なるアカウントを使用することも可能です。Windows のローカル ユーザーとグループ ユーティリティを使用して、新しい “匿名ログオン” ユーザー アカウントを作成することもできます。詳細については、「<a href="iiabasc.htm">認証について</a>」を参照してください。</p>
+
+<h2><a name="dav"></a>WebDAV</h2>
+<P>WebDAV (Web Distributed Authoring and Versioning) は、ファイル システムなどの格納媒体を HTTP 接続で使用可能にする、HTTP 1.1 規格の拡張機能です。WebDAV は IIS に実装されているため、作成元はリモートで、サーバー上のファイルおよびディレクトリとそのプロパティを移動、検索、または削除することができます。WebDAV は、Web サーバーのアクセス権の設定を使用して構成されます。詳細については、「<A href="wcwbdav.htm">WebDAV の発行</A>」を参照してください。</p>
+
+<p>WebDAV のアクセス権は、次の操作に対して設定できます。</p>
+
+<ul>
+<li>ディレクトリおよびファイルとそのプロパティの検索</li>
+<li>ディレクトリおよびファイルとそのプロパティの作成、変更、削除、および参照</li>
+<li>ファイルおよびディレクトリのカスタム プロパティの保存および検索</li>
+<li>共同作業環境でのファイルのロック</li> 
+</ul>
+
+
+<p>WebDAV は、ファイル アロケーション テーブル (FAT) および NTFS の両方で機能します。WebDAV 仕様ドラフトの詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=protocols" target=_blank>World Wide Web Consortium の Web サイト</a>の「WWW Distributed Authoring and Versioning」を参照してください。NTFS の詳細については、「<a href="iintfsc.htm">NTFS でファイルを保護する</a>」を参照してください。</P>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;WebDAV は、HTTP&nbsp;1.1 用に設計されたものです。 したがって、FTP サイトなどの非 HTTP サービスでは利用できません。</P>
+
+<h2><a name="overviewaccess">アクセス制御のしくみ</a></h2>
+<p>Windows ファイル システムおよび Web サーバーのセキュリティ機能を適切に構成することで、Web サーバーのコンテンツに対するユーザー アクセスを制御することができます。ユーザーが Web サーバーにアクセスしようとすると、サーバーはいくつかのアクセス制御処理を行ってユーザーを識別し、許可するアクセス レベルを決定します。</p> 
+
+
+<img src="iiacnsc2.GIF" align="MIDDLE" alt="アクセス制御のフロー チャート">
+
+<p>アクセス制御処理の概要を次に示します。</p>
+
+
+
+<ol>
+<li>クライアントがサーバーのリソースを要求します。</li>
+<li>サーバーは、認証を行うように構成されている場合、クライアントに認証情報を要求します。ブラウザはユーザーに対してユーザー名とパスワードの入力を求めるか、あるいはこの情報を自動的に提供します。詳細については、「<a href="iiabasc.htm">認証について</a>」を参照してください。</li>
+<li>IIS は、ユーザーが有効な Windows ユーザー アカウントを持っているかどうかを確認します。アクセス権がない場合、要求は失敗し、ユーザーに &quot;403 Access Forbidden&quot; というメッセージが返されます。</li>
+<li>IIS は、要求されたリソースに対する Web のアクセス権をユーザーが持っているかどうかを確認します。アクセス権がない場合、要求は失敗し、ユーザーに &quot;403 Access Forbidden&quot; というメッセージが返されます。 </li>
+<li>Web サイトの管理者が追加したサードパーティのセキュリティ モジュールがある場合は、ここで使用します。</li>
+<li>IIS は、リソースに対する NTFS のアクセス権を確認します。ユーザーがリソースに対する NTFS のアクセス権を持っていない場合は、要求は失敗し、ユーザーに &quot;401 Access Denied&quot; というメッセージが返されます。</li>
+<li>ユーザーに NTFS のアクセス権がある場合は、要求は受け付けられます。</li>
+</ol>
+
+
+
+
+<h3><a name="H3_37683323">Web サーバーのアクセス権</a></h3>
+
+<p>特定のサイト、ディレクトリ、およびファイルに対して、Web サーバーの &quot;アクセス権&quot; を構成できます。このアクセス権は、ユーザー固有のアクセス権利に関係なく、すべてのユーザーに適用されます。たとえば、特定の Web サイトのコンテンツを更新している間は、その Web サイトの読み取りアクセス権を無効にして、ユーザーがアクセスできないようにすることができます。 ユーザーがその Web サイトにアクセスしようとすると、サーバーから &quot;Access Forbidden&quot; というエラー メッセージが返されます。一方、読み取りアクセス権を有効にすると、サイトを表示できるユーザーを NTFS のアクセス権で制限していない限り、すべてのユーザーに Web サイトの表示を許可することになります。詳細については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</p>
+
+<p>Web サーバーのアクセス権のレベルは、次のとおりです。</p>
+<ul> 
+	<li>[<strong>読み取り</strong>]&nbsp;&nbsp;(既定で選択) ファイルのコンテンツおよびプロパティを表示できます。</li>
+	<li>[<strong>書き込み</strong>]&nbsp;&nbsp;ファイルのコンテンツおよびプロパティを変更できます。</li>
+	<li>[<strong>スクリプト ソース アクセス</strong>]&nbsp;&nbsp;ソース ファイルにアクセスできます。[読み取り] チェック ボックスがオンになっている場合は、ソース コードを読み取ることができ、[書き込み] チェック ボックスがオンになっている場合は、ソース コードに書き込むことができます。[スクリプト ソース アクセス] チェック ボックスをオンにすると、ユーザーは ASP アプリケーションのスクリプトなどの、ファイルのソース コードにアクセスすることができます。このオプションは、[読み取り] チェック ボックスまたは [書き込み] チェック ボックスのいずれかがオンになっている場合にのみ使用できます。</li>
+	<li>[<strong>ディレクトリの参照</strong>]&nbsp;&nbsp;ファイルの一覧とコレクションを表示できます。</li>
+	<li>[<strong>ログ アクセス</strong>]&nbsp;&nbsp;Web サイトを利用するたびにログ エントリが作成されます。</li>
+	<li>[<strong>このリソースに索引をつける</strong>]&nbsp;&nbsp;インデックス サービスで、このリソースに索引を付けることができます。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;Web サーバーのアクセス権の設定では、サイト、仮想ディレクトリ、またはファイルで使用できる HTTP の動詞を設定します。</p>
+</ul>
+
+
+<h3><a name="NTFSpermissions">NTFS のアクセス権</a></h3>
+
+<p>インターネット インフォメーション サービスは、NTFS のアクセス権を使って、権限のないアクセスから個々のファイルおよびディレクトリを保護します。すべてのユーザーに一律に適用される Web サーバーのアクセス権とは異なり、NTFS のアクセス権では、コンテンツにアクセスできるユーザーと、そのユーザーがコンテンツに対して実行できる操作を、厳密に定義できます。</p>
+
+<p>NTFS のアクセス権のレベルは、次のとおりです。</p>
+
+<ul>
+<li>[<strong>フル コントロール</strong>]&nbsp;&nbsp;ファイル、ファイルに関連付けられたプロパティ、およびディレクトリに対して、変更、追加、移動、削除を実行できます。また、すべてのファイルおよびサブディレクトリに対するアクセス権の設定を変更できます。</li>
+
+<li>[<strong>変更</strong>]&nbsp;&nbsp;ファイルとファイルのプロパティを表示、変更、削除、追加できます。</li>
+
+<li>[<strong>読み取りと実行</strong>]&nbsp;&nbsp;スクリプトなどの実行可能ファイルを実行できます。</li>
+
+<li>[<strong>フォルダの内容の一覧表示</strong>]&nbsp;&nbsp;フォルダの内容の一覧を表示できます。</li>
+
+<li>[<strong>読み取り</strong>]&nbsp;&nbsp;ファイルおよびファイルのプロパティを表示できます。</li>
+
+<li>[<strong>書き込み</strong>]&nbsp;&nbsp;ファイルに書き込むことができます。</li>
+
+<li>[<strong>アクセス権なし</strong>]&nbsp;&nbsp;すべてのチェック ボックスがオフになっている場合、上位レベルの親ディレクトリにアクセスできる場合でも、このリソースに対するアクセスは一切許可されません。</li>
+
+<p><font color="#0000FF"><strong>重要</strong></font>&nbsp;&nbsp;&nbsp;IUSR_<em>computername</em> アカウントに対して、リソースへのアクセス権を [アクセス権なし] に設定すると、匿名ユーザーはリソースへのアクセスを拒否されます。</p>
+</ul>
+
+<p>随意アクセス制御リスト (DACL) とも呼ばれるアクセス権の一覧は、個々のファイルまたはディレクトリに対して定義します。DACL を定義する場合は、Windows の特定のユーザー アカウントまたはユーザー グループを選択し、そのユーザーまたはグループに対するアクセス許可を指定します。</p>
+
+
+<p>次の表は、架空の Microsoft Word ドキュメント <EM>MYSERVER:\Administration\Accounts.doc</EM> に対するアクセス制御リストの内容です。</p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th width="50%" align="LEFT" valign="TOP" bgcolor="#C0C0C0"><strong>ユーザー アカウントまたはユーザー グループ</strong></th>
+<th width="50%" bgcolor="#C0C0C0" align="Left" valign="top"><strong>アクセス権</strong></th>
+</tr>
+<tr>
+<td width="50%" valign="Top">MYSERVER\Administrators</td>
+<td width="50%" valign="Top">フル コントロール</td>
+</tr>
+<tr>
+<td width="50%" valign="Top">MYSERVER\JeffSmith</td>
+<td width="50%" valign="Top">変更</td>
+</tr>
+<tr>
+<td width="50%" valign="Top">MYSERVER\Guests</td>
+<td width="50%" valign="Top">アクセス権なし</td>
+</tr>
+</table>
+
+<p>Administrator グループのメンバを除けば、&quot;JeffSmith&quot; という名前のアカウントだけが、Accounts.doc を変更する権限を持っています。Windows の Guest ユーザー グループのメンバとしてログオンする一般のユーザーは、Accounts.doc へのアクセスを明示的に拒否されます。</p>
+
+<p>NTFS のアクセス権を設定した場合、制限されたファイルへのアクセスを許可する前に、Web サーバーでユーザーを識別、つまり &quot;認証&quot; する方法が必要になります。有効な Windows アカウントのユーザー名とパスワードの提示をログオンするユーザーに要求するように、サーバーの認証機能を構成できます。詳細については、「<a href="iiabasc.htm">認証について</a>」を参照してください。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;NTFS の DACL の設定が正しくない場合、ブラウザがユーザーに対してユーザー情報の入力を求める場合があります。たとえば、DACL の設定によってファイルへのアクセスが許可されていないユーザーに対して、IIS はアクセス拒否のエラー メッセージを発行します。 この結果、ブラウザはユーザーに対して別のユーザー名とパスワードを入力するように要求します。</P>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;サーバーの安全を確保するには、不要なユーザーやグループ、または用途に関係のないグループを削除する必要があります。ただし、詳細の変更をせずに Web リソースの DACL から Everyone グループを削除すると、非匿名アクセスも使用できなくなる可能性があります。非匿名アクセスを正常に実行するには、次の権限を特定のユーザーまたはユーザー グループに追加する必要があります。
+<ul>
+<li>Administrator [フル コントロール]</li>
+<li>Creator/Owner [フル コントロール]</li>
+<li>System [フル コントロール]</li>
+</ul>
+
+<p>手順については、「<a href="iintfsc.htm">NTFS でファイルを保護する</a>」と「<a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a>」を参照してください。</p>
+
+
+<h2><a name="guidelines">アクセスの制御に関するガイドライン</a></h2>
+
+<p>次のガイドラインを使用して、Web サーバーのセキュリティに対する脅威を減らすことができます。適切なアクセス制御のポリシーを実装し、Web サーバーと Windows のセキュリティ機能を正しく設定した場合、確実なセキュリティ構成を実現できます。</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;金融機関のようにセキュリティを特に必要とする業界向けのアプリケーションを開発する場合は、適切なセキュリティの方針と手順の設定について、セキュリティ専門のコンサルティング会社によるサポートを受けることをお勧めします。コンサルティング会社を利用すると、適切なセキュリティ ポリシーとプロシージャを確立できます。</p>
+
+<p>Web サーバーのコンテンツを適切に保護するには、セキュリティ ポリシーに次のガイドラインが必要です。</p>
+
+<h3><a name="H3_37687994">強固なパスワード ポリシーを維持する</a></h3>
+
+<p>権限を持たないユーザーでも、ユーザー アカウントのパスワードを盗んだり推測したりすることで、Web サーバーにアクセスできる可能性があります。すべてのパスワード、中でも特に管理者権限を保護するためのパスワードは、容易に察知することのできないものにする必要があります。&quot;強固な&quot; パスワードを選択するには、次のガイドラインを使用します。</p>
+
+<ul>
+<li> パスワードには、一般的な言葉を使わないようにします。システムに危害を加えようとする第 3 者は、特殊なディクショナリ参照プログラムを使用して、パスワードの推測を試みることがあります。</li>
+<li>パスワードは、大文字と小文字の両方を含む 8 文字より長い文字列にします。パスワードには数字も使うようにし、可能であれば特殊文字も含めます。</li>
+<li>ユーザーには、パスワードを定期的に変更させるようにします。</li>
+</ul>
+
+<h3><a name="H3_37688822">Web サーバーの管理者権限へのアクセスを制限する</a></h3>
+
+<p>Web サーバーの &quot;Administrators&quot; グループへのアクセスは制限する必要があります。Administrators グループのメンバは、Web サーバー全体とそのセキュリティ機能を自由に制御できます。次の手順で、Administrators グループのメンバシップを管理します。</p>
+
+<ul>
+<li>管理者権限は、信頼できる個人にだけ与えるようにします。</li>
+<li>Administrator アカウントは、ネットワーク ドメインの管理にのみ使用します。インターネットのコンテンツを参照する場合は、Windows のユーザー グループ Guest と同程度の権限を持つ別のユーザー アカウントを使用します。これにより、インターネット上に公開されるコンピュータのプロセスが制限されます。</li>
+<li>新しいユーザー グループを作成するときは、内容を自由に操作できるフル コントロールのアクセス権を割り当てないようにします。</li>
+<li>Administrator アカウントのパスワードは定期的に変更します。</li>
+<li>Administrator としてログオンしている間は、信頼できないプログラムを実行しないように注意します。</li>
+<li>Web サーバーをリモートで管理する際には、SSL のセキュリティ機能を使用します。</li>
+</ul> 
+
+<h3><a name="H3_37689712">厳格なアカウント ポリシーを維持する</a></h3>
+
+<p>Windows のグループ ポリシーを使用して、Windows のユーザー グループに &quot;ユーザー権限のポリシー&quot; を指定します。ユーザー権限のポリシーによって、ユーザーが実行できる Web サーバーおよび Windows の管理操作が決まります。たとえば、一般ユーザーが Web サーバーをリモートからシャット ダウンする権限を持たないように、権限のポリシーを設定できます。原則として、ユーザー権利のポリシーは十分厳しく設定する必要があります。Web サーバーおよびそのリソースを変更できる権利を、誤ってユーザーに与えることがないようにします。詳細については、Windows のマニュアルを参照してください。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

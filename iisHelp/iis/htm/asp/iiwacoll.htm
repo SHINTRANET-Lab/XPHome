@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>コレクションを使用する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="コレクション全体に対して繰り返し操作を実行するなど、組み込みオブジェクトのコレクションを使用する方法を説明します。VBScript と JScript のコード サンプルも示します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="usingcollections">コレクションを使用する</a></h1>
+
+
+<p>ASP の組み込みオブジェクトの多くは、コレクションを提供しています。&quot;コレクション&quot; は、文字列、数値、オブジェクト、およびその他の値を格納する配列と類似したデータ構造です。ただし、コレクションから項目が取り出されたり、コレクションに項目が格納されたりすると、それに合わせて自動的にコレクションが拡大または縮小する点が、配列とは異なります。コレクションに対して変更が加えられると、コレクション内での項目の位置も移動します。一意の文字列キーおよびコレクション内でのインデックス (位置) を使用したり、コレクション内のすべての項目に対して操作を繰り返し実行したりすることにより、コレクション内の項目にアクセスすることができます。</p>
+
+<h2><a name="H2_37766951">名前またはインデックスを使用して項目にアクセスする</a></h2>
+
+<p>コレクション内の特定の項目には、一意の文字列キー、またはその名前を使用してアクセスすることができます。たとえば、<strong>Contents</strong> コレクションは、<strong>Session</strong> オブジェクトに格納されたすべての変数を保持しています。また、Contents コレクションは、<strong>Server.CreateObject</strong> を呼び出してインスタンス生成されたオブジェクトもすべて保持しています。たとえば、次のユーザー情報を <strong>Session</strong> オブジェクトに格納したとします。</p>
+
+<pre>&lt;%
+  Session.Contents("FirstName") = "Meng"
+  Session.Contents("LastName") = "Phua"
+  Session.Contents("Age") = 29
+%&gt;</pre>
+
+<p>この場合、各項目には、コレクションに項目を格納するときに関連付けた文字列キーを使ってアクセスすることができます。たとえば、次の式は文字列 "Meng" を返します。</p>
+
+<pre>&lt;%= Session.Contents("FirstName") %&gt;</pre>
+
+<p>項目に関連付けられたインデックス (番号) を使用して項目にアクセスすることもできます。たとえば、次の式は <strong>Session</strong> オブジェクト内で 2 番目に格納されている情報を取得し、"Phua" を返します。</p>
+
+<pre>&lt;%= Session.Contents(2) %&gt;</pre>
+
+<p>ASP のコレクションには、1 から番号が付けられています。 項目に関連付けられたインデックスは、コレクションへの項目の追加やコレクションからの項目の削除によって変わることがあります。したがって、項目のインデックスが常に同じであると仮定することはできません。一般に、インデックスを使用したアクセスは、次で説明するようにコレクション全体に対して繰り返し操作を行う場合か、または読み取り専用のコレクション内の項目にアクセスする場合に使用します。</p>
+
+<p>省略記法を使用して、項目に名前でアクセスすることもできます。ASP は、オブジェクトに関連付けられているコレクションを一定の順序で探します。特定の名前を持つ項目が、あるオブジェクトのコレクションに 1 つしかない場合は、コレクション名を省略できますが、結果としてパフォーマンスが低下することがあります。</p>
+
+<pre>&lt;%= Session("FirstName") %&gt;</pre>
+
+<p><strong>Application</strong> オブジェクトまたは <strong>Session</strong> オブジェクトに格納された項目にアクセスする場合は、通常、コレクション名を省略しても目的の項目に安全にアクセスできます。しかし、<strong>Request</strong> オブジェクトの場合は、コレクション名を指定する方がより安全です。 これは、コレクションに重複した名前を持つ項目が含まれる可能性が高いためです。</p>
+
+<h2><a name="H2_37768485">コレクション全体に対して繰り返し操作を実行する</a></h2>
+
+<p>コレクション内のすべての項目に対して操作を繰り返し実行すると、コレクションに格納されている内容を調べたり、項目を修正したりすることができます。コレクション全体に対して繰り返し操作を行う場合は、コレクション名を指定する必要があります。たとえば、VBScript の <strong>For...Each</strong> ステートメントを使用すると、<strong>Session</strong> オブジェクトに格納されているすべての項目にアクセスすることができます。</p>
+
+<pre>&lt;% 
+  'Declare a counter variable.
+  Dim strItem 
+
+  'For each item in the collection, display its value.
+  For Each strItem In Session.Contents 
+    Response.Write Session.Contents(strItem) & "&lt;BR&gt;"
+  Next
+%&gt;</pre>
+
+<p>VBScript の <strong>For...Next</strong> ステートメントを使用して、コレクション全体に対して繰り返し操作を実行することもできます。たとえば、前の例の <strong>Session</strong> に格納されている 3 つの項目を一覧表示するには、次のステートメントを使用します。</p>
+
+<pre>&lt;% 
+  'Declare a counter variable.
+  Dim intItem
+
+  'Repeat the loop until the value of counter is equal to 3.
+  For intItem = 1 To 3
+    Response.Write Session.Contents(intItem) & "&lt;BR&gt;"
+  Next
+%&gt;</pre>
+
+<p>通常、コレクション内に格納されている項目の数はわかりませんが、ASP ではコレクション内の項目を返す <strong>Count</strong> プロパティをサポートしているため、<strong>Count</strong> プロパティを使用してカウンタの最後の値を指定することができます。</p> 
+
+<pre>&lt;% 
+  'Declare a counter variable.
+  Dim lngItem, lngCount
+
+  lngCount = Session.Contents.Count
+
+  'Repeat this loop until the counter equals the number of items
+  'in the collection.
+  For lngItem = 1 To lngCount
+     Response.Write Session.Contents(lngItem) & "&lt;BR&gt;"
+  Next
+%&gt;</pre>
+
+<p>JScript では、<strong>for</strong> ステートメントを使うと、コレクション全体に対してループを実行できます。JScript の <strong>for</strong> ステートメントで <strong>Count</strong> プロパティを使用する場合は、効率を高めるために、<strong>Count</strong> の値をローカル変数に割り当ててから、このローカル変数を使用してカウンタの最後の値を設定します。この方法を使うと、ループを繰り返すたびにスクリプト エンジンが <strong>Count</strong> の値を求める必要がなくなります。この例を次に示します。</p>
+
+<pre>&lt;% 
+  var intItem, intNumItems;
+		
+  intNumItems = Session.Contents.Count;
+		
+  for (intItem = 1; intItem &lt;= intNumItems; intItem++)
+  {
+    Response.Write(Session.Contents(intItem) + "&lt;BR&gt;")
+  }
+%&gt;</pre>
+
+
+<p>Microsoft JScript では、<strong>Enumerator</strong> オブジェクトがサポートされており、このオブジェクトを使って ASP のコレクションに対する繰り返し操作を実行することもできます。<strong>atEnd</strong> メソッドは、コレクション内にまだ項目があるかどうかを示します。<strong>moveNext</strong> メソッドは、コレクション内の次の項目に移動します。</p>
+
+<pre>&lt;%
+  Session.Contents("Name") = "Suki White"
+  Session.Contents("Department") = "Hardware"
+		.
+		.
+		.
+  //Create an Enumerator object.
+  var mycollection = new Enumerator(Session.Contents);
+
+  //Iterate through the collection and display each item.
+  while (!mycollection.atEnd())
+  {
+    var x  = myCollection.item();
+    Response.Write(Session.Contents(x) + "&lt;BR&gt;");
+    myCollection.moveNext();
+  }
+%&gt;</pre>
+
+<h2><a name="H2_37771913">サブキーを使用してコレクション全体に対し繰り返し操作を実行する</a></h2>
+
+<p>スクリプトでは、ブラウザと Web サーバーの間でやり取りされる cookie の数を減らすために、いくつかの関連する値を 1 つの cookie に埋め込むことがあります。このため、<strong>Request</strong> オブジェクトおよび <strong>Response</strong> オブジェクトの <strong>Cookies</strong> コレクションは、1 つの項目内に複数の値を保持していることがあります。これらのサブ項目 (サブキー) には、個別にアクセスできます。サブキーをサポートしているのは、<strong>Request.Cookies</strong> コレクションと <strong>Response.Cookies</strong> コレクションのみです。<strong>Request.Cookies</strong> は読み取り操作のみを、<strong>Response.Cookies</strong> は書き込み操作のみをサポートしています。</P>
+
+<P>次の例は、通常の cookie とサブキーを持つ cookie を作成します。</P>
+
+<PRE>&lt;%
+  'Send a cookie to the browser.
+  Response.Cookies("Fruit") = "Pineapple"
+
+  'Send a cookie with subkeys to browser.
+  Response.Cookies("Mammals")("Elephant") = "African"
+  Response.Cookies("Mammals")("Dolphin") = "Bottlenosed"
+%&gt;</PRE>
+
+<P>HTTP 応答内の cookie テキストはブラウザに送信され、次のように表示されます。</P>
+
+<PRE>HTTP_COOKIE= Mammals=ELEPHANT=African&DOLPHIN=Bottlenosed; Fruit=Pineapple;</PRE> 
+
+<p><strong>Request.Cookies</strong> コレクション内のすべての cookie、および 1 つの cookie 内のすべてのサブキーを、列挙することもできます。ただし、サブキーを持たない cookie に対して、サブキーを使った繰り返し操作を実行しても、何も出力されません。これを避けるには、<STRONG>Cookies</STRONG> コレクションの <strong>HasKeys</strong> 属性を使って cookie がサブキーを持っているかどうかを先にチェックしておきます。この例を次に示します。</p>
+
+<pre>&lt;% 
+   'Declare counter variables.
+   Dim Cookie, Subkey
+
+   'Display the entire cookie collection.
+   For Each Cookie In Request.Cookies
+     Response.Write Cookie 
+     If Request.Cookies(Cookie).HasKeys Then
+       Response.Write "&lt;BR&gt;" 	
+       'Display the subkeys.
+       For Each Subkey In Request.Cookies(Cookie)
+         Response.Write " -&gt" & Subkey & " = " & Request.Cookies(Cookie)(Subkey) & "&lt;BR&gt;"
+       Next
+     Else
+       Response.Write " = " & Request.Cookies(Cookie) & "&lt;BR&gt;"
+     End If
+   Next    
+%&gt;</pre>
+
+<P>このスクリプトは、次のような結果を返します。</P>
+
+<PRE>Mammals
+-&gt;ELEPHANT = African
+-&gt;DOLPHIN = Bottlenosed
+Fruit = Pineapple</PRE>
+
+<H2><a name="H2_321118501">キー名の大文字と小文字</a></H2>
+
+<p><STRONG>Cookies</STRONG> コレクション、<STRONG>Request</STRONG> コレクション、<STRONG>Response</STRONG> コレクション、および <STRONG>ClientCertificate</STRONG> コレクションは、同じ一意の文字列キー名を参照することができます。たとえば、次のステートメントでは、<EM>User</EM> という同じキー名を参照していますが、コレクションによって異なる値が返されます。</p>
+
+<pre>strUserID = Request.Cookies("User") 
+strUserName = Request.QueryString("User")</pre>
+
+<P>キー名の大文字と小文字は、キーに値を割り当てる最初のコレクションによって設定されます。たとえば、次のスクリプトの場合を考えてみます。</P>
+
+<pre>&lt;%
+  'Retrieve a value from QueryString collection using the UserID key.
+  strUser = Request.QueryString("UserID") 
+				
+  'Send a cookie to the browser, but reference the key, UserId, which has a different spelling.
+  Response.Cookies("UserId")= "1111-2222"
+  Response.Cookies("UserId").Expires="December 31, 2000"
+%&gt;
+</pre>
+
+<P>cookie には、キー名 <EM>UserId</EM> が割り当てられているように見えますが、実際に cookie に割り当てられているキー名は、大文字の &quot;D&quot; が使われている <EM>UserID</EM> の方です。このキーの大文字と小文字は、最初に <STRONG>QueryString</STRONG> コレクションで定義されています。
+
+<P>コレクションの値への参照では、キー名の大文字と小文字を区別しないため、アプリケーションで、キー名の大文字と小文字を区別した処理が使用されていない限り、前の例のようにキー名の大文字と小文字が異なっていても、スクリプトに影響を与えることはありません。</P>
+
+
+<h2><a name="H3_37773518">オブジェクトのコレクションに対して繰り返し操作を実行する</a></h2>
+
+<p><strong>Session</strong> コレクションと <strong>Application</strong> コレクションは、スカラ変数またはオブジェクト インスタンスのいずれかを保持することができます。<strong>Contents</strong> コレクションは、スカラ変数、および <strong>Server.CreateObject</strong> を呼び出して作成されたオブジェクトのインスタンスの両方を保持できます。<strong>StaticObjects</strong> コレクションは、<STRONG>Session</STRONG> オブジェクトのスコープ内で HTML の &lt;OBJECT&gt; タグを使用して作成されたオブジェクトを保持できます。この方法でオブジェクトのインスタンスを作成する方法の詳細については、「<A HREF="iiwaobu.htm">オブジェクトのスコープを設定する</A>」を参照してください。</p>
+
+<p>オブジェクトを含むコレクションに対して繰り返し操作を実行する場合は、オブジェクトの Session 状態または Application 状態の情報にアクセスするか、あるいはオブジェクトのメソッドまたはプロパティにアクセスすることができます。たとえば、ユーザー アカウントを作成するために、アプリケーションでいくつかのオブジェクトを使用していて、各オブジェクトに初期化メソッドがある場合、<strong>StaticObjects</strong> コレクションに対して繰り返し操作を実行すると、オブジェクトのプロパティを取得することができます。</p>
+
+<pre>&lt;%
+  For Each Object in Session.StaticObjects
+    Response.Write Object & ": " & Session.StaticObjects(Object)
+  Next
+%&gt;</pre>
+
+<h2><a name="H3_37774582">ASP のコレクションとほかのコレクションとの相違</a></h2>
+
+<p>ここで説明した ASP のコレクションは Visual Basic の <strong>Collection</strong> オブジェクトと類似していますが、一部に相違があります。ASP コレクションでは、<strong>Count</strong> プロパティ、<strong>Item</strong> メソッド、<STRONG>Remove</STRONG> メソッド、および <STRONG>RemoveAll</STRONG> メソッドはサポートしていますが、<strong>Add</strong> メソッドはサポートしていません。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<title>[Web サイト] プロパティ シート</title>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 dir=ltr>
+<font face="ＭＳ Ｐゴシック">
+
+<p><a name="hidd_service"></a><strong>[Web サイト] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、Web サイトの識別パラメータを設定するために使用します。サイトの IP アドレスを設定するには、管理しているコンピュータ上で、あらかじめそのサイトの TCP/IP の設定を構成しておく必要があります。</p>  
+
+<p><strong>[識別]</strong></p>
+
+<p><strong>説明</strong></p>
+
+<p>任意のサーバー名を入力します。この名前は、インターネット サービス マネージャ (HTML) のツリー ビューに表示されます。</p>
+
+<p>[詳細] をクリックして、IP アドレス、TCP ポート番号、SSL ポート番号、およびホスト ヘッダー名を構成します。</p>
+
+<p><strong>[IP アドレス]</strong></p>
+
+<p>このボックスにアドレスを表示するには、管理しているコンピュータで使用するアドレスを、あらかじめコントロール パネルで定義しておく必要があります。詳細については、Windows のマニュアルを参照してください。特定の IP アドレスを割り当てない場合、このコンピュータに割り当てられていて、ほかのサイトに割り当てられていないすべての IP アドレスにこのサイトが応答し、既定の Web サイトになります。</p>
+
+<p><strong>[TCP ポート]</strong></p>
+
+<p>サービスを実行するポートを指定します。既定値はポート 80 です。ポートの値は、任意の重複しない TCP ポート番号に変更できますが、あらかじめクライアントにそのポート番号を通知しておく必要があります。通知せずに変更すると、クライアントはサーバーに接続できなくなります。ポート番号は必ず指定します。</p>
+
+<p><strong>接続</strong></p>
+
+<p><strong>[無制限]</strong></p>
+
+<p>同時接続を無制限に許可する場合は、このオプションを選択します。</p>
+
+<p><strong>[最大接続数]</strong></p>
+
+<p>サイトへの同時接続数を制限する場合は、このオプションを選択します。許可する最大接続数をボックスに入力します。</p>
+
+<p><strong>[接続のタイムアウト]</strong></p>
+
+<p>サーバーが、反応のないユーザーとの接続を切断するまでの時間を秒単位で設定します。これにより、HTTP プロトコルが接続の解除に失敗しても、すべての接続が切断されます。</p>
+
+<p><strong>[HTTP キープ アライブを有効にする] </strong></p>
+
+<p>この機能によりクライアントは、要求のたびに接続を行う必要がなくなり、クライアントとサーバーとの接続を維持できます。キープアライブを無効にすると、サーバーのパフォーマンスが低下する場合があります。キープアライブは、既定では有効に設定されています。</p>
+
+<p><strong>[ログを収集する]</strong></p>
+
+<p>このチェック ボックスをオンにすると、Web サイトのログ収集機能が有効になります。これにより、ユーザーの利用状況を詳細に記録し、希望の形式でログを作成できます。ログの収集を有効にし、[アクティブ ログ形式] ボックスでログの形式を選択します。選択できる形式は、次のとおりです。</p>
+
+<ul>
+<li><strong>[Microsoft IIS ログ ファイル形式]</strong>  固定の ASCII 形式です。</li>
+
+<li><strong>[NCSA 共通ログ ファイル形式]</strong>  National Center for Supercomputing Applications (NCSA) の共通形式です。固定の ASCII 形式です。</li>
+
+<li><strong>[W3C 拡張ログ ファイル形式]</strong>  カスタマイズ可能な ASCII 形式です。既定で選択されています。プロセス総計を使用する場合は、必ずこの形式を選択します。</li>
+
+<li><strong>[ODBC ログ]</strong> (Windows 2000 Server でのみ使用可能)  データベースに記録される固定の形式です。</li>
+</ul>
+
+<p>ログ ファイルの作成条件 (毎週、ファイル サイズ別など) を構成する場合、または W3C 拡張形式や ODBC 形式のログ収集のプロパティを構成する場合は、[プロパティ] をクリックし、設定します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

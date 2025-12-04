@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>データベースの接続</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_database_connectivity"></A><SUP></SUP>データベースの接続</H1>
+
+<P>Web ベースのアプリケーションを作成する場合、通常はそのアプリケーションでフォームを使用することになります。また、ほとんどの場合、ある種のデータベースが必要となります。ActiveX<sup>&reg;</sup> Data Objects (ADO) は、データ ソースに対してアクセスおよび操作するための強力なツール群を備えています。</P>
+
+<P>ここで提供するサンプルでは、ADO を効果的に使用するためのテクニックと、Web ベースのアプリケーションで ADO の機能を最大限に利用する方法を示します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps3unt.asp">簡単なクエリ</A>」では、ADO と ASP を併用して、簡単なデータベース クエリを実行する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps3reb.asp">クエリの結果を制限する</A>」では、スクリプトで ASP と ADO を使用して、レコードセットに返される行数を制限する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps6fax.asp">スクロールできるクエリ</A>」では、ADO を使用した、多角的でスクロール可能なクエリを示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps7q0j.asp">レコードを追加および削除する</A>」では、ASP と ADO を使用して、データ ソースに対してレコードを追加および削除するためのテクニックを示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps9uk3.asp">レコードを更新する</A>」では、アプリケーションで ADO を使用して既存のレコードを更新する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps05kj.asp">ストアド プロシージャを実行する</A>」では、ASP スクリプトで ADO を使用して、ストアド データベース プロシージャを実行する方法を示します。</li>
+</UL>
+
+<P>ADO および Microsoft の一般的なデータ アクセス ツールの詳細については、Microsoft Data Access Objects のマニュアルを参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サーバーに SSL をセットアップする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web コンテンツの検証、ユーザーの身元の確認、およびネットワーク伝送の暗号化を行うように、Web サーバーの Secure Sockets Layer (SSL) のセキュリティ機能を構成する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="sslsetup">サーバーに SSL をセットアップする</a></h1>
+
+<p>Web コンテンツの完全性の検証、ユーザーの身元の確認、およびネットワーク伝送の暗号化を行うように、Web サーバーの Secure Sockets Layer (SSL) のセキュリティ機能を構成することができます。</p>
+
+<big>Web サーバーに SSL をセットアップするには</big><!--</p>--><br>
+
+<ol>
+<li>SSL での通信を確立するには、Web サーバーに有効なサーバー証明書をインストールする必要があります。サーバー証明書ウィザードを使用して、証明機関に送信する証明書要求ファイル (既定では、certreq.txt) または、Microsoft 証明書サービスなどのオンライン証明機関へ送信する要求のいずれかを作成します。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。
+
+<p>独自のサーバー証明書を発行する際に Microsoft&reg; 証明書サービス&nbsp;2.0 を使わない場合は、第三者の証明機関から要求の承認およびサーバー証明書の発行を受ける必要があります。詳細については、「<a href="iiocrsc.htm">サーバー証明書を取得する</a>」を参照してください。</p></li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp; サーバー証明書が保証する識別情報のレベルにより、証明機関が要求を承認し、証明書ファイルが送られるまでに数日から数か月かかることがあります。</p>
+
+<li>サーバー証明書ファイルを受け取った後、ウィザードを使用してサーバー証明書ファイルをインストールします。このインストール処理によって、証明書が Web サイトに添付、つまり &quot;バインド&quot; されます。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;1 つの Web サイトにバインドできるサーバー証明書は 1 つだけです。</p>
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、SSL を使って保護する Web サイトを選択し、そのプロパティ シートを開きます。[Web サイト] プロパティ シートの [Web サイトの識別] で、[詳細] をクリックします。</li>
+
+<li>[複数の Web サイトの詳細構成] ダイアログ ボックスの [この Web サイトの複数の SSL ID] で、Web サイトの IP アドレスが、セキュリティで保護された通信の既定のポートであるポート 443 に割り当てられていることを確認します。
+<p>1 つの Web サイトに複数の SSL ポートを割り当てることができます。設定する SSL ポートを追加するには、[この Web サイトの複数の SSL ID] の [追加] をクリックします。</p></li>
+
+<li>[ディレクトリ セキュリティ] または [ファイル セキュリティ] のプロパティ シートで、[セキュリティ保護された通信] の [編集] をクリックします。</li>
+
+<li>[セキュリティ保護された通信] ダイアログ ボックスで、Web サーバーがセキュリティで保護されたチャンネルを要求するように構成します。128 ビット キーの暗号化を要求する場合は、ユーザーの Web ブラウザが 128 ビットの暗号化に対応していることを確認してください。詳細については、「<a href="iiencsc.htm">暗号化</a>」を参照してください。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;128 ビットの暗号化機能へのアップグレードについては、<a href="http://www.microsoft.com/isapi/redir.dll?prd=support&prd=ie&ar=support" target="_blank">Microsoft 製品サポート サービスの Web サイト</a>を参照してください。</p>
+
+<li>[セキュリティ保護された通信] の [編集] をクリックします。Web サーバーの SSL クライアント証明書の認証機能およびマッピング機能を有効にするオプションが用意されています。詳細については、次の項目を参照してください。</li>
+
+<ul>
+<li><a href="iiectsc.htm"><a href="iiectsc.htm">クライアント証明書を有効にする</a></a></li>
+<li><a href="iimapsc.htm">ユーザー アカウントにクライアント証明書をマップする</a></li>
+</ul>
+
+</ol>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

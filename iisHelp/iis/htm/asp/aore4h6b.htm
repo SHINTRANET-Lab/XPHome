@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsFilters</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iisfilters"></A><SUP></SUP>IIsFilters</H2>
+
+<P>IIsFilter オブジェクトのコレクションを格納する ADSI コンテナ オブジェクトです。フィルタがロードされる順序を指定する FilterLoadOrder プロパティを指定したり、フィルタを列挙したりすることができます。また、Web サービス レベルまたは個々の Web サーバーでフィルタを管理できます。</P>
+
+<P>IIsFilters オブジェクトは、ADSI コンテナ オブジェクトです。</P>
+
+<H6>ADsPath</H6>
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/Filters</DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<P>または
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/<I>N</I>/Filters</DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または &quot;LocalHost&quot; を指定できます。<I>N</I> は Web サーバーの番号です。</P>
+
+<H6>構文</H6>
+
+<P><I>varReturn</I> = <I>object</I>.<I>Method</I></P>
+
+<P>&nbsp;</P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>varReturn</I></DT>
+
+<DD>メソッドからの戻り値を受け取る変数です。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIsFilters オブジェクトを含んでいる変数です。<BR>
+</DD>
+
+<DT><I>Method</I></DT>
+
+<DD>選択したオブジェクト メソッドです。</DD>
+</DL>
+
+<H6>格納可能なオブジェクト</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore0drm.htm"><B>IIsFilter</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi57hv.htm"><B>ADSI オブジェクト プロパティ</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メタベース プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9lte.htm"><B>FilterLoadOrder</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi0ewj.htm"><B>ADSI オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI オブジェクトの標準メソッドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi7qpf.htm"><B>ADSI コンテナ オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI コンテナ オブジェクトの標準メソッドです。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

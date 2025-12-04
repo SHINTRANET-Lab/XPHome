@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<title>[ディレクトリ] プロパティ シート</title>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 dir=ltr>
+<font face="ＭＳ Ｐゴシック">
+
+<p><a name="hidd_directory_properties+0x20001"></a> <strong>[ディレクトリ] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、Web サイトの物理ディレクトリのプロパティを変更するときに使用します。</p>
+
+<p>物理ディレクトリは、次のいずれかからコンテンツを返します。</p>
+
+<ul>
+<li><strong>[構成中のサーバーにあるディレクトリ]</strong>&nbsp;&nbsp;たとえば、C:\Catalog\Shoes などです。</li>
+
+<li><strong>[URL へのリダイレクト]</strong>&nbsp;&nbsp;たとえば、http://tempserver などです。元の URL にあるリソースを要求するブラウザには、リソースを再要求できるように、[以下へリダイレクト] ボックスで指定されたリダイレクト先の URL が自動的に送信されます。要求を仮想ディレクトリにマップするには、/newcatalog などの仮想パスを使用します。</li>
+</ul>
+
+<p><strong>[ローカル パス]</strong>&nbsp;&nbsp;ディレクトリの場所を表示します。</p>
+
+<p><strong>[アクセス権]</strong></p>
+
+<p><strong>[読み取り]</strong>&nbsp;&nbsp;ファイルやディレクトリ、およびそれらに関連するプロパティの読み取りとダウンロードを許可するには、このチェック ボックスをオンにします。 </p>
+
+<p><strong>[書き込み]</strong>&nbsp;&nbsp;ファイルおよびファイルに関連するプロパティを、サーバー上の有効なディレクトリへアップロードする、または書き込み可能なファイルの内容の変更を許可するには、このチェック ボックスをオンにします。[書き込み] が使用できるのは、HTTP 1.1 プロトコル規格の PUT 機能をサポートするブラウザを使用する場合のみです。 </p>
+
+<p><strong>[スクリプト ソース アクセス]</strong>&nbsp;&nbsp;[読み取り] または [書き込み] のアクセス権が設定されている場合に、ソース コードへアクセスできるようにするには、このチェック ボックスをオンにします。ソース コードには、ASP アプリケーション内のスクリプトが含まれます。</p>
+
+<p><strong>[ディレクトリの参照]</strong>&nbsp;&nbsp;仮想ディレクトリ内のファイルとサブディレクトリの一覧をハイパーテキスト形式で表示できるようにするには、このチェック ボックスをオンにします。この一覧に仮想ディレクトリは表示されません。ユーザーは、あらかじめ仮想ディレクトリのエイリアスを知っておく必要があります。</p>
+
+<p><font color="#0000FF"><strong>重要</strong></font>&nbsp;&nbsp;&nbsp;次の &quot;両方&quot; が当てはまる場合に、ユーザーがファイルまたはディレクトリにアクセスしようとすると、Web サーバーは &quot;Access Forbidden&quot; というエラー メッセージを Web ブラウザに表示します。</p>
+<ul>
+<li>ディレクトリの参照が無効になっている。<br><br></li>
+<li>filename.htm などのファイル名が指定されていない。<br><br></li>
+</ul>
+
+<p><strong>[ログ アクセス]</strong>&nbsp;&nbsp;ディレクトリへのアクセスをログ ファイルに記録するには、このチェック ボックスをオンにします。アクセスが記録されるのは、Web サイトでログの収集が有効になっている場合のみです。 </p>
+
+<p><strong>[このリソースを索引付けする]</strong>&nbsp;&nbsp;Microsoft インデックス サービスが、このディレクトリを Web サイトのフルテキスト インデックスの形式で取り込めるようにするには、このチェック ボックスをオンにします。フルテキスト インデックスを使用すると、ユーザーは、公開されたドキュメントから単語や語句をすばやく検索できます。</p>
+
+<p><strong>[アプリケーションの設定]</strong></p>
+
+<p>IIS の Web ベースのアプリケーションは、アプリケーションが置かれているディレクトリ構造によって定義されます。このディレクトリをアプリケーションの開始点としてアプリケーションを作成するには、[作成] をクリックします。このホーム ディレクトリとアプリケーションを分離するには、[削除] をクリックします。</p>
+
+<p><strong>[実行アクセス権]</strong></p>
+
+<p>実行アクセス権によって、サイトや仮想ディレクトリのリソースに許可されるプログラムの実行レベルが決まります。</p>
+
+<ul>
+<li><strong>[なし]</strong>&nbsp;&nbsp;HTML ファイルやイメージ ファイルなどの静的ファイルだけにアクセスできます。</li>
+<li><strong>[スクリプトのみ]</strong>&nbsp;&nbsp;ASP スクリプトなどのスクリプトだけを実行できます。</li>
+<li><strong>[スクリプトおよび実行可能ファイル]</strong>&nbsp;&nbsp;どのファイル タイプでもアクセスまたは実行することができます。</li>
+</ul>
+
+<p><strong>アプリケーション保護</strong></p>
+
+<p>アプリケーションを、Web サービスと同じプロセスで実行するか ([低 (IIS プロセス)])、ほかのアプリケーションも実行される分離されたプール プロセスで実行するか ([中 (プール)])、またはほかのプロセスから切り離された分離プロセスで実行するか ([高 (分離プロセス)]) を選択します。</p> 
+
+<strong>[クライアントは以下に送信されます]</strong></p>
+
+<p>以下のプロパティは、[URL へのリダイレクト] を選択した場合に表示されます。</p>
+
+<p><strong>[上で入力した URL]</strong>&nbsp;&nbsp;元の URL とまったく違うかたちで、指定された URL に仮想ディレクトリをリダイレクトします。このオプションを使用すると、仮想ディレクトリ全体を 1 つのファイルにリダイレクトすることができます。たとえば、/scripts という仮想ディレクトリに対する要求を、すべてホーム ディレクトリの Default.htm というファイルにリダイレクトするには、[以下へリダイレクト] ボックスに「/Default.htm」と入力し、このチェック ボックスをオンにします。</p>
+
+<p><strong>[この下のディレクトリ]</strong>&nbsp;&nbsp;親ディレクトリを子ディレクトリにリダイレクトします。たとえば、/ で表されるホーム ディレクトリを、/newhome という名前のサブディレクトリにリダイレクトするには、[以下へリダイレクト] ボックスに「/newhome」と入力し、このチェック ボックスをオンにします。チェック ボックスをオフにすると、Web サーバーは引き続き親ディレクトリを親自体にマップします。</p>
+
+<p><strong>[このリソースへの恒久的なリダイレクト]</strong>&nbsp;&nbsp;クライアントに &quot;301 Permanent Redirect&quot; というメッセージを送信します。リダイレクトが一時的と見なされた場合、クライアント ブラウザは、&quot;302 Temporary Redirect&quot; というメッセージを受信します。ブラウザによっては、ブックマークなどの URL が恒久的に変更された合図として、&quot;301 Permanent Redirect&quot; というメッセージを使用できる場合があります。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

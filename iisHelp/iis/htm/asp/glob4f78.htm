@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Application_OnStart</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_application_onstart"></A><SUP></SUP>Application_OnStart</H3>
+
+<P>Application_OnStart イベントは、最初の新規セッションの作成前、つまり Session_OnStart イベントの前に発生します。<A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm">Application</A><B> </B> 組み込みオブジェクトおよび <A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server</A> 組み込みオブジェクトのみ利用できます。<A HREF="/iishelp/iis/htm/asp/vbob12d0.htm">Session</A> オブジェクト、<A HREF="/iishelp/iis/htm/asp/vbob5ulw.htm">Request</A> オブジェクト、または <A HREF="/iishelp/iis/htm/asp/vbob5sj8.htm">Response</A> オブジェクトを Application_OnStart イベント スクリプトの中で参照すると、エラーが発生します。 </P>
+
+<H6>構文</H6>
+
+<P><B>&lt;SCRIPT LANGUAGE=</B><I>ScriptLanguage</I> <B>RUNAT=Server&gt;</B> <BR> <B>Sub Application_OnStart</B><BR> ... <BR> <B>End Sub</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<P><B>&lt;/SCRIPT&gt;</B></P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>ScriptLanguage</I></DT>
+
+<DD>イベント スクリプトの作成に使うスクリプト言語を指定します。VBScript や JScript など、サポートされている任意のスクリプト言語を選択できます。複数のイベントが同じスクリプト言語を使う場合、単独の &lt;SCRIPT&gt; タグ セットの下に一緒に指定できます。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>Sub Application_OnStart</P>
+
+<P>&nbsp;&nbsp;Application("NumberofVisitors") = 0</P>
+
+<P>End Sub</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>Application_OnStart イベントでは、Application.Lock メソッドと Application.Unlock メソッドを使用する必要はありません。これは、このイベントが、アプリケーションを起動する最初のセッションによって 1 回だけ呼び出されるためです。</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/glob6zc4.htm"><B>Application_OnEnd</B></A>、<A HREF="/iishelp/iis/htm/asp/glob6t84.htm"><B>Session_OnStart</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

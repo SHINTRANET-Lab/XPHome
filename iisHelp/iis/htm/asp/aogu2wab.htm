@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS Admin オブジェクトを使用する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_using_iis_admin_objects"></A><SUP></SUP>IIS Admin オブジェクトを使用する</H1>
+
+<P>ここで説明する IIS Admin オブジェクトは、プログラムによる管理をできるだけ簡単にするために IIS が提供するものです。IIS Admin オブジェクトは、Microsoft Active Directory Service Interfaces (ADSI) に基づいており、オートメーションに対応します。また、Active Server Pages (ASP) における Microsoft Visual Basic Scripting Edition (VBScript) や JScript、Visual Basic、Java、C++ などの、オートメーションをサポートする任意の言語を使って簡単にアクセスおよび操作できます。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aogu0t6f.htm">IIS Admin オブジェクトの概要</A>」では、IIS Admin オブジェクトとその使用方法について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aogu7vub.htm">IIS Admin オブジェクトを使った管理作業</A>」では、IIS Admin オブジェクトを使って、一般的なプログラム管理作業を実行する方法について説明します。</li>
+</UL>
+
+<P>詳細については、「<A HREF="/iishelp/iis/htm/asp/aore94th.htm">IIS Admin オブジェクト リファレンス</A>」、「<A HREF="/iishelp/iis/htm/asp/apro3usl.htm">管理プロパティ リファレンス</A>」、「<A HREF="/iishelp/iis/htm/asp/aore94th.htm">IIS Admin オブジェクト リファレンス</A>」、および「<A HREF="/iishelp/iis/htm/asp/apro3usl.htm">管理プロパティ リファレンス</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

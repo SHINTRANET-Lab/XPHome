@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ASP スクリプトをデバッグする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<META NAME="DESCRIPTION" CONTENT="Microsoft Script Debugger を使用して ASP スクリプトのエラーを見つけ、修正する方法を説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="debuggingaspscripts">ASP スクリプトをデバッグする</a></h1>
+
+
+<p>プログラミングの経験がどんなに長くても、プログラム エラー、つまり &quot;バグ&quot; によってサーバー側のスクリプトが正しく動作しないという状況に遭遇します。このため、スクリプト エラーを発見して修正するプロセスであるデバッグは、信頼性の高い優れた ASP アプリケーションを開発するために不可欠です。特に、アプリケーションが複雑になるほど、デバッグの重要性が増します。</p>
+
+<h2><a name="themicrosoftscriptdebuggertool">Microsoft Script Debugger ツール</a></h2>
+
+<p>Microsoft&reg; Script Debugger は、バグを速やかに特定し、サーバー側のスクリプトの対話的なテストを行う強力なデバッグ ツールです。Script Debugger は、Windows&nbsp;Internet Explorer Version&nbsp;3.0 以降でも動作します。 Script Debugger を使用すると、次の項目が可能になります。</p>
+
+<ul>
+<li>サーバー側のスクリプトを 1 行ずつ実行する。</li>
+<li>コマンド ウィンドウを開いて、サーバー側のスクリプトの実行中に、変数、プロパティ、または配列の要素の値を監視する。</li>
+<li>デバッガまたはスクリプト コマンドを使用してスクリプトの特定の行にブレークポイントを設定し、サーバー側のスクリプトの実行を中断する。</li>
+<li>サーバー側のスクリプトの実行中にプロシージャをトレースする。</li>
+</ul>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;デバッガでは、スクリプトを表示してバグを特定することはできますが、スクリプトを直接編集することはできません。バグを解消するには、編集用プログラムを使用してスクリプトを編集し、変更内容を保存した後に再度スクリプトを実行する必要があります。</p>
+
+<h2><a name="enablingdebugging">デバッグを有効にする</a></h2>
+
+<p>サーバー側のスクリプトのデバッグを開始する前に、ASP のデバッグをサポートするように Web サーバーを構成する必要があります。詳細については、「<a href="../core/iiwarndd.htm">ASP のデバッグを有効にする</a>」を参照してください。</p>
+
+<p>Web サーバーのデバッグを有効にした後は、次のいずれかの方法を使用してスクリプトをデバッグできます。</p>
+
+<ul>
+<li>Script Debugger を手動で開き、ASP のサーバー側のスクリプトをデバッグします。</li>
+<li>Internet Explorer を使用して .asp ファイルを要求します。ファイルにバグが含まれている場合、または実行を意申</li>
+</ul>
+
+<h2><a name="scriptingerrors">スクリプトのエラー</a></h2>
+
+<p>サーバー側のスクリプトのデバッグで見つかるエラーには、いくつかの種類があります。エラーによっては、スクリプトを正しく実行できなかったり、プログラムの実行を止めたり、不正な結果を返したりすることがあります。</p>
+
+<h3><a name="syntaxerrors">構文エラー</a></h3>
+
+<p>&quot;構文&quot; エラーは、不正なスクリプト構文が原因で発生する一般的なエラーです。たとえば、コマンドの綴りが間違っている場合や、関数に渡す引数の数が適切でない場合などに、エラーが発生します。構文エラーがあると、スクリプトを実行できない場合があります。</p>
+
+<h3><a name="runtimeerrors">実行時エラー</a></h3>
+
+<p>&quot;実行時&quot; エラーは、スクリプトの実行開始後、実際には実行できない操作をスクリプトが実行を試みるために発生します。たとえば、次のスクリプトは、変数を 0 で除算する関数 (不正な算術演算を実行する関数) を含んでいるため、実行時エラーが発生します。</p>
+
+<pre>&lt;SCRIPT LANGUAGE=VBScript RUNAT=SERVER&gt;
+  Result = Findanswer(15)
+  Document.Write (&quot;The answer is &quot; &amp;Result)
+
+  Function Findanswer(x) 
+  'This statement generates a run-time error.
+   Findanswer = x/0      
+  End Function
+&lt;/SCRIPT&gt;</pre>
+
+<p>スクリプトを中断することなく実行できるようにするには、実行時エラーの原因となるバグを取り除く必要があります。</p>
+
+<h3><a name="logicalerrors">論理エラー</a></h3>
+
+<p>&quot;論理&quot; エラーは、検出が最も難しいバグです。論理エラーは、入力ミスやプログラムの論理構造の欠陥が原因で発生します。論理エラーがあると、スクリプトの実行は正しく行われますが、実行結果は期待どおりになりません。 たとえば、値の一覧を並べ替えるサーバー側のスクリプトで、小なり記号 (&lt;) の代わりに誤って大なり記号 (&gt;) を使用して値の比較を行うと、返される並べ替えの順序は誤ったものになります。</p>    
+
+<h2><a name="errordebuggingtechniques">エラーのデバッグ方法</a></h2>
+
+<p>バグの発生箇所を特定し、アプリケーションをテストするには、さまざまなデバッグの方法があります。</p>
+
+<h3><a name="justintimedebugging">ジャストインタイム (JIT) デバッグ</a></h3> 
+
+<p>実行時エラーによってサーバー側のスクリプトの実行が中断されると、Microsoft Script Debugger が自動的に起動します。Script Debugger は、.asp ファイルを表示し、ステートメント ポインタによってエラーが発生した行を示すと共に、エラー メッセージを表示します。この種のデバッグは、&quot;ジャストインタイム&quot; (JIT) デバッグと呼ばれ、コンピュータは以後のプログラムの実行を中断します。この場合、スクリプトの実行を再開するには、編集用プログラムを使用してエラーを修正し、変更内容を保存する必要があります。</p>
+
+<h3><a name="breakpointdebugging">ブレークポイントを使用したデバッグ</a></h3>
+
+<p>エラーが発生していて、エラーの発生箇所を簡単に特定することができない場合は、あらかじめ &quot;ブレークポイント&quot; を設定しておくと便利です。ブレークポイントは、特定の行でスクリプトの実行を中断します。ブレークポイントを使用する場合は、エラーが発生している可能性のある行よりも前に、1 つまたは複数のブレークポイントを設定し、スクリプトの中で設定されている変数やプロパティの値をデバッガを使用して調べます。エラーを修正した後は、スクリプトを中断することなく実行できるように、ブレークポイントを解除します。</p>
+
+<p>ブレークポイントを設定するには、Script Debugger で目的のスクリプトを開き、実行を中断するスクリプトの行を選択し、[Debug] メニューの [Toggle Breakpoint] をクリックします。次に、Web ブラウザを使用してスクリプトを再び要求します。スクリプトの、ブレークポイントが設定された行までが実行されると、コンピュータは Script Debugger を起動します。Script Debugger はスクリプトを表示し、ブレークポイントが設定された行をステートメント ポインタで示します。</p> 
+
+<h4>次のステートメントでの中断</h4>
+
+<p>実行する次のステートメントが、操作中の .asp ファイルの中にないときなど、場合によっては Script Debugger の [Break at Next Statement] を有効にすることができます。たとえば、Sales というアプリケーションの中の .asp ファイルに [Break at Next Statement] を設定した場合、Sales アプリケーションの任意のファイルのスクリプト、またはデバッグの実行が有効になっている任意のアプリケーションのスクリプトを実行すると、デバッガが起動されます。このため、[Break at Next Statement] を設定するときは、次に実行するスクリプト ステートメントの種類にかかわらずデバッガが起動されることに注意してください。</p>
+
+
+<h3><a name="vbscriptstopstatementdebugging">VBScript の Stop ステートメントを使用したデバッグ</a></h3>
+
+<p>VBScript で記述されたサーバー側のスクリプトにブレークポイントを設定するには、サーバー側のスクリプトのバグと疑われる部分よりも前に Stop ステートメントを挿入する方法もあります。たとえば、次のサーバー側のスクリプトの Stop ステートメントは、スクリプトがカスタム関数を呼び出す前にスクリプトの実行を中断します。</p>
+
+<pre>&lt;%	
+  intDay = Day(Now())
+  lngAccount = Request.Form(&quot;AccountNumber&quot;)
+  dtmExpires = Request.Form(&quot;ExpirationDate&quot;)
+   	  
+  strCustomerID  =  &quot;RETAIL&quot; &amp; intDay &amp; lngAccount &amp; dtmExpires
+
+  'Set breakpoint here.
+  Stop
+
+  'Call registration component.				
+  RegisterUser(strCustomerID)
+%&gt;</pre>
+
+<p>このスクリプトを要求すると、デバッガが起動して自動的に .asp ファイルを表示し、Stop ステートメントが挿入された場所をステートメント ポインタで示します。この時点で、変数がコンポーネントに渡される前に、それらの変数に割り当てられた値を調べることができます。</p>
+
+<p><strong><FONT COLOR="#0000FF">重要</FONT></strong>&nbsp;&nbsp;&nbsp;Stop ステートメントは、デバッグを終えた .asp ファイルから忘れずに削除してください。</p> 
+
+<h3><a name="jscriptdebuggerstatementdebugging">JScript の Debugger ステートメントを使用したデバッグ</a></h3>
+
+<p>JScript で記述されたサーバー側のスクリプトにブレークポイントを設定するには、スクリプトのバグと疑われる部分よりも前に debugger ステートメントを挿入します。たとえば、次のスクリプトの debugger ステートメントは、ループで新しい値を処理するたびに、スクリプトの実行を中断し、Script Debugger を自動的に起動します。</p>
+
+<pre>&lt;%@ LANGUAGE=JScript %&gt;
+&lt;%
+  for (var count = 1; count &lt;= 10; count++)
+  {        
+    var eventest = count%2
+    //Set breakpoint so that user can step through execution of script.
+    debugger						    
+    if (eventest == 0)
+          Response.Write(&quot;Even value is &quot; + count + &quot;&lt;br&gt;&quot;)
+   }
+%&gt;</pre>
+
+<p>debugger ステートメントを使用する場合、デバッグを終えたら、忘れずに .asp ファイルから debugger ステートメントを削除してください。</p>  
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;debugger ステートメントを JScript の break ステートメントと混同しないでください。break ステートメントは現在実行中のループを抜けるためのステートメントであり、Microsoft Script Debugger を起動したり、スクリプトの実行を中断したりするためのステートメントではありません。</p>
+
+<h2><a name="tipsfordebuggingscripts">スクリプトをデバッグするときのヒント</a></h2>
+
+<p>Script Debugger を使用する際に、いくつかのデバッグのヒントを活用すると、スクリプトのエラーを検出する時間を大幅に短縮できます。バグの多くは、コマンドの綴りの間違いや変数の欠如など、ソースを見るとすぐにわかるものですが、一部の論理エラーや実行時エラーはソースを見ても簡単に原因を特定できない場合があります。</p>
+
+<p></P>Microsoft Script Debugger の詳細については、「<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Microsoft Scripting Technologies</A>」を参照してください。
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+
+</font>
+</body>
+
+</html>

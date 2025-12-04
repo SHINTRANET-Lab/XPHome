@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS へのアクセス方法</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="キーボードのみを使用して IIS にアクセスする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1>IIS へのアクセス方法</h1>
+
+<p>ここで説明するショートカット キー操作やキーボード コマンドは、IIS 固有のものです。Windows のショートカット キーの一覧は、Windows ヘルプのキーワードで &quot;Windows 2000 のショートカット キー&quot; の項目を検索し、説明を参照してください。Microsoft 管理コンソール (MMC) の操作方法の詳細については、Windows ヘルプのキーワードで &quot;MMC&quot; の項目を検索し、説明を参照してください。</p>
+
+
+<big>IIS スナップインにアクセスするには</big>
+
+<ol>
+<li type="1">[スタート] をクリックし、次に [ファイル名を指定して実行] をクリックします。[ファイル名を指定して実行] ダイアログ ボックスが表示されます。</li> 
+<li type="1">「mmc %systemroot%\system32\inetsrv\iis.msc」と入力します。 </li>
+<li type="1"><B>Enter</B> キーを押します。インターネット インフォメーション サービス スナップインが表示されます。</li> 
+</ol>
+
+<p><b>注</b>&nbsp;&nbsp; IIS スナップインが表示されない場合、コマンドの入力が適切であるかどうかを確認します。mmc の後 (% 記号の前) にはスペースが 1 つ必要です。</p>
+
+<p>[コンピュータの管理] ウィンドウからも IIS にアクセスすることができます。この方法で IIS にアクセスすると、IIS スナップインに備わっている各種の管理機能が使用できません。迅速にアクセスできますが、Web サイトに関する管理機能が制限されます。 </p>
+
+<ol>
+<li type="1">[スタート] をクリックし、次に [マイ コンピュータ] を右クリックします。ドロップダウン リストから [管理] をクリックします。[コンピュータの管理] ウィンドウが表示されます。</li> 
+
+<li type="1">左側のウィンドウで、[サービスとアプリケーション] ツリーを展開します。</li> 
+
+<li type="1">[インターネット インフォメーション サービス] をクリックします。ユーザーの Web サイトの名前と状態が右側のウィンドウに表示されます。</li>
+</ol>
+
+<p><b>注</b>&nbsp;&nbsp;目的の Web ページのディレクトリと仮想ディレクトリの一覧が表示されるまで、左側のウィンドウで [インターネット インフォメーション サービス] ツリーとそれ以降の Web サイトのツリーを展開します。</p>
+
+
+
+
+<big>特定のプロパティ シートにアクセスするには</big>
+<ol>
+<li>IIS スナップインで、方向キーを使用して、管理するサイト、仮想ディレクトリ、またはファイルを選択します。ファイルにアクセスするには、詳細ウィンドウに切り替える必要があります。IIS スナップインでコンソール ツリーと詳細ウィンドウを切り替えるには、<B>Alt</B> キーを使用します。</li>
+<li>選択した項目のショートカット メニューを表示するには、<B>Shift</B> キーを押しながら <B>F10</B> キーを押します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;[表示] メニューを表示する場合は、<B>Ctrl</B> キーを押しながら <B>A</B> キーを押します。</p>
+<li><B>↑</B> キーまたは <B>↓</B> キーを使用して [プロパティ] を選択します。<B>Enter</B> キーを押します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;「<strong>P</strong>」と入力すると、サイトは一時停止します。</p> 
+<li>プロパティ シートのタイトルが強調表示されるまで、<B>Tab</B> キーを押します。</li>
+<li><B>→</B> キーまたは <B>←</B> キーを使用して、同じ行にあるプロパティ シートを選択します。</li>
+<li>別の行のプロパティ シートに移動するには、<B>↑</B> キーまたは <B>↓</B> キーを使用します。</li>
+<li>プロパティ シート内で移動するには、<B>Tab</B> キーを押します。項目を選択するには <B>Tab</B> キーを使用するか、<B>Alt</B> キーを押しながら下線の付いた文字のキーを押します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;チェック ボックスをオンまたはオフにする場合は、チェック ボックスを選択してから <B>Space</B> キーを押します。</p>
+</ol>
+
+
+
+<big>IIS のオンライン マニュアル内で移動するには</big>
+<ol>
+<li>[目次] タブが手前にない場合は、[目次] タブが強調表示されるまで <B>Tab</B> キーを押すか、または <B>Shift</B> キーを押しながら <B>Tab</B> キーを押します。</li>
+<li><B>Enter</B> キーを押してタブを手前に移動します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;この手順を使用して、[目次]、[索引]、および [検索] タブを切り替えることができます。</p>
+<li>目次の項目が強調表示されるまで <B>Tab</B> キーを押します。</li>
+<li><B>↑</B> キーまたは <B>↓</B> キーを使用して項目を選択します。</li>.
+<li>ブックを開くには、<B>→</B> キーを使用します。</li>
+<li>ブックを閉じるには、<B>←</B> キーを使用します。</li>
+<li>ドキュメントを開くには、開くドキュメントを選択し <B>Enter</B> キーを押します。</li>
+</ol>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</font>
+
+</BODY>
+</HTML>

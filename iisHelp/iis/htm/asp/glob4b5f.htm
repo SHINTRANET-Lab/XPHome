@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>TypeLibrary 宣言</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_typelibrary_declarations"></A><SUP></SUP>TypeLibrary 宣言</H2>
+
+<P>タイプ ライブラリとは、COM コンポーネントでサポートされるオブジェクトと型に関する情報のあるファイルです。通常、COM コンポーネントでは、コンポーネントがサポートする定数をタイプ ライブラリに記述します。Web アプリケーションで使用する COM オブジェクトが、タイプ ライブラリにデータ型を宣言している場合、タイプ ライブラリを Global.asa に宣言できます。このように宣言すると、アプリケーションの範囲内にある任意のスクリプトから、タイプ ライブラリに宣言された定数を参照できるようになります。</P>
+
+<P>ASP での定数の使用の詳細については、「<A HREF="iiwavar.htm">変数と定数を使用する</A>」を参照してください。</P>
+
+<H6>構文</H6>
+
+<P>&lt;!--METADATA TYPE="TypeLib"</P>
+
+<P>FILE="<I>file</I>"</P>
+
+<P>UUID="<I>typelibraryuuid</I>"</P>
+
+<P>VERSION="<I>majorversionnumber</I>.<I>minorversionnumber</I>"</P>
+
+<P>LCID="<I>localeid</I>"</P>
+
+<P>--&gt;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>file</I></DT>
+
+<DD>タイプ ライブラリの絶対パスです。このパラメータと <i>typelibraryuuid</i> を両方指定した場合、<i>file</i> が優先されます。<I>file</I> または <I>typelibraryuuid</I> を必ず指定します。<BR>
+</DD>
+
+<DT><I>typelibraryuuid</I></DT>
+
+<DD>タイプ ライブラリの汎用一意識別子です。<I>file</I> または <I>typelibraryuuid</I> を必ず指定します。<BR>
+</DD>
+
+<DT><I>majorversionnumber</I></DT>
+
+<DD>バージョンの選択に使用されます。要求したバージョンが見つからない場合、最新のバージョンが使用されます (省略可能)。<BR>
+</DD>
+
+<DT><I>minorversionnumber</I></DT>
+
+<DD>バージョンの選択に使用されます。要求したバージョンが見つからない場合、最新のバージョンが使用されます (省略可能)。<BR>
+</DD>
+
+<DT><I>localeid</I></DT>
+
+<DD>タイプ ライブラリに使用されるロケール識別子です。要求したロケールが見つからない場合、システム ロケール識別子が使用されます (省略可能)。</DD>
+</DL>
+
+<H6>エラー値</H6>
+
+<P>サーバーから次のようなエラー メッセージが生成されます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=31%><B>エラー</B></TD>
+<TD class=blue width=69%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>ASP 0222</TD>
+<TD width=69%>無効な TypeLib の指定です。METADATA タグが無効なタイプ ライブラリの指定を含んでいます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>ASP 0223</TD>
+<TD width=69%>TypeLib が見つかりません。METADATA タグがどのレジストリ エントリにも一致しないタイプ ライブラリの指定を含んでいます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>ASP 0224</TD>
+<TD width=69%>TypeLib を読み込めません。METADATA タグで指定されたタイプ ライブラリを読み込めません。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>ASP 0225</TD>
+<TD width=69%>TypeLib をラップできません。METADATA タグで指定されたタイプ ライブラリから、タイプ ライブラリのラップ オブジェクトを作成できません。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>解説</H6>
+
+<P>METADATA タグは、Global.asa ファイルの先頭近くに指定することをお勧めします。ただし、これらのタグは、Global.asa ファイルの内部ならどこにでも指定できます。SCRIPT タグの内側でも外側でもかまいません。</P>
+
+<P>定数のプレフィックスとしてタイプ ライブラリ名を付けると、定数へのあいまいな参照を避けることができます。たとえば、adErrItemNotFound と短く指定する代わりに、ADODB.adErrItemNotFound と指定すると、より明確になります。</P>
+
+<P>Microsoft Visual InterDev を使用して Global.asa ファイルを作った場合は、METADATA タグはオプションの STARTSPAN キーワードおよび ENDSPAN キーワードを含みます。これらのキーワードは、IIS によって無視されます。 </P>
+
+<P>タイプ ライブラリのロケール識別子を指定しない場合は、システム用の既定のロケール識別子が使用されます。システム ロケール識別子が使用できない場合に、ロケール識別子がほかに指定されていないときは、タイプ ライブラリのロケール識別子は 0 に設定されます。</P>
+
+<H6>例</H6>
+
+<P>次の例にある <CODE>MyComponent</CODE> は、Visual Basic 5.0 で開発されています。<CODE>MyComponent</CODE> では、次のステートメントを使用して定数 <CODE>MyError</CODE> を定義しています。</P>
+
+<PRE><CODE>Public Const MyError = "You are not using MyComponent correctly."
+</CODE></PRE>
+
+<P>タイプ ライブラリは、次のディレクトリにインストールされた MyComponent.lib に含まれています。</P>
+
+<PRE><CODE>C:\MyComponent
+</CODE></PRE>
+
+<P>次の METADATA タグは、MyApp アプリケーション用の Global.asa ファイルに含まれます。 </P>
+
+<PRE><CODE>&lt;!--METADATA TYPE="TypeLib"
+FILE="<I>MyComponent.tlb</I>"
+--&gt;
+ </CODE></PRE>
+
+<P>MyApp アプリケーションの任意の .asp ファイルに、次のスクリプトを入れることができるようになります。</P>
+
+<PRE><CODE>&lt;%
+  Dim MyVar
+  Set MyVar = Server.CreateObject("MyComponent.MyClass")
+  Currentreturn = MyVar.MyMethod
+  If Currentreturn = False
+    Response.Write(MyError)
+  End If
+%&gt;
+</CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

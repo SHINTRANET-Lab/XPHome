@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>継承された既定の設定を変更する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="既存または新規のサイトの、グローバルな既定設定を変更する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37763543">継承された既定の設定を変更する</a></h1>
+
+<p>IIS のインストール時に、プロパティ シートのさまざまなプロパティに既定値が割り当てられます。プロパティはサイト レベル、ディレクトリ レベル、またはファイル レベルで設定できます。上位レベル (サイト レベルなど) の設定は、下位レベル (ディレクトリ レベルなど) に自動的に適用、つまり継承されます。ただし、下位レベルで個別にプロパティを変更することも可能です。個々のサイト、ディレクトリ、またはファイルのプロパティが既に変更されている場合は、マスタの既定値を変更しても、個々の設定が自動的に既定の設定に置き換わることはありません。代わりに、サイト、ディレクトリ、またはファイルの設定を、新しい既定に合う設定に変更するかどうかを確認するメッセージが表示されます。</p>
+
+<big>コンピュータに割り当てられるすべてのサイトのマスタ プロパティを設定するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、[コンピュータ] アイコンを選択し、[プロパティ] をクリックして、プロパティ シートを表示します。</li>
+<li>[マスタ プロパティ] ボックスで、[WWW サービス] または [FTP サービス] を選択します。</li>
+<li>[編集] をクリックします。</li>
+<li>詳細については、各プロパティ シートで [ヘルプ] をクリックし、表示される説明を参照してください。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>サイトのプロパティを個別に設定するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトを右クリックし、[プロパティ] をクリックして、プロパティ シートを表示します。</li>
+<li>詳細については、各プロパティ シートで [ヘルプ] をクリックし、表示される説明を参照してください。</li>
+</ol>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>既定のプロパティの継承方法の詳細については、「Web サイトおよび FTP サイトについて」の「<a href="iivsovr.htm#propertiesandinheritanceofpropertiesonvirtualservers">プロパティおよびサイトのプロパティの継承</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC
+</layer></span>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ServerVariables</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_servervariables"></A><SUP></SUP>ServerVariables</H4>
+
+<P>ServerVariables コレクションは、定義済み環境変数の値を取得します。</P>
+
+<H6>構文</H6>
+
+<P>Request.<B>ServerVariables</B>(<I>server environment variable</I>)</P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>server environment variable</I></DT>
+
+<DD>取得するサーバー環境変数の名前を指定します。次のいずれかの値を指定できます。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=47%><B>変数</B></TD>
+<TD class=blue width=53%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>ALL_HTTP</TD>
+<TD width=53%>クライアントから送信されたすべての HTTP ヘッダーです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>ALL_RAW</TD>
+<TD width=53%>すべてのヘッダーを元の形式のままで取得します。ALL_RAW と ALL_HTTP との違いは、ALL_HTTP ではヘッダー名の前にプリフィックス &quot;HTTP_&quot; が付き、ヘッダー名が常に大文字に変換される点にあります。ALL_RAW では、ヘッダー名と値がクライアントから送信されたままの形で渡されます。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>APPL_MD_PATH</TD>
+<TD width=53%>ISAPI DLL 用のアプリケーションのメタベース パスを取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>APPL_PHYSICAL_PATH</TD>
+<TD width=53%>メタベース パスに対応する物理パスを取得します。IIS は、この値を返すときに、APPL_MD_PATH を物理 (ディレクトリ) パスに変換します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>AUTH_PASSWORD</TD>
+<TD width=53%>クライアントの認証ダイアログに入力された値です。この変数は、基本認証が使用された場合にのみ利用できます。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>AUTH_TYPE</TD>
+<TD width=53%>保護されたスクリプトにユーザーがアクセスしようとしたときに、サーバーがそのユーザーを確認するために使用する認証方法です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>AUTH_USER</TD>
+<TD width=53%>元の形式のままの認証ユーザー名です。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_COOKIE</TD>
+<TD width=53%>クライアント証明書の一意の ID が文字列として返されます。クライアント証明書全体の署名として使用できます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_FLAGS</TD>
+<TD width=53%>クライアント証明書が存在する場合は、bit0 は 1 に設定されます。
+<P>クライアント証明書の証明機関が無効な場合 (該当する証明機関がサーバー上の既知の CA の一覧に存在しない場合) は、bit1 は 1 に設定されます。</P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_ISSUER</TD>
+<TD width=53%>クライアント証明書の Issuer フィールドです (O=MS、OU=IAS、CN=ユーザー名、C=USA)。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_KEYSIZE</TD>
+<TD width=53%>SSL 接続キー サイズのビット数 (128 など) です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_SECRETKEYSIZE</TD>
+<TD width=53%>サーバー証明書秘密キーのビット数 (1024 など) です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_SERIALNUMBER</TD>
+<TD width=53%>クライアント証明書のシリアル番号フィールドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_SERVER_ISSUER</TD>
+<TD width=53%>サーバー証明書の Issuer フィールドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_SERVER_SUBJECT</TD>
+<TD width=53%>サーバー証明書の Subject フィールドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CERT_SUBJECT</TD>
+<TD width=53%>クライアント証明書の Subject フィールドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CONTENT_LENGTH</TD>
+<TD width=53%>クライアントから提供されるコンテンツの長さです。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>CONTENT_TYPE</TD>
+<TD width=53%>コンテンツのデータ型です。HTTP クエリの GET、POST、PUT など、情報が既に添付されているクエリで使用されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>GATEWAY_INTERFACE</TD>
+<TD width=53%>サーバーで使用する CGI 仕様のリビジョン番号です。&quot;CGI/<I>revision</I>&quot; という形式で示されます。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTP_&lt;<I>HeaderName</I>&gt;</TD>
+<TD width=53%><i>HeaderName</i> に格納されている値です。この表に列挙されているもの以外の任意のヘッダーには、ServerVariables コレクションがその値を取得できるように、必ずその前にプリフィックス &quot;HTTP_&quot; を付ける必要があります。
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;サーバーは、<i>HeaderName</i> 内にあるアンダスコア文字 (_) のうち、実際のヘッダー部分にあるものをダッシュ記号 (-) として解釈します。たとえば、HTTP_MY_HEADER と指定した場合、サーバーは MY-HEADER として送られたヘッダーを探します。</P>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTP_ACCEPT</TD>
+<TD width=53%>Accept ヘッダーの値を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTP_ACCEPT_LANGUAGE</TD>
+<TD width=53%>コンテンツの表示に使用する言語を説明する文字列を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTP_USER_AGENT</TD>
+<TD width=53%>要求を送信したブラウザを説明する文字列を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTP_COOKIE</TD>
+<TD width=53%>要求に含まれている cookie 文字列を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTP_REFERER</TD>
+<TD width=53%>現在のページに対する要求を参照しているページの URL を含んだ文字列を返します。ただし、リダイレクト要求は除きます。リダイレクト要求は、キャプチャされません。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTPS</TD>
+<TD width=53%>保護されたチャンネル (SSL) を経由して要求を受け取った場合は ON を返します。保護されていないチャンネルに対する要求の場合は OFF を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTPS_KEYSIZE</TD>
+<TD width=53%>SSL 接続キー サイズのビット数 (128 など) です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTPS_SECRETKEYSIZE</TD>
+<TD width=53%>サーバー証明書秘密キーのビット数 (1024 など) です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTPS_SERVER_ISSUER</TD>
+<TD width=53%>サーバー証明書の Issuer フィールドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>HTTPS_SERVER_SUBJECT</TD>
+<TD width=53%>サーバー証明書の Subject フィールドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>INSTANCE_ID</TD>
+<TD width=53%>IIS インスタンスの ID を文字形式で表したものです。インスタンス ID が 1 の場合、1 が文字列として表示されます。この変数を使用すると、要求が属する (メタベース内の) Web サーバー インスタンスの ID を取得できます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>INSTANCE_META_PATH</TD>
+<TD width=53%>要求に応答する IIS のインスタンスのメタベース パスです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>LOCAL_ADDR</TD>
+<TD width=53%>要求を受け取ったサーバー アドレスを返します。これは、コンピュータに複数の IP アドレスがバインドされている可能性のあるマルチホーム コンピュータで、要求が使用したアドレスを特定する場合に重要な情報です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>LOGON_USER</TD>
+<TD width=53%>ユーザーがログインした Windows アカウントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>PATH_INFO</TD>
+<TD width=53%>クライアントから提供される補足パス情報です。このサーバー変数 PATH_INFO と仮想パスを使用してスクリプトにアクセスできます。この情報が URL からのものである場合は、サーバーによってデコードされてから CGI スクリプトに渡されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>PATH_TRANSLATED</TD>
+<TD width=53%>PATH_INFO が変換されたものです。パスをたどって必要な仮想パスと物理パスの間のマッピングを実行します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>QUERY_STRING</TD>
+<TD width=53%>HTTP 要求内の疑問符 (?) の後の文字列に格納されているクエリ情報です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>REMOTE_ADDR</TD>
+<TD width=53%>要求を出したリモート ホストの IP アドレスです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>REMOTE_HOST</TD>
+<TD width=53%>要求を出したホストの名前です。サーバーがこの情報を持っていない場合、サーバーは REMOTE_ADDR を設定してこの変数を空のままにします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>REMOTE_USER</TD>
+<TD width=53%>ユーザーから送信された、マップされていないユーザー名文字列です。これは、サーバーにインストールされている認証フィルタによって変更された名前ではなく、ユーザーから実際に送信された名前です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>REQUEST_METHOD</TD>
+<TD width=53%>要求を出すために使用されたメソッドです。HTTP では GET、HEAD、POST などのメソッドがあります。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>SCRIPT_NAME</TD>
+<TD width=53%>実行されたスクリプトへの仮想パスです。このパスは自己参照 URL の場合に使用されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>SERVER_NAME</TD>
+<TD width=53%>自己参照 URL 内に出現する、サーバーのホスト名、DNS エイリアス、または IP アドレスです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>SERVER_PORT</TD>
+<TD width=53%>要求が送られたポート番号です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>SERVER_PORT_SECURE</TD>
+<TD width=53%>0 または 1 が格納される文字列です。保護されたポート上で要求が処理された場合は 1、そうでない場合は 0 になります。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>SERVER_PROTOCOL</TD>
+<TD width=53%>要求情報プロトコルの名前とリビジョン番号です。&quot;<I>protocol</I>/<I>revision</I>&quot; という形式で示されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>SERVER_SOFTWARE</TD>
+<TD width=53%>要求に応答してゲートウェイを実行するサーバー ソフトウェアの名前とバージョンです。&quot;<I>name</I>/<I>version</I>&quot; という形式で示されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=47%>URL </TD>
+<TD width=53%>URL の基本部分を示します。</TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>クライアントが上の表に示したもの以外のヘッダーを送信した場合は、Request.ServerVariables への呼び出しの中でヘッダー名の前に &quot;HTTP_&quot; を付けることで、ヘッダーの値を取得できます。たとえば、クライアントが次のヘッダーを送信したとします。</P>
+
+<PRE><CODE>  SomeNewHeader:SomeNewValue</CODE></PRE>
+
+<P><CODE>SomeNewValue</CODE> を取得するには、次の構文を使用します。</P>
+
+<PRE><CODE>  &lt;% Request.ServerVariables("HTTP_SomeNewHeader") %&gt;
+ </CODE></PRE>
+
+<H6>例</H6>
+
+<P>この例は、複数のサーバー変数名を表示します。</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;!-- This example displays the content of several ServerVariables. --&gt; 
+ALL_HTTP server variable = 
+&lt;%= Request.ServerVariables("ALL_HTTP") %&gt; &lt;BR&gt;
+CONTENT_LENGTH server variable = 
+&lt;%= Request.ServerVariables("CONTENT_LENGTH") %&gt; &lt;BR&gt; 
+CONTENT_TYPE server variable = 
+&lt;%= Request.ServerVariables("CONTENT_TYPE") %&gt; &lt;BR&gt;
+QUERY_STRING server variable = 
+&lt;%= Request.ServerVariables("QUERY_STRING") %&gt; &lt;BR&gt; 
+SERVER_SOFTWARE server variable = 
+&lt;%= Request.ServerVariables("SERVER_SOFTWARE") %&gt; &lt;BR&gt; 
+&lt;/HTML&gt;</CODE></PRE>
+
+<P>この例は、VBScript の For Each ループを使用して、既存のサーバー変数名に繰り返し処理を行います。匿名アクセスが有効になっている場合、変数が空になることもあります。次のスクリプトは、すべてのサーバー変数名を表形式で出力します。</P>
+
+<PRE><CODE>&lt;TABLE BORDER="1"&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;B&gt;Server Variable&lt;/B&gt;&lt;/TD&gt;&lt;TD&gt;&lt;B&gt;Value&lt;/B&gt;&lt;/TD&gt;&lt;/TR&gt;
+&lt;% For Each strKey In Request.ServerVariables %&gt; 
+&lt;TR&gt;
+&lt;TD&gt;&lt;%= strKey %&gt;&lt;/TD&gt;
+&lt;TD&gt;&lt;%= Request.ServerVariables(strKey) %&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;% Next %&gt;
+&lt;/TABLE&gt;
+ </CODE></PRE>
+
+<P>この例は、サーバーの名前をハイパーリンクに挿入します。 </P>
+
+<PRE><CODE>&lt;A HREF= "http://&lt;%=Request.ServerVariables("SERVER_NAME")%&gt;/scripts/MyPage.asp"&gt;
+Link to MyPage.asp
+&lt;/A&gt;
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Request オブジェクト </P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob8q5h.htm"><B>ClientCertificate</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob0z3o.htm"><B>Cookies</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob4fl9.htm"><B>Form</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob53hj.htm"><B>QueryString</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

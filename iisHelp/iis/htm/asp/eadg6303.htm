@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>コンポーネント サービス</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_component_services"></A><SUP></SUP>コンポーネント サービス</H1>
+
+<P>コンポーネント サービスには、コンポーネントや Web アプリケーションの開発を容易にするために、次のようなサービスが提供されています。</P>
+
+<H5>キュー コンポーネント</H5>
+
+<P>キュー コンポーネントにより、クライアントとサーバーが接続されている場合に、即座に実行可能なコンポーネントを作成することができます。これにより非同期にコンポーネントを呼び出し、実行することが容易になります。クライアントとサーバーが接続されていない場合、その接続が確立するまでコンポーネントの実行は保留になります。キュー コンポーネントには、コンポーネント開発に使用されるメソッドの呼び出しに類似したメソッドの呼び出しが使用されるため、マーシャリングに関する深い知識を習得する苦労を軽減します。詳細については、Platform SDK の「Component Services」セクションの「Queued Components」を参照してください。</P>
+
+<H5>コンポーネント サービス イベント</H5>
+
+<P>コンポーネント サービス イベントによって、パブリッシャとサブスクライバはデータ ソースに緩やかに接続されるため、それぞれが個別にデータ ソースを開発、配備、および実行できるようになります。パブリッシャは、サブスクライバの位置や数を把握する必要はありません。また、サブスクライバは仲介ブローカーを介して、パブリッシャを見つけたり、パブリッシャへのサブスクリプションを管理したりすることができます。イベント システムは、パブリッシャとサブスクライバの両方の身元を永続的にすることで、Web アプリケーションの開発を容易にします。パブリッシャとサブスクライバは、互いを知らなくても、その身元を操作することができます。詳細については、Platform SDK の「Component Services」セクションの「COM+ Events」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

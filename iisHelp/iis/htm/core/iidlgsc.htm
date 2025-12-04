@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>既定のログオン ドメインを設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="基本認証のための、既定のドメイン名の選択方法について説明します。基本認証において、単一のエンティティとして管理される 1 台または複数のコンピュータを示すドメイン名が、ユーザーによって入力されたユーザー名の前に付きます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="settingthedefaultlogondomain">既定のログオン ドメインを設定する</a></h1>
+
+<p> 基本認証で認証を受けるユーザーは、有効な Windows&nbsp;ユーザー名とパスワードでログオンする必要があります。通常、ユーザー名には次のものが含まれます。
+
+<ul>
+<li>Windows &quot;ドメイン&quot; 名</li>
+<li>アカウント ユーザー名</li>
+</UL>
+
+<p>これらの名前により、Web サーバーが管理する 1 台または複数のコンピュータが単一のエンティティとして識別されます。たとえば、&quot;Sales1&quot; ドメインの &quot;PhilSpencer&quot; というアカウントを使用してログオンするユーザーは、&quot;Sales1\PhilSpencer&quot; としてログオンします。ただし、ユーザーがドメイン名を示さない場合は、基本認証用の既定のログオン ドメインを使用するように、Web サーバーを構成することができます。</p>
+
+<big>既定のログオン ドメインを設定するには</big><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+<li>[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックします。[匿名アクセスおよび認証コントロール] の [選択] をクリックします。</li>
+<li>[認証方法] ダイアログ ボックスで、[基本認証] チェック ボックスをオンにします。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;基本認証では、パスワードが暗号化されずにネットワーク上に送信されるため、処理を続行するかどうかを確認するダイアログ ボックスが表示されます。[はい] をクリックして、処理を続行します。</p>
+
+<li>[選択] をクリックします。</li>
+<li>[基本認証ドメイン] ダイアログ ボックスで、新しく既定のログオン ドメインにするドメイン名を入力するか、または参照して選択します。Web サーバーの既定のドメイン名を使用するには、[標準設定] をクリックします。</li>
+</ol>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML dir=LTR><HEAD><TITLE>モジュール 2 : COM コンポーネントの使用</TITLE>
+<SCRIPT language=JavaScript>
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT>
+
+<SCRIPT language=VBScript>
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//-->
+</SCRIPT>
+
+<META content="スクリプト作成機能を拡張する COM コンポーネントの使用方法について学ぶための、Active Server Pages (ASP) チュートリアルです。ここでは、ASP にインクルードする COM コンポーネントを使用して、サンプル Web サイトの起動と、データベースの照会を行います。" name=DESCRIPTION>
+<META content="text/html; charset=shift_jis" http-equiv=Content-Type>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff text=#000000><FONT face="ＭＳ Ｐゴシック">
+<H1><A name=module1>モジュール 2 : ASP ページでの COM コンポーネントの使用</A></H1>
+<P>ASP ページで Microsoft&reg; COM (Component Object Model) コンポーネントを使用すると、ASP が持つ機能を大幅に拡張することができます。COM コンポーネントとは、ASP ページからの呼び出しが可能なコンパイル済みコードの集合体です。COM コンポーネントは、安全、コンパクト、かつ再利用可能なオブジェクトであり、DLL と同じようにコンパイルされています。Microsoft Visual C++&reg;、Microsoft Visual Basic&reg;、その他 COM をサポートしている任意の言語で作成することができます。たとえば、このチュートリアルのモジュール 1 で使用した Microsoft ActiveX&reg; Data Objects (ADO) では、データベースを効率的に照会するためのメソッドやプロパティを提供しています。COM コンポーネントから構築されている ADO オブジェクトを使用すれば、入り組んだデータ アクセス コードを自ら作成する必要はありません。 </P>
+<P>このモジュールでは、ASP にインクルードする COM コンポーネントを使用します。自分でも COM コンポーネントを作ってみましょう。ここでは、電子商取引に役立つサービスを提供する ASP ページの作成方法について説明します。次のような演習から構成されます。 </P>
+<UL>
+<LI><A    href="#rotating">演習 1 : 広告の切り替え</A>&nbsp;&nbsp;&nbsp;Web ページ上で広告を切り替え、ユーザー データを記録して、広告がクリックされるとユーザーをリダイレクトします。 
+<LI><A    href="#counting">演習 2 : ページのヒット数のカウント</A>&nbsp;&nbsp;&nbsp;ユーザーがページを要求した回数を追跡します。 
+<LI><A    href="#creating">演習 3 : Visual Basic COM オブジェクトの作成</A>&nbsp;&nbsp;&nbsp;Microsoft Visual Basic を使用して ActiveX オブジェクトを作成します。 
+<LI><A    href="#creatingj">演習 4 : Java COM オブジェクトの作成</A>&nbsp;&nbsp;&nbsp;Microsoft Visual J++&reg; を使用して Java オブジェクトを作成します。 </LI></UL><BR>
+<H2><A name=rotating>演習 1 : 広告の切り替え</A></H2>
+<P>広告は、Web 上の巨大なビジネスです。この演習では、IIS と同時にインストールされる Ad Rotator コンポーネントを使用して、Web ページ上で広告を切り替える方法について説明します。ユーザーが Web ページを読み込むか更新するたびに、Ad Rotator コンポーネントによって表示する広告が選択されます。さらに、広告を変更する場合は、広告が含まれる ASP ファイル全体を変更するのではなく、リダイレクト ファイルとロテータ スケジュール ファイルを変更するだけです。Web サイト内で数多くのページに広告を表示する場合、この方法で開発に要する時間が削減されます。 </P>
+<P>Ad Rotator コンポーネントをセットアップするには、広告への URL リンクを含むリダイレクト ファイル、および表示データを含むロテータ スケジュール ファイルの 2 種類のファイルが必要です。2 種類のファイルを設定することで、Web サイトの ASP ページから Ad Rotator コンポーネントを呼び出せます。 </P>
+<P>この演習では、次に示すタスクを実行します。 </P>
+<UL>
+<LI><b>例 1</b>&nbsp;&nbsp; 呼び出し元ページに広告イメージ リンクを作成する Ad Rotator ロテータ スケジュール ファイルを作成します。 
+<LI><b>例 2</b>&nbsp;&nbsp; グローバルな広告表示データおよび各広告に特有の情報を指定する Ad Rotator リダイレクト ファイルを作成します。 
+<LI><b>例 3</b>&nbsp;&nbsp; Ad Rotator の呼び出しコードを含めるインクルード ファイルを作成します。 
+<LI><b>例 4</b>&nbsp;&nbsp; Ad Rotator コンポーネントを呼び出す ASP ページを作成し、広告の表示と切り替え機能をテストします。これを実行する前に、例 1 ～ 3 を終了させておくことが必要です。 </LI></UL>
+<P>
+<H3>例 1 : Ad Rotator ロテータ スケジュール ファイルの作成</H3>
+<P>ロテータ スケジュール ファイルでは、表示する広告に関連した情報をカタログ化します。これには、広告がクリックされた後のリダイレクト情報、表示する広告のサイズ、使用するイメージ、広告に付加するコメント、および特定の広告を選択する頻度を指定した数字などが含まれます。Ad Rotator コンポーネントのメソッドが ASP ページで呼び出されると、このファイルを使用して表示する広告が決定されます。 </P>
+<P>ロテータ スケジュール ファイルは 2 つのセクションに分かれており、アスタリスク (*) で区切られます。最初のセクションにはすべての広告に共通の情報が示され、2 番目のセクションには各広告に固有のデータが示されます。ロテータ スケジュール ファイルをテストするために、Microsoft.com からそれぞれの広告にふさわしいイメージを使用します。次の一覧では、ロテータ スケジュール ファイルの大まかな構造を示します。 </P>
+<h5>セクション 1</h5>
+<UL>
+<LI><B>リダイレクト</B>&nbsp;&nbsp;&nbsp;URL 形式で、広告を表示する前に実行する ASP ファイルのパスと名前。このファイルを使用して、広告をクリックしたユーザーに関する情報を記録することができます。クライアントの IP アドレス、クライアントがその広告を見たページ、広告がクリックされた回数、などの情報を記録します。この ASP ファイルでは、セクション 2 の広告に関連付けられた URL が存在しない場合の処理を指定することもできます。広告に対するヒットの数で広告主に支払い請求をするときは、同一のユーザーが繰り返し [最新の情報に更新] をクリックした結果によるヒットではないことを証明できれば効果的です。 
+<LI><B>幅</B>&nbsp;&nbsp;&nbsp;各広告イメージの幅。ピクセル単位で指定します。既定値は 440 です。
+<LI><B>高さ</B>&nbsp;&nbsp;&nbsp;各広告イメージの高さ。ピクセル単位で指定します。既定値は 60 です。
+<LI><B>外枠</B>&nbsp;&nbsp;&nbsp;各広告イメージの外枠の太さ。既定値は 1 です。
+<LI><B>アスタリスク (*)</B>&nbsp;&nbsp;&nbsp;セクション 1 とセクション 2 の境界。アスタリスクの行には、ほかの文字を含めることができません。 </LI></UL>
+<h5>セクション 2</h5>
+<P>各広告に対して、次の内容を指定します。
+<UL>
+<LI><B>イメージの URL</B>&nbsp;&nbsp;&nbsp;その広告で使用するイメージ ファイルの仮想パスとファイル名。 
+<LI><B>広告主のホームページの URL</B>&nbsp;&nbsp;&nbsp;リンクが選択されたときのジャンプ先となる URL。リンクが存在しない場合、ハイフン (-) を使用します。 
+<LI><B>テキスト</B>&nbsp;&nbsp;&nbsp;ブラウザでグラフィックスがサポートされない場合に表示するテキスト。 
+
+<LI><B>評価</B>&nbsp;&nbsp;&nbsp;Ad Rotator コンポーネントによって広告が選択される際、この広告に設定する相対的重要度を表す整数。たとえば、2 種類の広告がある場合、この値が 3 の広告は 30% の確率で選択され、この値が 7 の広告は 70% の確率で選択されます。この例では、Ad Rotator コンポーネントによって 5 回のうち 2 回は Microsoft Windows&reg; の広告が選択され、5 回のうち 3 回は Microsoft Office の広告が選択されます。 </LI></UL>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、MyAdRot.txt と名前を付けて <I>x</I>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。 
+</P><CODE>
+<P>&nbsp; REDIRECT AdRotRedirect.asp <BR>&nbsp; WIDTH 250 <BR>&nbsp; HEIGHT 60 
+<BR>&nbsp; BORDER 0 <BR>&nbsp; * <BR>&nbsp; http://www.microsoft.com/windows/images/bnrWinfam.gif <BR>&nbsp; 
+http://www.microsoft.com/windows <BR>&nbsp; Microsoft Windows <BR>&nbsp; 2 
+<BR>&nbsp; http://www.microsoft.com/office/images/office_logo.gif <BR>&nbsp; 
+http://www.microsoft.com/office <BR>&nbsp; Office 2000 <BR>&nbsp; 3 </P>
+<P>&nbsp; </P></CODE>
+<h3>例 2 : Ad Rotator リダイレクト ファイルの作成
+</h3>
+<P> ユーザーがある広告をクリックしたとき、ASP 形式の Ad Rotator リダイレクト ファイルによって関連情報を取得し、その広告を表示してから、関連情報をファイルに書き込むことができます。&nbsp; 
+</P>
+<P> この機能を有効にするには、IUSR_<I>ComputerName</I> アカウントと IWAM_<I>ComputerName</I> アカウントに、<I>x</I>:\InetPub\Wwwroot\Tutorial フォルダへの読み取り/書き込みアクセスを許可する必要があります。あるいは、このチュートリアルの<A href="ASPTut01.htm#creating">モジュール 1 演習 3</a> のコードを使用して、Microsoft Access データベースに同じ情報を書き込むこともできます。 
+</P>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、AdRotRedirect.asp と名前を付けて <I>x</I>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。 
+</P><CODE>
+<P>&nbsp; &lt;%@ Language=VBScript %&gt; <BR><BR>&nbsp; &lt;html&gt; <BR>&nbsp; 
+&lt;head&gt; <BR>&nbsp; &lt;title&gt;AdRotRedirect file&lt;/title&gt; <BR>&nbsp; 
+&lt;/head&gt; <BR>&nbsp; &lt;body&gt; <BR><BR>&nbsp; &lt;% <BR>&nbsp;&nbsp; 
+'Create some variables. <BR>&nbsp;&nbsp; dim strLogFile <BR><BR>&nbsp;&nbsp; 
+'Get the physical path of this Web directory so that we know the path exists. 
+<BR>&nbsp;&nbsp; 'The ASP Server object has many useful methods. <BR>&nbsp;&nbsp; strLogFile = Server.MapPath(".") &amp; 
+"\AdRotLog.txt" <BR><BR>&nbsp;&nbsp; 'Set some constants for working with files. 
+<BR>&nbsp;&nbsp; Const cForAppending = 8 <BR>&nbsp;&nbsp; Const 
+cTristateUseDefault = -2 <BR><BR>&nbsp;&nbsp; 'Create a FileSystemObject object, 
+<BR>&nbsp;&nbsp; ' which gives you access to files and folders on the system. 
+<BR>&nbsp;&nbsp; Set fsoObject = 
+Server.CreateObject("Scripting.FileSystemObject") <BR><BR>&nbsp;&nbsp; 'Open a 
+handle to the file. <BR>&nbsp;&nbsp; 'True means that the file will be created 
+if it doesn't already exist. <BR>&nbsp;&nbsp; Set tsObject = 
+fsoObject.OpenTextFile(strLogFile, cForAppending, True) <BR><BR>&nbsp;&nbsp; 
+'Record the data for the user who has just clicked on an advertisement. 
+<BR>&nbsp;&nbsp; 'We have used the Write method of the ASP Request object. 
+<BR>&nbsp;&nbsp; 'The ServerVariables collection of the ASP Request object holds vast&nbsp; <BR>&nbsp;&nbsp; ' amounts of data for 
+each request made to a Web server. <BR>&nbsp;&nbsp; 
+tsObject.WriteLine "--------------------" <BR>&nbsp;&nbsp; tsObject.WriteLine 
+Date &amp; ", " &amp; Time <BR>&nbsp;&nbsp; tsObject.WriteLine 
+Request.ServerVariables("LOGON_USER") <BR>&nbsp;&nbsp; tsObject.WriteLine 
+Request.ServerVariables("REMOTE_ADDR") <BR>&nbsp;&nbsp; tsObject.WriteLine 
+Request.QueryString("url") <BR>&nbsp;&nbsp; tsObject.WriteLine 
+Request.ServerVariables("HTTP_REFERER") <BR>&nbsp;&nbsp; tsObject.WriteLine 
+Request.ServerVariables("HTTP_USER_AGENT") <BR>&nbsp;&nbsp; tsObject.Close 
+<BR><BR>&nbsp;&nbsp; 'Redirect to the Advertiser's Web site using the Redirect 
+method <BR>&nbsp;&nbsp; ' of the ASP Response object. <BR>&nbsp;&nbsp; 'When the 
+AdRotator component calls AdRotRedirect.asp, it&nbsp; <BR>&nbsp;&nbsp; ' 
+automatically passes in the advertiser's URL in the QueryString. 
+<BR>&nbsp;&nbsp; Response.Redirect Request.QueryString("url") <BR>&nbsp; %&gt; 
+<BR><BR>&nbsp; &lt;/body&gt; <BR>&nbsp; &lt;/html&gt; </P></CODE>
+<P>&nbsp; 
+</P>
+<h3>例 3 : Ad Rotator インクルード ファイルの作成
+</h3>
+<P>インクルード ファイルは、複数の ASP ファイルや HTML ファイルによって使用されるコードを格納するために使用します。Ad Rotator コードは、インクルード ファイル内のシンプルな関数に配置するのが効果的です。Ad Rotator インクルード ファイルを使用すれば、ASP ファイルや HTML ファイルから単一の関数を呼び出すだけで、広告を表示することができます。広告を表示する ASP ファイル全体にインクルード ファイルのコードを配置することも可能ですが、コードを変更する必要が生じた場合、単一のインクルード ファイルではなく、ASP ファイル全体を更新しなければなりません。 
+</P>
+<P>この例では、GetAd という関数を含める Ad Rotator インクルード ファイルを作成します。この関数は、ASP ページで表示する広告をランダムに選択します。 
+</P>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、AdRotatorLogic.inc と名前を付けて <I>x</I>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。 
+</P><CODE>
+<P>&nbsp; &lt;% <BR>&nbsp;&nbsp; Function GetAd() 
+<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp; dim objLoad <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+'Create an instance of the AdRotator component. <BR>&nbsp;&nbsp;&nbsp;&nbsp; Set 
+objLoad = Server.CreateObject("MSWC.AdRotator") <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+'Set the TargetFrame property, if any. If you have a Web 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; ' page using frames, this is the frame where the 
+URL opens. <BR>&nbsp;&nbsp;&nbsp;&nbsp; 'If the HTML page does not find the 
+TARGET name, <BR>&nbsp;&nbsp;&nbsp;&nbsp; ' the URL will be opened in a new 
+window. <BR>&nbsp;&nbsp;&nbsp;&nbsp; objLoad.TargetFrame = "TARGET=new" 
+<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp; 'Set one of the other AdRotator properties. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; objLoad.Border = 1 <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+'Get a random advertisement from the text file. <BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+GetAd = objLoad.GetAdvertisement("MyAdRot.txt") <BR><BR>&nbsp;&nbsp; End 
+Function <BR>&nbsp; %&gt; </P>
+<P>&nbsp; </P></CODE>
+<H3>例 4 : Ad Rotator のテスト</H3>
+<P>Ad Rotator コンポーネントに構築したアプリケーションをテストするには、作成した Ad Rotator インクルード ファイル内の関数を呼び出す ASP ページが必要です。 
+</P>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、DisplayAds.asp と名前を付けて <I>x</I>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。アドレス バーに「http://localhost/Tutorial/DisplayAds.asp」と入力し、ブラウザでこの例を表示します。 </P><CODE>
+<P>&nbsp; &lt;%@ Language=VBScript %&gt; <BR><BR>&nbsp; &lt;html&gt; <BR>&nbsp; 
+&lt;head&gt; <BR>&nbsp; &lt;title&gt;Display an Advertisement&lt;/title&gt; 
+<BR>&nbsp; &lt;/head&gt; <BR>&nbsp; &lt;body&gt; <BR><BR>&nbsp; &lt;font 
+face="MS Gothic"&gt; <BR>&nbsp; &lt;h2&gt;Display an Advertisement&lt;/h2&gt; 
+<BR><BR>&nbsp; &lt;comment&gt;Include the file you created to get an 
+advertisement.&lt;/comment&gt; <BR>&nbsp; &lt;!-- #include File = 
+"AdRotatorLogic.inc" --&gt; <BR><BR>&nbsp; &lt;comment&gt;Call the Function in 
+the include file.&lt;/comment&gt; <BR>&nbsp; &lt;%=GetAd()%&gt; <BR><BR>&nbsp; 
+&lt;/font&gt; <BR>&nbsp; &lt;/body&gt; <BR>&nbsp; &lt;/html&gt; </P></CODE>
+<P>ブラウザには、次のように表示されます。 </P>
+<P><FONT face="MS Gothic">
+<H2>Display an Advertisement</H2>
+<IMG SRC="http://www.microsoft.com/windows/images/bnrWinfam.gif" ALT="Microsoft Windows " WIDTH=250 HEIGHT=60 BORDER=1></FONT>
+<P>ブラウザで [最新の情報に更新] を 20 回ほどクリックし、広告がどのように変化するのかを確認します。広告をクリックして、AdRotRedirect.asp によって広告主の Web サイトにリダイレクトされることを確認します。AdRotLog.txt を開き、広告をクリックしたときに何が記録されたのかを確認します。 </P>
+<P>&nbsp; </P>
+<H2><A name=counting>演習 2 : ページのヒット数のカウント</A></H2>
+<P>Web ページに対する要求の回数、すなわちヒット数をカウントできれば便利です。トラフィックが盛んなサイトでは、広告収入の増加も期待できます。一部の Web サイトでは、このデータから 1 ヒットにつき一律いくらで広告主に請求しています。トラフィック情報によって、顧客がサイト内をどのように移動しているか、また広告をどのように配置すればよいのかも明らかになります。ヒット歴が残っていないようなページについては、デザインの変更を検討すべきかもしれません。 </P>
+<P>PageCounter コンポーネントは、内部オブジェクトを使用してサーバー上の Web ページに対するヒット数を記録します。PageCounter では、一定間隔ですべての情報をテキスト ファイルに保存するため、電源オフやシステム ダウンによってカウントが失われることはありません。PageCounter コンポーネントでは、次の 3 つのメソッドを使用します。 </P>
+<UL>
+<LI><B>Hits</B>&nbsp;&nbsp;&nbsp;このメソッドは、Web ページのヒット数を表示します。既定では、呼び出し元のページです。 
+<LI><B>PageHit</B>&nbsp;&nbsp;&nbsp;このメソッドは、現在のページのヒット カウントをインクリメントします。ASP ページのヒット数を記録する場合、このメソッドはページ内部から呼び出す必要があります。 
+<LI><B>Reset</B>&nbsp;&nbsp;&nbsp;このメソッドは、ページのヒット カウントを 0 に設定します。既定では、呼び出し元のページです。 </LI></UL>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、PageCounter.asp と名前を付けて <I>x</I>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。アドレス バーに「http://localhost/Tutorial/PageCounter.asp」と入力し、ブラウザでこの例を表示します。 </P><CODE>
+<P>&nbsp; &lt;%@ Language=VBScript %&gt; <BR><BR>&nbsp; &lt;html&gt; <BR>&nbsp; 
+&lt;head&gt; <BR>&nbsp; &lt;title&gt;Page Counter Example&lt;/title&gt; 
+<BR>&nbsp; &lt;/head&gt; <BR>&nbsp; &lt;body&gt; <BR>&nbsp; &lt;font face="MS 
+Gothic"&gt; <BR><BR>&nbsp; &lt;H3&gt;Page Counter Example&lt;/H3&gt; 
+<BR><BR>&nbsp; &lt;p&gt; <BR>&nbsp; &lt;FORM NAME="PageCounter" METHOD="GET" 
+ACTION="PageCounter.asp"&gt; <BR>&nbsp; &lt;INPUT TYPE="CHECKBOX" NAME="reset" 
+VALUE="True"&gt;Reset the Counter for this page?&lt;BR&gt; <BR>&nbsp; &lt;INPUT 
+TYPE="SUBMIT" VALUE="Submit"&gt; <BR>&nbsp; &lt;/FORM&gt; <BR>&nbsp; &lt;/p&gt; 
+<BR><BR>&nbsp; &lt;% <BR>&nbsp;&nbsp; 'Instantiate the PageCounter object. 
+<BR>&nbsp;&nbsp; Set MyPageCounter = Server.CreateObject("MSWC.PageCounter") 
+<BR><BR>&nbsp;&nbsp; 'Increment the counter for this page. <BR>&nbsp;&nbsp; 
+MyPageCounter.PageHit <BR><BR>&nbsp;&nbsp; If Request.QueryString("reset") = 
+"True" Then <BR>&nbsp;&nbsp;&nbsp;&nbsp; 'Reset the counter for this page. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; MyPageCounter.Reset("/Tutorial/PageCounter.asp") 
+<BR>&nbsp;&nbsp; End If <BR>&nbsp; %&gt; <BR><BR>&nbsp; Hits to this page = 
+&lt;%=MyPageCounter.Hits %&gt;&lt;BR&gt; <BR><BR>&nbsp; &lt;/font&gt; <BR>&nbsp; 
+&lt;/body&gt; <BR>&nbsp; &lt;/html&gt; </P></CODE>
+<P>ブラウザには、次のように表示されます。 </P>
+<P><FONT face="MS Gothic">
+<H3>&nbsp; Page Counter Example</H3>
+<P>
+<FORM method=get name=PageCounter>&nbsp; <INPUT name=reset type=checkbox 
+value=True>Reset the Counter for this page?<BR>&nbsp;<INPUT type=button value=Submit> </FORM>
+<P>&nbsp; Hits to this page = 1<BR></FONT>
+<P>ブラウザの [最新の情報に更新] をクリックするか、ページの [Submit] をクリックして、ヒット カウントの増加を確認します。カウンタをリセットする場合は、[Reset the Counter for this page?] をオンにします。 </P><BR>
+<H2><A name=creating>演習 3 : Visual Basic COM オブジェクトの作成</A></H2>
+<P>この演習では、Visual Basic を使用して、ASP ページから呼び出しが可能である単純な COM オブジェクトを作成します。この例では、ActiveX Wizard が使用できる Visual Basic が必要です。また、Visual Basic ランタイムが 64 ビット プラットフォーム対応に開発されるまで、64 ビット プラットフォームではサポートされません。64 ビット プラットフォームで実行される 32 ビット COM オブジェクトを作成しますが、32 ビット COM オブジェクトは 32 ビット アプリケーションから呼び出す必要があります。IIS は 64 ビット プラットフォームで実行される 64 ビット アプリケーションであるため、32 ビット オブジェクトを呼び出すことができません。 </P>
+<P>VBScript には備わっていない機能が必要となる Web アプリケーションの作成を検討してみます。この場合、アプリケーションの ASP ページから必要に応じて呼び出すカスタム プロシージャを作成するという方法があります。</P>
+<P>通常、この方法は、独自の機能をカプセル化するための適切なソリューションです。ただし、作成している Web アプリケーションが数千のユーザーに使用されるものであり、このプロシージャによって第三者への漏洩を回避したい独自の機能をカプセル化する場合、機能を COM コンポーネントの形式でカプセル化するほうが、より優れた方法です。コンポーネントはコンパイル済みのコードであるため、スクリプトよりもセキュリティとパフォーマンスにおいて優れています。さらに、Visual Basic、C++、Java、その他 COM に準拠している言語に備わっている機能を利用することができます。</P>
+<H3>ActiveX COM オブジェクトの作成</H3>
+<P>COM コンポーネントを作成するには、Visual Basic の ActiveX DLL Wizard を利用するのが最も簡単です。Microsoft Visual C++ によって COM コンポーネントを作成する場合、Active Template Library (ATL) を使用するか、手動でコードを記述します。この例では、Visual Basic を使用します。 </P>
+<P>ここでは、Visual Basic 関数をコンポーネントとして作成し、カプセル化する方法について説明します。Visual Basic には、VBScript にない財務関数が数多く含まれています。この例では、固定金利と定期的な固定支払いに基づいて投資の将来価値を計算します。</P>
+<OL>
+<LI>Visual Basic を起動します。[新しいプロジェクト] ウィンドウが表示されていない場合、[ファイル] の [新しいプロジェクト] をクリックします。 
+<LI>[ActiveX DLL] をクリックし、[OK] をクリックします。 
+<LI>[Project1 - Class1 (コード)] というウィンドウが開きます。このウィンドウで、コードを入力します。 
+<LI>[プロジェクト] メニューの [Project1 のプロパティ] をクリックします。[全般] プロパティ シートの [プロジェクト名] ボックスに、「ASPTut」と入力します。DLL は ASPTut.dll になります。[対話型インターフェイスの抑制] チェック ボックスをオンにすることで、プロジェクトの実行にユーザーが介入することはなくなり、ユーザー インターフェイスの要素も除外されます。[スレッド モデル] を [アパートメント スレッド] に設定します。これにより、複数のユーザーが同時に DLL を使用することができます。[OK] をクリックします。 
+<LI>Visual Basic で、メソッドおよびプロパティをグループ化するためのクラスを定義します。[プロジェクト - ASPTut] ウィンドウで [Class1 (Class1)] ノードをクリックすると、以下にクラス プロパティの一覧が表示されます。[プロパティ - Class1] で、[(オブジェクト名)] の隣にあるテキスト フィールドをクリックして、クラス名を「Finance」に変更します。ASP ページやほかのスクリプトでこの COM コンポーネントを呼び出す場合は、ASPTut.Finance として参照します。[Instancing] の隣にあるドロップダウン リスト ボックスをクリックして、[5 - MultiUse] を選択します。 
+<LI>ここで、使用する Visual Basic 関数について確認します。FV については、<a href="http://www.microsoft.com/japan/developer/library/default.asp" target="_blank">MSDN</A> の「Visual Basic library」を参照してください。 
+<LI>以前に [Project1 - Class1 (Code)] となっていたウィンドウのタイトルは、[ASPTut - Finance (Code)] になっているはずです。ウィンドウに次のテキストをコピーして貼り付けます。<CODE> <BR><BR>Option Explicit<BR><BR>'Declare the 
+  global variables that will be set by the Property functions.<BR>Dim 
+  gAnnualIntRate As Double<BR>Dim gNumPayPeriods As Integer<BR>Dim gPayment As 
+  Double<BR>Dim gPresentSavings As Variant 'Optional<BR>Dim gWhenDue As Variant 
+  'Optional<BR><BR>Public Function CalcFutureValue() As Double<BR><BR>&nbsp; 
+  'The global variables you pass to the FV function are set<BR>&nbsp; 'when user 
+  sets the properties in the ASP page.<BR>&nbsp; 'You could pass variables into 
+  the CalcFutureValue() function<BR>&nbsp; 'if you wanted to avoid using 
+  properties.<BR>&nbsp; 'CalcFutureValue becomes a method in your 
+  component.<BR><BR>&nbsp; Dim IntRatePerPeriod As Double<BR>&nbsp; Dim 
+  FullFutureValue As Double<BR><BR>&nbsp; If (gAnnualIntRate = Null) Or 
+  (gNumPayPeriods = Null) Or (gPayment = Null) Then<BR>&nbsp;&nbsp;&nbsp; 
+  CalcFutureValue = 0<BR>&nbsp; Else<BR>&nbsp;&nbsp;&nbsp; IntRatePerPeriod = 
+  gAnnualIntRate / 100 / 12<BR>&nbsp;&nbsp;&nbsp; FullFutureValue = 
+  FV(IntRatePerPeriod, gNumPayPeriods, gPayment, gPresentSavings, 
+  gWhenDue)<BR>&nbsp;&nbsp;&nbsp; CalcFutureValue = Round(FullFutureValue, 
+  2)<BR>&nbsp; End If<BR><BR>End Function<BR><BR>Public Property Get 
+  AnnualIntRate() As Double<BR>&nbsp; 'Get functions return the value of the 
+  global variables<BR>&nbsp; 'as if they were properties.<BR>&nbsp; 'In your 
+  ASP page, you might say x = oASPTut.Rate.<BR>&nbsp; AnnualIntRate = 
+  gAnnualIntRate<BR>End Property<BR><BR>Public Property Let AnnualIntRate(ByVal 
+  vAnnualIntRate As Double)<BR>&nbsp; 'Let functions set the global variables 
+  when your ASP page<BR>&nbsp; 'makes a call such as oASPTut.Rate = 5.<BR>&nbsp; 
+  gAnnualIntRate = vAnnualIntRate<BR>End Property<BR><BR>Public Property Get 
+  NumPayPeriods() As Integer<BR>&nbsp; NumPayPeriods = gNumPayPeriods<BR>End 
+  Property<BR><BR>Public Property Let NumPayPeriods(ByVal vNumPayPeriods As 
+  Integer)<BR>&nbsp; gNumPayPeriods = vNumPayPeriods<BR>End 
+  Property<BR><BR>Public Property Get Payment() As Double<BR>&nbsp; Payment = 
+  gPayment<BR>End Property<BR><BR>Public Property Let Payment(ByVal vPayment As 
+  Double)<BR>&nbsp; gPayment = -(vPayment)<BR>End Property<BR><BR>Public 
+  Property Get PresentSavings() As Variant<BR>&nbsp; PresentSavings = 
+  gPresentSavings<BR>End Property<BR><BR>Public Property Let 
+  PresentSavings(ByVal vPresentSavings As Variant)<BR>&nbsp; gPresentSavings = 
+  -(vPresentSavings)<BR>End Property<BR><BR>Public Property Get WhenDue() As 
+  Variant<BR>&nbsp; WhenDue = gWhenDue<BR>End Property<BR><BR>Public Property 
+  Let WhenDue(ByVal vWhenDue As Variant)<BR>&nbsp; gWhenDue = vWhenDue<BR>End 
+  Property<BR><BR></CODE>
+<LI>すべてのサーバー コンポーネントにエントリ ポイント (開始点) が必要です。このコードは、Server.CreateObject によって最初にオブジェクトのインスタンスが生成されると呼び出されます。ASPTut コンポーネントは、最初に呼び出された時点で特別な処理を実行する必要はありません。このため、空の Sub Main プロシージャを設定します。[プロジェクト] メニューの [標準モジュールの追加] をクリックします。[標準モジュールの追加] ウィンドウの [新規作成] タブで、[標準モジュール] をクリックして、[開く] をクリックします。［Module 1] コード ウィンドウで「Sub Main」と入力し、<B>Enter</B> キーを押します。空の Sub Main プロシージャが作成されます。 </FONT>
+<LI><FONT face=MS UI Gohic>Sub Main モジュールを Main.bas という名前で保存します。クラス ファイルを Finance.cls という名前で保存します。プロジェクトを ASPTut.vbp という名前で保存します。 
+<LI>[ファイル] をクリックし、[ASPTut.dll の作成] をクリックします。これにより、ASPTut.dll がコンパイルされ、登録されます。ASP ページから ASPTut.dll を呼び出した後は、ASP ファイルが実行されているアプリケーションをアンロードしないと、Visual Basic で DLL を作成することはできません。このためには、<a href="../core/iiabuti.htm">IIS スナップイン</a>を使用して既定の Web サイトのプロパティを開き、[アンロード] をクリックするという方法もあります。DLL を別の Web サーバーに登録する場合、ASPTut.dll をそのサーバーにコピーします。[スタート] をクリックし、[ファイル名を指定して実行] をクリックして、[名前] ボックスに「cmd」と入力します。ASPTut.dll と同じディレクトリで、「regsvr32 ASPTut.dll」と入力します。 
+<LI>Visual Basic を終了します。 </LI></OL>
+<H3>Visual Basic COM オブジェクトを使用する ASP ページの作成</H3>
+<P>この例の ASP ページでは、ユーザー データを読み込むフォームを使用し、オブジェクトのインスタンスを生成することで、貯蓄プランの将来価値を計算します。 </P>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、CalculateFutureValue.asp と名前を付けて <I>x</I>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。アドレス バーに「http://localhost/Tutorial/CalculateFutureValue.asp」と入力し、ブラウザでこの例を表示します。 
+</P><CODE>
+<P>&nbsp; &lt;%@ Language=VBScript %&gt;<BR><BR>&nbsp; &lt;%<BR>&nbsp; 
+Response.Expires = 0<BR>&nbsp; Payment = Request.Form("Payment")<BR>&nbsp; 
+AnnualIntRate = Request.Form("AnnualIntRate")<BR>&nbsp; NumPayPeriods = 
+Request.Form("NumPayPeriods")<BR>&nbsp; WhenDue = 
+Request.Form("WhenDue")<BR>&nbsp; PresentSavings = 
+Request.Form("PresentSavings")<BR>&nbsp; %&gt;<BR><BR>&nbsp; 
+&lt;HTML&gt;<BR>&nbsp; &lt;HEAD&gt;&lt;TITLE&gt;Future Value 
+Calculation&lt;/TITLE&gt;&lt;/HEAD&gt;<BR>&nbsp; &lt;BODY&gt;<BR>&nbsp; &lt;FONT 
+FACE="MS Gothic"&gt;<BR><BR>&nbsp; &lt;H2 align=center&gt;Calculate the Future 
+Value of a Savings Plan&lt;/H2&gt;&nbsp;<BR><BR>&nbsp; &lt;FORM METHOD=POST 
+ACTION="calculatefuturevalue.asp"&gt;&nbsp;<BR>&nbsp; &lt;TABLE cellpadding=4 
+align=center&gt;&nbsp;<BR>&nbsp; &lt;TR&gt;<BR>&nbsp; &lt;TD&gt;How much do you 
+plan to save each month?&lt;/TD&gt;<BR>&nbsp; &lt;TD&gt;&lt;INPUT TYPE=TEXT 
+NAME=Payment VALUE=&lt;%=Payment%&gt;&gt; (Required)&lt;/TD&gt;<BR>&nbsp; 
+&lt;/TR&gt;&lt;TR&gt;<BR>&nbsp; &lt;TD&gt;Enter the annual interest 
+rate.&lt;/TD&gt;<BR>&nbsp; &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=AnnualIntRate 
+VALUE=&lt;%=AnnualIntRate%&gt;&gt; (Required)&lt;/TD&gt;<BR>&nbsp; 
+&lt;/TR&gt;&lt;TR&gt;&nbsp;<BR>&nbsp; &lt;TD&gt;For how many months will you 
+save?&lt;/TD&gt;<BR>&nbsp; &lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=NumPayPeriods 
+VALUE=&lt;%=NumPayPeriods%&gt;&gt; (Required)&lt;/TD&gt;<BR>&nbsp; 
+&lt;/TR&gt;&lt;TR&gt;&nbsp;<BR>&nbsp; &lt;TD&gt;When do you make payments in the 
+month? &lt;/TD&gt;<BR>&nbsp; &lt;TD&gt;&lt;INPUT TYPE=RADIO NAME=WhenDue VALUE=1 
+&lt;%If 1=WhenDue Then Response.Write"CHECKED"%&gt;&gt;Beginning&nbsp;<BR>&nbsp; 
+&lt;INPUT TYPE=RADIO NAME=WhenDue VALUE=0 &lt;%If 0=WhenDue Then 
+Response.Write"CHECKED"%&gt;&gt;End &lt;/TD&gt;<BR>&nbsp; 
+&lt;/TR&gt;&lt;TR&gt;&nbsp;<BR>&nbsp; &lt;TD&gt;How much is in this savings 
+account now?&lt;/TD&gt;<BR>&nbsp; &lt;TD&gt;&lt;INPUT TYPE=TEXT 
+NAME=PresentSavings VALUE=&lt;%=PresentSavings%&gt;&gt; &lt;/TD&gt;<BR>&nbsp; 
+&lt;/TR&gt;<BR>&nbsp; &lt;/TABLE&gt;<BR>&nbsp; &lt;P align=center&gt;&lt;INPUT 
+TYPE=SUBMIT VALUE=" Calculate Future Value "&gt;<BR>&nbsp; 
+&lt;/FORM&gt;&nbsp;<BR><BR>&nbsp; &lt;%<BR>&nbsp; If ("" = Payment) Or ("" = 
+AnnualIntRate) Or ("" = NumPayPeriods) Then<BR><BR>&nbsp;&nbsp;&nbsp; 
+Response.Write "&lt;H3 align=center&gt;No valid input entered 
+yet.&lt;/H3&gt;"<BR><BR>&nbsp; ElseIf (IsNumeric(Payment)) And 
+(IsNumeric(AnnualIntRate)) And (IsNumeric(NumPayPeriods)) 
+Then<BR><BR>&nbsp;&nbsp;&nbsp; Dim FutureValue<BR>&nbsp;&nbsp;&nbsp; Set oASPTut 
+= Server.CreateObject("ASPTut.Finance")<BR>&nbsp;&nbsp;&nbsp; 
+oASPTut.AnnualIntRate = CDbl(AnnualIntRate)<BR>&nbsp;&nbsp;&nbsp; 
+oASPTut.NumPayPeriods = CInt(NumPayPeriods)<BR>&nbsp;&nbsp;&nbsp; 
+oASPTut.Payment = CDbl(Payment)<BR>&nbsp;&nbsp;&nbsp; If Not "" = PresentSavings 
+Then oASPTut.PresentSavings = CDbl(PresentSavings)<BR>&nbsp;&nbsp;&nbsp; 
+oASPTut.WhenDue = WhenDue<BR>&nbsp;&nbsp;&nbsp; FutureValue = 
+oASPTut.CalcFutureValue<BR>&nbsp;&nbsp;&nbsp; Response.Write "&lt;H3 
+align=center&gt;Future value = $" &amp; FutureValue &amp; 
+"&lt;/H3&gt;"<BR><BR>&nbsp; Else<BR><BR>&nbsp;&nbsp;&nbsp; Response.Write 
+"&lt;H3 align=center&gt;Some of your values are not 
+numbers.&lt;/H3&gt;"<BR><BR>&nbsp; End If<BR><BR>&nbsp; %&gt;<BR><BR>&nbsp; 
+&lt;/FONT&gt;&nbsp;<BR>&nbsp; &lt;/BODY&gt;&nbsp;<BR>&nbsp; &lt;/HTML&gt; 
+</P></CODE>
+<P>ブラウザには、次のように表示されます。 </P>
+<P><FONT face="MS Gothic">
+<H2 align=center>Calculate the Future Value of a Savings Plan</H2>
+<FORM method=post>
+<TABLE align=center cellPadding=4>
+  <TBODY>
+  <TR>
+<TD>How much do you plan to save each month?</TD>
+<TD><INPUT name=Payment> (Required)</TD></TR>
+  <TR>
+<TD>Enter the annual interest rate.</TD>
+<TD><INPUT name=AnnualIntRate> (Required)</TD></TR>
+  <TR>
+<TD>For how many months will you save?</TD>
+<TD><INPUT name=NumPayPeriods> (Required)</TD></TR>
+  <TR>
+<TD>When do you make payments in the month? </TD>
+<TD><INPUT name=WhenDue type=radio value=1>Beginning<INPUT CHECKED 
+      name=WhenDue type=radio value=0>End </TD></TR>
+  <TR>
+<TD>How much is in this savings account now?</TD>
+    <TD><INPUT name=PresentSavings> </TD></TR></TBODY></TABLE>
+<P align=center><INPUT type=button value=" Calculate Future Value  "> </FORM>
+<H3 align=center>No valid input entered yet.</H3></FONT>
+<H2><A name=creatingj>演習 4 : Java COM オブジェクトの作成</A></H2>
+<P>この演習では、Microsoft&reg; Visual J++&reg; を使用して、演習 3 の Visual Basic コンポーネントと同じ機能を有する COM オブジェクトを作成します。ここでは、Visual J++ 6.0 以降が必要です。 </P>
+<H3>Java COM オブジェクトの作成</H3>
+<OL>
+<LI>Visual J++ を起動します。[新しいプロジェクト] ウィンドウが表示されていない場合、[ファイル] メニューの [新しいプロジェクト] をクリックします。 
+<LI>[Visual J++ プロジェクト] をクリックし、[空のプロジェクト] をクリックします。[名前] ボックスに「ASPTut」と入力します。[開く] をクリックします。 
+<LI>[プロジェクト] メニューの [クラスの追加] をクリックします。[名前] ボックスに「ASPTut.java」と入力します。Java サーバー コンポーネントでは、クラス名はプロジェクト名と同じである必要があります。[開く] をクリックします。&nbsp;テキスト編集ウィンドウに次の行が表示されます。
+<BR><BR><CODE>public class 
+  ASPTut<BR>{<BR>}<BR><BR></CODE><LI>次のコードをコピーして、中かっこ ({}) の間に貼り付けます。Java では大文字と小文字が区別されることに注意してください。コンポーネントのメソッドは、次のようになります。
+<BR><BR><CODE>public double CalcFutureValue(<BR>&nbsp; double 
+  dblAnnualIntRate,<BR>&nbsp; double dblNumPayPeriods,<BR>&nbsp; double 
+  dblPayment,<BR>&nbsp; double dblPresentSavings,<BR>&nbsp; boolean 
+  bWhenDue)<BR>{<BR>&nbsp; double dblRet, dblTemp, dblTemp2, dblTemp3, 
+  dblIntRate;<BR><BR>&nbsp; if (dblAnnualIntRate == 0.0)<BR>&nbsp; 
+  {<BR>&nbsp;&nbsp;&nbsp; dblRet = -dblPresentSavings - dblPayment * 
+  dblNumPayPeriods;<BR>&nbsp; }<BR>&nbsp; else<BR>&nbsp; {<BR>&nbsp;&nbsp;&nbsp; 
+  dblIntRate = dblAnnualIntRate / 100 / 12;<BR>&nbsp;&nbsp;&nbsp; dblPayment = 
+  -dblPayment;<BR>&nbsp;&nbsp;&nbsp; dblPresentSavings = 
+  -dblPresentSavings;<BR><BR>&nbsp;&nbsp;&nbsp; dblTemp = (bWhenDue ? 1.0 + 
+  dblIntRate : 1.0);<BR>&nbsp;&nbsp;&nbsp; dblTemp3 = 1.0 + 
+  dblIntRate;<BR>&nbsp;&nbsp;&nbsp; dblTemp2 = Math.pow(dblTemp3, 
+  dblNumPayPeriods);&nbsp;<BR>&nbsp;&nbsp;&nbsp; dblRet = -dblPresentSavings * 
+  dblTemp2 - dblPayment * dblTemp * (dblTemp2 - 1.0) / dblIntRate;<BR>&nbsp; 
+  }<BR><BR>&nbsp; return dblRet;<BR>}</CODE><BR><BR><LI>[ビルド] メニューの [ビルド] をクリックします。テキスト編集ウィンドウ下部の [タスク一覧] ウィンドウで、エラーが生成されていないかどうか確認します。 
+<LI>Java クラス ファイルは、Web サーバーと同じコンピュータ上に登録する必要があります。コマンド ウィンドウで、構築された ASPTut.class ファイルを見つけます。ほとんどの場合、%USERPROFILE%\My Documents\Visual Studio Projects\ASPTut か、<I>x</I>:\Documents and Settings\<I>user name</I>\My Documents\Visual Studio Projects\ASPTut のどちらかです。x: は、Windows をインストールしているドライブです。ASPTut.class を <I>x</I>:\Winnt\Java\Trustlib にコピーします。「javareg /register /class:ASPTut /progid:MS.ASPTut.Java」と入力し、<b>Enter</b> キーを押して、Java クラスを登録します。 
+<LI>Visual J++ を終了します。 </LI></OL>
+<H3>Java COM オブジェクトを使用する ASP ページの作成</H3>
+<P>この例の ASP ページでは、ユーザー データを読み込むフォームを使用し、オブジェクトのインスタンスを生成することで、貯蓄プランの将来価値を計算します。この例では JScript を使用していますが、VBScript からでも Java コンポーネントを呼び出すことは可能です。 
+</P>
+<P>次に示すコードをコピーし、テキスト エディタで新しいファイルに貼り付け、CalculateFutureValueJava.asp と名前を付けて <I>x</I>:\Inetpub\wwwroot\Tutorial ディレクトリに保存します。アドレス バーに「http://localhost/Tutorial/CalculateFutureValueJava.asp」と入力し、ブラウザでこの例を表示します。 </P><CODE>&nbsp; </CODE><CODE>&lt;%@ Language=JScript 
+%&gt;<BR><BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;%<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>Response.Expires = 0;<BR></CODE><CODE>&nbsp; </CODE><CODE>Payment = 
+Request.Form("Payment");<BR></CODE><CODE>&nbsp; </CODE><CODE>AnnualIntRate = 
+Request.Form("AnnualIntRate");<BR></CODE><CODE>&nbsp; </CODE><CODE>NumPayPeriods 
+= Request.Form("NumPayPeriods");<BR></CODE><CODE>&nbsp; </CODE><CODE>WhenDue = 
+Request.Form("WhenDue");<BR></CODE><CODE>&nbsp; </CODE><CODE>PresentSavings = 
+Request.Form("PresentSavings");<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>%&gt;<BR><BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;HTML&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;HEAD&gt;&lt;TITLE&gt;Future Value Calculation - 
+Java&lt;/TITLE&gt;&lt;/HEAD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;BODY&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;FONT FACE="MS 
+Gothic"&gt;<BR><BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;H2 
+align=center&gt;Calculate the Future Value of a Savings 
+Plan&lt;/H2&gt;&nbsp;<BR><BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;FORM 
+METHOD=POST 
+ACTION="calculatefuturevaluejava.asp"&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TABLE cellpadding=4 
+align=center&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TR&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;TD&gt;How much 
+do you plan to save each month?&lt;/TD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TD&gt;&lt;INPUT TYPE=TEXT NAME=Payment 
+VALUE=&lt;%=Payment%&gt;&gt; (Required)&lt;/TD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/TR&gt;&lt;TR&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TD&gt;Enter the annual interest 
+rate.&lt;/TD&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;TD&gt;&lt;INPUT 
+TYPE=TEXT NAME=AnnualIntRate VALUE=&lt;%=AnnualIntRate%&gt;&gt; 
+(Required)&lt;/TD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/TR&gt;&lt;TR&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TD&gt;For how many months will you 
+save?&lt;/TD&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;TD&gt;&lt;INPUT 
+TYPE=TEXT NAME=NumPayPeriods VALUE=&lt;%=NumPayPeriods%&gt;&gt; 
+(Required)&lt;/TD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/TR&gt;&lt;TR&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TD&gt;When do you make payments in the month? 
+&lt;/TD&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;TD&gt;&lt;INPUT TYPE=RADIO 
+NAME=WhenDue VALUE=1 &lt;%if (1==WhenDue) 
+Response.Write("CHECKED")%&gt;&gt;Beginning&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;INPUT TYPE=RADIO NAME=WhenDue VALUE=0 &lt;%if (0==WhenDue) 
+Response.Write("CHECKED")%&gt;&gt;End &lt;/TD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/TR&gt;&lt;TR&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;TD&gt;How much is in this savings account 
+now?&lt;/TD&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;TD&gt;&lt;INPUT 
+TYPE=TEXT NAME=PresentSavings VALUE=&lt;%=PresentSavings%&gt;&gt; 
+&lt;/TD&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/TR&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/TABLE&gt;<BR></CODE><CODE>&nbsp; </CODE><CODE>&lt;P 
+align=center&gt;&lt;INPUT TYPE=SUBMIT VALUE=" Calculate Future Value 
+"&gt;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/FORM&gt;&nbsp;<BR><BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;%<BR><BR></CODE><CODE>&nbsp; </CODE><CODE>if (("" == Payment) 
+|| ("" == AnnualIntRate) || ("" == NumPayPeriods)) {<BR><BR></CODE><CODE>&nbsp; 
+&nbsp; </CODE><CODE>Response.Write("&lt;H3 align=center&gt;No valid input 
+entered yet.&lt;/H3&gt;");<BR><BR></CODE><CODE>&nbsp; </CODE><CODE>} else 
+{<BR><BR></CODE><CODE>&nbsp; &nbsp; </CODE><CODE>AnnualIntRate = 
+parseFloat(AnnualIntRate)<BR></CODE><CODE>&nbsp; &nbsp; 
+</CODE><CODE>NumPayPeriods = parseFloat(NumPayPeriods)<BR></CODE><CODE>&nbsp; 
+&nbsp; </CODE><CODE>Payment = parseFloat(Payment)<BR></CODE><CODE>&nbsp; &nbsp; 
+</CODE><CODE>if ("" != PresentSavings) PresentSavings = 
+parseFloat(PresentSavings);<BR><BR></CODE><CODE>&nbsp; &nbsp; </CODE><CODE>if 
+((isNaN(Payment)) || (isNaN(AnnualIntRate)) || (isNaN(NumPayPeriods))) 
+{<BR><BR></CODE><CODE>&nbsp; &nbsp; &nbsp; </CODE><CODE>Response.Write("&lt;H3 
+align=center&gt;Some of your values are not 
+numbers.&lt;/H3&gt;");<BR><BR></CODE><CODE>&nbsp; &nbsp; </CODE><CODE>} else 
+{<BR><BR></CODE><CODE>&nbsp; &nbsp; &nbsp; </CODE><CODE>var FutureValue, 
+Cents;<BR></CODE><CODE>&nbsp; &nbsp; &nbsp; </CODE><CODE>var oASPTut = 
+Server.CreateObject("MS.ASPTut.Java");<BR></CODE><CODE>&nbsp; &nbsp; &nbsp; 
+</CODE><CODE>FutureValue = oASPTut.CalcFutureValue(AnnualIntRate, NumPayPeriods, 
+Payment, PresentSavings, WhenDue);<BR><BR></CODE><CODE>&nbsp; &nbsp; &nbsp; 
+</CODE><CODE>Response.Write("&lt;H3 align=center&gt;Future value = $" + 
+parseInt(FutureValue) + "&lt;/H3&gt;");<BR><BR></CODE><CODE>&nbsp; &nbsp; 
+</CODE><CODE>}<BR></CODE><CODE>&nbsp; </CODE><CODE>}<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>%&gt;<BR><BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/FONT&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/BODY&gt;&nbsp;<BR></CODE><CODE>&nbsp; 
+</CODE><CODE>&lt;/HTML&gt;<BR></CODE>
+<P></P>
+<P>ブラウザでは、次のような画面が表示されます。このモジュールの演習 3 で、Visual Basic コンポーネントを使用して生成された画面と同一です。 </P>
+<P><FONT face="MS Gothic">
+<H2 align=center>Calculate the Future Value of a Savings Plan</H2>
+<FORM method=post>
+<TABLE align=center cellPadding=4>
+  <TBODY>
+  <TR>
+<TD>How much do you plan to save each month?</TD>
+<TD><INPUT name=Payment> (Required)</TD></TR>
+  <TR>
+<TD>Enter the annual interest rate.</TD>
+<TD><INPUT name=AnnualIntRate> (Required)</TD></TR>
+  <TR>
+<TD>For how many months will you save?</TD>
+<TD><INPUT name=NumPayPeriods> (Required)</TD></TR>
+  <TR>
+<TD>When do you make payments in the month? </TD>
+<TD><INPUT name=WhenDue type=radio value=1>Beginning<INPUT CHECKED 
+      name=WhenDue type=radio value=0>End </TD></TR>
+  <TR>
+<TD>How much is in this savings account now?</TD>
+    <TD><INPUT name=PresentSavings> </TD></TR></TBODY></TABLE>
+<P align=center><INPUT type=button value=" Calculate Future Value  "> </FORM>
+<H3 align=center>No valid input entered yet.</H3></FONT> <br>
+<H2>次のトピック : Web アプリケーション内のセッションの状態を維持する</H2>
+<HR class=iis SIZE=1>
+
+<P align=center><a href="/iishelp/common/colegal.htm"><EM>&copy; 1997-2001 Microsoft Corporation.All rights reserved.</EM></A></P></FONT></BODY></HTML>

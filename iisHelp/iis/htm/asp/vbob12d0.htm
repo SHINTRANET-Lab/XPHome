@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Session オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_session_object"></A><SUP></SUP>Session オブジェクト</H2>
+
+<P>Session オブジェクトは、特定のユーザー セッションで必要になる情報を格納します。Session オブジェクトに格納されている変数は、ユーザーがアプリケーションのページ間を移動している間は破棄されず、ユーザー セッション全体を通じて変化しません。 </P>
+
+<P>セッションをまだ持っていないユーザーがアプリケーションの Web ページを要求すると、Web サーバーは Session オブジェクトを自動的に作成します。セッションがタイムアウトになるか、または破棄されると、サーバーは Session オブジェクトを破棄します。 </P>
+
+<P>通常、Session オブジェクトは、ユーザーの基本設定を格納するために使用します。たとえば、ユーザーがグラフィックスを表示しないように設定している場合、その情報を Session オブジェクトに格納することができます。Session オブジェクトの使い方については、「ASP ページを構築する」の「<A HREF="iiapsess.htm">セッションを管理する</A>」を参照してください。</P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;セッションの状態が維持されるのは、cookie をサポートしているブラウザの場合だけです。</P>
+
+<H6>構文</H6>
+
+<P><B>Session</B>.<I>collection</I>|<I>property</I>|<I>method</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>コレクション</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob8my6.htm"><B>Contents</B></A></TD>
+<TD width=75%>スクリプト コマンドによってセッションに追加された項目が含まれます。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob5ovi.htm"><B>StaticObjects</B></A></TD>
+<TD width=75%>&lt;OBJECT&gt; タグによって作成され、セッション スコープを持つオブジェクトが含まれます。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob4ht1.htm"><B>CodePage</B></A></TD>
+<TD width=75%>セッション全体の組み込みオブジェクト内のデータにコードページを設定します。コードページにより、各国の文字に関するエンコード方式をサーバーに指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob72uc.htm"><B>LCID</B></A></TD>
+<TD width=75%>セッション全体のデータに LCID を設定します。LCID では、特定地域のロケールについて日付、時刻および通貨の書式を指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob8b6s.htm"><B>SessionID</B></A></TD>
+<TD width=75%>このユーザーのセッション識別子を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob04vo.htm"><B>Timeout</B></A></TD>
+<TD width=75%>このアプリケーションのセッション状態のタイムアウト時間 (分単位) です。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob5tpq.htm"><B>Abandon</B></A></TD>
+<TD width=75%>このメソッドは、Session オブジェクトを破棄してそのリソースを解放します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob155x.htm"><B>Contents.Remove</B></A></TD>
+<TD width=75%>このメソッドは、Contents コレクションから項目を削除します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob8bu4.htm"><B>Contents.RemoveAll</B></A></TD>
+<TD width=75%>このメソッドは、Contents コレクションからすべての項目を削除します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>イベント </H6>
+
+<P>次のイベントに対応するスクリプトが Global.asa ファイルで宣言されています。 </P>
+
+<TABLE border=0 cellpadding=5 cols=1 frame=box rules=rows>
+
+<TR VALIGN="top">
+<TD width=100%><A HREF="/iishelp/iis/htm/asp/glob2y90.htm">Session_OnEnd</A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=100%><A HREF="/iishelp/iis/htm/asp/glob6t84.htm">Session_OnStart</A></TD>
+</TR>
+</TABLE><BR>
+
+<P>これらのイベントおよび Global.asa ファイルの詳細については、「<A HREF="/iishelp/iis/htm/asp/glob63vp.htm">Global.asa リファレンス</A>」を参照してください。</P>
+
+<H6>解説</H6>
+
+<P>Session オブジェクトには値を格納できます。Session オブジェクトに格納された情報はセッション全体を通じて利用でき、セッション スコープを持ちます。次のスクリプトは、2 種類の変数を格納します。</P>
+
+<PRE><CODE>&lt;% 
+Session("username") = "Janine"
+Session("age") = 24
+%&gt;
+ </CODE></PRE>
+
+<P>ただし、Session オブジェクトにオブジェクトを格納する際に、主要スクリプト言語として VBScript を使用する場合は、Set キーワードを使用する必要があります。このスクリプト例を次に示します。</P>
+
+<PRE><CODE>&lt;% Set Session("Obj1") = Server.CreateObject("MyComponent.class1") %&gt;
+ </CODE></PRE>
+
+<P>この後、次のようにして <CODE>MyComponent.class1</CODE> が公開するメソッドとプロパティを後続の Web ページ上で呼び出すことができます。</P>
+
+<PRE><CODE>&lt;% Session("Obj1").MyMethod %&gt;
+ </CODE></PRE>
+
+<P>または、オブジェクトのローカル コピーを取り出して次のようにすることもできます。</P>
+
+<PRE><CODE>&lt;% 
+Set MyLocalObj1 = Session("Obj1") 
+MyLocalObj1.MyObjMethod
+%&gt;
+ </CODE></PRE>
+
+<P>セッション スコープを持つオブジェクトを作成する方法には、Global.asa ファイルで &lt;OBJECT&gt; タグを使用する方法もあります。 </P>
+
+<P>Session オブジェクトに組み込みオブジェクトを格納することはできません。たとえば、次のようなスクリプトは、すべてエラーを返します。</P>
+
+<PRE><CODE>&lt;%
+Set Session("var1") = Session
+Set Session("var2") = Request
+Set Session("var3") = Response
+Set Session("var4") = Server
+Set Session("var5") = Application
+%&gt;
+ </CODE></PRE>
+
+<P>Session オブジェクトにオブジェクトを格納するときは、格納するオブジェクトが使用するスレッド モデルをあらかじめ把握しておく必要があります。セッションをシングル スレッドにロックせずに Session オブジェクトに格納できるのは、both としてマークされているオブジェクトだけです。詳細については、Platform SDK を参照してください。</P>
+
+<P>Session オブジェクトに配列を格納する場合は、配列に格納されている要素を直接変更しないようにしてください。たとえば、次のようなスクリプトは正しく機能しません。</P>
+
+<PRE><CODE>&lt;% Session("StoredArray")(3) = "new value" %&gt;
+ </CODE></PRE>
+
+<P>これは、Session オブジェクトがコレクションとして実装されているためです。この場合、配列要素 <CODE>StoredArray(3)</CODE> には新しい値が設定されるのではなく、値のインデックスがコレクションに格納されることになり、その場所に格納されていた情報はすべて上書きされてしまいます。 </P>
+
+<P>このため、Session オブジェクトに配列を格納する場合は、配列のコピーを取得してからその要素の取得や変更を行うようにしてください。そして、配列の操作が終わった時点でもう一度 Session オブジェクトに配列を格納し、変更内容が保存されるようにします。以上の操作の例を次に示します。</P>
+
+<PRE><CODE>---file1.asp---
+&lt;%
+'Creating and initializing the array
+Dim MyArray()
+Redim MyArray(5)
+MyArray(0) = "hello"
+MyArray(1) = "some other string"
+
+'Storing the array in the Session object.
+Session("StoredArray") = MyArray
+
+Response.Redirect("file2.asp")
+%&gt;
+
+---file2.asp---
+&lt;%
+'Retrieving the array from the Session Object
+'and modifying its second element.
+LocalArray = Session("StoredArray")
+LocalArray(1) = " there"
+
+'Printing out the string "hello there."
+Response.Write(LocalArray(0)&amp;LocalArray(1))
+
+'Re-storing the array in the Session object.
+'This overwrites the values in StoredArray with the new values.
+Session("StoredArray") = LocalArray
+%&gt;
+ </CODE></PRE>
+
+<H6>例</H6>
+
+<P>次のコードは、<CODE>name</CODE> という名前のセッション変数に文字列 <CODE>MyName</CODE> を割り当て、<CODE>year,</CODE> という名前のセッション変数に値を割り当て、<CODE>myObj</CODE> という名前の変数に <CODE>some.Obj</CODE> コンポーネントのインスタンスを割り当てます。 </P>
+
+<PRE><CODE>Session("name") = "MyName" 
+Session("year") = 96 
+Set Session("myObj") = Server.CreateObject("someObj") 
+ %&gt; 
+ </CODE></PRE>
+
+<P>詳細については、「<A HREF="iiapsess.htm">セッションを管理する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

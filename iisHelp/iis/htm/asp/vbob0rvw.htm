@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>CacheControl</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_cachecontrol"></A><SUP></SUP>CacheControl</H4>
+
+<H6>CacheControl プロパティにより、Response 内の HTTP/1.1 Cache-Control ヘッダーを設定できます。</H6>
+
+<H6>構文</H6>
+
+<P>Response.<B>CacheControl </B>[= <I>Cache Control Header </I>]</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Cache Control Header</I></DT>
+</DL>
+
+<P>次に示す一覧は、HTTP/1.1 プロトコルでサポートされる値の一部です。詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank><span class=le>World Wide Web Consortium Web サイト</span></a> の「Hypertext Transfer Protocol -- HTTP/1.1」仕様についてのセクション 14.9 を参照してください。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>値</B></TD>
+<TD class=blue width=50%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>
+<DL>
+<DT>Private</DT>
+</DL>
+</TD>
+<TD width=50%>
+<DL>
+<DT>このページはプライベート キャッシュにキャッシュされ、単一のクライアントにのみ再送信されます。これは既定値です。プロキシ サーバーがこの設定でページをキャッシュすることはほとんどありません。</DT>
+</DL>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>
+<DL>
+<DT>Public</DT>
+</DL>
+</TD>
+<TD width=50%>
+<DL>
+<DT>プロキシ サーバーなどの共有キャッシュは、この設定のときにページをキャッシュします。キャッシュされたページは、任意のユーザーに送信されます。</DT>
+</DL>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>
+<DL>
+<DT>No-cache</DT>
+</DL>
+</TD>
+<TD width=50%>
+<DL>
+<DT>このページにはキャッシュが適用されません。同一クライアントが使用する場合でも同様です。 </DT>
+</DL>
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>
+<DL>
+<DT>No-store</DT>
+</DL>
+</TD>
+<TD width=50%>
+<DL>
+<DT>この応答および要求は、共有かプライベートかを問わず、キャッシュには保存されません。ここで対象となる記憶域は、テープ バックアップなど、不揮発性の記憶域です。セキュリティ対策としての信頼性は保証されません。</DT>
+</DL>
+</TD>
+</TR>
+</TABLE><BR>
+
+<H6>注</H6>
+
+<P>Web サーバーとそのページを要求するユーザーの間には、応答時間を短縮するために Web ページをキャッシュするにように構成されたプロキシ サーバーが存在することもあります。通常、ASP ページは、各ユーザーに対して一意となるように作成されるか、またはセキュリティ情報を含むことがあります。&nbsp;このため、IIS では CacheControl プロパティを &quot;Private&quot; に設定し、プロキシ サーバーやほかのキャッシュ メカニズムによってページがキャッシュされないようにします。&nbsp;この既定値は、HTTP/1.1 プロトコルでサポートされる値によって上書きすることができます。HTTP/1.1 プロトコルは、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank>World Wide Web Consortium Web サイト</a> の「Hypertext Transfer Protocol -- HTTP/1.1」仕様に定められています。</P>
+
+<P>Web サーバーとクライアント コンピュータの間にキャッシュ メカニズムが存在しないか、プロキシ サーバーで HTTP/1.0 が実行されている場合、CacheControl は無視されます。</P>
+
+<P>CacheControl を &quot;public&quot; に設定することで、.asp ファイルのパフォーマンスが改善されるように思われるかもしれません。しかし、各要求に対してカスタム HTML を生成した場合でも、プロキシ サーバーがその応答に介入するため、この設定はお勧めしません。</P>
+
+<P>CacheControl は文字列の値であるため、二重引用符 (&quot; &quot;) で囲む必要があります。応答のバッファ処理が有効になっている場合を除き、クライアントに応答を送信する前に CacheControl を設定する必要があります。</P>
+
+<H6>例</H6>
+
+<P>CacheControl は &lt;HTML&gt; タグの前に記述し、コンテンツがクライアントに送信される前に設定されるようにします。 </P>
+
+<P>--- CacheControl_NoBuffer.asp ---</P>
+
+<PRE><CODE>&lt;%
+  Response.Buffer = False
+  Response.CacheControl = "private"
+%&gt;
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Response.CacheControl Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+Output from this page is sent to the client as it is being processed.&lt;BR&gt;
+It will not be cached.&lt;BR&gt;
+Today is &lt;%= Date %&gt;, &lt;%= Time %&gt;&lt;BR&gt;
+&lt;H3&gt;Please enter your credit card number:&lt;/H3&gt;
+&lt;FORM NAME="Order" METHOD="POST" ACTION="order.asp "&gt;
+&lt;INPUT TYPE="TEXT" NAME="CreditCard"&gt;
+&lt;INPUT TYPE="SUBMIT" VALUE="Submit" NAME="Submit"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<P>--- CacheControl_Buffer.asp ---</P>
+
+<PRE><CODE>&lt;% Response.Buffer = True %&gt;
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Response.CacheControl Example&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+Output from this page is sent to the client once it is completely processed by the server, so we can set CacheControl anytime.&lt;BR&gt;
+&lt;% Response.CacheControl = "private" %&gt;
+It will not be cached.&lt;BR&gt;
+Today is &lt;%= Date %&gt;, &lt;%= Time %&gt;&lt;BR&gt;
+&lt;H3&gt;Please enter your credit card number:&lt;/H3&gt;
+&lt;FORM NAME="Order" METHOD="POST" ACTION="order.asp "&gt;
+&lt;INPUT TYPE="TEXT" NAME="CreditCard"&gt;
+&lt;INPUT TYPE="SUBMIT" VALUE="Submit" NAME="Submit"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;</CODE></PRE>
+
+<P>&lt;/HTML&gt;</P>
+
+<PRE><CODE>  </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

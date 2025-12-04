@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>インターネット インフォメーション サービス&nbsp;5.1 を使い始める</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="DESCRIPTION" content="広範な用語集、IIS の最新情報、インストール方法、新機能の説明、熟練管理者のためのクィックスタート手順、IIS マニュアル活用のヒントなどについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<img src="iis_banr.gif" width="366" height="43" alt="インターネット インフォメーション サービス">
+
+<h1><a name="gettingstarted">はじめに</a></h1>
+
+<p> インターネット インフォメーション サービス&nbsp;5.1 (IIS) は、イントラネットで簡単に情報を公開するための Windows XP の Web サービスです。</p>
+
+<p> [コンテンツ] タブの [同期] ボタン <img src="../../misc/synch.gif" border="0" alt="[同期] ボタン"> をクリックすると、コンテンツ ペインで表示されているドキュメントに対応する目次が、ナビゲーション ペインに表示されます。[検索] タブを使用してトピックを検索し、トピック リンクをクリックします。[コンテンツ] タブをクリックして [同期] ボタンをクリックします。トピックの場所が目次に表示されます。</p>
+
+<ul>
+<li>「<strong><a href="readme.htm">リリース ノート</a></strong>」には、インターネット インフォメーション サービスを適切にインストールして、使用するための最新情報が記載されています。 </li>
+
+<li>「<strong><a href="iiiisin.htm">IIS のインストール</a></strong>」では、IIS のインストール方法と、コンポーネントの追加や削除方法を説明し、IIS のアンインストール後に残るディレクトリを一覧で示します。</li>
+
+<li>「<strong><a href="iifeats.htm">機能</a></strong>」では、インターネット インフォメーション サービス&nbsp;5.1 で新たに採用された機能を一覧で示し、旧バージョンから引き継がれる機能を説明します。</li>
+
+<li>「<strong><a href="iibwupm.htm">変更箇所</a></strong>」では、IIS のバージョン&nbsp;4.0、5.0、および 5.1 における重要な変更箇所を一覧で示します。</li>
+
+<li>「<strong><a href="iiusdoc.htm">Web リソース</a></strong>」では、インターネットで利用できる IIS 関連のリソースを一覧で示します。 </li>
+
+<li>「<strong><A HREF="iitstart.htm">IIS によるサイトのクイック セットアップ</A></strong>」では、既定の設定を使用して、Web サイトと FTP サイトを作成する方法を説明します。</li>
+
+<li>「<strong><a href="iigsdocs.htm">マニュアルを使用する</a></strong>」では、必要な情報の検索に役立つツールについて説明します。</li>
+
+<li>「<strong><a href="iiabuti.htm">IIS スナップイン</a></strong>」では、IIS を管理しオプションを設定する主要ダイアログ ボックスについて説明します。</li>
+
+<li>「<strong><a href="iifaq.htm">よく寄せられる質問</a></strong>」では、インターネット インフォメーション サービスに関する一般的な質問に回答します。</li>
+
+<li>「<strong><a href="iigloss.htm">用語集</a></strong>」では、インターネットとイントラネットの一般的な用語について説明します。</li>
+</ul>
+
+<p>製品サポートについては、「よく寄せられる質問」の「<a href="iifaq.htm#techsupport"><strong>テクニカル サポート</strong></a>」トピックを参照してください。</p>
+
+<p>製品のほかのユーザーと対話できるピアツーピア ニュースグループが利用できます。ニュースグループには、任意のニュース読み取りソフトウェアを使用してアクセスできますが、読み取るにはソフトウェアの構成が必要な場合があります。ニュース サーバーを指定するよう指示されたら、「<STRONG>msnews.microsoft.com</STRONG>」を指定してください。アカウント名またはパスワードを入力する必要はありません。ニュースグループに投稿する前に、参加のルールをお読みください。</p>
+<P>IIS 5.0 および 5.1 に関する話題は、<STRONG>microsoft.public.inetserver.iis</STRONG> を使用してください。</P>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+readme, relnotes, rel notes, release notes, latest, late-breaking, recent, other, appendix, addenda, addendum, doc, docs, corrections, documented, undocumented, known problems, problem, help me, get help, support, tech support, product support, trouble, troubleshoot, troubleshooting, error, errors, crash, crashed, crashing, break, broken, doesn't work, keeps failing, fail, new, upgrade, old, troubles, troubleshoot, fix, repair, quick, quickstart, easy, shortcut, shortcuts, basic, basics, intro, introductory, introduction, beginner, begin, start, novice, intermediate, faq, frequently asked questions, publish, web pages, create, virtual directory, create, new, add, host, web site, web sites, multiple, many, several, browser, compatibility, browsers, different, versions, design, disabled, accessibility, disabled, handicapped, tech support, product support, phone support, helpdesk, help, assistance, redirect, change site name, older browsers, versions, host name headers, hostname header, http, request, remote, remotely,  mmc, proxy server, browser-based, admin, across network, over internet, internet service manager, ism, html, ntfs, fat, convert, partition, ftp, security, server certificate, certificates, readme, relnotes, rel notes, release notes, latest, late-breaking, recent, other, appendix, addenda, addendum, doc, docs, corrections, documented, undocumented, known problems, problem, help me, get help, support, tech support, product support, trouble, troubleshoot, troubleshooting, error, errors, crash, crashed, crashing, break, broken, doesn't work, keeps failing, fail, new, upgrade, old, bad, crashes, xml, streaming media, multimedia, audio, video, manage, newsgroups
+</layer></span></font>
+</body>
+</html>

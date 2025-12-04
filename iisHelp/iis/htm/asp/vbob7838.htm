@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Server オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_server_object"></A><SUP></SUP>Server オブジェクト</H2>
+
+<P>Server オブジェクトは、サーバーに関するメソッドおよびプロパティへのアクセスを提供します。これらのメソッドおよびプロパティのほとんどは、ユーティリティ関数として機能します。</P>
+
+<H6>構文 </H6>
+
+<P><B>Server</B>.<I>property</I>|<I>method</I></P>
+
+<P>&nbsp;</P>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob246s.htm"><B>ScriptTimeout</B></A></TD>
+<TD width=72%>タイムアウトする前にスクリプトを実行できる時間です。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob0ss4.htm"><B>CreateObject</B></A></TD>
+<TD width=72%>サーバー コンポーネントのインスタンスを作成します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob9pid.htm"><B>Execute</B></A></TD>
+<TD width=72%>.asp ファイルを実行します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob38aa.htm"><B>GetLastError</B></A></TD>
+<TD width=72%>エラー状況を説明する ASPError オブジェクトを返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob9aat.htm"><B>HTMLEncode</B></A></TD>
+<TD width=72%>指定された文字列に HTML エンコードを適用します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob98iw.htm"><B>MapPath</B></A></TD>
+<TD width=72%>指定された仮想パス (現在のサーバー上の絶対パス、または現在のページからの相対パス) を物理パスにマップします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob9waa.htm"><B>Transfer</B></A></TD>
+<TD width=72%>処理を行う別の .asp ファイルに、現在の状態情報をすべて送信します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob0wkl.htm"><B>URLEncode</B></A></TD>
+<TD width=72%>エスケープ文字を含む URL エンコード規則を文字列に適用します。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

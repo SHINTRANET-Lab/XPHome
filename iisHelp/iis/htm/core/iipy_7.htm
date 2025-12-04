@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html DIR=LTR>
+<head>
+
+<title>[セキュリティで保護された通信]</title>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 dir=ltr>
+<font face="ＭＳ Ｐゴシック">
+
+<p><a name="hidd_secure_communications"></a><strong>[セキュリティで保護された通信]</strong></p>
+
+<p>URL が https:// ではじまるような、保護された通信をサポートする Web ブラウザを使用する利用者のために、Secure Sockets Layer (SSL) による暗号化通信を構成します。 </p>
+
+<p>Web サーバーの SSL セキュリティ機能を使用する前に、&quot;証明機関&quot; と呼ばれる信頼できる第三者組織から有効なサーバー証明書を取得する必要があります。インターネット サービス マネージャ (HTML) では、この証明書を取得できないので、<a href="iiabuti.htm">IIS スナップイン</a>を使用する必要があります。</p>
+
+<p><strong>[セキュリティで保護されたチャンネル (SSL) を要求]</strong>  Web サイト、ディレクトリ、またはファイルへ接続する Web ブラウザに対して、暗号化された通信リンクを要求するには、このオプションを選択します。 </p>
+
+<p><strong>[128 ビット暗号化を要求する]</strong>  Web サイト、ディレクトリ、またはファイルへ接続する Web ブラウザに対して、128 ビットの暗号化された通信リンクを要求するには、このオプションを選択します。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;輸出規制により、128 ビット キーを使った暗号化機能を利用できるのは、米国およびカナダに限られています。</p>
+
+<p><strong>クライアント証明書</strong></p>
+
+<p>特定のファイルまたはディレクトリに接続するため、クライアント証明を承認、要求、または拒否するように Web サーバーを構成することができます。クライアント証明書は、&quot;証明機関&quot; と呼ばれる信頼できる第三者組織が発行するデジタル ID です。</p>
+
+<p><strong>[クライアント証明書を受諾しない]</strong>  クライアント証明書の提示を要求せずにユーザーのアクセスを許可するには、このチェック ボックスをオンにします。</p>
+
+<p><strong>[証明書を受諾する]</strong>  クライアント証明書を使ったアクセスを許可する一方で、証明書の要求を行わない場合は、このオプションを選択します。ユーザーのクライアント証明書は、マッピングに使用できます。クライアント証明書を持たないユーザーは、ほかの認証方式を使用します。</p>
+
+<p><strong>[クライアント証明書を要求]</strong> 有効なクライアント証明書を持つユーザーのみが接続できるようにするには、このチェック ボックスをオンにします。有効なクライアント証明書を持たないユーザーは、アクセスを拒否されます。このオプションを使用するには、[セキュリティで保護されたチャンネル (SSL) を要求] チェック ボックスをオンにする必要があります。</p>
+
+<p><strong>[クライアント証明書マッピングを有効にする]</strong></p>
+
+<p>有効なクライアント証明書を使ってログオンするユーザーを認証するには、このチェック ボックスをオンにします。マッピングでは、クライアント証明書に含まれている情報を、Windows ユーザー アカウントの情報と照合します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

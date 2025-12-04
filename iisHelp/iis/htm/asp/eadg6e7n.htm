@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>文字列変換のコードページを設定する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_setting_the_code_page_for_string_conversions"></A><SUP></SUP>文字列変換のコードページを設定する</H2>
+
+<P>&quot;コードページ&quot; は、記号 (文字、数字、区切り文字) を番号にマップするために、オペレーティング システムが使用する内部テーブルです。異なるコードページは、異なる言語で使用される文字セットをサポートしています。コードページは番号で表され、たとえば、コードページ 932 は日本語の文字セットを表します。また、中国語の文字セットの 1 つは 950 というコードページで表されます。</P>
+
+<P>Active Server Pages (ASP) と、ASP によってサポートされるスクリプト エンジンでは、内部的に Unicode が使用されます。Unicode は 16 ビット固定幅文字エンコード標準です。すべてのページを Web サーバーの既定のコードページで記述すると、ASP によって自動的に文字列が変換されます。Web サーバーの既定のコードページまたはブラウザの既定のコードページでスクリプトを作成していない場合、次の 3 つのケースで文字列が適切に変換されるように、コードページを指定する必要があります。
+
+<UL type=disc>
+	<LI>スクリプトと ASP エンジンの間</li>
+
+	<LI>ASP エンジンとブラウザの間</li>
+
+	<LI>ASP エンジンと COM コンポーネントの間</li>
+</UL>
+
+<P>ASP ページのコードページを指定するには、AspCodePage メタベース プロパティ、@CODEPAGE ディレクティブ、Session.CodePage プロパティ、または Response.CodePage プロパティのいずれかを使用します。たとえば、コードページを日本語に設定するには、次のコマンドのいずれかを使用してアプリケーションの AspCodePage プロパティを 932 に設定します。</P>
+
+<PRE><CODE>&lt;%@ CODEPAGE = 932 %&gt;
+
+&lt;% Session.CodePage = 932 %&gt;
+
+&lt;% Response.CodePage = 932 %&gt;
+</CODE></PRE>
+
+<P>ASP ページは、@CodePage ディレクティブと一致するファイル形式で保存することが重要です。 たとえば、@CodePage が 65001 に設定されている場合、Web ページは UTF-8 形式で保存します。&nbsp;@CodePage が 932 に設定されている場合、Web ページは既定のシステム ロケールが日本語に設定されているコンピュータ上の ANSI 形式で保存します。</P>
+
+<P>このページにあるコンテンツとスクリプトが処理されると、ASP により、指定されたコード ページを使用して、スクリプトの文字セットが Unicode に変換されます。たとえば、ANSI で文字 &quot;a&quot; を表す値は、Unicode で文字 &quot;a&quot; を表す値に変換されます。</P>
+
+<PRE></PRE>
+
+<P>スクリプトが実行されると、Response.CodePage により文字のエンコード方式が決定します。Response.CodePage が Web ページで明示的に設定されていない場合、この階層で暗黙的に設定されます。
+
+<UL type=disc>
+	<LI>Sessions が有効であり、Session.CodePage が明示的に設定されている場合、Session.CodePage により Response.CodePage が設定されます。または、</li>
+
+	<LI>@CodePage がページの先頭で定義されている場合、@CodePage により Response.CodePage が設定されます。または、</li>
+
+	<LI>アプリケーションの AspCodePage メタベース プロパティが 0 以外で設定されている場合、AspCodePage により Response.CodePage が設定されます。または、</li>
+
+	<LI>Web サーバーの既定のシステム コードページにより Response.CodePage が設定されます。</li>
+</UL>
+
+<P>Web ページごとに、設定できるコードページは 1 つだけです。@CodePage ともう 1 つ別にメソッドを使用する場合、両方を同じコードページに設定するか、一方を UTF-8  に設定します。@CodePage はリテラル文字列に適用され、もう一方のメソッドは文字列変数に適用されます。互換性のない 2 つのコードページを混在させた場合、ブラウザでリテラル文字列が適切に表示されません。</P>
+
+<P>ASP がブラウザに Web ページを送信したら、ブラウザではそのページを適切に表示するために使用する文字セットを判別できなければなりません。同時に、その文字セット用の言語パックがコンピュータ上でインストールされていることも必要です。文字セットを指定するには、次のいずれかのコマンドを使用します。</P>
+
+<PRE><CODE>&lt;META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=windows-1251"&gt;
+&lt;% Response.Charset = "windows-1252"</CODE></PRE>
+
+<P>スクリプトの一部で一時的にコードページを変更する場合、コードページは必ず元の値に戻してください。次のスクリプトは、一時的にコードページを変更する方法の一例を示しています。</P>
+
+<PRE><CODE>&lt;%@ CodePage = 65001 %&gt;
+&lt;!-- Welcome to my home page in UTF-8 --&gt;
+&lt;%
+  Response.Write "The Session codepage is " &amp; Session.CodePage &amp; "&lt;BR&gt;"
+  Response.CodePage = 932
+  Response.Write "The codepage for this page has been changed with Response.CodePage&lt;BR&gt;"
+  Response.Write "The Response codepage is " &amp; Response.CodePage &amp; "&lt;BR&gt;"
+  Response.Write "The Session codepage is still " &amp; Session.CodePage &amp; "&lt;BR&gt;"
+%&gt;</CODE></PRE>
+
+<P>詳細およびほかの例については、「<A HREF="apro8u91.htm">AspCodePage</A>」、「<A HREF="dire7ixx.htm">@CodePage</A>、「<A HREF="vbob4ht1.htm">Session.CodePage</A>」、「<A HREF="vbob150l.htm">Response.CodePage</A>」、および「<A HREF="vbob7fw4.htm">Response.Charset</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

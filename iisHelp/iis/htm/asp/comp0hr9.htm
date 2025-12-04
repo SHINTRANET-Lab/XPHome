@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>リダイレクト ファイル</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><a name="_redirection_file"></a>リダイレクト ファイル</H2>
+
+<P>リダイレクト ファイルは、管理者が作成するファイルです。通常このファイルには、AdRotator <B></B>オブジェクトが送信したクエリ文字列を解析し、ユーザーがクリックした広告に関連付けられた URL にユーザーをリダイレクトするスクリプトが含まれています。&nbsp;AdRotator オブジェクトがリダイレクト ファイルに渡す QueryString には、イメージ ファイルを保持する <B>image</B> という変数および広告主の URL を保持する <B>url</B> という変数が含まれます。</P>
+
+<P>またリダイレクト ファイルには、特定の広告をクリックしたユーザー数を計算し、その情報をサーバー上のファイルに保存するスクリプトを含めることもできます。</P>
+
+<H6>例</H6>
+
+<P>次の例は、ユーザー情報を Application 変数内に格納し、広告主のホーム ページにユーザーをリダイレクトします。</P>
+
+<P>--- AdRedir.asp ---</P>
+
+<PRE><CODE>&lt;%
+   Application.Lock
+   Application("LastAdClicked") = Request.QueryString("image")
+   Application("LastUser") = Request.ServerVariables("REMOTE_ADDR")
+   Application.UnLock
+   Response.Redirect(Request.QueryString("url"))
+%&gt;
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

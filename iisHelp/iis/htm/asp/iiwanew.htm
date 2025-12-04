@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ASP の新機能</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<META NAME="DESCRIPTION" CONTENT="このバージョンの Active Server Pages の新機能について、説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<font face="ＭＳ Ｐゴシック" color="black">
+<h1><a name="H1_37775030">ASP の新機能</a></h1>
+
+
+<p>Active Server Pages (ASP) はさまざまな点で機能が強化され、スクリプト作成者および Web アプリケーション開発者にとって使いやすくなっています。</p>
+
+<ul>
+
+<li><strong>新しいフロー制御機能</strong>&nbsp;&nbsp;ASP <strong>Server</strong> オブジェクトでは、<strong>Server.Transfer</strong> と <strong>Server.Execute</strong> という新しい 2 つのメソッドで、プログラムのフロー制御が可能となりました。これらのメソッドを使用すると、要求のリダイレクトによるクライアント/サーバー間のやり取りをせずに、サーバーから直接 .asp ファイルへ要求を転送できます。詳細については、「<a href="iiwacont.htm">ブラウザにコンテンツを送信する</a>」を参照してください。</li>
+
+<li><strong>エラー処理</strong>&nbsp;&nbsp;新しいエラー処理機能が ASP に追加され、カスタム エラー メッセージ の .asp ファイルでエラーをトラップできるようになりました。新しい <strong>Server.GetLastError</strong> メソッドを使用すると、エラーの説明やエラーが発生した行番号などの情報を表示できます。詳細については、「<a href="vbob1dtg.htm">ASPError オブジェクト</a>」を参照してください。</li>
+
+<li><strong>スクリプトレス ASP</strong>&nbsp;&nbsp;通常、静的なコンテンツはサーバー側コンテンツよりも速く処理されるため、以前は ASP 機能を含んだファイルだけに .asp ファイル拡張子を付ける方が便利でした。この場合、ASP 機能を静的な .html ファイルへ追加する必要があるたびに、手動で .asp ファイル拡張子を追加し、関連するハイパーリンクを修正しなければなりませんでした。しかし、この ASP の最新リリースでは、サーバー側機能を含んでいない .asp ファイルが、以前よりも高速に処理されるようになりました。したがって、開発中の Web アプリケーションの中のファイルが最終的には ASP 機能を必要とする可能性がある場合、静的なコンテンツまたはサーバー側コンテンツが含まれているかどうかに関係なく、自由にそれらのファイルに .asp ファイル拡張子を付けることができます。詳細については、「<a href="iiwabasi.htm">ASP ページを作成する</a>」を参照してください。</li>
+
+<li><strong>パフォーマンスが向上したオブジェクト</strong>&nbsp;&nbsp;Active Server Pages の新バージョンでは、よく使用されるインストール可能なコンポーネントのパフォーマンスが向上しています。これらのオブジェクトは、広範囲の Web 発行環境に合わせて確実に調整されます。詳細については、「<a href="comp275c.htm">ASP で利用可能なコンポーネント</a>」を参照してください。</li>
+
+<li><strong>XML の統合</strong>&nbsp;&nbsp;Extensible Markup Language (XML) を使用すると、複雑なデータまたはドキュメント構造を意味的に記述することができ、さまざまなアプリケーション、クライアント、およびサーバー間で共有できるようになります。Microsoft&reg; Internet Explorer Version&nbsp;4.0 以降に組み込まれている Microsoft&reg;&nbsp;XML Parser を使用すると、Web サーバーと、Internet Explorer Version&nbsp;4.0 以降 または XML 解析機能を持つ他のサーバーとの間で XML 形式のデータをやり取りできるサーバー側アプリケーションを作成できます。詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=xml" target="_blank">Microsoft XML の Web サイト</a>を参照してください。</li>
+
+<li><strong>Windows Script Components</strong>&nbsp;&nbsp;ASP では、Microsoft の強力な新スクリプト テクノロジである Windows Script Components をサポートします。つまり、ビジネス ロジックのスクリプト プロシージャを再利用可能な COM (Component Object Model) コンポーネントに変換できるようになります。この COM コンポーネントは、ほかの COM 準拠プログラムだけでなく、Web アプリケーションでも使用できます。詳細については、「<a href="iiwacomu.htm#scriptlets">コンポーネントとオブジェクトを使用する</a>」を参照してください。</li>
+
+<li><STRONG>ブラウザ機能を判別する新しい方法</STRONG>&nbsp;&nbsp;ASP には、正確にブラウザ機能を判別する新しい機能が付いています。ブラウザの機能が記述された、簡単なクライアント側スクリプトでインストール可能な cookie がブラウザから送信される場合、Browser Capabilities コンポーネントのインスタンスを作成すると、cookie が返すブラウザのプロパティを取得できます。この機能を使用すると、ブラウザの機能を知ることができ、その機能に応じてアプリケーションを調整できます。詳細については、「<A HREF="comp1vol.htm">cookie から Browser Capabilities を取得する</A>」を参照してください。</li>
+
+<li><STRONG>ASP のセルフチューニング</STRONG>&nbsp;ASP では、実行中の要求が外部リソースによってブロックされるとそれを検出し、追加要求を同時に実行しながら通常の処理を継続するように、自動的にスレッド数を増加させます。CPU が過負荷状態になった場合には、ASP はスレッド数を制限し、過度の非ブロック要求を同時に実行したときに発生する継続的なスイッチングを減少させます。詳細については、「<A HREF="apro4s9w.htm"><STRONG>AspThreadGateEnabled</STRONG></A>」のメタベース プロパティ リファレンスを参照してください。</li>
+
+
+<li><STRONG>SRC 属性を使用するサーバー側インクルード</STRONG>&nbsp;&nbsp;HTML の &lt;SCRIPT&gt;&lt;/SCRIPT&gt; タグの SRC 属性を使用し、サーバー側インクルードを実行できるようになりました。SRC 属性を使用して仮想パスまたは相対パスを指定し、RUNAT=SERVER 属性を使用してサーバー側実行であることを表すと、#Include ディレクティブと同じ機能を実現できます。詳細については、「<A HREF="iiwainc.htm">ファイルをインクルードする</A>」を参照してください。</li>
+
+<li><STRONG>ASP スクリプトのエンコード</STRONG>&nbsp;&nbsp;従来、Web 開発者は、第三者によってスクリプトのロジックを知られてしまうことを避けられませんでした。今回 ASP では、Microsoft&reg; Visual Basic Scripting Edition (VBScript) および Microsoft&reg; JScript&nbsp;5.0 で提供されている、新しいスクリプト符号化ユーティリティをサポートしています。Web 開発者は、プログラム ロジックを読み取ることのできない ASCII 文字で表示するエンコード方式を、クライアント側とサーバー側両方のスクリプトに設定できます。エンコードされたスクリプトは実行時にスクリプト エンジンによってデコードされるため、ほかのユーティリティは必要ありません。この機能は、セキュリティ保護の暗号化ソリューションを目的としたものではありませんが、これにより第三者によるスクリプトの参照やコピーの多くを回避することができます。詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Microsoft Script Technologies</A> の Web サイトを参照してください。</LI>
+
+</font>
+
+</font>
+
+<li><font face="ＭＳ Ｐゴシック" color="black"><b>インターナショナル ASP 開発</b>&nbsp; </font><font face="ＭＳ Ｐゴシック" color="black">Response.CodePage と Response.LCID という 2 つの新しいプロパティが Response オブジェクトに追加されました。これらのプロパティは、セッションを有効にすることなく、動的文字列のコードページおよびロケール設定にページ レベルのコントロールを提供します。Session.CodePage および Session.LCID も動的文字列のコードページおよびロケール設定にセッション レベルのコントロールを提供しますが、@CodePage および @LCID によって不用意に上書きされることはなくなりました。@CodePage および @LCID は、Web ページの静的文字列に影響します。既定では、これらの値のすべてが既定のシステム ANSI コードページ (CP_ACP) および既知のシステム ロケール (LOCALE_SYSTEM_DEFAULT) によって暗黙的に設定されます。ただし、メタベース プロパティ AspCodePage または AspLCID が Web サイトまたは仮想ディレクトリに設定されている場合は、これらが既定値になります。メタベース プロパティは、システム既定値とは異なるコードページを必要とする global.asa ファイルで使用できます。強化された UTF-8 サポートには、フォーム データおよびサーバー変数などの組み込みオブジェクト内の代理文字サポートおよび自国語に翻訳された文字サポートが含まれます。</font></LI>
+
+</ul>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</font>
+
+</body>
+</html>

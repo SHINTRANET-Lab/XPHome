@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Increment</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_increment_counters"></A><SUP></SUP>Increment</H2>
+
+<P>Increment メソッドは、指定された名前のカウンタの現在の値に 1 を加え、カウンタの新しい値を返します。指定されたカウンタが存在しない場合は、カウンタを作成し、値を 1 に設定します。</P>
+
+<H6>構文</H6>
+
+<P><I>Counters</I><B>.Increment(</B><I>CounterName</I><B>)</B></P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>CounterName</I></DT>
+
+<DD>カウンタの名前を表す文字列です。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>カウンタの値を増やすには、<CODE>&lt;% Counters.Increment(<I>CounterName</I>) %&gt;</CODE> を使用します。カウンタの値を増やし、値を表示するには、<CODE>&lt;%= Counters.Increment(<I>CounterName</I>) %&gt;</CODE> を使用します。 </P>
+
+<P>カウンタの値を取得するには、Counters.Get を使用します。カウンタに特定の値を設定するには、Counters.Set を使用します。 </P>
+
+<P>次のコードは、ページヒット カウンタを 1 行で記述しています。 </P>
+
+<P>この例は、クライアントがサーバーからこのページを要求するたびに、Counters.Increment がカウンタの値を 1 つインクリメントします。 </P>
+
+<P>--- Counters_Increment.asp ---</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;One-line Page-hit Counter&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;!-- The Counters object was instantiated in Global.asa. --&gt;
+&lt;B&gt;&lt;%=Request.ServerVariables("URL")%&gt;&lt;/B&gt; has been viewed &lt;B&gt;&lt;%=Counters.Increment("hits")%&gt;&lt;/B&gt; time(s).
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp1c37.htm"><B>Get</B></A>、<A HREF="/iishelp/iis/htm/asp/comp02cz.htm"><B>Remove</B></A>、<A HREF="/iishelp/iis/htm/asp/comp1q0j.htm"><B>Set</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

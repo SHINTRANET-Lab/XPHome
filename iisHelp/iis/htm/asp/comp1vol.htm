@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>cookie から Browser Capabilities を取得する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_retrieving_browser_capabilities_from_a_cookie"></A><SUP></SUP>cookie から Browser Capabilities を取得する</H2>
+
+<P>クライアントの機能を判別する新しい方法が、IIS 5.0 に導入されました。クライアントの機能を記述した cookie が、要求の一部としてクライアントから送信されると、ASP ページは Browser Capabilities コンポーネントのインスタンスを作成して、cookie に指定されている名前と値のペアをプロパティとして追加します。</P>
+
+<P>たとえば、userLanguage=Spanish という名前と値のペアを含んだ cookie がクライアントから送信されると、Browser Capabilities コンポーネントは userLanguage プロパティを追加し、そのプロパティの値を Spanish に設定します。 </P>
+
+<P><span class=le><B>重要</B></span></P>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob9waa.htm">Server.Transfer</A> メソッドまたは <A HREF="/iishelp/iis/htm/asp/vbob9pid.htm">Server.Execute</A> メソッドを使用したリダイレクトの結果としてクライアントから要求されたファイル内に、METADATA# メタタグが存在する場合、IIS はそのメタタグを無視します。ただし、実際にリダイレクトを含んでいるファイル内の METADATA メタタグは通常どおりに処理されます。</P>
+
+<P>次の例では、cookie を使用してブラウザの機能を判別します。この処理には 2 つのファイルが必要です。
+
+<UL type=disc>
+	<LI>Sendcook.htm はクライアントで実行され、DHTML を使用してクライアントに設定されている一連のプロパティを判別します。</li>
+
+	<LI>Checkcap.asp は、Browser Capabilities コンポーネントのインスタンスを作成し、Sendcook.htm からプロパティを取得します。</li>
+</UL>
+
+<P>--- SendCook.htm ---</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;HEAD&gt;
+
+&lt;SCRIPT language="JavaScript"&gt;
+
+function stopAllErrors() 
+{
+   // No errors should be presented to the user if they occur.   
+  return true;
+}
+window.onerror = stopAllErrors; 
+
+function window.onload ()
+{
+  oClientCaps.style.behavior = "url(#default#clientCaps)";
+  bcString   =  "width= "          + oClientCaps.width;
+  bcString  +=  "&amp;height= "        + oClientCaps.height;
+  bcString  +=  "&amp;bufferDepth= "   + oClientCaps.bufferDepth;
+  bcString  +=  "&amp;colorDepth= "    + oClientCaps.colorDepth;
+  bcString  +=  "&amp;cookies= "       + oClientCaps.cookieEnabled;
+  bcString  +=  "&amp;platform= "      + oClientCaps.platform;
+  document.cookie = "BrowsCap= "   + bcString;
+}
+&lt;/SCRIPT&gt;
+
+&lt;/HEAD&gt;
+
+&lt;BODY ID="oClientCaps"&gt;
+&lt;/BODY&gt;
+
+&lt;/HTML&gt;
+
+</CODE></PRE>
+
+<P>--- CheckCap.asp ---</P>
+
+<PRE><CODE>&lt;!--METADATA TYPE="Cookie" NAME="BrowsCap" SRC="sendcook.htm"--&gt;
+&lt;HTML&gt;
+
+&lt;BODY&gt;
+&lt;% Set myBrowsCap = Server.CreateObject("MSWC.BrowserType") %&gt;
+&lt;%
+  Response.write("width= "        +myBrowsCap.width            + "&lt;BR&gt;")
+  Response.write("height= "       +myBrowsCap.height           + "&lt;BR&gt;")
+  Response.write("bufferDepth= "  +myBrowsCap.bufferDepth      + "&lt;BR&gt;")
+  Response.write("colorDepth= "   +myBrowsCap.colorDepth       + "&lt;BR&gt;")
+  Response.write("cookies= "      +CStr(myBrowsCap.cookies)    + "&lt;BR&gt;")
+  Response.write("platform= "     +myBrowsCap.platform         + "&lt;BR&gt;")
+%&gt;
+&lt;/BODY&gt;
+
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<P>ブラウザの機能を確認する場合の設計上の影響については、「<A HREF="/iishelp/iis/htm/asp/eadg6isz.htm">クライアント機能</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

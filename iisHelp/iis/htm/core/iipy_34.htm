@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[アプリケーションのマッピング] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<FONT FACE="ＭＳ Ｐゴシック">
+
+<p><strong>[アプリケーションのマッピング] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、ファイル名の拡張子を、そのファイルを処理するプログラムまたはインタプリタにマップするときに使用します。マップされるアプリケーションには、Internet Server API (ISAPI) アプリケーション、Active Server Pages (ASP) アプリケーション、Internet Database Connector (IDC) アプリケーション、およびサーバー側インクルード ディレクティブを使用するファイルがあります。たとえば、.asp ファイル名拡張子を持つページへの要求を受け取った Web サーバーは、アプリケーションのマッピングを調べて、そのページの処理には実行可能ファイル asp.dll が必要であると判断します。</p>
+
+<p><strong>[ISAPI アプリケーションをキャッシュする] チェック ボックス</strong></p>
+
+<p>Internet Server API の DLL をロードしてキャッシュすると、それ以降要求があった場合に再びアプリケーションを呼び出さなくても処理することができます。ほとんどの ISAPI アプリケーション (Active Server Pages を含む) は、キャッシュすることで効率が向上します。このチェック ボックスは、ISAPI アプリケーションのデバッグなど、特別な場合にのみオフにしてください。</p>
+
+<p>1 つの ISAPI アプリケーションが、1 つのサーバーの複数の Web サイトでロードされてキャッシュされている場合は、そのサーバー上でこのチェック ボックスをオフにしても、アプリケーションはメモリからアンロードされません。同じアプリケーションを使用するすべての Web サイトで、このチェック ボックスをオフにする必要があります。実行中のアプリケーションは、このチェック ボックスをオフにしてもアンロードされません。ただし、それ以降の要求はキャッシュされなくなります。</p>
+
+<p><strong>アプリケーションのマッピング</strong></p>
+
+<p>この表には、実行可能ファイルに関連付けられたファイル名の拡張子と、実行可能ファイルの名前が一覧表示されます。一覧の中に &quot;(すべて)&quot; が表示されている場合は、すべての動詞がアプリケーションに送られます。&quot;(すべて)&quot; 自体は動詞ではありません。</p>
+
+<p><font color="#0000ff"><strong>重要</strong></font>&nbsp;&nbsp;&nbsp; IIS&nbsp;4.0 の [アプリケーションのマッピング] プロパティ シートの [除外] 列に動詞のリストがありました。IIS&nbsp;5.0 および 5.1 では、アプリケーションによって実行される HTTP 動詞が一覧表示される [動詞] 列に変わりました。</p> 
+
+<p><strong>アプリケーションのマッピングを追加するには</strong></p>
+
+<ol>
+<li>[追加] をクリックします。</li>
+<li>[拡張子] ボックスに、実行可能ファイルに関連付ける拡張子を入力します。</li>
+<li>[実行ファイルのパス] ボックスに、実行可能ファイルへの物理パスを入力します。</li>
+<li>実行可能ファイルがアプリケーションに渡す HTTP 動詞を入力します。すべての動詞をアプリケーションに渡すように指定するには、このボックスを空白にします。[OK] をクリックすると、このボックスに &quot;(すべて)&quot; と表示されます。メソッド名は、カンマ (,) で区切ります。</li>
+<li>実行アクセス権が設定されていないディレクトリでアプリケーションを実行する場合は、[スクリプト エンジン] チェック ボックスをオンにします。</li>
+<li>[ファイルの存在を確認] チェック ボックスをオンにすると、Web サーバーは、要求されたスクリプト ファイルが存在するかどうかを調べ、要求を行っているユーザーがそのスクリプト ファイルへのアクセス権を持っていることを確認します。</li>
+<li>[OK] をクリックします。</li>
+</ol>
+
+<p>アプリケーションのマッピングを削除するには、拡張子を選択して、[削除] をクリックします。</p>
+
+<p><strong>注</strong></p>
+
+<ul>
+<li>[スクリプト エンジン] チェック ボックスの設定は、本来インタプリタにマップされた ASP や IDC などのスクリプトベースのアプリケーションのためのものです。スクリプトにマップされたアプリケーションを実行するには、アプリケーションが置かれているディレクトリの [スクリプトのみ] または [スクリプトおよび実行可能ファイル] のいずれかを選択する必要があります。スクリプトにマップされたアプリケーションだけを実行できるようにするには、[スクリプトのみ] チェック ボックスをオンにします。スクリプトにマップされたアプリケーションと実行可能ファイル (.exe および .dll) の両方を実行できるようにするには、[スクリプトおよび実行可能ファイル] チェック ボックスをオンにします。</li>
+
+<li>[ファイルの存在を確認する] チェック ボックスがオンになっているときに、スクリプトが存在しない、またはユーザーにスクリプト ファイルへのアクセス権がない場合は、該当する警告メッセージがブラウザに返され、スクリプト エンジンは起動されません。このオプションは、スクリプトにアクセスできない場合でも CGI の応答を返さない、Perl インタプリタのような非 CGI 実行可能プログラムにマップされたスクリプトに役立ちます。スクリプトは、サーバーとスクリプト エンジンによって 1 回ずつ、合計 2 回開かれるので、このオプションを有効にするとパフォーマンスが低下します。</li>
+</ul>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

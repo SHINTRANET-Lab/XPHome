@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アクセス制御</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サーバーとそのリソースに対する、ユーザーとコンピュータのアクセス権を制御する方法についての参照先を示します。ディレクトリとファイルに対する特定のアクセス権を、NTFS または Web セキュリティ機能によって、ユーザーに割り当てることができます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="accesscontrol">アクセス制御</a></h1>
+
+<p>Web サーバーとそのリソースへのアクセスを許可する、ユーザーおよびコンピュータを制御することができます。NTFS および Web サーバーのセキュリティ機能を使用して、ディレクトリとファイルに対する特定のアクセス権をユーザーに割り当てることができます。</p>
+
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><a href="iiacnsc.htm">アクセス制御について</a></strong>」では、ファイルとディレクトリへのアクセスの制限について、概要を説明します。</li>
+<li>「<strong><a href="iintfsc.htm">NTFS でファイルを保護する</a></strong>」では、サーバーで NTFS のセキュリティ機能を使用するように構成する手順について説明します。</li>
+<li>「<strong><a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a></strong>」では、Windows ユーザー アカウントに割り当てるファイルやディレクトリへのアクセス権のレベル設定が可能な NTFS の構成方法について説明します。</li>
+
+<li>「<strong><a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a></strong>」では、すべてのユーザーに適用される Web および FTP のコンテンツに対する制限を設定する方法について説明します。 </li>		
+<li>「<strong><a href="iidbcsc.htm">データベースへのアクセスを制御する</a></strong>」では、権限のないアクセスからデータベース ファイルを保護する方法について説明します。</li>	
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>コンテンツ規制機能を構成して有害な Web コンテンツをユーザーに警告する方法については、「<a href="iicodirc.htm">コンテンツの規制を使用する</a>」を参照してください。</li>
+
+
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

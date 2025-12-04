@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>発行ディレクトリを作成する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="サーバーの WebDAV 発行ディレクトリの設定方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="CreatingaPublishingDirectory">発行ディレクトリを作成する</a></h1>
+
+<p>次の手順によって、"WebDAV" という発行ディレクトリを設定します。</p>
+
+<big>発行ディレクトリを設定するには</big><br>
+
+<ol>
+<li>Web サーバーに物理ディレクトリを作成します。このディレクトリは、Web サーバーの任意の場所に作成できます。 </li>
+<p><b>注</b>&nbsp;&nbsp;&nbsp;ディレクトリを Inetpub/Wwwroot ディレクトリに作成する場合は、新しいディレクトリに対するアクセス権を調整する必要があります。既定では、Wwwroot ディレクトリには読み取り専用アクセス権があり、Wwwroot 内に作成するディレクトリには読み取り専用アクセス権が継承されます。その他すべてのディレクトリには、既定でフル コントロール アクセス権が設定されます。</p> 
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、仮想ディレクトリを作成します。作成方法については、「<a href="iicodirv.htm">仮想ディレクトリを作成する</a>」を参照してください。</li>
+<li>仮想ディレクトリのエイリアスとして「WebDAV」と入力し、手順 1 で作成した物理ディレクトリにリンクします。</li>
+<li>仮想ディレクトリの [読み取り]、[書き込み]、[参照] のアクセス権を与えます。</li>
+<p>この仮想ディレクトリにドキュメントを発行し、その中のファイルのリストを参照するアクセス権をユーザーに与えます。セキュリティ上お勧めはできませんが、クライアントに Web サイト全体に対する作成元と同じアクセス権を与え、Web サーバー全体に対する発行をクライアントに許可することもできます。</p>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;クライアントに書き込みアクセス権を与えても、クライアントが Active Server Pages (ASP)、またはほかのスクリプトにマップされたファイルを修正することはできません。これらのファイルの修正を許可するには、仮想ディレクトリの作成後、書き込みアクセス権とスクリプト ソース アクセス権をクライアントに与える必要があります。これらのアクセス権の設定については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</p> 
+
+<p>WebDAV 仮想ディレクトリを設定した後、クライアントにその仮想ディレクトリへの発行を許可することができます。ユーザーが Microsoft WebDAV クライアントを通してディレクトリに接続する方法については、「<a href="wcwdpub.htm">ファイルを発行し管理する</a>」を参照してください。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

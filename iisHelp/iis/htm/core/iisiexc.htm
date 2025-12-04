@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=LTR>
+<HEAD>
+
+<TITLE>#exec</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービスのリファレンス ページです。#exec ディレクティブは、アプリケーションまたはシェル コマンドを実行し、その出力 (標準出力または ISAPI の WriteClient データ) をクライアント ブラウザに送信するよう、Web サーバーに命令します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><font face="ＭＳ Ｐゴシック">
+
+<H2><A NAME="_k2_exec"></A><SUP></SUP>#exec</H2>
+
+<p><b>#exec</b> ディレクティブは、アプリケーションまたはシェル コマンドを実行し、その出力 (標準出力または ISAPI の<b> WriteClient</b> データ) をクライアント ブラウザに送信します。ディレクティブは、HTML のコメント デリミタで囲む必要があります。</p>
+<p>このディレクティブは、STM ページでのみ使用できます。ASP ページでは使用できません。複数 CGI スクリプトまたは ISAPI アプリケーションの出力を Web ページに含める ASP スクリプト メソッドはありません。</p>
+
+<H6>構文</H6>
+
+<P><strong>&lt;!-- #exec </strong><em>CommandType</em><strong> = </strong><em>CommandDescription</em> <strong>--&gt;</strong></P>
+
+<H6>パラメータ</H6>
+
+<P><em>CommandType</em></P>
+
+<P>コマンドの種類を指定します。コマンドの種類は、次のいずれか 1 つを指定できます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all width=100%>
+
+<TR VALIGN="top">
+<TD width=26%><STRONG>コマンドの種類</STRONG></TD>
+<TD width=74%><STRONG>意味</STRONG></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=26%>CGI</TD>
+<TD width=74%>CGI スクリプト、ASP アプリケーション、ISAPI アプリケーションなどのアプリケーションを実行します。CommandDescription パラメータには、アプリケーションの完全な仮想パスの後に、疑問符 (?) とアプリケーションに渡すパラメータが入った文字列を指定します。複数のパラメータがある場合は、プラス記号 (+) で区切ります。ISAPI アプリケーションの実行は SSI ドキュメントの処理の一部でしかないため、ISAPI アプリケーションには次の制限があります。
+<p>URL の送信、または <strong>ServerSupportFunction</strong> コールバック機能によるリダイレクトを試みる ISAPI 拡張子を実行すると、メッセージは HTML ストリームに置かれますが、送信/リダイレクトは実行されません。</p>
+<p>HSE_STATUS_PENDING を返すアプリケーションの実行において、SSI インタプリタ (Ssinc.dll) は、<strong>ServerSupportFunction</strong> が呼び出されてセッションが終了しない限り、いつまでも待機します。&nbsp;
+<p><b> ServerSupportFunction</b> については、ISAPI リファレンスの <a href="http://www.microsoft.com/japan/developer/default.asp" target="_blank"><b>MSDN Library</b></a> を参照してください。
+</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=26%>CMD</TD>
+<TD width=74%>シェル コマンドを実行します。CommandDescription パラメータには、シェル プログラムの完全な物理パスの後に、スペースで区切られたコマンドライン パラメータが入った文字列を指定します。フル パスを指定しなかった場合、Web サーバーはシステム パスを検索します。
+<p>このディレクティブは、Web サイトをセキュリティ上の危険にさらすため、既定では無効になっています。このディレクティブを有効にするには、DWORD レジストリ値 <b> SSIEnableCmdDirective</b> を HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\W3SVC\Parameters キーに追加し、値を 1 に設定します。#exec ディレクティブを使用する STM ファイルを含む Web フォルダへの匿名アクセスを無効にします。</p>
+<p>レジストリの使い方については、「レジストリ」を参照してください。</p>
+</TD>
+</TR>
+</TABLE>&nbsp;
+
+<P><strong><font color="#0000FF">重要</strong></font>&nbsp;&nbsp;&nbsp;このディレクティブが入ったファイルには、SSI インタプリタにマップされるファイル名拡張子を使う必要があります。拡張子が異なると、Web サーバーはディレクティブを処理しません。既定では、ファイル名拡張子 .stm、.shtm、および .shtml が SSI インタプリタ (ssinc.dll) にマップされます。</P>
+
+<P>#echo ディレクティブを使用する STM ページは、それ自身または ASP ページから Response.Redirect を使用して実行する必要があります。STM ページを ASP ページから Server.Transfer、Server.Execute、または #include を使用して呼び出すと、STM ページが ssinc.dll ではなく asp.dll を通過するよう強制されるため、機能しません。</P>
+
+<P><a href="iiabuti.htm">IIS スナップイン</a>をインストールしている場合、既定の拡張子マッピングを変更して新しいマッピングを追加できます。詳細については、「<A HREF="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。ファイル拡張子を複数の実行可能ファイルにマップすることはできないため、このディレクティブを ASP ファイルでは使用できません。ASP ファイルは、既に asp.dll にマップされていて、そのまま保持する必要があります。</P>
+
+<H6><b>例</b></H6>
+
+<p>この例では、CGI コマンドを使用して ASP ページを実行しているため、レジストリに値を追加する必要はありません。Server.Execute、Server.Transfer、または #include を使用して Test.asp を Exec.asp から実行するほうが効率的ですが、ここでは STM ファイル内の #exec ディレクティブを示すのみです。</p>
+
+<p>--- Exec.asp ---</p>
+
+<pre>&lt;FORM NAME=&quot;RunExec&quot; METHOD=&quot;POST&quot; ACTION=&quot;Exec.asp&quot;&gt;
+&lt;INPUT TYPE=&quot;SUBMIT&quot; VALUE=&quot;Run the #exec Directive&quot; NAME=&quot;RunExec&quot;&gt;
+&lt;/FORM&gt;
+&lt;%
+If Len(Request.Form(&quot;RunExec&quot;)) Then
+  Response.Redirect(&quot;Exec.stm&quot;)
+End If
+%&gt;
+</pre>
+
+<p>--- Exec.stm ---</p>
+
+<pre>&lt;H3&gt;Inside Exec.stm&lt;/H3&gt;
+&lt;!-- #exec CGI=&quot;/testfolder/test.asp?test=Hello&quot; --&gt;
+&lt;FORM NAME=&quot;Return&quot; METHOD=&quot;POST&quot; ACTION=&quot;Exec.asp&quot;&gt;
+&lt;INPUT TYPE=&quot;SUBMIT&quot; VALUE=&quot;Return to Previous Page&quot; NAME=&quot;Return&quot;&gt;
+&lt;/FORM&gt;
+</pre>
+
+<p>--- Test.asp ---</p>
+
+<pre>&lt;%
+Response.Write &quot;&lt;BR&gt;Inside Test.asp.&lt;BR&gt;&quot;
+Response.Write &quot;Test = &quot; &amp; Request.QueryString(&quot;Test&quot;) &amp; &quot;.&lt;BR&gt;&quot;
+%&gt;</pre>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

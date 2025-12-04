@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<HEAD>
+
+<title>[Active Server Pages] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+<p><strong>[Active Server Pages] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、選択したアプリケーションで、ASP スクリプトをどのように実行するかを設定するときに使用します。</p>
+
+<p><strong>[セッションの状態を有効にする] チェック ボックス</strong></p>
+
+<p>セッションの状態を有効または無効にします。</p> 
+
+<p>セッションの状態を有効にすると、Active Server Pages は ASP アプリケーションにアクセスするユーザーごとにセッションを作成するので、アプリケーションのページ全体でユーザーを識別できるようになります。セッションの状態を無効にすると、ASP はユーザーを追跡しなくなり、ASP スクリプトは Session オブジェクトに情報を格納したり、Session_OnStart イベントや Session_OnEnd イベントを使用したりできなくなります。ユーザーがタイムアウト時間の終了までにアプリケーションのページの要求や更新を行わなかった場合、セッションは自動的に終了します。</p> 
+
+<p>タイムアウト時間を変更するには、[セッションのタイムアウト] ボックスに新しい数字を入力します。 </p>
+
+<p>スクリプトは、Session.Abandon メソッドを使用して、セッションを明示的に終了できます。アプリケーションのセッションの状態が有効になっている場合でも、&lt;%@ ENABLESESSIONSTATE = False %&gt; ディレクティブを使って個別の ASP ページのセッションの状態を無効にすることができます。</p>
+
+<p><strong>[バッファ処理を有効にする] チェック ボックス</strong></p>
+
+<p>ブラウザへの出力をバッファ処理するには、このチェック ボックスをオンにします。</p>
+
+<p>このチェック ボックスをオンにすると、ASP ページが生成するすべての出力が、ブラウザへ送られる前に収集されます。チェック ボックスをオフにすると、出力はページが処理されるときにブラウザに返されます。バッファ処理を有効にすると、ASP スクリプトのどこからでも HTTP ヘッダーを設定できるようになります。スクリプトの中でこのオプションを無効にするには、Response.Buffer メソッドを使用します。</p>
+
+<p><strong>[親のパスを有効にする] チェック ボックス</strong></p>
+
+<p>ASP スクリプトで、現在のディレクトリの親ディレクトリへの相対パス (.. 構文を使ったパス) を使用するには、このチェック ボックスをオンにします。</p>
+
+<p>このオプションを有効にする場合は、親ディレクトリに実行アクセス権を設定しないでください。実行アクセス権を設定すると、スクリプトが親ディレクトリで許可されていないプログラムの実行を試みる場合があります。</p>
+
+<p><strong>[既定の ASP の言語] ボックス</strong></p>
+
+<p>Active Server Pages の主要スクリプト言語を指定します。この言語は、ASP デリミタ (&lt;% および %&gt;) 内のコマンド処理に使用されます。</p>
+
+<p>選択したアプリケーションのすべてのページに別の主要スクリプト言語を選択するには、テキスト ボックスにその言語名を入力します。</p>
+
+<p>ASP には、Microsoft Visual Basic Scripting Edition (VBScript) と Microsoft JScript (JScript) の 2 種類の ActiveX スクリプト エンジンが添付されています。[既定の ASP の言語] の初期値は、vbscript です。サーバーにインストールされている ActiveX スクリプト エンジンに対応する言語であれば、どの言語名でも指定できます。スクリプト エンジンの製造元が指定する、エンジンに必要な正確なキーワードを使用してください。ASP ページで既定の言語を無効にするには、&lt;%@ LANGUAGE %&gt; ディレクティブを使用します。</p>
+
+<p><strong>[スクリプトのタイムアウト] ボックス</strong></p>
+
+<p>ASP がスクリプトの実行を許可する時間の長さを指定します。</p>
+
+<p>タイムアウト時間内にスクリプトの実行が終了しなかった場合、ASP はスクリプトを停止し、Windows イベント ログにイベントを記録します。タイムアウト時間には、1 から 2147483647 までの値を指定できます。ASP スクリプトの中でこのオプションを無効にするには、Server.ScriptTimeout メソッドを使用します。</p>
+
+<p>
+<strong>注</strong>&nbsp;&nbsp;&nbsp;[アプリケーションの設定] のプロパティは、Web サイト、仮想ディレクトリ、およびディレクトリの各レベルで設定できます。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

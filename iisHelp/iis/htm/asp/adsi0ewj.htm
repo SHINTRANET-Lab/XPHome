@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADSI オブジェクト メソッド</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_adsi_object_methods"></A><SUP></SUP>ADSI オブジェクト メソッド</H2>
+
+<P>IIS Admin オブジェクト の ADSI メソッドは、IIS の構成を制御するメタベース プロパティの値を変更します。IIS の特定の要素を構成するには、その要素に関連付けられたメタベース キーに対応する IIS Admin オブジェクトを開き、そのオブジェクトにキャッシュされているプロパティ値を変更し、さらに変更された値をオブジェクトからメタベースに格納します。</P>
+
+<P>次に示す ADSI メソッドは IIS Admin オブジェクトが公開しているもので、メタベース プロパティを設定または照会するために使用されます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=24%><B>メソッド</B></TD>
+<TD class=blue width=76%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi5ius.htm"><B>Get</B></A></TD>
+<TD width=76%>指定されたプロパティの値をオブジェクトから取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi52wj.htm"><B>GetDataPaths</B></A></TD>
+<TD width=76%>指定された開始パスに従属する、メタベース プロパティのすべての場所へのパスを取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi5ewo.htm"><B>GetEx</B></A></TD>
+<TD width=76%>単一の値または複数の値を持つプロパティの値を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi7vcf.htm"><B>GetInfo</B></A></TD>
+<TD width=76%>メタベースに存在するプロパティ値でオブジェクトを再ロードします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi5wmi.htm"><B>GetPropertyAttribObj</B></A></TD>
+<TD width=76%>プロパティの属性を含んでいるオブジェクトを取得します。このオブジェクトを使用し、ADSI プロパティの個々の属性を取得することができます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi6c38.htm"><B>Put</B></A></TD>
+<TD width=76%>プロパティに値を設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi1np4.htm"><B>PutEx</B></A></TD>
+<TD width=76%>単一の値または複数の値を持つプロパティに値を設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/adsi0elr.htm"><B>SetInfo</B></A></TD>
+<TD width=76%>オブジェクト プロパティの値をメタベースに書き込みます。</TD>
+</TR>
+</TABLE><BR>
+
+<P>GetInfo メソッドは、メタベースからオブジェクトにプロパティ値を再ロードします。IIS Admin オブジェクトを作成するか、または GetObject 関数で開くと、そのオブジェクトのプロパティは初期化されます。GetInfo メソッドを使用して、オブジェクトにキャッシュされた変更済みのプロパティ値を上書きすることで、プロパティ値をメタベースから復元できます。次に、Get または GetEx メソッドを使用してオブジェクト プロパティを取得し、その値を変数に割り当てます。さらに、Put および PutEx メソッドを使用して、オブジェクトのプロパティ値を変更します。 </P>
+
+<P>IIS Admin オブジェクトは、VBScript や JScript などの言語で使用される、<I>object.property</I> 構文もサポートしています。SetInfo メソッドを使用して、オブジェクトからメタベースにプロパティ値を書き込むことができます。SetInfo を呼び出すと、オブジェクトで変更したプロパティのみがメタベースに書き込まれます。SetInfo を呼び出さないと、変更がメタベースに反映されません。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>IIS Admin オブジェクトのプロパティを変更するためにメタベースとバインドすると、プロパティの値を変更する間はメタベースのロックが解除されます。値を取得してからメタベースに保存するまでに、ほかのプログラムがメタベースの値を変更する可能性があります。このため、プログラムが値を取得してから保存するまでの時間を最小限にする必要があります。</P>
+
+<P>ADSI プロパティはオブジェクトのみに適用され、非 ADSI プロパティはメタベースに適用されます。ADSI プロパティを取得するときは、<I>object.property</I> 構文を使用する必要があります。一方、メタベース プロパティを操作するときは、<I>object.property</I> 構文または Get と Put などの ADSI メソッドのどちらでも使用できます。</P>
+
+<H6>例</H6>
+
+<P>次の VBScript コードのサンプルは、IIS Admin オブジェクトの ADSI メソッドを使用してメタベース内の値を変更する方法、および効率を上げるためにメタベース プロパティを継承する方法を示しています。<I>MyComputer</I> は、IIS を実行するコンピュータの名前が入るプレースホルダです。</P>
+
+<PRE><CODE>&lt;% 
+  Dim WebServerObj 
+  Dim VDirObj 
+
+
+  'Open the object for the first virtual Web server root. 
+  Set WebServerObj = GetObject("IIS://<I>MyComputer</I>/W3SVC/1/Root") 
+ 
+  'Deny write access for all directories and files 
+  'for the server (except those already specifically set)
+  'by using the Put method. 
+  WebServerObj.Put "AccessWrite", False 
+ 
+  'Save the changed value to the metabase. 
+  WebServerObj.SetInfo 
+ 
+  'Get a directory subordinate to the Web server root. 
+  Set VDirObj = GetObject("IIS://<I>MyComputer</I>/W3SVC/1/Root/Vdir1/Dir1a") 
+ 
+  'Overwrite the inherited value for write access 
+  'by using the dot method equivalent to Put. 
+  VDirObj.AccessWrite = True 
+ 
+  'Save the changed value to the metabase. 
+  VDirObj.SetInfo 
+%&gt; 
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

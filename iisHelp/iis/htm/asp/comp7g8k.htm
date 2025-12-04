@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Tools コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_tools_component"></a>Tools コンポーネント</H1>
+
+<P>Tools コンポーネントは、Tools オブジェクトを作成します。Tools オブジェクトは、高度な機能を簡単に Web ページに追加するためのユーティリティを提供します。 </P>
+
+<H6>ファイル名</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=22%>tools.dll</TD>
+<TD width=78%>Tools コンポーネントです。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>oTools</I><B> = Server.CreateObject("MSWC.Tools")</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>&nbsp;パラメータ</H6>
+
+<DL>
+<DT><I>oTools</I></DT>
+
+<DD>Server.CreateObject を呼び出して作成する Tools オブジェクトの名前を指定します。<BR>
+</DD>
+
+<DT></DT>
+</DL>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>パーソナル Web サーバー for Windows<sup>&reg;</sup>&nbsp;95 または Windows&nbsp;98 では、Tools オブジェクトは、既定の仮想ディレクトリ内の Global.asa ファイルに既に組み込まれています。Tools.FileExists、Tools.ProcessForm、および Tools.Random を呼び出すことで、Tools オブジェクトを組み込みオブジェクトであるかのように使用することができます。</P>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/comp1d9v.htm">FileExists</A> </TD>
+<TD width=72%>ファイルの存在を確認します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/comp4ng2.htm">Owner</A> </TD>
+<TD width=72%>現在のユーザーがサイトの所有者かどうかを確認します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/comp2mer.htm">PluginExists</A> </TD>
+<TD width=72%>サーバー プラグインの存在を確認します (Macintosh のみ)。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/comp0gkt.htm">ProcessForm</A> </TD>
+<TD width=72%>HTML フォームを処理します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/comp8kdp.htm">Random</A> </TD>
+<TD width=72%>乱数 (整数) を生成します。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

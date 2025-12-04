@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASPError オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_asperror_object"></A><SUP></SUP>ASPError オブジェクト</H2>
+
+<P>ASPError オブジェクトは、ASP ページのスクリプト内で発生したエラー状況に関する情報を取得します。ASPError オブジェクトは、Server.GetLastError メソッドから返されます。ASPError オブジェクトは、読み取り専用のプロパティを公開します。</P>
+
+<H6>構文</H6>
+
+<P><B><B>ASPError</B>.<I>property</I></B></P>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob742t.htm"><B>ASPCode</B></A></TD>
+<TD width=50%>IIS で生成されたエラー コードを返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob8kz6.htm"><B>Number</B></A></TD>
+<TD width=50%>標準 COM エラー コードを返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob7fs5.htm"><B>Source</B></A></TD>
+<TD width=50%>可能である場合、エラーの原因となった行のソース コードを返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob33ll.htm"><B>Category</B></A></TD>
+<TD width=50%>エラーが、ASPの内部、スクリプト言語、オブジェクトのどこで発生したかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob3wbp.htm"><B>File</B></A></TD>
+<TD width=50%>エラーが発生したときに処理していた .asp ファイルの名前を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob7m1x.htm"><B>Line</B></A></TD>
+<TD width=50%>エラーを生成した .asp ファイル内の行を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob2xf2.htm"><B>Column</B></A></TD>
+<TD width=50%>エラーを生成した .asp ファイル内の列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob5pke.htm"><B>Description</B></A></TD>
+<TD width=50%>エラーの簡単な説明を返します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/vbob79ke.htm"><B>ASPDescription</B></A></TD>
+<TD width=50%>ASP 関連のエラーである場合は、エラーの詳細な説明を返します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>解説</H6>
+
+<P>IIS で .asp ファイルのコンパイル中または実行中にエラーが発生すると、IIS は 500;100 カスタム エラーを生成します。既定では、すべての Web サイトおよびアプリケーションは、既定の .asp ファイルに 500;100 カスタム エラーの処理を転送します。IIS は、500;100 カスタム エラーを生成した後、エラー状況を示す ASPError オブジェクトのインスタンスも作成します。IIS スナップインを使用して 500;100 カスタム エラーの処理用の .asp ファイルを変更する方法については、「<A HREF="../core/iiprstop.htm">ASP エラー処理を有効にする</A>」を参照してください。</P>
+
+<H6>例</H6>
+
+<P>次の例は、ファイル 500-100.asp の一部です。この例は、ASPError オブジェクトで公開されている情報を書き出す方法を示しています。</P>
+
+<PRE><CODE>&lt;%
+  Response.Write objASPError.Category
+  If objASPError.ASPCode &gt; "" Then Response.Write ", " &amp; objASPError.ASPCode
+  Response.Write " (0x" &amp; Hex(objASPError.Number) &amp; ")" &amp; "&lt;br&gt;"
+
+  Response.Write "&lt;b&gt;" &amp; objASPError.Description &amp; "&lt;/b&gt;&lt;br&gt;"
+
+  If objASPError.ASPDescription &gt; "" Then Response.Write objASPError.ASPDescription &amp; "&lt;br&gt;"
+
+  blnErrorWritten = False
+
+  ' Only show the Source if it is available and the request is from the same machine as IIS
+  If objASPError.Source &gt; "" Then
+    strServername = LCase(Request.ServerVariables("SERVER_NAME"))
+    strServerIP = Request.ServerVariables("LOCAL_ADDR")
+    strRemoteIP =  Request.ServerVariables("REMOTE_ADDR")
+    If (strServername = "localhost" Or strServerIP = strRemoteIP) And objASPError.File &lt;&gt; "?" Then
+      Response.Write objASPError.File 
+      If objASPError.Line &gt; 0 Then Response.Write ", line " &amp; objASPError.Line
+      If objASPError.Column &gt; 0 Then Response.Write ", column " &amp; objASPError.Column
+      Response.Write "&lt;br&gt;"
+      Response.Write "&lt;font style=""COLOR:000000; FONT: 8pt/11pt courier new""&gt;&lt;b&gt;"
+      Response.Write Server.HTMLEncode(objASPError.Source) &amp; "&lt;br&gt;"
+      If objASPError.Column &gt; 0 Then Response.Write String((objASPError.Column - 1), "-") &amp; "^&lt;br&gt;"
+      Response.Write "&lt;/b&gt;&lt;/font&gt;"
+      blnErrorWritten = True
+    End If
+  End If
+
+  If Not blnErrorWritten And objASPError.File &lt;&gt; "?" Then
+    Response.Write "&lt;b&gt;" &amp; objASPError.File
+    If objASPError.Line &gt; 0 Then Response.Write ", line " &amp; objASPError.Line
+    If objASPError.Column &gt; 0 Then Response.Write ", column " &amp; objASPError.Column
+    Response.Write "&lt;/b&gt;&lt;br&gt;"
+  End If
+%&gt;
+</CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob38aa.htm">Server.GetLastError</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

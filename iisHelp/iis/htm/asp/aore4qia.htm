@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsCertMapper</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iiscertmapper"></A><SUP></SUP>IIsCertMapper</H2>
+
+<P>IIsCertMapper オブジェクトは、クライアント証明書を Windows ユーザー アカウントにマップします。IIsCertMapper は ADSI オブジェクトですが、ADSI コンテナ オブジェクトではありません。ADSI コンテナ オブジェクトの詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2ek3.htm">ADSI の機能</A>」を参照してください。</P>
+
+<H6>ADsPath</H6>
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/<I>N</I>/IIsCertMapper</DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<H6>構文</H6>
+
+<P><I>varReturn</I> = <B>IIsCertMapper</B>.<I>Method</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>varReturn</I></DT>
+
+<DD>メソッドからの戻り値を受け取る変数です。<BR>
+</DD>
+
+<DT><I>Method</I></DT>
+
+<DD>選択したオブジェクト メソッドです。</DD>
+</DL>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore3mqv.htm"><B>CreateMapping</B></A></TD>
+<TD width=50%>証明書を Windows アカウントにマップします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore2s13.htm"><B>DeleteMapping</B></A></TD>
+<TD width=50%>既存の証明書マッピングを削除します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore0wvb.htm"><B>GetMapping</B></A></TD>
+<TD width=50%>既存の証明書マッピングを取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore4his.htm"><B>SetAcct</B></A></TD>
+<TD width=50%>既存の証明書マッピングの Windows アカウント文字列に新しい値を設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore5e78.htm"><B>SetEnabled</B></A></TD>
+<TD width=50%>既存の証明書マッピングを有効または無効にします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7d7p.htm"><B>SetName</B></A></TD>
+<TD width=50%>既存の証明書マッピングの名前の文字列に新しい値を設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore5msk.htm"><B>SetPwd</B></A></TD>
+<TD width=50%>既存の証明書マッピングの Windows パスワード文字列に新しい値を設定します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi0ewj.htm"><B>ADSI オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI オブジェクトの標準メソッドです。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

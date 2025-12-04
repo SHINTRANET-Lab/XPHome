@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ASP のデバッグを有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サーバー上でのデバッグを有効にし、Microsoft Script Debugger を使用可能にする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37777710">ASP のデバッグを有効にする</a></h1>
+
+<p> Microsoft Script Debugger を使用すると、ASP スクリプトのエラーを見つけることができます。Web サーバーでデバッガを使用するには、まずここで説明する手順に従ってサーバーをデバッグ用に構成する必要があります。デバッガを使ってスクリプトを調べる方法については、「<a href="../asp/iiwadbug.htm">ASP スクリプトをデバッグする</a>」および <a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target="_blank">Microsoft Scripting Technologies ホーム ページ</a>を参照してください。</p>
+
+<big>ASP のデバッグを有効にするには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li>[構成] をクリックし、[<a href="iipy_33.htm">アプリケーションのデバッグ</a>] タブをクリックします。</li>
+<li>デバッグを有効にするには、[ASP のサーバー側のスクリプトのデバッグを有効にする] チェック ボックスをオンにします。スクリプトにエラーがある場合、または ASP がスクリプト内のブレークポイントに到達すると、デバッガが起動します。</li>
+</ol>
+
+<hr class="iis" size="1"><p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

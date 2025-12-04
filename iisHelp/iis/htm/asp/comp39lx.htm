@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>コンテンツ リンク リスト ファイル</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><a name="_content_linking_list_file"></a>コンテンツ リンク リスト ファイル</H2>
+
+<P>コンテンツ リンク リスト ファイルには、一覧の各 URL に関するテキストが 1 行に 1 つずつ入ります。キャリッジ リターンまでを 1 行とします。行の各項目は、タブ文字で区切る必要があります。 </P>
+
+<P>コンテンツ リンク リスト ファイルを変更した後に、変更を有効にするには IIS サービスを再起動する必要があります。</P>
+
+<H6>構文</H6>
+
+<P><I>Web-page-URL</I> [<I>text-description</I>[<I>comment</I>]]</P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>値</H6>
+
+<DL>
+<DT><I>Web-page-URL</I></DT>
+
+<DD><I>filename </I>または <I>directory\filename</I> の形式で、Web ページの仮想 URL または相対 URL を指定します。&quot;http:&quot;、&quot;//&quot;、または &quot;\\&quot; で始まる絶対 URL はサポートされません。 GetNextURL および GetListIndex などのメソッドでは絶対 URL は処理されません。コンテンツ パスを作成するときは、衝突や無限ループが発生しないように注意してください。<BR>
+</DD>
+
+<DT><I>text-description</I></DT>
+
+<DD><I>Web-page-URL</I> を説明するテキストが入った値を指定します。<BR>
+</DD>
+
+<DT><I>comment</I></DT>
+
+<DD>コメントを指定します。この値はコンポーネントによって処理されません。</DD>
+</DL>
+
+<H6>例 </H6>
+
+<P>次に示すテキスト ファイルは、Content Linking コンポーネントで使用できる URL の一覧の例です。 </P>
+
+<P>--- NextLink.txt ---</P>
+
+<PRE><CODE>NextLink_GetListCount.asp   GetListCount Method Example.   Taken from the Docs.
+NextLink_GetListIndex.asp   GetListIndex Method Example.
+NextLink_GetNextDescription.asp   GetNextDescription Method Example.
+NextLink_GetNextURL.asp   GetNextURL Method Example.
+NextLink_GetNthDescription.asp   GetNthDescription Method Example.
+NextLink_GetNthURL.asp   GetNthURL.asp Method Example.
+NextLink_GetPreviousDescription.asp   GetPreviousDescription Method Example.
+NextLink_GetPreviousURL.asp   GetPreviousURL Method Example.
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

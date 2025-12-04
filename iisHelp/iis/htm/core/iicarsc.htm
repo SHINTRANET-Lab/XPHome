@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>証明書信頼リストを使用する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="各 Web サイトの証明機関を示す、証明書信頼リストの概念と使用方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="addingatrustedcertifcateauthority">証明書信頼リストを使用する</a></h1>
+
+<p>事前に定義された証明機関 (CA) のリストからの証明書を受け付けるようにコンピュータを構成することができます。CTL に対してクライアント証明書を自動的に検証することができます。証明書信頼リスト ウィザードを使用すると、CTL を作成および編集したり、CTL に新しいルート証明書を追加したりすることができます。</p>
+
+<P>たとえば、イントラネットの管理者は、イントラネット上の各部門の Web サイトに対して CTL の形式で信頼できる証明機関の一覧を個別に作成できます。IIS は、その部門の CTL に記載されている証明機関が発行した証明書のみを受け付けます。部門のメンバは、その部門の CTL に含まれている CA のクライアント証明書を使用してログオンすることで、自動的に認証されます。</p>
+
+<p><STRONG>注</STRONG></p>
+<ul>
+<li>最も一般的に使用されている CA ルート証明書は、IIS によって既にインストールされています。</li>
+<li>CTL は Web サイト レベルにのみ適用できます。 仮想ディレクトリやファイルには適用できません。</li>
+<li>FTP サイトでは CTL を利用できません。</li>
+</ul>
+
+
+<A NAME="H2_448396667"></A><big>コンピュータに CTL を作成するには</big>
+<ol>
+	<li>コンピュータに Administrator アカウントでログオンします。</li>
+		
+	<p><strong><font color=#0000FF>重要</font></strong>&nbsp;&nbsp;&nbsp;次の手順を行うには、Administrator アカウントでログオンする必要があります。Windows Administrators グループに属するほかのアカウントは使用できません。</p>	
+	
+	<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトのプロパティ シートを開きます。</li>
+
+	<li>[ディレクトリ セキュリティ] プロパティ シートで、[セキュリティ保護された通信] の [編集] をクリックします。</li>
+
+<p><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;[編集] ボタンは、サイトにサーバー証明書がアタッチ、つまりバインドされている場合にのみ使用できます。サーバー証明書の取得およびインストールについては、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</p>
+
+	<li>[セキュリティ保護された通信] ダイアログ ボックスで、[証明書信頼リストを有効にする] チェック ボックスをオンにして、[新規作成] をクリックします。証明書信頼リスト ウィザードに従って、CTL を作成します。</li>
+</OL>
+
+<A NAME="H2_448397537"></A><big>コンピュータの CTL を変更するには</big>
+<ol>
+	<li>Administrator アカウントでコンピュータにログオンします。</li>
+		
+	<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトのプロパティ シートを開きます。</li>
+
+	<li>[ディレクトリ セキュリティ] プロパティ シートで、[セキュリティ保護された通信] の [編集] をクリックします。</li>
+
+	<li>[セキュリティ保護された通信] ダイアログ ボックスで、変更する CTL を選択し、[編集] をクリックします。証明書信頼リスト ウィザードに従って、CTL を変更します。</li>
+</OL>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;Microsoft の証明書サービス&nbsp;2.0 を使用して証明書を発行している場合は、ルート証明書もインストールする必要があります。詳細については、Microsoft 証明書サービスのマニュアルを参照してください。</p>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</body>
+</html>

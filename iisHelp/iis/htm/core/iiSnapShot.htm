@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Metabase Snapshot Writer と NT Backup</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Metabase Snapshot Writer と NTbackup の対話方法について説明します。NTbackup を使用したメタベースの復元について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="bak">Metabase Snapshot Writer</a></h1>
+
+<h3>Metabase Snapshot Writer</h3>
+
+<p>Metabase Snapshot Writer (MSW) では、COM インターフェイスを使用して NTbackup がメタベースの安定した信頼できるバックアップを作成します。メタベースをバックアップするために NTbackup が呼び出されると、MSW は自動的に起動します。MSW では、NTbackup がバックアップを指定されているドライブ ボリュームの 1 つに metabase.bin ファイルがあるかどうかを判別し、ファイルがある場合は、RAM 内のメタベースから metabase.bin ファイルにデータをフラッシュします。ファイルがない場合は、NTbackup に対する次の呼び出しを待機します。次に、MSW では NT Backup が metabase.bin のバックアップをしている間、最大で 2 分間、新しい情報が RAM メタベースに追加されないようにし、NT Backup が完了すると、RAM 内のメタベースへの書き込みロックを解除します。次の図は、MSW の起動と機能を示しています。</p>
+
+<img src="iisnapshot.gif" alt="MSW の動作を表すグラフィック">
+
+<p class="note"><strong>注</strong>&nbsp;&nbsp;&nbsp;Metabase Snapshot Writer では、NTbackup をサポートしています。これは <a href="iiabuti.htm">IIS スナップイン</a>の [構成のバックアップ/復元] アプリケーションの一部ではありません。</p>
+
+<p><font color="#0000FF"><strong>重要</strong></font>&nbsp;&nbsp;&nbsp;NTbackup では、metabase.bin ファイルの復元時に Metabase Snapshot Writer を呼び出しません。NTbackup を使用してメタベースを復元する前に、WWW (World Wide Web Publishing) サービスを停止して IIS が metabase.bin ファイルへの書き込みを行わないようにしてください。</p>
+
+<p><strong>関連項目</strong></p>
+<ul>
+<li>NT backup の詳細については、[スタート] メニューの [ヘルプ] を選択し、キーワード  &quot;ntbackup&quot; を検索してください。</li>
+<li>WWW サービスの停止および再起動する方法の詳細については、「<a href="iicodira.htm">IIS を再起動する</a>」を参照してください。
+
+<li>メタベースの概要については、</li>「<a href="../asp/aint1aud.htm">IIS メタベースの紹介</a>」を参照してください。</li>
+<li>メタベースのバックアップの詳細については、「<a href="iitasks.htm">メタベースのバックアップ</a>」を参照してください。</li>
+<li>メタベースの復元の詳細については、「<a href="iirestore.htm">メタベースを復元する</a>」を参照してください。</li>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC, NTbackup NT Backup
+</layer></span>
+
+</font>
+</body>
+</html>

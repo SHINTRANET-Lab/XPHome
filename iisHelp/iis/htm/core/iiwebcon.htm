@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web サイト管理</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web サイトの管理についての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="websitecontent">Web サイト管理</a></h1>
+
+<p>サイトがイントラネット上にある場合でも、インターネット上にある場合でも、コンテンツを提供するときの原理は同じです。サーバー上のディレクトリに Web ファイルを置くと、ユーザーが HTTP 接続をして、そのファイルを Web ブラウザで表示できるようになります。ただし、単にサーバーにファイルを格納するだけではなく、どのようにサイトを配置するかを検討する必要があります。さらに重要なことは、サイトの展開の仕方を検討することです。現在人気のある Web サイトで、静的なページで構成されたサイトはほとんどなく、成功している Web の管理者の多くは、常に変化のある Web コンテンツを提供し続けています。</P>
+
+<P>ここでは、要求のリダイレクト方法から Web ページを動的に変更する方法まで、Web サイトのインフラ構造を管理するための基本について説明します。</p>
+
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><a href="iihtmat.htm">Web サイト管理について</a></strong>」では、Web サイトを配置し、管理するプロセスを紹介します。</li>
+<li>「<strong><a href="iihowat.htm">オーサリング ツールの選択</a></strong>」では、ニーズに合ったオーサリング ツールの選択方法の概念を説明します。</li>.
+<li>「<strong><a href="iiaspat.htm">ASP を使用して Web サイト コンテンツを管理する</a></strong>」では、Microsoft Active Server Pages (ASP) を紹介し、これを使って Web コンテンツを管理する方法を説明します。</li>
+<li>「<strong><a href="iicodirh.htm">ホーム ディレクトリを変更する</a></strong>」では、サイトの中心となるディレクトリの指定について説明します。</li>
+<li>「<strong><a href="iicodirv.htm">仮想ディレクトリを作成する</a></strong>」では、サイトへのディレクトリの追加方法について説明します。</li>
+<li>「<strong><a href="iicodirr.htm">要求をディレクトリにリダイレクトする</a></strong>」では、ブラウザの要求をほかのディレクトリに転送する方法について説明します。</li>
+<li>「<strong><a href="iicodirp.htm">要求をプログラムにリダイレクトする</a></strong>」では、ブラウザの要求をアプリケーションに転送する方法について説明します。</li>
+<li>「<strong><a href="iipswwws.htm">コンテンツの有効期限を設定する</a></strong>」では、期間が重要な意味を持つ情報に対して有効期限を設定する方法について説明します。</li>
+<li>「<strong><a href="iicodirc.htm">コンテンツの規制を使用する</a></strong>」では、ユーザーが有害な内容を避けられるようにサイトの内容を規制する方法について説明します。</li>
+<li>「<strong><a href="iicodirf.htm">Web ページにフッターを追加する</a></strong>」では、サイトの各 HTML ページに自動的にフッターを挿入する方法について説明します。</li>
+<li>「<STRONG><A HREF="iisiwelc.htm">サーバー側インクルード</A></STRONG>」では、ページが要求されてからブラウザに送られるまでに処理されるサーバー コマンドを、Web ページに挿入する方法について説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+<ul>
+<li>ASP でサーバー側スクリプトを作成する基本的な方法については、「<a href="../asp/iiwawelc.htm">Active Server Pages</a>」を参照してください。</li>
+<li>Web サイトの追加方法については、「<a href="iivrtsv.htm">Web サイトと FTP サイト</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+administer, administration, basics, simple, welcome, overview, admin, administrator, manage, manager, management, c:\, inetpub, wwwroot, url, friendly name, text name, alias, physical location, ftp, webmaster, configure, configuration, set up, setup, organize, organization, author, write, html, web, page, browser, browsers, explorer, navigator, site, notepad, frontpage, front page; homesite, hot dog, visual interdev, asp, active server pages, content, file, files, change, tree, directory, directories, folder, folders, structure, associate, link, links, home, start, default, virtual directory, vdir, v-dir, unc, access point, publish, publishing, create, creating, add, new, expire, expiration, stale, old, outdated, obsolete, previous, prior, newer, cache, browser, redirects, redirect, forward, send on,redirection, send, request, requests, different, bump, bounce, re-route, reroute, direct, address, substitute, detour, swap, rating, ratings, adult, offensive, objectionable, violence, violent, bloody, nudity, sex, sexual, porn, porno, pornography, pornographic, erotic, language, pics, platform for internet content selection, censor, inappropriate, children, kids, underage, footer, include, bottom, properties, property sheet, links, more information
+</layer></span></font>
+</body>
+</html>

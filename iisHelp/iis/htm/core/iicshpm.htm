@@ -1,0 +1,712 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>カウンタの説明</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="DESCRIPTION" content="パフォーマンスを監視するための IIS によりインストールされるすべてのカウンタの一覧を示し、その機能について説明します。カウンタはそれぞれ、帯域幅の使用、スループット、エラー、接続、キャッシングなどに分類されます。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name ="globalcounters">カウンタの説明</a></h1>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th bgcolor="#C0C0C0">オブジェクト</th>
+<th bgcolor="#C0C0C0">カウンタ</th>
+<th bgcolor="#C0C0C0">説明</th>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="ActiveFlushedEntries"><strong>Active Flushed Entries</strong></a></td>
+<td valign="top">キャッシュされたファイル ハンドルの数で、現在の転送がすべて完了すると閉じられます。IIS Global オブジェクトです。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="AnonymousUsers/sec">Anonymous Users/Sec</a></strong></td>
+<td valign="top">Web サービスを使用して匿名接続をしているユーザーの割合です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="BLOBCacheFlushes"><strong>BLOB Cache Flushes</strong></a></td>
+<td valign="top">サーバー開始後にフラッシュされた BLOB キャッシュの数です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="BLOBCacheHits"><strong>BLOB Cache Hits</strong></a></td>
+<td valign="top">BLOB キャッシュへの参照が成功した数の合計です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="BLOBCacheHits%"><strong>BLOB Cache Hits %</strong></a></td>
+<td valign="top">キャッシュ要求の全体に対して BLOB キャッシュがヒットした割合です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="BLOBCacheMisses"><strong>BLOB Cache Misses</strong></a></td>
+<td valign="top">BLOB キャッシュへの参照が失敗した数の合計です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="BytesReceived/sec">Bytes Received/Sec</a></strong></td>
+<td valign="top">アプリケーション層で、サービスがデータ バイトを受信する速度です。プロトコル ヘッダーまたは制御バイトは含まれません。</td>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="BytesSent/sec">Bytes Sent/Sec</a></strong></td>
+<td valign="top">サービスがデータ バイトを送信する速度です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="BytesTotal/sec">Bytes Total/Sec</a></strong></td>
+<td valign="top">Web サービスが転送するバイトの 1 秒あたりの総数です。これは、Bytes Sent/sec と Bytes Received/sec を合計した値です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="CGIRequests/sec">CGI Requests/Sec</a></strong></td>
+<td valign="top">Web サービスが同時に処理した CGI 要求の 1 秒あたりの数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="ConnectionAttempts/sec">Connection Attempts/Sec</a></strong></td>
+<td valign="top">Web サービスを使用して試みられた接続の割合です。&quot;インスタンス&quot; の選択には関係なく、すべての Web サイトを平均した値です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="CopyRequests/sec">Copy Requests/Sec</a></strong></td>
+<td valign="top">COPY メソッドを使用する HTTP 要求の 1 秒あたりの数です。Copy 要求は、ファイルおよびディレクトリをコピーするために使用されます。全体を計測する場合と、特定のサイトを計測する場合があります。</td>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="CurrentAnonymousUsers"><strong>Current Anonymous Users</strong></a></td>
+<td valign="top">Web サービスまたは FTP サービスを使用して匿名接続を行っている現在のユーザーの数です。匿名接続要求を拒否されたクライアントが有効な認証データを返した場合、接続は非匿名接続として数えられます。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="CurrentBLOBsCached"><strong>Current BLOBs Cached</strong></a></td>
+<td valign="top">WWW サービスおよび FTP サービスのキャッシュに現在ある BLOB 情報ブロックです。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global、Web</td>
+<td valign="top"><a name="CurrentBlockedAsyncI/ORequests"><strong>Current Blocked Async I/O Requests</strong></a></td>
+<td valign="top">帯域幅調整の設定によって一時的にブロックされている要求の、現在の数です。ブロックされた要求はバッファに保持され、タイムアウトの制限時間に達する前に利用可能な帯域幅が増えた場合は、ブロックが解除されます。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="CurrentCALCountForAuthenticatedUsers">Current CAL Count for Authenticated Users</a></strong></td>
+<td valign="top">認証された接続で Web サービスが現在同時に使用しているライセンスの数です。全体を計測する場合と、特定のサイトを計測する場合があります。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="CurrentCALCountForSSLConnections">Current CAL Count for SSL connections</a></strong></td>
+<td valign="top">SSL 接続で Web サービスが現在同時に使用しているライセンスの数です。全体を計測する場合と、特定のサイトを計測する場合があります。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="CurrentCGIRequests">Current CGI Requests</a></strong></td>
+<td valign="top">サービスが同時に処理している CGI 要求の現在の数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="CurrentConnections"><strong>Current Connections</strong></a></td>
+<td valign="top">Web サービスまたは FTP サービスを使用して現在確立されている接続の数です。この数値は、匿名ユーザーと非匿名ユーザーの接続数の合計です。&quot;インスタンス&quot; の選択には関係なく、すべての Web サイトと FTP サイトの現在の合計値です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="CurrentFileCacheMemoryUsage"><strong>Current File Cache Memory Usage</strong></a></td>
+<td valign="top">ファイル キャッシュで使用されている現在のバイト数です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="CurrentFilesCached"><strong>Current Files Cached</strong></a></td>
+<td valign="top">WWW サービスおよび FTP サービスのキャッシュに内容が含まれているファイルの現在の数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="CurrentISAPIExtensionRequests">Current ISAPI Extension Requests</a></strong></td>
+<td valign="top">サービスが同時に処理している ISAPI 拡張要求の現在の数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="CurrentNonAnonymousUsers"><strong>Current NonAnonymous Users</strong></a></td>
+<td valign="top">Web サービスまたは FTP サービスを使用して非匿名接続を行っている現在のユーザーの数です。匿名接続要求を拒否されたクライアントが有効な認証データを返した場合、接続は非匿名接続として数えられます。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="CurrentURIsCached"><strong>Current URIs Cached</strong></a></td>
+<td valign="top">WWW サービスおよび FTP サービスのキャッシュに現在ある URI 情報ブロックです。</td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="DebuggingRequests"><strong>Debugging Requests</strong></a></td>
+<td valign="top">デバッグ ドキュメント要求の数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="DeleteRequests/sec">Delete Requests/Sec</a></strong></td>
+<td valign="top">DELETE メソッドを使用する HTTP 要求の 1 秒あたりの数です。</td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="ErrorsDuringScriptRuntime"><strong>Errors During Script Runtime</strong></a></td>
+<td valign="top">実行時エラーにより失敗した要求の数です。</td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="ErrorsFromASPPreprocessor"><strong>Errors From ASP Preprocessor</strong></a></td>
+<td valign="top">プリプロセッサ エラーにより失敗した要求の数です。</td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="ErrorsFromScriptCompiler"><strong>Errors From Script Compiler</strong></a></td>
+<td valign="top">スクリプト コンパイル エラーにより失敗した要求の総数です。</td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="Errors/Sec"><strong>Errors/Sec</strong></a></td>
+<td valign="top">1 秒あたりのエラーの数です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top">
+<a name="FileCacheFlushes"><strong>File Cache Flushes</strong></a></td>
+<td valign="top">サーバー開始後にフラッシュされたファイル キャッシュの数です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="FileCacheHits"><strong>File Cache Hits</strong></a></td>
+<td valign="top">ファイル キャッシュへの参照が成功した数の合計です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="FileCacheHits%"><strong>File Cache Hits %</strong></a></td>
+<td valign="top">キャッシュ要求の全体に対してファイル キャッシュがヒットした割合です。</td>
+</tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="FileCacheMisses"><strong>File Cache Misses</strong></a></td>
+<td valign="top">ファイル キャッシュへの参照が失敗した数の合計です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="FilesReceived/sec">Files Received/Sec</a></strong></td>
+<td valign="top">サービスの開始後に、Web サービスが受信した (サービスにアップロードされた) 1 秒あたりのファイル数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="FilesSent/sec">Files Sent/Sec</a></strong></td>
+<td valign="top">サービスの開始後に、Web サービスが送信した (サービスからダウンロードされた) 1 秒あたりのファイル数です。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="Files/sec">Files/Sec</a></strong></td>
+<td valign="top">Web サービスの開始後に、サーバーが転送した 1 秒あたりのファイル数です。</td>
+</tr>
+
+<tr>
+<td valign="top">FTP</td>
+<td valign="top"><strong>FTP Service Uptime</strong></td><td valign="top">サービスまたはインスタンスが実行されている秒数です。サーバーまたはインスタンスが停止している場合は &quot;0&quot; に戻ります。一時停止によるこのカウンタへの影響はありません。このことを、Web サービスの &quot;サービス アップタイム&quot; と呼びます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="GetRequests/sec">Get Requests/Sec</a></strong></td>
+<td valign="top">GET メソッドを使用する HTTP 要求の 1 秒あたりの数です。GET 要求は、普通は基本的なファイルの取得またはイメージ マップに使用しますが、フォームにも使用できます。</td>
+</tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="HeadRequests/sec">Head Requests/Sec</a></strong></td>
+<td valign="top">HEAD メソッドを使用する HTTP 要求の 1 秒あたりの数です。HEAD 要求は、一般的に、クライアントが既に自分の手元にあるドキュメントを更新する必要があるかどうかを知るために、ドキュメントの状態を照会していることを示しています。</td>
+</tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="InMemoryCacheHitRate">In Memory Cache Hit Rate</a></strong></td><td valign="top">メモリにキャッシュされている ASP テンプレートで検出された要求の割合です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="InMemoryTemplates">In Memory Templates</a></strong></td><td valign="top">メモリにキャッシュされている ASP テンプレートの総数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="ISAPIExtensionRequests/sec">ISAPI Extension Requests/Sec</a></strong></td><td valign="top">Web サービスが同時に処理した ISAPI 拡張要求の 1 秒あたりの数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="LockRequests/sec">Lock Requests/Sec</a></strong></td><td valign="top">LOCK メソッドを使用する HTTP 要求の 1 秒あたりの数です。Lock 要求はあるユーザーのためにファイルをロックして、そのユーザーだけにファイルの変更を許可します。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="LockedErrors/sec"><strong>Locked Errors/Sec</strong></a></td><td valign="top">要求されたドキュメントがロックされていたためにサーバーが処理できなかった要求の、1 秒あたりの数です。普通、この種のエラーは、HTTP エラー コード 423 としてクライアントに通知されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="LogonAttempts/sec"><strong>Logon Attempts/Sec</strong></a></td><td valign="top">Web サービスを使用して試みられたログオンの割合です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="MaximumAnonymousUsers"><strong>Maximum Anonymous Users</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスを使用して同時に匿名接続を確立したユーザーの最大数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="MaximumCALCountForAuthenticatedUsers"><strong>Maximum CAL Count for Authenticated Users</strong></a></td><td valign="top">認証された接続で Web サービスが同時に使用するライセンスの最大数です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="MaximumCALCountForSSLConnections"><strong>Maximum CAL Count for SSL connections</strong></a></td><td valign="top">SSL 接続で Web サービスが同時に使用するライセンスの最大数です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="MaximumCGIRequests">Maximum CGI Requests</a></strong></td><td valign="top">サービスの開始後に、サービスが同時に処理した CGI 要求の最大数です。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="MaximumConnections"><strong>Maximum Connections</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスを使用して同時に確立した接続の最大数です。&quot;インスタンス&quot; の選択には関係なく、すべての Web サイトと FTP サイトの最大値を示します。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="MaximumFileCacheMemoryUsage"><strong>Maximum File Cache Memory Usage</strong></a></td><td valign="top">ファイル キャッシュで使用されるバイトの最大数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="MaximumISAPIExtensionRequests">Maximum ISAPI Extension Requests</a></strong></td><td valign="top">サービスの開始後に、サービスが同時に処理した ISAPI 拡張要求の最大数です。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="MaximumNonAnonymousUsers"><strong>Maximum NonAnonymous Users</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスを使用して同時に非匿名接続を確立したユーザーの最大数です。匿名接続要求を拒否されたクライアントが有効な認証データを返した場合、接続は非匿名接続として数えられます。</td></tr>
+
+<tr>
+<td valign="top">IIS Global、Web</td>
+<td valign="top"><a name="MeasuredAsyncI/OBandwidthusage"><strong>Measured Async I/O Bandwidth usage</strong></a></td><td valign="top">Web サーバーが送受信した 1 分あたりの平均のバイト数です。これは、サーバー上のユーザー トラフィックの総量を判断する基準です。</td></tr>
+
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top"><strong><a name="MemoryAllocated">Memory Allocated</a></strong></td><td valign="top">Active Server Pages によって現在割り当てられているメモリの総量 (バイト) です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="MkcolRequests/sec"><strong>Mkcol Requests/Sec</strong></a></td><td valign="top">MKCOL メソッドを使用する HTTP 要求の 1 秒あたりの数です。Mkcol 要求は、サーバー上でディレクトリを作成するために使用されます。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="MoveRequests/sec"><strong>Move Requests/Sec</strong></a></td><td valign="top">MOVE メソッドを使用する HTTP 要求の 1 秒あたりの数です。Move 要求は、ファイルおよびディレクトリを移動するために使用されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><a name="NonAnonymousUsers/sec"><strong>NonAnonymous Users/Sec</strong></a></td><td valign="top">Web サービスを使用して非匿名接続をしているユーザーの割合です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="NotFoundErrors/sec">Not Found Errors/Sec</a></strong></td><td valign="top">要求されたドキュメントが検出されなかったためにサーバーが処理できなかった要求の、1 秒あたりの数です。普通、この種のエラーは、HTTP エラー コード 404 としてクライアントに通知されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="OptionsRequests/sec">Options Requests/Sec</a></strong></td><td valign="top">OPTIONS メソッドを使用する HTTP 要求の 1 秒あたりの数です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="OtherRequestMethods/sec">Other Request Methods/Sec</a></strong></td><td valign="top">GET、POST、PUT、DELETE、TRACE、または HEAD メソッドを使わずに行われた HTTP 要求の、1 秒あたりの数です。LINK メソッドまたはゲートウェイ アプリケーションがサポートするほかのメソッドを含む場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="PostRequests/sec">Post Requests/Sec</a></strong></td><td valign="top">POST メソッドを使用する HTTP 要求の 1 秒あたりの数です。普通、POST メソッドはフォームまたはゲートウェイの要求に使用されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="PropfindRequests/sec">Propfind Requests/Sec</a></strong></td><td valign="top">PROPFIND メソッドを使用する HTTP 要求の 1 秒あたりの数です。Propfind 要求は、ファイルおよびディレクトリのプロパティ値を取得します。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="ProppatchRequests/sec">Proppatch Requests/Sec</a></strong></td><td valign="top">PROPPATCH メソッドを使用する HTTP 要求の 1 秒あたりの数です。Proppatch 要求は、ファイルおよびディレクトリのプロパティ値を設定します。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="PutRequests/sec">Put Requests/Sec</a></strong></td><td valign="top">PUT メソッドを使用する HTTP 要求の 1 秒あたりの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestBytesInTotal"><strong>Request Bytes In Total</strong></a></td><td valign="top">すべての要求の合計サイズ (バイト) です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestBytesOutTotal"><strong>Request Bytes Out Total</strong></a></td><td valign="top">クライアントに送信されたすべての応答の合計サイズ (バイト) です。標準 HTTP 応答ヘッダーは含みません。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestExecutionTime"><strong>Request Execution Time</strong></a></td><td valign="top">直前の要求を実行するためにかかった時間 (ミリ秒) です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestWaitTime"><strong>Request Wait Time</strong></a></td><td valign="top">直前の要求がキューに入っていた時間 (ミリ秒) です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsDisconnected"><strong>Requests Disconnected</strong></a></td><td valign="top">通信エラーのために切断された要求の数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsExecuting"><strong>Requests Executing</strong></a></td><td valign="top">現在実行している要求の数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsFailedTotal"><strong>Requests Failed Total</strong></a></td><td valign="top">エラー、認証エラー、および拒否により失敗した要求の総数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsNotAuthorized"><strong>Requests Not Authorized</strong></a></td><td valign="top">アクセス権が不十分なために失敗した要求の数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsNotFound"><strong>Requests Not Found</strong></a></td><td valign="top">ファイルが見つからなかった要求の数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsQueued"><strong>Requests Queued</strong></a></td><td valign="top">キューからのサービスを待っている要求の数です。 </td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsRejected"><strong>Requests Rejected</strong></a></td><td valign="top">処理に必要なリソースが不足していたために実行されなかった要求の総数です。</td></tr>
+ 
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsSucceeded"><strong>Requests Succeeded</strong></a></td><td valign="top">正常に実行された要求の数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsTimedOut"><strong>Requests Timed Out</strong></a></td><td valign="top">タイム アウトした要求の数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="RequestsTotal"><strong>Requests Total</strong></a></td><td valign="top">サービス開始後の要求の総数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><a name="Requests/Sec"><strong>Requests/Sec</strong></a></td><td valign="top">1 秒間に実行された要求の数です。 </td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="ScriptEngineCache">Script Engines Cached</a></strong></td><td valign="top">キャッシュ内のスクリプト エンジンの数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="SearchRequests/sec">Search Requests/Sec</a></strong></td><td valign="top">MS-SEARCH メソッドを使用する HTTP 要求の 1 秒あたりの数です。Search 要求は、サーバーへの照会に使用され、クライアントが提示する一連の条件に一致するリソースを検出します。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="ServiceUptime">Service Uptime</a></strong></td><td valign="top">サービスまたはインスタンスが実行されている秒数です。サーバーまたはインスタンスが停止している場合は &quot;0&quot; に戻ります。一時停止によるこのカウンタへの影響はありません。このことを、FTP サービスの &quot;FTP サービス アップタイム&quot; と呼びます。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="SessionDuration">Session Duration</a></strong></td><td valign="top">直前のセッションが持続した時間 (ミリ秒) です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="SessionsCurrent">Sessions Current</a></strong></td><td valign="top">サービスされているセッションの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="SessionsTimedOut">Sessions Timed Out</a></strong></td><td valign="top">タイム アウトしたセッションの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="SessionsTotal">Sessions Total</a></strong></td><td valign="top">サービス開始後のセッションの総数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TemplateCacheHitRate">Template Cache Hit Rate</a></strong></td><td valign="top">(メモリおよびディスクの) ASP テンプレート キャッシュでヒットした要求の割合です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TemplateNotifications">Template Notifications</a></strong></td><td valign="top">変更通知により、(メモリおよびディスクの) キャッシュ内で無効になったテンプレートの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TemplatesCached">Templates Cached</a></strong></td><td valign="top">メモリおよびディスクでキャッシュされている ASP テンプレートの総数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global、Web</td>
+<td valign="top"><a name="TotalAllowedAsyncI/ORequests"><strong>Total Allowed Async I/O Requests</strong></a></td><td valign="top">サービスの開始後に、Web サービスと FTP サービスが許可したユーザー要求の数です。帯域幅を調整すると、許可されるユーザー要求の数は制限されます。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="TotalAnonymousUsers"><strong>Total Anonymous Users</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスを使用して匿名接続を確立したユーザーの総数です。匿名接続要求を拒否されたクライアントが有効な認証データを返した場合、接続は非匿名接続として数えられます。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="TotalBLOBsCached"><strong>Total BLOBs Cached</strong></a></td><td valign="top">WWW サービスと FTP サービスでこれまでにキャッシュに追加された BLOB 情報ブロックの総数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global、Web</td>
+<td valign="top"><a name="TotalBlockedAsyncI/ORequests"><strong>Total Blocked Async I/O Requests</strong></a></td><td valign="top">サービスの開始後に、帯域幅調整の設定によって一時的にブロックされた要求の総数です。ブロックされた要求はバッファに保持され、タイムアウトの制限時間に達する前に利用可能な帯域幅が増えた場合は、ブロックが解除されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalCGIRequests">Total CGI Requests</a></strong></td><td valign="top">サービスの開始後に実行された Common Gateway Interface (CGI) 要求の総数です。CGI 要求は、独自のゲートウェイ実行可能ファイル (.exe) であり、インストールしてフォーム処理やほかの動的データ ソースを追加できます。CGI 要求は、サーバー上にプロセスを生成しますが、このプロセスはサーバーのリソースを大量に使用する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="TotalConnectionAttempts"><strong>Total Connection Attempts</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスへの接続を試みた回数の合計です。&quot;インスタンス&quot; の選択には関係なく、すべての Web サイトと FTP サイトの合計値を示します。<br>この数には、TCP (トランスポート) 層または IP (ネットワーク) 層で失敗した接続は含まれません。すべての接続の試みを監視するには、TCP パフォーマンス オブジェクトの Connection カウンタを使用します。このオブジェクトの取得と表示については、『Windows&nbsp;2000 リソース キット』を参照してください。現在アクティブ状態の接続を監視するには、<strong>Current Connections</strong> を使用します。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalCopyRequests">Total Copy Requests</a></strong></td><td valign="top">サービスの開始後からの、COPY メソッドを使用した HTTP 要求の総数です。Copy 要求は、ファイルおよびディレクトリをコピーするために使用されます。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalCountOfFailedCALRequestsForAuthenticatedUsers">Total Count of failed CAL Requests for Authenticated Users</a></strong></td><td valign="top">認証されたユーザーがライセンスを使用できないために失敗した HTTP 要求の数です。カウントは、サービス開始後からの合計です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalCountOfFailedCALRequestsForSSLConnections">Total Count of Failed CAL Requests for SSL connections</a></strong></td><td valign="top">SSL 接続がライセンスを使用できないために失敗した HTTP 要求の総数です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalDeleteRequests">Total Delete Requests</a></strong></td><td valign="top">DELETE メソッドを使用する HTTP 要求の数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="TotalFilesCached"><strong>Total Files Cached</strong></a></td><td valign="top">WWW サービスと FTP サービスでこれまでにその内容がキャッシュに追加されたファイルの総数です。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="TotalFilesReceived">Total Files Received</a></strong></td><td valign="top">サービスの開始後に、Web サービスが受信したファイルの総数です。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="TotalFilesSent">Total Files Sent</a></strong></td><td valign="top">サービスの開始後に、Web サービスが送信したファイルの総数です。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><strong><a name="TotalFilesTransferred">Total Files Transferred</a></strong></td><td valign="top">サービスの開始後に、Web サービスが転送したファイルの総数です。Total Files Transferred は、Files Sent と Files Received を合計した値です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="TotalFlushedBLOBs"><strong>Total Flushed BLOBs</strong></a></td><td valign="top">サービスの開始後に、キャッシュから削除された BLOB 情報ブロックの総数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="TotalFlushedFiles"><strong>Total Flushed Files</strong></a></td><td valign="top">サービスの開始後に、キャッシュから削除されたファイル ハンドルの総数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="TotalFlushedURIs"><strong>Total Flushed URIs</strong></a></td><td valign="top">サービスの開始後に、キャッシュから削除された URI 情報ブロックの総数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalGetRequests">Total Get Requests</a></strong></td><td valign="top">サービスが受け取った HTTP GET 要求の総数です。GET 要求は、普通は基本的なファイルの取得またはイメージ マップに使用しますが、フォームにも使用できます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalHeadRequests">Total Head Requests</a></strong></td><td valign="top">サービスが受け取った HTTP HEAD 要求の総数です。HEAD 要求は、一般的に、クライアントが既に自分の手元にあるドキュメントを更新する必要があるかどうかを知るために、ドキュメントの状態を照会していることを示しています。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalISAPIExtensionRequests">Total ISAPI Extension Requests</a></strong></td><td valign="top">サービスが受け取った HTTP ISAPI 拡張要求の総数です。ISAPI 拡張要求は、独自のゲートウェイ ダイナミックリンク ライブラリ (DLL) であり、インストールしてフォーム処理やほかの動的データ ソースを追加できます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalLockRequests">Total Lock Requests</a></strong></td><td valign="top">サービスの開始後からの、LOCK メソッドを使用した HTTP 要求の総数です。Lock 要求はあるユーザーのためにファイルをロックして、そのユーザーだけにファイルの変更を許可します。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalLockedErrors">Total Locked Errors</a></strong></td><td valign="top">要求されたドキュメントがロックされていたために、サーバーが処理できなかった要求の総数です。普通、この種のエラーは、HTTP エラー コード 423 としてクライアントに通知されます。カウントは、サービス開始後からの合計です。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="TotalLogonAttempts"><strong>Total Logon Attempts</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスへのログオンが成功した総数です。失敗したログオンは含まれません。接続に成功して、ログオンに失敗した回数を計算するには、Total Connection Attempts の値から Total Logon Attempts の値を引きます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalMethodRequests">Total Method Requests</a></strong></td><td valign="top">HTTP の GET、POST、PUT、DELETE、TRACE、HEAD およびほかのメソッドを使用する要求の総数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalMethodRequests/sec">Total Method Requests/Sec</a></strong></td><td valign="top">GET、POST、PUT、DELETE、TRACE、または HEAD メソッドを使用する HTTP 要求の 1 秒あたりの数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalMkcolRequests">Total Mkcol Requests</a></strong></td><td valign="top">サービスの開始後からの、MKCOL メソッドを使用した HTTP 要求の総数です。Mkcol 要求は、サーバー上でディレクトリを作成するために使用されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalMoveRequests">Total Move Requests</a></strong></td><td valign="top">サービスの開始後からの、MOVE メソッドを使用した HTTP 要求の総数です。Move 要求は、ファイルおよびディレクトリを移動するために使用されます。</td></tr>
+
+<tr>
+<td valign="top">Web、FTP</td>
+<td valign="top"><a name="TotalNonAnonymousUsers"><strong>Total NonAnonymous Users</strong></a></td><td valign="top">サービスの開始後に、Web サービスまたは FTP サービスを使用して非匿名接続を確立したユーザーの総数です。匿名接続要求を拒否されたクライアントが有効な認証データを返した場合、接続は非匿名接続として数えられます。</td></tr>
+  
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalNotFoundErrors">Total Not Found Errors</a></strong></td><td valign="top">要求されたドキュメントが検出されなかったために Web サービスが処理できなかった要求の数です。普通、この種のエラーは、HTTP エラー コード 404 としてクライアントに通知されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalOptionsRequests">Total Options Requests</a></strong></td><td valign="top">サービスの開始後からの、OPTIONS メソッドを使用した HTTP 要求の総数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalOtherRequestMethods">Total Other Request Methods</a></strong></td><td valign="top">GET、POST、PUT、DELETE、TRACE、または HEAD の各メソッドを使用しない HTTP 要求の総数です。LINK メソッドまたはゲートウェイ アプリケーションがサポートするほかのメソッドを含む場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalPostRequests">Total Post Requests</a></strong></td><td valign="top">POST メソッドを使用する HTTP 要求の数です。普通、POST 要求は、フォームまたはゲートウェイの要求に使用されます。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalPropfindRequests">Total Propfind Requests</a></strong></td><td valign="top">サービスの開始後からの、PROPFIND メソッドを使用した HTTP 要求の総数です。Propfind 要求は、ファイルおよびディレクトリのプロパティ値を取得します。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalProppatchRequests">Total Proppatch Requests</a></strong></td><td valign="top">サービスの開始後からの、PROPPATCH メソッドを使用した HTTP 要求の総数です。Proppatch 要求は、ファイルおよびディレクトリのプロパティ値を設定します。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalPutRequests">Total Put Requests</a></strong></td><td valign="top">PUT メソッドを使用する HTTP 要求の数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global、Web</td>
+<td valign="top"><a name="TotalRejectedAsyncI/ORequests"><strong>Total Rejected Async I/O Requests</strong></a></td><td valign="top">サービスの開始後に、帯域幅の設定により拒否されたユーザー要求の総数です。ブロックされた要求とは異なり、拒否された要求はバッファには保持されません。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalSearchRequests">Total Search Requests</a></strong></td><td valign="top">サービスの開始後からの、MS-SEARCH メソッドを使用した HTTP 要求の総数です。Search 要求は、サーバーへの照会に使用され、クライアントが提示する一連の条件に一致するリソースを検出します。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalTraceRequests">Total Trace Requests</a></strong></td><td valign="top">TRACE メソッドを使用する HTTP 要求の数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TotalUnlockRequests">Total Unlock Requests</a></strong></td><td valign="top">サービスの開始後からの、UNLOCK メソッドを使用した HTTP 要求の総数です。Unlock 要求は、ファイルのロックを解除するために使用されます。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="TotalURIsCached"><strong>Total URIs Cached</strong></a></td><td valign="top">WWW サービスと FTP サービスでこれまでにキャッシュに追加された URI 情報ブロックの総数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="TraceRequests/sec">Trace Requests/Sec</a></strong></td><td valign="top">TRACE メソッドを使用する HTTP 要求の 1 秒あたりの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TransactionsAborted">Transactions Aborted</a></strong></td><td valign="top">中止されたトランザクションの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TransactionsCommitted">Transactions Committed</a></strong></td><td valign="top">コミットされたトランザクションの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TransactionsPending">Transactions Pending</a></strong></td><td valign="top">処理中のトランザクションの数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="TransactionsTotal">Transactions Total</a></strong></td><td valign="top">サービス開始後のトランザクションの総数です。</td></tr>
+
+<tr>
+<td valign="top">ASP</td>
+<td valign="top"><strong><a name="Transactions/Sec">Transactions/Sec</a></strong></td><td valign="top">開始したトランザクションの 1 秒あたりの数です。</td></tr>
+
+<tr>
+<td valign="top">Web</td>
+<td valign="top"><strong><a name="UnlockRequests/sec">Unlock Requests/Sec</a></strong></td><td valign="top">UNLOCK メソッドを使用する HTTP 要求の 1 秒あたりの数です。Unlock 要求は、ファイルのロックを解除するために使用されます。全体を計測する場合と、特定のサイトを計測する場合があります。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="URICacheFlushes"><strong>URI Cache Flushes</strong></a></td><td valign="top">サーバー開始後にフラッシュされた URI キャッシュの数です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="URICacheHits"><strong>URI Cache Hits</strong></a></td><td valign="top">URI キャッシュへの参照が成功した数の合計です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="URICacheHits%"><strong>URI Cache Hits %</strong></a></td><td valign="top">キャッシュ要求の全体に対して URI キャッシュがヒットした割合です。</td></tr>
+
+<tr>
+<td valign="top">IIS Global</td>
+<td valign="top"><a name="URICacheMisses"><strong>URI Cache Misses</strong></a></td><td valign="top">URI キャッシュへの参照が失敗した数の合計です。</td></tr>
+</table>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>

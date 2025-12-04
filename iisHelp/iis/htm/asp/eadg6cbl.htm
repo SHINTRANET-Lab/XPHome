@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>データをキャッシュする</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_caching_data"></A><SUP></SUP>データをキャッシュする</H3>
+
+<P>ASP ページにアクセスしてきたクライアントが必要とする情報を提供する方法には、基本的に次の 2 種類があります。
+
+<UL type=disc>
+	<LI>データベースに保持されているデータなど、サーバー リソースから得た情報を渡す</li>
+
+	<LI>アプリケーションの内部から得た情報を渡す</li>
+</UL>
+
+<P>アプリケーションの外部にあるリソースからデータを取得する場合、処理に必要な手順が増えるので、アプリケーション スペース内部からデータを生成するよりも長い時間がかかります。</P>
+
+<P>これからブラウザに送信するデータが、過去に行われた要求によって既に準備されていた場合、このデータがキャッシュに格納されていれば、アプリケーションでより高速にデータを取得することができます。このようなキャッシュ方法は、&quot;出力キャッシング&quot; と呼ばれます。異なる多数の要求に対して、同じ書式で同じデータを返す場合、出力キャッシングが特に適しています。たとえば、入力フォームの開発に共通する作業の 1 つに、ドロップダウン リスト ボックスのリスト内容として、一定で変化しないデータを集めることがあります。このような一定不変のデータに対する更新は、自動的にフォームに反映されるので、HTML ページへ直接エントリを書き込むよりも適しています。</P>
+
+<P>次のスクリプトは、出力キャッシングの例です。この例では、getSportsListBox 関数により、一定不変のデータを使用してリスト ボックスが作成されます。このリスト ボックスはアプリケーション スペースに追加されるため、クライアントが個別にリスト ボックスに値を入力する場合に、より速く、クライアントからリスト ボックスにアクセスできます。この例では、DSN "Sports" は同じサーバーに定義されているものと仮定しています。</P>
+
+<PRE><CODE>&lt;%@ LANGUAGE=JavaScript %&gt;&lt;HTML&gt;&lt;BODY&gt;
+&lt;FORM METHOD=post&gt;
+
+What is your favorite sport? &lt;%= getSportsListBox() %&gt;
+&lt;P&gt;
+
+&lt;INPUT TYPE=submit&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+&lt;%
+
+function getSportsListBox()
+{
+  SportsListBox = Application("SportsListBox")
+  If (SportsListBox != null) return SportsListBox;
+  crlf = String.fromCharCode(13, 10)
+  SportsListBox = "&lt;select name=Sports&gt;" + crlf;
+  SQL = "SELECT SportName FROM Sports ORDER BY SportName";
+  cnnSports = Server.CreateObject("ADODB.Connection");
+  cnnSports.Open("Sports", "WebUser", "WebPassword");
+  rstSports = cnnSports.Execute(SQL);
+  fldSportName = rstSports("SportName");
+  While (!rstSports.EOF)
+{    SportsListBox = SportsListBox + "  &lt;option&gt;" +      fldSportName + "&lt;/option&gt;" + crlf;    rstSports.MoveNext();  }
+  SportsListBox = SportsListBox + "&lt;/select&gt;"
+  Application("SportsListBox") = SportsListBox
+  return SportsListBox;
+}
+%&gt;
+ </CODE></PRE>
+
+<P>場合によっては、アプリケーションによって受信された、同じデータに対する複数の異なる要求ごとに、データの表示方法を変更する必要があります。このような場合は、&quot;入力キャッシング&quot; を使用します。入力キャッシングでは、データは保存されますが、表示形式は保存されません。入力キャッシングを実行するには、VBScript に用意されている Dictionary オブジェクト、または ADO レコードセットを使用して、データをキャッシュします。</P>
+
+<P>次の例では、アプリケーションに コネクションレス レコードセットを追加することにより、データをキャッシュしています。この後、アプリケーション スペース内の ASP スクリプトにより、データベースからデータが取得されるのではなく、レコードセットがアクセスされるようになります。次の 2 つの ASP スクリプトは、このテクニックを使用した例です。</P>
+
+<P>Global.asa からの引用</P>
+
+<PRE><CODE>&lt;OBJECT ID=rsCustomers PROGID="ADODB.Recordset" RUNAT="Server" SCOPE="Application"&gt;
+&lt;/OBJECT&gt;&lt;!--METADATA TYPE="TypeLib" FILE = "C:\Program Files\Common Files\system\ado\msado15.dll"
+--&gt;
+
+&lt;%  SQL = "SELECT CompanyName, City FROM Customers"  Cnn = "DSN=AdvWorks"  rsCustomers.CursorLocation = adUseClient  rsCustomers.Open SQL, Cnn, adOpenStatic, AdLockReadOnly  rsCustomers.ActiveConnection = Nothing
+  Set myCustomers = Application("rsCustomers").Clone  Set CompanyName = myCustomers("CompanyName")  Set City        = myCustomers("City")
+  Do Until myCustomers.EOF%&gt;&lt;B&gt;&lt;%= CompanyName %&gt;&lt;/B&gt; is located in &lt;B&gt;&lt;%= City %&gt;&lt;/B&gt;.&lt;P&gt;
+&lt;%
+    myCustomers.MoveNext
+  Loop
+%&gt;
+ </CODE></PRE>
+
+<P>このアプリケーションの Global.asa ファイルにより、レコードセットが作成され、アプリケーション スペースへ追加されます。次に、ASP スクリプトによりレコードセットにレコードが読み込まれ、ActiveConnection プロパティが Nothing に設定されて、コネクションレスになります。続けて、このレコードセットが複製されて、値がすべて繰り返されます。これは、データベース本体にアクセスするより、ずっと高速です。このテクニックはレコードセットにレコードを読み込むのに使用されるデータが比較的安定しているとわかっている場合にのみ適しています。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html dir=LTR><hEAD><TITLE>ブラウザにコンテンツを送信する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<META NAME="DESCRIPTION" CONTENT="コンテンツのバッファなど、ブラウザに返される応答を制御する方法について説明します。ブラウザからサーバーへのファイルの送信に関しての概要も説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37769139">ブラウザにコンテンツを送信する</a></h1>
+
+
+<p>ASP ページのスクリプトが処理されると、ASP のデリミタまたは &lt;SCRIPT&gt; タグで囲まれていないテキストまたはグラフィックスは、そのままブラウザに返されます。<strong>Response</strong> オブジェクトを使用して、ブラウザに明示的にコンテンツを送信することもできます。</p>
+
+<h2><a name="H2_37769829">コンテンツを送信する</a></h2>
+
+<p>ASP のデリミタの中から、またはプロシージャからブラウザにコンテンツを送信するには、<strong>Response</strong> オブジェクトの <strong>Write</strong> メソッドを使用します。たとえば、次のステートメントは、以前にページを利用したことがあるかどうかに応じて、異なるメッセージをユーザーに送信します。</p>
+
+<pre>&lt;% 
+  If blnFirstTime Then 
+    Response.Write &quot;&lt;H3 ALIGN=CENTER&gt;Welcome to the Overview Page.&lt;/H3&gt;&quot;
+  Else
+    Response.Write &quot;&lt;H3 ALIGN=CENTER&gt;Welcome Back to the Overview Page.&lt;/H3&gt;&quot; 
+  End If 
+%&gt;</pre>
+
+<p>プロシージャの外では、ユーザーにコンテンツを送信するために <strong>Response.Write</strong> を使用する必要はありません。スクリプトのデリミタで囲まれていないコンテンツはそのままブラウザに送信され、適切に書式が設定されて表示されます。たとえば、次のスクリプトの表示結果は前のスクリプトと同じになります。</p>
+
+<pre>&lt;H3 ALIGN=CENTER&gt; 
+&lt;% If blnFirstTime Then %&gt; 
+  Welcome to the Overview Page. 
+&lt;% Else %&gt; 
+  Welcome Back to the Overview Page. 
+&lt;% End If %&gt; 
+&lt;/H3&gt;</pre>
+
+<p>出力を一度だけ送信すればよい場合や、既存の HTML テキストにステートメントを追加する方が簡単な場合は、スクリプト コマンドと HTML を混在させて記述することができます。デリミタでステートメントを分割しない場合、またはブラウザに返す文字列を作成する場合は、<strong>Response.Write</strong> を使用します。たとえば、次のように記述すると、HTML フォームから送信された値を表に入れて表示することができます。</p>
+
+<pre>Response.Write &quot;&lt;TR&gt;&lt;TD&gt;&quot; &amp; Request.Form(&quot;FirstName&quot;) _
+ &amp; &quot;&lt;/TD&gt;&lt;TD&gt;&quot; &amp; Request.Form(&quot;LastName&quot;) &amp; &quot;&lt;/TD&gt;&lt;/TR&gt;&quot;</pre>
+
+<p><strong>Request.Form</strong> は、HTML フォームから送信された値を返します (「<a href="iiwaform.htm">ユーザーからの入力を処理する</a>」を参照してください)。</P>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;アンパサンド (&amp) は、VBScript で文字列を連結するための文字です。アンダスコア (_) は、VBScript で行を続けるための文字です。</p>
+
+
+<h2><a name="H2_37772109">コンテンツ タイプを設定する</a></h2>
+
+<p>Web サーバーは、ブラウザにファイルを返すときに、ファイルに含まれているコンテンツの種類をブラウザに知らせます。ブラウザはこの情報に基づいて、ファイルをそのまま表示できるかどうか、またはほかのアプリケーションを呼び出す必要があるかどうかを判断します。たとえば、Web サーバーが Microsoft Excel のワークシートを返す場合、ブラウザではページを表示するのに Microsoft Excel を起動する必要があります。Web サーバーは、ファイル名拡張子を &quot;MIME&quot; (Multipurpose Internet Mail Extensions) のタイプの一覧にマップすることによりファイル タイプを認識します。たとえば、Microsoft Excel を起動するには、ブラウザは application/vnd.ms-excel MIME タイプを認識する必要があります。</p>
+
+<p><strong>Response</strong> オブジェクトの <A HREF="vbob67ol.htm"><strong>ContentType</strong></A> プロパティを使用して、ユーザーに送信するコンテンツの HTTP コンテンツ タイプ文字列を設定できます。たとえば、次のコマンドはチャンネル定義のためのコンテンツ タイプを設定します。</p>
+
+<pre>&lt;% Response.ContentType = &quot;application/x-cdf&quot; %&gt;</pre>
+
+<p>チャンネルの詳細については、このトピックの「<a href="#channels">動的なチャンネルを作成する</a>」を参照してください。</p>
+
+<p>このほかによく使われるコンテンツ タイプとして、text/plain (解読の必要な HTML ステートメントではなく、テキストとして返されるコンテンツ)、image/gif (GIF イメージ)、image/jpeg (JPEG イメージ)、video/quicktime (Apple QuickTime&reg; 形式の映画)、および text/xml (XML ドキュメント) があります。また、Web サーバーや Web ブラウザでは、独自の MIME タイプをサポートすることができます。Microsoft Web サーバーで既に定義されているコンテンツ タイプを表示するには、<a href="javascript://" onclick="Activate(); return false">インターネット インフォメーション サービス スナップイン</a> で、
+
+<script language="javascript"> <!-- function Activate() { if (navigator.appName == "Microsoft Internet Explorer"){ window.open("../core/iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350'); } else if (navigator.appName == "Netscape") { window.open("../core/iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200'); } } //--> </script> Web サイトのプロパティ シートを開き、[HTTP ヘッダー] タブをクリックして、[ファイルの種類] をクリックします。これらのファイル タイプは、ASP を使って手動でコンテンツ タイプを設定するときに、参照として使用できます。</p>
+
+<h2><a name="H2_37773741">ブラウザをリダイレクトする</a></h2>
+
+<p>ユーザーにコンテンツを送信する代わりに、<strong>Redirect</strong> メソッドを使って別の URL にブラウザをリダイレクトすることもできます。たとえば、ユーザーが顧客 ID を受けとったかどうか確認することができます。 受けとっていない場合は、ホームページから受けとるようにユーザーをホームページにリダイレクトできます。</p>
+
+<pre>&lt;%
+  If Session(&quot;CustomerID&quot;) = &quot;&quot; Then
+    Response.Redirect &quot;Register.asp&quot; 
+  End If
+%&gt;</pre>
+
+<p>ユーザーにコンテンツが送信される前に処理されるサーバー側スクリプトは、&quot;バッファ処理される&quot; と言います。ASP により、バッファ処理をオンまたはオフにすることができます。 また、この構成により、<STRONG>Redirect</STRONG> メソッドの動作に大きな影響が出ます。特に、バッファ処理をオフにした場合、ページの HTTP ヘッダーがブラウザに返される前に、ブラウザをリダイレクトする必要があります。</P>
+
+<P><strong>Response.Redirect</strong> ステートメントはテキストまたは &lt;HTML&gt; タグよりも前の、ページの先頭に記述し、その前にブラウザには何も送信されないようにしてください。コンテンツやヘッダーがブラウザに返された後で <strong>Response.Redirect</strong> を使用すると、エラー メッセージが表示されます。また、<strong>Response.Redirect</strong> の後に <STRONG><A HREF="vbob2sis.htm">Response.End</A></STRONG> を続ける必要が &quot;ない&quot; 点に注意してください。</p>
+
+<p>ページ内部で <strong>Response.Redirect</strong> を使用する場合は、「<a href="#buffcnt">コンテンツのバッファ処理を行う</a>」で説明するように、<strong>Response.Buffer</strong> プロパティと共に使用してください。</p>
+
+<h2><A NAME="H2_633205286"></A>.ASP ファイル間で転送する</h2>
+
+<p><strong>Response.Redirect</strong> を使ってブラウザをリダイレクトするには、&quot;往復&quot; 処理が必要になります。 つまり、サーバーが新しい URL の場所を示す HTTP 応答をブラウザに送ります。ブラウザは、サーバーの要求キューから自動的に離れて、新しい URL 用の新しい HTTP 要求を送信します。次にサーバーは、この間に届いたほかのクライアントの要求と共に、この新たな要求を要求キューに追加します。ビジーな Web サイトでは、往復処理は帯域幅を浪費し、サーバーのパフォーマンスを低下させます。 ブラウザが同じサーバーに配置されているファイルにリダイレクトされるときは、特に著しく低下します。</p>
+
+<p><strong>Response.Redirect</strong> メソッドではなく <strong>Server.Transfer</strong> メソッドを使って、1 つの .asp ファイルから同じサーバー上の別のファイルに転送することができます。<strong>Server.Transfer</strong> メソッドを使うと、.asp ファイルに対する要求をサーバーの要求キューを離れずに直接転送できるため、負担の大きい往復処理を回避できます。</p>
+
+<p>たとえば、次のスクリプトは、<STRONG>Server.Transfer</STRONG> を使い、その状態の情報に応じてアプリケーションのページ間をジャンプする方法を示します。</p>
+
+<pre>&lt;%
+  If Session(&quot;blnSaleCompleted&quot;) Then
+    Server.Transfer(&quot;/Order/ThankYou.asp&quot;)
+  Else
+    Server.Transfer(&quot;/Order/MoreInfo.asp&quot;)
+  End if
+%&gt;
+</pre>
+
+<p><strong>Server.Transfer</strong> は、1 つの実行 .asp ファイルから別のファイルに要求を送信します。転送中、初めに要求された .asp ファイルは、出力バッファをクリアせずに直ちに実行を終了します (詳細については、「<a href="#buffcnt">コンテンツのバッファ処理を行う</a>」を参照してください)。送信先ファイルが実行を開始すると、要求情報がこのファイルで使用可能になります。実行中、送信先ファイルは初めに要求されたファイルと同じ組み込みオブジェクトのセット (<STRONG>Request</STRONG>、<STRONG>Response</STRONG>、<STRONG>Server</STRONG>、<STRONG>Session</STRONG>、および <STRONG>Application</STRONG>) にアクセスできます。</p>
+
+<p><strong>Server.Transfer</strong> を使って、異なるアプリケーションに配置された .asp ファイル間での転送もできます。ただし、別のアプリケーションの .asp ファイルに転送するときは、ファイルは転送元のアプリケーションの一部であるかのように動作します。 つまり、ファイルは実際にファイルが置かれているアプリケーションではなく、転送元のアプリケーションに規定されている範囲の変数のみにアクセスできます。たとえば、販売アプリケーションのファイルから人事アプリケーションのファイルに転送した場合、販売アプリケーションはこのファイルを人事アプリケーションから必要に応じて借り、それが販売アプリケーションの一部であるかのように実行します。</p>
+
+<p>ASP には、ファイルに転送し、コンテンツを実行して、転送を開始したファイルに戻す <strong>Server.Execute</strong> コマンドもあります。VBScript を使い慣れている場合は、<strong>Server.Execute</strong> がプロシージャ呼び出しに類似したものであり、プロシージャを実行する代わりに .asp ファイル全体を実行すると考えると理解できます。 </p>
+
+<p>たとえば、次のスクリプトは <strong>Server.Execute</strong> を使って .asp ファイルを動的に取り込む方法を示します。</p>
+
+<pre>&lt;%
+  .
+  .
+  .
+  If blnUseDHTML Then
+    Server.Execute(&quot;DHTML.asp&quot;)
+  Else
+    Server.Execute(&quot;HTML.asp&quot;)
+  End If
+  .
+  .
+  .
+%&gt;
+</pre>
+
+<p>転送先ファイルが同じサーバー上のアプリケーションに属している限り、転送元のアプリケーションはこの転送先ファイルに転送し、転送先ファイルのコンテンツを実行してから、転送を開始したファイルの実行を再開します。<STRONG>Server.Transfer</STRONG> の場合と同じように、実行される .asp ファイルは元のアプリケーションの一部であるかのように動作します。ただし、<strong>Server.Execute</strong> は異なるサーバー間では実行 &quot;されません&quot;。詳細については、「<a href="vbob9pid.htm"><STRONG>Server.Execute</STRONG></a>」を参照してください。</p>
+
+<h2><a name="buffcnt">コンテンツのバッファ処理を行う</a></h2>
+
+<p>既定では、Web サーバーはページ上のすべてのスクリプト コマンドを処理してから、ユーザーにコンテンツを送信します。この処理は、&quot;バッファ処理&quot; と言います。バッファ処理が無効になるように <strong>Response</strong> オブジェクトの <strong>Buffer</strong> プロパティを設定し、Web サーバーがページを処理しながら HTML とスクリプトの結果を返すようにすることもできます。</p>
+
+<p>.asp ファイルをバッファ処理する利点は、たとえば、スクリプト処理が正しく実行されない場合、またはユーザーが適切なセキュリティ資格情報を持っていない場合に、Web ページの送信を中止できることです。送信を中止する代わりに、<strong>Server.Transfer</strong> を使って別のページにユーザーを送るか、または <strong>Response</strong> オブジェクトの <strong>Clear</strong> メソッドを使ってバッファをクリアして、別のコンテンツをユーザーに送信することができます。アプリケーションによっては、転送の前に <STRONG>Clear</STRONG> メソッドを使う場合もあります。次の例では、この両方のメソッドが使用されます。</p>
+
+<pre>
+&lt;HTML&gt;
+  &lt;BODY&gt;
+  .
+  .
+  .
+  &lt;%
+    If Request(&quot;CustomerStatus&quot;) = &quot;&quot; Then
+      Response.Clear
+      Server.Transfer(&quot;/CustomerInfo/Register.asp&quot;)
+    Else
+      Response.Write &quot;Welcome back &quot; &amp; Request(&quot;FirstName&quot;) &amp; &quot;!&quot;
+		    .
+		    .
+		    .
+    End If
+  %&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+<p><strong>Response.Buffer</strong> は、Web サーバーが HTTP ヘッダーを返す前に、スクリプトでヘッダーを修正できるようにする場合にも使用できます。HTTP ヘッダーを修正するプロパティおよびメソッドには、<strong>Response.Expires</strong>、<strong>Response.Redirect</strong> などがあります。</p>
+
+<p>同じスクリプトの中で <strong>Buffer</strong> プロパティが TRUE に設定され、バッファ処理されたコンテンツを直ちにブラウザに送信する <strong>Flush</strong> メソッドを呼び出さない場合、サーバーはクライアントからのキープアライブ要求を保持します。この方法でスクリプトを記述すると、(サーバーとクライアント、およびその間のプロキシ サーバーのいずれもがキープアライブ要求をサポートしている場合は) クライアントの要求ごとにサーバーが新しい接続を作成する必要がなくなるため、サーバーのパフォーマンスが向上するという利点があります。ただし、この方法を使用した場合はバッファ処理が行われるため、サーバーがスクリプト全体の処理を終えるまで、応答がユーザーに送信されないという欠点もあります。このため、長いスクリプトや複雑なスクリプトでは、ページが表示されるまでユーザーが長時間待たされる可能性があります。</p>
+
+<p>既定では、ASP アプリケーションではバッファ処理は有効になっています。<a href="javascript://" onclick="Activate(); return false">インターネット インフォメーション サービス スナップイン</a>で、
+
+<script language="javascript"> <!-- function Activate() { if (navigator.appName == "Microsoft Internet Explorer"){ window.open("../core/../core/iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350'); } else if (navigator.appName == "Netscape") { window.open("../core/../core/iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200'); } } //--> </script> ASP アプリケーション全体のバッファ処理を無効にすることができます。詳細については、「<a href="../core/iiwarndh.htm">ASP アプリケーションを構成する</a>」を参照してください。</p>
+
+<h2><a name="H2_37777557">プロキシ サーバーがページをキャッシュできるようにする</a></h2>
+
+<p>アプリケーションがクライアントに送信するページは、&quot;プロキシ サーバー&quot; を経由することがあります。プロキシ サーバーは、クライアント ブラウザに代わって Web サイトのページを要求します。プロキシ サーバーは HTML ページをキャッシュしているので、同じページが繰り返し要求される場合にすばやく効率的にページをブラウザに返すことができます。プロキシ サーバーを使って要求の処理とページのキャッシュを行うと、ネットワークと Web サーバーの負荷を軽減できます。</p>
+
+<p>キャシュは多くの HTML ページに対して十分に機能しますが、頻繁に更新される情報を含む ASP ページでは適切に機能しないことがあります。たとえば、株価を表示したり、大規模ビジネスでの在庫を表示したりするページでは、適切なタイミングで情報を提供する必要があり、わずか 1 時間前の情報でも正確さを欠くことがあります。また、カスタム ホーム ページなど、ユーザーごとにカスタマイズした情報を返すアプリケーションの場合は、ユーザーの個人情報がほかのユーザーに表示されないようにする必要があります。</p>
+
+<p>ASP では、既定では、ASP ページ自体はキャッシュしないようにプロキシ サーバーに指示します (画像、イメージ マップ、アプレット、およびそのページから参照されているその他の項目はキャッシュされます)。<strong>Response.CacheControl</strong> プロパティを使用して Cache-Control HTTP ヘッダー フィールドを設定すると、特定のページに対してキャッシュを有効にすることができます。<strong>Response.CacheControl</strong> の既定値は文字列 "Private" であり、プロキシ サーバーによるページのキャッシュは無効になっています。キャッシュを有効にするには、Cache-Control ヘッダー フィールドを Public に設定します。</p>
+
+<pre>&lt;% Response.CacheControl = &quot;Public&quot; %&gt;</pre>
+
+<p>HTTP ヘッダーは、ページのコンテンツが送信される前にブラウザまたはプロキシ サーバーに送信する必要があるため、<strong>Response.CacheControl</strong> プロパティはどの HTML タグよりも前に記述するか、またはバッファ処理を無効にしている場合は、<strong>Response.Buffer</strong> を使用してページをバッファ処理してください。</p>
+
+<p>Cache-Control ヘッダー フィールドは、HTTP&nbsp;1.1 仕様の一部です。HTTP&nbsp;1.0 のみをサポートするプロキシ サーバー上では、Expires ヘッダー フィールドが送信されないので、ASP ページはキャッシュされません。</p>
+
+<h2><a name="H2_37779593">ブラウザによるページのキャッシュを禁止する</a></h2>
+
+<p>ページをキャッシュするかどうかの決定については、ブラウザの種類ごとに規則があります。ブラウザによる ASP ページのキャッシュを禁止するには、次の例のように、<strong>Response.Expires</strong> を使用して Expires ヘッダーを設定してください。</p>
+
+<pre>&lt;% Response.Expires = 0 %&gt;</pre>
+
+<p>値 0 は、キャッシュされたページの有効期限が直ちに切れることを示します。HTTP ヘッダーは、ページのコンテンツが送信される前にブラウザに送信する必要があるため、<strong>Response.Expires</strong> プロパティをどの HTML タグよりも前に記述するか、またはページをバッファ処理してください。</p>
+
+<h2><a name="H2_37780216"></a><a name="channels">動的なチャンネルを作成する</a></h2>
+
+<p>&quot;チャンネル&quot; は、Microsoft Internet Explorer&nbsp;4.0 以降で使用できる Web テクノロジです。 チャンネルを使うと、新しい Web コンテンツまたは更新された Web コンテンツを自動的にユーザーに配布できます。チャンネルは、ユーザーのコンピュータが定期的にサーバーに接続し、更新された情報を取り出すようにスケジュールします。この検索プロセスは、一般に &quot;クライアント プル&quot; と呼ばれます。 これは、サーバーから情報を &quot;引き出す&quot;、つまり集めるためです。特定の Web サイトで新しい情報が入手可能になると、コンテンツがブラウザのキャッシュにダウンロードされます。Web ベースの情報を配布するために、特にイントラネット上でチャンネルを有効に使用すると、情報の中央集中化とサーバー トラフィックの削減に効果的です。チャンネルの詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=ie&pver=4.0&ar=inews&clcid=0x0411" TARGET="_blank">Microsoft Internet Explorer の Web サイト</a> を参照してください。</p>
+
+<p>ASP では、&quot;チャンネル定義ファイル&quot; を生成することにより動的にチャンネルを作成するスクリプトを記述することができます。XML ベースのチャンネル定義ファイル (.cdf) は、チャンネルのコンテンツの構成および更新スケジュールを記述します。.cdf ファイルのコマンドは HTML タグに類似した構文を使用するので覚えやすく、スクリプトから簡単に生成できます。サーバー側スクリプトでチャンネル定義ファイルを作成するときは、ファイルの拡張子を .cdx にします。ASP は、.cdx 拡張子のファイルを読み込むと、自動的に application/x-cdf コンテンツ タイプを送信し、ブラウザにチャンネル定義としてバイトを解釈するように指示します。.cdx 拡張子を使わない場合は、スクリプトの記述で <strong>Response.ContentType</strong> を使用して、手動でコンテンツ タイプを application/x-cdf に設定する必要があります。</p>
+
+<p>次に示すのは、チャンネルの使い方の例です。この HTML フォームは、チャンネルの選択をユーザーに求めます。ユーザーから送信されたフォームは、.cdx ファイル内のスクリプトを呼び出し、チャンネル定義を作成します。</p>
+
+<pre>&lt;P&gt; Choose the channels you want. &lt;/P&gt;
+&lt;FORM METHOD=&quot;POST&quot; ACTION=&quot;Chan.cdx&quot;&gt;
+&lt;P&gt;&lt;INPUT TYPE=CHECKBOX NAME=Movies&gt; Movies
+&lt;P&gt;&lt;INPUT TYPE=CHECKBOX NAME=Sports&gt; Sports
+&lt;P&gt;&lt;INPUT TYPE=&quot;SUBMIT&quot; VALUE=&quot;SUBMIT&quot;&gt;
+&lt;/FORM&gt;</pre>
+
+<p>Chan.cdx 内のスクリプトは、要求と共にユーザーから送信されたフォームの値に基づいて、チャンネル定義を作成します。</p>
+
+<pre>&lt;% If Request.Form(&quot;Movies&quot;) &lt;&gt; &quot;&quot; Then %&gt;
+  &lt;CHANNEL&gt;
+    <em>channel definition statements for the movie pages</em>
+  &lt;/CHANNEL&gt;
+&lt;% End If %&gt;
+
+&lt;% If Request.Form(&quot;Sports&quot;) &lt;&gt; &quot;&quot; Then %&gt;
+  &lt;CHANNEL&gt;
+    <em>channel definition statements for the sports pages</em>
+  &lt;/CHANNEL&gt;
+&lt;% End If %&gt;</pre>
+
+<h2><a name="H2_37783243">WebDAV でサーバー リソースにアクセスする</a></h2>
+
+<p>Distributed Authoring and Versioning (WebDAV) は、HTTP 1.1 プロトコルの強力な拡張機能であり、Web コンテンツを、ローカル ファイル システムのようなファイル記憶媒体として HTTP 接続上で公開します。WebDAV により、Web がシームレスで共同作業に適したオーサリング環境になることが大いに期待できます。WebDAV を実装した IIS&nbsp;5.1 では、リモートにいる作成者が Web サーバー上のファイルとディレクトリに対して、属性の作成、削除、移動、検索、または適用を実行できるようになります。詳細については、「<A HREF="../core/wcwbdav.htm">WebDav の発行</A>」を参照してください。<A HREF="http://www.ietf.org" TARGET="_blank"></A>  
+
+</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+
+</font>
+</body>
+
+</html>

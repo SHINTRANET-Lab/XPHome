@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[ASP のデバッグ] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+<p><strong>[ASP のデバッグ] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、選択したアプリケーションで実行される ASP スクリプトのデバッグ オプションを設定するときに使用します。</p>
+
+<p><strong>[デバッグのフラグ] グループ</strong></p>
+
+<p><strong>[ASP のサーバー側のスクリプトのデバッグを有効にする] チェック ボックス</strong></p>
+
+<p>ASP スクリプトの処理中に Web サーバーが Microsoft Script Debugger を呼び出すには、このチェック ボックスをオンにします。これにより、デバッガを使ってスクリプトを調べることができます。</p>
+
+<p>ASP サーバー側デバッグを有効にすると、ASP はシングルスレッド モードで実行されます。パフォーマンスの点から、作成環境での ASP デバッグはお勧めできません。</p> 
+
+<p><strong>[ASP のクライアント側のスクリプトのデバッグを有効にする] チェック ボックス</strong></p>
+
+<p>このオプションは、将来使用するためのもので現在のバージョンの ASP では機能しません。</p>
+
+<p><strong>[スクリプトのエラー メッセージ] グループ</strong></p>
+
+<p><strong>[クライアントに詳細な ASP のエラー メッセージを送る] オプション ボタン</strong></p>
+
+<p>ファイル名、エラー メッセージ、および行番号を含む、詳細なデバッグ情報をブラウザに送る場合は、このオプションを選択します。</p>
+
+<p><strong>[クライアントにテキストのエラー メッセージを送る] オプション ボタン</strong></p>
+
+<p>エラーによって Web サーバーが ASP スクリプトを処理できなくなったときに、既定のエラー メッセージをブラウザに送る場合は、このオプションを選択します。エラー メッセージの詳細は、エラー ログに記録されます。既定のエラー メッセージを変更するには、テキスト ボックスに新しいメッセージを入力します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

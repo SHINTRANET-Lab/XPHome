@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADSI オブジェクト プロパティ</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_adsi_object_properties"></A><SUP></SUP>ADSI オブジェクト プロパティ</H2>
+
+<P>IIS Admin オブジェクトは、ADSI オブジェクトに必要な 6 つの基本プロパティを実装します。これらのプロパティのデータ型は、すべて文字列です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=48%><B>ADSI プロパティ</B></TD>
+<TD class=blue width=52%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Name</B></TD>
+<TD width=52%>基になる名前空間の中で使用されるオブジェクトの名前です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>ADsPath</B></TD>
+<TD width=52%>オブジェクトを一意に識別するパスです。GetObject で、オブジェクトを取得するときに使用されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Class</B></TD>
+<TD width=52%>オブジェクトのスキーマ クラスの名前です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>GUID</B></TD>
+<TD width=52%>このスキーマ クラスのオブジェクトの一意な識別子です。IIS は、グローバル一意識別子 (GUID) を使用します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Parent</B></TD>
+<TD width=52%>親コンテナ オブジェクトの ADsPath です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Schema</B></TD>
+<TD width=52%>スキーマ内でこのスキーマ クラスを表すオブジェクトの ADsPath です。</TD>
+</TR>
+</TABLE><BR>
+
+<P>ADSI オブジェクトのプロパティは読み取り専用で、ADSI の名前空間を管理する ADSI クライアント プログラムが使用します。次の表は、IIsWebService オブジェクトの ADSI プロパティの例です。<I>LocalHost</I> は、IIS を実行するローカル コンピュータの名前が入るプレースホルダです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=48%><B>ADSI プロパティ</B></TD>
+<TD class=blue width=52%><B>値</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Name</B></TD>
+<TD width=52%>W3SVC</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>ADsPath</B></TD>
+<TD width=52%>IIS://<I>LocalHost</I>/W3SVC</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Class</B></TD>
+<TD width=52%>IIsWebService</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>GUID</B></TD>
+<TD width=52%>{8B645280-7BA4-11CF-B03D-00AA006E0975} </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Parent</B></TD>
+<TD width=52%>IIS://<I>LocalHost</I></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><B>Schema</B></TD>
+<TD width=52%>IIS://<I>LocalHost</I>/schema/IIsWebService</TD>
+</TR>
+</TABLE><BR>
+
+<P>ADSI の Name プロパティを使用して、IIS インストール環境の構造を文書化することができます。</P>
+
+<P>IIS Admin オブジェクトがサポートするメタベース プロパティを使用して、IIS インストール環境の構成を制御することができます。「<A HREF="/iishelp/iis/htm/asp/adsi0ewj.htm">ADSI オブジェクト メソッド</A>」および、個々の IIS Admin オブジェクトがサポートする特定のメタベース プロパティを参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

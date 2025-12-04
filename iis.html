@@ -1,0 +1,198 @@
+<html>
+
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=shift_jis">
+
+<script language="javascript">
+
+  // This code is executed before the rest of the page, even before the ASP code above.
+  
+  var gWinheight;
+  var gDialogsize;
+  var ghelpwin;
+  
+  // Move the current window to the top left corner.
+  
+  window.moveTo(5,5);
+  
+  // Change the size of the window.
+
+  gWinheight= 480;
+  gDialogsize= "width=640,height=480,left=300,top=50,"
+  
+  if (window.screen.height > 600)
+  {
+<% if not success and Err = 0 then %>
+    gWinheight= 700;
+<% else %>
+    gWinheight= 700;
+<% end if %>
+    gDialogsize= "width=640,height=480,left=500,top=50"
+  }
+  
+window.resizeTo(640, gWinheight);
+  
+  // Launch IIS Help in another browser window.
+  
+  loadHelpFront();
+
+function loadHelpFront()
+// This function opens IIS Help in another browser window.
+{
+  ghelpwin = window.open("http://localhost/iishelp/","Help","status=yes,toolbar=yes,scrollbars=yes,menubar=yes,location=yes,resizable=yes,"+gDialogsize,true);  
+      window.resizeTo(620,gWinheight);
+}
+
+function activate(ServerVersion)
+// This function brings up a little help window showing how to open the IIS snap-in.
+{
+  if (50 == ServerVersion)
+    window.open("http://localhost/iishelp/iis/htm/core/iisnapin.htm", "SnapIn", 'toolbar=no, left=200, top=200, scrollbars=yes, resizeable=yes,  width=350, height=350');
+  if (51 == ServerVersion)
+    window.open("http://localhost/iishelp/iis/htm/core/iiabuti.htm", "SnapIn", 'toolbar=no, left=200, top=200, scrollbars=yes, resizeable=yes,  width=350, height=350');
+  if (60 == ServerVersion)
+    window.open("http://localhost/iishelp/iis/htm/core/gs_iissnapin.htm", "SnapIn", 'toolbar=no, left=200, top=200, scrollbars=yes, resizeable=yes,  width=350, height=350');
+  if (0 == ServerVersion)
+    window.open("http://localhost/iishelp/", "Help", 'toolbar=no, left=200, top=200, scrollbars=yes, resizeable=yes,  width=350, height=350');  
+}
+
+</script>
+
+<title>Windows XP Server インターネット サービスへようこそ</title>
+<style>
+  ul{margin-left: 15px;}
+  .clsHeading {font-family: ＭＳ Ｐゴシック; color: black; font-size: 11; font-weight: 800; width:210;}  
+  .clsEntryText {font-family: ＭＳ Ｐゴシック; color: black; font-size: 11; font-weight: 400; background-color:#FFFFFF;}    
+  .clsWarningText {font-family: ＭＳ Ｐゴシック; color: #B80A2D; font-size: 11; font-weight: 600; width:550;  background-color:#EFE7EA;}  
+  .clsCopy {font-family: ＭＳ Ｐゴシック; color: black; font-size: 11; font-weight: 400;  background-color:#FFFFFF;}  
+</style>
+</head>
+
+<body topmargin="3" leftmargin="3" marginheight="0" marginwidth="0" bgcolor="#FFFFFF"
+link="#000066" vlink="#000000" alink="#0000FF" text="#000000">
+
+<!-- BEGIN MAIN DOCUMENT BODY --->
+
+<p align="center"><img src="winXP.gif" vspace="0" hspace="0"></p>
+<table width="500" cellpadding="5" cellspacing="3" border="0" align="center">
+
+  <tr>
+  <td class="clsWarningText" colspan="2">
+  
+  <table><tr><td>
+  <img src="warning.gif" width="40" height="40" border="0" align="left">
+  </td><td class="clsWarningText">
+  <b>Web  サービスが実行しています。
+  
+  <p>既定の Web ページはありますが、敢えてこのページを残しています。
+
+
+    既定の Web サイトにドキュメントを追加するには、wwwroot にファイルを保存してください。
+  </b>
+  </td></tr></table>
+ 
+  </td>
+  </tr>
+  
+  <tr>
+  <td>
+  <table cellpadding="3" cellspacing="3" border=0 >
+  <tr>
+    <td valign="top" rowspan=3>
+      <img src="web.gif">
+    </td>  
+    <td valign="top" rowspan=3>
+  <span class="clsHeading">
+  IIS 5.1 へようこそ</span><br>
+      <span class="clsEntryText">    
+    Microsoft Windows XP Professional インターネット インフォメーション サービス (IIS) 5.1
+ は、Windows での Web コンピューティングを可能にします。
+ IIS を使って、ファイルやプリンタを簡単に共有することができます。
+また、セキュリティで保護された Web に情報を公開するためのアプリケーションを作成して、組織が情報を共有する方法を改善することもできます。
+    IIS は、E コマースやミッションクリティカルなアプリケーションを Web に構築、導入するための安全なプラットフォームです。     
+  <p>
+    IIS がインストールされた Windows XP Professional は、次のようなことが可能なオペレーティング システムです :</span>
+  <p>
+    <ul class="clsEntryText">
+      <li>パーソナル Web サーバーのセット アップ
+      <li>チーム内での情報の共有
+<li>データベースへのアクセス
+<li>企業イントラネットの開発
+<li>Web アプリケーションの開発
+    </ul>
+  <p>
+  <span class="clsEntryText">
+    IIS は、Windows とインターネット標準を統合しています。このため、コンテンツを発行、
+    管理、開発するための新しい方法をはじめから学習する必要はありません。
+  <p>
+  </span>
+  </td>
+
+    <td valign="top">
+      <img src="mmc.gif">
+    </td>
+    <td valign="top">
+      <span class="clsHeading">統合された管理</span>
+      <br>
+      <span class="clsEntryText">
+        Windows XP のコンピュータ管理、またはスクリプトを使って IIS を管理できます。<a href="javascript:activate(<%=iVer%>);">コンソール</a> 
+        コンソールを使って、IIS で管理しているサーバーやサイトのコンテンツを共有することもできます。
+        コンソールから IIS スナップインにアクセスすると、ほとんどの IIS の設定を行うことができます。
+        サイトとアプリケーションの開発後は、これらの設定を実際の運用環境で使うことができます。
+ 
+             <p>
+       
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="help.gif">
+    </td>
+    <td valign="top">
+      <span class="clsHeading"><a href="javascript:loadHelpFront();">オンライン ヘルプ</a></span>
+      <br>
+      <span class="clsEntryText">IIS のオンライン ヘルプにはインデックス、フル テキスト検索機能
+        があります。また、トピックごとに印刷することも可能です。プログラム的な管理とスクリプトの開発については、
+        サンプルを使ってください。ヘルプは HTML なので、必要に応じて
+        注釈をつけたり共有したりすることができます。
+        IIS オンライン ヘルプを使うと次のことが可能です :<p>
+      </span>
+      <ul class="clsEntryText">
+         <li>タスクの完了
+         <li>サーバーの操作と管理についての学習
+         <li>リファレンスの参照
+         <li>サンプル コードの表示
+      </ul>
+      <p>
+        <span class="clsEntryText">
+        IIS に関するその他の有用な情報は、 Microsoft.com 
+        Web サイト: MSDN、 TechNet、Windows サイトにあります。
+        </span>
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top">
+      <img src="print.gif">
+    </td>
+    <td valign="top">
+      <span class="clsHeading">Web 印刷</span>
+      <br>
+      <span class="clsEntryText">Windows XP Professional は、サーバー上のすべてのプリンタを、簡単にアクセスできる Web サイトに動的に一覧表示します。
+        このサイトを参照して、プリンタとそのジョブを監視できます。
+        また、このサイトを介してどの Windows コンピュータからでもプリンタに接続できます。
+        インターネット印刷については、Windows のヘルプを参照してください。
+      </span>
+    </td>
+  </tr>
+  
+  </table>
+</td>
+</tr>
+</table>
+
+<p align=center><em><a href="/iishelp/common/colegal.htm">(C) 1997-2001 Microsoft Corporation. All rights reserved.</a></em></p>
+
+</body>
+</html>

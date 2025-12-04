@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir="LTR"><head><title>機能</title>
+
+<script LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<script LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></script>
+
+<meta NAME="DESCRIPTION" CONTENT="セキュリティ機能、管理機能、プログラム機能、インターネット標準のサポートなど、IIS 5.1 の新機能について説明します。">
+<meta HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<meta HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "&lt;http://www.rsac.org/ratingsv01.html&gt;" l comment "RSACi North America Server" by "inet@microsoft.com &lt;mailto:inet@microsoft.com&gt;" r (n 0 s 0 v 0 l 0))'>
+<meta NAME="MS.LOCALE" CONTENT="JA">
+<meta NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37672043">機能</a></h1>
+
+<p>インターネット インフォメーション サービス&nbsp;5.1 には、Web 管理者が拡張性と柔軟性を備えた Web アプリケーションを作成するための新しい機能が多数あります。                  
+
+<p><a href="#security">セキュリティ</a><br> <a href="#administration">管理</a><br> <a href="#programmability">プログラマビリティ</a><br> <a href="#standards">インターネット標準</a></p>
+
+<h2><a name="security">セキュリティ</a></h2>
+
+<ul>
+
+<li><img alt="New!" src="iinew1.gif"><a href="iiabasc.htm#Advanceddigest"><b>高度ダイジェスト認証</a></b>&nbsp;&nbsp;</a>高度ダイジェスト認証は、プロキシ サーバーおよびファイアウォールを介して安全で強固なユーザー認証を可能にします。クライアント ソフトウェアを追加する必要もなく、インターネット上でクリア テキストのユーザー名やパスワードを送信する危険がありません。さらに、ダイジェスト認証、匿名認証、HTTP 基本認証、および統合 Windows 認証 (以前は Windows NT チャレンジ/レスポンス認証および NTLM 認証と呼ばれていました) も使用できます。 
+
+<li><b>セキュリティ保護された通信</b>&nbsp;&nbsp;<a href="/iishelp/iis/htm/core/iiabtsc.htm">Secure Sockets Layer</a>&nbsp;(SSL)&nbsp;3.0 および Transport Layer Security (TLS) により、クライアントとサーバー間で安全に情報を交換できます。また、ユーザーがサーバーにログオンする &quot;前&quot; に、クライアントが誰であるかをサーバーが確認することができます。IIS&nbsp;5.1 では、クライアント証明書が ISAPI と Active Server Pages の両方に公開されるので、プログラマはサイトを通してユーザーを追跡できます。さらに、IIS&nbsp;5.1 ではクライアント証明書を Windows ユーザー アカウントにマップすることで、管理者はクライアント証明書に基づいてシステム リソースへのアクセスを制御することができます。  
+
+<li><b><a href="iistesc.htm">Server-Gated Cryptography</a>&nbsp;&nbsp;</b>Server-Gated Cryptography (SGC) は SSL の拡張機能であり、IIS を使用する金融機関に強力な 128 ビットの暗号化を提供します。SGC 機能は IIS&nbsp;5.0 および 5.1 に組み込まれていますが、SGC を使用するには特殊な SGC 証明書が必要です。 
+  
+<li><b><a href="iikeysc.htm">セキュリティ ウィザード</a>&nbsp;&nbsp;</b>セキュリティ ウィザードにより、サーバー管理が簡略化されます。
+	<ul>
+	<li><b>サーバー証明書ウィザード</b>では、証明書要求の作成や証明書ライフ サイクルの管理など、証明書の管理が簡略化されます。 
+
+	<li><b>アクセス許可ウィザード</b>では、アクセス ポリシーを仮想ディレクトリやファイルに適用することで、Web サイト アクセスの構成が容易になります。アクセス許可ウィザードでは、NTFS ファイルのアクセス権を更新して、Web アクセス ポリシーを反映させることも可能です。 
+
+	<li><b><a href="iikeysc.htm">CTL ウィザード</b></a>では、証明書信頼リスト (CTL) を構成することができます。CTL は、特定のディレクトリについて信頼できる証明機関 (CA) の一覧です。サーバー上に複数の Web サイトを持ち、承認された証明機関の一覧がサイトごとに異なるインターネット サービス プロバイダ (ISP) にとって、CTL は特に役立ちます。
+	</li>
+	</ul>
+	
+	<li><b>IP とインターネット ドメインの制限&nbsp;&nbsp;</b>個々のコンピュータ、コンピュータ グループ、またはドメイン全体に対して、Web アクセスを許可または拒否することができます。 
+
+
+<li><b><a name="kerb">Kerberos</a>v5 認証プロトコル準拠&nbsp;&nbsp;</b>IIS は、Microsoft&reg; Windows&reg;&nbsp;XP に実装されている Kerberos&nbsp;v5 認証プロトコルと完全に統合されており、Windows を実行する接続されたコンピュータ間で認証資格情報の受け渡しができます。 
+
+<li><b>証明書の記憶領域&nbsp;&nbsp;</b>IIS 証明書の記憶領域は、現在は Windows CryptoAPI 記憶領域に統合されています。Windows 証明書管理ツールは、サーバー証明書の保存、バックアップ、および構成を行うための単一のエントリ ポイントを提供します。 
+
+<li><b><a href="iiabtsc.htm#standardsused">Fortezza</a>&nbsp;&nbsp;</b>一般に &quot;Fortezza&quot; と呼ばれる米国政府のセキュリティ標準が、IIS&nbsp;5.1 でサポートされています。この標準は、メッセージの機密性、整合性、認証、およびメッセージ、コンポーネント、システムに対するアクセス制御を提供する暗号メカニズムを備え、Defense Message System セキュリティ アーキテクチャを実現しています。これらの機能は、サーバーとブラウザ ソフトウェア、および PCMCIA カード ハードウェアを使って実装できます。
+ </li>
+</ul>
+
+<h2><a name="administration">管理</a></h2> 
+
+<ul>
+
+<li><b><a href="iicodira.htm">IIS を再起動する</a>&nbsp;&nbsp;</b>コンピュータを再起動しなくても、インターネット サービスを再開できるようになりました。 
+  
+<li><img alt="New!" src="iinew1.gif"><b>メタベースのバックアップと復元</a>&nbsp;&nbsp;</b>メタベースの<a href="iitasks.htm">バックアップ</a>および<a href="iirestore.htm">復元</a>機能と手順が変更され、セキュリティが強化されると共に、メタベースを別のコンピュータで復元することが可能になりました。アプリケーションは、<a href="iiabuti.htm">IIS スナップイン</a>から実行されます。
+
+<li><img alt="New!" src="iinew1.gif"><b><a href="iisnapshot.htm">Metabase Snapshot Writer</a>&nbsp;&nbsp;</b>Metabase Snapshot Writer (MSW) では、COM を使用しているため、NTbackup により安定した、信頼性のあるメタベースのバックアップを作成できます。MSW は NTbackup でのみ使用され、<a href="iiabuti.htm">IIS スナップイン</a>から実行される [構成のバックアップ/復元] アプリケーションの一部ではありません。
+
+<li><img alt="New!" src="iinew1.gif"><b><a href="iipoolc.htm">ASP テンプレート キャッシュ</a>&nbsp;&nbsp;</b>ASP テンプレート キャッシュの変更により、ASP ファイルのキャッシュに関する制御が向上しています。
+  
+<li><b><a href="iierrcst.htm">カスタム エラー メッセージの改善</a>&nbsp;&nbsp;</b>Web サイトで HTTP エラーが発生した際に、管理者からより多くの情報を含むメッセージをクライアントに送信できます。さらに、カスタム エラー メッセージ 500-100.asp を使用することで、より詳細な ASP エラー処理機能が実現します。IIS&nbsp;5.1 に組み込まれているカスタム エラーを使用することも、独自に作成することも可能です。 
+
+<li><b>設定オプション&nbsp;&nbsp;</b>読み取り、書き込み、実行、スクリプト、および FrontPage Web の各操作の権限を、サイト レベル、ディレクトリ レベル、またはファイル レベルで設定できます。 
+  
+  
+
+
+<li>
+<b>リモート管理&nbsp;&nbsp;</b> IIS&nbsp;5.1 には、任意のプラットフォームでほとんどのブラウザからサーバーのリモート管理を可能にする Web ベースの管理ツールがあります。IIS&nbsp;5.1 では、Web 上で制限された管理者権限を持つ Operators という管理者アカウントを設定して、管理タスクを分配することができます。 
+
+<li><b>ターミナル サービス&nbsp;&nbsp;</b>ターミナル サービスは Windows&nbsp;XP の機能で、ターミナル上、およびパーソナル コンピュータやほかのコンピュータ デスクトップで実行されるターミナル エミュレータ上で、32 ビットの Windows アプリケーションを実行可能にします。ターミナル サービスにより、事実上あらゆるデスクトップでサーバー上のアプリケーションを実行できるようになります。IIS などの Windows XP サービスを、リモートで、あたかもサーバー コンソールの前にいるかのように管理することができます。たとえば、従来のレガシー PC や、互換性のあるクライアント ソフトウェアを導入した UNIX ワークステーションなどの非 PC デバイスからでも管理することができます。ただし、Windows 以外のクライアントでは、サード パーティ製のアドオン ソフトウェアが必要です。 
+
+<li><b>集中管理&nbsp;&nbsp;</b>IIS の管理ツールは、Microsoft&reg; 管理コンソール (MMC) を使用します。MMC は、スナップインと呼ばれるプログラムをホストします。スナップインは、管理者がサーバーを管理するために使うプログラムです。<a href="iiabuti.htm">IIS スナップイン</a>を使用して、Windows&nbsp;XP Professional を実行するコンピュータから、Windows&nbsp;2000 Server でインターネット インフォメーション サービスを実行するイントラネット上のコンピュータを管理できます。 
+
+</ul>
+
+<h2><a name="programmability">プログラマビリティ</a></h2>
+
+<ul>
+
+<li><b>Active Server Pages&nbsp;&nbsp;</b>サーバー側スクリプトとコンポーネントを使用して、ブラウザに依存しない動的コンテンツを作成できます。<a href="/iishelp/iis/htm/asp/iiwawelc.htm">Active Server Pages (ASP)</a> は、任意のスクリプト言語やサーバー コンポーネントを HTML ページに埋め込むことを可能にした、CGI および ISAPI に替わる使いやすいツールです。ASP は、すべての HTTP の要求ストリームおよび応答ストリームにアクセスでき、また標準的なデータベースへの接続性、および個々のブラウザ用にコンテンツをカスタマイズする機能も提供します。
+
+<li><b><a href="../asp/iiwanew.htm">ASP の新機能</a>&nbsp;&nbsp;</b>Active Server Pages は、パフォーマンスの拡張とサーバー側スクリプトの簡素化のための、新しい機能や改良された機能をいくつか備えています。 
+
+<li><b><a href="iiwarndc.htm#app_2">アプリケーション保護</a>&nbsp;&nbsp;</b>IIS&nbsp;5.1 は、Web アプリケーションの保護を強化し、信頼性を高めています。既定では、IIS はすべてのアプリケーションをコア IIS プロセスから分離して、共通プロセス、つまり &quot;プールされた&quot; プロセスで実行します。さらに、コア IIS でもプール プロセスでも実行することが望ましくない、重要な用途のアプリケーションを、&quot;<a href="iiisol.htm">分離プロセス</a>&quot; に置くこともできます。 
+
+<li><b>ADSI&nbsp;2.0&nbsp;&nbsp;</b>IIS&nbsp;5.1 では、管理者およびアプリケーション開発者は、カスタム オブジェクト、プロパティ、およびメソッドを既存の ADSI プロバイダに追加できるため、さらに柔軟性のあるサイトの構成が可能になります。 
+</li>
+
+</ul>
+
+<h2><a name="standards">インターネット標準</a></h2>
+
+<ul>
+
+<li><b>標準&nbsp;&nbsp;</b>Microsoft インターネット インフォメーション サービス&nbsp;5.0 および 5.1 は、HTTP&nbsp;1.1 標準に準拠します。これには、PUT および DELETE などの機能、HTTP エラー メッセージをカスタマイズする機能、およびカスタム HTTP ヘッダーのサポートが含まれます。 
+  
+<li><b>複数のサイト、単一の IP アドレス&nbsp;&nbsp;</b>ホスト ヘッダーのサポートにより、Microsoft Windows&nbsp;2000 Server を実行している単一のコンピュータ上の複数 Web サイトを、1 つの IP アドレスでホストできます。これは、複数のサイトをホストしているインターネット サービス プロバイダおよび企業内イントラネットにとって有益です。 
+
+<li><b><a href="wcwbdav.htm">Web Distributed Authoring and Versioning (WebDAV)</a>&nbsp;&nbsp;</b>この機能により、リモートの作成元が HTTP 接続を通して、サーバー上のファイル、ファイル プロパティ、ディレクトリ、およびディレクトリ プロパティを作成、移動、または削除できます。 
+  
+<li><b>ニュースとメール&nbsp;&nbsp;</b>SMTP サービスと NNTP サービスを使用して、IIS と連携して機能するイントラネットのメール サービスやニュース サービスをセットアップすることができます。 
+
+<li><b>PICS 規制&nbsp;&nbsp;</b>成人向けのコンテンツを含むサイトに、Platform for Internet Content Selection (PICS) 規制を適用することができます。 
+
+<li><b><a href="iivsovr.htm#ftpresume">FTP の再開</a>&nbsp;&nbsp;</b>ファイル転送プロトコルによるファイルのダウンロードで、データ転送中の割り込みが発生した場合でもダウンロードが再開できるようになり、ファイル全体を再度ダウンロードする必要がなくなりました。 
+  
+<li><b>HTTP 圧縮&nbsp;&nbsp;</b>Web サーバーと圧縮に対応しているクライアントの間でページをより高速に転送することができます。静的ファイルは圧縮後、キャッシュされます。動的に生成されるファイルには、オンデマンドで圧縮を実行します。                          </li>
+
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</body>
+</html>

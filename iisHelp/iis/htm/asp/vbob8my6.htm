@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Session Contents コレクション</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_session_contents_collection"></A><SUP></SUP>Session Contents コレクション</H4>
+
+<P>Session.Contents コレクションには、あるセッションで &lt;OBJECT&gt; タグを使用せずに確立された項目すべてが含まれます。Session.Contents コレクションを使用すると、セッションの特定の項目の値を調べたり、コレクションに対して繰り返し処理を行って、セッションのすべての項目の一覧を取得したりすることができます。</P>
+
+<H6>構文</H6>
+
+<P><B>Session.Contents</B>( <I>Key</I> )</P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Key</I></DT>
+
+<DD>取得するプロパティの名前です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>ループ制御構造を使用すると、Contents コレクションのすべての要素を対象として繰り返し処理を行うことができます。この例を次に示します。</P>
+
+<PRE><CODE>&lt;%@ LANGUAGE="VBSCRIPT" %&gt;
+&lt;%
+  Dim sessitem
+  Dim anArray(2)
+  response.write "SessionID: " &amp; Session.SessionID &amp; "&lt;P&gt;"
+
+  anArray(0)="one"
+  anArray(1)="second"
+  anArray(2)="third"
+  Session("anArray")=anArray
+  Session("scalar")="1234567890ABCDEFG"
+
+  set objConn=server.createobject("adodb.connection")
+  set Session("object")=objConn
+
+  response.write "List of " &amp; Session.Contents.Count &amp; " items in Session
+  contents collection:&lt;HR&gt;"
+  For Each sessitem in Session.Contents
+    If IsObject(Session.Contents(sessitem)) Then
+      Response.write(sessitem &amp; " : Session object cannot be displayed." &amp; "&lt;BR&gt;")
+    Else
+      If IsArray(Session.Contents(sessitem)) Then
+         Response.write "Array named " &amp; Session.Content(sessitem) &amp; "&lt;ol&gt;"
+         For each objArray in Session.Contents(sessitem)
+             Response.write "&lt;li&gt;" &amp; _
+             Session.Contents(sessitem)(objArray)&amp; "&lt;BR&gt;"
+         Next
+             Response.write "&lt;/ol&gt;"
+      Else
+             Response.write(sessitem &amp; " : " &amp; Session.Contents(sessitem) &amp; "&lt;BR&gt;")
+       End If
+    End If
+  Next 
+%&gt;
+</CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

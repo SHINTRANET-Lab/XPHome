@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>拡張性のある Web アプリケーションを開発する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_developing_scalable_web_applications"></A><SUP></SUP>拡張性のある Web アプリケーションを開発する</H1>
+
+<H6>パフォーマンス</H6>
+
+<P>単一ユーザー用デスクトップ ソフトウェアの開発では、パフォーマンス要件が明確に定義されます。この場合、通常のタスクの実行において大きな遅延が生じないことが重要です。</P>
+
+<P>World Wide Web の初期のころは、Web ページの速度は遅く、多くのユーザーが長い待ち時間を耐えていました。しかし、新しい Web アプリケーションが増えるにつれて、Web アプリケーションのパフォーマンスの要件が、単一ユーザー用デスクトップにおけるパフォーマンスの要件と変わらなくなってきました。今日、高速の通信テクノロジが一般的になり、ユーザーはより大きなサイト パフォーマンスを求めています。</P>
+
+<H6>拡張性</H6>
+
+<P>Web アプリケーションの設計における実際の問題は、アプリケーションが単一ユーザーには従来のデスクトップ アプリケーションのように見えていても、実際には数百または数千ものユーザーが同時に使用する可能性のある分散アプリケーションである点です。</P>
+
+<P>Web アプリケーションでは、広範な環境条件の下でのパフォーマンスが要求されます。つまり、拡張性を備えていることが必要です。もちろん、Web アプリケーションはパフォーマンスの良いものでなければなりませんが、単一ユーザーに使用されているときのパフォーマンスの良さは、必ずしも拡張性の良さに転換できるものではありません。</P>
+
+<P>アプリケーションの拡張性を判定するために、多様な測定基準があります。理想的には、確かな拡張性を備えた Web アプリケーションは、次のような機能を持つべきです。
+
+<UL type=disc>
+	<LI>単一ユーザーが使用すると共に、数百または数千のユーザーが同時に使用できる。</li>
+
+	<LI>2 倍のリソース (プロセッサ、RAM など) を備えたコンピュータにインストールされた場合は 2 倍、3 倍のリソースを備えたコンピュータにインストールされた場合は 3 倍効率が向上する。</li>
+</UL>
+
+<P>もちろん上記の拡張性要件はあくまで &quot;理想&quot; です。しかし、アプリケーションがこれらの理想に近づけば近づくほど、負荷の下でのアプリケーションの成功率が高まります。</P>
+
+<H6>パフォーマンスと拡張性の設計の留意点</H6>
+
+<P>Web アプリケーションの開発プロジェクトの開始にあたって最も重要なのは、Web アプリケーションがほとんどの場合サーバー アプリケーションであるという点です。歴史的に見て、サーバー ソフトウェアは複雑さにおいてもプログラミングの難しさにおいても、オペレーティング システム内部の次に位置されてきました。IIS および Windows<sup>&reg;</sup> は、Web アプリケーション開発をもっと速く容易にする各種の革新的なツールを提供しますが、サーバー ソフトウェア プログラミングの問題と課題は依然存在しています。</P>
+
+<P>アプリケーションの拡張性を高めるために留意するべき重要な点は、次のとおりです。
+
+<UL type=disc>
+	<LI><B>テクノロジの選択  </B> どのような開発プラットフォームにおいても、Windows は特定のタスクを完了するためのオプションを多数提供します。適切なテクノロジを選択することが、拡張性のある Web アプリケーションの設計における第一の、そして通常最も重要なステップです。たとえば、クライアント側のテクノロジが、サーバー側で提供される機能と同じ、または同様の機能を提供する場合、多くの場合、クライアント側のオプションが処理に影響を与えます。これは、クライアントが負荷のほとんどを処理することで、アプリケーションの拡張性が高まるためです。適切なテクノロジを選択することにより、クライアントとサーバー間のやり取りを減らすことができ、パフォーマンスがさらに向上します。詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg8qpj.htm">Web アプリケーションの概要</A>」および Internet Client SDK を参照してください。</li>
+
+	<LI><B>言語の選択  </B>開発言語の選択は、作成された Web アプリケーションにアクセスするユーザーの範囲を規定するので、アプリケーションに大きく影響します。たとえば、アプリケーションにスクリプティングを含めると、スクリプティングをサポートしないブラウザを使用しているユーザーが除外されてしまいます。次の一覧は、使用できる開発言語です。
+<UL type=disc>
+	<LI>Windows スクリプト コンポーネント</li>
+
+	<LI>Visual Basic</li>
+
+	<LI>Java</li>
+
+	<LI>C++</li>
+</UL>
+</li>
+
+	<LI><B>アルゴリズムとワーク フローの設計  </B>適切なテクノロジでも、使用方法を誤るとよい結果は得られません。</li>
+
+	<LI><B>マルチスレッド  </B>IIS と Windows は、マルチスレッド環境を提供します。拡張性のあるアプリケーションを作成するためには、コンポーネントに適したスレッド モデルを選択する必要があります。</li>
+
+	<LI><B>リソース競合と遅延  </B>リソースの競合とリークは、アプリケーションの拡張性の障害となります。</li>
+
+	<LI><B>"実用的な" テスト  </B>Web アプリケーションが使用される実際の環境に類似する環境で、アプリケーションを十分にテストする必要があります。</li>
+</UL>
+
+<P>上記の項目の詳細な分析は、このマニュアルでは扱いません。ここでは、拡張性のある Web アプリケーションの作成に役立つように、IIS に固有の注意やプロシージャをまとめて示します。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI><A HREF="/iishelp/iis/htm/asp/perf6j1v.htm">拡張性のある ASP アプリケーションを開発する</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/perf4i5v.htm">拡張性のあるコンポーネントを開発する</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/perf4vsj.htm">パフォーマンスの高い ISAPI アプリケーションを設計する</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/perf7xnp.htm">データ アクセス パフォーマンス</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/perf1w13.htm">パフォーマンスとセキュリティをテストする</A></li>
+</UL>
+
+<P>Web アプリケーションの設計の詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg8e43.htm">設計に関する決定事項</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

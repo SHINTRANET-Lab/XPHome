@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>プロシージャを記述する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ASP スクリプト作成環境での、プロシージャの定義と記述方法について説明します。VBScript と JScript のサンプルも示します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+
+<h1><a name="H1_37776449">プロシージャを記述する</a></h1>
+
+
+<p>&quot;プロシージャ&quot; とは、特定の作業を実行し、値を返すことのできるスクリプト コマンドの集まりのことです。スクリプトでは独自のプロシージャを定義することができ、定義したプロシージャを何度でも呼び出すことができます。</p>
+
+<p>プロシージャの定義は、プロシージャを呼び出す .asp ファイル自体に記述することができます。また、いくつかのよく使うプロシージャを 1 つの共有 .asp ファイルで定義し、これらのプロシージャを呼び出す側の .asp ファイルで <a href="../core/iisiinc.htm"><strong>#include</strong></a> ディレクティブを使用して、共有 .asp ファイルをインクルードすることもできます。さらに、これらの機能ａECOM コンポーネントにカプセル化することもできます。</p>
+
+<h2><a name="H2_37777134">プロシージャを定義する</a></h2>
+
+<p>プロシージャの定義は &lt;SCRIPT&gt; タグと &lt;/SCRIPT&gt; タグの間に記述することができますが、宣言したスクリプト言語の規則に従う必要があります。&lt;SCRIPT&gt; は、主要スクリプト言語以外の言語でプロシージャを記述する場合に使用します。ただし、主要スクリプト言語でプロシージャを記述する場合は、スクリプトのデリミタ (&lt;% と %&gt;) を使用します。</p>
+
+<p>HTML の &lt;SCRIPT&gt; タグを使用する場合は、スクリプトがサーバー側で処理されるようにするために、2 つの属性を使用する必要があります。&lt;SCRIPT&gt; タグを使用する場合の構文は、次のとおりです。</p>
+
+<pre>&lt;SCRIPT LANGUAGE=JScript RUNAT=SERVER&gt;
+
+  <em>procedure definition</em>
+
+&lt;/SCRIPT&gt;</pre>
+
+<p>RUNAT=SERVER 属性は、Web サーバーに対し、スクリプトをサーバー上で処理することを指示します。この属性を設定しない場合、スクリプトはクライアント ブラウザで処理されます。LANGUAGE 属性は、このスクリプト ブロックで使用するスクリプト言語を指定します。サーバーに対応するスクリプト エンジンがインストールされていれば、任意の言語を指定できます。VBScript を指定するには、値 VBScript を使用します。JScript を使用するには、値 JScript を使用します。LANGUAGE 属性を指定しない場合、このスクリプト ブロックは主要スクリプト言語で記述されているものとして解釈されます。</p>
+
+<p>スクリプト ブロック内のコマンドは、選択したスクリプト言語で記述された 1 つまたは複数の完結したプロシージャを形成する必要があります。たとえば、次のコマンドは、JScript のプロシージャ <strong>MyFunction</strong> を定義します。</p>
+
+<pre>&lt;HTML&gt;
+&lt;SCRIPT LANGUAGE=JScript RUNAT=SERVER &gt;
+
+  function MyFunction()
+  {
+    Response.Write("You called MyFunction().")
+  }
+  
+&lt;/SCRIPT&gt;</pre>
+
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;サーバー側の &lt;SCRIPT&gt; タグの内側には、完結したプロシージャを構成しないスクリプト コマンドは記述しないでください。完結したプロシージャを構成しないコマンドを記述した場合は、コードが次の順序で実行されるため、予期しない結果を招くことがあります。既定の言語以外のスクリプト ブロックは、表示された順、次にインライン コード、最後に既定言語内のスクリプト ブロックの順に実行されます。また、プロシージャの内部では ASP の出力ディレクティブ <code>&lt;%= %&gt;</code> を使用しないでください。代わりに、<strong>Response.Write</strong> を使用し、コンテンツをブラウザに送信します。</p>
+
+<h2><a name="callingprocedures">プロシージャを呼び出す</a></h2>
+
+<p>プロシージャを呼び出すには、コマンド内にそのプロシージャの名前を記述します。JScript のプロシージャを VBScript から呼び出す場合は、プロシージャ名の後にかっこを付ける必要があります。 プロシージャが引数を持たない場合は、空のかっこを使用してください。JScript から VBScript または JScript のプロシージャを呼び出す場合は、プロシージャ名の後に必ずかっこを付ける必要があります。</p>
+
+<p>VBScript では、プロシージャを呼び出すときにキーワード <strong>Call</strong> も使用できます。ただし、呼び出そうとしているプロシージャが引数を持つ場合は、引数のリストをかっこで囲む必要があります。キーワード <strong>Call</strong> を省略する場合は、引数リストのかっこも必ず省略する必要があります。<strong>Call</strong> 構文を使って組み込み関数またはユーザー定義関数を呼び出す場合、その関数の戻り値は破棄されます。</p>
+
+<p>次の例は、2 つの異なるスクリプト言語 (VBScript と JScript) を使って、プロシージャの作成と呼び出しを行っています。</p>
+
+<pre>&lt;%@ LANGUAGE=VBScript %&gt;
+&lt;HTML&gt; 
+  &lt;BODY&gt;
+  &lt;!-- Call the JScript procedure from within VBScript--&gt;
+  &lt;% call printDate() %&gt;
+  &lt;!--Call the VBScript procedure from within VBScrip--&gt;
+&lt;% Echo %&gt; 
+  &lt;BR&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+
+&lt;%Sub Echo%&gt;
+&lt;!--Note: this will not output anything unless the page is called with a query string like http://localhost/test.asp?x=1%20have&y=a%20cunning&z=plan --&gt;
+&lt;%
+  Response.Write "&lt;TABLE BORDER=1&gt;" & _
+    "&lt;TR&gt;&lt;TH&gt;Name&lt;/TH&gt;&lt;TH&gt;Value&lt;/TH&gt;&lt;/TR&gt;" 
+
+  Set objQueryString = Request.QueryString 
+  
+  For Each strSelection In objQueryString
+    Response.Write "&lt;TR&gt;&lt;TD&gt;" &amp; strSelection &amp; "&lt;/TD&gt;&lt;TD&gt;" &amp; _ 
+    objQueryString(strSelection) &amp; &quot;&lt;/TD&gt;&lt;/TR&gt;&quot; 
+  Next 
+
+  Response.Write "&lt;/TABLE&gt;" 
+
+End Sub 
+%&gt;
+
+&lt;SCRIPT LANGUAGE=JScript RUNAT=SERVER&gt; 
+
+function printDate() 
+{ 
+  var x
+ 
+  x = new Date() 
+
+  Response.Write(x.toString()) 
+  Response.Write(&quot;&lt;BR&gt;&quot;)
+} 
+&lt;/SCRIPT&gt;</pre>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;VBScript から JScript 関数を呼び出す場合、大文字と小文字は区別され &quot;ません&quot;。</p>
+
+
+<h2><a name="H2_37781124">プロシージャに配列を渡す</a></h2>
+
+<p>VBScript でプロシージャに配列全体を渡すには、配列名の後に空のかっこを付けて指定します。 JScript の場合は、空の角かっこを付けて指定します。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

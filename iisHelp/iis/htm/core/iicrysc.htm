@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>暗号化について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web サーバーの暗号化機能について説明します。暗号化は、送信される情報をエンコードし、制限された Web コンテンツにアクセスするユーザーとサーバーとの通信の機密性を保持します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37695400"></a>暗号化について</h1>
+
+<p>セキュリティで保護されていないネットワークを通して重要な情報を伝送すると、悪意のある第三者に傍受される危険があります。そのため、重要な財務情報や個人情報を扱う Web サイトをユーザーに提供する場合は、暗号化技術を使ってネットワーク リンクを保護する必要があります。</p>
+
+
+<ul>
+<li><a href="#Howencryptworks">暗号化の動作方法</a></li>
+<li><a href="#pub-keyencryption">公開キー暗号方式</a></li>
+<li><a href="#encryptstrength">セッション キー暗号化の強度</a></li>
+</ul>
+
+<h2><a name="Howencryptworks">暗号化の動作方法</a></h2>
+
+<p>暗号化とは、正しい受信者以外のユーザーには元の情報の復元が困難になるように、数学の関数を使用し、情報をそのままでは理解できない表現形式に変換する処理です。この処理の中心になるのは、&quot;キー&quot; と呼ばれる数学的値です。関数はこのキーを使用し、複雑な独自の方法で情報を暗号化します。</p>
+
+<p>Web サーバーは、本質的にこれと同じ暗号化手順を使用して、ユーザーとの通信リンクを保護します。セキュリティで保護されたリンクを確立した後、Web サーバーとユーザーの Web ブラウザは専用の &quot;セッション&quot; キーを使用して、情報の暗号化と解読を行います。たとえば、認証されたユーザーが、セキュリティで保護されたチャンネルを必要とする Web サイトからファイルをダウンロードする場合、Web サーバーは、セッション キーを使用して、ファイルおよび関連する HTTP ヘッダーを暗号化します。Web ブラウザは、暗号化されたファイルを受信すると、同じセッション キーのコピーを使用してファイルを復元します。</p>
+
+<p>この暗号化方式は安全ですが、欠点もあります。セキュリティで保護されたリンクを確立するまでの過程で、セッション キーのコピーが、保護されていないネットワークを通して伝送されることがあります。つまり、リンクに危害を加えようとする悪意のある第三者は、セッション キーを傍受するだけでその目的を達成してしまいます。これに対する保護手段として、Web サーバーには別の暗号化方式が実装されています。</p>
+
+<h2><a name="pub-keyencryption">公開キー暗号方式</a></h2>
+
+<p>Web サーバーの Secure Sockets Layer (SSL) セキュリティ機能は、&quot;公開キー&quot; 暗号方式として知られる技術を利用して、伝送の際の盗聴からセッション キーを保護します。公開キー暗号方式は、&quot;秘密&quot; キーと &quot;公開&quot; キーという新しい 2 つのキー (鍵) を使用し、次の方法で機能します。</p>
+
+<ol>
+<li>ユーザーの Web ブラウザは、セキュリティで保護された (https://) 通信リンクを Web サーバーとの間に確立します。</li>
+<li>ユーザーの Web ブラウザとサーバーは、ネゴシエーションを行って、セキュリティで保護された通信で使用する暗号化の程度を決定します。</li>
+<li>Web サーバーは、ブラウザに公開キーを送信します。</li>
+<li>Web ブラウザは、サーバーの公開キーを使って、セッション キーの生成に使用された情報を暗号化し、サーバーに送信します。</li>
+<li>サーバーは、秘密キーを使ってメッセージを解読し、セッション キーを生成します。次に、公開キーでこのセッション キーを暗号化し、ブラウザに送信します。</li>
+<li>Web サーバーとブラウザは、いずれもセッション キーを使って、伝送されるデータの暗号化と解読を行います。 </li>
+</ol>
+
+<img src="iicrysc.GIF" width=350 height=170 border=0 alt="暗号化と解読">
+
+<p>通信リンクをセキュリティで保護された状態に確実に保つうえで、秘密キーが重要な役割を担っている点に注意してください。適切な予防手段をすべて講じて、秘密キーを紛失したり盗まれたりしないように保護する必要があります。証明書をフロッピー ディスクにコピーして安全な場所に保管することにより、証明書をバックアップできます。同様に、秘密キーのセキュリティが破られた可能性がある場合は、まず証明機関にその旨を連絡します。次に、サーバー証明書ウィザードを使用して、証明書要求を新規に作成し、新しいサーバー証明書を取得します。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</p>
+
+
+<h2><a name="encryptstrength">セッション キー暗号化の強度</a></h2>
+
+<p>セッション キーの &quot;強度&quot; は、セッション キー ファイルの &quot;ビット&quot; 数に比例します。つまり、セッション キーのビット数を多くするほどセキュリティの程度は高くなり、強制的に解読することがいっそう困難になります。</p>
+
+<p>ユーザーが、セキュリティで保護された通信チャンネルを Web サーバーとの間に確立しようとするとき、ユーザーのブラウザは、そのチャンネルでの通信を保護するために使用できる最大限可能な暗号化レベル、つまりセッション キーの強度をネゴシエートして決めなければなりません。つまり、Web サーバーとユーザーのブラウザの両方が、互換性のあるセッション キーの暗号化および解読機能を備えている必要があります。たとえば、最低 40 ビット (既定値) の暗号化強度を持つセッション キーを使うように Web サーバーを構成する場合、セキュリティで保護された接続を試みるユーザーは、40 ビットのセッション キーの情報を処理できる Web ブラウザを使用する必要があります。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

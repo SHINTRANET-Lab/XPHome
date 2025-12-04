@@ -1,0 +1,92 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="DESCRIPTION" content="NTFS のアクセス権を設定して、Web サーバーにあるディレクトリやファイルへのアクセスを制御します。NTFS のアクセス権を使うと、有効な Windows ユーザー アカウントを持つ、特定のユーザーやユーザーのグループに許可するアクセスのレベルを設定できます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="settingaccesspermissionforadirectoryorfile">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a></h1>
+
+<p>NTFS のアクセス権を設定して、Web サーバーにあるディレクトリやファイルへのアクセスを制御できます。NTFS のアクセス権を使うと、有効な Windows ユーザー アカウントを持つ、特定のユーザーやユーザーのグループに許可するアクセスのレベルを設定できます。ディレクトリおよびファイルのアクセス権の適切な構成は、権限のないアクセスを阻止するうえで重要です。詳細については、「<a href="iiacnsc.htm">アクセス制御について</a>」および Windows のマニュアルを参照してください。</p> 
+
+<p>ディレクトリまたはファイルを共有している場合、NTFS のディレクトリとファイルに設定されている既定のアクセス権では、すべてのユーザーが含まれる Windows ユーザー グループの &quot;Everyone&quot; に、&quot;フル コントロール&quot; のアクセス権が与えられます。つまり、すべてのユーザーに対してディレクトリやファイルの変更、移動、削除を行い、NTFS のアクセス権を変更する権限が与えられます。この既定の設定は、すべてのディレクトリとファイルに適切であるとは限りません。</p>
+
+<p>サーバーのセキュリティを保持するには、サーバーを使用する必要のないユーザーやグループ、または範囲の広すぎるグループを削除します。しかし、Everyone グループを随意アクセス制御リストから削除して、Web リソースでの変更を加えないと、非匿名アクセスでも失敗することになります。非匿名アクセスを正常に実行するには、次の権限を特定のユーザーまたはユーザー グループに追加する必要があります。
+<ul>
+<li>Administrator [フル コントロール]</li>
+<li>Creator/Owner [フル コントロール]</li>
+<li>System [フル コントロール]</li>
+</ul></p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;サーバーのファイル システムが NTFS として構成されていない場合、ドライブ、ディレクトリ、またはファイルのプロパティ シートに [セキュリティ] タブが表示されません。ファイル システムの NTFS への変換については、Windows のマニュアルを参照してください。</P>
+
+<big>ディレクトリおよびファイルに対する NTFS のアクセス権を変更するには</big><br>
+<ol>
+<li>[マイ コンピュータ] を開いて、保護するドライブ、ディレクトリ、またはファイルを右クリックし、[プロパティ] をクリックして、プロパティ シートを開きます。</li>
+<li>[セキュリティ] プロパティ シートを選択し、アクセス権を変更する Windows アカウントをクリックします。</li>
+<li>[アクセス許可] で、選択したユーザーまたはグループに与えるアクセス権の種類を選択します。アクセスを明確に許可するには [許可] を指定し、アクセスを明確に拒否するには [拒否] を指定します。さらに詳細に設定するには、[詳細] をクリックします。</li> 各種アクセス権の詳細については、Windows のマニュアルを参照してください。
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;[拒否] を指定するときは注意が必要です。[拒否] は [許可] に優先します。Everyone グループに対して [拒否] を設定すると、管理者を含むそのレベルのあらゆるアクセスについて、リソースが閉じられる場合があります。</P>
+</ol>
+
+<big>ディレクトリおよびファイルに対する NTFS のアクセス権について Windows アカウントを追加または削除するには</big><br>
+<ol>
+<li>[セキュリティ] プロパティ シートの [追加] をクリックして、ユーザーおよびグループを追加します。</li>
+<li>[セキュリティ] プロパティ シートの [削除] をクリックして、ユーザーおよびグループを削除します。</li>
+<li>[ユーザー、コンピュータ、または グループの選択] ダイアログ ボックスで、一覧に表示されたコンピュータまたはドメインをクリックするか、[名前] ボックスに名前を入力します。</li>
+<li>ユーザーやグループを続けて追加できます。一覧には、クリックや入力で指定したユーザーとグループが表示されます。</li>
+<li>[OK] をクリックして、これらのユーザーとグループを [セキュリティ] プロパティ シートの一覧に追加します。</li>
+<li>ボックスの一覧で、ディレクトリまたはファイルへのアクセス権を与えるユーザーまたはグループを選択します。</li>
+</li>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;NTFS のアクセス権と Web サーバーの権限が競合している場合、最も制限の厳しい設定が使用されます。つまり、アクセスを許可する権限よりもアクセスを明示的に禁止する権限が、常に優先されます。</p>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

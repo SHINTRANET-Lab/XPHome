@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS Admin オブジェクトを使った管理作業</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_administrative_tasks_using_the_iis_admin_objects"></A><SUP></SUP>IIS Admin オブジェクトを使った管理作業</H1>
+
+<P>IIS の構成情報は、メタベース プロパティとも呼ばれるバイナリ値としてメタベースに格納されます。これらの構成値は、IIS Admin オブジェクトを使って変更できます。また、IIS Admin オブジェクトを使って IIS インストール環境を構成したり、新しい FTP サーバー、Web サーバー、仮想ディレクトリなどの IIS 要素を作成したりすることもできます。個々の IIS Admin オブジェクトは、メタベース内の特定のタイプのキーに対応しています。簡単なスクリプトで、または ASP ページの中で、IIS Admin オブジェクトを使って IIS のインストール環境をリモート管理するアプリケーションを作成できます。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/aogu8syt.htm">メタベースを操作する</A>」では、IIS で行う一般的なプログラムによる管理作業の 1 つである、スクリプトを使ったメタベースの操作について説明します。</li>
+</UL>
+
+<P>その他のコマンドライン スクリプトのサンプルが、\Inetpub\AdminScripts ディレクトリに用意されています。また、Platform SDK の 「Developer Samples」でも例を参照することができます。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

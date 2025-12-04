@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<HEAD>
+
+<title>[インターネット インフォメーション サービス] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[インターネット インフォメーション サービス] プロパティ シート</strong></p>
+
+<p>
+このプロパティ シートは、サービスが使用する帯域幅を設定し、MIME の種類を構成するために使用します。これらの既定値は、必要に応じて各サイトで個別に変更できます。</p>
+
+<p><strong>[帯域幅調整を使用可能にする] チェック ボックス</strong></p>
+
+<p>このチェック ボックスをオンにすると、Web サービスおよび FTP サービスが使用する帯域幅を制限できます。 </p>
+
+<p>電子メールやリモート ログオンなど、ネットワーク カードが複数の目的で使用されている場合、帯域幅を制限することは特に有効です。帯域幅調整で制限できるのは、静的 HTML ファイルが使用する帯域幅だけです。</p>
+
+<p><strong>MIME マップ</strong></p>
+
+<p>[ファイルの種類] をクリックし、Multipurpose Internet Mail Extensions (MIME) マッピングを構成します。このマッピングでは、Web サービスがブラウザに返すさまざまなファイルの種類を設定します。</p> 
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

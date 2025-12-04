@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Web サーバー作成ツール</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_web_server_creator"></A><SUP></SUP>Web サーバー作成ツール</H1>
+
+<H6>概要</H6>
+
+<P>サーバーの作成、削除、停止、開始、および構成は、特に大規模なインターネットまたはイントラネットの Web サイトの管理者にとって、いずれも手間のかかる作業です。ここで提供するサンプルのツールでは、これらの作業の多くを自動化する方法を示します。</P>
+
+<H6>コードの説明</H6>
+
+<P>このサンプル スクリプトが提供する簡単なインターフェイスを通して、新しい Web サーバーを作成します。これを実現するには、IIS://LocalHost/W3SVC ノード上での GetObject の呼び出しから始まるいくつかの手順を行う必要があります。IIsWebService オブジェクトの ADSI メソッドである Create を使用して、新しい IIsWebServer オブジェクトを作成します。次にこのサーバー オブジェクトを構成し、SetInfo メソッドで新しい情報をメタベースに書き戻します。</P>
+
+<P>スクリプトのこの段階では、サーバーはまだ完全に機能する Web サイトではありません。サーバーのノードはメタベースに作成されましたが、サーバーは動作していません。また、何かを格納するルート ディレクトリもありません。Web サイトを完成させるため、このツールでは ADSI オブジェクト IIsWebVirtualDir のインスタンスを作成し、このオブジェクトを新しいサーバーのルート ディレクトリとして構成します。ここで再び SetInfo を呼び出して、情報をメタベースに保存します。この段階まで問題がなければ、最後にサーバー オブジェクトの Start メソッドを呼び出します。</P>
+
+<H6>解説</H6>
+
+<P>このサンプルの主なステートメント群は、それぞれ独自にエラーコードをチェックしています。これは、一般にツールを作成する場合でも重要ですが、IIS メタベースを使用するツールにとっては特に重要です。</P>
+
+<H6>スクリプトの場所</H6>
+
+<P>このスクリプトは、インターネット サービス ディレクトリの ...\iissamples\sdk\admin\mkwebsrv.vbs に含まれています。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

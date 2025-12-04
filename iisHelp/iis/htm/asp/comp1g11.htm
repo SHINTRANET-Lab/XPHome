@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Browscap.ini ファイル</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><a name="_browscap.ini_file"></a>Browscap.ini ファイル</H2>
+
+<P>Browscap.ini ファイルでは、任意の数のブラウザのプロパティ定義を宣言できます。また、クライアントのブラウザが定義の一覧に含まれていない場合に使用する既定値も設定できます。 </P>
+
+<P>各ブラウザ定義に対して、HTTP User Agent ヘッダー、およびそのヘッダーに関連付けるプロパティと値を設定します。HTTP User Agent ヘッダーの形式の詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank><b><span class=le>World Wide Web Consortium Web サイト</span></b></a>で入手できる HTTP の仕様書を参照してください。</P>
+
+<P>Browscap.ini ファイルを変更した後に、変更を有効にするには IIS サービスを再起動する必要があります。</P>
+
+<H6>構文</H6>
+
+<P>[; <I>comments</I>]</P>
+
+<P>[HTTPUserAgentHeader] </P>
+
+<P>[parent = <I>browserDefinition</I>]</P>
+
+<P>[<I>property1</I> = <I>value1</I>]</P>
+
+<P>...</P>
+
+<P>[<I>propertyN</I> = <I>valueN</I>] </P>
+
+<P><B>[Default Browser Capability Settings]</B></P>
+
+<P>[<I>defaultProperty1</I> = <I>defaultValue1</I>]</P>
+
+<P>...</P>
+
+<P>[<I>defaultPropertyN</I> = <I>defaultValueN</I>] </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>comments</I></DT>
+
+<DD>セミコロン (;) で始まる行です。BrowserType オブジェクトはコメントを無視します。コメントは browscap.ini ファイル内の任意の場所で使用できます。 <BR>
+</DD>
+
+<DT><I>HTTPUserAgentHeader</I></DT>
+
+<DD>HTTP User Agent ヘッダーを指定します。このヘッダーは、<I>propertyN</I> に指定された browser プロパティ値ステートメントに関連付けられます。Browscap.ini ファイルには、複数のブラウザ定義を格納できます。各定義の先頭には一意の <I>HTTPUserAgentHeader</I> 値を指定します。
+
+<P class=tl><I>HTTPUserAgentHeader</I> では、ワイルドカード文字として、0 個以上の文字を表すアスタリスク (*) 文字、および 1 文字を表す (?) 文字を使用できます。
+
+
+<P class=tl>たとえば、<I>HTTPUserAgentHeader</I> に次の文字列を指定したとします。
+</DD>
+</DL>
+
+<P><CODE>&nbsp;&nbsp;[Mozilla/4.0 (compatible; MSIE 5.0;* Windows NT)]</CODE></P>
+
+<P><CODE>&nbsp;</CODE></P>
+
+<P class=tl>この文字列は、次のすべての User Agent ヘッダーに一致します。</P>
+
+<P><CODE>&nbsp;&nbsp;[Mozilla/4.0 (compatible; MSIE 5.0; Windows NT)]</CODE></P>
+
+<P><CODE>&nbsp;&nbsp;[Mozilla/4.0 (compatible; MSIE 5.0; AK; Windows NT)]</CODE></P>
+
+<P><CODE>&nbsp;&nbsp;[Mozilla/4.0 (compatible; MSIE 5.0; SK; Windows NT)]</CODE></P>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>BrowserType オブジェクトは、最初に User Agent ヘッダーと正確に一致する <I>HTTPUserAgentHeader</I> の値を検出しようとします。これに失敗した場合は、ワイルドカード文字を使用して一致するものを検出しようとします。</P>
+
+<P class=tl>ワイルドカード文字を含む複数のブラウザ定義が User Agent ヘッダーと一致する場合、BrowserType オブジェクトは User Agent ヘッダーと最も一致する定義のプロパティを返します。最も一致するとは、置換する文字数が最も少ないことを意味します。
+
+<DL>
+<DT><I>browserDefinition </I></DT>
+
+<DD>親ブラウザとして使用するブラウザの HTTP User Agent ヘッダー文字列を指定する、省略可能なパラメータです。現在のブラウザ定義は、親ブラウザの定義で宣言されたプロパティの値をすべて継承します。これは、新しいバージョンのブラウザのプロパティを定義するときに役立ちます。通常、新しいバージョンでは、前リリースのプロパティの大部分をそのまま使用するためです。継承したプロパティの値を上書きするには、構文 <I>propertyN </I>= <I>valueN</I> を使用してプロパティに新しい値を明示的に設定します。 <BR>
+</DD>
+
+<DT><I>propertyN</I></DT>
+
+<DD>設定するブラウザ プロパティの名前を指定する省略可能なパラメータです。この名前は、英字で始まる 255 文字以内の文字列でなければなりません。Browscap.ini ファイル内の各ブラウザ定義には、プロパティ値のステートメントを必要な数だけ指定できます。たとえば、ユーザーのブラウザが VBScript をサポートしているかどうかのみをアプリケーションで確認する場合、各ブラウザ定義に必要なプロパティ ステートメントは 1 つだけです。
+
+<P>次の表は、指定可能なプロパティの一部を示しています。
+
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=29%><B>プロパティ</B></TD>
+<TD class=blue width=71%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>ActiveXControls</B></TD>
+<TD width=71%>ブラウザが ActiveX<sup>&reg;</sup> コントロールをサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Backgroundsounds</B></TD>
+<TD width=71%>ブラウザが効果音をサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Beta</B></TD>
+<TD width=71%>ブラウザがベータ版かどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Browser</B></TD>
+<TD width=71%>ブラウザ名を指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Cdf</B></TD>
+<TD width=71%>ブラウザが Web キャスティングのためのチャンネル定義形式をサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Cookies</B></TD>
+<TD width=71%>ブラウザが cookie をサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Frames</B></TD>
+<TD width=71%>ブラウザがフレームをサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Javaapplets</B></TD>
+<TD width=71%>ブラウザが Java アプレットをサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Javascript</B></TD>
+<TD width=71%>ブラウザが JScript をサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Platform</B></TD>
+<TD width=71%>ブラウザを実行するプラットフォームを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Tables</B></TD>
+<TD width=71%>ブラウザが表をサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Vbscript</B></TD>
+<TD width=71%>ブラウザが VBScript をサポートしているかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=29%><B>Version</B></TD>
+<TD width=71%>ブラウザのバージョン番号を指定します。</TD>
+</TR>
+</TABLE><BR>
+
+<BR>
+</DD>
+
+<DT><I>valueN</I></DT>
+
+<DD><I>propertyN</I> の値を指定する省略可能なパラメータです。既定値は文字列です。整数を指定するには、値の前にシャープ記号 (#) を付けます。ブール値を指定する場合は、TRUE または FALSE を使用します。<BR>
+</DD>
+
+<DT><I>defaultPropertyN</I></DT>
+
+<DD>省略可能なパラメータです。定義された <I>HTTPUserAgentHeader</I> のいずれの値もブラウザから送信された HTTP User Agent ヘッダーと一致しない場合に、既定値を割り当てるブラウザ プロパティの名前を指定します。<BR>
+</DD>
+
+<DT><I>defaultValueN</I></DT>
+
+<DD><I>defaultPropertyN</I> の値を指定する省略可能なパラメータです。既定値は文字列です。整数を指定するには、値の前にシャープ記号 (#) を付けます。ブール値を指定する場合は、TRUE または FALSE を使用します。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>次の例は、親タグによって、2 番目のブラウザ定義が最初のブラウザ定義から値を継承します。したがって、Microsoft<sup>&reg;</sup> Internet Explorer 5.x の定義は、Microsoft<sup>&reg;</sup> Internet Explorer 5.0 の定義のプロパティをすべて継承します (<CODE>frames=TRUE</CODE>、<CODE> tables=TRUE</CODE>、<CODE>cookies=TRUE</CODE> など)。また、<CODE>platform=WinNT</CODE> 行でプラットフォーム固有の情報を追加します。</P>
+
+<P>--- BrowsCap.ini ---</P>
+
+<PRE><CODE>;;ie 5.0
+[IE 5.0]
+browser=IE
+Version=5.0
+majorver=#5
+minorver=#0
+frames=TRUE
+tables=TRUE
+cookies=TRUE
+backgroundsounds=TRUE
+vbscript=TRUE
+javascript=TRUE
+javaapplets=True
+ActiveXControls=TRUE
+Win16=False
+beta=False
+AK=False
+SK=False
+AOL=False
+ 
+;;ie 5.x
+[Mozilla/4.0 (compatible; MSIE 5.*; Windows NT)]
+parent=IE 5.0
+version=5.0
+minorver=0
+platform=WinNT
+ 
+; Default Browser 
+[*]
+browser=Default
+frames=FALSE 
+tables=TRUE 
+cookies=FALSE 
+backgroundsounds=FALSE 
+vbscript=FALSE 
+javascript=FALSE 
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

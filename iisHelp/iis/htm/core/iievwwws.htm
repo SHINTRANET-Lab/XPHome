@@ -1,0 +1,574 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web サービス イベント</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS の Windows イベントによってログ収集される Web サービス イベントのメッセージとその ID の一覧を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="wwwevents">Web サービス イベント</a></h1>
+
+<p><strong>認証</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>マップ ファイル %1 の読み込みエラー、エラー %2</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>ユーザー %1 ログオン失敗 :  %2</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>ダイジェスト認証 : ユーザー "%1" の無効な認証、領域 "%2"</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>ダイジェスト認証 : 不明なユーザー "%1"、領域 "%2"</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>ダイジェスト認証 : ユーザー "%1" の認証遅延、領域 "%2"</td>
+</tr>
+</table>
+
+<p><strong>ログ収集</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>ディスクがいっぱいになったため、%1 の IIS ログの収集はシャットダウンされました。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>IIS ログの収集はディレクトリ %1 を作成できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>IIS ログの収集はファイル %1 を作成できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>%1 の IIS ログの収集は再開されました。</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>IIS ODBC ログの収集はデータ ソース %1 に接続できませんでした。エラー テキストは [%2] です。</td>
+</tr>
+<tr>
+<td align="center">100</td>
+<td>次のエラーのため、サーバーは Windows NT アカウント '%1' をログオンできませんでした : %2 このデータはエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">101</td>
+<td>次のエラーのため、サーバーはディレクトリ '%2' に仮想ルート '%1' を追加できませんでした : %3 このデータはエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">102</td>
+<td>次のエラーのため、サーバーは SQL ログ用の ODBC32.DLL を読み込めませんでした : %1 このデータはエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">103</td>
+<td>サーバーは、ユーザー名 %3 の ODBC データ ソース %1、テーブル %2 を開けませんでした。ODBC エラーは %4 です。データがエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">104</td>
+<td>ログのために指定されたパラメータが長すぎます。フィールド : %1、データ : %2。</td>
+</tr>
+<tr>
+<td align="center">105</td>
+<td>サーバーは管理ツールのディスカバリ情報を登録できませんでした。管理ツールからこのサーバーが見えない可能性があります。データがエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">106</td>
+<td>InetLog コンテキストの作成に失敗しました。データがエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">107</td>
+<td>ログ情報の構成が間違っているため、ログ オブジェクトは作成されませんでした。</td>
+</tr>
+<tr>
+<td align="center">108</td>
+<td>サーバーはログ ファイルのディレクトリ %1 を見つけられませんでした。このデータはエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">109</td>
+<td>ログ記録を書き込み中にエラーが発生したため、サーバーはログの要求を中断しました。データがエラー コードです。エラー コード テキスト : %1。</td>
+</tr>
+<tr>
+<td align="center">110</td>
+<td>サーバーはログの要求を再開しました。</td>
+</tr>
+<tr>
+<td align="center">111</td>
+<td>サービスはソケット ライブラリを初期化できませんでした。データがエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">112</td>
+<td>サービスはモジュール %1 を見つけられませんでした。このデータはエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">113</td>
+<td>インスタンス %1 には無効なバインディング記述子 %2 があります。</td>
+</tr>
+<tr>
+<td align="center">114</td>
+<td>インスタンス %1 にはセキュリティ保護された無効なバインディング記述子 %2 (ホスト名無視) があります。</td>
+</tr>
+<tr>
+<td align="center">115</td>
+<td>サービスはインスタンス %1 をバインドできませんでした。このデータはエラー コードです。</td>
+</tr>
+<tr>
+<td align="center">116</td>
+<td>サービスの メタベース パス '%1' を開けませんでした。データがエラー コードです。</td>
+</tr>
+</table>
+
+<p><strong>メタベース</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>サーバー %1 インスタンス %2 の IIS メタベース構成にアクセスできません。エラー %3</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>サーバー %1 インスタンス %2 は HTTP クエリに応答しません。エラー %3</td>
+</tr>
+<tr>
+<td align="center">800</td>
+<td>メタデータが初期化されていません。</td>
+</tr>
+<tr>
+<td align="center">801</td>
+<td>指定されたメタデータが見つかりませんでした。</td>
+</tr>
+<tr>
+<td align="center">802</td>
+<td>メタデータの記憶領域に指定されているバージョンを認識できませんでした。</td>
+</tr>
+<tr>
+<td align="center">803</td>
+<td>指定したメタオブジェクトへのパスが見つかりませんでした。メタオブジェクトと関連付けられたメタデータは無視されました。</td>
+</tr>
+<tr>
+<td align="center">804</td>
+<td>メタオブジェクトまたはメタデータが 2 度以上指定されました。重複部は無視されました。</td>
+</tr>
+<tr>
+<td align="center">805</td>
+<td>無効なメタデータが指定されましたが、無視されました。</td>
+</tr>
+<tr>
+<td align="center">806</td>
+<td>ターゲットのサーバーとセキュリティ保護された通信チャンネルを確立できませんでした。</td>
+</tr>
+<tr>
+<td align="center">807</td>
+<td>文字列に要求したパスが挿入されませんでした。データがハンドルより高レベルのオブジェクトである可能性があります。</td>
+</tr>
+<tr>
+<td align="center">808</td>
+<td>METADATA_SECURE の属性は GetData メソッドでデータ項目から削除することはできません。セキュリティ保護されたデータを削除するには DeleteData メソッドを使用してください。</td>
+</tr>
+<tr>
+<td align="center">809</td>
+<td>バックアップに先立つメタデータの保存に失敗しました。前のバージョンのデータをバックアップしました。</td>
+</tr>
+</table>
+
+<p><strong>ODBC ログ収集</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>クエリを実行できません %1。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>入力されたフォームには %1 エントリが必要です。フォームにこのエントリを入力してから、もう一度実行してください。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>クエリ ファイル %1 を開けませんでした。ファイルが存在しないか、またはこのファイルを開くアクセス許可がありません。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>テンプレート ファイル %1 を開けませんでした。ファイルが存在しないか、またはこのファイルを開くアクセス許可がありません。</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>テンプレート ファイルには "else" タグが含まれていますが、これに対応する "if" タグがありません。</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td>テンプレート ファイルには "endif" タグが含まれていますが、これに対応する "if" タグがありません。</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td>テンプレート ファイルに、型の異なるパラメータを伴った表記が含まれています。このエラーは、たとえば "if" タグを文字列と数字の比較に使用すると発生します。</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td>テンプレート ファイルに、パラメータが文字列以外で "CONTAINS" 演算子を使った表記が含まれています。"CONTAINS" は文字列値にのみ有効です。</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td>テンプレート ファイルに、引用符を使った文字列表現がありますが、終わりの引用符が足りません。</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td>テンプレート ファイルに、認識できない演算子を使った表現が含まれています。有効な演算子は、"GT"、"LT"、"EQ" および "CONTAINS" です。</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td>クエリ ファイルに、認識できないフィールド %1 が含まれています。</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td>クエリ ファイルには、有効でかつ空でない "Datasource:"フィールドおよび "SQLStatement:"フィールドを含めてください。</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td>クエリを実行するために、odbc32.dll ライブラリを読み込めませんでした。サーバーに ODBC が正しくインストールされているか確認してください。</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td>指定された HTTP メソッドはサポートされていません。POST と GET だけがサポートされています。</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td>クエリの実行エラー %1。</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td>IDC ファイルの SQLStatement フィールドが最大数を超えました。</td>
+</tr>
+</table>
+
+<p><strong>サーバー側インクルード</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>仮想パス '%1' を解決できません。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>SSI ファイル '%1' の処理中にエラーが発生しました。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>無効な SSI タグ。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>flastmod( '%1' ) を実行できません : Win32 エラー コード = %2。</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>fsize( '%1' ) を実行できません : Win32 エラー コード = %2。</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td>変数 '%1' が見つかりません。</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td>変数 '%1' を評価できません。</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td>SSI 機能はサポートされていません。</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td>SSI ファイル '%1' の処理エラー : Win32 エラー コード = %2。</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td>SSI ファイル '%1' は正常に処理されました。</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td>SSI ファイル '%1' を処理できませんでした。</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td>CMD '%1' を実行できませんでした : Win32 エラー コード = %2。</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td>スクリプト '%1' を実行できませんでした : Win32 エラー コード = %2。</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td>ISAPI 拡張 '%1' を実行できませんでした。</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td>このドキュメントは (URL) に移動しました。</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td>子プロセスの環境のセットアップをできませんでした : Win32 エラー コード = %1。</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td>子プロセスのパイプのセットアップをできませんでした : Win32 エラー コード = %1。</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td>プロセスを作成できませんでした : Win32 エラー コード = %1。</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td>#EXEC コマンドがタイム アウトになりました。</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td>ISAPI アプリケーションの #EXEC に失敗しました : Win32 エラー コード = %1。</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td>ISAPI アプリケーションは (URL) への送信を試みました。</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td>実行権がないため、#EXEC '%1' を実行できません。</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td>アクセスが拒否されたため、'%1' を処理できません。</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td>サーバー側のインクルード ファイルにそのファイル自身が含まれているか、またはサーバー側のインクルード ファイルのネストが深すぎます。</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td>ISA により、サポートされていない ServerSupportFunction() オプションが使用されました。</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td>CMD のオプションは #EXEC の呼び出しに対して使用可能になっていません。</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td>#EXEC 呼び出しは、この仮想パスで使用できません。</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td>'%1' に再帰する #INCLUDE チェーンがあります。</td>
+</tr>
+</table>
+
+<p><strong>Web サービス</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>HTTP サーバーはセキュリティを初期化できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>HTTP サーバーはソケット ライブラリを初期化できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>HTTP サーバーは、メモリ不足のため初期化できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td>HTTP サーバーは、メイン接続ソケットを作成できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td>HTTP サーバーは、ホスト %1 のユーザーに対するクライアント接続オブジェクトを作成できませんでした。このユーザーとの接続は終了します。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td>HTTP フィルタ DLL %1 の読み込みに失敗しました。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td>パラメータが '%2' の URL '%1' で始まるスクリプトが、構成されたタイムアウト時間内に応答しませんでした。HTTP サーバーはこのスクリプトを終了します。</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td>サーバー側のインクルード ファイル '%1' を処理中に HTTP サーバーでエラーが発生しました。エラーは '%2' でした。</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td>ISAPI アプリケーション '%1' の処理中に、HTTP サーバーでハンドルされない例外が発生しました。</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td>HTTP サーバーは ISAPI アプリケーション '%1' を読み込めませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td>サーバー側のインクルード ファイルにそのファイル自身が含まれているか、またはサーバー側のインクルード ファイルのネストが深すぎます。</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td>サーバー インスタンス上のフィルタ '%1' を読み込もうとしましたが、SF_NOTIFY_READ_RAW_DATA フィルタ通知が必要です。グローバル フィルタとして読み込まれなければなりません。</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td>IIS の以前のバージョンとの互換性のため、フィルタ '%1' はレジストリからグローバル フィルタとして読み込まれました。<a href="iiabuti.htm">IIS スナップイン</a>でフィルタを制御するには、レジストリからフィルタを削除して、インターネット サービス マネージャでグローバル フィルタとして追加してください。レジストリ内のフィルタは "HKLM\System\CurrentControlSet\Services\W3Svc\Parameters\Filter DLLs" に格納されています。</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td>アクセス許可が不足していたため、サーバーはファイル %1 を読み取れませんでした。</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td>サーバーは SSL 接続のライセンスを取得できませんでした。</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td>処理外のコンポーネントのクラッシュ数が制限を超えたため、サーバーはアプリケーション '%1' の  要求サービスを停止しました。</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td>サーバーはアプリケーション '%1' を終了できませんでした。エラーは '%2' でした。</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td>サーバーはファイル %1 を読み取れませんでした。ファイルが存在しません。</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td>サーバーはファイル %1 を読み取れませんでした。戻された Windows 32 エラーは %2 でした。</td>
+</tr>
+<tr>
+<td align="center">32</td>
+<td>サーバーはファイル %1 を読み取れませんでした。ファイルが %2 の最大許容量を超えています。</td>
+</tr>
+<tr>
+<td align="center">33</td>
+<td>サーバーはファイル %1 を読み取るバッファを割り当てられませんでした。</td>
+</tr>
+<tr>
+<td align="center">34</td>
+<td>サーバーは URL %1 (ファイル名 %2) に PUT できませんでした。このファイルは失われた可能性があります。バックアップ コピーを %3 として保存しました。</td>
+</tr>
+<tr>
+<td align="center">35</td>
+<td>サーバーは URL %1 (ファイル名 %2) に PUT できませんでした。</td>
+</tr>
+<tr>
+<td align="center">36</td>
+<td>サーバーはアプリケーション '%1' の読み込みに失敗しました。エラーは '%2' でした。</td>
+</tr>
+<tr>
+<td align="center">37</td>
+<td>処理外のアプリケーション '%1' を予期せず終了しました。</td>
+</tr>
+</table>
+
+<p><strong>Web Application Manager (WAM)</strong></p>
+
+<table border="1" cellpadding="4" cellspacing="1">
+<tr>
+<td align="center" bgcolor="#C0C0C0"><strong>イベント ID</strong></td>
+<td align="center" bgcolor="#C0C0C0"><strong>説明</strong></td>
+</tr>
+<tr>
+<td align="center">201</td>
+<td>WAM インスタンスはプロセス ID %1 で起動しました。</td>
+</tr>
+<tr>
+<td align="center">202</td>
+<td>WAM インスタンスはプロセス %1 中で起動できませんでした。このデータはエラーです。</td>
+</tr>
+<tr>
+<td align="center">203</td>
+<td>プロセス %1 の WAM インスタンスはシャットダウンされています。</td>
+</tr>
+<tr>
+<td align="center">204</td>
+<td>ISAPI アプリケーション '%1' の処理中に、HTTP サーバーでハンドルされない例外が発生しました。</td>
+</tr>
+<tr>
+<td align="center">205</td>
+<td>HTTP サーバーは ISAPI アプリケーション '%1' を読み込めませんでした。このデータはエラーです。</td>
+</tr>
+</table>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;イベント ログまたは Web ブラウザにメッセージが表示されるときは、上記一覧の中の %s、%X、%1、%2 などの記号の部分には、実際に発生したときのエラーの詳細が記載されます。</p>
+ 
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

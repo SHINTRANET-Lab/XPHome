@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html DIR=LTR><head><title>IIS スナップインでのタイムアウト設定</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="time2">IIS スナップインでのタイムアウト設定</a></h1>
+
+<p>このページは、「<a href="iitime.htm">タイムアウト リファレンス</a>」の補足です。</p>
+
+<hr><!--1-->
+
+<big><a name="1">AspScriptTimeout 値を変更するには</a></big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li> [構成] をクリックし、次に [アプリケーションのオプション] タブをクリックします。</li>
+<li> [ASP のスクリプトのタイムアウト] ボックスに値を入力します。</li>
+</ol>
+
+<pre><font face="ＭＳ Ｐゴシック">
+または
+IIS スナップイン | [プロパティ] | [構成] | [アプリケーションのオプション] | [ASP のスクリプトのタイムアウト]
+</font></pre>
+
+<hr><!--2-->
+
+<big><a name="2">AspSessionTimeout 値を変更するには</a></big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li> [構成] をクリックし、次に [アプリケーションのオプション] タブをクリックします。</li>
+<li> [セッションのタイムアウト] ボックスに値を入力します。</li>
+</ol>
+
+<hr><!--3-->
+
+<big><a name="3">ConnectionTimeout 値を変更するには</a></big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[Web サイト] タブをクリックします。</li>
+<li> [接続のタイムアウト] ボックスに値を入力します。</li>
+</ol>
+
+<hr><!--4-->
+
+<big><a name="4">CGITimeout 値を変更するには</a></big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li> [構成] をクリックし、[処理オプション] タブをクリックします。</li>
+<li> [CGI スクリプトのタイムアウト] ボックスに値を入力します。</li>
+</ol>
+
+<hr><!--5-->
+
+<big><a name="5">Web サイトのプロセッサ使用率をログ収集するには </a></big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、プロセッサ使用率をログ収集する Web サイトを選択します。</li>
+<li>Web サイトのプロパティ シートを開き、[パフォーマンス] タブをクリックします。</li>
+<li>[プロセス調整を有効にする] を選択し、このサイトに対する CPU 時間の上限をパーセントで入力します。 </li>
+<li>CpuLimitPriority と CpuLimitProcStop を有効にする場合は、[制限を強制する] をクリックします。</li>
+</ol>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サービス固有のレジストリ エントリ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="サービス固有のレジストリ エントリについての詳細情報など、システム レジストリのリファレンス ページです。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37746497">サービス固有のレジストリ エントリ</a></h1>
+
+<p>次のパラメータは、サービスごとにレジストリに格納され、サービス固有の動作を定義しますが、各サービスで同じ名前が付いています。</p>
+
+<p>レジストリ パス</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br> \CurrentControlSet<br> &nbsp;\Services<br> &nbsp;&nbsp;<em>\ServiceName</em><br> &nbsp;&nbsp;&nbsp;\Parameters</p>
+
+<p><em>ServiceName</em> は、次のようになります。</p>
+
+<p>MSFTPSVC  (FTP サービス)<br> W3SVC (WWW サービス)</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>AllowGuestAccess </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 1、0 <br><strong>既定値 :</strong> 1 (有効)</td></tr>
+<tr><td width=100%>インターネット サービスで Guest ログオンを許可するかどうかを指定します。新しいユーザーがログオンすると、サーバーは、そのユーザーが Windows の Guest ユーザーとしてログオンしているかどうかをチェックします。Guest による接続の場合、インターネット サービスはこのパラメータの値に応じて新しい接続を許可または拒否します。管理が不十分なサイトでは、Guest アクセスを許可することにより問題が起きる場合があります。Windows システムを既定の設定でインストールすると、Guest アカウントにはシステムに対するすべての種類のアクセス権が許可されます。この既定の設定では容易にセキュリティが破られる可能性があるため、値を 0 に設定してスイッチを無効にすることをお勧めします。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>EnableSvcLoc </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong> 範囲 :</strong> 1、0 <br><strong>既定値 :</strong> 1 (有効)</td></tr>
+<tr><td width=100%>IIS のサービスは、各サービス ロケータに登録し、<a href="iiabuti.htm">IIS スナップイン</a>から認識できるようにします。このパラメータは、登録の有効と無効を制御します。値を 0 に設定すると、サービスは登録されません。値を 1 に設定すると、サービス ロケータにサービスが登録されます。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<p>次の <strong>LanguageEngines</strong> というレジストリ キーは、既定ではインストールされません。このキーを使用するには、次の位置にこのキーを作成する必要があります。</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br> &nbsp;\CurrentControlSet<br> &nbsp;&nbsp;\Services<br> &nbsp;&nbsp;&nbsp;\W3SVC<br> &nbsp;&nbsp;&nbsp;&nbsp;\ASP<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\LanguageEngines<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<em>LanguageName</em><br></p>
+
+<p>値 : Write REG_SZ: Response.WriteEquiv |<br> 値 : WriteBlock REG_SZ:Response.WriteBlockEquiv |</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>LanguageEngines </strong><br>REG_STRING</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 文字列<br><strong>既定値 :</strong> なし</td></tr>
+<tr><td width=100%>このパラメータは、<strong>Object.Method</strong> 形式の構文をサポートしていないスクリプト言語を、Active Server Pages の主要スクリプト言語 (ASP スクリプト デリミタ &lt;% ... %&gt; の中で使われる言語) として指定します。<code><em>LanguageName</em></code> は使用する言語です。<code>Response.WriteEquiv</code> および <code>Response.WriteBlockEquiv</code> は、それぞれ <strong>Response.Write</strong> および <strong>Response.WriteBlock</strong> と同等の機能を持つ構文です。パイプ記号 (|) は、通常、<strong>Response.Write</strong> メソッドと <strong>Response.WriteBlock</strong> メソッドで処理される、式と HTML ブロックを送信するために ASP が使用する挿入コードです。追加スクリプト言語をインストールすると、この記号が自動的に挿入されます。使用するスクリプト言語が空白や改行文字を区別して扱う場合は、このレジストリの値を設定しても、主要スクリプト言語として使用できない場合があります。代わりに、ブラウザに HTML ブロックを手動で書き込むか、タグ付きのスクリプト ブロック (&lt;SCRIPT&gt; ... &lt;/SCRIPT&gt;) の中にその言語の関数を書き込み、ほかの言語から呼び出す方法があります。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC
+</layer></span>
+
+</font>
+</body>
+</html>

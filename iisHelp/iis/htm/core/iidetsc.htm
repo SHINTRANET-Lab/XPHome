@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>権限のないアクセスを検出する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="権限のないアクセスを検出するための、セキュリティ ログの保存および参照方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37697000">権限のないアクセスを検出する</a></h1>
+
+<p>IIS ログと Windows セキュリティ ログを参照して、長期にわたってセキュリティ イベントを監視できます。さらに、Microsoft 管理コンソールを使って、Windows セキュリティ ログを表示できます。IIS ログは、テキスト エディタやワード プロセッサで表示できます。IIS ログの表示の詳細については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</p>
+
+<p>Windows セキュリティ ログでは、権限のないアクセスを検出できます。これらのアクセスは、警告またはエラーのログ エントリとして表示されます。これらのログを保存して、後で使用することもできます。監査の詳細については、Windows のマニュアルを参照してください。</p>
+
+<big>Windows セキュリティ ログを参照してセキュリティに関連する問題を検出するには</big><br>
+
+<ol>
+<li>[スタート] ボタンをクリックし、[設定] をポイントします。次に、[コントロール パネル] をクリックします。[管理ツール] フォルダをダブルクリックし、[コンピュータの管理] をダブルクリックします。</li>
+<li>[システム ツール] をクリックします。</li>
+<li>[イベント ビューア] をクリックします。</li>
+<li>[セキュリティ] をクリックします。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;使用しているユーザー アカウントに、セキュリティ ログを表示する権限が与えられていない場合、セキュリティ ログを表示できません。これは、ドメインレベルのセキュリティ ポリシーが、ローカル コンピュータレベルのセキュリティ ポリシーに優先する、つまりローカル コンピュータの管理者としてログオンすることは可能でも、セキュリティ ログへのアクセス権は与えられていないからです。このアクセス権は、ネットワーク管理者に連絡して取得してください。セキュリティ ポリシーの詳細については、Windows のマニュアルを参照してください。</p>
+
+
+<li>疑わしいセキュリティ イベントのログを調査します。次のイベントに注目します。</li>
+
+<ul>
+<li>無効になったログオン。</li>
+<li>権限の使用の失敗。</li>
+<li>.bat ファイルまたは .cmd ファイルのアクセスや修正に失敗している。</li>
+<li>セキュリティ権限または監査ログの変更を試みた。</li>
+<li>サーバーのシャットダウンを試みた。</li>
+</ul>
+</ol>
+
+
+
+<big>Windows セキュリティ ログを保存するには</big><br>
+<ol>
+<li>[スタート] ボタンをクリックし、[設定] をポイントします。次に、[コントロール パネル] をクリックします。[管理ツール] フォルダをダブルクリックし、[コンピュータの管理] をダブルクリックします。</li>
+<li>[システム ツール] をクリックします。</li>
+<li>[イベント ビューア] をクリックします。</li>
+<li>[セキュリティ] をクリックします。</li>
+<li>[操作] メニューの [ログ ファイルの名前を付けて保存] をクリックします。</li>
+<li>[名前を付けて保存] ダイアログ ボックスで、ファイルを保存するディレクトリを選択し、ファイル名を入力します。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;セキュリティ ログは、イベント (.evt) ファイル、テキスト (.txt) ファイル、またはカンマで区切られた (.csv) ファイルとして保存できます。</p>
+</ol>
+
+
+
+<big>保存した Windows セキュリティ ログを開くには</big><br>
+<ol>
+<li>[スタート] ボタンをクリックし、[設定] をポイントします。次に、[コントロール パネル] をクリックします。[管理ツール] フォルダをダブルクリックし、[コンピュータの管理] をダブルクリックします。</li>
+<li>[システム ツール] をクリックします。</li>
+<li>[イベント ビューア] をクリックします。</li>
+<li>[セキュリティ] をクリックします。</li>
+<li>[操作] メニューの [ログ ファイルを開く] をクリックします。</li>
+<li>開くファイルをクリックします。</li>
+<li>[ログの種類] ボックスの [セキュリティ] をクリックします。</li>
+<li>[開く] をクリックし、ビューアのファイルを開きます。</li>
+</ol>
+
+<big>IIS ログ ファイルを参照してセキュリティに関連する問題を検出するには</big><br>
+<ol>
+<li>メモ帳などのテキスト エディタで、ログ ファイルを開きます。ログ ファイルの詳細については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</li>
+<li>疑わしいセキュリティ イベントのログを調査します。次のイベントに注目します。</li>
+
+<ul>
+<li>実行可能ファイルまたはスクリプトを実行しようとするコマンドで、繰り返し失敗している。(Scripts ディレクトリを詳細に監視する必要があります。) </li>
+<li>同じ IP アドレスからログオンを試み、何回も失敗している。ネットワーク トラフィックを増加させたり、ほかのユーザーのアクセスを妨害することを意図している可能性があります。
+<li>.bat ファイルまたは .cmd ファイルのアクセスや修正に失敗している。</li>
+<li>実行可能ファイルが置いてあるディレクトリに、権限を持たずにファイルのアップロードを試みる。</li>
+</ul>
+</ol>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

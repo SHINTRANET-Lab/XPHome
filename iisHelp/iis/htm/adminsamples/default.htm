@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>管理スクリプト</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="管理スクリプトについて説明します。 管理スクリプトを使用して、管理者はコマンド ラインによる Web サイトまたは FTP サイトの管理を行うことができます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1><a name="adminscripts">管理スクリプト</a></h1>
+
+<p>管理スクリプトは、管理者が、コマンドライン スクリプティング ユーティリティ Cscript.exe を使って Web サーバーの設定を変更するために使用するツールです。 </p>
+
+<p>ここでは、次の項目について説明します。</p>
+<ul>
+<li>「<strong><A HREF="iiasabt.htm">管理スクリプトについて</A></strong>」では、管理スクリプトの機能を説明します。</li>
+<li>「<strong>スクリプト マニュアル</strong>」では、各スクリプトを、その用法やパラメータ情報も含めて説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+<ul>
+<li>管理者用のリファレンス情報については、「<a href="../core/iiadmnrf.htm">管理者用リファレンス</a>」を参照してください。</li>
+<li>ASP スクリプティングについては、「<a href="../asp/iiwawelc.htm">Active Server Pages</a>」を参照してください。</li>
+</ul>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+<title>MIME マップ</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<body bgcolor=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>MIME マップ</strong></p>
+
+<p>Multipurpose Internet Mail Extensions (MIME) マッピングを構成するには、[新しいタイプ] をクリックします。ファイルに関連付ける拡張子を、[拡張子] 列に入力します。[コンテンツの種類 (MIME)] ボックスには、<em>&lt;mime type&gt;  / &lt;filename&gt;</em> の形式で、MIME の種類とファイル名の拡張子を入力します。</p>
+
+<p>MIME マッピングを削除するには、[登録されているファイルの種類] ボックスでファイル タイプを選択し、[削除] をクリックします。</p>
+
+<p>マスタ プロパティ シートで MIME マッピングを設定すると、そのコンピュータの Web サイトおよびディレクトリに同じマッピングが適用されます。Web サイトやディレクトリの MIME マッピングは、変更可能です。表示されるのはすべての MIME マッピングの値ではなく、変更された値のみです。マスタ プロパティを再度適用すると、変更した Web サイトやディレクトリのプロパティの値がすべてマスタ プロパティの値に置換されます。つまり、プロパティはマージされません。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

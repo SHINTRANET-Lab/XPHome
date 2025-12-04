@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS セキュリティ チェックリスト</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="コンピュータのセキュリティに改善の余地があるかどうかを見直すための、チェックリストです。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><A NAME="H1_324736748"></A>IIS セキュリティ チェックリスト</h1>
+<p>イントラネットに情報を公開するコンピュータのセキュリティを強化するには、いくつかの方法があります。システムのセキュリティに不安がある場合は、このチェックリストを参考にして、セキュリティ面の強化が可能かどうかを判断してください。
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;きわめて重要性の高い情報を保護する場合には、セキュリティ専門のコンサルタント会社のサポートを受けることをお勧めします。コンサルタント会社を利用すると、適切なセキュリティ ポリシーとプロシージャを確立できます。</p>
+
+<p>
+<a href="#NTsecurity">Windows のセキュリティ</a><br> <a href="#IISsecurity">インターネット インフォメーション サービスのセキュリティ</a><br> <a href="#Physicalsecurity">物理的セキュリティ</a><br> <a href="#Personnelsecurity">人的セキュリティ</a><br> <a href="#MoreInfo">セキュリティに関する詳細情報</a>
+</p>
+
+<h2><a name="NTsecurity">Windows のセキュリティ</a></h2>
+<p>IIS のセキュリティ機能は、Windows のセキュリティ機能に基づいています。Windows で次の設定を行うと、Web サイトを保護できます。</p>
+
+<h3>ファイル システム</h3>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr bordercolor="#000000">
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>NTFS を使用する</strong></td>
+	<td>NTFS システムの方が FAT システムよりもセキュリティが強化されます。コンピュータのハード ディスクを FAT から NTFS に変換する方法については、Windows のマニュアルを参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>ディレクトリのアクセス権を確認する</strong></td>
+	<td>既定では、Windows は、新しいフォルダを作成し、Everyone グループにフル コントロール アクセス権を割り当てます。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>IUSR_<em>computername</em> アカウントにアクセス制御を設定する</strong></td>
+	<td>匿名ユーザーからのアクセスを制限します。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>別のディレクトリに実行可能ファイルを保存する</strong></td>
+	<td>管理者によるアクセス権の割り当てと監査が容易になります。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>ネットワーク ドライブの NTFS アクセス権をチェックする</strong></td>
+	<td>既定では、Windows は、新しい共有リソースを作成し、Everyone グループにフル コントロール アクセス権を割り当てます。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+<h3>ユーザー アカウント</h3>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>ユーザー アカウントを頻繁に確認する</strong></td>
+	<td>有効な管理者が作成していない新しいアカウント、つまり IUSR_<em>computername</em> アカウントに正しい権利が与えられているかチェックします。サイトに匿名アクセスできるすべてのユーザーは、このアカウントに割り当てられた権利を持っています。また、監査を使用して、セキュリティ ポリシーがいつ、だれによって変更されたかを監視することもできます。詳細については、「<a href="iiaudsc.htm">監査</a>」を参照してください。</td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>推測が困難なパスワードを選ぶ</strong></td>
+	<td>パスワードは、大文字と小文字、数字、および特殊記号を組み合わせると、推測しにくくなります。</td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>厳密なアカウント ポリシーを維持する</strong></td>
+	<td>重要なユーザー アカウントとグループに与えられているアクセス権の種類を記録します。この中には、セキュリティ ポリシーを変更できるユーザーの情報が含まれます。</td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>Administrators グループのメンバシップを制限する</strong></td>
+	<td>通常、このグループには、コンピュータへのフル アクセス権が与えられています。</td>
+</tr>
+<tr><td>&nbsp;</td></tr><tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>Administrator アカウントにパスワードを割り当てる</strong></td>
+	<td>既定では、Administrator のアカウント用のパスワードは空白です。セキュリティを強化するには、既に説明したように、推測されにくいパスワードをこのアカウントに設定します。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+
+<h3>サービスとその他の問題</h3>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>最小限のサービスを実行する</strong></td>
+	<td>必要最低限のサービスのみ実行します。サービスを増やすことにより、そこから悪意のある第三者の侵入と攻撃を受けやすくなります。サービスとセキュリティの詳細については、『Microsoft&nbsp;Windows&nbsp;2000 Server リソース キット』を参照してください。</td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>監査を有効にする</strong></td>
+	<td>監査は、セキュリティで保護されたファイルまたは重要なファイルへのアクセスを追跡するための有効なツールです。セキュリティ ポリシーの変更など、サーバーのイベントを追跡する場合にも、監査を使用できます。監査ログは、保存して、後で使用することもできます。詳細については、「<a href="iiaudsc.htm">監査</a>」を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>コンピュータをリモート管理する場合は、暗号化を使用する</strong></td>
+	<td>通常、リモート管理には、Administrator アカウントのパスワードなどの重要な情報のやり取りが含まれます。オープン ネットワークにおいて重要な情報を保護するには、Secured Sockets Layer (SSL) の暗号化を使用します。詳細については、「<a href="iiencsc.htm">暗号化</a>」を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>下位レベルのアカウントを使用してインターネットを参照する</strong></td>
+	<td>Administrator や Power User のアカウント、またはそのほかの上位レベルの権限を持つアカウントを使用してインターネットを参照すると、悪意のある第三者の攻撃を受けやすくなります。同じ理由から、プライマリ ドメイン コントローラ (PDC) からインターネットを参照しないようにしてください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>重要なファイルとレジストリを頻繁にバックアップする</strong></td>
+	<td>データの安全性を保証できるセキュリティ対策はありません。詳細については、『Microsoft&nbsp;Windows&nbsp;2000 Server リソース キット』を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>定期的にウイルス チェックを実行する</strong></td>
+	<td>オープン ネットワーク上のコンピュータは、コンピュータ ウイルスに感染する危険性があります。定期的なウイルス検査により、データの損失を防ぐことができます。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+
+
+
+
+
+<h2><a name="IISsecurity">インターネット インフォメーション サービスのセキュリティ</a></h2>
+<p>IIS では、認証や Web アクセス権などの最前線での Web サイトのセキュリティを提供します。</p>
+
+<h3>認証</h3>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>できる限り安全性の高い認証形式を使用する</strong></td>
+	<td>クライアントがサポートする認証形式の中で、最も安全性の高い形式を使用します。たとえば、統合 Windows 認証およびダイジェスト認証は、基本認証より安全性が高くなります。安全性の高い認証には、クライアント証明書も使用できます。認証の詳細については、「<a href="iiathsc.htm">認証</a>」を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>一対一のマッピングと多対一のマッピング</strong></td>
+	<td>一対一と多対一のマッピング メソッドを必要に応じて使用し、Windows のユーザー アカウントにクライアント証明書をマップすることができます。一対一のマッピングは高レベルの確実性を提供しますが、サーバーにクライアント証明書のコピーを格納する必要があります。多対一のマッピングは実装が簡単で、サーバーにクライアント証明書のコピーを格納する必要はありません。詳細については、「<a href="iimapsc.htm">ユーザー アカウントにクライアント証明書をマップする</a>」を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+<h3>Web アクセス権</h3>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>Web アクセス権と NTFS アクセス権を同期させる</strong></td>
+	<td>Web アクセス権と NTFS アクセス権が同期していない場合、この 2 つのうちで制限の厳しい方のアクセス権が使用されます。同期化は、手動またはアクセス許可ウィザードで実行できます。Web アクセス権の詳細については、「<a href="iiacnsc.htm">アクセス制御について</a>」を参照してください。NTFS アクセス権については、Windows のマニュアルを参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>できる限り制限の厳しいアクセス権を使用する</strong></td>
+	<td>たとえば、Web サイトを情報の表示専用にしている場合は、読み取りアクセス権のみを割り当てます。ディレクトリやサイトに ASP アプリケーションが含まれている場合は、スクリプトおよび実行可能ファイルの実行アクセス権ではなく、スクリプトのみのアクセス権を割り当てます。詳細については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>書き込みアクセス権、スクリプトおよび実行可能ファイルの実行アクセス権を使用する</strong></td>
+	<td>アクセス権をこの組み合わせで使用する場合は、特に注意してください。有害な実行可能ファイルを第三者がサーバーへアップロードし、実行するおそれがあります。詳細については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+<h2><a name="Physicalsecurity">物理的セキュリティ</a></h2>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>コンピュータを離れるときは、ワークステーションをロックする</strong></td>
+	<td>コンピュータを操作しないときは、CTRL + ALT + DELETE のショートカット キーを押し、[コンピュータのロック] をクリックして、コンピュータをロックします。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>パスワードによる保護オプションを設定してスクリーン セーバーを使用する</strong></td>
+	<td>席を離れたときにコンピュータを使用されないように、スクリーン セーバーの実行までの時間を短く設定します。アニメーションのスクリーン セーバーは、サーバーのパフォーマンスを低下させることがあるため、模様のないスクリーン セーバーを選びます。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>コンピュータをロックする</strong></td>
+	<td>安全な部屋でコンピュータをロックしておくと、悪意のある第三者にアクセスされる危険が減少します。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+<h2><a name="Personnelsecurity">人的セキュリティ</a></h2>
+<table border="0">
+<tr>
+	<td></td>
+	<td width="40%" bgcolor="#C0C0C0">&nbsp;<strong>対策</strong></td>
+	<td width="60%" bgcolor="#C0C0C0">&nbsp;<strong>理由</strong></td>
+</tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>異なる Administrator アカウントを使用する</strong></td>
+	<td>管理者権限を持つ各ユーザーには、別々のユーザー アカウントとパスワードを与える必要があります。これにより、変更が加えられた場合の追跡が容易になります。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>機密保持契約を結ぶ</strong></td>
+	<td>機密保持契約を結び、責任を明確にします。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>定期的にアカウントを再割り当てする</strong></td>
+	<td>ユーザー アカウント情報が危険にさらされる確率を低くするために、Administrator の権限やほかの上位レベルの権限を持つユーザーに新しいユーザー アカウントを割り当てます。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+	<td align="RIGHT" valign="TOP">&nbsp;</td>
+	<td align="LEFT" valign="TOP"><strong>未使用アカウントをすばやく削除する</strong></td>
+	<td>元従業員や元ベンダーがネットワークにアクセスする危険が減少します。</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+<h2><a name="MoreInfo">セキュリティに関する詳細情報</a></h2>
+<p>Web サイトのセキュリティに関する詳細情報は、次のリソースで提供されています。</p>
+<ul>
+<li>Microsoft&nbsp;Windows&nbsp;2000 Server リソース キット</li>
+<li><a href="http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=security" target=_blank>Microsoft Security Web サイト</a></li>
+<li><a HREF="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=RSA&ar=securitystandards&pver=1.0" target="_blank">RSA Web サイト</a></li>
+<li><a href="http://www.microsoft.com/isapi/redir.dll?prd=win2000&ar=security&sbp=Server&pver=5.0&os=Win2000" target=_blank>Windows Security Web サイト</a></li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</font>
+
+</BODY>
+</HTML>

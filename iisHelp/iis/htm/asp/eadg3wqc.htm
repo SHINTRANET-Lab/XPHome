@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>セキュリティ コンテキストを渡す</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_passing_security_context"></A><SUP></SUP>セキュリティ コンテキストを渡す</H1>
+
+<P>Windows では、ログオンしたユーザーそれぞれに対し、セキュリティ コンテキストが確立されます。IIS でクライアントからの要求が受信されると、IIS により要求が認証され、クライアントが偽装されます。クライアントが偽装されている間、IIS は認証されたクライアントのセキュリティ コンテキストの範囲内で動作します。このセキュリティ コンテキストは、要求処理が行われている間に、クライアント要求の性質に応じて変更される可能性があります。次の図は、要求処理の間に役割を果たすさまざまなセキュリティ コンテキストを示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/seccont.gif" ALT="セキュリティ コンテキスト" BORDER=0></P>
+
+<P>IIS プロセス (inetinfo) のセキュリティ コンテキストは、LocalSystem として知られています。しかし、IIS によりクライアント要求が処理されていると、要求を生成したクライアントのコンテキストが偽装されます。クライアントが匿名認証方式で認証されている場合、インプロセス アプリケーションのセキュリティ コンテキストは IUSR_<I>machinename</I>、独立したプロセスで実行されているアプリケーションのセキュリティ コンテキストは IWAM_<I>machinename</I> になります。これ以外の認証方式でクライアントが認証されている場合、セキュリティ コンテキストはクライアントの個々のアカウントにマップされます。</P>
+
+<P>ASP を使用して COM コンポーネントのインスタンスを作成した場合、この COM コンポーネントはこれを作成した .asp ファイルのセキュリティ コンテキストを継承します。IIS によってこのコンポーネント インスタンスが壊される場合も、ほとんどのインスタンスで、.asp ファイルのセキュリティ コンテキストが使用されます。ただし、この現象が起こらない場合が、少なくとも 1 つあります。COM コンポーネントにセッション スコープ (つまり、<B>Session</B>("mysesscomp") = <B>Server.CreateObject</B>("MyComps.Comp1")) が与えられていて、コンポーネントが破棄される前に、このセッションがタイム アウトした場合、IIS は、.asp ファイルにアクセスしたクライアントのコンテキストではなく、IIS 自身のセキュリティ コンテキスト (LocalSystem) を使用して、コンポーネントを破棄しようとします。このコンポーネントが保護されたリソースにアクセスしたときに、このリソースが解放されていなかった場合、システムが全体にわたって二次的な影響を受けます。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

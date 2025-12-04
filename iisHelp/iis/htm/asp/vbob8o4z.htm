@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Expires</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_expires"></A><SUP></SUP>Expires</H4>
+
+<P>Expires プロパティは、ブラウザにキャッシュされているページの有効期限が切れるまでの時間を指定します。有効期限が切れる前にユーザーが同じページに戻ってきた場合は、キャッシュされているページが表示されます。</P>
+
+<H6>構文</H6>
+
+<P><B>Response.Expires </B>[<B>=</B> <I>number</I>]</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>number</I></DT>
+
+<DD>ページの有効期限が切れるまでの分数です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>.asp ファイルが Response.Expires を呼び出すと、IIS は サーバー時間を示す HTTP ヘッダーを作成します。クライアントまたはサーバーのいずれかの時間設定が正しくないか、またはタイム ゾーンが異なるなどの理由で、クライアントのシステム時間がサーバーのシステム時間よりも進んでいる場合、パラメータを 0 に設定してもページの有効期限が直ちに切れることはありません。Response.ExpiresAbsolute プロパティを使用すると、ページの有効期限がすぐに切れるようにすることができます。あるいは、Expires プロパティに負の数を使用することもできます。たとえば、次のように指定したとします。</P>
+
+<PRE><CODE>&lt;%Response.Expires = -1 %&gt;
+</CODE></PRE>
+
+<P>この場合、Response オブジェクトの有効期限はすぐに切れます。</P>
+
+<P>同じページ内で Response.Expires を複数回呼び出している場合は、サーバーは有効期限が最も早く切れる設定を適用します。</P>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob1qzp.htm"><B>ExpiresAbsolute</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

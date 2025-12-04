@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html dir=LTR><head><title>インターネット サービス マネージャ (HTML)</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<p><strong><a name="internetservicemanager">インターネット サービス マネージャ (HTML)</a></strong></p>
+
+<p>HTML バージョンのインターネット サービス マネージャは、ブラウザのウィンドウを分割したかたちで表示されます。ブラウザのナビゲーションのウィンドウにはメニュー ビューが表示され、コンテンツのウィンドウにはツリー ビューが表示されます。</p>
+
+<p> ツリー ビューには、管理できるすべてのコンピュータ、Web サイト、FTP サイト、仮想ディレクトリ、およびディレクトリが表示されます。ツリー ビューで項目を選択すると、その項目が強調表示されます。項目を選択してメニュー ビューでコマンドを選択すると、強調表示された項目にそのコマンドが適用されます。</p> 
+
+<p>メニュー ビューには、次のコマンドが表示されます。</p>
+
+<P><strong>[新規作成]</strong><br> Web サイトまたは FTP サイトを新規に作成します。</P>
+
+<p><strong>[削除]</strong><br> Web サイト、FTP サイト、仮想ディレクトリ、またはディレクトリを削除します。</p>
+
+<p><strong>[名前の変更]</strong><br> Web サイト、FTP サイト、または仮想ディレクトリの名前を変更します。</p>
+
+<p><strong>[プロパティ]</strong><br> ツリー ビューで選択した項目のプロパティを表示します。</p>
+
+<p><strong>[開始]</strong><br> 選択した Web サイトまたは FTP サイトを開始します。</p>
+
+<p><strong>[停止]</strong><br> 選択した Web サイトまたは FTP サイトを停止します。</p>
+
+<p><strong>[一時停止]</strong><br> 選択した Web サイトまたは FTP サイトを一時停止します。</p>
+
+<p><strong>[再開]</strong><br> 選択した Web サイトまたは FTP サイトの一時停止を解除します。</p>
+
+<p><strong>[アクセス許可ウィザード]</strong><br> Web と FTP のアクセス権、その他のアクセス権、および認証方法を設定します。</p>
+
+<p><strong>[マスタ プロパティ]</strong><br> 既存または新規作成するすべての Web サイトおよび FTP サイトが使用する既定値を設定します。 </p>
+
+<p><strong>[構成のバックアップ]</strong><br> インターネット サービス マネージャ (HTML) のセッション中に構成したすべての設定を保存します。</p>
+
+<p><strong><font color="#FF0000">注意</font></strong>&nbsp;&nbsp;&nbsp;セキュリティが確保されていない場合、インターネット サービス マネージャ (HTML) を安全に利用するには、Secure Sockets Layer (SSL) を使って接続する必要があります。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

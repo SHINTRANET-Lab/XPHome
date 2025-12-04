@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web サイト管理について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="基本的なディレクトリ構造、リダイレクト、サーバー側インクルード、サーバー側スクリプト作成など、Web サイトの管理の概念と方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="webmanage">Web サイト管理について</a></h1>
+
+<P>経費をかけて作った新しい Web サイトを配置した後に、すべてのページから会社のロゴ マークが抜けていることがわかったり、コンピュータのトラブルのために、多数のユーザーを代替の Web サイトに送るように突然頼まれたとします。このような問題は、Web サイトを管理する際に発生する問題の一部にすぎません。効果的に Web サイトを管理できるように、最も一般的な管理作業や緊急事態に対処するための基本的なツールや手順が多数提供されています。</P>
+
+<H2><A NAME="H2_448401500"></A>開始する</H2>
+
+<p>最初に、公開するドキュメントが入っているディレクトリを指定し、Web サイトをセットアップします。Web サーバーは、これらの指定されたディレクトリに入っていないドキュメントは公開できません。したがって、Web サイトを配置するには、まずファイルの編成方法を決定します。その後で、<a href="iiabuti.htm">IIS スナップイン</a>を使用して、どのディレクトリがサイトの一部であるかを指定します。</p>
+
+<p>特別なディレクトリ構造を作成せず直接開始するときに、すべてのファイルがインターネット インフォメーション サービスを実行するコンピュータの同じハード ディスクに格納されている場合は、既定のホーム ディレクトリである C:\Inetpub\Wwwroot に Web ファイルをコピーするだけで、直ちにドキュメントを公開できます(FTP サイトについては、C:\Inetpub\Ftproot にファイルをコピーします)。これでイントラネット ユーザーは、「http://<EM>servername</EM>/<EM>filename</EM>」という URL を入力してこれらのファイルにアクセスできます。複数のサイトを運用して個々の Web コンテンツを構成する方法については、ここで説明する手順を参照してください。ファイルの既定の場所の変更方法、および別のハード ディスク上またはネットワーク上の別のコンピュータにあるディレクトリを追加する方法が説明されています。</P>
+
+<h2><a name="homedirectories">ホーム ディレクトリを定義する</a></h2>
+
+<p>どの Web サイトまたは FTP サイトにも、1 つのホーム ディレクトリが必要です。&quot;ホーム ディレクトリ&quot; は、公開するページの中心となる場所です。ホーム ディレクトリには、利用者を歓迎するメッセージおよびサイト内のほかのページへのリンクを含む、ホーム ページまたはインデックス ファイルが含まれます。ホーム ディレクトリは、サイトのドメイン名またはサーバー名にマップされています。たとえば、サイトのインターネット ドメイン名が www.microsoft.com であり、ホーム ディレクトリが C:\Website\Microsoft の場合、ブラウザは http://www.microsoft.com という URL を使ってホーム ディレクトリのファイルにアクセスします。イントラネットでは、サーバー名が AcctServer の場合、ブラウザは http://acctserver という URL を使ってホーム ディレクトリのファイルにアクセスします。</p>
+
+<p>既定のホーム ディレクトリは、インターネット インフォメーション サービスをインストールしたときに作成されます。また、新しい Web サイトを作成したときに指定できます。ホーム ディレクトリは変更できます。変更方法については、「<a href="iicodirh.htm">ホーム ディレクトリを変更する</a>」を参照してください。</p>
+
+<h2><a name="virtualdirectories">仮想ディレクトリとは</a></h2>
+
+<p>ホーム ディレクトリに含まれない任意のディレクトリから公開するには、仮想ディレクトリを作成します。&quot;仮想ディレクトリ&quot; とは、実際にはホーム ディレクトリに含まれていないが、クライアントのブラウザからは含まれているように見えるディレクトリのことです。</p>
+
+<p>仮想ディレクトリには &quot;エイリアス&quot; が設定されています。エイリアスとは、仮想ディレクトリにアクセスするために Web ブラウザが使用する名前です。通常、エイリアスは、ディレクトリのパス名より短いため、入力する際に便利です。エイリアスを使うことでセキュリティを高めることができます。ユーザーは、ファイルが存在するサーバー上の物理的な位置がわからないため、その情報を使って仮想ディレクトリのファイルを変更することができません。エイリアスを使うことで、サイト内でのディレクトリの移動も容易になります。ディレクトリの URL を変更する代わりに、エイリアスとディレクトリの物理的な位置とのマッピングを変更するだけで済みます。</p>
+
+<p>たとえば、社内のイントラネット上で、マーケティング グループのために Web サイトをセットアップする場合を考えます。次の表は、ファイルの物理的な格納位置と、ファイルにアクセスするための URL のマッピングを示したものです。</p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th align=middle width="33%" bgcolor="#C0C0C0">物理的な<br>位置</th>
+<th align=middle width="33%" bgcolor="#C0C0C0">エイリアス</th>
+<th align=middle width="34%" bgcolor="#C0C0C0">URL <br>パス</th></tr>
+<tr>
+<td valign="top" width="33%">C:\Inetpub\wwwroot</td>
+<td valign="top" width="33%">&quot;ホーム ディレクトリ&quot; (なし)</td>
+<td valign="top" width="34%">http://Sales</td></tr>
+<tr>
+<td valign="top" width="33%">\\Server2\SalesData\ProdCustomers</td>
+<td valign="top" width="33%">Customers</td>
+<td valign="top" width="34%">http://Sales/Customers</td></tr>
+<tr>
+<td valign="top" width="33%">C:\Inetpub\wwwroot\Quotes</td>
+<td valign="top" width="33%"><em>なし</em></td>
+<td valign="top" width="34%">http://Sales/Quotes</td></tr>
+<tr>
+<tr>
+<td valign="top" width="33%">C:\Inetpub\wwwroot\OrderStatus</td>
+<td valign="top" width="33%"><em>なし</em></td>
+<td valign="top" width="34%">http://Sales/OrderStatus</td></tr>
+<tr>
+<td valign="top" width="33%">D:\Mktng\PR</td>
+<td valign="top" width="33%">PR</td>
+<td valign="top" width="34%"> http://Sales/PR</td></tr>
+</table>
+
+<p>インターネット インフォメーション サービス スナップインでは、仮想ディレクトリと物理ディレクトリ (エイリアスが設定されていないディレクトリ) の両方が表示されます。仮想ディレクトリは、隅に地球のマークが付いたフォルダ アイコンで示されます。次の図は、上の例の Web サイトを示しています。/Customers と /PR は仮想ディレクトリです。</p>
+
+<img src="iicodir1.gif" alt="インターネット インフォメーション サービス スナップインで、事例の Web サイトの仮想ディレクトリが、隅に地球の付いたフォルダで表示されている図" align=bottom width="144" height="100">
+<p>
+<p>
+
+<p>簡単な Web サイトの場合、仮想ディレクトリを追加する必要はありません。すべてのファイルを、サイトのホーム ディレクトリに置くことができます。複雑なサイトの場合、またはサイトの構成部分によって異なる URL を指定する場合は、必要に応じて仮想ディレクトリを追加できます。作成方法については、「<a href="iicodirv.htm">仮想ディレクトリを作成する</a>」を参照してください。</p>
+
+<h2><a name="browserredirects">リダイレクトによるリルート要求</a></h2>
+
+<p>ブラウザが Web サイトのページを要求すると、Web サーバーは URL で示されるページの位置を検索し、そのページをブラウザに返します。Web サイト上でページを移動する場合、移動したページの旧 URL を参照するすべてのリンクを修正することが難しい場合もあります。新しい URL で目的のページを確実に見つけるには、Web サーバーが新しい URL をブラウザに渡すように設定します。ブラウザは新しい URL を使用して、もう一度ページを要求します。この処理を、&quot;ブラウザの要求をリダイレクトする&quot; または &quot;別の URL にリダイレクトする&quot; といいます。ページの要求をリダイレクトする処理は、郵便サービスで転送先の住所を使用する処理と似ています。郵便局に転送先住所を届け出ておくと、転居前の住所宛てに送られた手紙や小包は、新しい住所に配達されます。</p> 
+   
+<p>Web サイトを更新しているあいだ一時的にサイトの一部を利用できないようにする場合、または仮想ディレクトリの名前を変更し、元の仮想ディレクトリのファイルへのリンクで新しい仮想ディレクトリの同じファイルにアクセスできるようにする場合は、URL のリダイレクトを使用します。リダイレクトの方法については、「<a href="iicodirr.htm">要求をディレクトリにリダイレクトする</a>」を参照してください。</p>
+
+
+<H2><A NAME="otherfeatures">そのほかの便利なツール</A></H2>
+
+<P>Web コンテンツが要求されてからブラウザに返されるまでに、コンテンツを動的に変更すると便利な場合がよくあります。インターネット インフォメーション サービスには、このための機能が 2 つあります。1 つはサーバー側インクルード (SSI)、もう 1 つは Microsoft&reg;&nbsp;Active Server Pages (ASP) のスクリプト環境です。  </P>
+
+<P>動的タイムスタンプの追加から、ファイル要求時の特殊なシェル コマンドの実行まで、Web サイトの管理作業全般を SSI を使って実行することができます。&quot;ディレクティブ&quot; と呼ばれる SSI コマンドは、デザイン時に Web ページに追加されます。ページが要求されると、Web サーバーは Web ページにあるすべてのディレクティブを解析して実行します。通常使われる SSI ディレクティブは、ファイルのコンテンツを Web ページに挿入、つまり &quot;インクルード&quot; します。たとえば、Web ページの広告を継続的に更新する必要がある場合、SSI を使って広告の HTML ソースを Web ページにインクルードすることができます。広告を更新するには、広告の HTML ソースが含まれているファイルを変更するだけで済みます。SSI を使うためにスクリプト言語を理解する必要はありません。正しいディレクティブ構文を使うだけです。</P>
+
+<P>手順や参照項目の詳細については、「<A HREF="iisiwelc.htm">サーバー側インクルード</A>」を参照してください。</P> 
+
+<P>ASP は、動的に Web コンテンツを変更するための &quot;サーバー側&quot; のスクリプト環境です。ASP は、本来 Web アプリケーションの開発用にデザインされたものですが、Web サイトの管理をさらに簡単にするための機能も多数含みます。たとえば、ASP を使って、Web サイトを利用したユーザーの追跡や、ブラウザの機能に基づいた Web コンテンツのカスタマイズができます。ただし、SSI とは異なり、ASP では VBScript や JScript などのスクリプト言語を使う必要があります。 </P>
+
+<P>詳細については、「<A HREF="iiaspat.htm">ASP を使用して Web サイト コンテンツを管理する</A>」を参照してください。</P>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+icons
+</layer></span>
+
+</font>
+</body>
+</html>

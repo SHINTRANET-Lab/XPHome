@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS アーキテクチャ</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_internet_information_services_architecture"></A><SUP></SUP>IIS アーキテクチャ</H1>
+
+<P>IIS は、Windows DNA アーキテクチャに必要不可欠な部分です。IIS の重要な役割は、HTTP を通じてシステムにアクセスしているクライアントを、DHTML、ASP などそのほかの Windows DNA サービスにリンクすることです。さらに、IIS には、カスタム アプリケーション アーキテクチャを定義するために、システム開発者が拡張できる基本的な機能が用意されています。</P>
+
+<P>ここでは、次の項目について説明します。
+
+<UL type=disc>
+	<LI>「<A HREF="eadg9s3d.htm">IIS のコア機能</A>」では、Web アプリケーションの構築に使用できる基本的な機能について説明します。</li>
+
+	<LI>「<A HREF="eadg8tdf.htm">IIS とコンポーネント サービス</A>」では、トランザクション用 ASP アプリケーションの処理の分離、管理、および調整を行うために使用する機能の概要を説明します。</li>
+
+	<LI>「<A HREF="eadg346f.htm">IIS 要求処理</A>」では、要求の種類を判断するために使用する評価手順について説明します。</li>
+</UL>
+
+<P>ここでは、基本的な機能について説明し、IIS アーキテクチャと、Windows DNA の残りの部分との関係を定義します。また、IIS が HTTP 要求を処理する方法の概要も説明します。</P>
+<script language="JavaScript">
+<!--
+function MM_showHideLayers() { //v1.2
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+//-->
+</script>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+<!--
+function OpenIt(whichlink){
+    whichlink.style.display="block"; 
+    }
+//-->
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+<!--
+function CloseIt(whichlink){
+    whichlink.style.display="none"; 
+    }
+//-->
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+<!--
+function ScrollIt(){
+    window.scrollBy(0,1000); 
+    }
+//-->
+</SCRIPT>
+
+<br>
+<div id="picture" style="position:relative; left:0px; top:-5px; width:350px; height:300px; z-index:0; visibility: visible">
+
+  <div id="main" style="position:absolute; left:0px; top:22px; width:268px; height:248px; z-index:1" onClick="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','hide','document.layers[\'metabase\']','document.all[\'metabase\']','hide','document.layers[\'com\']','document.all[\'com\']','hide','document.layers[\'da\']','document.all[\'da\']','hide')" onMouseOver="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','hide','document.layers[\'metabase\']','document.all[\'metabase\']','hide','document.layers[\'metaclick\']','document.all[\'metaclick\']','hide'); javascript:CloseIt(one)"><img src="art/pict1.GIF" width="268" height="248"></div>
+
+    
+  <div id="aspclick" style="position:absolute; left:10px; top:146px; width:113px; height:62px; z-index:2; visibility: visible" onClick="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','show','document.layers[\'metaclick\']','document.all[\'metaclick\']','show'); javascript:OpenIt(one); ScrollIt()" onmouseover="this.style.cursor='hand'"><img src="art/pict1_a.GIF" width="113" height="62"></div>
+    
+  <div id="comclick" style="position:absolute; left:170px; top:82px; width:87px; height:41px; z-index:5; visibility: visible" onClick="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','hide','document.layers[\'metabase\']','document.all[\'metabase\']','hide','document.layers[\'com\']','document.all[\'com\']','show','document.layers[\'da\']','document.all[\'da\']','hide')" onMouseOut="MM_showHideLayers('document.layers[\'com\']','document.all[\'com\']','hide')" onmouseover="this.style.cursor='hand'"> 
+    <img src="art/pict1_c.GIF" width="87" height="41"></div>
+
+  <div id="asp" style="position:absolute; left:0px; top:201px; width:227px; height:98px; z-index:7; visibility: hidden" onMouseOut="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','hide')"><img src="art/pict3.GIF" width="400" height="218"></div>
+
+  <div id="metabase" style="position:absolute; left:115px; top:264px; width:79px; height:31px; z-index:8; visibility: hidden" onMouseOut="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','hide','document.layers[\'metabase\']','document.all[\'metabase\']','hide','document.layers[\'metaclick\']','document.all[\'metaclick\']','hide')"><img src="art/pict4.GIF" width="217" height="203"> 
+  </div>
+
+  <div id="com" style="position:absolute; left:149px; top:-15px; width:129px; height:107px; z-index:9; visibility: hidden"><img src="art/pict5.GIF" width="129" height="107"></div>
+
+  <div id="metaclick" style="position:absolute; left:21px; top:367px; width:93px; height:44px; z-index:10; visibility: hidden" onClick="MM_showHideLayers('document.layers[\'metabase\']','document.all[\'metabase\']','show')" onMouseOver="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','show'); this.style.cursor='hand'"></div>
+    
+  <div id="daclick" style="position:absolute; left:170px; top:221px; width:87px; height:41px; z-index:9; visibility: visible" onClick="MM_showHideLayers('document.layers[\'asp\']','document.all[\'asp\']','hide','document.layers[\'metabase\']','document.all[\'metabase\']','hide','document.layers[\'com\']','document.all[\'com\']','hide','document.layers[\'da\']','document.all[\'da\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'da\']','document.all[\'da\']','hide')" onmouseover="this.style.cursor='hand'"><img src="art/pict1_b.GIF" width="87" height="41"></div>
+
+  <div id="da" style="position:absolute; left:249px; top:64px; width:142px; height:199px; z-index:10; visibility: hidden"><img src="art/pict2.GIF" width="151" height="199"></div>
+</div>
+<p ID="one" STYLE = "display:none"> 
+          <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

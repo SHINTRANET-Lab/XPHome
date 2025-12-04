@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Charset</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_charset"></A><SUP></SUP>Charset</H4>
+
+<P>Charset プロパティは、Response オブジェクトの Content-Type ヘッダーに文字セット名 (ISO-LATIN-7 など) を追加します。</P>
+
+<H6>構文</H6>
+
+<P>Response.<B>Charset</b>(<i>CharsetName</i>)</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>CharsetName</I></DT>
+
+<DD>ページの文字セットを指定する文字列です。文字セット名は Response オブジェクトの Content-Type ヘッダーに追加されます。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>このプロパティは、指定した文字列が有効な文字セットを表すかどうかにかかわらず、任意の文字列をヘッダーに挿入します。</P>
+
+<P>Response.Charset を含むタグが同じページに複数存在する場合、各 Response.Charset は直前の <i>CharsetName</i> を置換します。結果として、文字セットは、ページの一番最後の Response.Charset で指定した値で設定されます。</P>
+
+<P>Web ページのコードページが Web クライアントにおけるシステムの既定値と一致する場合、Web ページでのコードページ設定は必須ではありませんが、設定することをお勧めします。</P>
+
+<P>Response.CodePage、Session.CodePage、@CodePage、または AspCodePage メタベース プロパティを使用してコードページを設定している場合、Response.Charset も設定する必要があります。コードページの値は、応答を作成する段階で、データのエンコード方式を IIS に指定します。Charset の値は、応答を表示する段階で、データのデコード方式をブラウザに指定します。Response.Charset の <I>CharsetName</I> は、コードページの値と一致していることが必要です。一致していない場合、ブラウザで表示する文字が統一されません。<I>CharsetNames</I> と対応するコードページの値の一覧については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&sbp=workshop&pver=6.0&ar=reference&sba=charsets " target=_blank>MSDN Web Workshop</a> の Preferred Charset Label および FamilyCodePage の各列を参照してください。</P>
+
+<P>複数言語対応の Web サイトなどで、各種のコードページおよび文字セットを使用する Web ページを作成し、テストする場合、テストを実施するクライアント コンピュータには、表示したい各言語の言語パックをインストールしておく必要があります。言語パックは、[コントロール パネル] の [地域のオプション] からインストールします。</P>
+
+<P>Macintosh のコンピュータでは、既定の U.S. 文字セットは ISO-LATIN-1 ではありません。ドキュメントを提供するときは、パーソナル Web サーバー for Macintosh が Macintosh の文字セットを ISO-LATIN-1 に自動的に変換します。U.S. バージョンでは、Response.Charset を使用しない限り、すべてのページが U.S. Macintosh の文字セットであると見なされます。Response.Charset を使用して文字セットを変更する場合は、パーソナル Web サーバー for Macintosh による文字セットの変換は行われません。</P>
+
+<H6>例</H6>
+
+<P>Response.Charset プロパティが指定されていない ASP ページの Content-Type ヘッダーは、次のようになります。 </P>
+
+<PRE><CODE>content-type:text/html
+</CODE></PRE>
+
+<P>同じ .asp ファイルで、次のように指定されているとします。</P>
+
+<PRE><CODE>&lt;% Response.Charset= "ISO-LATIN-7" %&gt;
+</CODE></PRE>
+
+<P>この場合、Content-Type ヘッダーは次のようになります。</P>
+
+<PRE><CODE>content-type:text/html; charset=ISO-LATIN-7
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob150l.htm"><B>CodePage</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

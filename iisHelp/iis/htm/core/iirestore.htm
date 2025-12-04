@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>メタベースを復元する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="メタベースを復元する">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="bak">メタベースを復元する</a></h1>
+
+<p>IIS では、<a href="iiabuti.htm">IIS スナップイン</a>にある [構成のバックアップ/復元] に新しい機能を提供しています。Web サイトの管理者は、パスワードで保護されているか、保護されていないかに関わらず、メタベースのバックアップをほかのコンピュータに復元できます。また、レガシー方式を使用してメタベースを復元することもできます。</p>
+
+<h3>メタベース バックアップの復元に関する問題</h3>
+
+<p><big>パスワードで保護されたバックアップの復元</big>&nbsp;&nbsp;&nbsp; パスワードはメタベース バックアップ内に格納され、セッション キーの暗号化に使用されます。このパスワードは変更できません。パスワードを忘れた場合は、そのメタベース バックアップは復元できなくなります。
+
+<p><big>パスワードで保護されていないバックアップの復元</big>&nbsp;&nbsp;&nbsp; メタベース バックアップはパスワードで保護されていません。パスワードで保護されていないバックアップは、誰でも任意のコンピュータに復元できます。 
+
+<p><big>レガシー バックアップの復元</big>&nbsp;&nbsp;&nbsp; レガシー方式では、マシン キー (OS の特定のインストール固有) およびシステム キー (IIS によって生成される) を使用してバックアップを暗号化します。したがって、レガシー メタベース バックアップを復元できるのは、バックアップが作成されたオペレーティング システム (OS) をインストールしている場合のみです。 
+
+<p><big>コンテンツ ファイル</big>&nbsp;&nbsp;&nbsp; [構成のバックアップ/復元] ではコンテンツ ファイルは保存されません。別のサーバーにメタベース バックアップを復元するときには、コンテンツ ファイルをコピーする必要があります。また、コンテンツ ファイルは元のサーバーで使用されていたのと同じドライブ文字上に存在しなければなりません。 
+
+<p><big>SSL 証明書</big>&nbsp;&nbsp;&nbsp; SSL (secure socket layer) 証明書を Web サーバーで使用していて、メタベース バックアップを別の OS インストールに復元する場合は、証明書が利用できないか、インストールされていない場合にはエラーが発生します。サイトの SSL 証明書がない場合は、接続が切断され、IIS で &quot;page unavailable&quot; エラーが表示されます。サーバーでは、次の警告がイベント ログに記録されます。エラーを解決するには、証明書を同じ証明書ストアに再インストールして、IIS を再起動します。証明書を再インストールした後に IIS を再起動できない場合は、引き続きエラー ログが作成され、接続が切断されます。SSL 証明書のインストール方法の詳細については、「<a href="iisslsc.htm">サーバーに SSL をセットアップする</a>」を参照してください。</p>
+
+
+<a name="TorestoreyourMetabaseBackup"><h3>メタベース バックアップを復元するには</h3>
+<ol>
+<li> <a href="iiabuti.htm">IIS スナップイン</a>で、[インターネット インフォメーション サービス] の [コンピュータ] アイコンをクリックします。</li>
+<li>[操作] メニューの [すべてのタスク] をポイントし、[構成のバックアップ/復元] をクリックします。</li>
+<li>[以前のバックアップ] のリストからファイル名を選択して、[復元] をクリックします。パスワードを入力するよう指示された場合は、バックアップを保護するために選択したパスワードを入力します。</li>
+</ol>
+
+<p><a name="RelatedTopics"><strong>関連項目</strong></p>
+<ul>
+<li>メタベースのバックアップの詳細については、「<a href="iitasks.htm">メタベースのバックアップ</a>」を参照してください。</li>
+<li>メタベースのキー名とパス、プロパティの継承、およびセキュリティと信頼性については、「<a href="../asp/aint1aud.htm">IIS メタベースの紹介</a>」を参照してください。</li>
+<li>SSL 証明書のインストール方法の詳細については、「<a href="iisslsc.htm">サーバーに SSL をセットアップする</a>」を参照してください。</li>
+<li>IIS の再起動については、「<a href="iicodira.htm">IIS を再起動する</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+
+
+</body>
+</html>

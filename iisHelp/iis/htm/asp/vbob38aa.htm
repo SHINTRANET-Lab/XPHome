@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>GetLastError</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_getlasterror"></A><SUP></SUP>GetLastError</H4>
+
+<P>GetLastError メソッドは、発生したエラー状況を示す <A HREF="/iishelp/iis/htm/asp/vbob1dtg.htm">ASPError オブジェクト</A> を返します。このメソッドは、.asp ファイルがクライアントにコンテンツを送る前に限り利用できます。</P>
+
+<H6>構文</H6>
+
+<P>Server.<B>GetLastError</B> ()</P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>解説</H6>
+
+<P>ASP アプリケーション用の 500;100 カスタム エラーが定義されている場合は、.asp ファイルを参照します。この場合、アプリケーション内で .asp ファイルを実行している最中にエラーが発生したときは、サーバーはこの ASP ページを <A HREF="/iishelp/iis/htm/asp/vbob9waa.htm">Server.Transfer</A> メソッドを通して自動的に転送します。実行中の ASP アプリケーションから得られる、状態に関するすべての情報は、エラーを処理する .asp ファイルで利用できます。さらに、<A HREF="/iishelp/iis/htm/asp/vbob1dtg.htm"><U>ASPError</U> オブジェクト</A>も利用できるため、エラー処理の設定に使用する .asp ファイルを通してエラーのプロパティを公開することもできます。</P>
+
+<P>既定の Web サイトは、ファイル \iishelp\common\500-100.asp を使用するように構成されています。このファイルは、ASP エラーの処理、または独自のエラー処理の作成のいずれかに使用できます。500;100 カスタム エラーの処理について .asp ファイルを変更する場合は、インターネット インフォメーション サービス スナップインを使用できます。詳細については、「<A HREF="../core/iiprstop.htm">ASP エラー処理を有効にする</A>」を参照してください。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>500;100 カスタム エラーは、IIS で、.asp ファイルまたはアプリケーションの Global.asa ファイルの処理中にエラーが発生した場合に生成されます。 </P>
+
+<H6>例</H6>
+
+<P>次の 3 つの例は、500;100 カスタム エラーを生成するエラーを示しています。エラーには、次の 3 種類があります。
+
+<UL type=disc>
+	<LI>処理前のエラー</li>
+
+	<LI>スクリプト コンパイル時のエラー</li>
+
+	<LI>実行時エラー</li>
+</UL>
+
+<P>最初の例は、処理前のエラーを示しています。これは、IIS がファイルをインクルードしようとしたときに発生するエラーです。このエラーは、インクルード ステートメントのファイル パラメータが不足しているために発生します。2 つ目の例は、スクリプト コンパイル時のエラーを示しています。スクリプトは、For...Next ループのキーワード &quot;next&quot; が不足しているため、スクリプト エンジンによってコンパイルされません。3 つ目の例は、実行時エラーを示しています。これは、スクリプトで 0 による除算を行おうとしたために発生します。 </P>
+
+<P>例 1</P>
+
+<PRE><CODE>&lt;!--#include fil=inc.h  --&gt;
+&lt;%
+  response.write "hello"
+%&gt;
+</CODE></PRE>
+
+<P>例 2</P>
+
+<PRE><CODE>&lt;%
+  dim I
+  for i=1 to 1
+  nxt
+%&gt;
+</CODE></PRE>
+
+<P>例 3</P>
+
+<PRE><CODE>&lt;%
+  dim i,j
+  dim sum
+  sum=0
+  j=0
+
+  for i=1 to 10
+    sum=sum+1
+  next
+
+  sum=sum/j
+%&gt;
+</CODE></PRE>
+
+<H6>対象</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A></P>
+
+<H6>関連項目</H6>
+
+<P>ASPError オブジェクト</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

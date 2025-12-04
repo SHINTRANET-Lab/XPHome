@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>簡単なスクリプト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_simple_scripts"></A><SUP></SUP>簡単なスクリプト</H1>
+
+<P>次のスクリプトでは、ASP スクリプトの作成で使用する基本的なテクニックを示します。アプリケーション開発の経験がないユーザーや、スクリプトを初めて作成するプログラマには、これらのスクリプトが出発点として適しています。</P>
+
+<P>次の一覧から例を選択してください。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps6e5v.asp">変数</A>」では、ASP スクリプトで変数を作成および操作する方法を示します。 </li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps9nfr.asp">ループ処理</A>」では、最も一般的な 3 つのループ構造、For ... Next、Do ... Loop、および While ... Wend の例を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps5l9v.asp">条件演算子</A>」では、If ... Then などの条件演算子を ASP スクリプトで使用する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps5nlf.asp">配列</A>」では、配列を作成、アクセス、および管理する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps4egj.asp">サーバー側インクルード</A>」では、サーバー側インクルードの使用方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps58hf.asp">関数とプロシージャ</A>」では、ASP スクリプトで関数およびプロシージャを作成および利用する方法を示します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

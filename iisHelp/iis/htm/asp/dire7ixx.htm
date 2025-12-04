@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>@CODEPAGE</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="__codepage"></A><SUP></SUP>@CODEPAGE</H2>
+
+<P><B>@CodePage</B> ディレクティブは、Web ページ内でリテラル (静的) 文字列をエンコードする方法を指定します。コード ページは、数字、句読点、およびその他の記号を含む文字セットです。コードページは、各言語によって異なります。日本語やヒンディー語などマルチバイト系の文字がある一方で、英語やドイツ語などシングルバイト系の文字もあります。<B>@CodePage</B> ディレクティブは書き込み専用です。</P>
+
+<P>コード ページは、文字とシングルバイトの値またはマルチバイトの値とを対応付けた表によって表すことができます。ほとんどのコード ページでは、0x00 ～ 0x7F の範囲の文字に対して ASCII 文字セットを共有しています。</P>
+
+<H6>構文</H6>
+
+<P>&lt;% <B>@CODEPAGE</B> = <I>codepage</I> %&gt;</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>codepage</I></DT>
+
+<DD>ASP スクリプト エンジンを実行しているシステムに有効なコード ページを表す符号なし整数です。</DD>
+</DL>
+
+<H6>注</H6>
+
+<P>@CodePage を明示的に設定すると、単一の応答におけるリテラル文字列に影響します。Response.CodePage は、単一応答内の動的文字列に影響し、Session.CodePage は、セッション内のすべての応答内の動的文字列に影響します。</P>
+
+<P>@CodePage がページ内に明示的に設定されていない場合は、AspCodePage メタベース プロパティまたはシステム ANSI コードページによって暗黙的に設定されます。 </P>
+
+<P>応答の本体ごとに、設定できるコードページは 1 つだけです。複数あった場合、不適切な文字が表示されます。2 つのページでコードページを明示的に設定しており、一方のページからもう一方のページを #include、Server.Execute、または Server.Transfer で呼び出している場合、通常は、親ページのコードページが有効になります。この唯一の例外は、Server.Execute 呼び出しの親ページで Response.CodePage が明示的に設定されている場合です。この場合、子ページ内の @CodePage コマンドは親コードページを無効にします。</P>
+
+<P>Response.CodePage または Session.CodePage を明示的に設定する場合は、非リテラル文字列をクライアントに送信する前に設定を行います。同一ページでリテラル文字列と非リテラル文字列を使用する場合、@CodePage のコードページが Response.CodePage のコードページと一致していることを確認します。一致していないと、リテラル文字列と非リテラル文字列のエンコード方式が異なってしまい、正しく表示されません。</P>
+
+<P>Web ページのコードページが Web クライアントにおけるシステムの既定値と一致する場合、Web ページでのコードページ設定は必須ではありませんが、設定することをお勧めします。</P>
+
+<P>ページ内でコードページが設定されている場合、Response.Charset も設定する必要があります。コードページの値は、応答を作成する段階で、データのエンコード方式を IIS に指定します。Charset の値は、応答を表示する段階で、データのデコード方式をブラウザに指定します。Response.Charset の <I>CharsetName</I> は、コードページの値と一致していることが必要です。一致していない場合、ブラウザで表示する文字が統一されません。<I>CharsetNames</I> と対応するコードページの値の一覧については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&sbp=workshop&pver=6.0&ar=reference&sba=charsets " target=_blank>MSDN Web Workshop</a> の Preferred Charset Label および FamilyCodePage の各列を参照してください。</P>
+
+<P>Web ページのファイル形式は、ページ内で使用する @CodePage と一致させる必要があります。Notepad.exe では、ファイルを UTF-8 形式またはシステムの ANSI 形式で保存できます。たとえば、@CodePage が UTF-8 を表す 65001 に設定されている場合、Web ファイルは UTF-8 形式で保存します。@CodePage が 1252 に設定されている場合、Web ファイルは英語かドイツ語システムの ANSI 形式で保存します。システム言語とは異なる言語の ANSI 形式でページを保存する場合、[コントロール パネル] の [地域のオプション] で既定のシステム ロケールを変更できます。たとえば、システム ロケールを日本語に変更した後は、ANSI 形式で保存されるすべてのファイルに日本語のコードページが使用され、日本語のシステム ロケールによってのみ判読可能になります。</P>
+
+<P>異なるコードページおよび文字セットを使用する Web ページを記述してテストしている場合 (たとえば、多言語 Web サイトを作成している場合)、テスト クライアント コンピュータに表示しようとしている各言語の言語パックがインストールされていることが必要です。言語パックは、[コントロール パネル] の [地域のオプション] からインストールします。</P>
+
+<H6>例</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob150l.htm">Response.CodePage</A> の例を参照してください。</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob4ht1.htm">Session.CodePage</A>、<A HREF="/iishelp/iis/htm/asp/vbob150l.htm">Response.CodePage</A>、<A HREF="/iishelp/iis/htm/asp/vbob7fw4.htm">Response.Charset</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

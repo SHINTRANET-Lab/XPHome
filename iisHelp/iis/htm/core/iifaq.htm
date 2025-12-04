@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>よく寄せられる質問</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="サイトの設定、コンテンツの発行、新機能の使用、一般的な問題に対するトラブルシューティング、テクニカル サポートなどに関する質問の回答を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="faq">よく寄せられる質問</a></h1>
+
+<ol>
+<li><strong><a href="#pub">ドキュメントや Web ページを公開するには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#vdir">仮想ディレクトリを Web サイトや FTP サイトに作成するには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#website">Web サイトを作成するには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#multisite">複数の Web サイトを作成するには、どうすればよいですか。</a></strong></li>
+
+<li><strong><a href="#iisreset">インターネット サービスを停止したり再開したりするには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#browscap">サイトの利用者の中に、それぞれのブラウザに合わせて設計した Web ページを見ることができない人がいるのはなぜですか。</a></strong></li>
+<li><strong><a href="#acessability">障害のあるユーザーのためのユーザー補助機能に関する情報はどこに記載されていますか。</a></strong></li>
+<li><strong><a href="#techsupport">IIS のテクニカル サポートを受けるには、どうすればよいですか。 </a></strong></li>
+<li><strong><a href="#namechange">Web サイトの名前を変更できますか。また、旧サイト名宛ての要求を新しいサイトにリダイレクトできますか。</a></strong></li>
+
+
+<li><strong><a href="#ntfs1">ドライブが NTFS を使用するように構成されているかどうかを確認するには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#ntfs2">ファイル アロケーション テーブル (FAT) のファイル システム形式のドライブまたはパーティションを NTFS 形式に変換するには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#ftpaccess">ユーザーごとに異なるアクセス レベルを設定して FTP サイトをセットアップできますか。 </a></strong></li>
+<li><strong><a href="#cert1">サーバー証明書が特定の Web サイトにインストールされていることを確認するには、どうすればよいですか。</a></strong></li>
+<li><strong><a href="#cert2">複数のサーバー証明書を 1 つの Web サイトにインストールできますか。</a></strong></li>
+<li><strong><a href="#cert3">1 つのサーバー証明書を複数のサイトにインストールできますか。</a></strong></li>
+<li><strong><a href="#cert4">サーバー証明書を FTP サイトにインストールできますか。</a></strong></li>
+<li><strong><a href="#cert5">サーバー証明書のバックアップ コピーを作成する必要はありますか。</a></strong></li>
+<li><strong><a href="#currentconn">FTP サービスに接続したユーザーの人数を確認するには、どうすればよいですか。</a></strong></li>
+</ol>
+
+<hr>
+
+<ol>
+
+<li><strong><a name="pub">ドキュメントや Web ページを公開するには、どうすればよいですか。</a></strong></li>
+
+<p> ドキュメントを公開するには、ファイルを \inetpub\wwwroot ディレクトリに置きます。次に、ブラウザのアドレス バーに 「<strong>http://<em>servername</em>/<em>filename</em></strong>」と入力して、公開したファイルを表示します。詳細については、「<a href="iitstart.htm">IIS によるサイトのクイック セットアップ</a>」を参照してください。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="vdir">仮想ディレクトリを Web サイトや FTP サイトに作成するには、どうすればよいですか。</a></strong></li>
+
+<p><a href="iiabuti.htm">IIS スナップイン</a>を使用して、Web サイトに仮想ディレクトリを作成できます。「<a href="iicodirv.htm">仮想ディレクトリを作成する</a>」に、手順の説明があります。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="website">Web サイトを作成するには、どうすればよいですか。</a></strong></li>
+
+<p>Microsoft&reg; Windows XP に IIS をインストールすると、既定の Web サイトがセットアップされます。この既定の場所で、すぐにコンテンツを発行できます。  </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="multisite">複数の Web サイトを作成するには、どうすればよいですか。</a></strong></li>
+
+
+
+<p>IIS が組み込まれた Windows XP&nbsp;Professional は、単一のコンピュータ上で Web サイトと FTP サイトを 1 つずつホストできます。単一のコンピュータで複数の Web サイトや FTP サイトをホストする場合は、Windows Server 製品にアップグレードすることをお勧めします。 </p>
+
+
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="iisreset">インターネット サービスを停止したり再開したりするには、どうすればよいですか。</a></strong></li>
+
+<p> インターネット サービスには、単独のプロセスで実行されるもの、またいくつかのプロセスによって構成されるものがあります。このため、インターネット サービスを最も効果的に停止および再開するには、ほかの Windows サービスとは異なる方法が必要です。IISReset.exe の使い方については、「<a href="iicodira.htm">IIS を再起動する</a>」を参照してください。</p> 
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="browscap">サイトの利用者の中に、それぞれのブラウザに合わせて設計した Web ページを見ることができない人がいるのはなぜですか。</a></strong></li>
+
+<p><a href="../asp/comp3xx0.htm">Browser Capabilities コンポーネント</a>を使ってクライアントの表示機能を判別している場合は、ブラウザの新しいバージョンがリリースされるたびに、サーバーの Browscap.ini ファイルを定期的に更新する必要があります。Browscap.ini の更新バージョンは、Windows XP&nbsp;CD から取得するか、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msft&ar=home" target="_blank">Microsoft の Web サイト</a>からダウンロードできます。</p> 
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="acessability">障害のあるユーザーのためのユーザー補助機能に関する情報はどこに記載されていますか。</a></strong></li>
+
+<p>Windows のユーザー補助機能に関する一般的な説明については、Windows のマニュアルを参照してください。特に IIS に関連するユーザー補助機能については、「<a href="iiacess.htm">IIS へのアクセス方法</a>」を参照してください。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="techsupport">IIS のテクニカル サポートを受けるには、どうすればよいですか。</a></strong></li>
+
+<p>テクニカル サポートについては、このソフトウェアが相手先ブランド供給 (OEM) パッケージに含まれていた場合、またはパーソナル コンピュータの購入時に別途含まれていた場合は、コンピュータまたはサーバーの製造元にお問い合わせください。製造元の連絡先については、コンピュータやサーバーに同梱のマニュアルを参照してください。</p>
+
+<p> この製品を個別に販売店で購入した場合、オンライン マニュアルを参照しても解決できない技術的な質問については、<A HREF="http://www.microsoft.com/isapi/redir.dll?prd=support&sbp=portal&Clcid=0x0411" TARGET="_new">Microsoft 製品サポート サービス</A>の Web ページを参照してください。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="namechange">Web サイトの名前を変更できますか。また、旧サイト名宛ての要求を新しいサイトにリダイレクトできますか。</a></strong></li>
+
+<p>ネットワーク上で正常に要求をルートできる場合は、Web サイトが新旧両方の名前宛ての要求に応答するように Web サイトを構成することができます。この構成により、古い名前でもサイトが使用でき、サイトの利用者には新しい名前が通知されます。名前を割り当てる方法については、「<a href="iinamvs.htm">Web サイトに名前を付ける</a>」を参照してください。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+
+
+
+
+<li><strong><a name="ntfs1">ドライブが NTFS を使用するように構成されているかどうかを確認するには、どうすればよいですか。</a></strong></li>
+
+<p>Windows エクスプローラで、ドライブを選択し、そのプロパティ シートを開きます。[全般] タブに、ファイル システムの種類が一覧表示されます。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="ntfs2">ファイル アロケーション テーブル (FAT) のファイル システム形式のドライブまたはパーティションを NTFS 形式に変換するには、どうすればよいですか。</a></strong></li>
+
+<p>コマンド ラインに、「<strong>convert <em>drive letter: </em> /FS:NTFS</strong>」と入力します。NTFS ドライブを FAT に戻すことはできません。詳細については、Windows のマニュアルを参照してください。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="ftpaccess">ユーザーごとに異なるアクセス レベルを設定して FTP サイトをセットアップできますか。 </a></strong></li>
+
+
+
+<p>NTFS ファイル システムでは、単一の仮想ディレクトリを使用し、個々の Windows ユーザー アカウントに、異なる種類のアクセスを許可または拒否するよう、NTFS のアクセス権を設定することができます。</p>
+<p>IP アドレスとドメイン名に基づいてアクセスを許可または拒否する場合は、Windows Server 製品のいずれかにアップグレードすることをお勧めします。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert1">サーバー証明書が特定の Web サイトにインストールされていることを確認するには、どうすればよいですか。</a></strong></li>
+
+<p> サイトを選択し、そのプロパティ シートを開きます。[ディレクトリ セキュリティ] プロパティ シートの [セキュリティ保護された通信] に [編集] があります。このボタンが有効になっている場合は、Web サイトに証明書がインストールされています。ボタンが淡色表示になっている場合、Secured Sockets Layer (SSL) 機能を使用するには、サーバー証明書をサイトにインストールする必要があります。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert2">複数のサーバー証明書を 1 つの Web サイトにインストールできますか。</a></strong></li>
+
+<p> いいえ、できません。1 つの Web サイトには、サーバー証明書を 1 つだけインストールできます。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert3">1 つのサーバー証明書を複数のサイトにインストールできますか。</a></strong></li>
+
+<p> はい、必要です。サーバー証明書は、必要に応じて任意の数の Web サイトにインストールできます。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert4">サーバー証明書を FTP サイトにインストールできますか。</a></strong></li>
+
+<p>いいえ、できません。FTP サイトは SSL 機能をサポートしていません。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="cert5">サーバー証明書のバックアップ コピーを作成する必要はありますか。</a></strong></li>
+
+<p>はい、必要です。サーバー証明書は重要なものであり、サーバーの SSL 機能を使うための鍵となるものです。サーバー証明書のバックアップ コピーを作成するには、証明書全体をフロッピー ディスクにコピーして、安全な場所に保管してください。 </p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+<li><strong><a name="currentconn">FTP サービスに接続したユーザーの人数を確認するには、どうすればよいですか。</a></strong></li>
+
+<p><a href="iiabuti.htm">IIS スナップイン</a>で、FTP サイトを選択し、そのプロパティ シートを開いて、[現在のセッション] をクリックします。詳細については、「<a href="iiptnov.htm">パフォーマンス チューニング</a>」を参照してください。</p>
+
+<p><a href="#faq"><IMG SRC="../../../common/up.gif" ALT="先頭へ" ALIGN="TOP" border="0"></a></p>
+
+</ol>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+<SPAN STYLE="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+trouble, troubles, troubleshoot, fix, repair, quick, quick start, easy, shortcut, shortcuts, basic, basics, intro, introductory, introduction, overview, beginner, begin, start, novice, intermediate, faq, frequently asked questions, publish, web pages, create, virtual directory, create, new, add, host, web site, web sites, website, websites, multiple, many, several, browser, compatibility, compatible, browsers, different versions, design, disabled, accessibility, disabled persons, blind, paralyzed, dyslexic, voice, handicapped, tech support, product support, phone support, helpdesk, help, assistance, redirect, change, site name, older browsers, versions, host name headers, hostname header, http, request, remote, remotely, mmc, proxy server, browser-based, admin, across network, over internet, internet service manager, internet services manager, ism, html, ntfs, ntlm, fat, convert, partition, ftp, security, server certificate, certificates, readme, relnotes, rel notes, summary, common, usual, release notes, latest, late-breaking, recent, other, appendix, addenda, addendum, new, newer, newest, last-minute, doc, docs,  corrections, documented, undocumented, known problems, problem, help me, get help, support, tech support, tech-support, product support, trouble, troubleshoot, troubleshooting, error, errors, crash, crashed, crashing, break, broken, doesn't work, keeps failing, fail, new, upgrade, old, bad, crashes, xml, extensible markup language, streaming media, audio, video, net stop w3svc, net stop iisadmin, net start w3svc, net start iisadmin, restarting IIS, IISReset.exe, IISReset
+</LAYER></SPAN>
+
+</font>
+</body>
+</html>

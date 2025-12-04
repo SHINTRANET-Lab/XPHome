@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>セキュリティについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web サーバーのセキュリティ機能、ユーザーの認証のためのウィザード、アクセス制御、通信の暗号化、監査、証明書の使用、の概要について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37678347">セキュリティについて</a></h1>
+
+<p>ここでは、インターネット インフォメーション サービス 5.1 で提供される 5 つの主なセキュリティ要素の概要について説明します。IIS のセキュリティ要素には、認証、アクセス制御、暗号化、監査、および証明書があります。また、Web サーバーのセキュリティの構成方法、IIS の新しい機能ウィザード、および IIS のセキュリティでサポートされる標準についても説明します。ここでは、次の項目について説明します。</p>
+ 
+<UL>
+<li><A href="#wizards">新しい機能ウィザード</A></li>
+<li><A HREF="#authenticationbasics">認証</A></li>
+<li><A HREF="#accesscontrolbasics">アクセス制御</A></li>
+<li><A HREF="#certificatesbasics">証明書</A></li>
+<li><A HREF="#encryptionbasics">暗号化</A></li>
+<li><A HREF="#auditingbasics">監査</A></li>
+<li><A HREF="#standardsused">実装されている標準</A></li>
+<li><A HREF="#getstarted">セキュリティの設定</A></li>
+</UL>
+
+
+<h2><A NAME="wizards"></A>新しい機能ウィザード</h2>
+<p>IIS&nbsp;5.1 には、IIS&nbsp;5.0 にも含まれていた 3 つの新しいセキュリティ機能ウィザードが含まれます。サーバー証明書ウィザードは、サーバー証明書の取得および管理を簡略化します。証明書信頼リスト ウィザードは、証明書信頼リストの作成および管理を簡略化します。これら 2 つのウィザードで、従来の IIS の作業をより簡単に行うことができます。アクセス許可ウィザードは、ディレクトリおよびファイルへのアクセス許可の設定を簡略化します。アクセス権は、NTFS や IIS の旧バージョンで使用していた手順でも設定できます。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</p>
+
+<h2><a name="authenticationbasics">認証の概要</a></h2>
+<p>インターネット インフォメーション サービスには、Windows と完全に統合されたセキュリティ機能があります。サポートされている 6 種類の認証方法を使用して、Web サイトへのアクセスを要求しているユーザーを識別することができます。</p>
+
+<ul>
+<li><strong>匿名認証</strong>を使用すると、ユーザーはユーザー名やパスワードを入力せずにアクセスすることができます。</li>
+
+<li><strong>基本認証</strong>では、ユーザーにユーザー名とパスワードの入力を求めます。入力された情報は &quot;暗号化されずに&quot; ネットワークに送られます。</li>
+
+<li><strong>ダイジェスト認証</strong>は、基本認証とほとんど同じですが、パスワードを &quot;ハッシュ&quot; 値として送る点が異なります。ダイジェスト認証は、Windows&nbsp;2000 ドメイン コントローラを備えているドメイン上でのみ利用できます。</li>
+
+<li><strong>高度ダイジェスト認証</strong> は、ダイジェスト認証と似ていますが、クライアントの資格情報を Windows XP ドメイン コントローラの Active Directory に MD5 ハッシュとして格納することで、セキュリティが強化されます。 
+</li>
+
+<li><strong>統合 Windows 認証</strong>は、ハッシング技術を使用して、実際にネットワークを介してパスワードを送らずにユーザーを識別します。</li>
+<li><strong>証明書</strong>は、Secure Sockets Layer (SSL) 接続の確立に使用するデジタル資格情報です。証明書は、認証にも使用できます。</li>
+</ul>
+
+<p>これらの方法を使用することで、サイトの公開領域にはアクセス権を与えながら、プライベートなファイルやディレクトリを権限のないアクセスから保護することができます。Web サーバーでほかの認証を使用する方法については、「<A HREF="iiathsc.htm">認証</A>」を参照してください。</p>
+
+
+<h2><A NAME="accesscontrolbasics"></A>アクセス制御の概要</h2>
+<p>Web サーバーのセキュリティの基礎となる NTFS のアクセス権を使用することで、Windows のユーザーやグループに許可するファイルおよびディレクトリへのアクセス レベルを設定できます。たとえば、ある業務でカタログを Web サーバーに設ける場合、その業務用の Windows ユーザー アカウントを作成し、特定の Web サイト、ディレクトリ、またはファイルに対するアクセス権を構成する必要があります。このアクセス権によって、サーバーの管理者と業務の担当者だけが Web サイトのコンテンツを変更できるようになります。一般のユーザーは、Web サイトを見ることはできますが、コンテンツの変更はできません。NTFS アクセス権の設定方法の詳細については、「<A HREF="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</A>」を参照してください。</p>
+
+<p>WebDAV は、HTTP 1.1 プロトコルの拡張機能で、HTTP 接続でのファイルやディレクトリの操作が簡略化されます。WebDAV の &quot;動詞&quot; やコマンドを使用することで、ファイルやディレクトリにプロパティを追加したり、プロパティを読み込んだりすることができます。ファイルやディレクトリの作成、削除、移動、またはコピーは、リモートで行うこともできます。この追加アクセス制御は、Web サーバーのアクセス権および NTFS の両方で構成できます。詳細については、「<a href="iiacnsc.htm">アクセス制御について</a>」または「<A href="wcwbdav.htm">WebDAV の発行</A>」を参照してください。</p>
+
+<h2><A NAME="certificatesbasics"></A>証明書の概要</h2>
+<p>証明書は、サーバーとクライアントが相互に認証することのできるデジタル身元証明書です。証明書は、サーバーとクライアントのブラウザとの間で暗号化した情報を送る SSL 接続を確立するために必要です。証明書に基づく IIS の SSL 機能は、サーバー証明書、クライアント証明書、およびさまざまなデジタル キーから構成されています。証明書は、Microsoft 証明書サービスを使用して作成するか、または証明機関 (CA) と呼ばれる双方が信頼する第三者機関から取得することができます。証明書およびキーの設定方法の詳細については、「<a href="iisslsc.htm">サーバーに SSL をセットアップする</a>」を参照してください。</p>
+
+<h3>サーバー証明書</h3>
+<p>サーバー証明書は、Web サイトの身元を確認するための手段をユーザーに提供します。サーバー証明書には、サーバーのコンテンツに関係する組織名、証明書を発行した機関名、暗号化した接続に使用する &quot;公開キー&quot; などの詳細な識別情報が含まれています。サーバー証明書は、Web サーバーのコンテンツに信頼性があり、HTTP 接続を確立しても安全であることを、ユーザーに保証します。詳細については、「<a href="iiabcsc.htm">証明書について</a>」を参照してください。</p>
+
+<h3>クライアント証明書</h3>
+<p>SSL では、Web サーバーはクライアント証明書の内容を調べることで認証を行う方法もあります。一般的なクライアント証明書には、ユーザーや証明書を発行している組織に関する詳細な識別情報と &quot;公開キー&quot; が含まれています。SSL の暗号化とクライアント証明書認証を併せて使用することで、ユーザーの身元を確認するための安全性の高い方法を実装できます。詳細については、「<a href="iiabcsc.htm">証明書について</a>」を参照してください。</p>
+
+<h2><A NAME="encryptionbasics"></A>暗号化の概要</h2>
+<P>暗号化を使用することで、ユーザーはクレジット カードの番号や電話番号などの個人的な情報を、サーバーと安全にやり取りすることができます。暗号化とは情報を送信前に &quot;スクランブル&quot; することで、解読は受信後に情報を &quot;元どおり&quot; にすることです。IIS の暗号化の基盤は、SSL&nbsp;3.0 プロトコルです。このプロトコルによって、ユーザーとの暗号化された通信リンクを安全な方法で確立することができます。SSL は Web サイトの信頼性を保証し、必要に応じて、アクセス制限されている Web サイトにアクセスしようとするユーザーの身元も保証します。</P>
+
+<p> 証明書には、SSL で保護された接続を確立するときに使用する &quot;キー&quot; が含まれています。&quot;キー&quot; は、SSL 接続を確立する際にサーバーおよびクライアントの認証に使用される一意な値です。&quot;公開キー&quot; と &quot;秘密キー&quot; は、SSL の &quot;キー ペア&quot; を構成します。Web サーバーは、このキー ペアを使用して、ユーザーの Web ブラウザと安全な接続をネゴシエートし、安全な通信に必要な暗号化のレベルを決定します。</p>
+
+<p>暗号化を使用して接続する場合、Web サーバーとユーザーのブラウザの両方が互換性のある暗号化機能および解読機能を備えている必要があります。通信中に、暗号化キーが作成されます。これは、&quot;セッション キー&quot; とも呼ばれます。サーバーおよび Web ブラウザは、このセッション キーを使用して伝送する情報を暗号化および解読します。セッション キーの暗号化のレベル、つまり &quot;強度&quot; は &quot;ビット&quot; で表します。セッション キーのビット数が大きいほど、暗号化およびセキュリティのレベルが高くなります。暗号化キーの強度が高いほど、セキュリティのレベルも高くなりますが、実装に必要なサーバー リソースも増加します。Web サーバーのセッション キーは、通常は 40 ビット長ですが、必要なセキュリティのレベルに応じて 128 ビット長まで使用できます。詳細については、「<a href="iiencsc.htm">暗号化</a>」を参照してください。</p>
+
+
+
+
+<h2><A NAME="auditingbasics"></A>監査の概要</h2>
+<P>セキュリティ監査を使用して、ユーザーおよび Web サーバーの広範なセキュリティ状況を監視できます。日常的にサーバーの構成を監査し、リソースのどの部分で権限のないアクセスやデータの改ざんを受ける危険があるかを検出することをお勧めします。統合された Windows のユーティリティや IIS に組み込まれたログ収集機能を使用するか、または Active Server Pages (ASP) アプリケーションで独自の監査ログを作成することができます。詳細については、「<a href="iiaudsc.htm">監査</a>」を参照してください。 </P>
+
+
+<h2><A NAME="standardsused"></A>実装されている標準規格</h2>
+<p>IIS で採用しているセキュリティ機能のほとんどは、インターネット業界の標準です。この標準により、アプリケーションや情報の統一およびクロスプラットフォーム利用が容易になります。Microsoft は、インターネットおよびコンピュータ コミュニティと共に標準の構築に積極的に参加してきましたが、これらの標準の実装にも力を入れています。IIS のセキュリティ機能に実装されている標準の詳細については、次の各リンク先の説明を参照してください。</p>
+
+<p><a href="http://go.microsoft.com/fwlink/?linkid=1769" target="_blank">Fortezza</a> 一般に &quot;Fortezza&quot; と呼ばれる米国政府のセキュリティ標準が、IIS でサポートされています。この標準は、メッセージの機密性、整合性、認証、否認不可性およびメッセージ、コンポーネント、システムに対するアクセス制御を提供する暗号メカニズムを備え、Defense Message System セキュリティ アーキテクチャを実現しています。これらの機能は、サーバーとブラウザ ソフトウェア、および PCMCIA カード ハードウェアを使って実装できます。Fortezza は、米国政表内部で広く使われているセキュリティ標準です。</p>
+
+<p><a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=Netscape&pver=1.0&ar=SSL3" target="_blank">Secure Sockets Layer (SSL&nbsp;3.0)</a> は、Secure Channel (Schannel) セキュリティ プロバイダによって実装される、公開キーに基づくセキュリティ プロトコルです。SSL セキュリティ プロトコルは、認証、メッセージの整合性、および機密性を実現するために、インターネット ブラウザおよびサーバーで広く使用されています。</p>
+
+<p><a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target="_blank">基本認証</a>は、パスワードを Base64 エンコード形式でネットワークに送る HTTP 1.0 の仕様の一部です。この仕様は、ほとんどのブラウザでサポートされています。</p>
+
+<p><a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target="_blank">ダイジェスト認証</a>は、認証情報を &quot;ハッシュ&quot; としてネットワークに送ります。プロキシ サーバーと互換性があります。</p>
+
+<p><a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=RSA&pver=1.0&ar=securitystandards" target="_blank">PKCS&nbsp;#7</a>には、情報を安全に扱うためのデジタル署名やデジタル封書など、暗号化したデータの形式が記述されています。これらの機能は、IIS の証明機能に関連しています。</p>
+
+<p><a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=RSA&pver=1.0&ar=securitystandards" target="_blank">PKCS&nbsp;#10</a> には、証明機関に提出される証明書の要求形式が記述されています。</p>
+
+<p>Windows およびネットワーク セキュリティの詳細については、<a href="http://www.microsoft.com/japan/technet/security/current.asp" target="_blank">Microsoft セキュリティの Web サイト</a>、または <a href="http://www.microsoft.com/japan/products/ntserver/security/" target="_blank">Windows セキュリティの Web サイト</a>を参照してください。</p>
+
+<h2><a name="getstarted">セキュリティの設定</a></h2>
+<p>Web サーバーのセキュリティを構成する前に、Web サイトや FTP サイトの保護に必要なセキュリティのレベルを決定します。たとえば、財務情報や医療記録などのプライベートな情報へのアクセスを、特定のユーザーに許可する Web サイトを作成する場合、強固なセキュリティ構成が必要になります。このセキュリティ構成では、特定のユーザーを高い信頼性で認証し、これらユーザーのみがアクセスするよう制限する必要があります。</p>
+
+<p> Web サーバーのセキュリティの大部分は、Windows のセキュリティ構成に依存します。Windows のセキュリティ機能を適切に構成しなければ、Web サーバーのセキュリティを構成することはできません。</p>
+
+<p>Windows のセキュリティ機能をまだ構成していない場合は、次の手順で構成します。</p> 
+
+<ul>	
+<li>Windows の管理者アカウントを構成します。</li>
+<li>ユーザー アカウントを作成して管理します。</li>
+<li>グループを作成して管理します。</li>
+<li>Windows のセキュリティ ポリシーを定義します。</li>
+</ul>
+
+<p>詳細については、Windows のマニュアルを参照してください。『Microsoft&nbsp;Windows&nbsp;2000 Server リソース キット』も、セキュリティ情報についての貴重な情報源になります。</p>
+
+<p>セキュリティ構成の一部として、ハード ディスクのパーティションを NTFS のパーティションに変換する必要もあります。NTFS のハード ディスク パーティションは、ファイルおよびディレクトリへのアクセス制御を厳密に行い、ファイル アロケーション テーブル (FAT) のパーティションよりも効率的に情報を保存します。変換には、Windows の変換ユーティリティを使用します。詳細については、Windows のマニュアルを参照してください。</p>
+
+<p>次に、Web サイトや FTP サイトを利用するユーザーに公開するファイルとディレクトリを決めます。公開するコンテンツと制限するコンテンツは、別のディレクトリに分けて置きます。</p>
+
+<p>Web サーバーのセキュリティの構成を始める際は、「<a href="iiacnsc.htm">アクセス制御について</a>」を参照し、Web サーバーへの匿名アクセスを適切に構成する方法を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</body>
+</html>

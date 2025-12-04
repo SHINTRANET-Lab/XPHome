@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>WebDAV セキュリティの管理</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="いくつかの異なるレベルのセキュリティと、そのセキュリティを調整し、WebDAV ディレクトリへのアクセスを制御する方法について説明します。詳細についての参照先も示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="ManagingWebDAVSecurity">WebDAV セキュリティの管理</a></h1>
+
+<p>ここでは、セキュリティ保護されたリモートの発行のセットアップ方法として最もお勧めできるものについて説明します。サーバーおよびコンテンツのセキュリティ保護のいくつかの側面を活用し、統合されたセキュリティ保護を確立します。このセキュリティ保護には、次のものが含まれます。</p>
+
+<ul>
+<li><a href="#Authenticating">クライアントの認証</a></li>
+<li><a href="#ControllingAccess">アクセスの制御</a></li>
+<li><a href="#FileSize">サービスの拒否</a></li>
+</ul>
+
+<h2><a name="Authenticating"></a>クライアントの認証</h2>
+
+<p>IIS によって次のレベルの認証が提供されます。</p>
+
+<ul>
+<li>匿名認証</li>
+<li>基本認証</li>
+<li>統合 Windows 認証</li>
+<li>ダイジェスト認証</li>
+<li>高度ダイジェスト認証</li>
+</ul>
+
+<p>どのように発行を行うかによって、適切な WebDAV ディレクトリの構成が決まります。IIS によって仮想ディレクトリを作成する場合、匿名認証と統合 Windows 認証の両方がオンになります。サーバーに接続するクライアントが Web ページのコンテンツを表示する場合、およびスクリプトを実行する場合には、この既定の設定により、良い結果が期待できますが、クライアントがディレクトリのファイルを操作またはディレクトリに対してファイルを発行する場合にはその限りではありません。</p>
+
+<p><strong>匿名アクセス</strong>&nbsp;&nbsp;すべてのユーザーにそのディレクトリに対するアクセスを許可します。そのため、WebDAV ディレクトリに対してはオフにする必要があります。だれがアクセスするかを制御することができないため、不特定のクライアントにより、ディレクトリが破壊される可能性があります。詳細については、「<a href="iiabasc.htm#Anonymous">匿名認証</a>」を参照してください。</p>
+
+<p><strong>基本認証</strong>&nbsp;&nbsp;パスワードがクリア テキストで送られます。クリア テキストは、簡単に傍受、解読されるため、基本認証をオンにする場合は SSL (Secure Sockets Layer) によるパスワードの暗号化を行う必要があります。詳細については、「<a href="iiabasc.htm#basic">基本認証</a>」および「<a href="iisslsc.htm">サーバーに SSL をセットアップする</a>」を参照してください。</p>
+
+<p><strong>ダイジェスト認証</strong> パスワードが MD5 ハッシュとしてネットワークで送信されるため、インターネット上でファイアウォールを通してアクセスされるサーバー上に情報を公開する場合に適しています。ただし、パスワードは Active Directory 内にテキスト形式で格納されます。詳細については、「<a href="iiabasc.htm#digest">ダイジェスト認証</a>」を参照してください。</p>
+
+<p><strong>高度ダイジェスト認証</strong> ダイジェスト認証の強化版です。パスワードが MD5 ハッシュとしてネットワークで送信されるのに加えて、Active Directory 内に テキストではなく MD5 ハッシュとして格納されます。このため、高度ダイジェストは、インターネット上でファイアウォールを通してアクセスされるサーバー上に情報を公開する場合に適しています。詳細については、「<a href="iiabasc.htm#advanceddigest">高度ダイジェスト認証</a>」を参照してください。</p>
+
+<p><strong>統合 Windows 認証</strong>&nbsp;&nbsp;インターネット上で WebDAV ディレクトリをセットアップする場合に適しています。詳細については、「<a href="iiabasc.htm#challenge">統合 Windows 認証</a>」を参照してください。</p>
+
+<h2><a name="ControllingAccess">アクセスの制御</a></h2>
+
+<p>ここでは、IIS の権限と Windows XP の権限を用いて、どのように WebDAV ディレクトリへのアクセスを制御するか、また、どのようにスクリプト ファイルを保護するかについて説明します。 </p>
+
+<h3><a name="Permissions">Web アクセス権の構成</a></h3>
+
+<p>ここでは、発行するものの目的により選択できる Web アクセス権の構成方法を示します。</p>
+
+<ul>
+<li><strong>[読み取り]、[書き込み]、[ディレクトリの参照] を有効にする</strong>&nbsp;&nbsp;これらの設定をオンにすることにより、クライアントはリソースの一覧の参照、リソースへの書き込み ([書き込み] アクセス権がある場合)、リソースの公開、ファイルの操作を行うことができます。</li>
+
+<li><strong>[書き込み] を有効にし、[読み取り] と [ディレクトリの参照] を無効にする</strong>&nbsp;&nbsp;クライアントが個人の情報をディレクトリに発行でき、第三者にその内容を知られないようにするためには、[書き込み] アクセス権を設定し、[読み取り]、[ディレクトリの参照] は設定しません。クライアントが投票や実績調査などを提出する場合に、この構成は有用です。</li>
+
+<li><strong>[読み取り] および [書き込み] を有効にし、[ディレクトリの参照] を無効にする</strong>&nbsp;&nbsp;ファイル名を隠すことによりセキュリティを確保する場合に、この構成を採用します。しかし、悪意のある第三者が、試行錯誤を繰り返すことによりファイル名を推測し、特定する可能性があるため、この方法は高いレベルのセキュリティであるとはいえません。</li>
+
+<li><strong>[このリソースに索引を付ける] を有効にする</strong>&nbsp;&nbsp;ディレクトリ リソースの検索をクライアントに許可するには、インデックス サービスを有効にします。</li>
+</ul>
+
+<p>Web アクセス権の詳細については、「<a href="iiwspsc.htm">Web サーバーのアクセス権を設定する</a>」を参照してください。</p>
+
+<h3><a name="ACLs">DACL によるアクセスの制御</a></h3>
+
+<p>NTFS ファイル システムのドライブに WebDAV 発行ディレクトリを設定する場合、Windows XP Server では、既定で、Wwwroot ディレクトリを除くすべてのユーザーにフル コントロールが与えられます。このアクセス権のレベルを変更して Everyone グループに [読み取り] アクセス権<em>のみ</em>を付与します。次に、特定の個人またはグループに [書き込み] アクセス権を付与します。</p>
+
+<p>NTFS のアクセス権の詳細については、「<a href="iiacnsc.htm#NTFSpermissions">NTFS のアクセス権</a>」を参照してください。</p>
+
+<h3><a name="Script">スクリプト コードを保護する</a></h3>
+
+<p>発行ディレクトリ内に、クライアントによって参照されるべきではないスクリプト ファイルがある場合には、[スクリプト ソース アクセス] を許可しないことにより、ファイルへのアクセスを拒否することができます。スクリプトには、アプリケーション マッピング リストにある拡張子を持つファイルが含まれます。[スクリプトおよび実行可能ファイル] がそのディレクトリに対して有効に設定されていない限り、.exe の拡張子を持つファイルを含むその他のすべての実行可能ファイルは、静的 HTML ファイルとして扱われます。</p>
+
+<p>.exe ファイルを実行可能とする一方で、それがダウンロードされ、HTML ファイルとして参照されることを防ぐには、発行ディレクトリの [仮想ディレクトリ] プロパティ シートで、実行アクセス権を [スクリプトおよび実行可能ファイル] に変更します。このレベルの設定により、すべての実行可能ファイルに [スクリプト ソース アクセス] の設定が適用されます。[スクリプト ソース アクセス] が選択されている場合、[読み込み] アクセス権を持つクライアントは、すべての実行可能ファイルの実行と参照を行うことができ、[書き込み] アクセス権を持つクライアントは、その実行と編集を行うことができます。</p>
+
+<p>次のアクセス権によって、クライアントは、[アプリケーションのマッピング] プロパティ シートにない実行可能ファイルに書き込みを行うことができます。</p>
+
+<ul>
+<li>[書き込み] アクセス権が与えられている</li>
+<li>実行アクセス権が [スクリプトのみ] に設定されている</li>
+</ul>
+
+<p>次のアクセス権によって、クライアントは、実行可能ファイルに書き込みを行うことができます。</p>
+
+<ul>
+<li>[スクリプト ソース アクセス] が与えられている</li>
+<li>実行アクセス権が [スクリプトおよび実行可能ファイル] に設定されている</li>
+</ul>
+
+<h2><a name="FileSize">サービスの拒否</a></h2>
+
+<p>極めて大きいサイズのファイルを WebDAV ディレクトリにドラッグ アンド ドロップする場合には、大きなディスク領域が必要とされます。使用するディスク領域を制限するには、ディスク使用のクォータを設定します。ディスク クォータの詳細については、Windows 2000 Server のマニュアルの「ディスク クォータの概要」を参照してください。</p>
+
+<p>セキュリティの詳細については、「<a href="iisckl.htm">IIS セキュリティ チェックリスト</a>」を参照してください。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

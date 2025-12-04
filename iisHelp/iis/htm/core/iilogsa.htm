@@ -1,0 +1,80 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サイトの利用状況のログを収集する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="DESCRIPTION" content="サイトの利用状況のログ収集についての参照先を示します。IIS のログを使用して、Web サイトでのユーザーの利用状況に関する情報を収集することができます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37708915">サイトの利用状況のログを収集する</a></h1>
+
+<p>Web サイトのログ収集機能を有効にすることで、ユーザーの利用状況の情報を収集できます。収集された情報は、ASCII ファイルに格納されます。IIS のログ情報には、Windows のイベント ログ収集機能やパフォーマンス監視機能では記録されない情報も含まれます。このログには、Web サイトにアクセスした利用者名、利用者が閲覧した情報、最後に情報を閲覧した日時、などの情報を収集できます。このログを使って、コンテンツの人気を評価したり、情報のボトルネックを特定したりすることができます。</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><a href="iiabtlg.htm">サイトの利用状況のログ収集について</a></strong>」では、ログ収集の概要、ログの形式、ログ ファイルのサイズと新しいログ ファイルの作成について説明します。</li>
+<li>「<strong><a href="iienblg.htm">ログの収集を有効にする</a></strong>」では、Web サイトや FTP サイトまたはディレクトリのログ収集の有効化または無効化について説明します。 </li>
+
+<li>「<strong><a href="iiconlg.htm">W3C 拡張形式のログ収集をカスタマイズする</a></strong>」では、W3C 拡張形式のログ ファイルに含まれるフィールドの指定について説明します。</li>
+<li>「<strong><a href="iinamlg.htm">ログ ファイルを保存する</a></strong>」では、ログ ファイル ディレクトリの指定と、新しいログ ファイルを作成するときのオプションについて説明します。</li>
+<li>「<strong><a href="iicnvlg.htm">ログ ファイルを NCSA 形式に変換する</a></strong>」では、コマンドライン ユーティリティ Convlog.exe を使って、ログを NCSA 共通 ログ ファイル形式へ変換する方法について説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul> 
+<li>ログ収集以外の監視ツールの使用方法については、「<a href="iiptnov.htm">パフォーマンス チューニング</a>」を参照してください。</li>
+<li>セキュリティ ログ (監査) の生成、表示、または解析については、「<a href="iisecsa.htm">セキュリティ</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+log, logs, logging, track, tracking, feedback, pattern, flow, gridlock, unavailable, too busy, bulge, rush, simultaneous, large, fast, quick, improve, improvement, improvements, analyze, tune, fine-tune, chart, graph, table, stats, collect, hits, hit count, statistics, report, reports, server activity, record, recording, records, odbc, database, event, events, perform, performance, visits, visitors, usage, traffic, load, busy, busier, busiest, heavy, light, processor, use, handle, handling, monitor, view, total, hour, hours, hourly, day, days, daily, week, weeks, weekly, month, months, monthly, midnight, noon, greenwich, gmt, local time, locale, locality, date, time, date/time, time/date, bottleneck, bottlenecks, process accounting, per site, processor, cpu, utilization, resources, scripts, cgi, malfunction, malfunctioning, slow, poor, disproportionate, bandwidth, out of process, out-of-process, oop, out-of-proc, app, apps, application, applications, programs, logfile, logfiles, files, directory, directories, create, rollover, roll over, cycle, new, ncsa, common, format, formats, iis, w3c, extended, convlog, convlog.exe, convert, links, more information
+</layer></span></font>
+</body>
+</html>

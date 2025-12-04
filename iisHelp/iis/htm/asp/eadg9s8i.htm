@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ロケール識別子を設定する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_setting_the_locale_identifier"></A><SUP></SUP>ロケール識別子を設定する</H2>
+
+<P>&quot;ロケール&quot; は、ユーザーの使用する言語に関連するユーザーの基本設定情報のセットで、日付、時刻、通貨および数字の書式設定の方法、項目を文字コード順にソートする方法、および文字列を比較する方法を決定します。ロケール識別子 (LCID) は 32 ビットの値であり、ロケールを一意に識別します。ASP は特定のスクリプトに対して別のロケールが指定されない限り、Web サーバーの既定のロケールを使用します。</P>
+
+<P>ASP ページのロケールを指定するには、AspLCID メタベース プロパティ、@LCID ディレクティブ、Session.LCID プロパティ、または Response.LCID プロパティを使用します。たとえば、ロケールを日本語に設定するには、次のコマンドのいずれかを使用してアプリケーションの AspLCID プロパティを 1041 に設定します。</P>
+
+<PRE><CODE>&lt;%@ LCID = 1041 %&gt;
+
+&lt;% Session.LCID = 1041 %&gt;
+
+&lt;% Response.LCID = 1041 %&gt;
+ </CODE></PRE>
+
+<P>VBScript の FormatCurrency や FormatDateTime など、関数への呼び出しによって生成される各国の文字を表示するためにコードページを設定する、ということを忘れないでください。たとえば、Response.LCID が日本語に相当する 1041 に設定された場合、FormatDateTime(Date, 1) への呼び出しによって返される月と日付を適切に表示するには、Response.CodePage を 932 に設定する必要があります。</P>
+
+<P>スクリプトが実行されると、Response.LCID により文字のエンコード方式が決定します。Response.LCID が Web ページで明示的に設定されていない場合、この階層で暗黙的に設定されます。
+
+<UL type=disc>
+	<LI>Sessions が有効であり、Session.LCID が明示的に設定されている場合、Session.LCID により Response.LCID が設定されます。または、</li>
+
+	<LI>@LCID がページの先頭で定義されている場合、@LCID により Response.LCID が設定されます。または、</li>
+
+	<LI>アプリケーションの AspLCID メタベース プロパティが 0 以外で設定されている場合、AspLCID により Response.LCID が設定されます。または、</li>
+
+	<LI>Web サーバーの既定のシステム ロケールにより Response.LCID が設定されます。</li>
+</UL>
+
+<P>これらのメソッドのいずれかを使用してロケールを設定すると、スクリプト エンジンのロケールも設定されます。ただし、VBScript 関数 setLocale でスクリプト エンジンのロケールを設定しても、ASP のロケールは設定されません。</P>
+
+<P>Web ページで複数のロケールを指定する場合、各国の文字を適切に表示するには、Web ページのコードページを UTF-8 に相当する 65001 に設定し、Response.Charset を &quot;utf-8&quot; に設定する必要があります。 </P>
+
+<P>次の例は、Response.LCID のマニュアルにも記載されています。</P>
+
+<PRE><CODE>&lt;%
+Response.Codepage = 65001
+Response.Charset = "utf-8"
+
+' See what happens when you uncomment the lines below.
+'Response.Codepage = 1252
+'Response.Charset = "windows-1252"
+
+ShowDateTimeCurrency 1033, "North America"
+ShowDateTimeCurrency 1041, "Japan"
+ShowDateTimeCurrency 1049, "Russia"
+ShowDateTimeCurrency 1031, "Germany"
+ShowDateTimeCurrency 1025, "Saudi Arabia"
+ShowDateTimeCurrency 1081, "India"
+ShowDateTimeCurrency 2052, "China"
+ShowDateTimeCurrency 1042, "Korea"
+
+Sub ShowDateTimeCurrency(iLCID, sLocale)
+  Response.LCID = iLCID
+  Response.Write "&lt;B&gt;" &amp; sLocale &amp; "&lt;/B&gt;&lt;BR&gt;"
+  Response.Write FormatDateTime(Date, 1) &amp; "&lt;BR&gt;"
+  Response.Write FormatDateTime(Time, 3) &amp; "&lt;BR&gt;"
+  Response.Write FormatCurrency(1000) &amp; "&lt;BR&gt;"
+  Response.Write FormatNumber(50, 3, 0, 0, -1) &amp; " &amp; " &amp; FormatNumber(.02, 3, 0, 0, -1) &amp; "&lt;BR&gt;&lt;BR&gt;"
+End Sub
+%&gt;</CODE></PRE>
+
+<P>詳細およびほかの例については、「<A HREF="apro4ysk.htm">AspLCID</A>」、「<A HREF="dire8dr8.htm">@LCID</A>」、「<A HREF="vbob72uc.htm">Session.LCID</A>」、「<A HREF="vbob055w.htm">Response.LCID</A>」、「<A HREF="vbob7fw4.htm">Response.Charset</A>」、および Platform SDK の「Windows Base Services」セクションで「International Features」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

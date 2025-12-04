@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ログ ファイルを NCSA 形式に変換する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="convlog ユーティリティを使用して、ログ ファイルを NCSA 共通ログ ファイル形式に変換する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37691496">ログ ファイルを NCSA 形式に変換する</a></h1>
+
+<p><strong>convlog</strong> ユーティリティを使用して、Web サーバーのログ ファイルを NCSA 共通ログ ファイル形式に変換できます。このコンバータを使うと、Microsoft IIS 形式および W3C 拡張形式のログ ファイルを NCSA 形式に変換する際に、IP アドレスを DNS 名に置き換えることもできます。 NCSA 形式のログ ファイル内で IP アドレスを DNS 名に変換することも可能です。また、タイム オフセットの変換も行えます。</p>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;プロセス総計ログ情報を含む W3C 拡張ログ ファイルでこのユーティリティを使用すると、プロセス総計情報が失われてしまいます。</P>
+
+<big>ログ ファイルをほかの形式に変換するには</big><br>
+
+<ol>
+<li>コマンド プロンプトで、「<b>convlog</b>」と次のパラメータから必要なものを入力します。</li>
+
+<ul>
+<li TYPE=disc><strong>-i ( i 、n 、e )</strong>&nbsp;&nbsp;入力ファイルの形式を指定します。</li>
+	<ul>
+	<li TYPE=circle><strong>i </strong>&nbsp;&nbsp;Microsoft IIS ログ ファイル形式</li>
+	<li TYPE=circle><strong>n</strong>&nbsp;&nbsp;NCSA 共通ログ ファイル形式</li>
+	<li TYPE=circle><strong>e</strong>&nbsp;&nbsp;W3C 拡張ログ ファイル形式</li>
+	</ul>
+<li TYPE=disc><strong><em>filename</em>.log</strong>&nbsp;&nbsp;入力ファイルの名前を指定します。</li>
+<li TYPE=disc><strong>-t  ( ncsa:GMTOffset )</strong>&nbsp;&nbsp;出力形式の既定値を NCSA 共通ログ ファイル形式に指定します。</li>
+	<ul>
+	<li TYPE=circle><strong>GMTOffset</strong>&nbsp;&nbsp;グリニッジ標準時 (GMT) からのオフセットを時間数で指定します。オフセットは、4 桁の数値の前にプラス (+) またはマイナス (-) の符号を付けたもので、値と符号は GMT と現地時間の差で決まります。Microsoft IIS ログ ファイル形式の場合に限り、GMT オフセットの後にスペースを付けると、IP アドレスを DNS 名に置き換えることができます。</li>
+	</ul>
+<li TYPE=disc><strong>-l ( 0 、1 、2 )</strong>&nbsp;&nbsp;IIS ログ ファイル形式の入力ファイルで使われている日付の書式を指定します。ユーティリティは、指定した書式をそのまま受け入れるため、入力ファイルで使われている書式を調べて正しく指定する必要があります。</li>
+	<ul>
+	<li TYPE=circle><strong>0</strong> - MM/DD/YY (既定値は米国式表記)</li>
+	<li TYPE=circle><strong>1</strong> - YY/MM/DD (日本式表記)</li>
+	<li TYPE=circle><strong>2</strong> - DD.MM.YY (ドイツ式表記)</li>
+	</ul>
+<li TYPE=disc><strong>-o</strong> <em>output directory</em>&nbsp;&nbsp;出力先のディレクトリを指定します。既定値は、カレント ディレクトリ (%WINNT%\System32) です。</li>
+<li TYPE=disc><strong>-x</strong>&nbsp;&nbsp;非 HTTP トランザクションのエントリを、.dmp ファイルに保存します。</li>
+<li TYPE=disc><strong>-d</strong>&nbsp;&nbsp;変換処理で、ユーザーの IP アドレスを DNS に置き換えます。</li>
+</ul>
+</ol>
+
+<p>使用例</p>
+
+<p><strong>convlog -ii inetsv1.log  -d -t ncsa:-0700</strong>&nbsp;&nbsp;Inetsv1.log という名前のファイルを、DNS 名を使う NCSA 共通ログ ファイル形式に変換します。 GMT オフセットの修正は -7 時間です。</p>
+
+<p><strong>convlog -ii inetsv1.log  -l1 -t ncsa:+0900 -o \Logfiles\Japan\</strong>&nbsp;&nbsp;&nbsp;Inetsv1.log という名前のファイルを、IIS ログ ファイル形式から NCSA 共通ログ ファイル形式に変換します。GMT オフセットの修正は +9 時間 (日本時間) で、日付は日本式の表記に設定します。出力ファイルは、カレント ドライブにある <EM>Logfiles</EM> フォルダの下の <EM>Japan</EM> フォルダに保存します。</p>
+
+<p><strong>convlog -ie extend1.log -o D:\Temp\NCSALogs</strong>&nbsp;&nbsp;&nbsp;Extend1.log という名前のファイルを、W3C 拡張ログ ファイル形式から NCSA 共通ログ ファイル形式に変換し、D:\Temp ディレクトリの NCSALogs フォルダに出力します。IP アドレスから DNS 名への変換は行いません。</p>
+
+<p><strong>convlog -in ncsa1.log -o -d \\REMOTE_MACHINE\REMOTE_SHARE\NCSALogs</strong>&nbsp;&nbsp;&nbsp;Ncsa1.log という名前の NCSA 共通ログ ファイル形式のファイルを、リモート ドライブの共有ディレクトリにある NCSALogs フォルダに出力します。IP アドレスは DNS 名に変換されますが、ファイル形式の変換は行われません。</p>
+
+<p>DNS 変換処理で生成されるファイルの名前は、次の規則に従います。</p>
+
+<ul>
+<li>DNS 変換を行わずに NCSA 共通ログ ファイル形式に変換する場合、ログ ファイルの名前は変わらず、.ncsa という拡張子が付きます。</li>
+<li>IP アドレスが DNS 名に変換されているログ ファイルの場合、ログ ファイルの名前は変わらず、.ncsa.dns という拡張子が付きます。</li>
+</ul>
+
+<p>たとえば、Microsoft IIS ログ ファイル形式の Inetsv1.log という名前のログ ファイルの場合、DNS 変換を行わないと、出力されるログ ファイルの名前は Inetsv1.log.ncsa になります。一方、DNS 変換を行うと、出力されるログ ファイルの名前は Inetsv1.log.ncsa.dns になります。</p>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>利用できるログ ファイル形式については、「<a href="iiabtlg.htm">サイトの利用状況のログ収集について</a>」を参照してください。</li>
+<li>W3C 拡張形式のログを収集するフィールドの設定については、「<a href="iiconlg.htm">W3C 拡張形式のログ収集をカスタマイズする</a>」を参照してください。</li>
+<li>ログ収集の頻度とログ サイズについては、「<a href="iinamlg.htm">ログ ファイルを保存する</a>」を参照してください。</li>
+<li>ログ プロパティの参照リストについては、「<a href="iiintlg.htm">ログ収集プロパティ リファレンス</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

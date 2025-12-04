@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Session_OnStart</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_session_onstart"></A><SUP></SUP>Session_OnStart</H3>
+
+<P>Session_OnStart イベントは、サーバーが新しいセッションを作成したときに発生します。このスクリプトは、要求されたページの実行前に処理されます。したがって、Session_OnStart イベントは、セッション全体の変数を設定するタイミングとして適しています。変数は、ページへのアクセスが始まる前に設定されるためです。Session_OnStart イベント スクリプトでは、すべての組み込みオブジェクト (<A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm">Application</A>、<A HREF="/iishelp/iis/htm/asp/vbob554k.htm">ObjectContext</A>、<A HREF="/iishelp/iis/htm/asp/vbob5ulw.htm">Request</A>、<A HREF="/iishelp/iis/htm/asp/vbob5sj8.htm">Response</A>、<A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server</A>、および <A HREF="/iishelp/iis/htm/asp/vbob12d0.htm">Session</A>) が利用でき、参照できます。 </P>
+
+<H6>構文</H6>
+
+<P><B>&lt;SCRIPT LANGUAGE=</B><I>ScriptLanguage</I> <B>RUNAT=Server&gt; </B><BR> <B>Sub Session_OnStart</B><BR> ...<BR> <B>End Sub</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<P><B>&lt;/SCRIPT&gt;</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>ScriptLanguage</I></DT>
+
+<DD>イベント スクリプトの作成に使うスクリプト言語を指定します。VBScript や JScript など、サポートされている任意のスクリプト言語を選択できます。複数のイベントが同じスクリプト言語を使う場合、単独の &lt;SCRIPT&gt; タグ セットの下に一緒に指定できます。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>Session_OnStart イベントに <A HREF="/iishelp/iis/htm/asp/vbob8h10.htm">Redirect</A> メソッドまたは <A HREF="/iishelp/iis/htm/asp/vbob2sis.htm">End</A> メソッドの呼び出しが含まれている場合も、Session オブジェクトは処理されますが、サーバーは Global.asa ファイルのスクリプト、および Session_OnStart イベントを発生させたファイルのスクリプトの処理を停止します。 </P>
+
+<P>Session_OnStart イベントで <A HREF="/iishelp/iis/htm/asp/vbob8h10.htm">Redirect</A> メソッドを呼び出し、ユーザーが常に特定の Web ページでセッションを始めるようにする処理などを行うことができます。ユーザーがアプリケーションに入ると、サーバーはそのユーザーに対してセッションを作成し、Session_OnStart イベント スクリプトを処理します。このイベントのスクリプトでは、ユーザーが開いたページが開始ページかどうかを調べ、開始ページではない場合に Response.Redirect メソッドを呼び出してユーザーを開始ページに移動させることができます。この例を次に示します。</P>
+
+<PRE><CODE>&lt;SCRIPT RUNAT=Server LANGUAGE=VBScript&gt;
+Sub Session_OnStart
+  'Make sure that new users start on the correct
+  'page of the ASP application.
+
+  'Replace the value given to startPage below
+  'with the virtual path to your application's
+  'start page.
+
+  startPage = "/MyApp/StartHere.asp"
+  currentPage = Request.ServerVariables("SCRIPT_NAME")
+
+  'Do a case-insensitive compare, and if they
+  'don't match, send the user to the start page.
+
+  If strcomp(currentPage,startPage,1) then
+    Response.Redirect(startPage)
+  End If
+End Sub
+&lt;/SCRIPT&gt;
+</CODE></PRE>
+
+<P>上の例は、cookie をサポートしているブラウザでのみ動作します。非 cookie ブラウザは SessionID cookie を返さないため、ユーザーがページを要求するたびにサーバーは新しいセッションを作成します。したがって、要求ごとにサーバーは Session_OnStart スクリプトを処理し、ユーザーを開始ページに移動させます。上記のスクリプトを使う場合、そのサイトの開始ページには、cookie が利用可能なブラウザの使用が必要なことをユーザーに知らせるメッセージを掲示することをお勧めします。</P>
+
+<H6>解説</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob8h10.htm">Redirect</A> メソッドの呼び出しの後にある Session_OnStart イベント スクリプトは実行されないことに注意してください。したがって、次の例のように、Redirect メソッドはイベント スクリプトの最後に呼び出します。 </P>
+
+<PRE><CODE>&lt;SCRIPT LANGUAGE=VBScript RUNAT=Server&gt; 
+ Sub Session_OnStart
+  'Session initialization script.  
+  Response.Redirect "http:/server/app/StartHere.asp"
+ End sub
+&lt;/SCRIPT&gt;
+</CODE></PRE>
+
+<P>上の例では、セッション初期化スクリプトの実行中にクライアントに表示されるテキストは、<A HREF="/iishelp/iis/htm/asp/vbob8h10.htm">Redirect</A> メソッドによって非表示になります。 </P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/glob2y90.htm"><B>Session_OnEnd</B></A>、<A HREF="/iishelp/iis/htm/asp/glob4f78.htm"><B>Application_OnStart</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

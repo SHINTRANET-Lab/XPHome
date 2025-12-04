@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS によるサイトのクイック セットアップ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS の既定の設定とフォルダを使用して、Web サイトおよび FTP サイトをすばやく簡単にセットアップする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="quickstart">IIS によるサイトのクイック セットアップ</a></h1>
+
+<p>
+
+Windows XP Professional をインストールすると、IIS は既定の Web サイトおよび FTP サイトを作成します。ここでは、既定のサイトに情報を公開する方法について説明します。 </p>
+
+<big>Web サイトでコンテンツを公開するには</big><!--</p>--><br>
+
+<ol>
+<li>Web サイトのホーム ページを作成します。Web サイトの作成に利用できるツールの詳細については、「<a href="iihowat.htm">オーサリング ツールの選択</a>」を参照してください。</li>
+
+<li>ホーム ページ ファイルに、Default.htm または Default.asp という名前を付けます。
+
+<li>IIS の既定の Web 発行ディレクトリにホーム ページ ファイルをコピーします。既定の Web 発行ディレクトリは、ホーム ディレクトリとも呼ばれます。セットアップで用意されているホーム ディレクトリは、\Inetpub\Wwwroot です。</li>
+
+<li>ネットワークで名前解決システム (通常は DNS) が使われている場合、利用者はブラウザのアドレス バーにコンピュータ名を入力するだけで、サイトにアクセスできます。名前解決システムが使われていない場合、利用者はコンピュータの IP アドレスを入力する必要があります。詳細については、「<a href="iinmres.htm">名前解決について</a>」を参照してください。</li>
+</ol>
+
+<big>FTP サイトにコンテンツを公開するには</big><!--</p>--><br>
+
+<ol>
+<li>既定の FTP 発行ディレクトリに、ファイルをコピーまたは移動します。セットアップで用意されている既定のディレクトリは、\Inetpub\Ftproot です。</li>
+
+<li>ネットワークで名前解決システム (通常は DNS) が使われている場合、利用者はブラウザのアドレス バーに、「ftp://」に続けてコンピュータ名を入力し、サイトにアクセスすることができます。名前解決システムが使われていない場合、利用者は <strong>ftp://</strong> およびコンピュータの IP アドレスを入力する必要があります。FTP サイトの外観をカスタマイズするには、「<a href="iiprsovr.htm">FTP メッセージとディレクトリ表示スタイルを設定する</a>」を参照してください。</li>
+</ol>
+
+
+
+<hr><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

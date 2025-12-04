@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ASP ページを作成する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<META NAME="DESCRIPTION" CONTENT=".asp ファイルの作成方法と、スクリプト コマンドのファイルへの挿入方法について説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="H1_37765342">ASP ページを作成する</a></h1>
+
+
+<p>Active Server Pages (ASP) ファイルは、次の要素の任意の組み合わせを含む、拡張子 .asp を持つテキスト ファイルです。</p>
+
+<ul>
+<li>テキスト型</li>
+<li>HTML タグ</li>
+<li>サーバー側スクリプト</li>
+</ul>
+
+<p>.asp ファイルは、HTML ファイルのファイル名拡張子 .htm または .html を .asp に置き換えることにより簡単に作成できます。ファイルに ASP の機能が含まれていない場合は、サーバーは ASP スクリプト処理を省略して、効率的にファイルをクライアントに送ります。Web 開発者にとっては、その時点では ASP 機能を追加する予定がない場合でも、ファイルに .asp 拡張子を割り当てることができるため、大幅に柔軟性が増すことになります。</p>
+
+<p>.asp ファイルを Web に発行するには、新しく作成したファイルを Web サイトの仮想ディレクトリに保存します  (このとき、保存するディレクトリで、スクリプト アクセス権または実行アクセス権が有効になっていることを確認してください)。次に、保存したファイルの URL を入力し、ブラウザからファイルを要求します。(ここでは ASP ページを要求する必要があります。 .asp ファイルの物理パスを入力して ASP ページを要求することはできません。)このファイルがブラウザに表示されると、サーバーが HTML ページを返したことがわかります。これは、通常の動作と異なるようにみえるかもしれませんが、それは、サーバーがファイルを送る前に、ASP のサーバー側のスクリプトすべてを解析および実行するためです。ユーザーが受け取るのは、常に、標準の HTML ファイルです。</p>
+
+<p>.asp ファイルの作成には任意のテキスト エディタを使用できますが、Microsoft&reg; Visual InterDev&trade; などの ASP をサポートする機能のあるエディタを使用すると、より効率的な作業が行えます (詳細については、<A HREF="http://www.microsoft.com/isapi/redir.dll?prd=vinterdev&ar=home&pver=6.0" target="_blank">Microsoft Visual InterDev の Web サイト</A>を参照してください)。 </P>
+
+<h2><a name="whatisascript">サーバー側のスクリプト コマンドを追加する</a></h2>
+
+<p>サーバー側のスクリプトとは、Web サーバーに連続的にコマンドを発行するために使用する一連の命令のことです (Web サイトの作成経験があるユーザーは、Web ブラウザ上で実行されるクライアント側のスクリプトを知っていることでしょう)。.asp ファイルでは、スクリプトはデリミタによってテキストおよび HTML タグと区別されます。&quot;デリミタ&quot; とは、ある情報単位の開始と終了を示す文字または文字の並びのことです。HTML の場合は小なり記号 (&lt;) と大なり記号 (&gt;) がデリミタで、HTML のタグはこれらのデリミタで囲まれます。</p>
+
+<p>ASP では、スクリプト コマンドを囲むデリミタとして &lt;% と %&gt; を使用します。デリミタで囲まれた部分には、使用するスクリプト言語で有効な任意のコマンドを記述できます。次の例は、スクリプト コマンドを含む簡単な HTML ページです。</p>
+
+<pre>&lt;HTML&gt;
+  &lt;BODY&gt;
+  This page was last refreshed on &lt;%= Now() %&gt;.
+  &lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+<p>VBScript の関数 <strong>Now()</strong> は、現在の日付と時刻を返します。このページが Web サーバーによって処理されると、<code>&lt;%= Now() %&gt;</code> が現在の日付と時刻に置き換えられた後、次のような結果がブラウザに返されます。</p>
+
+<pre>This page was last refreshed on 01/29/99 2:20:00 PM.</pre>
+
+<p>デリミタによって囲まれたコマンドは、&quot;主要スクリプト コマンド&quot; と呼ばれ、これらのコマンドは、主要スクリプト言語を使って処理されます。スクリプトのデリミタで囲まれた部分に記述するコマンドは、主要スクリプト言語で有効なコマンドである必要があります。既定では、主要スクリプト言語は VBScript ですが、ほかの言語に設定することもできます。「<a href="iiwascln.htm">スクリプト言語を使用する</a>」を参照してください。</p>
+
+<p>既にクライアント側のスクリプト作成の経験があるユーザーは、スクリプト コマンドおよび式を囲む際に、HTML の &lt;SCRIPT&gt; タグが使用されることに気づくでしょう。&lt;SCRIPT&gt; タグは、.asp ファイル内で複数の言語を使用して、プロシージャを定義する必要があるサーバー側のスクリプトを作成するときに使用することもできます。詳細については、「<a href="iiwascln.htm">スクリプト言語を使用する</a>」を参照してください。</p>
+
+<h2><a name="singleexpressions">HTML とスクリプト コマンドを組み合わせて使用する</a></h2>
+
+<p>ASP のデリミタで囲まれた部分には、主要スクリプト言語で有効な任意のステートメント、式、プロシージャ、または演算子を記述できます。VBScript やほかのスクリプト言語で使われる &quot;ステートメント&quot; とは、何かの操作、宣言、または定義を表すための構文的に完結した単位のことをいいます。次の例で使われている条件ステートメント <strong>If...Then...Else</strong> は、よく使われる VBScript ステートメントの 1 つです。</p>
+
+<pre>&lt;% 
+  Dim dtmHour
+  
+  dtmHour = Hour(Now())
+
+  If dtmHour &lt; 12 Then
+    strGreeting = &quot;Good Morning!&quot;
+  Else 	
+    strGreeting = &quot;Hello!&quot;
+  End If   
+%&gt; 
+
+&lt;%= strGreeting %&gt;</pre>
+
+<p>このスクリプトは、時間に応じて <code>"Good Morning!"</code> または <code>"Hello!"</code> を文字列変数 <code>strGreeting</code> に割り当てます。<code>&lt;%= strGreeting %&gt;</code> ステートメントは、変数の現在の値をブラウザに送信します。</p>
+
+<p>この例では、(Web サーバーのタイム ゾーンで) 正午前にこのスクリプトを見たユーザーには、次のテキスト行が表示されます。</p>
+
+<pre>Good Morning!</pre>
+
+<p>正午以降にこのスクリプトを見たユーザーには、次のテキスト行が表示されます。</p>
+
+<pre>Hello!</pre>
+
+<p>1 つのステートメントのセクション間に HTML テキストを挿入することができます。たとえば、次のスクリプトでは、<strong>If...Then...Else</strong> ステートメントの内部に HTML を記述していますが、前のスクリプト例とまったく同じ結果が得られます。</p>
+
+<pre>&lt;%
+  Dim dtmHour
+
+  dtmHour = Hour(Now())
+
+  If dtmHour &lt; 12 Then
+%&gt; 
+  Good Morning!
+&lt;% Else %&gt;
+  Hello!
+&lt;% End If %&gt;</pre>
+
+<p>条件が真、つまり時刻が正午前である場合、Web サーバーは条件ステートメントの後に記述されている HTML (&quot;Good Morning&quot;) をブラウザに送ります。 条件が偽の場合は、<strong>Else</strong> ステートメントの後に記述されている HTML (&quot;Hello!&quot;) をブラウザに送ります。HTML とスクリプト コマンドをこのように組み合わせて使う方法は、複数行の HTML テキストを <strong>If...Then...Else</strong> ステートメントで囲む場合に便利です。最初のスクリプト例は、Web ページのさまざまな場所であいさつの言葉を表示する場合に特に便利です。変数の値を一度設定するだけで、繰り返しその値を表示できるためです。</p>
+
+<p>HTML テキストの間にスクリプト コマンドを挿入するのではなく、スクリプト コマンドの中から HTML テキストをブラウザに返すこともできます。テキストをブラウザに返すには、ASP の組み込みオブジェクトである <strong>Response</strong> を使用します。次の例では、前のスクリプト例と同じ結果が得られます。</p>
+
+<pre>&lt;% 
+  Dim dtmHour
+  
+  dtmHour = Hour(Now())
+
+  If dtmHour &lt; 12 Then
+    Response.Write &quot;Good Morning!&quot;
+  Else 	
+    Response.Write &quot;Hello!&quot;
+  End If   
+%&gt; 
+</pre>
+
+<p><strong>Response.Write</strong> は、その後に指定されたテキストをブラウザに送信します。テキストを動的に組み立ててブラウザに返す場合は、ステートメント内で <strong>Response.Write</strong> を使用します。たとえば、いくつかの変数の値を含む文字列を作成する場合は、この方法を使用します。<strong>Response</strong> オブジェクト、およびオブジェクト全般の詳細については、「<a href="iiwacomu.htm">コンポーネントとオブジェクトを使用する</a>」および「<a href="iiwacont.htm">ブラウザにコンテンツを送信する</a>」を参照してください。ここでは、HTML ページにスクリプト コマンドを挿入するには、いくつかの方法があることに注意してください。</p>
+
+<p>ASP のデリミタで囲まれた部分には、既定の主要スクリプト言語で記述されたプロシージャを含めることができます。詳細については、「<a href="iiwascln.htm">スクリプト言語を使用する</a>」を参照してください。</p>
+
+<p>JScript コマンドを使用している場合、ステートメントのブロックを示す中かっこ ({}) は、間に HTML タグおよびテキストがある場合でも、ASP コマンドの中に直接挿入できます。たとえば、次のように指定します。</p>
+
+<pre>&lt;% 
+  if (screenresolution == &quot;low&quot;)
+  {
+%&gt;
+This is the text version of a page.
+&lt;%
+  }
+  else
+  {
+%&gt;
+This is the multimedia version of a page.
+&lt;%
+  } 
+%&gt;</pre>
+
+<p>または、次のように記述できます。</p>
+
+<pre>&lt;% 
+  if (screenresolution == &quot;low&quot;)
+  { 
+    Response.Write(&quot;This is the text version of a page.&quot;)
+  }
+  else
+  { 
+    Response.Write(&quot;This is the multimedia version of a page.&quot;)
+  } 
+%&gt;</pre>
+
+
+
+<h2><a name="aspdirectives">ASP のディレクティブを使用する</a></h2>
+
+<p>ASP は、使用するスクリプト言語の一部ではないディレクティブ、すなわち出力ディレクティブと処理ディレクティブを提供しています。</p>
+
+<p>ASP の &quot;出力ディレクティブ&quot; <code>&lt;%= <em>expression</em> %&gt;</code>は、式の値を表示します。この出力ディレクティブは、<strong>Response.Write</strong> を使用して情報を表示することと同じです。たとえば、出力式 <code>&lt;%= city %&gt;</code> は、<code>Baltimore</code> という語 (変数の現在の値) をブラウザに表示します。</p>
+
+<p>ASP の &quot;処理ディレクティブ&quot; <code>&lt;%@ <em>keyword</em> %&gt;</code> は、.asp ファイルを処理するために必要な ASP の情報を提供します。たとえば、次のディレクティブは、VBScript をページの主要スクリプト言語として設定します。</p>
+
+<pre>&lt;%@ LANGUAGE=VBScript %&gt;</pre>
+
+<p>処理ディレクティブは、.asp ファイルの先頭行に記述する必要があります。ページに複数のディレクティブを追加する場合は、ディレクティブを同じデリミタの中に記述する必要があります。処理ディレクティブは、<strong>#include</strong> ステートメントでインクルードされるファイルの中には記述しないでください。詳細については、「<a href="iiwainc.htm">ファイルをインクルードする</a>」を参照してください。アットマーク記号 (@) とキーワードの間には、スペースを 1 つ入れる必要があります。処理ディレクティブには、次のキーワードがあります。</p>
+
+<ul>
+<li><A HREF="dire0bz9.htm">LANGUAGE</A> キーワードは、.asp ファイルのスクリプト言語を設定します。「<a href="iiwascln.htm">スクリプト言語を使用する</a>」を参照してください。</li>
+<li><A HREF="dire92zp.htm">ENABLESESSIONSTATE</A> キーワードは、.asp ファイルがセッションの状態を使用するかどうかを指定します。「<a href="iiapsess.htm">セッションを管理する</a>」を参照してください。</li>
+<li><A HREF="dire7ixx.htm">CODEPAGE</A> キーワードは、.asp ファイルのコード ページ (文字エンコード方式) を設定します。</li>
+<li><A HREF="dire8dr8.htm">LCID</A> キーワードは、ファイルのロケール識別子を設定します。</li>
+<li><A HREF="dire5t0u.htm">TRANSACTION</A> キーワードは、.asp ファイルをトランザクション コンテキスト内で実行することを指定します。「<a href="iiaptran.htm">トランザクションを理解する</a>」を参照してください。</li>
+</ul>
+
+<p><strong>重要</strong>&nbsp;&nbsp;&nbsp;1 つのディレクティブに複数のキーワードを含めることができます。キーワードと値のペアは、ほかのペアとスペースで区切る必要があります。等号 (=) の両側にはスペースを入れないでください。</p>
+
+<p>次の例は、スクリプト言語とコード ページの両方を設定します。</p>
+
+<pre>&lt;%@ LANGUAGE=&quot;JScript&quot; CODEPAGE=&quot;932&quot; %&gt;</pre>
+
+<h2><a name="H2_37775911">スクリプト内のホワイト スペース</a></h2>
+
+<p>主要スクリプト言語が VBScript または JScript のいずれかの場合、ASP はコマンドからホワイト スペースを取り除きます。その他のすべてのスクリプト言語では、ASP はホワイト スペースをそのまま残し、位置やインデントが意味を持つ言語が正しく解釈されるようにします。ホワイト スペースには、スペース、タブ、キャリッジ リターン、およびライン フィードが含まれます。</p>
+
+<p>VBScript と JScript では、デリミタ &lt;% の後とデリミタ %&gt; の前にホワイト スペースを使用して、コマンドを読みやすくすることができます。次に示すコマンドは有効なコマンドです。</p>
+
+<pre>&lt;% Color = &quot;Green&quot; %&gt;
+
+&lt;%Color=&quot;Green&quot;%&gt;
+
+&lt;%
+Color = &quot;Green&quot;
+%&gt;</pre>
+
+<p>ASP では、デリミタ %&gt; と &lt;% の間のホワイト スペースは取り除かれますが、読みやすくするためにホワイト スペースを使用することをお勧めします。1 つの分の中に複数の変数の値を表示する場合など、2 つのステートメントの間でホワイト スペースを保持する必要がある場合は、HTML の改行しないスペース文字 (&amp;nbsp;) を使用してください。たとえば、次のように指定します。</p>
+
+<pre>&lt;%
+  'Define two variables with string values.
+  strFirstName = &quot;Jeff&quot;
+  strLastName = &quot;Smith&quot;
+%&gt;
+
+&lt;P&gt;This Web page is customized for &quot;&lt;%= strFirstName %&gt;&amp;nbsp;&lt;%= strLastName %&gt;.&quot; &lt;/P&gt;</pre>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+
+</font>
+</body>
+
+</html>

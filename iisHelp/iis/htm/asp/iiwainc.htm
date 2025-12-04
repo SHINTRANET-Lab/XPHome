@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ファイルをインクルードする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ASP ファイルにファイルをインクルードするための、サーバー側インクルード ディレクティブの使用方法について説明します。また、操作上のヒントとサンプル スクリプトを示します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37774682">ファイルをインクルードする</a></h1>
+
+
+<p>&quot;サーバー側インクルード&quot; ディレクティブを使用すると、Web サーバーがファイルを処理する前に、ほかのファイルの内容をそのファイルに挿入することができます。ASP では、この機構を持つディレクティブとして <strong><A HREF="../core/iisiinc.htm">#include</A></strong> のみを実装しています。.asp ファイルにファイルを挿入するには、次の構文を使用します。</p>
+ 
+<pre>&lt;!-- #include virtual | file ="<em>filename</em>" --&gt; </pre>
+
+<p>キーワード <strong>virtual</strong> とキーワード <strong>file</strong> は、ファイルをインクルードするときに使うパスの種類を表し、<em>filename</em> はインクルードするファイルのパスと名前を示します。</p>
+
+<p>インクルードされる側のファイルに、特別なファイル名拡張子を付ける必要はありませんが、ほかの種類のファイルと区別するために、一般的なプログラミングの慣習に従って .inc という拡張子を付けることをお勧めします。</p>
+
+<h2><a name="usingthevirtualkeyword">キーワード Virtual を使用する</a></h2>
+
+<p>キーワード <strong>virtual</strong> は、&quot;仮想ディレクトリ&quot; で始まるパスを指定するときに使用します。たとえば、Footer.inc という名前のファイルが仮想ディレクトリ /Myapp に存在する場合、次の行を記述したファイルに Footer.inc の内容が挿入されます。</p>
+
+<pre>&lt;!-- #include virtual ="/myapp/footer.inc" --&gt;</pre>
+
+<h2><a name="usingthefilekeyword">キーワード File を使用する</a></h2>
+
+<p>キーワード <strong>file</strong> は、&quot;相対&quot; パスを指定するときに使用します。相対パスでは、インクルードする側のファイルのあるディレクトリがパスの起点になります。たとえば、ディレクトリ Myapp にインクルードする側のファイルがあり、ファイル Header1.inc が Myapp\Headers にある場合、次のように記述すると、Header1.inc がファイルに挿入されます。</p>
+
+<pre>&lt;!-- #include file ="headers\header1.inc" --&gt;</pre>
+
+<p>インクルードされる側のファイルのパス Headers\header1.inc が、インクルードする側のファイルに対して相対的に指定されていることに注意してください。この <strong>#include</strong> ステートメントを含むスクリプトがディレクトリ /Myapp に存在しない場合、ステートメントは正しく動作しません。</p>
+
+<p><a href="javascript://" onclick="Activate(); return false">インターネット インフォメーション サービス スナップイン</a>で [親のパスを有効にする] オプションをオンにしている場合は、キーワード <strong>file</strong> を構文 (<code>..\</code>) と共に使用して、親ディレクトリ (1 つ上のディレクトリ) のファイルをインクルードすることもできます。
+
+<script language="javascript"> <!-- function Activate() { if (navigator.appName == "Microsoft Internet Explorer"){ window.open("../core/iisnapin.htm", "NewWin",'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350'); } else if (navigator.appName == "Netscape") { window.open("../core/iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200'); } } //--> </script> その方法については、「<a href="../../../iis/htm/core/iiwarndh.htm">ASP アプリケーションを構成する</a>」を参照してください。</p>
+
+
+<h2><a name="H2_37777384">インクルード ファイルの場所</a></h2>
+
+<p>ASP は、インクルードされるファイルがどこに存在していても、そのファイルの変更を検出し、次回ブラウザからこのファイルをインクルードする .asp ファイルを要求されたとき、そのファイルのコンテンツを挿入します。ただし、通常、インクルードするファイルが同じアプリケーションまたは Web サイト内に存在する場合は、インクルードするファイルをセキュリティ保護する方が簡単です。セキュリティを強化する場合には、インクルードするファイルを \Includes などのアプリケーション内の別のディレクトリに置き、適切な (Web サーバーの) 実行アクセス権だけを設定することをお勧めします。詳細については、「<A HREF="../core/iiwspsc.htm"> Web サーバーのアクセス権を設定する</A>」を参照してください。</P>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">重要</font></span></strong>&nbsp;&nbsp;&nbsp;既定では、Web サーバーの読み取りアクセス権がすべてのファイルに設定されます。ただし、ユーザーにインクルードするファイルのコンテンツを見せないようにするには、Include ディレクトリに対する読み取りアクセス権を無効にします。 </p>
+
+<h2><a name="includingfilesdosanddonts">ファイルをインクルードする際のヒントと注意事項</a></h2>
+
+<p>インクルードされる側のファイルが、ほかのファイルをインクルードすることもできます。.asp ファイルでは、同じファイルを何度もインクルードすることができます。 ただし、これは <strong>#include</strong> ディレクティブがループを発生させない場合に限ります。たとえば、ファイル First.asp がファイル Second.inc をインクルードする場合、Second.inc が First.asp をインクルードすることはできません。また、ファイルがそのファイル自体をインクルードすることもできません。ASP は、このようなループやネストのエラーを検出し、エラー メッセージを表示して、要求された .asp ファイルの処理を停止します。</p>
+
+<p>ASP は、スクリプト コマンドを実行する前にファイルをインクルードします。したがって、スクリプト コマンドを使って、インクルードされるファイルの名前を作成することはできません。たとえば、次のスクリプトではファイル Header1.inc は開けません。これは、変数 <code>name</code> にファイル名が代入される前に、ASP が <strong>#include</strong> ディレクティブを実行しようとするためです。</p>
+
+<pre>&lt;!--  This script will fail --&gt;
+&lt;% name=(header1 &amp; ".inc") %&gt; 
+&lt;!-- #include file="&lt;%= name %&gt;" --&gt;</pre>
+
+<p>スクリプト コマンドおよびプロシージャは、スクリプトの区切り記号 &lt;% と %&gt; の間、HTML タグ &lt;SCRIPT&gt; と &lt;/SCRIPT&gt; の間、または HTML タグ &lt;OBJECT&gt; と &lt;/OBJECT&gt; の間に完全な形で含まれている必要があります。つまり、インクルードする側の .asp ファイルでスクリプトの区切り記号を開き、インクルードされる側のファイルで区切り記号を閉じることはできません。 スクリプトやスクリプト コマンドは、1 つの完結した単位を構成している必要があります。たとえば、次のスクリプトは正しく動作しません。</p>
+
+<pre>&lt;!-- This script will fail --&gt;
+&lt;%
+  For i = 1 To n
+    <em>statements in main file</em>
+    &lt;!--  #include file="header1.inc" --&gt;
+  Next
+%&gt;</pre>
+
+<p>ただし、次のスクリプトは正しく動作します。</p>
+
+<pre>&lt;% 
+  For i = 1 to n
+    <em>statements in main file</em>
+%&gt; 
+&lt;!--  #include file="header1.inc"   --&gt;
+&lt;% Next %&gt;</pre>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ASP スクリプトがインクルードするファイルに、インクルードしているスクリプトで使用されない関数および変数が多数含まれている場合は、使用しない構造体によってリソースが必要以上に占有されてしまうため、パフォーマンスに悪影響を与え、最終的には Web アプリケーションの拡張性を低下させる可能性があります。そこで通常は、不必要な情報が含まれている 1 つまたは 2 つの大きなインクルード ファイルをインクルードするのではなく、インクルード ファイルを複数の小さなファイルに分割し、サーバー側スクリプトで必要とするファイルのみをインクルードすることをお勧めします。</p>
+
+<p>場合によっては、HTML の &lt;SCRIPT&gt;&lt;/SCRIPT&gt; タグを使用して、サーバー側ファイルをインクルードする方が適していることがあります。たとえば、次のスクリプトでは、サーバーが相対パスにより実行可能なファイルをインクルードしています。</p>
+
+<pre>&lt;SCRIPT LANGUAGE="VBScript" RUNAT=SERVER SRC="Utils\datasrt.inc"&gt;&lt;/SCRIPT&gt;</pre>
+
+
+<P>次の表では、仮想パスまたは相対パスにより SRC 属性を持つファイルをインクルードするときの正しい構文を示します。</P>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<!--Column 1--><th width="15%" bgcolor="#C0C0C0" align="Left" valign="top">パスの種類</th>
+<!--Column 2--><th width="33%" bgcolor="#C0C0C0" align="Left" valign="top">構文</th>
+<!--Column 3--><th width="33%" bgcolor="#C0C0C0" align="Left" valign="top">例</th>
+</tr>
+<tr>
+<!--Column 1--><td width="15%" valign="Top">相対</td>
+<!--Column 2--><td width="33%" valign="Top">SRC="<EM>Path\Filename</EM>"</td>
+<!--Column 3--><td width="33%" valign="Top">SRC="Utilities\Test.asp"</td>
+</tr>
+<tr>
+<!--Column 1--><td width="15%" valign="Top">Virtual</td>
+<!--Column 2--><td width="33%" valign="Top">SRC="/<EM>Path/Filename</EM>"</td>
+<!--Column 3--><td width="33%" valign="Top">SRC="/MyScripts/Digital.asp"</td>
+</tr>
+<tr>
+<!--Column 1--><td width="15%" valign="Top">Virtual</td>
+<!--Column 2--><td width="33%" valign="Top">SRC="\<EM>Path\Filename</EM>"</td>
+<!--Column 3--><td width="33%" valign="Top">SRC="\RegApps\Process.asp"</td>
+</tr>
+
+</table>
+
+
+
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;この方法でファイルをインクルードする場合は、プログラム ロジックを &lt;SCRIPT&gt; タグの間に置かないでください。 プログラム ロジックを追加するときは、別の &lt;SCRIPT&gt; タグ セットを使用します。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>オーサリング ツールの選択</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ユーザーの目的に合ったオーサリング ツールの選択について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37703369">オーサリング ツールの選択</a></h1>
+
+<p>ここでは、ユーザーの目的に合ったオーサリング ツールの選択の基本について説明します。</p>
+
+<ul>
+<li><a href="#righttool">使用可能なオプション</a></li>
+<li><a href="#multimedia">マルチメディア コンテンツおよびその他のファイル形式</a></li>
+<li><a href="#WebApplications">高度な Web サイトの開発</a></li>
+</ul>
+
+<h2><a name="righttool">使用可能なオプション</a></h2>
+
+<p>インターネットおよびイントラネット技術が発展すると共に、専門化された多様な Web オーサリング ツールが求められるようになりました。初めて Web を発行する際に、Web 発行の目的に適したツールを選ぶことが複雑で難しく感じられる場合がよくあります。ここでは、オーサリング ツールを選択するにあたり、使用できる主なツールの理解を深めるための情報を提供します。</p>
+
+
+<h3>WYSIWYG</h3>
+<p>Web ページを初めて作成する場合は、HTML の知識がなくても使用できて、すぐに Web ページの作成作業を開始できるオーサリング ツールが適しています。ツールの中には、Microsoft&reg;&nbsp;Word などのワード プロセッサで使用されている、WYSIWYG (what you see is what you get) のユーザー インターフェイスを備えているものがあります。ワード プロセッサの使用経験があれば、Web ページの作成が可能です。Microsoft&reg;&nbsp;FrontPage&reg;&nbsp;は簡単に使える WYSIWYG エディタで、使いやすいインターフェイス、便利なフォーム ページ ウィザード、表やグラフィックスを Web ページに簡単に付け加えることができる各種テンプレートなどが用意されています。Web ブラウザに表示されるページの外観は、Web ページを作成および編集しながら FrontPage の表示で確認できます。FrontPage には特別なプログラムの拡張機能も備わり、Web サーバー上の機能が強化されています。詳細については、<a href="http://www.microsoft.com/japan/office/frontpage/" target="_blank">Microsoft FrontPage の Web サイト</a>を参照してください。</p>
+
+<h3>HTML 変換</h3>
+<p>Web ページを作成するには、既存のドキュメントを HTML ドキュメントに変換して Web ページを発行する方法もあります。ワード プロセッサのファイルまたはスプレッドシートのファイルをコンバータにインポートすれば、すぐに Web ページに変換できます。Word などワード プロセッサの多くは、HTML への変換機能を備えています。ただし、ほとんどのコンバータは HTML の書式指定タグをテキストに追加するだけで、中にはドキュメントの元の外観を保つことができないものもあるため注意が必要です。頻繁に更新する必要のない、大量の既存ドキュメントを発行する場合は、コンバータが便利です。</p>
+
+<h3>テキスト エディタ</h3>
+<p>メモ帳などのほとんどすべての標準テキスト エディタでも Web ページを作成できます。HTML のタグを入力し、そのファイルを保存してから Web ブラウザでページを開きます。Web ページの書式を細かく指定でき、最新の Web 技術をいち早く実装してテストできるため、Web ページ作成の経験があるユーザーの中には、この方法を好むユーザーもいます。ただし、テキスト エディタで Web ページを作成する場合は、HTML に習熟し、HTML ファイルのトラブルシューティングのための時間を見込んでおく必要があります。</p>
+
+<p>標準テキスト エディタに、WYSIWYG エディタのような便利なショートカット機能を多数備えた &quot;ハイブリッド&quot; ツールも数種類あります。このツールにより、定義済みの HTML タグをページに簡単に挿入して、入力作業を軽減することができます。インターネット ベンダや最寄りのコンピュータ ソフトウェア ベンダで、詳しい情報を入手できます。市販されている各種 Web オーサリング ツールについては、<A HREF="http://www.microsoft.com/japan/developer/" TARGET="_blank">Microsoft MSDN Online Web サイト</A>で参照できます。
+
+
+<h2><a name="multimedia">マルチメディア コンテンツおよびその他のファイル形式</a></h2>
+
+<p>Web ページのコンテンツは、テキスト、表およびグラフィックスに限られていません。映像や音は商用 Web サイトに不可欠なものになっています。標準的な HTML タグのみを使用して、魅力的なマルチメディア機能を Web ページに追加できます。たとえば、HTML の &lt;IMG&gt; タグの DYNSRC 属性を使い、ビデオ クリップを Web ページに埋め込むことができます。</p>
+
+<pre> &lt;IMG DYNSRC=&quot;MyVideo.avi&quot; &gt;</pre>
+
+<p>上記のタグを含む Web ページを読み込むと、ビデオ クリップの MyVideo.avi が再生されます。</p>
+
+<p>ストリーム転送ビデオなどの、高度なマルチメディア機能を実装するには、専用の編集および作成用ソフトウェアの使用を必要とする場合があります。Microsoft&reg;&nbsp;Windows Media Technologies &trade; などを使用すると、ストリーム転送メディアのファイルを簡単に作成、配信、再生することができます。ストリーム転送メディア技術の詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=windows&ar=windowsmedia" target="_blank">Microsoft&reg;&nbsp;Windows Media の Web サイト</A>を参照してください。</p>
+
+<p>HTML を使うと、Microsoft Office のファイルを含む多数のファイル形式へのリンクを作成できます。これらの形式を表示するには、HTML 以外のファイルを表示できる Web ブラウザが必要です。たとえば、イントラネットのユーザー全員が Microsoft&reg;&nbsp;Excel と Microsoft&reg;&nbsp;Internet Explorer の Version 3.0 以降を使用している場合は、Web ページから Excel ワークシートにリンクすることが可能です。ユーザーがリンクをクリックすると、Web ブラウザ上に Excel 形式のドキュメントが表示されます。これは、ドキュメントを共有および分散する Web サイトを作成するための手段であり、より効果的に作業を進めるうえで有効です。</p>
+
+<h2><a name="WebApplications">高度な Web サイトの開発</a></h2>
+
+<p>現在では、ほとんどの商用 Web サイトが洗練された対話型の Web ページを使用して、より多くの情報を含む魅力的なコンテンツをユーザーに提供しています。これらの Web サイトにはしばしば &quot;Web アプリケーション&quot; または &quot;Weblications&quot; と呼ばれ、ユーザーの入力に応じて、サーバーから情報を取得する &quot;スクリプト&quot; という処理プログラムが組み込まれています。商品を提示してユーザーの注文に応じるオンライン書店やオンライン ブティックは、Web アプリケーションの典型的な例です。</p> 
+
+<p>ユーザーが作成できる便利な Web アプリケーションが、Active Server Pages (ASP) アプリケーションです。ASP アプリケーションは、サーバーのみで処理する &quot;サーバー側&quot; のスクリプトおよびコマンドを含みます。ASP サーバー側スクリプトを使って、Web サイトにデータベース接続を追加したり、ユーザーの Web ブラウザの機能に合わせた Web コンテンツを配信することができます。ASP の使用方法については、「<A HREF="../asp/iiwawelc.htm">Active Server Pages</A>」を参照してください。</p> 
+
+<p>Web アプリケーションの構築に取りかかる際に、信頼性があり、用途の広いオーサリング ツールが必要となります。強力な Web アプリケーション開発ツールである Microsoft&reg;&nbsp;Visual InterDev を使用して、最先端の Web サイトを迅速に構築することができます。Visual InterDev の統合データベース ツールによって、Web サイトを OLE DB データ ソースおよび オープン データベース コネクティビティ (ODBC) に準拠したデータベースに簡単に接続できます。詳細については、<A HREF="http://www.microsoft.com/japan/developer/vinterdev/" target="_blank">Microsoft Visual InterDev の Web サイト</A>を参照してください。</p>  
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

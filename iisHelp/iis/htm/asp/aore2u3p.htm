@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsMimeType</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iismimetype"></A>IIsMimeType</H2>
+
+<P><A HREF="/iishelp/iis/htm/asp/apro5gs0.htm">MimeMap</A> プロパティには、IISMimeType オブジェクトの配列が含まれます。この配列に追加するには、まず新しい IISMimeType オブジェクトを作成し、その MimeType を設定します。次に Extension を作成し、この要素を MimeMap の配列に追加し、ADSI で設定します。</P>
+
+<P>IIsMimeType オブジェクトは、カスタム ADSI オートメーション オブジェクトです。</P>
+
+<H6>構文</H6>
+
+<P>varMimeMap = <I>object</I>.MimeMap</P>
+
+<P>Set <I>objMimeType</I> = <I>aMimeMap</I>( 0 )</P>
+
+<P>&nbsp;</P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>aMimeMap</I></DT>
+
+<DD>IIsMimeType オブジェクトの一覧を受け取る変数です。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、MimeType プロパティをサポートする変数です。<BR>
+</DD>
+
+<DT><I>objMimeType</I></DT>
+
+<DD>IIsMimeType オブジェクトを受け取るオブジェクト変数です。</DD>
+</DL>
+
+<H6>格納可能なオブジェクト </H6>
+
+<P>このオブジェクトは、ほかのどのオブジェクトも格納できません。</P>
+
+<H6>プロパティ</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/adsi57hv.htm">ADSI オブジェクト プロパティ</A></P>
+
+<H6>メタベース プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5gs0.htm"><B>MimeMap</B></A></TD>
+<TD width=50%>このプロパティは、MIME (Multipurpose Internet Mail Extensions) マッピングのためのファイル名拡張子の一覧を提供します。MineMap は、IISMimeType オブジェクトの配列です。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>オブジェクト プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore19lx.htm"><B>MimeType</B></A></TD>
+<TD width=50%>このプロパティは、オブジェクトの MimeType の GET および PUT に使用されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore4mum.htm"><B>Extension</B></A></TD>
+<TD width=50%>このプロパティは、オブジェクトに割り当てられたファイル名拡張子の GET および PUT に使用されます。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore8m5s.htm"><B>IIsMimeMap</B></A>、<A HREF="/iishelp/iis/htm/asp/apro5gs0.htm"><B>MimeMap</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

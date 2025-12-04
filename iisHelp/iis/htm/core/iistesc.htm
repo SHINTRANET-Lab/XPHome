@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>暗号化の強度を設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="SSL でセキュリティ保護された通信の暗号化の強度 (既定のセッション キー強度は 40 ビット キー) の設定の方法について説明します。輸出規制により、128 ビット キーを使った暗号化機能を利用できるのは米国およびカナダに限られていますが、Server-Gated Cryptography (SGC) によって128 ビット暗号化による金融取引を実現できます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37756791">暗号化の強度を設定する</a></h1>
+
+<p>SSL でセキュリティ保護されたすべての通信セッションで、既定の 40 ビット キーの代わりに 128 ビット以上のセッション キーを要求するように、Web サーバーを構成できます。ただし、暗号化の強度を 128 ビット以上のキーに設定した場合、サーバーとの間でセキュリティ保護された通信チャンネルを確立しようとするユーザーは、128 ビット セッション キーを使った通信に対応する Web ブラウザを使用しなければなりません。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong></p>
+
+<ul>
+<li>128 ビットの暗号化機能へのアップグレードについては、<a href="http://www.microsoft.com/isapi/redir.dll?prd=support&prd=ie&ar=support" target="_blank">Microsoft 製品サポート サービスの Web サイト</a>を参照してください。</li>
+
+<li>特定の Web サイトのセキュリティのプロパティを設定すると、そのサイトに属するディレクトリおよびファイルにも同じセキュリティのプロパティが自動的に設定されます。ただし、個々のディレクトリおよびファイルのセキュリティのプロパティがそれ以前に設定されていた場合を除きます。</li>  
+
+<li>Web サイトのセキュリティのプロパティを設定しようとすると、個々のディレクトリおよびファイルのプロパティをリセットするかどうかを確認するメッセージが表示されます。プロパティのリセットを選択すると、それまでのセキュリティの設定は新しい設定に置き換えられます。既にセキュリティのプロパティが設定されているサブディレクトリやファイルを含むディレクトリのセキュリティのプロパティを設定するときも、同じ条件が適用されます。プロパティの設定の詳細については、「<a href="iivsovr.htm">Web サイトおよび FTP サイトについて</a>」の「プロパティおよびサイトのプロパティの継承」を参照してください。</li>
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>暗号化の強度を設定するには</big><br>
+
+
+<p>セキュリティで保護され、暗号化された通信を確立するには、有効なサーバー証明書をインストールする必要があります。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」および「<a href="iiocrsc.htm">サーバー証明書を取得する</a>」を参照してください。</p>
+
+<ol>
+	<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+	<li>サーバーのキー ペアと証明書の要求をまだ作成していない場合は、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックし、[セキュリティ保護された通信] の [サーバー証明書] をクリックします。サーバー証明書ウィザードの指示に従って、操作を進めます。新しいウィザードの詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</li>
+	<li>サーバーのキー ペアと証明書の要求を既に作成している場合は、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックし、[セキュリティ保護された通信] の [編集] をクリックします。</li>
+	<li>[セキュリティ保護された通信] ダイアログ ボックスの [保護されたチャンネル (SSL) を要求する] チェック ボックスをオンにします。</li>
+	<li>128 ビットの暗号化を指定する場合は、[128 ビット暗号化を要求する] チェック ボックスをオンにします。</li>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;56 ビット暗号化のみを使用できるサーバーで [128 ビット暗号化を要求する] チェック ボックスをオンにすると、この要求が選択されているリソースにユーザーがアクセスできません。128 ビット暗号化チェック ボックスがオンになっていても、使用できるのは 56 ビット暗号化のみです。ユーザーがこれらのリソースを表示できるようにするには、チェック ボックスをオフにします。</p>
+
+	<li>[OK] をクリックします。</li>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;このセッション キーは、セキュリティで保護された通信リンクのネゴシエーションと確立に使われる SSL キー ペアとは別のものです。</p>
+
+
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

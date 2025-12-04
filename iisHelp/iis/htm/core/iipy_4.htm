@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[IP アドレス アクセス制限]</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[IP アドレス アクセス制限]</strong></p>
+
+<p>このダイアログ ボックスは、Web サイト、仮想ディレクトリ、またはディレクトリへのアクセスを、特定のユーザーに対して許可または拒否するために使用します。</p>
+
+<p><strong>[既定では、すべてのコンピュータからのアクセスを] オプション</strong></p>
+
+<p><strong>[許可する]</strong></p>
+
+<p>例外として指定したコンピュータを除く、すべてのコンピュータにリソースへのアクセスを許可する場合に、このオプションを選択します。たとえば、特定の IP アドレスからサーバーへのアクセスを拒否することで特定の個人またはグループを除外したり、ネットワーク全体に対してサーバーへのアクセスを拒否する一方で、ほかのすべてのネットワークにアクセスを許可することができます。</p>
+
+<p><strong>[拒否する]</strong></p>
+
+<p>アクセスが許可された特定の IP アドレスを使用するユーザーを除く、すべてのリモート ユーザーからのアクセスを拒否する場合に、このオプションを選択します。インターネットでは、既知のユーザー以外の全員を除外する場合に、IP アドレスによるセキュリティを利用すると便利です。</p>
+
+<p><strong>[ただし次のものは除きます]</strong></p>
+
+<p>特定のコンピュータまたはコンピュータ グループからのアクセスを許可または拒否するには、次の操作を行います。</p>
+
+<ol>
+<li>[追加] をクリックします。[許可する] が選択されている場合は、[拒否] が表示され、[拒否する] が選択されている場合は、[許可] が表示されます。</li>
+
+<li>[IP アドレス] 列に、サイトへのアクセスを許可または拒否する特定のコンピュータの、固有の TCP/IP ネットワーク アドレスを入力します。</li>
+
+<li>[サブネット マスク] 列に、サイトへのアクセスを許可または拒否するコンピュータ グループの TCP/IP ネットワーク区分を示す数値を入力します。</li>
+
+<li>[ドメイン] 列に、サイトへのアクセスを許可または拒否するネットワークのドメイン名を入力します。</li>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;IP アドレスの制限項目を設定するために、[IP アドレス]、[サブネット マスク]、および [ドメイン] の 3 つのテキスト ボックスが用意されていますが、この 3 つすべてを同時に指定することはできません。 </p>
+
+<p>1 台のコンピュータへのアクセスを制限する場合は、IP アドレスのみを指定します。</p>
+
+<p>IP の範囲を指定してコンピュータ グループへのアクセスを制限する場合は、IP アドレスとサブネット マスクのみを指定します。</p>
+
+<p>ドメインを指定してコンピュータ グループへのアクセスを制限する場合は、ドメインのみを指定します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Content Rotator コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_content_rotator_component"></a>Content Rotator コンポーネント</H1>
+
+<P>Content Rotator コンポーネントは ContentRotator オブジェクトを作成します。このオブジェクトは、Web ページ上の HTML コンテンツ文字列を自動的に交換します。ユーザーが Web ページを要求するたびに、ContentRotator オブジェクトは<A HREF="/iishelp/iis/htm/asp/comp0mw5.htm">コンテンツ スケジュール ファイル</A>に指定された情報に基づいて、新しい HTML コンテンツ文字列を表示します。</P>
+
+<P>コンテンツ文字列には HTML タグを使用できるため、テキスト、イメージ、ハイパーリンクなど、HTML で表現できるコンテンツはすべて表示できます。たとえば、Content Rotator コンポーネントを使用して、引用やハイパーリンクを日替わりで表示したり、Web ページが開かれるたびに本文と背景の色を変更したりできます。</P>
+
+<P>Content Rotator コンポーネントは、次のファイルを使用します。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=52%><B>ファイル名</B></TD>
+<TD class=blue width=48%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%>controt.dll </TD>
+<TD width=48%>Content Rotator コンポーネントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><A HREF="/iishelp/iis/htm/asp/comp0mw5.htm">コンテンツ スケジュール ファイル</A></TD>
+<TD width=48%>Web コンテンツの表示スケジュールとファイル情報が入ったテキスト ファイルです。このファイルは、Web サーバーの仮想パスに置く必要があります。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>ContRot </I>=<B> Server.CreateObject( "MSWC.ContentRotator" ) </B></P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>ContRot</I></DT>
+
+<DD>Server.CreateObject を呼び出して作成する ContentRotator オブジェクトの名前を指定します。</DD>
+</DL>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=48%><A HREF="/iishelp/iis/htm/asp/comp8r1w.htm">ChooseContent</A> </TD>
+<TD width=52%>コンテンツ文字列を取得し、表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><A HREF="/iishelp/iis/htm/asp/comp6fzo.htm">GetAllContent</A></TD>
+<TD width=52%>コンテンツ スケジュール ファイルのすべてのコンテンツ文字列を取得し、表示します。</TD>
+</TR>
+</TABLE><BR>
+
+<P><span class=le><B>注</B></span></P>
+
+<P><U>Content Rotator コンポーネント</U>は、乱数ジェネレータを使用して、重み付けされたコンテンツ文字列の中から表示する文字列を選択するため、同じ文字列が繰り返し表示される場合があります。特に繰り返しが発生しやすいのは、コンテンツ スケジュール ファイル内のエントリが少ない場合、またはほかのエントリに比べ、特定のエントリの重み付けが著しく大きい場合です。</P>
+
+<H6>例</H6>
+
+<P>次の例は、ユーザーが Web ページを表示するたびに、異なるワンポイント メッセージを表示します。この例を実行するには、Default Web Site フォルダの Data サブフォルダ内に <U>Content Schedule File</U> を作成する必要があります。&nbsp;たとえば、Default Web Site が C:\Inetpub\Wwwroot にマップされている場合は、C:\Inetpub\Wwwroot\Data\ContRot.txt 内にリスト ファイルを作成する必要があります。</P>
+
+<P>--- ContRot.asp ---</P>
+
+<PRE><CODE>&lt;% 
+  Set objContRot = Server.CreateObject("MSWC.ContentRotator") 
+%&gt;
+&lt;%= objContRot.ChooseContent("/Data/ContRot.txt") %&gt;  
+</CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

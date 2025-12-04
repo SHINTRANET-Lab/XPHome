@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>@TRANSACTION</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="__transaction"></A><SUP></SUP>@TRANSACTION</H2>
+
+<P>@TRANSACTION ディレクティブを使用して、スクリプトをトランザクションとして処理するように設定できます。スクリプトがトランザクションとして処理される場合、コンポーネント サービスはトランザクションを作成してリソースの更新を調整します。</P>
+
+<H6>構文</H6>
+
+<P>&lt;% <B>@TRANSACTION</B> = <I>value</I> %&gt;</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>value</I></DT>
+
+<DD>トランザクション サポートの種類を示す文字列です。次の値を指定できます。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=31%><B>値</B></TD>
+<TD class=blue width=69%><B>意味</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>Required</TD>
+<TD width=69%>スクリプトはトランザクションを開始します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>Requires_New</TD>
+<TD width=69%>スクリプトはトランザクションを開始します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>Supported</TD>
+<TD width=69%>スクリプトはトランザクションを開始しません。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%>Not_Supported</TD>
+<TD width=69%>スクリプトはトランザクションを開始しません。</TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>スクリプトに @TRANSACTION ディレクティブを指定する場合は、.asp ファイルの先頭行で使用する必要があります。先頭行以外で使用するとエラーが発生します。このディレクティブは、トランザクションで実行されるページすべてに追加する必要があります。現在のトランザクションは、スクリプトの処理が終了した時点で終了します。</P>
+
+<P>@TRANSACTION ディレクティブを含むスクリプトが、Server.Transfer メソッドまたは Server.Execute メソッドのいずれかにより呼び出されたときに、ディレクティブの値が Required に指定されている場合、呼び出し元の asp のトランザクションが実行されていたときは、スクリプトは呼び出し元の asp のトランザクションを続行します。呼び出し元の asp のトランザクションが実行されていなかったときは、呼び出された asp は新しいトランザクションを作成します。</P>
+
+<P>たとえば、次の 2 つのスクリプトは 1 つのトランザクションと見なされます。</P>
+
+<P>ASP</P>
+
+<PRE><CODE>&lt;%@ TRANSACTION=Required %&gt;
+&lt;%
+  Server.Transfer("/asp/asp2.asp")
+%&gt;
+ASP2
+&lt;%@ TRANSACTION=Required%&gt;
+&lt;%
+  Server.CreateObject("Mytransactedcomponent.Closeout")
+%&gt;
+</CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob554k.htm">ObjectContext</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>スクリプト言語を使用する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<META NAME="DESCRIPTION" CONTENT="Web ページまたはアプリケーションの主要スクリプト言語を設定する方法、また ASP スクリプト作成環境で、VBScript や JScript を使用する方法について説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="H1_37779074">スクリプト言語を使用する</a></h1>
+
+
+<p>Visual Basic、C++、および Java などのプログラミング言語は、コンピュータのリソースへの低レベルのアクセスを提供し、複雑で大規模なプログラムの作成に使用されます。一方、スクリプト言語は、Web サーバーやブラウザで Web サイトの機能を実行するように限定された、&quot;スクリプト&quot; と呼ばれるプログラムを作成するために使用されます。複雑なプログラミング言語と異なり、スクリプト言語は &quot;インタプリタ型&quot; の言語で、&quot;コマンド インタプリタ&quot; と呼ばれる中間プログラムによって命令ステートメントが順に実行されます。インタプリタ処理を行うと実行効率は低下しますが、スクリプト言語は習得しやすく強力な機能を備えています。スクリプトは、HTML ページに埋め込んでコンテンツの書式を設定したり、高度なビジネス ロジックをカプセル化する COM コンポーネントを実装するために使用したりすることができます。</p>
+
+<p>Active Server Pages を使うと、Web 開発者はサーバー上で実行されるスクリプトをさまざまなスクリプト言語で記述できます。つまり、1 つの .asp ファイルの中で複数のスクリプト言語を使用することができます。また、スクリプトの読み取りと処理はサーバー側で行われるため、.asp ファイルを要求するブラウザがスクリプティングをサポートしている必要はありません。</p>
+
+<p>スクリプト言語は、対応するスクリプト エンジンが Web サーバー上にインストールされていれば、任意のものを使用できます。&quot;スクリプト エンジン&quot; とは、特定の言語で記述されたコマンドを処理するプログラムのことです。Active Server Pages には、Microsoft Visual Basic Scripting Edition (VBScript) と Microsoft JScript の2 つのスクリプト エンジンが付属しています。REXX、PERL、および Python などのその他のスクリプト言語用のエンジンも、インストールして使用することができます。</p>
+
+<p>既に Visual Basic でプログラムを作成した経験があれば、Visual Basic のサブセットである VBScript はすぐに使い始めることができます。Java、C、または C++ と JScript の構文は似ていますが、JScript は Java や C と直接は関係ありません。</p>
+
+<p>REXX、Perl、または Python などのその他のスクリプト言語に習熟している場合は、対応するスクリプト エンジンを入手してインストールすれば、既に知っている言語を使用できます。Active Server Pages は、COM スクリプティング ホストです。ある特定の言語を使用するには、COM スクリプティングの標準に従い、Web サーバー上に COM (Component Object Model) オブジェクトとして常駐するスクリプト エンジンをインストールする必要があります。</p>
+
+<h2><a name="settingtheprimaryscriptinglanguage">主要スクリプト言語を設定する </a></h2>
+ 
+<p>ASP の &quot;主要スクリプト言語&quot; は、デリミタ &lt;% と %&gt; で囲まれた部分のコマンドを処理するのに使われる言語のことです。特に指定しない限り、VBScript が主要スクリプト言語になります。スクリプト エンジンがあれば、主要スクリプト言語として任意のスクリプト言語を使用できます。主要スクリプト言語は、ページ単位または ASP アプリケーションのすべてのページを対象として設定できます。</p>
+
+<h3><a name="H3_37782962">アプリケーションの言語を設定する</a></h3>
+
+<p>アプリケーション内のすべてのページに対して主要スクリプト言語を設定するには、インターネット インフォメーション サービス スナップインの [アプリケーションのオプション] タブで、[既定の ASP の言語] プロパティを設定します。詳細については、「<a href="../core/iiwarndh.htm">ASP アプリケーションを構成する</a>」を参照してください。</p>
+
+<h3><a name="H3_37781925">ページの言語を設定する</a></h3>
+
+<p>あるページにのみ使用する主要スクリプト言語を設定するには、.asp ファイルの先頭に <code>&lt;%@ LANGUAGE %&gt;</code> ディレクティブを追加します。このディレクティブの構文は、次のとおりです。</p>
+
+<pre>&lt;%@ LANGUAGE=<em>ScriptingLanguage </em>%&gt;</pre>
+
+<p><code><em>ScriptingLanguage</em></code> には、このページに設定する主要スクリプト言語を指定します。ページに対する設定は、アプリケーションのすべてのページに対するグローバルな設定より優先されます。</p> 
+
+<p>ASP ディレクティブは、ガイドラインに従って使用してください。詳細については、「<a href="iiwabasi.htm">ASP ページを作成する</a>」を参照してください。</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;<strong>Object.Method</strong> の構文をサポートしていない言語を主要スクリプト言語として設定するには、<strong>LanguageEngines</strong> レジストリ キーを作成する必要があります。詳細については、「<a href="../core/iiregovr.htm" >レジストリについて</a>」を参照してください。</p>
+
+<h2><a name="usingvbscriptandjscript">サーバー上で VBScript と JScript を使用する</a></h2>
+
+<p>サーバー上で ASP と組み合わせて VBScript を使用する場合は、VBScript の 2 つの機能が無効になります。Active Server Pages で記述されたスクリプトはサーバー上で実行されるため、ユーザー インターフェイスの要素を表示する VBScript のステートメント、<strong>InputBox</strong> および <strong>MsgBox</strong> はサポートされません。また、VBScript の関数 <strong>CreateObject</strong> と <strong>GetObject</strong> はサーバー側のスクリプトでは使用しないでください。代わりに <strong>Server.CreateObject</strong> を使用し、ASP がオブジェクトのインスタンスを追跡できるようにします。<strong>CreateObject</strong> または <strong>GetObject</strong> によって作成されたオブジェクトは、ASP の組み込みオブジェクトにアクセスすることができず、トランザクションに参加することはできません。例外は、IIS の Admin オブジェクトを使用する場合、および Java モニカを使用する場合です。詳細については、「<a href="aogu2wab.htm">IIS Admin オブジェクトを使用する</a>」および「<a href="iiwacomu.htm#H2_37772661">Java クラスからオブジェクトを作成する</a>」を参照してください。</p>
+
+<p>VBScript と JScript の演算子、関数、ステートメント、オブジェクト、プロパティ、およびメソッドの一覧と説明については、「VBScript ランゲージ リファレンス」と「JScript ランゲージ リファレンス」を参照してください。このリファレンスは、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Windows Script Technologies</a> の Web サイトにあります。</p>
+
+<h3><a name="includingcomments">コメントを挿入する</a></h3>
+
+<p>ASP では、すべてのスクリプトの処理はサーバー側で行われます。このため、一般的なクライアント側スクリプトのように、スクリプトをサポートしていないブラウザにスクリプトが表示されるのを避けるために HTML コメント タグでスクリプトを隠す必要はありません。すべての ASP コマンドは、ブラウザにコンテンツが送信される前に処理されます。HTML コメントは、HTML ページに注釈を付け加えるために使用できます。追加したコメントはブラウザに返され、ユーザーが HTML のソースを表示すると見ることができます。</p>
+
+<h4><a name="H4_37784996">VBScript のコメント</a></h4>
+
+<p>VBScript では、一重引用符形式のコメントがサポートされています。HTML のコメントとは異なり、VBScript のコメントはスクリプトが処理されるときに削除され、ブラウザには送信されません。</p>
+
+<pre>&lt;% 
+  'This line and the following two are comments. 
+  'The PrintTable function prints all 
+  'the elements in an array. 
+  PrintTable MyArray() 
+%&gt;</pre>
+
+<p>出力式の中にコメントを記述することはできません。たとえば、次の例の 1 行目は正しく動作しますが、2 行目は <code>&lt;%=</code> で始まるため正しく動作しません。</p>
+
+<pre>&lt;% i = i +1 'This statement increments i. (This script will work.) %&gt; 
+
+&lt;%= name 'This statement prints the variable name. (This script will fail.) %&gt;</pre>
+
+<h4><a name="H4_37785830">JScript のコメント</a></h4>
+
+<p>JScript では、コメント文字 <code>//</code> がサポートされています。コメント文字はコメント行ごとに使用します。</p>
+
+<pre>&lt;%
+  var x
+  x = new Date() 
+  // This line sends the current date to the browser, 
+  // translated to a string.
+  Response.Write(x.toString()) 
+%&gt;</pre>
+
+<h3><a name="H3_37786236">大文字と小文字の区別</a></h3>
+
+<p>VBScript では、大文字と小文字は区別されません。たとえば、<strong>Request</strong> と <strong>request</strong> のどちらを使用しても、ASP の <strong>Request</strong> オブジェクトを参照することができます。ただし、大文字と小文字が区別されないため、変数名を大文字と小文字の違いで区別することはできません。たとえば、Color と color を別の変数として作成することはできません。</p>
+
+<p>JScript では、大文字と小文字が区別されます。スクリプトで JScript のキーワードを使用するときは、そのキーワードのリファレンス ページに示されているとおりに入力する必要があります。たとえば、<strong>Date</strong> の代わりに <strong>date</strong> を使うと、エラーが発生します。このヘルプで ASP の組み込みオブジェクトに関して使われている大文字小文字の区別は、JScript コマンドでも動作します。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+
+</font>
+</body>
+
+</html>

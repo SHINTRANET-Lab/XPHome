@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Cookies</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_cookies_request"></A><SUP></SUP>Cookies</H4>
+
+<P>Cookies コレクションで、HTTP 要求の中で送信された cookie の値を取得できます。</P>
+
+<H6>構文</H6>
+
+<P>Request.<B>Cookies</B>(<I>cookie</I>)[(<I>key</I>)|.<I>attribute</I>] </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>cookie</I></DT>
+
+<DD>値を取得する cookie を指定します。<br>
+</DD>
+
+<DT><I>Key</I></DT>
+
+<DD>cookie 辞書からサブキーの値を取得するために使用する省略可能なパラメータです。<br>
+</DD>
+
+<DT><I>attribute</I></DT>
+
+<DD>cookie に関する情報を指定します。指定できる属性パラメータは、次のとおりです。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=25%><B>Name</B></TD>
+<TD class=blue width=75%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><B>HasKeys</B></TD>
+<TD width=75%>読み取り専用です。cookie にキーが含まれているかどうかを指定します。</TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>cookie 辞書のサブキーにアクセスするには、<i>Key</i> に対応する値を指定します。<i>Key</i> を指定せずに cookie 辞書にアクセスすると、すべてのキーが 1 つのクエリ文字列として返されます。たとえば、MyCookie に First と Second という 2 つのキーがあるとき、Request.Cookies の呼び出しの中でこれらのキーをどちらも指定していないと、次の文字列が返されます。</P>
+
+<PRE><CODE>First=firstkeyvalue&amp;Second=secondkeyvalue
+ </CODE></PRE>
+
+<P>同じ名前を持つ 2 つの cookie がクライアント ブラウザから送信された場合、Request.Cookies はより深いパス構造を持つ方の cookie を返します。たとえば、2 つの cookie が同じ名前で、一方のパス属性が /www/、もう一方のパス属性が /www/home/ であるとすると、クライアント ブラウザは両方の cookie を /www/home/ ディレクトリに送信しますが、Request.Cookies は後者の方の cookie だけを返します。</P>
+
+<P>cookie が cookie 辞書であるかどうか (cookie がキーを持っているかどうか) を調べるには、次のスクリプトを使用します。</P>
+
+<PRE><CODE>&lt;%= Request.Cookies("myCookie").HasKeys %&gt; 
+ </CODE></PRE>
+
+<P><CODE>myCookie</CODE> が cookie 辞書であれば、上のスクリプトの値は TRUE に評価され、そうでなければ FALSE に評価されます。</P>
+
+<P>ループを使用すると、Cookies コレクション内のすべての cookie や、cookie 内のすべてのキーを調べることができます。ただし、キーを持っていない cookie に対してループを使用した場合は何も出力されません。これを防ぐには、.HasKeys の構文を使用して cookie がキーを持っているかどうかを先にチェックしておきます。以上の操作の例を次に示します。</P>
+
+<PRE><CODE>&lt;%
+    For Each strKey In Request.Cookies
+      Response.Write strKey &amp; " = " &amp; Request.Cookies(strKey) &amp; "&lt;BR&gt;"
+      If Request.Cookies(strKey).HasKeys Then
+        For Each strSubKey In Request.Cookies(strKey)
+          Response.Write "-&gt;" &amp; strKey &amp; "(" &amp; strSubKey &amp; ") = " &amp; _
+            Request.Cookies(strKey)(strSubKey) &amp; "&lt;BR&gt;"
+        Next
+      End If
+    Next
+%&gt;
+
+ </CODE></PRE>
+
+<H6>例</H6>
+
+<P>次の例は、myCookie の値を Web ページに出力します。</P>
+
+<PRE><CODE>Here is the value of the cookie named myCookie: 
+&lt;%= Request.Cookies("myCookie") %&gt; 
+ </CODE></PRE>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>Cookies コレクションの詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank>World Wide Web Consortium Web サイト</a> で入手可能な HTTP state management specification に記述されています。</P>
+
+<H6>対象</H6>
+
+<P>Request オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob8q5h.htm"><B>ClientCertificate</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob4fl9.htm"><B>Form</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob53hj.htm"><B>QueryString</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob5vsj.htm"><B>ServerVariables</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

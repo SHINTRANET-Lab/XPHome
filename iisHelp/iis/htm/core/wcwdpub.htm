@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ファイルを発行し管理する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion	
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Windows&nbsp;2000、Internet Explorer&nbsp;5.0、Office&nbsp;2000 を使用して、ユーザーが、WebDAV ディレクトリへドキュメントを発行する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="PublishingandManagingFiles">ファイルを発行し管理する</a></h1>
+
+<p>ここでは、ユーザーが WebDAV 発行ディレクトリに接続し、ユーザーのコンピュータからドキュメントを発行ディレクトリにドラッグすることにより、ドキュメントの発行を行う方法、および発行ディレクトリ内のファイルを操作する方法を示します。</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><a href="wcwind.htm">Windows XP による発行</a></strong>」では、ネットワーク コンピュータの Web フォルダ機能により、WebDAV サーバーに接続する方法を説明します。</li>
+<li>「<strong><a href="wcie50.htm">Internet Explorer Version&nbsp;5 による発行</a></strong>」では、WebDAV サーバーに接続し、Internet Explorer&nbsp;5 上でファイルを操作する方法について説明します。</li>
+<li>「<strong><a href="wcoffic.htm">Office&nbsp;2000 による発行</a></strong>」では、WebDAV 仮想ディレクトリで直接ファイルの管理および編集を行う方法を説明します。</li></font>
+</ul>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ユーザーがファイアウォール越しに接続している場合であっても、適切なアクセス権が与えられ、発行が行えるようにファイアウォールが構成されていれば、そのユーザーは WebDAV ディレクトリで発行を行うことができます。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</body>
+</html>

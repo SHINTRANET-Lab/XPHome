@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>管理スクリプトについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="管理スクリプトついて説明し、IIS Admin オブジェクトについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="abtadminscripts">管理スクリプトについて</a></h1>
+
+<p>ここでは、管理スクリプトの概念について説明します。説明する項目は、IIS Admin オブジェクト、Cscript.exe コマンドライン スクリプティング ユーティリティ、および管理スクリプトの既定のインストール先です。</p>
+
+<ul>
+<li><a href="#iiaso">IIS Admin オブジェクト</a></li>
+<li><a href="#cscript.exe">Cscript.exe</a></li>
+</ul>
+
+<h2><a name="iiaso">インターネット インフォメーション サービス Admin オブジェクト </a></h2>
+
+<p>管理スクリプトは、最も頻繁に使用する管理作業の一部を自動化し、IIS Admin オブジェクト の機能を実行します。これらのスクリプトを使って、Web サイト、アプリケーション、ディレクトリなどを作成および制御することができます。</p>
+
+<p>システム ドライブ上のディレクトリ \Inetpub\adminscripts に既定でインストールされている VBScript ファイルを使用して、Administration Scripts を実行することができます。</p>
+
+<h2><a name="cscript.exe">Cscript.exe</a></h2> 
+
+<p>管理スクリプトは、Cscript.exe コマンドライン スクリプティング ユーティリティと共に使用されるもので、Cscript が .vbs ファイルの実行用として登録されている場合に最も効果を発揮します。</p>
+
+<p> Cscript を登録するには、<a href="adsutil.htm">adsutil</a> サンプルを実行します。これにより、Cscript.exe が登録されます。</p>
+
+<p>コマンド プロンプトから次のコマンドを実行することで、Cscript.exe を既定のスクリプティング ホストとして登録できます。</p>
+
+<P><strong>cscript //H:cscript</strong></P>
+
+
+<p>Cscript が登録されると、スクリプト エンジンを指定せずにスクリプトを呼び出すことができます。たとえば、コマンド プロンプトで次のように入力できます。</p>
+<p><b>pauseweb.vbs /?</b></p>
+<p>つまり、次のように入力する必要はありません。</p>
+<p><b>cscript pauseweb.vbs /?</b></p>
+<p>ただし、スクリプトの中にはコマンド ウィンドウではなくポップアップ ウィンドウに出力を送信するものがあります。この場合、多くの出力がある場合には問題が発生する可能性があります。ポップアップ ウィンドウを避けるには、スクリプト名の前に必ず cscript を使用してください。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サイトの利用状況のログ収集について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web サイトと FTP サイトのコンテンツの人気の評価、セキュリティ要件の計画、潜在的な問題への対応に役立つログ収集オプションの概要について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37676888">サイトの利用状況のログ収集について</a></h1>
+
+<p>Web サイトまたは FTP サイトを構成して、ユーザーとサーバーの利用状況から生成されるログ エントリを記録できます。IIS のログ データは、コンテンツへのアクセスの規制、コンテンツの人気の評価、セキュリティ要件の計画、Web サイトまたは FTP サイトの潜在的な問題への対応に役立ちます。IIS サイトの利用状況のログ収集は、イベント ログの収集とは異なります。イベント ログは、Windows&nbsp;XP によって行われ、イベント ビューアで表示します。IIS のログ機能ではさらに広範な情報が収集されます。ここでは、次の項目について説明します。</p>
+
+<ul>
+<li><a href="#events">ログの収集 </a></li>
+<li><a href="#logmodules">ログ ファイルの形式</a></li>
+             
+<li><a href="#logsize">ログ ファイルのサイズと新しいログ ファイルの作成</a></li>
+<li><a href="#H3_37719228">ログ ファイルの名前</a></li>
+</ul>
+
+<h2><a name="events">ログの収集</a></h2>
+
+<p>Web サイトや FTP サイトのログの収集は、サーバーのほかの機能とは独立して動作するモジュールによって行われます。収集するログの形式は、Web サイトや FTP サイトごとに指定できます。ログの収集がサイトに対して有効になっている場合は、そのサイトにある各ディレクトリに対してもログの収集を有効または無効にできます。サイトやディレクトリのログの収集を有効または無効にする手順については、「<a href="iienblg.htm">ログの収集を有効にする</a>」を参照してください。</p>
+
+
+
+<p>各ログ形式では、ログに表示される時刻の基準として異なるタイム ゾーンを使用します。W3C 拡張ログ ファイル形式では、以前はグリニッジ標準時 (GMT) と呼ばれていた協定世界時 (UTC) を使用します。そのほかの形式では現地時間が使用されます。ログ ファイルに表示される時刻には、サーバーが要求および応答の処理に要した時間が反映されています。この時間には、クライアントへのデータ転送にかかった時間やクライアントでの処理時間は含まれません。 </p>
+
+<h2><a name="logmodules">ログ ファイルの形式</a></h2>
+
+<p>Web サーバーがユーザーの利用状況を記録する際に使用する形式は、選択することができます。利用できる形式は、次のとおりです。
+
+<ul>
+<li><a href="#W3CExtendedLogFileFormat">W3C 拡張ログ ファイル形式</a></li>
+<li><a href="#MicrosoftIISLogFormat">Microsoft IIS ログ ファイル形式</a></li>
+<li><a href="#NCSACommonLogFileFormat">NCSA 共通ログ ファイル形式</a></li>
+
+</ul>
+
+<p>W3C 拡張ログ ファイル形式、Microsoft IIS ログ ファイル形式、および NCSA 共通ログ ファイル形式は、いずれも ASCII テキスト形式です。W3C 拡張ログ ファイル形式と NCSA 共通ログ ファイル形式では、ログ データの年を 4 桁で記録します。Microsoft IIS ログ ファイル形式では、1999 年以前は 2 桁、2000 年からは 4 桁で年を記録します。Microsoft IIS ログ ファイル形式は、これまでの IIS との互換性を保つために使用されます。W3C 拡張ログ ファイル形式が使用できるのは、必要なフィールドのみを含んだ、カスタマイズしたログ形式を作成する場合に限られます。</p>
+
+<h3><a name="W3CExtendedLogFileFormat">W3C 拡張ログ ファイル形式</a></h3>
+
+<p>W3C 拡張ログ ファイル形式は、さまざまなフィールドがあり、カスタマイズが可能な ASCII 形式です。重要なフィールドのみを含め、必要のないフィールドは省略してログのサイズを抑えることができます。フィールドはスペースで区切られます。時刻は UTC で記録されます。W3C 拡張ログ形式のカスタマイズ方法については、「<a href="iiconlg.htm">W3C 拡張形式のログ収集をカスタマイズする</a>」を参照してください。W3C 拡張形式の仕様の詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=W3org&pver=1.0&ar=specs" target=_blank>World Wide Web Consortium の Web サイト</a>を参照してください。</p>
+
+<p>次の例は、[時間]、[クライアント IP アドレス]、[メソッド]、[URI Stem]、[プロトコルの状態]、および [プロトコル バージョン] の各チェック ボックスをオンにした場合にファイルに書き込まれる行を示しています。</p>
+
+<p><pre>#Software: Microsoft Internet Information Services 5.1
+#Version: 1.0
+#Date: 1998-05-02 17:42:15
+#Fields: time c-ip cs-method cs-uri-stem sc-status cs-version
+17:42:15 172.16.255.255 GET /default.htm 200 HTTP/1.0</pre>
+
+<p>このエントリは、UTC の 1998 年 5 月 2 日の午後 5 時 42 分に、HTTP Version&nbsp;1.0 を使用し、IP アドレス 172.16.255.255 のユーザーが /Default.htm ファイルを要求する HTTP GET コマンドを発行したことを示しています。この要求でエラーは発生しませんでした。[#Date] フィールドは、最初のログ エントリが作成された日付、つまりログが作成された日付を示します。[#Version] フィールドは W3C ログ フォーマットが使用されていることを示しています。</p>
+
+<p>任意のフィールドを選択できますが、要求によっては記録する情報がないフィールドもあります。選択されていても記録する情報がないフィールドには、プレースホルダとしてダッシュ (&mdash;) が表示されます。</p>
+
+<h3><a name="MicrosoftIISLogFormat">Microsoft IIS ログ ファイル形式</a></h3>
+
+<p>Microsoft IIS ログ形式は、固定の ASCII 形式で、カスタマイズはできません。NCSA 共通ログ形式より多くの情報項目が記録されます。Microsoft IIS ログ形式では、ユーザーの IP アドレス、ユーザー名、要求が出された日時、サービス ステータス コード、受信バイト数などの基本項目が記録されます。さらに、経過時間、送信バイト数、利用の種類 (たとえば、GET コマンドで実行されたダウンロード)、利用の対象ファイルなどの詳細項目が記録されます。項目はカンマで区切られているので、セパレータにスペースを使うほかの ASCII 形式のログより、簡単に解析できます。記録される時刻は、現地時間です。</p>
+
+<p>テキスト エディタで Microsoft IIS 形式のファイルを開くと、次の例に示すようなエントリが表示されます。</p>
+
+<p>
+
+192.168.114.201, &mdash;, 03/20/98, 7:55:20, W3SVC2, SALES1, 192.168.114.201, 4502, 163, 3223, 200, 0, GET, /DeptLogo.gif, &mdash;,</p>
+
+<p>
+
+172.16.255.255, anonymous, 03/20/98, 23:58:11, MSFTPSVC, SALES1, 192.168.114.201, 60, 275, 0, 0, 0, PASS, /intro.htm, &mdash;,</p>
+
+<p>この例のエントリは、次の表のとおりに解釈できます。それぞれの表で、上の行は Web サイト の 2 つ目のインスタンス (サービスに &quot;W3SVC2&quot; と示される) のもので、下の行は FTP サイトの 1 つ目のインスタンス (サービスに &quot;MSFTPSVC1&quot; と示される) のものです。ページの幅に制約があるため、3 つの表に分けて示します。</p>
+
+<table border="1" cellpadding="5" cellspacing="1">
+<tr>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="20%">ユーザーの IP アドレス</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">ユーザー名</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">日付</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">時間</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">サービスとインスタンス</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">コンピュータ名</th><tr>
+
+<td valign="Top"><pre>192.168.114.201</pre></td>
+<td valign="Top"><pre>-</pre></td>
+<td valign="Top"><pre>03/20/98</pre></td>
+<td valign="Top"><pre>7:55:20</pre></td>
+<td valign="Top"><pre>W3SVC2</pre></td>
+<td valign="Top"><pre>SALES1</pre></td></tr>
+<tr><td valign="Top"><pre>172.16.255.255</pre></td>
+<td valign="Top"><pre>anonymous</pre></td>
+<td valign="Top"><pre>03/20/98</pre></td>
+<td valign="Top"><pre>23:58:11</pre></td>
+<td valign="Top"><pre>MSFTPSVC1</pre></td>
+<td valign="Top"><pre>SALES1</pre></td></tr>
+</table>
+<br>
+
+<table border="1" cellpadding="5" cellspacing="1">
+<tr align="Left" valign="top" bgcolor="#cococo">
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="20%">サーバーの IP アドレス</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">所要時間</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">送信バイト数</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">受信バイト数</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">サービスのステータス コード</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="15%">Windows のステータス コード</th></tr>
+
+<tr>
+<td valign="Top"><pre>172.21.13.45</pre></td>
+<td valign="Top"><pre>4502</pre></td>
+<td valign="Top"><pre>163</pre></td>
+<td valign="Top"><pre>3223</pre></td>
+<td valign="Top"><pre>200</pre></td>
+<td valign="Top"><pre>0</pre></td></tr>
+
+<tr>
+<td valign="Top"><pre>172.16.255.255,</pre>
+</td>
+<td valign="Top"><pre>60</pre></td>
+<td valign="Top"><pre>275</pre></td>
+<td valign="Top"><pre>0</pre></td>
+<td valign="Top"><pre>0</pre></td>
+<td valign="Top"><pre>0</pre></td></tr>
+
+</table>
+<br>
+<table border="1" cellpadding="5" cellspacing="1">
+<tr align="Left" valign="top" bgcolor="#cococo">
+
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="30%"> 要求の種類</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="30%">操作の対象</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top" width="30%">パラメータ</th></tr>
+<tr>
+<td valign="Top"><pre>GET</pre></td>
+<td valign="Top"><pre>/DeptLogo.gif</pre></td>
+<td valign="Top"><pre>-</pre></td></tr>
+<td valign="Top"><pre>[376] PASS </pre></td>
+<td valign="Top"><pre>/intro.htm</pre></td>
+<td valign="Top"><pre>-</pre></td>
+</table>
+
+<p>この例の最初のエントリは、1998 年 3 月 20 日の午前 7 時 55 分に、IP アドレス 192.168.114.201 の匿名ユーザーが、IP アドレス 172.21.13.45 の SALES1 という名前のサーバーに、画像ファイル /DeptLogo.gif を要求する HTTP GET コマンドを発行したことを示しています。163 バイトの HTTP 要求に対して、処理が完了するまでの経過時間は 4502 ミリ秒 (4.5 秒) で、エラーは発生せず、3223 バイトのデータが匿名ユーザーに返されました。</p>
+
+<p>ログ ファイルのすべてのフィールドはカンマ (,) で区切られています。有効な値がないフィールドには、プレースホルダとしてダッシュ (&mdash;) が表示されます。</p>
+
+<h3><a name="NCSACommonLogFileFormat">NCSA 共通ログ ファイル形式</a></h3>
+
+<p>NCSA 共通ログ ファイル形式は、カスタマイズできない固定の ASCII 形式です。 この形式は、Web サイトでは利用できますが、FTP サイトでは利用できません。このログには、リモート ホスト名、ユーザー名、日付、時刻、要求の種類、HTTP のステータス コード、サーバーが送信したバイト数など、ユーザーの要求についての基本情報が記録されます。項目は、スペースで区切られます。 時刻は、現地時間で記録されます。<p>
+
+<p>テキスト エディタで NCSA 共通ログ形式のファイルを開くと、次の例に示すようなエントリが表示されます。</p>
+
+<p>172.21.13.45 &mdash; REDMOND\fred [08/Apr/1997:17:39:04 &mdash;0800] &quot;GET /scripts/iisadmin/ism.dll?http/serv HTTP/1.0&quot; 200 3401</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;このエントリでは、ユーザーのリモート ログ名を表す 2 番目のフィールドは空欄です。 IP アドレス 172.21.13.45 の後のダッシュ (-) は、記録する情報がないことを示しています。</p>
+
+<p>この例のエントリは、次の表のとおりに解釈できます。ページの幅に制約があるため、2 つの表に分けて示します。</p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th bgcolor="#C0C0C0" align="Left" valign="top">リモート ホスト名</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">リモート ログ名</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">ユーザー名</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">日付</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">時刻と GMT オフセット</th></tr>
+<tr>
+<td valign="Top"><pre>172.21.13.45</pre></td>
+<td valign="Top"><pre>-</pre></td>
+<td valign="Top"><pre>REDMOND\fred</pre></td>
+<td valign="Top"><pre>08/Apr/1998</pre></td>
+<td valign="Top"><pre>17:39:10 -0800</pre></td></tr>
+</table>
+<br>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th bgcolor="#C0C0C0" align="Left" valign="top">要求/バージョン</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">サービスのステータス コード</th>
+<th bgcolor="#C0C0C0" align="Left" valign="top">送信バイト数</th></tr>
+<tr>
+<td valign="Top"><pre>GET /scripts/iisadmin/ism.dll?http/serv HTTP/1.0</pre></td>
+<td valign="Top"><pre>200</pre></td>
+<td valign="Top"><pre>3401</pre></td></tr>
+</table>
+
+<p>このエントリは、IP アドレスが 172.21.13.45 の Fred という REDMOND ドメインのユーザーが、1998 年 4 月 8 日の午後 5 時 39 分に、HTTP GET コマンド (ファイルのダウンロード) を発行したことを示しています。 エラーは発生せず、3401 バイトのデータが Fred に送り返されています。</p>
+
+
+
+
+<h2><a name="logsize">ログ ファイルのサイズと新しいログ ファイルの作成</a></h2>
+
+<p>既定の設定のとおり、IIS のログ収集を有効にすると、ユーザーがサーバーにアクセスするたびに、新しいログ エントリが作成されます。このため、ログ ファイルのサイズまたはログ ファイルの数は、少しずつ増えていきます。したがって、詳細データの収集を調節し、ログ ファイルのサイズと数を扱いやすい範囲に抑えなければならない場合があります。IIS には、ログ データの生成と新規ログ ファイルの作成を管理するための方法が、2 つ用意されています。</p>
+
+<p>ログ データを管理する 1 つの方法は、W3C 拡張ログ形式をカスタマイズして、必要なデータのみを収集する方法です。手順については、「<a href="iiconlg.htm">W3C 拡張形式のログ収集をカスタマイズする</a>」を参照してください。ログ ファイルを管理するもう 1 つの方法は、ログ ファイルを作成する頻度を変更して、ログのサイズを制限する方法です。間隔のオプションの詳細については、「<a href="iinamlg.htm">ログ ファイルを保存する</a>」を参照してください。ログ オプションを選択する際に、現在のログ ファイルにアクセスできるのは、サイトを停止した後であることに注意してください。</p>
+
+<p>ログ ファイルは、単純な ASCII テキスト形式ファイルです。作成された大量の小さなファイルを 1 つの大きなファイルにまとめる場合は、ASCII ファイルどうしを結合します。<strong>copy</strong> コマンドによるファイルの結合に関する情報は、コマンド プロンプトで「<strong>copy /?</strong>」と入力し、表示します。</p>
+
+<p>IIS がファイルにログ エントリを追加するときに、サーバーの空きディスク容量が不足していると、IIS のログ収集は停止します。同時に、Windows イベント ビューアのアプリケーション ログに、イベントが記録されます。ディスク容量に再び余裕ができると、IIS のログ収集は再開します。このイベントは、Windows イベント ビューアのアプリケーション ログに記録されます。</p>
+
+<h2><a name="H3_37719228">ログ ファイルの名前</a></h2>
+
+<p>ログ ファイルの名前は、最初にログの形式を示すアルファベットがあり、その後にログを収集した時間フレームまたは順番を示す数字が続きます。詳細は、次の表を参照してください。斜体の文字は数字を示します。<em>nn</em> はシーケンシャル番号、<em>yy</em> は年、<em>mm</em> は月、<em>ww</em> は週、<em>dd</em> は日、<em>hh</em> は 24 時間形式の時間 (たとえば、午後 5 時 は 17) をそれぞれ表します。</p>
+
+
+<table border="1" cellpadding="4" cellspacing="1" width="75%">
+<tr>
+<th width="30%" bgcolor="#C0C0C0" align="Left" valign="top">形式</th>
+<th width="20%" bgcolor="#C0C0C0" align="Left" valign="top">新規ログの条件</th>
+<th width="50%" bgcolor="#C0C0C0" align="Left" valign="top">ファイル名のパターン</th>
+</tr>
+
+<tr>
+<td valign="top" rowspan="5"> Microsoft IIS ログ ファイル形式</td>
+<td valign="top">ファイル サイズ</td>
+<td valign="top"><strong>inetsv</strong><em>nn</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎時間</td>
+<td valign="top"><strong>in</strong><em>yymmddhh</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎日</td>
+<td valign="top"><strong>in</strong><em>yymmdd</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎週</td>
+<td valign="top"><strong>in</strong><em>yymmww</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎月</td>
+<td valign="top"><strong>in</strong><em>yymm</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top" rowspan=5> NCSA 共通ログ ファイル形式</td>
+<td valign="top">ファイル サイズ</td>
+<td valign="top"><strong>ncsa</strong><em>nn</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎時間</td>
+<td valign="top"><strong>nc</strong><em>yymmddhh</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎日</td>
+<td valign="top"><strong>nc</strong><em>yymmdd</em><strong>.log</strong></td></tr>
+
+<tr>
+<td valign="top">毎週</td>
+<td valign="top"><strong>nc</strong><em>yymmww</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎月</td>
+<td valign="top"><strong>nc</strong><em>yymm</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top" rowspan=5> W3C 拡張ログ ファイル形式</td>
+<td valign="top">ファイル サイズ</td>
+<td valign="top"><strong>extend</strong><em>nn</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎時間</td>
+<td valign="top"><strong>ex</strong><em>yymmddhh</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎日</td>
+<td valign="top"><strong>ex</strong><em>yymmdd</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎週</td>
+<td valign="top"><strong>ex</strong><em>yymmww</em><strong>.log</strong></td>
+</tr>
+
+<tr>
+<td valign="top">毎月</td>
+<td valign="top"><strong>ex</strong><em>yymm</em><strong>.log</strong></td>
+</tr>
+</table>
+
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

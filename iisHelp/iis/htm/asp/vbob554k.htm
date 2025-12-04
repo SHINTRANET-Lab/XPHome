@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ObjectContext オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_objectcontext_object"></A><SUP></SUP>ObjectContext オブジェクト</H2>
+
+<P>ObjectContext オブジェクトは、ASP ページ内のスクリプトによって開始された、コンポーネント サービスが管理するトランザクションをコミットまたは中止します。</P>
+
+<P>ASP に <A HREF="/iishelp/iis/htm/asp/dire5t0u.htm">@TRANSACTION</A> ディレクティブが含まれている場合、そのページは 1 つのトランザクション内で実行され、トランザクションが完全に終了するかまたは失敗するまで、ページの処理は完了しません。</P>
+
+<H6>構文</H6>
+
+<P><B>ObjectContext</B>.<I>method</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob74l0.htm"><B>SetAbort</B></A></TD>
+<TD width=72%>SetAbort メソッドは、スクリプトで開始されたトランザクションが完了していないので、リソースを更新すべきではないことを宣言します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/vbob9gpx.htm"><B>SetComplete</B></A></TD>
+<TD width=72%>SetComplete メソッドは、トランザクションを完了させないための理由が、そのスクリプトでは見つからないことを宣言します。トランザクションに参加しているすべてのコンポーネントが SetComplete を呼び出すと、トランザクションは完了します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>イベント</H6>
+
+<TABLE border=0 cellpadding=5 cols=1 frame=box rules=rows>
+
+<TR VALIGN="top">
+<TD width=100%><A HREF="/iishelp/iis/htm/asp/vbob7z78.htm">OnTransactionAbort</A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=100%><A HREF="/iishelp/iis/htm/asp/vbob1n04.htm">OnTransactionCommit</A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>解説</H6>
+
+<P>ObjectContext は、COM の ObjectContext オブジェクトのメソッドのうち、2 つのメソッドを実装しています。SetAbort メソッドは、トランザクションを明示的に中止します。この場合、コンポーネント サービスは、トランザクションの第 1 フェーズに関与したリソースに対する更新が行われないようにします。トランザクションが中止されると、そのスクリプトの OnTransactionAbort イベントが処理されます。</P>
+
+<P>SetComplete メソッドの呼び出しは、必ずしもトランザクションの完了を意味するものではありません。トランザクションが完了するのは、スクリプトから呼び出されたトラザクション コンポーネントのすべてが SetComplete を呼び出した後です。ほとんどの場合、スクリプトの中で SetComplete を呼び出す必要はありません。これは、SetAbort を呼び出すことなく処理が終了したスクリプトは正常に完了したと見なされるためです。</P>
+
+<P>ObjectContext は、SetAbort と SetComplete 以外のメソッドも公開しています。ただし、これらのメソッドは ASP スクリプトでは利用できません。スクリプトから呼び出されたコンポーネントでは、これらのメソッドを利用できます。</P>
+
+<H6>例</H6>
+
+<P>次に示すのは、SetAbort メソッドと SetCommit メソッドの例です。Sales.htm ファイルは、注文の処理に必要なデータを取得します。もう 1 つのファイル SalesVerify.asp にはスクリプトが記述されており、Inventory および Sales という 2 つのオブジェクトを使用して注文の要求を処理します。在庫が十分になく、要求を処理できないことを示すエラー コードが Inventory から返された場合は、SetAbort を呼び出します。Inventory オブジェクトがエラー コードを返さなければ、SetComplete を呼び出し、注文を処理します。</P>
+
+<P><B>Sales.htm</B></P>
+
+<PRE><CODE>&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Sales Order&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY BGCOLOR="#FFFFFF"&gt;&lt;FONT FACE="ARIAL,HELVETICA"&gt;
+&lt;H2&gt;Sales Order Form &lt;/H2&gt;
+
+&lt;FORM METHOD=POST ACTION="SalesVerify.asp"&gt; 
+&lt;P&gt;Please enter the product code, quantity, and your account number.
+&lt;INPUT TYPE=TEXT NAME=QuantityToBuy&gt; 
+&lt;INPUT TYPE=TEXT NAME=ProductCode&gt; 
+&lt;INPUT TYPE=TEXT NAME=AccountIn&gt; 
+&lt;P&gt;
+&lt;INPUT TYPE=SUBMIT&gt; 
+&lt;/FONT&gt; 
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<P><B>SalesVerify.asp ファイル</B></P>
+
+<PRE><CODE>&lt;%@ Transaction = Required %&gt;
+&lt;%
+  Set CurrentQOH = Server.CreateObject("Mycomp.Inventory")
+  Set CurrentSales = Server.CreateObject("Mycomp.Sales")
+ 
+  CheckQuantity = Request("QuantityToBuy")
+  CheckProduct = Request("ProductCode")
+  QuantityStatus = CurrentQOH.CheckQOH(CheckQuantity,CheckProduct)
+ 
+  If QuantityStatus = None
+    ObjectContext.SetAbort
+    Response.Write "Sorry, there is not sufficient quantity on hand to
+    process your sale."
+  Else 
+    ObjectContext.SetComplete
+    Account = Request("AccountIn")
+    Saleupdate = CurrentSales.PostIt(AccountIn)
+  End If
+%&gt;
+</CODE></PRE>
+
+<P>詳細については、「<A HREF="iiaptran.htm">トランザクションを理解する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

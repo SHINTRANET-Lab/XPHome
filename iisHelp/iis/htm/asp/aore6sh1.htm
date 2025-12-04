@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsCompressionScheme</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iiscompressionscheme"></A>IIsCompressionScheme</H2>
+
+<P>IIS Admin オブジェクトである IIsCompressionScheme は、圧縮方式ごとの設定情報を含んでいる ADSI オブジェクトです。IIsCompressionScheme オブジェクトのすべてのインスタンスは、<A HREF="/iishelp/iis/htm/asp/aore4mcz.htm">IIsCompressionSchemes</A> に含まれています。</P>
+
+<H6>ADsPath</H6>
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/Filters/Compression/Scheme</DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<H6>構文</H6>
+
+<P><I>varReturn</I> = <I>object</I>.<I>Method</I></P>
+
+<P><I>varReturn</I> = <I>object</I>.<I>Property</I></P>
+
+<P>&nbsp;</P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>varReturn</I></DT>
+
+<DD>メソッドからの戻り値を受け取る変数です。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIsCompressionScheme  オブジェクトを参照する変数です。<BR>
+</DD>
+
+<DT><I>Method </I>または <I>Property</I></DT>
+
+<DD>使用する特定のオブジェクト メソッドまたはプロパティです。</DD>
+</DL>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi57hv.htm"><B>ADSI オブジェクト プロパティ</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メタベース プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4kfg.htm"><B>HcCompressionDll</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro85ir.htm"><B>HcFileExtensions</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8myb.htm"><B>HcCreateFlags</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8v6t.htm"><B>HcMimeType</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7qum.htm"><B>HcDoDynamicCompression</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3nho.htm"><B>HcOnDemandCompLevel</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9fla.htm"><B>HcDoStaticCompression</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8kqh.htm"><B>HcPriority</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro0r72.htm"><B>HcDoOnDemandCompression</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1l9v.htm"><B>HcScriptFileExtensions</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7jfw.htm"><B>HcDynamicCompressionLevel</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi0ewj.htm"><B>ADSI オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI オブジェクトの標準メソッドです。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

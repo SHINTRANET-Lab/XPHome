@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>カスタム エラー メッセージについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="既定およびカスタムの HTTP エラー メッセージについて説明します。既定のエラー メッセージと番号の一覧も示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="customerrormessages">カスタム エラー メッセージについて</a></h1>
+
+<p>ここでは、既定の HTTP 1.1 エラーおよびカスタマイズした HTTP 1.1 エラーについて概要を説明します。</p>
+
+<ul>
+<li><a href="#httperrors">HTTP 1.1 エラー メッセージ</a></li>
+<li><a href="#customize">カスタム エラー メッセージ</a></li>
+</ul>
+
+<h2><a name="httperrors">HTTP 1.1 エラー メッセージ</a></h2>
+<P>HTTP 1.1 エラー メッセージは、一般的なメッセージを含んだ HTML ページの形式でクライアントのブラウザに返されます。ユーザーが Web サイトに接続しようとしたときに HTTP エラーが発生すると、接続の確立中に何が発生したかを簡単に説明するエラー メッセージが、クライアントのブラウザに送信されます。たとえば、既に接続の処理能力の限界に達している Web サイトにユーザーが接続を試みると、&quot;Too many users&quot; というメッセージを含む HTTP エラーがクライアントに返されます。 </P>
+
+<h2><a name="customize">カスタム エラー メッセージ</a></h2>
+
+<p>すべての IIS カスタム エラー メッセージは、業界標準の HTTP コードを表示し、HTTP 1.1 エラー メッセージとの一貫性を保つことができます。IIS の [カスタム エラー] プロパティ シートを使って、一般的な HTTP エラー メッセージをカスタマイズできます。</p>
+
+<p>次の HTTP エラー メッセージを IIS でカスタマイズできます。</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="70%">
+<tr>
+<th  bgcolor="#C0C0C0" align="Left" valign="top" ALIGN="Center">エラー コード</th>
+<th  bgcolor="#C0C0C0" align="Left" valign="top">エラー メッセージ</th>
+</tr>
+<tr>
+<td valign="Top" ALIGN="Center">400</td>
+<td  valign="Top">Bad request</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 401.1</td>
+<td  valign="Top">Logon failed</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 401.2</td>
+<td  valign="Top">Logon failed due to server configuration</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 401.3</td>
+<td  valign="Top">Unauthorized due to ACL on resource</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">401.4</td>
+<td  valign="Top">Authorization failed by filter</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">401.5</td>
+<td  valign="Top">Authorization failed by ISAPI/CGI application</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">403.1</td>
+<td  valign="Top">Execute access forbidden</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">403.2</td>
+<td  valign="Top">Read access forbidden</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">403.3</td>
+<td  valign="Top">Write access forbidden</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">403.4</td>
+<td  valign="Top">SSL required</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.5</td>
+<td  valign="Top">SSL 128 required</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.6</td>
+<td  valign="Top">IP address rejected</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.7</td>
+<td  valign="Top">Client certificate required</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.8</td>
+<td  valign="Top">Site access denied</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.9</td>
+<td  valign="Top">Too many users</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.10</td>
+<td  valign="Top">Invalid configuration</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.11</td>
+<td  valign="Top">Password change</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.12</td>
+<td  valign="Top">Mapper denied access</td>
+</tr>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.13</td>
+<td  valign="Top">Client certificate revoked
+</td>
+</tr>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.14</td>
+<td  valign="Top">Directory listing denied</td>
+</tr>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.15</td>
+<td  valign="Top">Client Access Licenses exceeded
+</td>
+</tr>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.16</td>
+<td  valign="Top">Client certificate untrusted or invalid
+</td>
+</tr>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 403.17</td>
+<td  valign="Top">Client certificate has expired or is not yet valid</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 404</td>
+<td  valign="Top">Not found</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 404.1</td>
+<td  valign="Top">Site not found</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 405</td>
+<td  valign="Top">Method not allowed</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 406</td>
+<td  valign="Top">Not acceptable</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">407</td>
+<td  valign="Top">Proxy authentication required</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">412</td>
+<td  valign="Top">Precondition Failed</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center">414</td>
+<td  valign="Top">Request-URI too long</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 500</td>
+<td  valign="Top">Internal server error</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 500.12</td>
+<td  valign="Top">Application restarting</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 500.13</td>
+<td  valign="Top">Server too busy</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 500.15</td>
+<td  valign="Top">Requests for Global.asa not allowed</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 500-100.asp</td>
+<td  valign="Top">ASP error</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 501</td>
+<td  valign="Top">Not implemented</td>
+</tr>
+<tr>
+<td  valign="Top" ALIGN="Center"> 502</td>
+<td  valign="Top">Bad gateway</td>
+</tr>
+</table>
+
+<p><strong>注</strong></p>
+
+<ul>
+<li>IIS スナップインでは、カスタム エラー メッセージはリストとして表示され、リスト全体が単一のプロパティとして扱われます。たとえば、カスタム エラー メッセージのセットを Web サイト レベルで構成すると、そのサーバーに属するすべてのディレクトリに、カスタム エラー メッセージのリストがすべて継承されます。つまり、サーバーとディレクトリの 2 つのカスタム エラー メッセージ リストは統合されません。</li>
+
+
+
+<li>404.1 エラーは、複数の IP アドレスを持つコンピュータでのみ発生します。クライアント要求が指定の IP アドレス/ポートの組み合わせで受信され、その IP アドレスが特定のポートでリッスンするように構成されていない場合、IIS は 404.1 HTTP エラーを返します。たとえば、コンピュータが 2 つの IP アドレスを持ち、その中の 1 つの IP アドレスだけがポート 80 でリッスンするように構成され、ポート番号 80 を使用して、もう 1 つの IP アドレスに受信を要求した場合、すべての要求に IIS は 404.1 エラーを返します。このエラーは、サーバー上で複数の IP アドレスが使われているときのみクライアントに返されるため、サービス レベルでのみ設定します。</li>   
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

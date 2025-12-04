@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR>
+<head>
+<title>コンテンツの有効期限を設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="発行した Web サイトのコンテンツの有効期限を、HTTP ヘッダー プロパティ シートを使用して構成する方法について説明します。" >
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1><A NAME="H1_325765936"></A>コンテンツの有効期限を設定する</h1>
+
+<p>期間を限定すべき情報が Web サイトに含まれている場合に、期間が過ぎた情報を発信しないように設定することができます。ある時点で、Web サイトのコンテンツが、自動的に期限切れになるように構成するには、[HTTP ヘッダー] プロパティ シートを使用します。コンテンツの有効期限が設定されている場合、Web ブラウザは現在の日付と有効期限の日付を比較し、キャッシュされたページを表示するか、更新されたページをサーバーに要求するかどうかを判断します。</p>
+
+<big>Web サイトのコンテンツに有効期限を設定するには</big><br>
+ 	
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、コンテンツの有効期限を設定する Web サイト、仮想ディレクトリ、ディレクトリ、またはファイルを選択します。</li>
+<li>Web サイト、仮想ディレクトリ、ディレクトリ、またはファイルを右クリックし、[プロパティ] をクリックします。</li>
+<li>[HTTP ヘッダー] プロパティ シートをクリックします。</li>
+<li>[コンテンツに有効期限を設定する] チェック ボックスをオンにします。</li>
+<li>[直ちに有効期限を切る]、[有効期間]、または [有効期限] をクリックし、対応するボックスに適切な有効期限の情報を入力します。</li>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;通常、期間限定の情報は、個々のファイル、ディレクトリ、または Web サイトに限られています。ただし、WWW のマスタ プロパティを構成して、コンピュータ上のすべての Web サイトにコンテンツの有効期限を設定することもできます。詳細については、「<a href="iivspro.htm">継承された既定の設定を変更する</a>」を参照してください。</p>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

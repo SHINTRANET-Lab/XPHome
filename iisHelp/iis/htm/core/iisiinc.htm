@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML dir=LTR>
+<HEAD>
+
+<TITLE>#include</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービスのリファレンス ページです。#include ディレクティブは、ファイルの内容を HTML ページに挿入するよう、Web サーバーに命令します。インクルードされるファイルには、HTML ドキュメントで有効な任意の内容を含めることができます。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_include"></A><SUP></SUP>#include</H2>
+
+<p><b>#include</b> ディレクティブは、ファイルの内容を Web ページに挿入するよう、Web サーバーに命令します。ディレクティブは、HTML のコメント デリミタで囲む必要があります。</p>
+<p>このディレクティブは ASP ページ、STM ページ、INC ページ、または SSI インタプリタ (ssinc.dll) または ASP インタプリタ (asp.dll) にマップされるファイル名拡張子を持つ任意のページで使用できます。インターネット サービス マネージャをインストールしている場合、既定の拡張子マッピングを変更して新しいマッピングを追加できます。詳細については、「<b>アプリケーションのマッピングを設定する</b>」を参照してください。</p>
+<p>インクルードされるファイルのファイル名拡張子は特に決まっていませんが、拡張子 .inc を付けることをお勧めします。インクルードされるファイルは呼び出しページのインタプリタで処理されます。たとえば、#exec ディレクティブを使用するページをインクルードする場合は、STM ページから呼び出す必要があり、ASP スクリプトを使用しているページをインクルードする場合は、ASP ページから呼び出す必要があります。このようにすると、インクルードされる HTM ページは期待通りに動作します。</p>
+
+<H6>構文</H6>
+
+<P><strong>&lt;!-- #include </strong><em>PathType</em><strong> = </strong><em>FileName</em> <strong>--&gt;</strong></P>
+
+<H6>パラメータ</H6>
+
+<P><em>PathType</em></P>
+
+<P><em>FileName</em> へのパスの種類を指定します。パスの種類は、次のいずれか 1 つを指定できます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all width=100%>
+
+<TR VALIGN="top">
+<TD width=20%><STRONG>パスの種類</STRONG></TD>
+<TD width=80%><STRONG>意味</STRONG></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>File</TD>
+<TD width=80%><i>FileName</i> は、<b>#finclude</b> ディレクティブが入ったドキュメントがあるディレクトリからの相対パスです。インクルードされるファイルは、同じディレクトリまたはサブディレクトリに入れることができます。インクルードされるファイルは、Web フォルダのプロパティ シートの [親のパスを有効にする] チェック ボックスをオンにしていない限り、<b> #include</b> ディレクティブを使用したページより上のディレクトリに入れることはできません。チェック ボックスをオンにすることは、セキュリティ上のリスクがあるため勧められていません。Web ユーザーがサイトの URL の一部として「../..」を入力すると、ユーザーに参照させたくない親フォルダの内容を表示することができます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=20%>仮想</TD>
+<TD width=80%>ファイル名は、Web サイトの仮想ディレクトリからの完全な仮想パスです。</TD>
+</TR>
+</TABLE><BR>
+
+<P><em>FileName</em></P>
+
+<P>インクルードするファイルの名前を指定します。<em>FileName</em> には、ファイル名拡張子を含める必要があります。また、ファイル名は、二重引用符 (&quot;) で囲む必要があります。</P>
+
+<font face="ＭＳ Ｐゴシック">
+
+<P><strong><font color="#0000FF">重要</strong></font>&nbsp;&nbsp;&nbsp;このディレクティブが入ったファイルには、SSI インタプリタにマップされるファイル名拡張子を使う必要があります。拡張子が異なると、Web サーバーはディレクティブを処理しません。既定では、ファイル名拡張子 .stm、.shtm、および .shtml が SSI インタプリタ (ssinc.dll) にマップされます。</P>
+
+<P>#echo ディレクティブを使用する STM ページは、それ自身または ASP ページから Response.Redirect を使用して実行する必要があります。STM ページを ASP ページから Server.Transfer、Server.Execute、または #include を使用して呼び出すと、STM ページが ssinc.dll ではなく asp.dll を通過するよう強制されるため、機能しません。</P>
+
+<P><a href="iiabuti.htm">IIS スナップイン</a>をインストールしている場合、既定の拡張子マッピングを変更して新しいマッピングを追加できます。詳細については、「<A HREF="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。ファイル拡張子を複数の実行可能ファイルにマップすることはできないため、このディレクティブを ASP ファイルでは使用できません。ASP ファイルは、既に asp.dll にマップされていて、そのまま保持する必要があります。</P>
+
+<H6><b>例</b></H6>
+
+<p>--- IncExample.asp ---</p>
+
+<pre>&lt;!-- The included file is in the same directory as IncExample.asp. --&gt;
+&lt;!-- #include file = &quot;myfile.inc&quot; --&gt;
+
+&lt;!-- The included file is in the directory above IncExample.asp.
+     Enable Parent Paths must be checked for the web folder. --&gt;
+&lt;!-- #include file = &quot;..\myfile.htm&quot; --&gt;
+
+&lt;!-- The included file is in the Scripts virtual directory. --&gt;
+&lt;!-- #include virtual = &quot;/scripts/tools/global.inc&quot; --&gt;
+</pre>
+
+</font>
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

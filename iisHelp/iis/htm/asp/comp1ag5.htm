@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>TargetFrame</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_targetframe"></A><SUP></SUP>TargetFrame</H3>
+
+<P>TargetFrame プロパティは、リンクを読み込むターゲット フレームを指定します。このプロパティは、HTML アンカ ステートメントの TARGET パラメータと同じ機能を果たします。 </P>
+
+<H6>構文</H6>
+
+<P><I>AdRotator</I><B>.TargetFrame = </B><I>frame</I></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>frame</I></DT>
+
+<DD>広告を表示するフレームの名前を指定します。このパラメータには、_TOP、_NEW、_CHILD、_SELF、_PARENT、_BLANK などの HTML フレームキーワード のいずれかを指定することもできます。既定値は NO FRAME です。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>次の例は、フレーム <CODE>AdFrame</CODE> 内に広告を表示します。</P>
+
+<P>--- AdRot_TargetFrame.asp ---</P>
+
+<PRE><CODE>&lt;%  
+ Set ad = Server.CreateObject("MSWC.AdRotator") 
+ ad.TargetFrame = "target=_TOP"
+%&gt;
+&lt;%= ad.GetAdvertisement("/ads/adrot.txt") %&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp14fm.htm"><B>Border</B></A>、<B> </B><A HREF="/iishelp/iis/htm/asp/comp5279.htm"><B>Clickable</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

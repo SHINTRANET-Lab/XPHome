@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Page Counter コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_page_counter_component"></a>Page Counter コンポーネント</H1>
+
+<P>Page Counter コンポーネントは、Web ページが開かれた回数を数えて表示する PageCounter オブジェクトを作成します。PageCounter オブジェクトは、一定の間隔でヒット数をテキスト ファイルに書き込み、サーバーがシャットダウンした場合でもデータが失われないようにします。Page Counter コンポーネントは、内部の Central Management オブジェクトを使用して、アプリケーション内の各ページが開かれた回数を記録します。 </P>
+
+<P>Server.CreateObject メソッドを使用してページ上に PageCounter オブジェクトのインスタンスが作成されると、その PageCounter オブジェクトは、指定された Web ページの現在のヒット数を Central Management オブジェクトから取得します。その後は、PageCounter オブジェクトが公開するメソッドでオブジェクトを操作できます。</P>
+
+<P>Page Counter コンポーネントは、次のファイルを使用します。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=43%><B>ファイル名</B></TD>
+<TD class=blue width=57%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=43%>pagecnt.dll </TD>
+<TD width=57%>Page Counter コンポーネントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=43%><A HREF="/iishelp/iis/htm/asp/comp7aw5.htm">ヒット数データ ファイル</A></TD>
+<TD width=57%>Page Counter コンポーネントが現在のヒット数を保存するテキスト ファイルです。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>oVar </I><B>= Server.CreateObject( "MSWC.PageCounter" )</B> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>oVar</I></DT>
+
+<DD>Server.CreateObject を呼び出して作成する PageCounter オブジェクトの名前を指定します。 </DD>
+</DL>
+
+<H6>レジストリ エントリ</H6>
+
+<P>Page Counter は、オブジェクトがコンパイルまたは登録されるときに、レジストリにキー MSWC.PageCounter を追加します。このキーは HKEY_CLASSES_ROOT の下に追加され、次の名前付き値を含んでいます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=22%><B>名前付き値</B></TD>
+<TD class=blue width=78%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%>File_Location </TD>
+<TD width=78%>ヒット数データ ファイルのパスとファイル名を指定する文字列です。 The default filename is Hitcnt.cnt. This file is located in your Windows directory.</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%>Save_Count </TD>
+<TD width=78%>ヒット数がどの値に達したらヒット数をヒット数データ ファイルに保存するかを指定する DWORD 値です。これは、ページごとのヒット数ではなく、総ヒット数であることに注意してください。既定値は 25 です。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=40%><A HREF="/iishelp/iis/htm/asp/comp559v.htm">Hits</A></TD>
+<TD width=60%>指定された URL が開かれた回数を表示します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><A HREF="/iishelp/iis/htm/asp/comp2bhw.htm">PageHit</A></TD>
+<TD width=60%>ヒット数をインクリメントします。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=40%><A HREF="/iishelp/iis/htm/asp/comp1lma.htm">Reset</A></TD>
+<TD width=60%>指定されたページのヒット数を 0 に設定します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>例</H6>
+
+<P>次の例は、PageCounter オブジェクトを使用してページの利用者数を記録し、10 人目の利用者に特別なメッセージを表示します。</P>
+
+<P>--- PageCount.asp ---</P>
+
+<PRE><CODE>&lt;% 
+  Set MyPageCounter = Server.CreateObject("MSWC.PageCounter")
+  HitMe = MyPageCounter.Hits
+  If HitMe = 10 Then 
+%&gt;
+  You are the lucky 10th Customer!!! &lt;BR&gt;
+&lt;% Else %&gt;
+  Sorry, you are customer #&lt;%= HitMe %&gt; &lt;BR&gt;
+&lt;% End If %&gt;
+</CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

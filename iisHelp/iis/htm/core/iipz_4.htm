@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+<title>[ディレクトリのセキュリティ] プロパティ シート</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><font face="ＭＳ Ｐゴシック">
+
+<p><strong>[ディレクトリのセキュリティ] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、FTP サイトのセキュリティ機能を設定するために使用します。</p>
+
+<p><strong>[匿名アクセスおよび認証コントロール]</strong></p>
+
+<p>FTP サイトの認証および匿名アクセス機能を構成するには、[編集] をクリックします。これらの機能を使って、ユーザーの身元を確認してから制限されたコンテンツへのアクセスを許可するように FTP サイトを構成します。</p>
+
+<p>ただし、FTP サイトでユーザーを認証できるようにするには、まず有効な Windows ユーザー アカウントを作成し、そのアカウントに対して、Windows ファイル システム (NTFS) のディレクトリおよびファイル アクセス権を構成する必要があります。</p>
+
+<p><strong>[IP アドレスとドメイン名の制限]</strong></p> 
+
+<p>特定のユーザー、コンピュータ、コンピュータ グループ、またはドメインに対して、この FTP サイトまたはディレクトリへのアクセスを許可または禁止するには、[編集] をクリックします。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

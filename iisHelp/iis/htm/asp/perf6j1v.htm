@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>拡張性のある ASP アプリケーションを開発する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_developing_scalable_asp_applications"></A><SUP></SUP>拡張性のある ASP アプリケーションを開発する</H1>
+
+<H6>ASP の適切な使用</H6>
+
+<P>ASP を使用すると、C または C++ などの従来のサーバー側言語を使用した場合に比較して、Web アプリケーションを速く容易に作成できます。</P>
+
+<P>ただし、ASP ベースのアプリケーションの作成が容易になる反面、そのアプリケーションに必要なサーバー処理とクライアント サーバー間の対話が複雑になります。拡張 ASP スクリプトで作成された Web アプリケーションの拡張性が十分得られない可能性があります。</P>
+
+<P>拡張性の問題を避けるために、ASP を開発する際に考慮すべきポイントが 2 つあります。
+
+<UL type=disc>
+	<LI>ASP は、"接着剤" です。</li>
+
+	<LI>ASP は、ビジネス ロジック用に使用するべきではありません。</li>
+</UL>
+
+<P>最初のポイントは、ASP が HTML、DHTML を使用するクライアント側スクリプティング、および XML と綿密につながって、ユーザーと対話する強力なプラットフォームを作成することを強調しています。ASP スクリプティングは、ユーザー インターフェイスを Web アプリケーションのビジネス ロジックに結びつけるために設計されたもので、ASP はこのようなタスク用に最適化されました。</P>
+
+<P>第 2 のポイントは、重要な注意事項です。ビジネス ロジックの大部分が ASP に埋め込まれていると、多くの場合、アプリケーションは適切な拡張性を持たなくなります。ASP がホストする ActiveX<sup>&reg;</sup> スクリプト言語が大量のビジネス ロジック処理を実施できる能力があることは事実です。しかし、Web アプリケーションに必要なビジネス ロジックが通常のものを超えている場合は、ASP スクリプトに埋め込むのではなく、新しい COM コンポーネントにそのビジネス ロジックを組み入れることをお勧めします。</P>
+
+<H6>IIS での ASP の最適化</H6>
+
+<P>アプリケーションの設計に ASP の使用が適していることを確認し、ビジネス ロジックをまとめて COM コンポーネントにカプセル化した後で、Web アプリケーションのパフォーマンスと拡張性をさらに向上させる方法が 2 つあります。
+
+<UL type=disc>
+	<LI><A HREF="/iishelp/iis/htm/asp/perf9ini.htm">ASP スクリプティングの最適化</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/perf24dq.htm">IIS 構成の最適化 </A></li>
+</UL>
+
+<P>Web アプリケーションの設計の詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg8e43.htm">設計に関する決定事項</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

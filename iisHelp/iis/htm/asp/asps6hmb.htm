@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP の例</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_asp_samples"></A><SUP></SUP>ASP の例</H1>
+
+<P>IIS のインストール環境のセキュリティを向上させるため、インターネット インフォメーション サービス (IIS) のサンプル説明は <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online</a> の <b>ASP Samples</b> セクションに移動しました。Platform Software Developer Kit (SDK) をインストールすると、C:\Inetpub\IIsSamples (C ドライブにオペレーティング システムがインストールされている場合) にサンプルのソース コードがインストールされます。 
+</P>
+
+
+<P><span class=le><B>重要&nbsp;&nbsp;&nbsp;</B></span>これらのサンプルは学習用であって、開発用ではありません。また、開発環境でのテストも行われていません。Microsoft では、これらのサンプルに対するテクニカル サポートを行いません。</P>
+
+<P>アプリケーション開発に関する情報については、「<A HREF="/iishelp/iis/htm/asp/eadg01v7.htm">Web アプリケーションを開発する</A>」を参照してください。
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</BODY>
+</HTML>

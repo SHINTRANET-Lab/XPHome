@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Windows イベントについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Windows イベントについて説明します。IIS のイベント ログ収集に使用できるオプションについて概要を説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="About Windows&nbsp;NT Events">Windows イベントについて</a></h1>
+
+<P>Windows が起動されると、ログの収集が自動的に開始されます。ログには、システム ログ、セキュリティ ログ、およびアプリケーション ログの 3 種類があります。ログの種類ごとに、表示するイベントへのフィルタの使用、表示するエントリの数の指定、エントリを保存する期間の決定、およびログがいっぱいになったときに既存のイベントに自動的に上書きするかどうかの決定などを実行できます。</P>
+
+<P>イベント ビューアを開くには、いくつかの方法があります。</P>
+
+<ul>
+<li>[スタート] をクリックし、[ファイル名を指定して実行] をクリックして、[名前] ボックスで「<b>eventvwr</b>」と入力します。&nbsp;<B>Enter</B> キーを押します。</li>
+<li>コマンド プロンプトで「<b>start eventvwr</b>」と入力し、<B>Enter</B> キーを押します。</li>
+<li>[スタート] をクリックし、[プログラム] をポイントして、[管理ツール] をクリックします。次に、[イベント ビューア] をクリックします。</li>
+<li>[スタート] をクリックし、[プログラム] をポイントして、[管理ツール] をクリックします。次に、[コンピュータの管理] をクリックします。[システム ツール] ノードに [イベント ビューア] が表示されます。この表示方法の利点は、同じウィンドウの [サービスとアプリケーション] ノード以下に IIS スナップインがあることです。</li>
+</ul>
+
+<h2><a name="aspevents">ASP エラーおよび Windows イベント ログ</a></h2>
+
+<p>イベント ビューアでは、各タイプのログについてプロパティ ページを開き、すべてのイベントに一般的に適用されるフィルタ オプションを構成することができます。</p>
+
+<p>IIS では、2 種類のメタベース キーによって制御レベルを上げます。このキーにより、ASP エラーの発生時に Windows イベント ログに送信される内容を指定することができます。&nbsp;</p>
+
+<ul>
+<li><a href="../asp/apro2qur.htm">AspLogErrorRequests</a>: このキーが TRUE に設定された場合、ASP エラーがアプリケーション イベント ログに送信されます。このキーが FALSE に設定された場合、ASP エラーは送信されません。このキーは、IIS スナップインで設定することも、プログラムによって設定することも可能です。IIS スナップインの場合、仮想ディレクトリのプロパティを表示して、[アプリケーション保護] を [高 (分離プロセス)] に設定してから、[構成] をクリックします。[処理オプション] タブをクリックして、[失敗したクライアント要求をイベント ログに書き込む] チェック ボックスをオンにします。チェック ボックスをオンにすると、AspLogErrorRequests メタベース キーが TRUE に設定されます。</li>
+<li> <a href="../asp/apro9zfr.htm">AspErrorsToNTLog</a>: このキーが TRUE に設定された場合、すべての ASP エラーがアプリケーション イベント ログに送信されます。このキーが FALSE に設定された場合、ASP エラー全体のサブセットだけが送信されます。サブセットに含まれるエラー番号は、100、101、102、103、104、105、106、107、115、190、191、192、193、194、240、241、242 です。このキーは IIS スナップインではなく、プログラムによって設定します。</li>
+</ul>
+<p>ASP イベント エラーの詳細については、「<a href="iievtasp.htm">Active Server Pages イベント</a>」を参照してください。&nbsp;</p>
+<p>メタベースおよびプログラムによる IIS の管理の詳細については、「<a href="../asp/aint7e9l.htm">IIS をプログラム管理する</a>」を参照してください。メタベース キーを設定するには、<a href="file:///X:/inetpub/adminscripts">X:\inetpub\adminscripts</a> (X は IIS をインストールしたドライブ) 内のスクリプト サンプル adsutil.vbs を使用するのが簡単です。たとえば、ASP イベント エラーのサブセットを Windows イベント ログに送信するには、コマンド プロンプトで次の行を入力します。</p>
+<p>&nbsp;&nbsp;&nbsp;<font face="Courier New"> cscript adsutil.vbs SET w3svc/1/root/&lt;vdir_name&gt;/AspLogErrorRequests TRUE</font></p>
+<p>&nbsp;&nbsp;&nbsp;
+
+</font> <font face="Courier New"> cscript adsutil.vbs SET w3svc/1/root/&lt;vdir_name&gt;/AspErrorsToNTLog FALSE</font></p>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ASP エラーは、IIS ログ ファイルにも記録することができます。このためには、IIS スナップインの構成が必要です。IIS ログ ファイルで ASP エラーの記録が失敗した場合、エラーは Windows イベント ログに送信されます。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

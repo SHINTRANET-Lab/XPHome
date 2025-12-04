@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>メタベース バックアップ ユーティリティ</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_metabase_backup_utility"></A><SUP></SUP>メタベース バックアップ ユーティリティ</H1>
+
+<H6>概要</H6>
+
+<P>IIS メタベースは、大規模で複雑な構造体であり、インターネット サイトに関する多数の重要な情報を保持しています。この重要なデータを容易に保護するため、メタベースのバックアップは簡単に実行できるようになっています。このツールでは、メタベースをさらに簡単にバックアップするためのツールを作成する方法を示します。</P>
+
+<H6>コードの説明</H6>
+
+<P>メタベースのバックアップ機能は IIS://LocalHost レベルで提供されているため、この文字列を GetObject に渡してローカル コンピュータのオブジェクトへの参照を取得します。次に、Backup メソッドを呼び出します。その際、多数のフラグ、場所、バージョン番号などのパラメータを指定します。</P>
+
+<P>場所パラメータは、バックアップ バージョンのセットに付けられた名前を指します。バックアップの実装は、今後のリリースで変更される可能性がありますが、現時点では、すべてのバックアップが同じディレクトリに格納されます。したがって、一連のバックアップ バージョンの名前が場所であると考えると便利です。</P>
+
+<P>バックアップ バージョン パラメータは、明示的に指定するか、またはいくつかの特殊な値の 1 つを指定することができます。特殊な値のうち最も重要なものは、&amp;HFFFFFFFF です。VBScript では -1 に相当するこの値を指定すると、Backup メソッドは、同じ場所で検出された最も高いバージョン番号よりもさらに 1 つ高いバージョン番号をこのバックアップに割り当てます。</P>
+
+<H6>スクリプトの場所</H6>
+
+<P>このスクリプトは、インターネット サービス ディレクトリ内の ...\iissamples\sdk\admin\metabackrest.vbs にあります。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

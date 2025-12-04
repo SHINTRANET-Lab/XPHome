@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML DIR=LTR><HEAD><TITLE><a name="H1_37780314">変数と定数を使用する</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT> 
+
+
+
+<META NAME="DESCRIPTION" CONTENT="ASP スクリプト作成環境での、変数と定数の使用方法を説明します。VBScript と JScript のサンプルも示します。"><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<FONT FACE="ＭＳ Ｐゴシック">	
+
+
+<H1><A NAME="H1_37780314"><a name="H1_37780314">変数と定数を使用する</A></H1>
+
+
+<P>&quot;変数&quot; は、コンピュータのメモリ内で数値やテキスト文字列などのデータを格納する記憶領域に名前を付けたものです。変数に格納されているデータは、変数の &quot;値&quot; と呼ばれます。変数を使うと、名前を使って値を格納、取得、または操作できるため、スクリプトが実行する内容をわかりやすくすることができます。</P>
+
+<H2><A NAME="H2_37780793">変数を宣言して名前を付ける</A></H2>
+
+<P>変数の宣言と名前付けについては、使用するスクリプト言語の規則とガイドラインに従ってください。変数を使用する前に宣言する必要がない場合でも、必ず変数を宣言するように習慣付けておくと、エラーの発生を未然に防ぐことができます。変数の &quot;宣言&quot; とは、スクリプト内で変数への参照を使用できるように、特定の名前を持つ変数が存在することをスクリプト エンジンに知らせることを意味します。</P>
+
+
+<H3><A NAME="H3_37781338">VBScript</A></H3>
+
+<P>VBScript では変数を宣言する必要はありませんが、使用する前にすべての変数を宣言することをお勧めします。VBScript で変数を宣言するには、Dim、Public、または Private ステートメントを使用します。たとえば、次のように指定します。</P>
+
+<PRE>&lt;% Dim UserName %&gt;</PRE>
+
+<P>.asp ファイルで VBScript の Option Explicit ステートメントを使用すると、Dim、Private、Public、および ReDim ステートメントを使用した変数の明示的な宣言を強制することができます。Option Explicit ステートメントは、ASP ディレクティブ (存在する場合) の後で、かつ HTML テキストまたはスクリプト コマンドよりも前に記述する必要があります。このステートメントによって影響を受けるのは、VBScript で記述された ASP コマンドのみです。JScript コマンドは、このステートメントの影響を受けません。</P>
+
+<PRE>&lt;% Option Explicit %&gt;
+&lt;HTML&gt;
+&lt;%
+  Dim strUserName
+  Public lngAccountNumber
+%&gt;
+.
+.
+.
+</PRE>
+
+
+<P>コマンドの詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Windows Script Technologies</a> の Web サイトの「VBScript ランゲージ リファレンス」を参照してください。</P>
+
+
+<H3><A NAME="H3_37782240">JScript</A></H3>
+
+<P>通常、JScript では変数を宣言する必要はありませんが、使用する前にすべての変数を宣言することをお勧めします。変数を宣言するには、var ステートメントを使用します。たとえば、次のように指定します。</P>
+
+<PRE>&lt;% var UserName %&gt;</PRE>
+
+<P>通常、JScript で変数を宣言する必要があるのは、関数内の変数と、その関数の外部で使用されている &quot;グローバル&quot; 変数を区別する必要がある場合のみです。この場合、2 つの変数を区別しないと、グローバル変数のみを参照していると JScript は見なします。var ステートメントの詳細については、「JScript ランゲージ リファレンス」を参照してください。このリファレンスは、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Windows Script Technologies</a> の Web サイトにあります。</P>
+
+<H2><A NAME="H2_37782652">変数のスコープ</A></H2>
+
+<P>どのスクリプト コマンドから変数にアクセスできるかは、変数の &quot;スコープ&quot; (寿命) によって決まります。プロシージャ内部で宣言された変数は &quot;ローカル スコープ&quot; を持ち、プロシージャが実行されるたびに作成されて破棄される変数になります。この変数には、プロシージャの外側からはアクセスできません。プロシージャの外部で宣言された変数は &quot;グローバル スコープ&quot; を持ち、ASP ページ上の任意のスクリプト コマンドからその値にアクセスし、変更することができます。</P>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;変数のスコープをプロシージャに限定すると、パフォーマンスが向上します。</P>
+
+
+<P>変数を宣言する場合、ローカル変数とグローバル変数に同じ名前を付けることができます。この場合、一方の変数の値を変更しても、もう一方の値は影響を受けません。しかし、変数の宣言を行っていない場合は、グローバル変数の値を不用意に変更してしまう場合があります。たとえば、次の例では Y という名前の変数が 2 つありますが、このスクリプト コマンドは 1 を返します。</P>
+
+<PRE>&lt;%
+  Option Explicit 
+  Dim Y
+
+  Y = 1
+
+  SetLocalVariable
+
+  Response.Write Y
+
+Sub SetLocalVariable
+    Dim Y
+    Y = 2
+End Sub
+%&gt;</PRE>
+
+<P>一方、次のスクリプト コマンドは、変数が明示的に宣言されていないために 2 を返します。これは、プロシージャ呼び出しで Y に 2 を設定するとき、スクリプト エンジンがグローバル変数の値を変更するものとして処理するためです。</P>
+
+<PRE>&lt;% 
+  Option Explicit
+  Dim Y
+  Y = 1
+
+  SetLocalVariable
+
+  Response.Write Y
+
+Sub SetLocalVariable
+    Y = 2
+End Sub
+%&gt;</PRE>
+
+<P>このような問題の発生を避けるために、変数は必ず宣言してから使用することをお勧めします。変数の宣言は、<strong>#include</strong> ステートメントを使って .asp ページにファイルをインクルードするときは特に重要です。インクルードされるスクリプトは別のファイルに含まれていますが、これらのスクリプトはインクルードする側のファイルの一部として扱われます。このため、変数を宣言しておかないと、メイン スクリプトで使用する変数とインクルードされるスクリプトで使用する変数に異なる名前が付いているかどうかを確認することが困難になります。</P> 
+
+<H2><A NAME="H2_37784611">変数にセッション スコープまたはアプリケーション スコープを与える </A></H2>
+
+<P>グローバル変数は、1 つの .asp ページでのみアクセスできます。複数のページで変数にアクセスできるようにするには、変数にセッション スコープまたはアプリケーション スコープを与える必要があります。セッション スコープを持つ変数は、ある特定のユーザーに要求された 1 つの ASP アプリケーション内のすべてのページで利用できます。アプリケーション スコープを持つ変数は、任意のユーザーに要求された1 つの ASP アプリケーション内のすべてのページで利用できます。セッション変数は、ユーザー設定、ユーザー名、ユーザーの識別など、ユーザーごとの情報を格納する場合に便利です。アプリケーション変数は、アプリケーション固有のメッセージ、アプリケーションで必要になる一般的な値など、あるアプリケーションのすべてのユーザーに共通する情報を格納する場合に便利です。</P>
+
+<P>ASP では、変数を格納できる組み込みオブジェクトとして Session オブジェクトと Application オブジェクトの 2 つのオブジェクトを提供しています。</P>
+
+<P>セッション スコープまたはアプリケーション スコープを持つオブジェクトのインスタンスを作成することもできます。詳細については、「<A HREF="iiwaobu.htm">オブジェクトのスコープを設定する</A>」を参照してください。</P>
+
+<H3><A NAME="H3_37785903">セッション スコープ</A></H3>
+
+<P>変数にセッション スコープを与えるには、Session オブジェクトの名前付きエントリに値を割り当てて、Session オブジェクトに変数を格納します。たとえば、次のコマンドは、2 つの新しい変数を Session オブジェクトに格納します。</P>
+
+<PRE>&lt;% 
+  Session(&quot;FirstName&quot;) = &quot;Jeff&quot;
+  Session(&quot;LastName&quot;) = &quot;Smith&quot; 
+%&gt;</PRE>
+
+<P>Session オブジェクトから情報を取得するには、出力ディレクティブ (<CODE>&lt;%=</CODE>) または Response.Write を使用して、オブジェクト内の名前付きエントリにアクセスします。次の例は、出力ディレクティブを使用して Session("FirstName") の現在の値を表示します。</P>
+
+<PRE>Welcome &lt;%= Session(&quot;FirstName&quot;) %&gt;</PRE>
+
+<P>ユーザーの設定を Session オブジェクトに格納しておくと、格納した設定に後からアクセスして、どのページをユーザーに返すかを決定することができます。たとえば、アプリケーションの最初のページで、ユーザーがテキスト専用バージョンのコンテンツを指定できるようにしておけば、この設定を、アプリケーション内でユーザーが引き続き利用するすべてのページに対して適用することができます。</P>
+
+<PRE>&lt;%
+  strScreenResolution = Session(&quot;ScreenResolution&quot;)
+  If strScreenResolution = &quot;Low&quot; Then
+%&gt; 
+  This is the text version of the page.
+&lt;% Else %&gt; 
+  This is the multimedia version of the page.
+&lt;% End If %&gt;</PRE>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;スクリプトで繰り返しセッション スコープを持つ変数を参照する場合は、既に例を挙げて説明したように、その変数をローカル変数に割り当てるとパフォーマンスが向上します。</P>
+
+
+<H3><A NAME="H3_37787278">アプリケーション スコープ</A></H3>
+
+<P>変数にアプリケーション スコープを与えるには、Application オブジェクトの名前付きエントリに値を割り当てて、Application オブジェクトに変数を格納します。たとえば、次のコマンドは、アプリケーション固有のメッセージを Application オブジェクトに格納します。</P>
+
+<PRE>&lt;% Application(&quot;Greeting&quot;) = &quot;Welcome to the Sales Department!&quot; %&gt;</PRE>
+
+<P>Application オブジェクトから情報を取得する場合は、ASP の出力ディレクティブ (<CODE>&lt;%=</CODE>) または Response.Write を使用すると、アプリケーション内の後続の任意のページから名前付きエントリにアクセスできます。次の例は、出力ディレクティブを使用して Application("Greeting") の値を表示します。</P>
+
+<PRE>&lt;%= Application(&quot;Greeting&quot;) %&gt;</PRE>
+
+<P>また、スクリプトで繰り返しアプリケーション スコープを持つ変数を参照する場合は、その変数をローカル変数に割り当てるとパフォーマンスが向上します。</P>
+
+<H2><A NAME="usingconstants">定数を使用する</A></H2>
+
+<P>&quot;定数&quot; とは、数値や文字列に代わる役割を果たす名前のことです。ActiveX Data Objects (ADO) など、ASP に付属する一部の基本コンポーネントでは、スクリプトで使用できる定数が定義されています。コンポーネントは、&quot;コンポーネント タイプ ライブラリ&quot; で定数を宣言できます。&quot;コンポーネント タイプ ライブラリ&quot; とは、COM コンポーネントによってサポートされるオブジェクトと型についての情報が格納されているファイルのことです。.asp ファイルでタイプ ライブラリを宣言すると、同じ .asp ファイル内の任意のスクリプトで定義済み定数を使用できます。同様に、Global.asa ファイルの中でタイプ ライブラリを宣言すると、アプリケーション内の任意の .asp ファイルで定義済み定数を使用できます。</P>
+
+<P>タイプ ライブラリを宣言するには、.asp ファイルまたは Global.asa ファイルで &lt;METADATA&gt; タグを使用します。たとえば、ADO タイプ ライブラリを宣言するには、次のステートメントを使用します。</P>  
+
+<PRE>&lt;!--METADATA NAME=&quot;Microsoft ActiveX Data Objects 2.5 Library&quot; TYPE=&quot;TypeLib&quot; UUID=&quot;{00000205-0000-0010-8000-00AA006D2EA4}&quot;--&gt;</PRE>
+
+<P>または、タイプ ライブラリの汎用一意識別子 (UUID) を参照せずに、ファイル パスでタイプ ライブラリを参照することもできます。</P>
+
+<PRE>&lt;!-- METADATA TYPE=&quot;typelib&quot; FILE=&quot;c:\program files\common files\system\ado\msado15.dll&quot;--&gt;</PRE> 
+	
+
+<P>このように宣言した後は、タイプ ライブラリを宣言した .asp ファイルや、ADO タイプ ライブラリ宣言をした Global.asa ファイルが含まれているアプリケーションに常駐する .asp ファイルで、ADO 定数を使用できます。次の例では、<CODE>adOpenKeyset</CODE> および <CODE>adLockOptimistic</CODE> が ADO 定数です。</P>
+
+<PRE>&lt;%
+  'Create and Open Recordset Object.
+  Set rstCustomerList = Server.CreateObject(&quot;ADODB.Recordset&quot;)
+
+  rstCustomerList.ActiveConnection = cnnPubs
+  rstCustomerList.CursorType = adOpenKeyset
+  rstCustomerList.LockType = adLockOptimistic
+%&gt;</PRE>
+
+<P>次の表は、一般に使用されるタイプ ライブラリと UUID の一覧です。</P>
+
+<TABLE BORDER="1" CELLPADDING="5" CELLSPACING="1" WIDTH="80%">
+	<TR>
+	  <TH WIDTH=20% BGCOLOR="#c0c0c0">タイプ ライブラリ</TH>
+	  <TH WIDTH=80% BGCOLOR="#c0c0c0">UUID</TH>
+	</TR>
+	<TR><TD>Microsoft ActiveX Data Objects 2.5 Library</TD><TD>{00000205-0000-0010-8000-00AA006D2EA4}</TD></TR>
+	<TR><TD>Microsoft CDO 1.2 Library for Windows 2000 Server</TD><TD>{0E064ADD-9D99-11D0-ABE5-00AA0064D470}</TD></TR>
+	<TR><TD>MSWC Advertisement Rotator Object Library</TD><TD>{090ACFA1-1580-11D1-8AC0-00C0F00910F9}</TD></TR>
+	<TR><TD>MSWC IIS Log Object Library</TD><TD>{B758F2F9-A3D6-11D1-8B9C-080009DCC2FA}</TD></TR>
+</TABLE>
+
+<P>&lt;METADATA&gt; タグのリファレンス情報については、「<a href="glob4b5f.htm">TypeLibrary 宣言</a>」を参照してください。</P>
+
+<P>以前のバージョンの ASP では、いくつかのコンポーネントが定数を定義したファイルを提供していました。このファイルは、これらの定数を使用する各 ASP ファイルでインクルードする必要がありました。<STRONG><A HREF="../core/iisiinc.htm">#include</A></STRONG> ディレクティブを使用した定数定義のインクルードは引き続きサポートされますが、タイプ ライブラリの方が一般により使いやすく、スクリプトのアップグレードも容易です。ASP の将来のリリースでは、コンポーネントによる定数定義ファイルの提供は行われない可能性があります。</P>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;<STRONG>#include</STRONG> ディレクティブより &lt;METADATA&gt;  タグを使用した方が、Web アプリケーションのパフォーマンスが向上する可能性があります。</P>
+
+<P>独自の定数を定義することもできます。独自の定数を定義するには、VBScript では Const ステートメントを使用します。JScript では、var ステートメントを使用し、定数値を変数に割り当てます。複数の .asp ファイルで定数を使用する場合は、定数の定義を別ファイルに記述し、このファイルを、定数を使用する各 .asp ファイルにインクルードします。</P>
+
+
+<HR CLASS="iis" SIZE="1">
+<P ALIGN="center"><EM><A HREF="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation. All rights reserved.</A></EM></P>
+
+</font>
+
+</font>
+</BODY>
+
+</HTML>

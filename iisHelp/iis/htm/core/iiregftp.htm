@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>FTP サービスのレジストリ エントリ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="FTP サービスのレジストリ エントリの詳細など、FTP のリファレンス ページです。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+<style title="FPRevisionMarks">
+<!--
+	.FPRevisionDel {color: red; text-decoration: line-through;}
+	.FPRevisionIns {color: red; text-decoration: underline;}
+	.FPRevisionDelHighlight {color: white; text-decoration: line-through; background: black;}
+	.FPRevisionInsHighlight {color: white; text-decoration: underline; background: black;}
+	.FPRevisionImgDel {border: 4 dashed #FF0000;}
+	.FPRevisionImgDelHighlight {border: 8 solid #000000;}
+-->
+</style>
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37744883">FTP サービスのレジストリ エントリ</a></h1>
+
+<p>「<a href="iiregssp.htm">サービス固有のレジストリ エントリ</a>」に記載されているパラメータに加えて、FTP サービスでは、次のパラメータが保持されます。</p>
+
+<p>レジストリ パス</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br> \CurrentControlSet<br> &nbsp;\Services<br> &nbsp;&nbsp;\MSFTPSVC<br> &nbsp;&nbsp;&nbsp;\Parameters</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>AnnotateDirectories </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0、1 <br><strong>既定値 :</strong> 0 (無効)</td></tr>
+<tr><td width=100%>FTP サービスでは、カスタム メッセージを使ってディレクトリにコメントを付けることができます。コメント テキストは、コメントを付けるディレクトリの中の ~ftpsvc~.ckm という特別なファイルに格納されます。FTP でディレクトリの変更 (CWD) を行ったときに、移動先のディレクトリにこのファイルが存在する場合、サービスはこのファイルの内容を使って応答します。これによって管理者は、作成中のディレクトリ用のカスタム メッセージを追加することができます。既定の設定では、コメント テキストは送信されません。カスタム メッセージを追加する場合は、コメント ファイルも作成する必要があります。また、コメント ファイルがディレクトリの一覧に表示されないように、ファイルを隠しファイルにすることをお勧めします。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>DisableExtendedCharFilenames</strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong>&nbsp; 1 <br> <strong>既定値 :</strong> なし</td></tr>
+<tr><td width=100%><font face="ＭＳ Ｐゴシック">FTP サービス</font>は、すべての拡張文字を伴うファイル名を受け入れますが、<font face="ＭＳ Ｐゴシック"><b>DisableExtendedCharFilenames</b></font> を作成して 1 に設定すると、特定の FTP サイトに対してこの機能を無効にすることができます。
+<b>DisableExtendedCharFilenames</b> を有効にするには、FTP サービスを再起動する必要があります。<font face="ＭＳ Ｐゴシック">&nbsp;
+</font>
+ </td></tr>
+</table>
+
+
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> EnablePortAttack </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (無効)</td></tr>
+<tr><td width=100%>このパラメータは、FTP プロトコル仕様に含まれるセキュリティ上の問題を回避するために、既定で設定されています。FTP サービスの仕様では、クライアントが指定したポート アドレスを基にパッシブ接続を確立することが可能です。これを許可すると、悪意のある第三者が FTP サービスでシステムを破壊するコマンドを実行するおそれがあります。この問題は、FTP サービスが、FTP データ ポート (20) 以外のポートを使って接続し、ポート番号が IP_PORT_RESERVED (1024) 未満の場合に発生します。EnablePortAttack は、このような攻撃を制御します。既定では、サービスは、IP_PORT_RESERVED 未満の (20 を除く) ポート番号に接続しません。FTP の RFC に明記されているこれ以外のポートを使ってユーザーからの接続を受け付ける場合は、このフラグを有効にする必要があります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>LowercaseFiles </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (無効)</td></tr>
+<tr><td width=100%>FTP サービスでは、ファイル システムに格納されているとおりの大文字と小文字を使ったファイル名が使用されます。ただし、大文字と小文字を区別するファイル システムと正確に比較するためには、適切なファイル名を使用しなければならない場合があります。この値を追加すると、その比較の際に小文字が使われるようになります。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

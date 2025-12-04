@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web および FTP のアクセス権を設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="Web および FTP のアクセス権を設定し、特定の FTP サイトや Web サイト、ディレクトリ、ファイルに対するユーザーのアクセスを制御する方法を示します。また、WebDAV についても説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37784235">Web および FTP のアクセス権を設定する</a></h1>
+
+<p>Web および FTP のアクセス権と NTFS のアクセス権では、その意味に大きな違いがあります。Web および FTP のアクセス権は、NTFS のアクセス権とは異なり、Web サイトと FTP サイトにアクセスするすべてのユーザーに適用されます。NTFS のアクセス権は、有効な Windows アカウントを持つ特定のユーザーまたはユーザー グループにのみ適用されます。Web と FTP のアクセス権が Web サイトや FTP サイトの仮想ディレクトリへのアクセスを制御するのに対し、NTFS ではサーバーの物理ディレクトリへのアクセスを制御します。詳細については、「<a href="iivrtsv.htm">Web サイトと FTP サイト</a>」を参照してください。</p>
+
+<p>既定では、Web のアクセス権と FTP のアクセス権には、Windows のアカウントである IUSR_<em>computername</em> が使用されます。匿名認証を使ってサイトにアクセスするユーザーが、このアカウントを使用します。既定では、IIS から IUSR_<em>computername </em>に、Web サイトや FTP サイトが実際に入っているフォルダに対する NTFS のアクセス権が与えられます。ただし、サイトの任意のフォルダやファイルに対するアクセス権は、変更することができます。たとえば、Web のアクセス権を使用して、Web サイトを訪問するユーザーに、特定ページの閲覧、情報のアップロード、またはサイトでのスクリプトの実行を許可するかどうかを制御できます。詳細については、「<a href="iiacnsc.htm">アクセス制御について</a>」を参照してください。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong></p>
+
+<ul>
+<li>Web または FTP のアクセス権と NTFS のアクセス権がディレクトリやファイルごとに異なる場合には、厳しい方の制限の設定が適用されます。</li>
+
+<li>IIS では、Web サイト、FTP サイト、または仮想ディレクトリにセキュリティ プロパティを設定する際、ディレクトリおよびファイルに個別に設定されているプロパティをリセットするかどうかを確認するメッセージが表示されます。プロパティのリセットを選択すると、それまでのセキュリティの設定は新しい設定に置き換えられます。プロパティの設定の詳細については、「<a href="iivsovr.htm">Web サイトおよび FTP サイトについて</a>」の「プロパティおよびサイトのプロパティの継承」を参照してください。</li>
+
+<li>WebDAV (Web Distributed Authoring and Versioning) は、ファイル システムなどあらゆる記憶メディアを HTTP 接続で公開するための HTTP&nbsp;1.1 標準の拡張機能です。IIS に WebDAV が実装されていると、作成元はサーバー上のファイルとディレクトリをリモートで作成、移動、検索、削除できます。WebDAV は HTTP&nbsp;1.1 の実装を前提としているため、FTP サイトなどの HTTP 以外のサービスでは使用できません。詳細については、「<a href="wcwbdav.htm">WebDAV の発行</A>」を参照してください。</li> 
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>WebDAV を含む Web コンテンツに対するのアクセス権を設定するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、仮想ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+<li>[ホーム ディレクトリ]、[仮想ディレクトリ]、または [ファイル] のいずれかのプロパティ シートで、必要に応じて次のチェック ボックスをオンまたはオフにします。</li>
+
+<ul> 
+	<li>[読み取り]  ディレクトリやファイルのコンテンツとプロパティを表示できます(既定で選択されています)。</li>
+	<li>[書き込み]  ディレクトリやファイルの、コンテンツおよびプロパティを変更できます。</li>
+	<li>[スクリプト ソース アクセス]  ソース ファイルにアクセスできます。[読み取り] チェック ボックスがオンのときは、ソースの読み取りができ、[書き込み] チェック ボックスがオンのときは、ソースへの書き込みができます。[スクリプト ソース アクセス] には、ASP アプリケーションのスクリプトなどのスクリプトのソース コードが含まれます。[読み取り] と [書き込み] のいずれのチェック ボックスもオンになっていない場合は、このオプションは使用できません。</li>
+	<li>[ディレクトリの参照]  ファイルの一覧とコレクションを表示できます。</li>
+	<li>[ログ アクセス]  Web サイトを利用するたびにログ エントリが作成されます。</li>
+	<li>[<strong>このリソースに索引をつける</strong>] インデックス サービスで、このリソースに索引を付けることができます。これにより、リソース上で検索を実行できます。</li>
+</ul>
+
+<LI>[実行アクセス権] ボックスで、スクリプトを実行するときの適切なレベルを選択します。</LI>
+<UL>
+<li>[なし]  サーバーでは ASP アプリケーションなどのスクリプトや実行可能ファイルを実行しません。</li>
+<li>[スクリプトのみ]  サーバーで ASP アプリケーションなどのスクリプトのみを実行します。</li>
+<li>[スクリプトおよび実行可能ファイル]  サーバーで ASP アプリケーションなどのスクリプトと実行可能ファイルを実行します。</li>
+</UL>
+
+<li>[OK] をクリックします。</li>
+
+<p><strong>注</strong></p>
+
+<ul>
+<li>アクセス権を無効にすると、すべてのユーザーが制限されます。たとえば、[読み取り] アクセス権を無効にすると、ユーザー アカウントに適用される NTFS のアクセス権とは無関係に、すべてのユーザーがファイルを表示できなくなります。ただし、[読み取り] アクセス権を有効にすると、そのファイルへのアクセスが NTFS のアクセス権によって制限されていない限り、すべてのユーザーがファイルを表示できます。</li>
+<li>IIS のアクセス権と NTFS のアクセス権の両方が設定されている場合は、明示的なアクセスの拒否が、アクセスの許可よりも優先されます。</li>
+</ul>
+</ol>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;[スクリプト ソース アクセス] チェック ボックスをオンにすると、ASP アプリケーションのスクリプトから、ユーザー名やパスワードなどの重要な情報がユーザーによって閲覧される可能性があります。また、サーバーで実行されるソース コードを変更され、サーバーのセキュリティとパフォーマンスに重大な影響が及ぼされる可能性もあります。重要な情報と機能にアクセスする場合、個別の Windows アカウントと、ダイジェスト認証や統合 Windows 認証などの上位レベルの認証を使用してアクセスする方法が一般に利用されています。</p>
+
+
+<big>FTP コンテンツに対するアクセス権を設定するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、FTP サイト、仮想ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+<li>[ホーム ディレクトリ]、[仮想ディレクトリ]、または [ファイル] のいずれかのプロパティ シートで、次のチェック ボックスのオプションをオンまたはオフにします。</li>
+
+<ul>
+<li>[読み取り]  ファイルのコンテンツを表示できます。</li>
+<li>[書き込み]  ファイルのコンテンツを変更できます。</li>
+<li>[ログ アクセス]  ユーザーのアクセスをログ ファイルに記録できます。</li>
+</ul>	
+</ol>
+
+<p><b>注 &nbsp;&nbsp;&nbsp;</b>アカウント情報の変更後にプロセス外アプリケーションの起動に問題が発生するのは、変更後にユーザー アカウント名およびパスワード情報が同期されていないためです。IWAM_computername アカウントをログオンできなかったことを通知するイベント ログ エラーが表示される場合があります。この問題が発生した場合は、synciwam スクリプトを実行してパスワードを同期します。このスクリプトを実行するには、コマンド プロンプトで次のように入力します。cscript synciwam.vbs [-v|-h]</p>
+<p>-v は、verbose モードを使用し、スクリプトのアクティビティのログを出力します。</p> 
+<p>-h は、スクリプトのヘルプ情報を出力します。</p> 
+<p>synciwam.vbs ファイルは、次の場所にあります。%systemdrive%\inetpub\adminscripts</p>
+
+<p>これらのプロパティ シートの詳細については、該当するプロパティ シートで [ヘルプ] をクリックしてください。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Windows DNA</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_microsoft_windows_distributed_internet_application_architecture"></A><SUP></SUP>Windows DNA</H1>
+
+<P>Windows DNA は、<I>n</I> 層開発モデルによって Web を完全に統合する方法として、Microsoft により開発されたものです。Windows DNA では、企業コンピューティング、インターネット、イントラネット、世界的な電子商取引などの要件を満たすソリューションを提供しながら、全体的な開発コストや導入コストを削減するためのフレームワークが定義されています。</P>
+
+<P>Windows DNA では、標準 Windows ベースのサービスを使用して、ユーザー インターフェイスとナビゲーション、ビジネス ロジック、データ保存などの、複数層ソリューションを構成するそれぞれの層の要求に対応しています。Windows DNA で使用されているサービスは、Component Object Model (COM) を通じて統合されています。Windows DNA で使用されているサービスは、次のとおりです。
+
+<UL type=disc>
+	<LI>ダイナミック HTML (DHTML)</li>
+
+	<LI>Active Server Pages (ASP)</li>
+
+	<LI>COM コンポーネント</li>
+
+	<LI>コンポーネント サービス</li>
+
+	<LI>Active Directory Services</li>
+
+	<LI>Windows<sup>&reg;</sup> セキュリティ サービス</li>
+
+	<LI>Microsoft<sup>&reg;</sup><SUP> </SUP>メッセージ キュー サービス</li>
+
+	<LI>Microsoft Data Access Components</li>
+</UL>
+
+<P>Windows DNA は、オープン プロトコル、およびパブリック インターフェイスを使用して開発されているため、サードパーティ製品に容易に統合できます。さらに、インターネット コンピューティング用に業界で定義された標準がサポートされているため、技術の変更に対し、開発者が簡単に対応できます。Windows DNA に追加された最新技術の一部については、「<A HREF="/iishelp/iis/htm/asp/eadg7r5f.htm">開発テクノロジ</A>」を参照してください。次の図は、このような技術を示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/wdna.gif" ALT="Windows DNA アーキテクチャ" BORDER=0></P>
+<span style="display:none"><LAYER VISIBILITY=HIDE> (The following words are used by Search; they are not intended to be displayed on the page.) MSMQ </layer></span><hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

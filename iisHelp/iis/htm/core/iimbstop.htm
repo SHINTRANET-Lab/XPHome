@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>メタベース</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="メタベースの構成について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="metabase">メタベース</a></h1>
+
+<p>メタベースは、IIS の構成値を格納する階層的なデータベースです。メタベースを使用することによって、レジストリを直接編集するよりも、サーバーのプロパティを細かく構成することができます。一部の値はメタベースを使わずに、直接構成できるようになっています。メタベースを変更することで、コンピュータ、Web サイト、仮想ディレクトリ、ディレクトリ、およびファイルの各レベルでサーバーのプロパティを設定できます。
+</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><A HREF="iimbsovr.htm">メタベースについて</A></strong>」では、メタベースの概念について説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>メタベースのバックアップについては、「<a href="iitasks.htm">メタベースのバックアップ</a>」を参照してください。</li>
+<li>メタベースの復元については、「<a href="iirestore.htm">メタベースを復元する</a>」を参照してください。</li>
+<li>レジストリについては、「<a href="iiregtop.htm">レジストリ</a>」を参照してください。</li>
+<li>定期的なサーバー管理については、「<a href="iisvadm.htm">サーバーの管理</a>」を参照してください。</li>
+<li>プログラムを使った管理については、「<a href="../asp/aint7e9l.htm">IIS をプログラム管理する</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

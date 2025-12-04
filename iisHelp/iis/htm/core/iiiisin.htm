@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS のインストール</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS のインストール、コンポーネントの追加/削除方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="installing">IIS のインストール</a></h1>
+
+
+
+
+<p>インターネット インフォメーション サービスは、特に指定しない限り Windows XP Professional にはインストールされません。ただし、IIS&nbsp;5.1 は、既定では、Windows のアップグレード前のバージョンに PWS がインストールされていた場合のみインストールされています。[コントロール パネル] の [プログラムの追加と削除] で、IIS の削除や追加コンポーネントの選択ができます。IIS の使用開始方法については、「<a href="iitstart.htm">IIS によるサイトのクイック セットアップ</a>」および「<a href="iiabuti.htm">IIS スナップイン</a>」を参照してください。</p>
+
+<p>
+<big>IIS のインストールおよびコンポーネントの追加/削除を実行するには</big></p>
+
+<p>
+IIS オプション コンポーネントの詳細については、「<a href="gs_opcomp.htm">IIS オプション コンポーネントのインストール</a>」を参照してください。
+</p>
+<ol>
+
+<li>[スタート] をクリックし、[コントロール パネル] をクリックして、[プログラムの追加と削除] をダブルクリックします。[プログラムの追加と削除] が表示されます。</li>
+<li>[プログラムの追加と削除] ダイアログ ボックスの左側の列で、[Windows コンポーネントの追加と削除] をクリックします。</li>
+<li>Windows コンポーネント ウィザードで [次へ] をクリックします。
+<li>Windows コンポーネントのリストで [インターネット インフォメーション サービス (IIS)] を選択します。</li>
+<li>[次へ] をクリックし、その後の指示に従います。</li>
+</ol>
+
+
+<p><big>アンインストール後に残るディレクトリ</big></p>
+
+<p>次のユーザー コンテンツを含むディレクトリは、IIS をアンインストールした後も、コンピュータ上に残ります。</p>
+
+<ul>
+<li>\Inetpub</li>
+<li>\<em>systemroot</em>\Help\IisHelp</li>
+<li>\<em>systemroot</em>\System32\Inetsrv</li>
+</ul>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>IIS ソフトウェア チェックリスト、セキュリティ チェックリスト、トラブルシューティングなどの関連項目の詳細については、[スタート] メニューの [ヘルプ] をクリックし、Windows のマニュアルを参照してください。</li>
+<li>IIS に関してよく寄せられる質問については、「<a href="iifaq.htm">よく寄せられる質問</a>」を参照してください。</li>
+
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

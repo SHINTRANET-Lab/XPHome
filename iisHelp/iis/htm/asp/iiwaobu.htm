@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>オブジェクトのスコープを設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="オブジェクトのスコープを設定するために使用する ASP スクリプト コマンドと、それに関連する推奨事項について説明します。また、特定の状況において使用するスレッド モデルに関する推奨事項についても説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="settingcomponentscope">オブジェクトのスコープを設定する</a></h1>
+
+
+<p>どのスクリプトがオブジェクトを使用できるかは、オブジェクトのスコープによって決まります。既定では、オブジェクトのインスタンスを作成すると、そのオブジェクトはページ スコープを持ちます。ページ スコープを持つオブジェクトには、同じ ASP ページの任意のスクリプト コマンドからアクセスできます。ページ スコープを持つオブジェクトは、.asp ファイルが要求の処理を終了すると解放されます。ほとんどのオブジェクトで推奨されるスコープは、ページ スコープです。ただし、オブジェクトのスコープを変更して、ほかのページのスクリプトからオブジェクトにアクセスできるようにすることもできます。ここでは、ページ スコープを持つオブジェクトの使用法、およびオブジェクトのスコープの変更方法について説明します。<p>
+
+<h2><a name="H2_37778304">ページ スコープを持つオブジェクトを使用する</a></h2>
+
+<p>ある ASP ページ上で Server.CreateObject または HTML &lt;OBJECT&gt; タグを使用して作成したオブジェクトは、そのページが処理されている間存在します。このオブジェクトは、そのページの任意のスクリプト コマンドからアクセスでき、ASP がそのページの処理を終えた時点で解放されます。このようなオブジェクトは、ページのスコープ (寿命) を持っているといいます。</p>
+
+<H3>ループ内でオブジェクトを作成する</H3>
+
+<p>一般に、ループ内でのオブジェクトの作成は避ける必要があります。ループ内でオブジェクトを作成する必要がある場合は、オブジェクトが使用するリソースを手動で解放してください。</p>
+
+<pre>&lt;%
+  Dim objAd
+  For i = 0 To 1000
+    Set objAd = Server.CreateObject("MSWC.AdRotator")
+    .
+    .
+    .		
+    objAd.GetAdvertisement
+    .
+    .
+    .
+    Set objAd = Nothing		
+  Next
+%&gt;</pre>
+
+<h2><a name="sessionscope">オブジェクトにセッション スコープを与える</a></h2>
+
+<p>&quot;セッション スコープ&quot; を持つオブジェクトは、アプリケーション内の新しいセッションごとに作成され、セッションが終了すると解放されます。したがって、セッション スコープを持つオブジェクトは、アクティブなセッションごとに 1 つ存在することになります。セッション スコープは、複数のスクリプトから呼び出されるものの、1 つのユーザー セッションのみを対象とするオブジェクトで使用します。オブジェクトにセッション スコープを与えるのは、必要な場合のみに限られます。スレッド モデルによって、オブジェクトのパフォーマンスおよびセキュリティ コンテキストが影響を受けるため、セッション スコープを使用する場合は、目的のオブジェクトを提供するコンポーネントのスレッド モデルについて知る必要があります。詳細については、後の「<a href="#performanceissues">詳細情報 : パフォーマンスの問題</a>」を参照してください。</p>
+
+<p>オブジェクトにセッション スコープを与えるには、オブジェクトを ASP の Session 組み込みオブジェクトに格納します。セッション スコープを持つオブジェクトのインスタンスを生成するには、Global.asa ファイルで HTML の &lt;OBJECT&gt; タグを使用する方法と、ASP ページ上で Server.CreateObject メソッドを使用する方法があります。</p>
+
+<p>Global.asa では、RUNAT 属性 (SERVER に設定する必要があります) および SCOPE 属性 (Session に設定する必要があります) を指定した &lt;OBJECT&gt; タグを使用できます。次の例は、セッション スコープを持つ Browser Capabilities コンポーネントの Browser Type オブジェクトのインスタンスを作成します。</p>
+
+<pre>&lt;OBJECT RUNAT=SERVER SCOPE=Session ID=MyBrowser PROGID="MSWC.BrowserType"&gt;
+&lt;/OBJECT&gt;</pre>
+
+<p>オブジェクトを Session オブジェクトに格納した後は、アプリケーション内の任意のページからオブジェクトにアクセスできます。次のステートメントは、前の例の &lt;OBJECT&gt; タグによって作成されたオブジェクトのインスタンスを使用しています。</p>
+
+<pre>&lt;%= If MyBrowser.browser = "IE"  and  MyBrowser.majorver >= 4  Then . . .%&gt;</pre>
+
+<p>ASP ページでは、Server.CreateObject メソッドを使って Session 組み込みオブジェクトにオブジェクトを格納することもできます。次の例は、Browser Type オブジェクトのインスタンスを Session オブジェクトに格納します。</p>
+
+<pre>&lt;% Set Session("MyBrowser") = Server.CreateObject("MSWC.BrowserType") %&gt; </pre>
+
+<p>ほかの .asp ファイルにあるブラウザ情報を表示するには、まず、Session オブジェクトに格納された BrowserType オブジェクトのインスタンスを取得し、次にブラウザ名を表示する Browser メソッドを呼び出します。</p>
+
+<pre>&lt;% Set MyBrowser = Session("MyBrowser") %&gt; 
+&lt;%= MyBrowser.browser %&gt;</pre>
+
+<p>&lt;OBJECT&gt; タグを使用して宣言したオブジェクトの場合、.asp ファイル内のスクリプト コマンドによってそのオブジェクトが参照されるまで、ASP はオブジェクトのインスタンスを生成しません。一方、Server.CreateObject メソッドは、直ちにオブジェクトのインスタンスを作成します。このため、セッション スコープを持つオブジェクトでは、&lt;OBJECT&gt; タグを使用する方が Server.CreateObject メソッドを使用する場合よりも拡張性が向上します。</p>
+
+<h2><a name="H2_37783263">オブジェクトにアプリケーション スコープを与える</a></h2>
+
+<p>&quot;アプリケーション スコープ&quot; を持つオブジェクトは、アプリケーションの起動時に作成されるオブジェクトの単一のインスタンスです。このオブジェクトは、すべてのクライアント要求において共有されます。<A HREF="comp00vo.htm">Page Counter コンポーネント</A>のオブジェクトなど、一部のユーティリティ オブジェクトではアプリケーション スコープで実行した方が良い場合がありますが、通常は、後の説明の中で推奨している別の方法を使用してください。また、オブジェクトのパフォーマンスとセキュリティ コンテキストはスレッド モデルによって影響を受けます (後の「<a href="#performanceissues">詳細情報 : パフォーマンスの問題</a>」を参照してください)。</p>
+
+<p>オブジェクトにアプリケーション スコープを与えるには、ASP の Application 組み込みオブジェクトにオブジェクトを格納します。アプリケーション スコープを持つオブジェクトのインスタンスを作成するには、Global.asa ファイルで &lt;OBJECT&gt; タグを使用する方法と、.asp ファイル上で Server.CreateObject メソッドを使用する方法があります。</p>
+
+<p>Global.asa ファイルでは、RUNAT 属性 (Server に設定する必要があります) および SCOPE 属性 (Application に設定する必要があります) を指定した &lt;OBJECT&gt; タグを使用できます。たとえば、次に示すのは、&lt;OBJECT&gt; タグを使用し、Ad Rotator オブジェクトのアプリケーション スコープのインスタンスを作成している例です。
+
+<pre>&lt;OBJECT RUNAT=SERVER SCOPE=Application ID=MyAds PROGID="MSWC.AdRotator"&gt;
+&lt;/OBJECT&gt;</pre>
+
+<P>Application 状態に Ad Rotator オブジェクトを格納した後、次のようなステートメントを使用して、アプリケーションの任意のページからアクセスできるようになります。</P>
+
+<PRE>&lt;%=MyAds.GetAdvertisement("CustomerAds.txt")&nbsp;%&gt;</PRE>
+
+<P>また .asp ファイルでは、次の例のように Server.CreateObject を使うと、Application 組み込みオブジェクトにオブジェクトのインスタンスを格納できます。<strong></strong><strong></strong></P>
+
+&lt;% Set Application("MyAds") = Server.CreateObject("MSWC.Adrotator")%&gt;
+
+<P>次の例にあるように、Application の状態から Ad Rotator オブジェクトのインスタンスを取得すると、アプリケーションの .asp ファイルの広告を表示できます。</P>
+
+&lt;%Set MyAds = Application("MyAds")  %&gt; &lt;%=MyAds.GetAdvertisement("CustomerAds.txt")  %&gt;
+
+<h2><a name="alternativestosession">セッション スコープおよびアプリケーション スコープを持つオブジェクトに代わる手段</a></h2>
+
+<p>一般に、辞書オブジェクトまたはレコードセットのように、初期化に時間がかかる項目やオブジェクトの場合には、アプリケーション状態またはセッション状態の使用を徹底的に試みる必要があります。ただし、メモリやデータベース接続などのセッション状態またはアプリケーション状態のオブジェクトが、大量のリソースを消費している場合には、別の方法によりこれらのオブジェクトを実装する必要があります。たとえば、コンポーネントのスレッド モデルは、そのコンポーネントから作成するオブジェクト、特にセッション スコープまたはアプリケーション スコープを持つオブジェクトのパフォーマンスに影響を与える可能性があります。</p>
+
+<p>ほとんどの場合、アプリケーション スコープまたはセッション スコープを持つオブジェクトを作成するよりも、ページ レベルで作成されたオブジェクトに情報を渡すためのセッション スコープまたはアプリケーション スコープを持つ変数を使用する方が、ソリューションとして優れています。たとえば、ADO の Connection オブジェクトにセッション スコープまたはアプリケーション スコープを与えることは避ける必要があります。これは、このオブジェクトが作成する接続が長時間開いたままになり、スクリプトでは接続プールを利用できなくなるためです。しかし、ODBC または OLE DB 接続文字列を Session または Application 組み込みオブジェクトに格納すれば、ページ上で作成した Connection オブジェクト インスタンスのプロパティを設定する文字列にアクセスすることができます。これにより、頻繁に使用する情報をセッション状態またはアプリケーション状態に保存し、必要な場合に限り、この情報を使用するオブジェクトを作成することができます。変数にスコープを設定する方法の詳細については、「<a href="iiwavar.htm">変数と定数を使用する</a>」を参照してください。</p>
+
+<h2><a name="jscriptobjects">ユーザー定義の JScript オブジェクト</a></h2>
+
+<p>新しいオブジェクトのプロパティおよびメソッドの作成と初期化を行うコンストラクタ関数を定義することにより、独自の JScript オブジェクトを作成できます。オブジェクトのインスタンスは、スクリプトで new 演算子を使用してコンストラクタを呼び出したときに生成されます。ユーザー定義の JScript オブジェクトは、ASP のサーバー側スクリプトでサポートされ、オブジェクトがページ スコープを持つ場合は適切に動作します。しかし、ユーザー定義のオブジェクトにアプリケーション スコープを与えることはできません。また、ユーザー定義の JScript オブジェクトにセッション スコープを与えると、オブジェクトの機能に影響することがあります。具体的には、オブジェクトがセッション スコープを持つ場合、ほかのページのスクリプトからオブジェクトのプロパティにアクセスすることはできますが、メソッドを呼び出すことはできません。また、ユーザー定義の JScript オブジェクトにセッション スコープを与えると、Web アプリケーションのパフォーマンスが影響を受ける可能性があります。</p>
+
+<h2><a name="performanceissues">詳細情報 : パフォーマンスの問題</a></h2>
+
+<p>コンポーネントのスレッド モデルは、Web サイトのパフォーマンスに影響を与えることがあります。通常、オブジェクトを Session 状態および Application 状態に格納する場合は、.asp ファイルでは Both としてマークされたオブジェクトを使用することをお勧めします。シングルスレッド、アパートメント、およびフリースレッドのオブジェクトの使用はお勧めできません。</p>
+
+<p>使用するオブジェクトのスレッド モデルを常に管理できるとは限らないので、最適なパフォーマンスを得るために、次のガイドラインに従ってください。</p>
+
+<ul>
+<li>ページ スコープ オブジェクトの場合は、Both または Apartment としてマークされたオブジェクトによって最適のパフォーマンスが得られます。</li>
+
+<li>アプリケーション スコープ オブジェクトの場合は、フリースレッド マーシャラを集成する、Both としてマークされたオブジェクトによって最適のパフォーマンスが得られます。Both としてマークされたオブジェクトを Application オブジェクトに格納するには、&lt;OBJECT&gt; タグを使用する方法と、Server.CreateObject メソッドを使用する方法があります。アパートメントスレッド オブジェクトでは、HTML&nbsp;&lt;OBJECT&gt; タグを使用する必要があります。</li>
+
+<li>セッション スコープ オブジェクトの場合は、Both としてマークされたオブジェクトによって最適なパフォーマンスが得られます。シングルスレッド オブジェクトまたはアパートメントスレッド オブジェクトを使用すると、Web サーバーがセッションを 1 つのスレッドにロックすることがあります。フリースレッド オブジェクトは、セッションをロック ダウンすることはありませんが、処理速度は遅くなります。オブジェクトを Session オブジェクトに格納するには、&lt;OBJECT&gt; タグを使用する方法と、Server.CreateObject メソッドを使用する方法があります。</li>
+
+</ul>
+
+
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

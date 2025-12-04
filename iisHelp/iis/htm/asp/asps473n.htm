@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>インストール可能なコンポーネントを使用する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_using_installable_components"></A><SUP></SUP>インストール可能なコンポーネントを使用する</H1>
+
+<P>IIS インストール時に、多数のコンポーネントが共にインストールされます。アプリケーションでは、これらのコンポーネントを呼び出してさまざまな作業を実行し、Web サイトを強化することができます。これらのコンポーネントの実際の利点は、最新の Web ブラウザでも結果を表示できることにあります。これは、これらのコンポーネントがサーバー上で実行され、通常の HTML のみをクライアント ブラウザに送信するためです。次の例では、これらのコンポーネントにアクセスする方法と、コンポーネントを利用できる状況をいくつか示します。</P>
+
+<P>次の一覧から例を選択してください。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps4v5e.asp">Ad Rotator</A>」では、ASP スクリプトで Ad Rotator コンポーネントを使用する方法を示します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps0zlf.asp">Browser Capabilities</A>」では、ASP スクリプトで  Browser Capabilities コンポーネントを使用する方法を示します。</li>
+</UL>
+
+<P>インストール可能な Active Server コンポーネントの使用に関する詳細、および各コンポーネントの詳細については、「<A HREF="/iishelp/iis/htm/asp/comp275c.htm">ASP で利用可能なコンポーネント</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

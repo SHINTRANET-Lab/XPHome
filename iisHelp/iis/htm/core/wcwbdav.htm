@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>WebDAV の発行</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="WebDAV 発行ディレクトリの設定方法、WebDAV ディレクトリへのドキュメントの発行方法、ユーザーによるディレクトリ検索を可能にする方法などの WebDAV についての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="WebDAVPublishing">WebDAV の発行</a></h1>
+
+<p>ここでは、IIS サーバー上での WebDAV 発行ディレクトリの設定の方法と、クライアントがサーバーに接続し、ファイルを編集、操作する方法について説明します。</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><a href="wcwdcp.htm">WebDAV について</a></strong>」では、リモートでユーザーがファイルを発行し、操作するディレクトリを WebDAV により作成する方法について説明します。</li>
+<li>「<strong><a href="wcservr.htm">発行ディレクトリを作成する</a></strong>」では、WebDAV 発行ディレクトリの設定の方法について説明します。</li>
+<li>「<strong><a href="wcsecur.htm">WebDAV セキュリティの管理</a></strong>」では、WebDAV サイトのセキュリティ保護に、IIS と Windows XP のセキュリティを有効に利用する方法を説明します</li>
+<li>「<strong><a href="wcsrch.htm">WebDAV ディレクトリを検索する</a></strong>」では、ユーザーが、コンテンツとドキュメント プロパティの検索を行えるように、WebDAV ディレクトリを構成する方法について説明します。</li>
+<li>「<strong><a href="wcwdpub.htm">ファイルを発行し管理する</a></strong>」では、Windows XP、Internet Explorer、および Office&nbsp;2000 により、コンテンツの発行とファイルの操作を行う方法について説明します。</li>
+</ul>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;WebDAV は、HTTP&nbsp;1.1 用に設計されたものです。したがって、FTP サイトなどの非 HTTP サービスでは利用できません。また、WebDAV は、現在 IIS&nbsp;5.0 および 5.1 のみに実装されています。</p>
+
+<hr><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<SPAN STYLE="visibility:hidden"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+perf, perform, performance, capacity, able, capability, planning, perfmon, modify, customize, customise, tune, tuning, fine-tune, tweak, improve, enhance, speed up, more, additional, greater, ram, memory, cpu, speed, volume, handle, load, connection, connections, pool, pooling, http, keep alive, keep-alive, keepalive, keep-alives, keepalives, estimate, calculate, how many, how much, disk drive, add, adding, utilize, utility, utilities, bandwidth, throttle, throttling, process, processor, oop, out-of-process, utilize, application, time out, timeouts, time-outs, limit, compress, compressed, limiting, http compression, cache, network, web, internet, intranet, server, applications, requirements, load, loading, loaded, heavy, light, big, bigger, e-mail, email, capability, links, more information, job object 
+</SPAN></LAYER>
+
+</font>
+</body>
+</html>

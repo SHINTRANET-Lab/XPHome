@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Application オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_application_object"></A><SUP></SUP>Application オブジェクト</H2>
+
+<P>Application オブジェクトを使用すると、指定されたアプリケーションのすべてのユーザー間で情報を共有できます。ASP 対応アプリケーションは、仮想ディレクトリとそのサブディレクトリにあるすべての .asp ファイルとして定義されます。Application オブジェクトは複数のユーザーで共有できるため、これらのユーザーがプロパティを同時に変更することがないように、Lock メソッドと Unlock メソッドが用意されています。</P>
+
+<H6>構文</H6>
+
+<P><b>Application</b>.<I>method</I> </P>
+
+<P>&nbsp;</P>
+
+<H6>コレクション</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/vbob129a.htm"><B>Application Contents コレクション</B></A></TD>
+<TD width=76%>スクリプト コマンドによってアプリケーションに追加されたすべての項目が含まれます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=24%><A HREF="/iishelp/iis/htm/asp/vbob5uem.htm"><B>Application StaticObjects コレクション</B></A></TD>
+<TD width=76%>&lt;OBJECT&gt; タグによってセッションに追加されたすべてのオブジェクトが含まれます。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob60kw.htm"><B>Contents.Remove</B></A></TD>
+<TD width=75%><A HREF="/iishelp/iis/htm/asp/vbob60kw.htm">Contents.Remove</A> メソッドは、Application オブジェクトの Contents コレクションから項目を削除します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob1wxc.htm"><B>Contents.RemoveAll</B></A></TD>
+<TD width=75%><A HREF="/iishelp/iis/htm/asp/vbob1wxc.htm">Contents.RemoveAll</A> メソッドは、Application オブジェクトの Contents コレクションからすべての項目を削除します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob84h7.htm"><B>Lock</B></A></TD>
+<TD width=75%>Lock メソッドは、ほかのクライアントが Application オブジェクトのプロパティを変更できないようにします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/vbob51gr.htm"><B>Unlock</B></A></TD>
+<TD width=75%>Unlock メソッドは、ほかのクライアントが Application オブジェクトのプロパティを変更できるようにします。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>イベント</H6>
+
+<TABLE border=0 cellpadding=5 cols=1 frame=box rules=rows>
+
+<TR VALIGN="top">
+<TD width=100%><A HREF="/iishelp/iis/htm/asp/glob6zc4.htm"><B>Application_OnEnd</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=100%><A HREF="/iishelp/iis/htm/asp/glob4f78.htm"><B>Application_OnStart</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<P>これらのイベントに対応するスクリプトは、Global.asa ファイルで宣言されています。これらのイベントおよび Global.asa ファイルの詳細については、「<A HREF="/iishelp/iis/htm/asp/glob63vp.htm">Global.asa リファレンス</A>」を参照してください。</P>
+
+<H6>解説</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob3z77.htm">Application コレクション</A>には値を格納できます。Application コレクションに格納されていえる情報はアプリケーションを通じて利用でき、アプリケーション スコープを持ちます。次のスクリプトは、2 種類の変数を格納します。</P>
+
+<PRE><CODE>&lt;% 
+Application("greeting") = "Welcome to My Web World!"
+Application("num") = 25
+%&gt;
+ </CODE></PRE>
+
+<P>これらの変数はそれぞれ <A HREF="/iishelp/iis/htm/asp/vbob129a.htm">Application Contents コレクション</A>のメンバになります。</P>
+
+<P>アプリケーション スコープを持つ変数にコンポーネントのインスタンスを割り当てることもできます。コンポーネントのインスタンスを Server.CreateObject メソッドを使用して変数に割り当てた場合は、この変数は Application.Contents コレクションのメンバになります。&lt;OBJECT&gt; タグを使用して変数に割り当てた場合は、この変数は <A HREF="/iishelp/iis/htm/asp/vbob5uem.htm">Application StaticObjects コレクション</A>のメンバになります。</P>
+
+<P>コンポーネントによってはアプリケーション スコープを持つように設計されていないものがあるので、アプリケーション スコープを持つ変数にコンポーネントのインスタンスを割り当てる場合は注意が必要です。詳細については、Platform SDK を参照してください。</P>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob129a.htm">Application Contents コレクション</A>内の変数にコンポーネントのインスタンスを割り当てる際に、主要スクリプト言語として Visual Basic<sup>&reg;</sup> Scripting Edition (VBScript) を使用する場合は、Set キーワードを使用する必要があります。このスクリプト例を次に示します。</P>
+
+<PRE><CODE>&lt;% Set Application("Obj1") = Server.CreateObject("MyComponent") %&gt;
+ </CODE></PRE>
+
+<P>この後、次のようにして <CODE>MyComponent</CODE> のメソッドとプロパティを後続の Web ページ上で参照することができます。</P>
+
+<PRE><CODE>&lt;% Application("Obj1").MyObjMethod %&gt;
+ </CODE></PRE>
+
+<P>または、オブジェクトのローカル コピーを取り出して次のようにすることもできます。</P>
+
+<PRE><CODE>&lt;% 
+Set MyLocalObj1 = Application("Obj1") 
+MyLocalObj1.MyObjMethod
+%&gt;
+ </CODE></PRE>
+
+<P>アプリケーション スコープを持つオブジェクトを作成する方法には、Global.asa ファイルで &lt;OBJECT&gt; タグを使用する方法もあります。詳細については、「<A HREF="/iishelp/iis/htm/asp/glob63vp.htm">Global.asa リファレンス</A>」を参照してください。</P>
+
+<P>Application オブジェクトに組み込みオブジェクトを格納することはできません。たとえば、次のようなスクリプトはすべてエラーを返します。</P>
+
+<PRE><CODE>&lt;%
+Set Application("var1") = Session
+Set Application("var2") = Request
+Set Application("var3") = Response
+Set Application("var4") = Server
+Set Application("var5") = Application
+Set Application("var6") = ObjectContext
+%&gt;
+ </CODE></PRE>
+
+<P>アプリケーション スコープを与えるコンポーネントで使用されているスレッド モデルには注意が必要です。コンポーネントのインスタンスを Application コレクションの任意のコレクション内の変数に割り当てる必要があるかどうかは、コンポーネントの開発に使用したスレッド モデルによって左右されます。 </P>
+
+<P>Application オブジェクトに配列を格納する場合は、配列に格納されている要素を直接変更しないようにしてください。たとえば、次のようなスクリプトは正しく機能しません。</P>
+
+<PRE><CODE>&lt;% Application("StoredArray")(3) = "new value" %&gt;
+ </CODE></PRE>
+
+<P>これは、Application オブジェクトがコレクションとして実装されているためです。この場合、新しい値は、配列要素 <CODE>StoredArray(3)</CODE> に設定されるのではなく、Application オブジェクト コレクションに含まれることになり、その場所に格納されていた情報はすべて上書きされてしまいます。</P>
+
+<P>このため、Application オブジェクトに配列を格納する場合は、配列のコピーを取得してからその要素の取得や変更を行うようにしてください。そして、配列の操作が終わった時点でもう一度 Application オブジェクトに配列を格納し、変更内容が保存されるようにします。以上の操作の例を次に示します。</P>
+
+<PRE><CODE>---file1.asp---
+&lt;%
+'Creating and initializing the array.
+dim MyArray()
+Redim MyArray(5)
+MyArray(0) = "hello"
+MyArray(1) = "some other string"
+
+'Storing the array in the Application object.
+Application.Lock
+Application("StoredArray") = MyArray
+Application.Unlock
+
+Server.Transfer("file2.asp")
+%&gt;
+
+---file2.asp---
+&lt;%
+'Retrieving the array from the Application Object
+'and modifying its second element.
+LocalArray = Application("StoredArray")
+LocalArray(1) = " there"
+
+'Printing out the string "hello there."
+Response.Write(LocalArray(0)&amp;LocalArray(1))
+
+'Re-storing the array in the Application object.
+'This overwrites the values in StoredArray with the new values.
+Application.Lock
+Application("StoredArray") = LocalArray
+Application.Unlock
+%&gt;
+ </CODE></PRE>
+
+<H6>例</H6>
+
+<P>次の例は、アプリケーション変数 <I>NumVisits</I> を使用して、特定のページへのアクセス数を格納します。まず、現在のクライアントだけが <CODE>NumVisits</CODE> にアクセスしたり、値を変更したりできるようにするために、Lock メソッドを呼び出します。その後、ほかのユーザーが Application オブジェクトにアクセスできるように Unlock メソッドを呼び出します。</P>
+
+<PRE><CODE>&lt;%
+Application.Lock
+Application("NumVisits") = Application("NumVisits") + 1
+Application.Unlock
+%&gt; 
+ 
+This application page has been visited 
+&lt;%= Application("NumVisits") %&gt; times!
+ </CODE></PRE>
+
+<P>Application オブジェクトを使用したサンプル .asp ファイルは、Platform SDK の IIS セクションにある <b>ASP Samples</b> または <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> にあります。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

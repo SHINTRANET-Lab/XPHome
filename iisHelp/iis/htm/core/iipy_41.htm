@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[ログを収集する] - [全般のプロパティ]</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[ログを収集する] - [全般のプロパティ]</strong></p>
+
+<p>このダイアログ ボックスは、ログ ファイルの作成および保存方法を指定するときに使用します。</p>
+
+<p><strong>新規ログ期間</strong></p>
+
+<ul>
+<li><strong>[毎時間]</strong>  ログ ファイルが 1 時間ごとに作成されます。</li>
+<li><strong>[毎日]</strong>  ログ ファイルが毎日作成されます。ログの収集は、午前 0 時以降に発生した最初のエントリから開始されます。</li>
+<li><strong>[毎週]</strong>  ログ ファイルが毎週作成されます。ログの収集は、日曜日の午前 0 時以降に最初に発生したエントリから開始されます。</li>
+<li><strong>[毎月]</strong>  ログ ファイルが毎月作成されます。ログの収集は、各月の初日の午前 0 時以降に最初に発生したエントリから開始されます。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;W3C 拡張形式を除くすべてのログ ファイル形式では、&quot;午前 0 時&quot; は現地時間の午前 0 時となります。W3C 拡張形式のログ ファイルでは、特に指定しない限り、&quot;午前 0 時&quot; はグリニッジ標準時 (GMT) の午前 0 時ですが、現地時間の午前 0 時に変更することもできます。</p>
+
+<li><strong>[ファイル サイズを限定しない]</strong>  データは常に同じログ ファイルに追加されます。サイトを停止しないとこのファイルには、アクセスできません。</li>
+<li><strong>[ファイル サイズが次のバイト数に達したとき]</strong>  現在のログ ファイルが所定のサイズに達すると、新しいログ ファイルが作成されます。サイズを指定します。</li>
+</ul>
+
+<p><strong>ログ ファイル</strong></p>
+
+<p>ログ ファイルを保存するディレクトリを入力します。または、[参照] をクリックしてディレクトリを選択します。</p>
+
+<p>[ディレクトリ] ボックスの下にファイル名が表示されます。この名前は、ログ ファイルの形式と、ログの収集の条件によって決まります。</p> 
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

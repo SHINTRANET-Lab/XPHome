@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Execute</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_execute"></A><SUP></SUP>Execute</H4>
+
+<P>Execute メソッドは、.asp ファイルを呼び出し、ASP スクリプトの呼び出しの一部であるかのように処理します。Execute メソッドは、多くのプログラミング言語にあるプロシージャ コールに似ています。 </P>
+
+<H6>構文</H6>
+
+<P>Server.<B>Execute</B>( <I>Path </I>)</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Path</I></DT>
+
+<DD>実行する .asp ファイルの場所を指定する文字列です。<I>Path</I> パラメータには、絶対パスと相対パスのいずれかを指定できます。絶対パスの場合は、呼び出し元の .asp ファイルと同じアプリケーションの ASP スクリプトにマップする必要があります。<I>Path</I> は、実行時に設定される文字列型変数の名前であることもあります。<I>Path</I> パラメータにクエリ文字列を指定することはできません。指定した場合、IIS はエラーを返します。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>Server.Execute メソッドは、複雑なアプリケーションを個別のモジュールに分割する方法を提供します。Server.Execute メソッドを使用すると、必要に応じて呼び出すことができる .asp ファイルのライブラリを作成できます。この方法は、サーバー側インクルードに代わるものです。両者の一番大きな違いは、Server.Execute では .asp ファイルを動的に呼び出すことができるという点です。</P>
+
+<P>Server.Execute の入力パラメータで指定した .asp ファイルが IIS によって処理されると、呼び出し元の ASP スクリプトに応答が返されます。</P>
+
+<P>実行される .asp ページで使用可能なコレクションおよびプロパティは、次のとおりです。
+
+<UL type=disc>
+	<LI>アプリケーション変数。呼び出し元ページで設定されている場合も可。</li>
+
+	<LI>Session プロパティ。呼び出し元ページで設定されている場合も可。</li>
+
+	<LI>サーバー変数およびプロパティ。呼び出し元ページで設定されている場合も可。</li>
+
+	<LI>Request コレクションおよびプロパティ。呼び出し元ページで設定されている場合も可。呼び出し元ページに渡される Form および QueryString データも含みます。</li>
+
+	<LI>Response コレクションおよびプロパティ。実行される .asp ファイルは HTTP ヘッダーを変更することができます。ただし、ほかの .asp ファイルと同じように、実行される .asp ファイルが、クライアントへの応答が送られた後で HTTP ヘッダーを変更しようとすると、エラーが発生します。</li>
+</UL>
+
+<P>#include によって呼び出し元ページにインクルードしたファイルは、実行される .asp では認識されません。&nbsp;たとえば、呼び出し元ページにインクルードしたファイルにサブルーチンがあっても、実行される .asp ではそのサブルーチン名が認識されません。&nbsp;サブルーチンを認識させるには、実行されるそれぞれの .asp にファイルをインクルードする必要があります。</P>
+
+<P>呼び出し元または呼び出し先の .asp ファイルのいずれかに、トランザクション ディレクティブが含まれている場合、トランザクションの状態はディレクティブを含む方の .asp ファイルに適用されます。たとえば、次の例では、ASP1 が ASP2 を呼び出しています。ASP2 の処理中にトランザクションが中止された場合、ASP2 の OnTransactionAbort (存在する場合) が呼び出されます。ASP2 の処理が完了すると、ASP1 の OnTransactionAbort (存在する場合) が呼び出されます。</P>
+
+<PRE><CODE>ASP1:
+&lt;%@ Transaction=Required %&gt;
+&lt;% 
+  Server.Execute ("ASP2.asp") 
+  Sub OnTransactionAbort
+  Sub OnTransactionCommit
+%&gt;
+
+ASP2.asp:
+&lt;%@ Transaction=Required %&gt;
+&lt;%
+  Sub OnTransactionAbort
+  Sub OnTransactionCommit
+%&gt;
+</CODE></PRE>
+
+<H6>例</H6>
+
+<P>次の例では、ブラウザの言語によって実行する .asp ファイルが決定します。英語 (US) システムの場合、スクリプトの出力は次のようになります。</P>
+
+<P>Company Name</P>
+
+<P>Welcome to my website!</P>
+
+<P>ドイツ語システムの場合、スクリプトの出力は次のようになります。</P>
+
+<P>Company Name</P>
+
+<P>Willkommen zu meinem website!</P>
+
+<P>スペイン語システムの場合、スクリプトの出力は次のようになります。</P>
+
+<P>Company Name</P>
+
+<P>Recepci? a mi website!</P>
+
+<P>(コードページに互換性がないため、この例ではマルチバイト系文字の言語は取り上げていません。)</P>
+
+<P><B>Welcome.asp</B></P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;BODY&gt;
+&lt;H1&gt;Company Name&lt;/H1&gt;
+&lt;%
+  AcceptLang = Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")
+  Lang = Left(AcceptLang, 2)
+  Server.Execute(Lang &amp; "Welcome.asp")
+%&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<P><B>enWelcome.asp</B></P>
+
+<PRE><CODE>&lt;% Response.Write "Welcome to my website!" %&gt;
+</CODE></PRE>
+
+<P><B>deWelcome.asp</B></P>
+
+<PRE><CODE>&lt;% Response.Write "Willkommen zu meinem website!" %&gt;
+</CODE></PRE>
+
+<P><B>esWelcome.asp</B></P>
+
+<PRE><CODE>&lt;% Response.Write "Recepcion a mi website!" %&gt;
+</CODE></PRE>
+
+<H6>対象</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A></P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob9waa.htm"><B>Transfer</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob7z78.htm"><B>OnTransactionAbort</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob1n04.htm"><B>OnTransactionCommit</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

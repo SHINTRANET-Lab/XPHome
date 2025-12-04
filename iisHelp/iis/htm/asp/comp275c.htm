@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP で利用可能なコンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_installable_components_for_asp"></a>ASP で利用可能なコンポーネント</H1>
+
+<P>Active Server Pages (ASP) に含まれるサーバー コンポーネントをスクリプト内で使用することで、動的で対話的な Web ページを作成できます。ここでは、これらのコンポーネントに関する説明とその例を示します。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp59f8.htm">Ad Rotator コンポーネント</A></TD>
+<TD width=64%>AdRotator オブジェクトを作成します。このオブジェクトは、指定されたスケジュールに従って、ページに表示する広告を自動的に交換します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp3xx0.htm">Browser Capabilities コンポーネント</A></TD>
+<TD width=64%>BrowserType オブジェクトを作成します。このオブジェクトは、Web サイトにアクセスする各ブラウザの機能、種類、およびバージョンを判別します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp7pmc.htm">Content Linking コンポーネント</A></TD>
+<TD width=64%>NextLink オブジェクトを作成します。このオブジェクトは、Web ページの目次を作成し、書籍のページのように Web ページを連続的にリンクします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp09dg.htm">Content Rotator コンポーネント</A></TD>
+<TD width=64%>Web ページ上の HTML コンテンツ文字列を自動的に交換します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp3790.htm">Counters コンポーネント</A></TD>
+<TD width=64%>Counters オブジェクトを作成します。このオブジェクトは、個々のカウンタの作成、格納、インクリメント、および取得を実行できます。カウンタの数に制限はありません。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp2m0k.htm">Database Access コンポーネント</A></TD>
+<TD width=64%>ActiveX<sup>&reg;</sup> Data Objects (ADO) を使用したデータベースへのアクセスを提供します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp5h4k.htm">File Access コンポーネント</A></TD>
+<TD width=64%>ファイル入出力へのアクセスを提供します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp6i5w.htm">IISLog コンポーネント</A></TD>
+<TD width=64%>IIS が生成する HTTP アクティビティ ログ ファイルを読み取ることができます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp00vo.htm">Page Counter コンポーネント</A></TD>
+<TD width=64%>Web ページが開かれた回数を数えて表示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp3hf8.htm">Permission Checker コンポーネント</A></TD>
+<TD width=64%>Microsoft<sup>&reg;</sup> インターネット インフォメーション サービス (IIS) が提供するパスワード認証プロトコルを使用して、Web ユーザーにファイルを読み取る権限があるかどうかを判別します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp1qt0.htm">Status コンポーネント</A></TD>
+<TD width=64%>Status オブジェクトを作成します。このオブジェクトは、サーバー ステータス情報を含んだプロパティを持ちます。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=36%><A HREF="/iishelp/iis/htm/asp/comp7g8k.htm">Tools コンポーネント</A></TD>
+<TD width=64%>Tools オブジェクトを作成します。このオブジェクトは、高度な機能を簡単に Web ページに追加するためのユーティリティを提供します。</TD>
+</TR>
+</TABLE><BR>
+
+<P>ASP を使用したサーバー スクリプト作成の詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg01v7.htm">Web アプリケーションを開発する</A>」を参照してください。ASP で提供されている組み込みオブジェクトの詳細については、「<A HREF="/iishelp/iis/htm/asp/vbob6zkv.htm">ASP 組み込みオブジェクト</A>」を参照してください。</P>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>このリファレンスの例では、主要スクリプト言語として Microsoft<sup>&reg;</sup> Visual Basic<sup>&reg;</sup> Scripting Edition (VBScript) を使用しています。ただし、ASP スクリプトは、サポートされている任意のスクリプト言語で作成できます。主要スクリプト言語を変更する方法については、「<A HREF="iiwascln.htm">スクリプト言語を使用する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

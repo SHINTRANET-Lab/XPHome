@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>要求をプログラムにリダイレクトする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ブラウザの要求を、プログラムにリダイレクトする方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="redirectingrequeststoaprogram">要求をプログラムにリダイレクトする</a></h1>
+
+<p>特定のディレクトリにある複数のファイルへの要求を、すべて 1 つのプログラムにリダイレクトできます。 これは、リダイレクトの高度な使用方法です。通常は、リダイレクトの変数を使用して、元の URL で指定されているパラメータをプログラムに渡すこともできます。 </p>
+
+<big>要求をプログラムにリダイレクトするには</big><!--</p>--><br>
+
+<ol>
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはディレクトリを選択し、そのプロパティ シートを開きます。</li>
+<li>[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li>[URL へのリダイレクト] をクリックします。</li>
+<li>[リダイレクト先] ボックスに、プログラムの URL と、パラメータをプログラムに渡すために必要なリダイレクトの変数を入力します。</li>
+<p>たとえば、Scripts ディレクトリのスクリプトに対するすべての要求を、要求された URL および URL と共に渡されたパラメータを記録するログ収集プログラムにリダイレクトするには、「<strong>/Scripts/Logger.exe?URL=$V+PARAMS=$P</strong>」と入力します。$V と $P は、リダイレクトの変数です。</p>
+<li>[上で入力した URL] チェック ボックスをオンにし、Web サーバーがリダイレクト先の URL に元のファイル名を追加しないようにします。</li>
+</ol>
+
+<p>リダイレクトの変数の詳細については、「<A HREF="iiabdsk.htm">リダイレクト リファレンス</A>」を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

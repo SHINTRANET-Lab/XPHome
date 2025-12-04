@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR>
+<head>
+
+<title>ASP チュートリアル</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT> 
+
+<link disabled rel="stylesheet" href="cocss.css"> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//-->
+</SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="インタラクティブな ASP のチュートリアルを示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+
+<font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37685983">ASP チュートリアル</a></h1>
+
+<p>
+Microsoft&reg; Active Server Pages (ASP) を使用すると、動的でインタラクティブな Web ページを作成することができます。ASP ページは、クライアントのブラウザに送る前に Web サーバーで処理するスクリプト コマンドを含む Hypertext Markup Language (HTML) ページです。これが、&quot;サーバー側のスクリプト&quot; と呼ばれる理由です。
+</p>
+
+
+
+<P>
+HTML は、Web ページを作成するための最も簡単な言語ですが、静的な Web ページしか作成できません。Web クライアントが Web サーバーの静的 HTML ファイルを要求すると、Web サーバーは、計算を実行することなくクライアントに HTML ファイルを直接送信します (図&nbsp;1)。その後、クライアントのブラウザは、ファイルの HTML コードを処理してコンテンツを表示します。
+</P>
+
+<TABLE align=center>
+<tr><td><IMG src="art/00_01.gif"></td></tr>
+<tr><td>図 1</td></tr>
+</TABLE>
+
+<p>
+VBScript は、ASP ページを作成するための最も簡単な言語です。このチュートリアルのコード サンプルは、比較のために JScript で複製されたサンプル以外はすべて VBScript で作成されています。Web クライアントが Web サーバーの ASP ファイルを要求すると、Web サーバーは ASP エンジンを使用して ASP ファイルを送信します。ASP エンジンでは、すべてのサーバー側のスクリプト コードは実行されるか、HTML コードに変換されます (図&nbsp;2)。変換されたコードは、Web クライアントに送信されます。
+</p>
+
+<TABLE align=center>
+<tr><td><IMG src="art/00_02.gif"></td></tr>
+<tr><td>図 2</td></tr>
+</TABLE>
+
+<p>
+作成が困難な従来の Common Gateway Interface (CGI) アプリケーションとは異なり、ASP は Web アプリケーションの開発プロセスを大幅に簡素化するように設計されています。ASP では、スクリプトを数行追加するだけで、Web ページにデータベースの接続性や、高度なカスタマイズ機能を追加できます。以前は、このような機能を実現するのに PERL や C を習得する必要がありましたが、ASP では Microsoft JScript (ECMA 262 言語仕様を実装した Microsoft の言語)、Microsoft Visual Basic&reg; Scripting Edition&nbsp;(VBScript)、または COM に準拠したスクリプト言語 (JavaScript や PERL など) のように一般的な Web スクリプト言語を使用できます。
+</p>
+<p>ASP ページで Component Object Model (COM) コンポーネントを使用すると、ASP の機能を飛躍的に拡張することができます。COM コンポーネントは、ASP ページから呼び出すことができるコンパイル済みのコードです。COM コンポーネントは DLL としてコンパイルされる、セキュリティで保護されたコンパクトで再利用可能なオブジェクトです。Visual C++、Visual Basic、または COM をサポートするその他の言語で作成できます。
+</p>
+
+<p>
+チュートリアルには、次のモジュールが含まれます。
+</p>
+
+<ul>
+	<li>
+	<B><A href="AspTut01.htm">モジュール 1 : ASP ページの作成</A></B>&nbsp;&nbsp;&nbsp;このモジュールでは、ASP ページを作成して実行し、データを収集するフォームを作成し、データベースに接続し、Microsoft Excel スプレッドシートを表示します。作業を始めるには、HTML ページの作成について多少の知識が必要です。
+	</li> 
+	<li>
+	<B><A href="AspTut02.htm">モジュール 2 : ASP ページでの COM コンポーネントの使用</A></B>&nbsp;&nbsp;&nbsp;このモジュールでは、Active Server Pages にインクルードする COM コンポーネントを使用して絵が切り替わる広告バナーを作成し、Web サイトのトラフィックを記録します。	</li>  
+	<li>
+	<B><A href="AspTut03.htm">モジュール 3 : Web アプリケーション内のセッションの状態を維持する</A></B>&nbsp;&nbsp;&nbsp;このモジュールでは、ASP のセッション状態の保持に使用できるさまざまなメソッドについて学習します。	</li>
+</ul>
+<h2>始める前に</h2>
+<p>
+3 つのモジュールから構成されるこのチュートリアルでは、VBScript を使用した ASP ページの実装に役立つ具体的な手順およびサンプルを示します。チュートリアル サンプルを読み込んで実行するには、IIS が実行されているコンピュータの管理者権限を持っている必要があります。既定の IIS セキュリティ設定でチュートリアルを実行できますが、アクセス違反が発生した場合にはセキュリティ設定の変更が必要になる可能性があります。
+</p>
+
+
+<P>ブラウザで ASP ページを開いたときにエラーが発生した場合は、次の操作を試みてください。
+<ul>
+    <li>
+	テキスト エディタで開かれている ASP ファイルを閉じます。サーバーは、テキスト エディタで開かれている HTML ページを表示できない場合があります。 
+    </li><li>
+	正しい名前と拡張子を持つファイルが <i>x</i>:\InetPub\Wwwroot\Tutorial に存在することを確認してください。
+    </li><li>
+	ブラウザのアドレス バーに入力した URL のスペルを確認し、必要に応じて修正します。URL は http://localhost/Tutorial/<i>MyFile</i>.asp または http://<i>ComputerName</i>/Tutorial/<i>MyFile</i>.asp のような形になっている必要があります。&nbsp;
+    </li><li>
+	Web サーバーが稼動していることを確認します。アドレス バーに「<a href="http://localhost/localstart.asp">http://localhost/localstart.asp</a>」と入力することによって簡単に確認できます。&quot;ページを表示できません&quot; というエラーが返された場合、Web サービスが実行されていない可能性があります。Web サービスを起動するには、[スタート] ボタンをクリックし、[ファイル名を指定して実行] をクリックします。次に [名前] ボックスに「cmd」と入力します。コマンド ウィンドウで、「net start w3svc」と入力します。 
+    </li>
+</ul>
+問題が解決しない場合、発生しているエラーは一般的なエラーではありません。ブラウザに表示されるエラーを注意して読み、エラーの原因を判別できるかどうかを調べます。可能性のあるエラーとその説明を次に示します。
+
+<ul>
+<li><B>サーバー エラー</B>&nbsp;&nbsp;&nbsp;エラーの原因は IIS です。</li>
+<li><B>VBScript</B> または <B>JScript エラー</B>&nbsp;&nbsp;&nbsp;おそらくコーディング エラーです。</li>
+<li><B>ADODB</B>&nbsp;&nbsp;&nbsp;データベースに問題がある可能性があります。</li>
+<li><B>セキュリティ</B>および<B>アクセス拒否</B>&nbsp;&nbsp;&nbsp;これらのエラーは難解です。ファイルおよびフォルダのアクセス権、特にデータを変更する場合は、読み取り/書き込みアクセスを必要とするデータベース ファイルのアクセス権を確認する必要があります。</li></ul>
+<P>
+Web アクセス権は IIS の <a href="../core/iiabuti.htm">IIS スナップイン</a>で設定します。ただし、これらのアクセス権は、特定のファイルおよびフォルダの NTFS のアクセス権によって変更されることがあります。IIS で Web サイトへのユーザー アクセスを許可しても、NTFS ファイルのアクセス権が ASP ファイルやデータベース ファイルに対するアクセスを拒否する場合、Web ユーザーはそのファイルを表示できません。匿名認証を使用する場合、IWAM_<i>ComputerName</i> および IUSR_<i>ComputerName</i> アカウントへのアクセスを許可するように NTFS のアクセス権を設定する必要があります。セキュリティとアクセス権の設定については IIS のオンライン ヘルプを、NTFS セキュリティについては <a href="http://www.microsoft.com/japan/technet/iis/default.asp" target="_blank">TechNet の IIS の記事</a>を参照してください。
+</P>
+
+<p>         
+IIS のインストールをカスタマイズしていない場合は、既定のディレクトリとして <i>x</i>:\Inetpub\Wwwroot が作成されます。<i>x</i> は Windows がインストールされているドライブです。<i>x</i>:\Inetpub\Wwwroot で、Tutorial というディレクトリを作成します。各モジュールの演習では、作業を <i>x</i>:\Inetpub\Wwwroot\Tutorial ディレクトリに保存します。Web ブラウザで「http://localhost/Tutorial/<i>file_name.asp</i> (<i>file_name.asp</i> は表示するファイルの名前)」と入力し、ブラウザに作業結果を表示します。</P> 
+
+<p>
+Web ページにエラーがある場合、既定では Internet Explorer で一般的なメッセージを表示します。Internet Explorer で詳細なエラー メッセージを表示するには、IIS から送信されるエラーを回避する Internet Explorer の機能を無効にします。Internet Explorer で、[ツール] メニューをクリックし、[インターネット オプション] をクリックします。[詳細設定] タブをクリックし、[HTTP エラー メッセージを簡易表示する] チェック ボックスをオフにします。
+</p>
+
+
+<p>
+関連するその他の項目
+</p>
+
+<ul>
+	<li>
+	VBScript および JScript の言語の詳細な情報、つまり ASP スクリプトの作成に関する説明については、「<A href="iiwawelc.htm">Active Server Pages</A>」または <A href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Windows Script Technologies の Web サイト</A> を参照してください。
+	</li> 
+	<li>すべての組み込み ASP オブジェクトの詳細については、「<A href="iiwaobb.htm">組み込み ASP オブジェクト</A>」を参照してください。
+	</li>
+</ul> 
+  
+<p>&nbsp;</p> 
+  
+
+<hr class="iis" size="1">
+<p align="center">
+<em><A href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation. All rights reserved.</A></em>
+</p>
+
+</font>
+
+</body>
+</html>

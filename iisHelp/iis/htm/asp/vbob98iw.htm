@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>MapPath</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_mappath"></A><SUP></SUP>MapPath</H4>
+
+<P>MapPath メソッドは、指定された相対パスや仮想パスを、サーバー上の対応する物理ディレクトリにマップします。</P>
+
+<H6>構文</H6>
+
+<P>Server.<B>MapPath</B>( <I>Path</I> )</P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Path</I></DT>
+
+<DD>物理ディレクトリにマップする相対パスまたは仮想パスを指定します。<i>path</i> にスラッシュ (/) または円記号 (\) で始まるパスを指定した場合、MapPath メソッドは、<i>path</i> を仮想フルパスであるとみなした場合のパスを返します。<i>path</i> にスラッシュまたは円記号以外の文字で始まるパスを指定した場合、MapPath メソッドは、処理中の .asp ファイルのディレクトリからの相対パスを返します。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>MapPath メソッドでは、返されるパスが有効であるかどうか、またサーバー上に存在するかどうかはチェックされません。Session.OnEnd イベントおよび Application.OnEnd イベントでは、MapPath が使用できません。</P>
+
+<P>MapPath メソッドは、指定されたディレクトリが現在存在しているかどうかにかかわらず、パスをマップします。このため、MapPath メソッドを使用してパスを物理ディレクトリ構造にマップしてから、指定されたディレクトリやファイルをサーバー上に作成するコンポーネントにそのパスを渡すことができます。</P>
+
+<P>セキュリティ上の理由から、<A HREF="/iishelp/iis/htm/asp/apro00vn.htm">AspEnableParentPaths</A> プロパティの既定値は FALSE に設定されています。<A HREF="/iishelp/iis/htm/asp/apro00vn.htm">AspEnableParentPaths</A> が TRUE に設定されない限り、スクリプトから物理ディレクトリ構造にアクセスすることはできません。</P>
+
+<H6>例</H6>
+
+<P>次のスクリプト例で、ファイル data.txt は C:\Inetpub\Wwwroot\Script というディレクトリにあります。 また、次のスクリプトが記述されている test.asp というファイルも同じディレクトリにあります。C:\Inetpub\Wwwroot ディレクトリは、サーバーのホーム ディレクトリとして設定されています。</P>
+
+<P>次の例は、サーバー変数 <CODE>PATH_INFO</CODE> を使用して現在のファイルの物理パスをマップします。 </P>
+
+<PRE><CODE>&lt;%= Server.MapPath(Request.ServerVariables("PATH_INFO"))%&gt;&lt;BR&gt;
+ </CODE></PRE>
+
+<P>このスクリプトの出力は、次のようになります。</P>
+
+<PRE><CODE>c:\inetpub\wwwroot\script\test.asp&lt;BR&gt;
+ </CODE></PRE>
+
+<P>次の例のパス パラメータはスラッシュまたは円記号で始まっていないため、現在のディレクトリ (ここでは C:\Inetpub\Wwwroot\Script) からの相対パスとしてマップされます。 </P>
+
+<PRE><CODE>&lt;%= Server.MapPath("data.txt")%&gt;&lt;BR&gt;
+&lt;%= Server.MapPath("script/data.txt")%&gt;&lt;BR&gt;
+ </CODE></PRE>
+
+<P>以上のスクリプトの出力は、次のようになります。</P>
+
+<PRE><CODE>c:\inetpub\wwwroot\script\data.txt&lt;BR&gt;
+c:\inetpub\wwwroot\script\script\data.txt&lt;BR&gt;
+ </CODE></PRE>
+
+<P>次の 2 つの例は、スラッシュまたは円記号を使い、返されるパスがサーバー上の完全な仮想パスを参照するように指定します。 </P>
+
+<PRE><CODE>&lt;%= Server.MapPath("/script/data.txt")%&gt;&lt;BR&gt;
+&lt;%= Server.MapPath("\script")%&gt;&lt;BR&gt;
+ </CODE></PRE>
+
+<P>以上のスクリプトの出力は、次のようになります。</P>
+
+<PRE><CODE>c:\inetpub\wwwroot\script\data.txt&lt;BR&gt;
+c:\inetpub\wwwroot\script&lt;BR&gt;
+ </CODE></PRE>
+
+<P>次の例は、スラッシュ (/) または円記号 (\) を使用して、Web サイトのルートにおけるホーム ディレクトリの物理パスを返す方法を示しています。 </P>
+
+<PRE><CODE>&lt;%= Server.MapPath("/")%&gt;&lt;BR&gt;
+&lt;%= Server.MapPath("\")%&gt;&lt;BR&gt;
+</CODE></PRE>
+
+<P>以上のスクリプトの出力は、次のようになります。</P>
+
+<PRE><CODE>c:\inetpub\wwwroot&lt;BR&gt;
+c:\inetpub\wwwroot&lt;BR&gt;
+</CODE></PRE>
+
+<P>次の例は、相対パスを使用して、Web ブラウザで表示されているページへの相対物理パスを返す方法を示しています。</P>
+
+<PRE><CODE>&lt;%= Server.MapPath("../")%&gt;&lt;BR&gt;
+&lt;%= Server.MapPath("..\")%&gt;&lt;BR&gt;
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A> </P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/apro00vn.htm">AspEnableParentPaths</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

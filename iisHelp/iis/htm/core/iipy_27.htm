@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=shift_jis">
+<title>[この Web サイトの複数の ID]</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<!--
+<SCRIPT LANGUAGE="JavaScript">
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+</script>
+-->
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック"><p>
+<b>[この Web サイトの複数の ID]</b></p>
+
+<p>このダイアログ ボックスは、Web サイトのそのほかの識別情報を構成するために使用します。</p>
+
+<p>[追加] または [削除] をクリックすると、一覧表示された識別情報を追加または削除できます。既存の識別情報を編集するには、IP アドレスを選択して、[IP アドレス]、[TCP ポート]、[SSL ポート]、または [ホスト ヘッダー名] のうち、必要なフィールドを編集します。</p>
+
+<p>各 Web サイトには、一意の識別特性の組み合わせを設定する必要があります。このため、複数の Web サイトでは、3 つの識別特性 (ドメインまたはホスト ヘッダー名、IP アドレス、およびポート) のうち 2 つまでを共有できますが、1 つは異なるものでなければなりません。また、SSL の証明書にはドメイン名が含まれるので、証明書を使用する Web サイトでは、ほかの Web サイトと IP アドレスを共有できません。</p>
+
+<p><b>[SSL ポート]</b></p>
+
+<p>Secure Sockets Layer (SSL) 接続を確立するときに使用するポートを指定します。</p>
+
+<p>Web サーバーの既定の Web サイトでは、このポートは 443 に設定されています。新しい Web サイトを作成する場合は、このポートを明示的に設定する必要があります。SSL ポートの値は、一意で任意の TCP ポート番号に変更できますが、あらかじめユーザーにそのポート番号を知らせておく必要があります。そうしないと、ユーザーはサーバーに接続できなくなります。このオプションを利用できるのは、サーバー証明書がインストールされている場合だけです。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</BODY>
+</HTML>

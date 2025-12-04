@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>CGI アプリケーションを構成する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サーバーに CGI アプリケーションをインストールし、構成する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="configuringcgiapplications">CGI アプリケーションを構成する</a></h1>
+
+<p>インターネット インフォメーション サービスは、CGI アプリケーションをサポートしています。ここでは、Web サーバーへの CGI アプリケーションのインストールと構成に関する管理上の情報について説明します。CGI アプリケーションのプログラミングに関する一般的な情報については、Microsoft の  <a href="http://www.microsoft.com/japan/developer/default.asp" target="_blank">MSDN Online Library</a> を参照してください。</p>
+
+<p> Web サーバーが、CGI プログラム名およびプログラムに必要なパラメータを含む URL を受け取ると、CGI プログラムが実行されます。CGI プログラムをコンパイルして実行可能ファイル (.exe) にする場合は、プログラムを置くディレクトリに実行アクセス権を設定し、ユーザーがプログラムを実行できるようにする必要があります。Perl スクリプトなどのスクリプトとして CGI プログラムが記述されている場合は、ディレクトリに実行アクセス権またはスクリプト アクセス権を設定します。スクリプト アクセス権を使用するには、スクリプトのインタプリタがスクリプト エンジンとして設定されていなければなりません。</p>
+
+<p>CGI アプリケーションを新たに開発しようとする場合、いくつかの選択肢が用意されています。実行の速さが求められる場合は、CGI の代わりに ISAPI 拡張機能の使用が考えられます。開発の容易さを重視する場合は、ASP アプリケーションの使用が考えられます。ASP は、HTTP ヘッダーの解析など、CGI アプリケーションの作成に伴う作業の多くを処理するため、経験の浅いプログラマやスクリプト作成者には特に魅力的な手法です。詳細については、「<a href="../asp/iiwawelc.htm">Active Server Pages</a>」を参照してください。</p>
+
+<big>CGI アプリケーションをインストールして構成するには</big><br>
+
+<ol>
+<li>CGI プログラム用のディレクトリをセットアップします。セキュリティを強化するには、CGI プログラムとコンテンツ ファイルを分ける必要があります。ディレクトリには、Cgi-bin という名前を付けることもできますが、必須ではありません。詳細については、「<a href="iicodirv.htm">仮想ディレクトリを作成する</a>」を参照してください。</li>
+
+<li>CGI プログラムがスクリプトである場合は、適切なスクリプト インタプリタを入手してインストールします。たとえば、Perl スクリプトを実行するには、Perl インタプリタが必要です。</li>
+
+<p>Windows のオペレーティング システムでは、Perl、SED、および AWK を提供していません。インタプリタは、サード パーティの開発元から入手できます。</p>
+
+<li>CGI プログラムが .exe ファイルである場合は、ディレクトリに実行アクセス権を設定します。CGI プログラムがスクリプトの場合は、ディレクトリに実行アクセス権またはスクリプト アクセス権を設定します。詳細については、「<a href="iiaclsc.htm">アクセス制御</a>」を参照してください。</li>
+
+<p>スクリプト アクセス権を指定する場合は、ディレクトリのプロパティ シートで、スクリプトのインタプリタをスクリプト エンジンとして指定する必要があります。ディレクトリ内で実行できるのは、スクリプト エンジンとして指定されているインタプリタだけです。実行可能ファイル (.dll ファイルと .exe ファイル) を直接実行することはできません。 つまり、URL にプログラム名を入れてブラウザ要求を行っても、&quot;Web サーバー上の&quot; 実行可能ファイルを起動することはできません。[スクリプト エンジン] オプションでスクリプト アクセス権を有効にすれば、コンテンツ ファイル (.htm ファイルや .gif ファイルなど) と CGI スクリプトを同じディレクトリに安全に格納できます。この場合、コンテンツ ファイルはブラウザに表示され、スクリプトは実行されますが、無許可のプログラムを実行したり、スクリプト コマンドをブラウザに表示したりすることはできません。 <!--</p>--><br>
+
+<p><strong><font color="Blue">重要</font></strong>&nbsp;&nbsp;&nbsp; </span></strong>&nbsp;&nbsp;&nbsp;実行可能ファイルを含むディレクトリに、読み取りアクセス権が設定されている場合、サイトの利用者は実行可能ファイルをダウンロードして実行することができます。セキュリティを考慮して、実行可能ファイルは、読み取りアクセス権が設定されていない別のディレクトリに配置することをお勧めします。 <br> 
+
+<li>CGI スクリプトを使用する場合は、スクリプトのファイル名の拡張子とスクリプト インタプリタの間のアプリケーション マッピングを作成します。</li>
+
+<p>インターネット インフォメーション サービスは、ファイル名の拡張子をインタプリタにマップします。たとえば、拡張子が .pl のファイルに格納されている Perl スクリプトを使用する場合は、Perl スクリプトを実行するプログラムに拡張子 .pl をマップします。拡張子が .bat および .cmd のファイルは、コマンド インタプリタ (Cmd.exe) にマップします。詳細については、「<a href="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。<br>
+
+<li>NTFS のアクセス権を設定します。</li>
+<p>INTFS のアクセス権を使用する場合は、プログラムを実行するすべてのユーザーに、ディレクトリに対する実行アクセス権を与える必要があります。匿名ユーザーを受け付ける Web サイトでは、匿名ユーザー (IUSR_<em>computername</em> アカウント) に、実行アクセス権を与えます。<br>
+
+</ol>
+
+<p>インターネット インフォメーション サービスは、標準のサーバー環境変数の大部分をサポートしています。 </p>
+
+<p>リモート サーバーで実行中の Cmd.exe にマップされているスクリプトに別のスクリプトからアクセスする場合、既定の実行時ディレクトリは、ローカル コンピュータ上の %SYSTEM32% に設定されます。%SYSTEM32% の既定値は、Windows&nbsp;2000 以降では \Winnt\System32、Windows&nbsp;95 以降では \Win95\System です。</p>
+
+<p>セキュリティ強化のため、Web サーバーは、マップされている CGI アプリケーションにコマンド インタプリタの特殊文字を渡しません。既定では、CGI アプリケーションを呼び出す URL で次の文字を使うことはできません。</p>
+
+<pre>| ( , ; % &lt; &gt;</pre>
+
+<p>お勧めはできませんが、レジストリの <strong>AllowSpecialCharsInShell</strong> の値を変更すれば、一部の特殊文字を使用できるようになります。詳細については、「<a href="iiregwww.htm">WWW サービスのレジストリ エントリ</a>」を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC
+</layer></span>
+
+</font>
+</body>
+</html>

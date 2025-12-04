@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[エラー メッセージ] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック"><p>
+
+<strong>[エラー メッセージ] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、Web サーバー エラーが発生した場合に、クライアントに送信される HTTP エラーをカスタマイズするために使用します。管理者は、標準の HTTP 1.1 エラーを使用できます。これは IIS が提供する詳細なカスタム エラー ファイルです。また、管理者は独自にカスタム エラー ファイルを作成することもできます。</p>
+
+<p>カスタム エラー メッセージのプロパティを変更するには、HTTP エラーを選択し、[種類] 列の、[既定]、[ファイル]、または [URL] をクリックします。</p>
+
+<p>[既定] を選択した場合は、標準の HTTP 1.1 エラーがクライアントに返されます。既定の HTTP 1.1 エラーのテキストが [コンテンツ] 列に表示されます。</p>
+
+<p>[ファイル] を選択した場合は、カスタム エラー ファイルのローカル パスを入力します。</p>
+
+<p>[URL] を選択した場合は、<em>/virdir1/errors/404.htm</em> などの仮想ディレクトリ名で始まる URL へのパスを入力します。この URL は、ローカル サーバーになければなりません。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

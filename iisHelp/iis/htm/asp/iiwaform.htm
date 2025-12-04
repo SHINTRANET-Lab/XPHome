@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ユーザーからの入力を処理する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<META NAME="DESCRIPTION" CONTENT="ASP の Request オブジェクトを使用して、HTML フォームから取得したデータの収集および処理を行うスクリプトの作成の方法について説明します。また、フォーム情報の処理を行う基本的なスクリプトの作成方法と、サーバーとブラウザ双方の、フォーム データの検証方法について説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37773245">ユーザーからの入力を処理する</a></h1>
+
+
+<p>ASP の <A HREF="vbob5ulw.htm">Request</A> オブジェクトを使用すると、HTML フォームから取得したデータの収集および処理を行う強力なスクリプトを簡単に作成できます。ここでは、基本的なフォーム処理スクリプトの作成方法に加え、Web サーバーとユーザーのブラウザの両方でフォーム情報を確認するための便利なテクニックについて学びます。</p>
+
+<h2><a name="H2_37773883">HTML フォームについて</a></h2>
+
+<p>Web ベースの情報を収集するための最も一般的な方法である HTML フォームは、Web ページ上にユーザー インターフェイスの要素を表示する特別な HTML タグを組み合わせたものです。ユーザーが Web ページと対話して Web サーバーに情報を送信できるようにする要素には、テキスト ボックス、ボタン、チェック ボックスなどがあります。</p>  
+
+<p>たとえば、次の HTML のタグでは、ユーザーが姓名と年齢を入力できるフォームを生成します。 このフォームには、情報を Web サーバーに送信するためのボタンが含まれています。また、追加情報を Web サーバーに渡すための隠し入力タグ (Web ブラウザには表示されないコントロール) も含まれています。</p>
+
+<pre>&lt;FORM METHOD=&quot;Get&quot; ACTION=&quot;Profile.asp&quot;&gt;
+&lt;INPUT TYPE=&quot;Text&quot; NAME=&quot;FirstName&quot;&gt; 
+&lt;INPUT TYPE=&quot;Text&quot; NAME=&quot;LastName&quot;&gt;
+&lt;INPUT TYPE=&quot;Text&quot; NAME=&quot;Age&quot;&gt;
+&lt;INPUT TYPE=&quot;Hidden&quot; NAME=&quot;UserStatus&quot; VALUE=&quot;New&quot;&gt;
+&lt;INPUT TYPE=&quot;Submit&quot; VALUE=&quot;Enter&quot;&gt;
+&lt;/FORM&gt;</pre>
+
+<p>ここで扱う範囲に HTML フォーム タグ セットの詳しい説明は含まれていませんが、便利で魅力的な HTML フォームの作成方法を学習するときに使用できる情報ソースは数多くあります。たとえば、どのようにほかの Web サイトの HTML フォームが作成されているかを調べる場合は、使用している Web ブラウザのソース表示機能を使用します。また、ほかのインターネット テクノロジにおける HTML フォームの革新的な使用方法については、<a HREF="http://www.microsoft.com/japan/developer/library/default.asp" target="_blank">MSDN Online</a> を参照してください。</p>
+
+<h3><a name="H3_37775553">フォームの入力内容を ASP で処理する</a></h3>
+
+<p>HTML フォームを作成した後は、ユーザーからの入力を処理する必要があります。入力の処理とは、入力された情報を .asp ファイルへ送信し、解析と操作を行うことです。上記の例の HTML コードでは、&lt;FORM&gt; タグの ACTION 属性が Profile.asp というファイルを参照することに注意してください。ユーザーが HTML に情報を入力すると、ブラウザは POST メソッドを使用し、その情報をサーバーにある .asp ファイル、この例では Profile.asp へ送信します。.asp ファイルには、情報を処理し、ほかのスクリプト、COM コンポーネント、またはデータベースなどのリソースと対話するスクリプトを含めることができます。</p>
+
+<p>ASP を使用して HTML フォームの情報を収集するには、次の 3 つの基本的方法があります。</p>
+
+<ul>
+<li>静的な .htm ファイルにフォームを用意し、このフォームが .asp ファイルに値をポストする。 </li>
+<li>.asp ファイルがフォームを作成し、このフォームがほかの .asp ファイルに情報をポストする。 </li>
+<li>.asp ファイルがフォームを作成し、このフォームが元の .asp ファイル自体 (つまりフォームを含む .asp ファイル) に情報をポストする。 </li>
+</ul>
+
+<p>最初の 2 つの方法は、ほかの Web サーバー プログラムと対話するフォームの場合と動作のしくみは同じです。 ただし、ASP を使用する場合は、フォーム情報の収集と処理を行う作業がかなり簡素化されています。3 つ目の方法は特に便利であるため、後の「<a href="#verfyingforminput">フォームの入力内容を確認する</a>」で実際に例を示します。</p>
+
+
+<h2><a name="H2_37776308">フォームの入力内容を取得する</a></h2>
+
+<p>ASP の Request オブジェクトは、URL 要求として一緒に送信されるフォーム情報の取得作業を容易にする 2 つのコレクションを提供しています。</p>
+
+<h3><a name="H3_37776816">QueryString コレクション</a></h3>
+
+<p><A HREF="vbob53hj.htm"><strong>QueryString</strong></A> コレクションは、要求の URL の疑問符 (?) に続く文字列の形で Web サーバーに渡されたフォームの値を取得します。フォームの値を URL に追加するには、HTTP GET メソッドを使用する方法と、URL にフォームの値を手動で追加する方法があります。</p>
+
+<p>たとえば、前のフォームの例で GET メソッド (METHOD="GET") を使用したとします。ユーザーが「Clair」、「Hector」、「30」と入力すると、次の URL 要求がサーバーに送信されます。</p> 
+
+<pre>http://Reskit/Workshop1/Painting/Profile.asp?FirstName=Clair&amp;LastName=Hector&amp;Age=30&amp;UserStatus=New</pre>
+
+<p>Profile.asp には、次のようなフォーム処理スクリプトを記述できます。</p>
+
+<pre>Hello &lt;%= Request.QueryString(&quot;FirstName&quot;) %&gt;&nbsp;&lt;%= Request.QueryString(&quot;LastName&quot;) %&gt;. 
+You are&nbsp;&lt;%= Request.QueryString(&quot;Age&quot;) %&gt;&nbsp;years old!
+
+&lt;%
+  If Request.QueryString(&quot;UserStatus&quot;) = &quot;New&quot; Then 
+    Response.Write &quot;This is your first visit to this Web site!&quot;
+  End if	
+%&gt;</pre>
+
+<p>この場合、Web サーバーは、ユーザーの Web ブラウザに次のテキストを返します。</p>
+
+<pre>Hello Clair Hector. You are 30 years old! This is your first visit to this Web site!</pre>
+
+<p>QueryString コレクションには、GET メソッドを使用し、URL 要求に含まれる複数の値のうちの 1 つにアクセスするときに使用できる省略可能なパラメータもあります。また、Count プロパティを使用して、特定の種類の値が出現する回数を数えることもできます。</p>
+  
+<p>たとえば、複数の項目を持つリスト ボックスを含むフォームでは、次のような要求が作成される場合があります。</p>
+
+<pre>http://Reskit/OrganicFoods/list.asp?Food=Apples&amp;Food=Olives&amp;Food=Bread</pre>
+
+<p>この場合、次のコマンドを使用すると、複数の値を数えることができます。</p>
+
+<pre>Request.QueryString(&quot;Food&quot;).Count</pre>
+
+<p>List.asp に次のスクリプトを記述しておくと、複数の値の種類を表示できます。</p>
+
+<pre>&lt;%
+  lngTotal = Request.QueryString(&quot;Food&quot;).Count
+  For i = 1 To lngTotal
+    Response.Write Request.QueryString(&quot;Food&quot;)(i) &amp; &quot;&lt;BR&gt;&quot;
+  Next
+%&gt;</pre>
+このスクリプトの出力結果は、次のようになります。
+
+<pre>Apples
+Olives
+Bread</pre>
+
+<P>次のスクリプトを使用すると、すべての値の一覧をカンマで区切られた文字列として表示することもできます。</P>
+
+<pre>&lt;% Response.Write Request.QueryString(&quot;Food&quot;) %&gt;</pre>
+
+<p>この出力結果は、次の文字列になります。</p>
+
+<pre>Apples, Olives, Bread</pre>
+
+<h3><a name="H3_37779230">Form コレクション</a></h3>
+
+<p>HTTP GET メソッドを使用して長い複雑なフォームの値を Web サーバーに送信すると、情報が失われる危険性があります。Web サーバーの中には URL クエリ文字列のサイズを制限しているサーバーがあるため、GET メソッドで渡された長いフォームの値が切り捨てられる可能性があります。フォームから大量の情報を Web サーバーに送信する場合は、HTTP POST メソッドを使用する必要があります。POST メソッドは、フォームのデータを HTTP の要求本体の中で送信するので、サーバーに送信できる文字数にほとんど制限はありません。POST メソッドで送信された値は、ASP の Request オブジェクトの <A HREF="vbob4fl9.htm"><strong>Form</strong></A> コレクションを使用して取得できます。</p>
+
+<p>Form コレクションは、QueryString コレクションと同じような方法で値を格納します。たとえば、非常に項目数の多い名前のリストをユーザーがフォームで入力したとすると、これらの名前は次のスクリプトを使用して取得できます。</p>
+
+<pre>&lt;%
+  lngTotal = Request.Form(&quot;Food&quot;).Count
+  For i = 1 To lngTotal 
+   Response.Write Request.Form(&quot;Food&quot;)(i) &amp; &quot;&lt;BR&gt;&quot;
+  Next
+%&gt;</pre>
+
+<h2><a name="verfyingforminput">フォームの入力内容を確認する</a></h2>
+
+<p>優れた設計の Web フォームには、ユーザーが入力した情報をサーバーに送信する前に、入力された情報の妥当性を検査するクライアント スクリプトが含まれていることがよくあります。&quot;入力検査スクリプト&quot; を用意すれば、ユーザーが有効な数値を入力したかどうか、またはテキスト ボックスが空白のままかどうかということをチェックできます。Web サイトに、投資額に対する利益率をユーザーが計算できるフォームが含まれている場合を考えてみます。無効かもしれない情報がサーバーに送信される前に、実際にユーザーが適切なフォーム フィールドに数値情報やテキスト情報を入力したかどうかを確認することができます。</p>
+
+<p>一般に、できるだけフォームの入力検査スクリプトはクライアント側で行うことをお勧めします。クライアント側で入力検査スクリプトを行うと、ユーザーに直ちに入力エラーが知らされるだけではなく、応答時間が速くなり、サーバーの負荷が軽減して、他のアプリケーションに帯域幅が解放されるようになります。</p>
+
+<p>次のクライアント側スクリプトでは、情報をサーバーに送信する前に、ユーザー入力を確認しています (この場合は、ユーザーが入力したアカウント番号が実際に数字であるかどうかをスクリプトが判断します)。</p>
+
+<pre>&lt;SCRIPT LANGUAGE=&quot;JScript&quot;&gt;
+	
+function CheckNumber()
+{			
+ if (isNumeric(document.UserForm.AcctNo.value))
+   return true
+ else
+ {
+   alert(&quot;Please enter a valid account number.&quot;)
+   return false
+ }		
+}
+	
+//Function for determining if form value is a number.
+//Note:  The JScript isNaN method is a more elegant way to determine whether
+//a value is not a number. However, some older browsers do not support this method.
+function isNumeric(str)
+{
+  for (var i=0; i &lt; str.length; i++)
+		{
+    var ch = str.substring(i, i+1)
+    if( ch &lt; &quot;0&quot; || ch&gt;&quot;9&quot; || str.length == null)
+				{
+      return false
+    }
+  }
+  return true
+}	
+&lt;/SCRIPT&gt;
+
+&lt;FORM METHOD=&quot;Get&quot; ACTION=&quot;balance.asp&quot; NAME=&quot;UserForm&quot; ONSUBMIT=&quot;return CheckNumber()&quot;&gt;
+
+	&lt;INPUT TYPE=&quot;Text&quot;   NAME=&quot;AcctNo&quot;&gt;
+	&lt;INPUT TYPE=&quot;Submit&quot; VALUE=&quot;Submit&quot;&gt;
+	
+&lt;/FORM&gt;
+</pre>
+
+<p>ただし、フォームの入力検査スクリプトがデータベースへのアクセスを必要とする場合は、サーバー側でのフォームの入力検査スクリプトを検討する必要があります。サーバー側で入力検査スクリプトを実行する場合に特に有益な方法は、情報をフォーム自体にポストするフォームを作成することです。この場合、実際には .asp ファイルにユーザー入力を取得する HTML フォームが含まれます。(ASP を使用してクライアント側スクリプトおよび HTML と対話できることを思い出してください。詳細については、「<A HREF="iiwabs.htm">クライアント側のスクリプトと対話する</A>」を参照してください)。ユーザーの入力が同じファイルに返されてから、その情報の妥当性が検査され、入力が無効である場合には、ユーザーにエラーが通知されます。</p>  
+
+<p>この方法を使用してユーザー入力の処理および入力検査スクリプトを行うと、Web ベースのフォームの有用性と応答を著しく向上させることができます。たとえば、無効な情報が入力されたフォーム フィールドの近くにエラー情報を表示すると、ユーザーがエラー原因を簡単に発見することができます(通常、Web ベースのフォームは、エラー情報を含んでいる別の Web ページへ要求を転送します。エラー情報を直ちに理解できないユーザーは、不満を感じる可能性があります。)</p>
+
+<p>たとえば、次のスクリプトは、ユーザーが入力したアカウント番号をそのファイル自体 (Verify.asp) にポストし、データベースに照会するユーザー定義関数を呼び出して、ユーザーが有効なアカウント番号を入力したかどうかを判断します。</p>
+
+<pre>&lt;% 
+  strAcct = Request.Form(&quot;Account&quot;)
+  If Not AccountValid(strAcct) Then   
+    ErrMsg = &quot;&lt;FONT COLOR=Red&gt;Sorry, you may have entered an invalid account number.&lt;/FONT&gt;&quot;
+  Else
+    <em>Process the user input</em>
+    .
+    .
+    .	
+    Server.Transfer(&quot;Complete.asp&quot;)
+  End If
+
+  Function AccountValid(strAcct)
+    <em>A database connectivity script or component method call goes here.</em>
+  End Function 
+%&gt;
+
+&lt;FORM METHOD=&quot;Post&quot;  ACTION=&quot;Verify.asp&quot;&gt;   
+Account Number:  &lt;INPUT TYPE=&quot;Text&quot; NAME=&quot;Account&quot;&gt;&nbsp;&lt;%= ErrMsg %&gt;&nbsp;&lt;BR&gt; 
+&lt;INPUT TYPE=&quot;Submit&quot;&gt;			
+&lt;/FORM&gt;</pre>
+
+<p>この例のスクリプトは、Verify.asp という名前のファイル、つまり HTML フォームを含んでいるファイルと同じファイルにあります。 フォームでは、ACTION 属性に Verify.asp を指定して、情報をそれ自体にポストしています。</p> 
+
+
+<p><STRONG><font color="#0000FF">重要</font></STRONG>&nbsp;&nbsp;&nbsp;JScript を使ってサーバー側で妥当性を検査をしている場合、Request コレクションをローカル変数に設定している場合は、Request コレクションの項目 (QueryString または Form のいずれか) の後ろに必ず空のかっこ &quot;()&quot; を付けてください。かっこを付けない場合、コレクションは文字列ではなくオブジェクトを返します。次のスクリプトは、JScript で変数を正しく設定する方法を示しています。</p>
+ 
+<pre>
+&lt;%
+   var Name = Request.Form(&quot;Name&quot;)();
+   var Password = Request.Form(&quot;Password&quot;)();
+
+  if(Name &gt; &quot;&quot;)
+  {
+     if(Name == Password)
+      Response.Write(&quot;Your name and password are the same.&quot;)
+  else
+      Response.Write(&quot;Your name and password are different.&quot;);
+  }
+%&gt;
+</pre>
+ 
+<p>カンマで区切られたり、インデックス付けされている複数の値がコレクションに含まれる場合には、VBScript は同じ動作を実行します。つまり、VBScript および JScript のいずれでも、Request コレクションの項目の後ろに空のかっこ &quot;()&quot; を付けるだけではなく、求める値のインデックスを指定する必要があります。たとえば、次の JScript のスクリプト行では、フォームの要素に対する複数の値の、最初の値のみを返します。</p>
+
+<pre>
+var Name = Request.Form(&quot;Name&quot;)(1);
+</pre> 
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+
+</font>
+</body>
+
+</html>

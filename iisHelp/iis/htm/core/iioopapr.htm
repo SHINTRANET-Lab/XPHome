@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>プロセスの再利用について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="プロセスの再利用の概念、それにより解決される問題、および再利用イベントについて説明します。.">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="AboutProcessRecycling">プロセスの再利用について</a></h1>
+
+<h2><a name="Overview">概要</a></h2>
+<p>IIS を使用すると、アプリケーションを IIS から分離されている DLLHost.exe プロセスでホストされるアウトプロセス (OOP) で実行できます。プロセスの再利用では、COM+ によって構築されたインフラ構造をてこ入れして、これらの OOP アプリケーションのプロセス再利用を実行します。特に、IIS は DLLHost.exe プロセスによってホストされるアプリケーションを再利用することを COM+ に示す手段として、COM+ 内の RecycleProcess() メソッドに依存しています。アプリケーションを再利用するタイミングの詳細については、「<a href="#ProblemsWithApplications">アプリケーションの問題</a>」を参照してください。</p>
+
+<h2><a name="ProblemsWithApplications">アプリケーションの問題</a></h2>
+
+<p>コードが適切に記述されてないと、時間の経過とともに、ループに何かがスタックして CPU に不必要な負荷をかけてアプリケーションのパフォーマンスが低下する場合がしばしばあります。これらのアプリケーションが原因で、アプリケーションが不必要なメモリをオペレーティング システムに戻さないメモリ リークが発生する可能性もあります。これらのアプリケーションによりサーバーに遅延が発生し、サーバーを再起動することが必要になります。プロセス再利用は、これらの問題を解決するために作成されました。</p>
+
+<h2>プロセスの再利用の機能</h2>
+<p>プロセス再利用は、構成された再利用イベントが発生したときにアプリケーションまたはアプリケーション プールを再利用することによって機能します。OOP アプリケーションを再利用する方法は簡単です。IIS が COM+ RecycleProcess() メソッドを呼び出してアプリケーションの DLLhost.exe ホスト プロセスを再利用するよう要求します。再利用イベントが発生したら、次のイベントが発生します。
+
+<ul>
+<li>新しいプロセスが作成されて、再利用されているアプリケーションの新しいアプリケーション要求をサービスします。
+</li>
+<li>再利用されているプロセスに古いアプリケーション要求の処理を完了する時間が与えられます。時間間隔は、<a href="../asp/apro0y44.htm">ShutdownTimeLimit</a> メタベース キーを使用して構成されます。 
+</li>
+<li>ShutdownTimeLimit に達し、古いプロセスがシャットダウンしない場合は、IIS によって古いプロセスが終了されます。
+</li>
+</ul>
+
+<p>COM+ の RecycleProcess の詳細については、COM+ (Component Services) Platform SDK で、キーワード &quot;RecycleProcess&quot; を検索してください。
+
+<h2><a name="PooledAndIsolatedApplications">プールされたアプリケーションと分離されたアプリケーション</a></h2>
+
+<p>アプリケーションは、3 つのうちの 1 つの方法で構成できます。IIS 5.0 では、これらのオプションを説明するために &quot;分離レベル&quot; という用語を導入しました。	分離レベルは、低、中、高の 3 つです。アプリケーションは、<a href="iiabuti.htm">IIS スナップイン</a>を使用して [ホーム ディレクトリ] プロパティ シート上に構成されます。
+
+<ul>
+<li><b>低 (IIS)</b>&nbsp;&nbsp;&nbsp;アプリケーションは、プライマリ IIS プロセスのインプロセスとも呼ばれる inetinfo.exe で実行できます。完全にテストされるまで IIS プロセスでアプリケーションを実行しないでください。このプロセス内で実行するアプリケーションがクラッシュした場合は、IIS とインプロセスで実行するその他のアプリケーションもクラッシュします。インプロセスで実行中のアプリケーションは、再利用されません。</li>
+
+<li><b>中 (プール)</b>&nbsp;&nbsp;&nbsp;プールされたアプリケーションは OOP で実行され、共通 DLLHost.exe プロセスによってホストされます。プロセス再利用は、メタベースの W3SVC レベルのすべてのプールされたアプリケーション用に構成され、プールされたアプリケーションはすべて一緒に再利用されます。</li>
+
+<li><b>高 (分離)&nbsp;&nbsp;&nbsp;</b>分離されたアプリケーションは、OOP で実行され、各アプリケーションは単一の DLLHost.exe プロセスによってホストされます。分離されたアプリケーションは、ほかのアプリケーションとは別に再利用されます。プロセス再利用は、分離されたアプリケーションが存在するメタベースのどのレベルでも構成できます。</li>
+</ul>
+
+<p>プロセス再利用が構成できるメタベースのレベルについては、「<a href="iiooplai.htm">レベルと継承</a>」で説明しています。プロセス再利用の構成については、「<a href="iioopcre.htm">プロセス再利用イベントを構成する</a>」を参照してください。インプロセスまたはアウトプロセスでアプリケーションを実行することに関する詳細については、「<a href="iiwarndc.htm">アプリケーションについて</a>」を参照してください。
+
+<h2><a name="RecyclingEvents">再利用イベント</a></h2>
+
+<p> 再利用イベントを発生させるように構成できるイベントは 3 つあります。3 つのイベントは同時にアクティブにすることができます。構成できるイベントは次のとおりです。</p>
+
+<h3>プロセス再利用イベントの要約</h3>
+次に示すのは、プロセス再利用イベントを発生させるよう構成できるメタベース キー名です。 
+
+<ul>
+<li><strong>Time Created</strong><br> アプリケーションは、設定した時間の間実行した後に再利用されます。このプロパティは、PeriodicRestartTime メタベース キーを使用して構成できます。</li>
+<li> <strong>Number of Requests</strong><br> アプリケーションは、設定した数の要求を受信した後に再利用されます。このプロパティは、PeriodicRestartRequests メタベース キーを使用して構成できます。
+<li><strong>Scheduled Time</strong><br> アプリケーションは、設定した時刻に再利用されます。このプロパティは、PeriodicRestartSchedule メタベース キーを使用して構成できます。</li>
+</ul>
+
+<h3>発生したイベントについて</h3>
+再利用の発生に複数のイベントが使用されると、最初に到達したイベントしきい値により IIS がアプリケーションの DLLhost.exe プロセスを再利用します。PeriodicRestartTime および PeriodicRestartRequests イベントでは、ゼロからメタベース キー内に設定されている値までカウントする内部タイマが使用されます。カウンタがメタベースキー内に設定されている値に達したら、プロセスが再利用され、内部カウンタがゼロに戻ります。また、PeriodicRestartTime および PeriodicRestartRequests 内部カウンタは、次のように相互に影響します。 
+<ul>
+<li>PeriodicRestartTime イベントが発生した場合 :&nbsp;&nbsp;&nbsp;プロセスが再利用され、PeriodicRestartTime および PeriodicRestartRequests 内部タイマがゼロにリセットされます。 
+</li>
+<li>PeriodicRestartRequests イベントが発生した場合 :&nbsp;&nbsp;&nbsp;プロセスが再利用され、PeriodicRestartTime および PeriodicRestartRequests 内部タイマがゼロにリセットされます。 
+</li>
+<li>PeriodicRestartSchedule イベントが発生した場合 :&nbsp;&nbsp;&nbsp;プロセスが再利用され、PeriodicRestartTime および PeriodicRestartRequests 内部タイマがゼロにリセットされます。PeriodicRestartSchedule イベントは、時計時間に基づいていてリセットされません。ほかの 2 つのイベントに影響されます。</li>
+</ul>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">重要</font></span></strong>&nbsp;&nbsp;&nbsp;内部タイマはメタベースから読み取りのみを行います。メタベース値をリセットすることはありません。内部タイマと既定のメタベース キー パラメータを混同しないでください。
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;PeriodicRestartTime および PeriodicRestartRequests の既定のメタベース キー パラメータはゼロであるため、これらの機能は無効になっています。PeriodicRestartSchedule イベントは、既定では定義されません。「<a href="iiooplai.htm">レベルと継承</a>」では、プロセス再利用イベントに関連付けられているメタベース キーについて詳細に説明しています。</p>
+
+<p>プロセス再利用イベントの構成については、「<a href="iioopcpr.htm">再利用イベントを構成する</a>」を参照してください。構成レベルおよび継承については、「<a href="iiooplai.htm">レベルと継承</a>」を参照してください。 </p>
+
+<h2><a name="RelatedResources">関連リソース</a></h2>
+
+<p>次のリソースで関連情報が提供されています。</p>
+
+<ul>
+<li>「<a href="iiwarndc.htm">アプリケーションについて</a>」&nbsp;&nbsp;&nbsp;アプリケーションに関する概念、開始点、およびアプリケーションを実行できる異なるプロセスについて説明しています。</li>
+<li>「<a href="iiisol.htm">アプリケーションを分離する</a>」&nbsp;&nbsp;&nbsp;アプリケーションを異なるプロセスで実行するよう構成する方法を手順を追って説明しています。</li>
+<p>
+
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

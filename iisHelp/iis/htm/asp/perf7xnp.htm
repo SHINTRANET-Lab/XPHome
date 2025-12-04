@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>データ アクセス パフォーマンス</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_data_access_performance"></A><SUP></SUP>データ アクセス パフォーマンス</H1>
+
+<P>多くの場合、データ アクセスとデータの取得は、Web アプリケーションの開発者にとって最も難しい領域です。</P>
+
+<P>データ アクセスに関する拡張性とパフォーマンスの問題の多くは、Web アプリケーションの開発者が制御できるものではありません。しかし、最大のパフォーマンスを可能にする方法はいくつかあります。
+
+<UL type=disc>
+	<LI><B>固定したデータソース、または変化が予想されるデータソースから結果をキャッシュする  </B>クエリからデータ ソースに返されたレコードセットをキャッシュするか、またはクエリの結果を使用して作成された純粋な HTML 出力をキャッシュすることができます。 
+<P class=tl>たとえば、ADO を使用して、事業所のある都市の名前が入るリストボックスのパラメータを読み込む場合、ADO の最初の呼び出し元は ADO のクエリ結果をアプリケーション スコープに挿入することができます。そのため、この後のリストボックス情報の要求では、ADO を通してデータ ソースを呼び出す代わりに、Application オブジェクトから結果を取得することができます。
+
+<P class=tl>結果のレコードセットを直接キャッシュする場合は、クライアント側のカーソルを使用し、ADO の ActiveConnection プロパティを Nothing に設定することにより、Command オブジェクトからレコードセットを切り離します。 
+
+<P class=tl>データ キャッシュの詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg6cbl.htm">データをキャッシュする</A>」を参照してください。
+</li>
+
+	<LI><B>一般的に、ADO 接続をセッション状態に置くことは避ける  </B>これは、ODBC (Version 3.0 以降) では自動的に接続プールが実行され、また OLE DB ではセッション プールが提供されるためです。</li>
+
+	<LI><B>できるだけ、ネイティブ OLE DB 接続文字列を使用する  </B>ネイティブ OLE DB 接続文字列は、一般にほとんどの ODBC DNS より高速です。さらに、アプリケーションで任意の OLE DB プロバイダを使用できるため、OLE DB 接続文字列はより柔軟性に優れています。</li>
+
+	<LI><B>Microsoft SQL Server などのストアド プロシージャをサポートするデータ ソースを使用する場合、できる限りストアド プロシージャを使用する  </B>ストアド プロシージャから実行されるクエリは、SQL クエリ文字列を通して渡されるクエリより高速です。</li>
+
+	<LI><B>パフォーマンスを最適化するために、AddNew および Delete など、ADO のレコードの追加メソッドおよび削除メソッドの使用は避ける  </B>アプリケーションでレコードの追加と削除が集中的に実行される場合は、INSERT などの直接 SQL ステートメントを使用するとアプリケーションのパフォーマンスが向上します。</li>
+
+	<LI><B>ADO CacheSize プロパティを既定の値 (1) より大きな数値に設定する  </B>1 つのトランザクションでデータ ソースから ADO が強制的に複数レコードを取得するようにして、そのトランザクションに含まれるオーバーヘッドの部分を削除することにより、アプリケーションの拡張性が向上する場合があります。一般に、CacheSize を「予想されるレコードの数」、または「100」のいずれか小さいほうに設定すると、この利点を最大限に活かすことができます。</li>
+
+	<LI><B>データ行を返さないコマンド、またはアクセスや保存の必要のない行を返すコマンドの実行中は、ADO 2.0 AdExecuteNoRecords フラグを使用する  </B>この新しい機能は、ADO 2.0 に導入され、ADO により発生するオーバーヘッドを削減してパフォーマンスと拡張性を向上させるために作成されました。</li>
+
+	<LI><B>データ ソースがテンポラリ ストアド プロシージャをサポートする場合、それを無効にする。</B></li>
+</UL>
+
+<P>データ アクセスの詳細については、「<A HREF="iiwadata.htm">データ ソースにアクセスする</A>」および「<A HREF="/iishelp/iis/htm/asp/eadg3l80.htm">ASPでデータにアクセスする</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

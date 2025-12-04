@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>暗号化を有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="サーバーとの間に SSL で暗号化されたリンクを確立するよう、ユーザーに要求する方法について説明します。ユーザーの Web ブラウザと Web サーバーの間のすべての通信を暗号化するために、Web サーバーは、40 ビット以上のセッション キー強度をサポートしています。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37697878">暗号化を有効にする</a></h1>
+
+<p>アクセスが制限されている Web サイト、ディレクトリ、またはファイルにアクセスするユーザーには、アクセスの前に、サーバーとの間に暗号化されたチャンネル (http:// ではなく https://) を確立するように要求できます。ただし、暗号化されたチャンネルを使うためには、ユーザーの Web ブラウザおよび Web サーバーが、チャンネルを保護する暗号化方式をサポートしている必要があります。特に、Web サーバーのセキュリティで保護された通信の既定の設定を有効にすると、40 ビット以上のセッション キー強度のサポートをユーザーの Web ブラウザに要求することになります。</p>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">重要</font></span></strong></p>
+
+<ul>
+<li>特定の Web サイトのセキュリティ プロパティを設定すると、そのサイトに属するディレクトリおよびファイルにも同じセキュリティ プロパティが自動的に設定されます。ただし、個々のディレクトリおよびファイルのセキュリティ プロパティがそれ以前に設定されていた場合を除きます。</li>  
+<li>Web サイトのセキュリティのプロパティを設定しようとすると、個々のディレクトリおよびファイルのプロパティをリセットするかどうかを確認するメッセージが表示されます。プロパティのリセットを選択すると、それまでのセキュリティの設定は新しい設定に置き換えられます。既にセキュリティのプロパティが設定されているサブディレクトリやファイルを含むディレクトリのセキュリティのプロパティを設定するときも、同じ条件が適用されます。プロパティの設定の詳細については、「<a href="iivsovr.htm">Web サイトおよび FTP サイトについて</a>」の「プロパティおよびサイトのプロパティの継承」を参照してください。</li>
+</ul>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>暗号化を有効にするには</big><br>
+
+<p>暗号化を有効にする前に、有効なサーバー証明書をインストールする必要があります。詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」および「<a href="iiocrsc.htm">サーバー証明書を取得する</a>」を参照してください。</p>
+
+<ol>	
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイト、ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+<li>サーバーのキー ペアと証明書の要求をまだ作成していない場合は、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックし、[セキュリティ保護された通信] の [サーバー証明書] をクリックします。サーバー証明書ウィザードの指示に従って、操作を進めます。新しいウィザードの詳細については、「<a href="iikeysc.htm">新しいセキュリティ機能ウィザードを使用する</a>」を参照してください。</li>
+<li>サーバーのキー ペアと証明書の要求の作成が済んでいる場合は、[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートをクリックし、[セキュリティ保護された通信] の [編集] をクリックします。</li>
+<li>[セキュリティ保護された通信] ダイアログ ボックスの [保護されたチャンネル (SSL) を要求する] チェック ボックスをオンにします。</li>
+<li>Web のコンテンツと、セキュリティで保護された HTTPS 接続を確立すること、つまり制限された Web サイトの URL は http:// ではなく https:// で始めることをユーザーに通知します。</li>
+
+<p><strong>注</strong></p>
+<ul>
+<li>Web サーバーのパフォーマンスの水準を維持するには、金融取引に関する情報など、保護を必要とする情報についてのみ SSL の暗号化を使うことをお勧めします。データ伝送を暗号化すると、伝送速度とサーバーのパフォーマンスが大きく低下します。</li>
+<li>[保護されたチャンネル (SSL) を要求する] チェック ボックスがオンになっていない場合でも、ユーザーは暗号化されたチャンネル (https://) を確立できます。セキュリティで保護されたチャンネルを確立するようにユーザーに &quot;要求&quot; する場合は、[保護されたチャンネル (SSL) を要求する] チェック ボックスをオンにしてください。</li>
+</ul>
+</ol>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

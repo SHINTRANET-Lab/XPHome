@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サーバー側インクルード ディレクティブの使い方</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="HTML ファイルに SSI ディレクティブを挿入する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="H1_37754921">サーバー側インクルード ディレクティブの使い方</a></h1>
+
+<p>Web ページをクライアントのブラウザに配信する直前に、テキスト、グラフィックス、またはアプリケーション コンテンツをページに追加するよう、Web サーバーに命令するには、サーバー側インクルード (SSI) ディレクティブを使います。SSI は、特殊な前処理ディレクティブを備えており、そのディレクティブを使ってファイルに関する情報にアクセスしたり、CGI 変数の値を表示したりできます。また、SSI のディレクティブを使うと、アプリケーションまたはシェル コマンドの結果を Web ページに挿入することもできます。</p>
+
+<p><strong><font color="#0000FF">重要</strong></font>&nbsp;&nbsp;&nbsp;#include ステートメントは、実行時ではなくコンパイル時に処理されます。したがって、このステートメントをクライアント側プロシージャのロジックに組み込むことはできません。</p>
+
+<h2><a name="includingfiles">ファイルをインクルードする</a></h2>
+
+<p>ファイルをインクルードするには、<a href="iisiinc.htm"><strong>#include</strong></a> ディレクティブを使います。たとえば、Web ページが要求されたとき、Copyright.inc というファイルを Web ページに挿入するには、Web ページで次のディレクティブを指定します。</p>
+
+<pre>&lt;!-- #include file="Copyright.inc" --&gt;</pre>
+
+<p>この例では、ファイル Copyright.inc は、インクルード ファイルと同じディレクトリにあることが必要です。<strong>#include</strong> ディレクティブのある HTML ファイルは、Web サイトで公開されている必要があります。インクルードされる側のファイルに特別なファイル名拡張子を付ける必要はありませんが、ほかの種類のファイルと区別するために、一般的なプログラミングの慣習に従って .inc という拡張子を付けることをお勧めします。</p>
+
+<p>現在のディレクトリからの相対パスを使用して、インクルードファイルを指定するには、<strong>file</strong> 引数を使います。たとえば、呼び出しファイルが Documents というディレクトリにあり、インクルード ファイルが Documents\Common というサブディレクトリにある場合、次のディレクティブを使います。</p>
+
+<pre>&lt;!-- #include file="Common\Copyright.inc" --&gt;</pre>
+
+<p>Web サイトのドキュメントを扱う場合は、専用の仮想ディレクトリに共有ファイルを格納することができます。ファイルへの完全な仮想パスを使用して、インクルード ファイルを指定するには、<strong>virtual</strong> 引数を使います。たとえば、仮想ディレクトリ /Common のファイルをインクルードするには、次のディレクティブを使います。</p>
+
+<pre>&lt;!-- #include virtual="/Common/Copyright.inc" --&gt;</pre>
+
+
+<h2><a name="H2_37756964"> アプリケーションからの結果をインクルードする</a></h2>
+
+<p>ファイルの内容をインクルードする以外に、SSI ディレクティブを使ってアプリケーションまたはシェル コマンドを実行し、その結果を Web ページにインクルードすることもできます。アプリケーションまたはシェル コマンドを実行するには、<a href="iisiexc.htm"><strong>#exec</strong></a> ディレクティブを使います。実行できるアプリケーションは、CGI プログラム、ASP アプリケーション、または ISAPI アプリケーションです。次に例を示します。</p>
+
+<pre>&lt;!-- #exec cgi=/scripts/guestbook.exe?FirstName+LastName&gt;</pre>
+
+<p>アプリケーションへのパスには、完全な仮想パスまたは URL を指定します。アプリケーションにパラメータを渡すには、アプリケーションのファイル名の後に疑問符 (?) を付け、その後にプラス記号 (+) で結合したパラメータのリストを続けます。</p>
+
+<p><font color="#0000FF"><strong>重要</strong></font>&nbsp;&nbsp;通常の Web ファイルでアプリケーションの実行を許可すると、セキュリティ上の危険を冒すことになります。Web ページで、ほかの SSI ディレクティブの使用を許可したまま、<strong>#exec</strong> ディレクティブのみ無効にすることもできます。 
+
+<p>詳細については、「<a href="iisiref.htm">サーバー側インクルード リファレンス</a>」を参照してください。</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

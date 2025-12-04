@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>GetAllContent</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_getallcontent"></A><SUP></SUP>GetAllContent</H2>
+
+<P>GetAllContent メソッドは、コンテンツ スケジュール ファイルからすべての HTML コンテンツ文字列を取得し、Web ページに一覧として直接書き込みます。各エントリの後には &lt;HR&gt; タグが付きます。 </P>
+
+<P>通常、このメソッドは、オーサリング中にコンテンツ スケジュール ファイルを校正するために使用します。</P>
+
+<H6>構文</H6>
+
+<P><I>ContRot</I><B> .GetAllContent( </B><I>content-schedule-path </I><B>) </B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>content-schedule-path</I></DT>
+
+<DD>コンテンツ スケジュール ファイルの格納場所を指定します。 
+
+<P>このパラメータは、相対パスまたは仮想パスとして指定します。たとえば、コンテンツ スケジュール ファイル ContRot.txt、および GetAllContent メソッドを呼び出した .asp ファイルが、両方ともディレクトリ /MyApp/Data/ にある (MyApp はサーバー上の仮想ルート) 場合、<i>content-schedule-path</i> にはフル仮想パス (/MyApp/Data/ConRot.txt)、または相対パス (ContRot.txt) のいずれかを指定できます。
+
+
+<P class=tl>ContentRotator オブジェクトは、Server.MapPath メソッドを呼び出し、指定されたパスを物理ディレクトリにマップします。詳細については、「<A HREF="/iishelp/iis/htm/asp/vbob7838.htm"><B>Server オブジェクト</B></A>」のリファレンス ページを参照してください。
+</DD>
+</DL>
+
+<H6>戻り値</H6>
+
+<P>なし。 </P>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>Content Rotator コンポーネントでは、Response.Write メソッドを使用して、GetAllContent メソッドを呼び出した .asp ページに出力を直接書き込みます。詳細については、「<A HREF="/iishelp/iis/htm/asp/vbob5sj8.htm"><B>Response オブジェクト</B></A>」<I></I>のリファレンス ページを参照してください。</P>
+
+<H6>例</H6>
+
+<P>次の例は、GetAllContent メソッドを使用してコンテンツ スケジュール ファイルのすべてのエントリを表示します。 </P>
+
+<P>--- ContRot_AllContent.asp ---</P>
+
+<PRE><CODE>&lt;H1&gt;Tips Stored in the Content Schedule File:&lt;/H1&gt;
+&lt;% Set objContRot = Server.CreateObject("MSWC.ContentRotator") %&gt;
+&lt;%=objContRot.GetAllContent("/Data/ContRot.txt") %&gt;
+ </CODE></PRE>
+
+<P>上の例は、次のような HTML 出力を生成します。</P>
+
+<PRE><CODE>&lt;H1&gt;Tips Stored in the Content Schedule File:&lt;/H1&gt;
+&lt;hr&gt;
+Don't run with scissors.
+&lt;hr&gt;
+&lt;FONT FACE="ARIAL,HELVETICA" SIZE="2"&gt;
+  Be like a
+  &lt;H1&gt;duck&lt;/H1&gt;
+  calm on the surface, paddling like mad underneath.
+&lt;/FONT&gt;
+&lt;hr&gt;
+&lt;IMG SRC="http://zone.msn.com/graphics/hotgames_msn.gif"&gt;
+&lt;hr&gt;
+Here's the &lt;A HREF="/data/controt.txt"&gt;secret link&lt;/A&gt; to your content file.
+&lt;hr&gt;
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

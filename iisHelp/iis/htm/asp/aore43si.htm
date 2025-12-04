@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsFtpServer</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iisftpserver"></A><SUP></SUP>IIsFtpServer</H2>
+
+<P>IIsFtpServer オブジェクトは、FTP サーバーに適用するメタベース プロパティを設定し、FTP 仮想ディレクトリに継承可能なメタベース プロパティを設定します。サーバー動作を制御するために、特定のメソッドを使用することもできます。メタベースでは、FTP サーバーをそのインデックス番号で識別します。たとえば、1 番目の FTP サーバーの番号は 1 、2 番目の FTP サーバーの番号は 2 です。</P>
+
+<P>IIsFtpServer オブジェクトは、ADSI コンテナ オブジェクトです。ADSI コンテナ オブジェクトの詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2ek3.htm">ADSI の機能</A>」を参照してください。</P>
+
+<H6>ADsPath </H6>
+
+<DL>
+<DT>IIS://<I>MachineName</I>/MSFTPSVC/<I>N</I> </DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<H6>構文</H6>
+
+<P><I>varReturn</I> = <I>object</I>.<I>Method</I></P>
+
+<P>&nbsp;</P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>varReturn</I></DT>
+
+<DD>メソッドからの戻り値を受け取る変数です。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIsFtpServer オブジェクトを含んでいる変数です。<BR>
+</DD>
+
+<DT><I>Method</I></DT>
+
+<DD>選択したオブジェクト メソッドです。</DD>
+</DL>
+
+<H6>格納可能なオブジェクト </H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore20mq.htm"><B>IIsFtpVirtualDir</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi57hv.htm"><B>ADSI オブジェクト プロパティ</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メタベース プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>A </B><B>-</B><B> I</B></TD>
+<TD class=blue width=50%>&nbsp;</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2n1v.htm"><B>AccessFlags</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6khg.htm"><B>ConnectionTimeout</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5wv8.htm"><B>AccessRead</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3hym.htm"><B>DefaultLogonDomain</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro063p.htm"><B>AccessWrite</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9zon.htm"><B>DisableSocketPooling</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro76ek.htm"><B>AdminACL</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1g9z.htm"><B>DontLog</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9bcj.htm"><B>AllowAnonymous</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9nz9.htm"><B>ExitMessage</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9rsp.htm"><B>AnonymousOnly</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1k9x.htm"><B>FtpDirBrowseShowLongDate</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro08o3.htm"><B>AnonymousPasswordSync</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro33tx.htm"><B>GreetingMessage</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3jfp.htm"><B>AnonymousUserName</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2k1l.htm"><B>IPSecurity</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4sab.htm"><B>AnonymousUserPass</B></A></TD>
+<TD class=blue width=50%>&nbsp;</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>Log...</B></TD>
+<TD class=blue width=50%>&nbsp;</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro65rn.htm"><B>LogAnonymous</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9gdq.htm"><B>LogExtFileTimeTaken</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro12d2.htm"><B>LogExtFileBytesRecv</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2fzt.htm"><B>LogExtFileUriQuery</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6p6c.htm"><B>LogExtFileBytesSent</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2wml.htm"><B>LogExtFileUriStem</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4nxs.htm"><B>LogExtFileClientIp</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1bsk.htm"><B>LogExtFileUserAgent</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro0j39.htm"><B>LogExtFileComputerName</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3679.htm"><B>LogExtFileUserName</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4ied.htm"><B>LogExtFileCookie</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7mlv.htm"><B>LogExtFileWin32Status</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3zz9.htm"><B>LogExtFileDate</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro02d5.htm"><B>LogFileDirectory</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5ak3.htm"><B>LogExtFileFlags</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro186q.htm"><B>LogFileLocaltimeRollover</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6z04.htm"><B>LogExtFileHost</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5pd0.htm"><B>LogFilePeriod</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro76sz.htm"><B>LogExtFileHttpStatus</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro892d.htm"><B>LogFileTruncateSize</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6jok.htm"><B>LogExtFileMethod</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7e43.htm"><B>LogNonAnonymous</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro767i.htm"><B>LogExtFileProtocolVersion</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4mqt.htm"><B>LogOdbcDataSource</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2h4i.htm"><B>LogExtFileReferer</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7otg.htm"><B>LogOdbcPassword</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7zcg.htm"><B>LogExtFileServerIp</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro52jp.htm"><B>LogOdbcTableName</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2yd0.htm"><B>LogExtFileServerPort</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4u1x.htm"><B>LogOdbcUserName</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9i5h.htm"><B>LogExtFileSiteName</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4ejo.htm"><B>LogPluginClsid</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><A HREF="/iishelp/iis/htm/asp/apro4l9h.htm"><B>LogExtFileTime</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro0gkl.htm"><B>LogType</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>M </B><B>-</B><B> S</B></TD>
+<TD class=blue width=50%>&nbsp;</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro18dh.htm"><B>MaxClientsMessage</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7tmb.htm"><B>ServerBindings</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro66pf.htm"><B>MaxConnections</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro7his.htm"><B>ServerComment</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3wj7.htm"><B>MaxEndpointConnections</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2v53.htm"><B>ServerListenBacklog</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8njo.htm"><B>MSDOSDirOutput</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro19ys.htm"><B>ServerListenTimeout</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9ael.htm"><B>Realm</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro47ad.htm"><B>ServerSize</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5i0k.htm"><B>ServerAutoStart</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8l7p.htm"><B>ServerState</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド </H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore6g11.htm"><B>Continue</B></A></TD>
+<TD width=50%>サーバーを再開します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore3cbp.htm"><B>Pause</B></A></TD>
+<TD width=50%>サーバーを一時停止します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore74dw.htm"><B>Start</B></A></TD>
+<TD width=50%>サーバーを起動します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore5z5f.htm"><B>Status</B></A></TD>
+<TD width=50%>サーバーの現在の状態を取得します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7bg0.htm"><B>Stop</B></A></TD>
+<TD width=50%>サーバーを停止します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目 </H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi0ewj.htm"><B>ADSI オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI オブジェクトの標準メソッドです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi7qpf.htm"><B>ADSI コンテナ オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI コンテナ オブジェクトの標準メソッドです。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

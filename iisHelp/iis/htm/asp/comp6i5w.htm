@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IISLog コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_logging_utility_component"></A><SUP></SUP>IISLog コンポーネント</H1>
+
+<P>IIS Log コンポーネントは、IISLog オブジェクトを作成します。IISLog オブジェクトは、アプリケーションが IIS ログからの読み取りを実行できるようにします。このコンポーネントを使用すると、たとえば日常的にログ ファイルを検索するようにプログラムした、特定の種類の情報を抽出するための ASP スクリプトまたは VB コンポーネントをすばやく作成できます。</P>
+
+<P><span class=le><B>重要</B></span></P>
+
+<P>IISLog コンポーネントのインスタンスを作成する ASP スクリプトにアクセスするユーザーは、IIS を実行するサーバー上で管理者またはオペレータとして認証されている必要があります。ユーザーが匿名としてのみ認証されている場合は、IIS Log コンポーネントは正常に機能しません。</P>
+
+<H6>ファイル名</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%>Logscrpt.dll</TD>
+<TD width=50%>IISLog コンポーネント</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>oIISLog</I><B> = Server.CreateObject( MSWC.IISLog ) </B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>oIISLog</I></DT>
+
+<DD>IISLog コンポーネントへの参照として使用する名前を指定します。</DD>
+</DL>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp4rzb.htm">AtEndOfLog</A></TD>
+<TD width=50%>ログ ファイルのレコードがすべて読み取られたかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp5dtf.htm">CloseLogFiles</A></TD>
+<TD width=50%>開いているすべてのログ ファイルを閉じます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6hnp.htm">OpenLogFile</A></TD>
+<TD width=50%>ログ ファイルを読み取り用または書き込み用として開きます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp1cqa.htm">ReadFilter</A></TD>
+<TD width=50%>ログ ファイルのレコードに日付と時刻でフィルタをかけます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6jms.htm">ReadLogRecord</A></TD>
+<TD width=50%>現在のログ ファイルから、次の利用可能なログ レコードを読み取ります。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp4290.htm">WriteLogRecord</A></TD>
+<TD width=50%>現在のログ ファイルにログ レコードを書き込みます。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6xt0.htm">BytesReceived</A></TD>
+<TD width=50%>受信したバイト数を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp7dv8.htm">Bytessent</A></TD>
+<TD width=50%>送信したバイト数を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp4d2o.htm">ClientIP</A></TD>
+<TD width=50%>クライアントのホスト名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp8wf9.htm">Cookie</A></TD>
+<TD width=50%>クライアントの cookie を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp7k37.htm">CustomFields</A></TD>
+<TD width=50%>カスタム ヘッダーの配列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp5smd.htm">DateTime</A></TD>
+<TD width=50%>日付と時刻を GMT で示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp0xpg.htm">Method</A></TD>
+<TD width=50%>操作の種類を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp735f.htm">ProtocolStatus</A></TD>
+<TD width=50%>プロトコルの状態を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp0g8e.htm">ProtocolVersion</A></TD>
+<TD width=50%>バージョン文字列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp3epe.htm">Referer</A></TD>
+<TD width=50%>参照元 (履歴) ページを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp7ohc.htm">Serverip</A></TD>
+<TD width=50%>サーバーの IP アドレスを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp4dk5.htm">ServerName</A></TD>
+<TD width=50%>サーバー名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6ulw.htm">ServerPort</A></TD>
+<TD width=50%>ポート番号を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp32g5.htm">ServiceName</A></TD>
+<TD width=50%>サービス名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp052m.htm">TimeTaken</A></TD>
+<TD width=50%>総処理時間を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp254p.htm">URIQuery</A></TD>
+<TD width=50%>要求と共に渡されたパラメータを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp3u7h.htm">URIStem</A></TD>
+<TD width=50%>宛先の URL を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp20hg.htm">UserAgent</A></TD>
+<TD width=50%>ユーザー エージェントの文字列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp2vc5.htm">UserName</A></TD>
+<TD width=50%>ユーザー名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6yer.htm">Win32status</A></TD>
+<TD width=50%>Win32 状態コードを示します。</TD>
+</TR>
+</TABLE><BR>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>IIS Log コンポーネントを有効に使用するには、次の手順を実行する必要があります。
+
+<UL type=disc>
+	<LI>OpenLogFile メソッドを使用して、IISLog コンポーネントが読み取るログ ファイルを指定します。</li>
+
+	<LI>ReadLogRecord を使用して、適切なログ レコードを読み取ります。</li>
+
+	<LI>IIS Log コンポーネントのプロパティを使用して、ログ レコードから特定の情報を取得します。</li>
+</UL>
+
+<P><span class=le><B>重要</B></span></P>
+
+<P>このコンポーネントでは、ログ ファイルの読み取りをサポートするログ収集モジュールが作成したログ ファイルだけにアクセスできます。IIS に付属する 4 つの組み込みログ収集モジュールは、ログ ファイルの読み取りをサポートしていますが、カスタム ログ収集モジュール、またはサードパーティのログ収集モジュールを使用している場合は、ログ収集モジュールを強化する必要があります。 </P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

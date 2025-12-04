@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>BinaryRead</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_binaryread"></A><SUP></SUP>BinaryRead</H4>
+
+<P>BinaryRead メソッドは、POST 要求の一部としてクライアントからサーバーに送信されたデータを取得します。このメソッドは、クライアントからデータを取得し、取得したデータをセーフ配列に格納します。セーフ配列は、次元の数と各次元の上限および下限に関する情報を含む配列です。</P>
+
+<H6>構文</H6>
+
+<P><i>variant</i> = Request.<b>BinaryRead</b>( <i>count</i> )</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>variant</I></DT>
+
+<DD>このメソッドが返す符合なしバイトの配列を含みます。このパラメータの型は、VT_ARRAY | VT_UI1 になります。これは、符号なし 1 バイト文字の可変配列です。<BR>
+</DD>
+
+<DT><I>count</I></DT>
+
+<DD>メソッドを実行する前に、クライアントから読み取るバイト数を指定します。メソッドを実行した後の <i>count</i> には、クライアントから正常に読み取ったバイト数が設定されます。実際にクライアントから読み取られるバイト数の合計は、Request.TotalBytes と等しいか、またはこれより少なくなります。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>BinaryRead メソッドは、POST 要求の一部としてクライアントから送信された生のデータを読み取るときに使用します。BinaryRead メソッドは、データへの下位レベルのアクセスを行うときに使用するメソッドであり、Request.Form コレクションを使用して POST 要求で送信されたフォーム データを表示する場合などとは使用目的が異なります。BinaryRead を呼び出した後で Request.Form コレクション内のいずれかの変数を参照すると、エラーが発生します。同様に、Request.Form コレクション内の変数を参照した後で BinaryWrite を呼び出すと、エラーが発生します。このため、変数がどのサブコレクションに属しているかを指定せずに Request コレクション内の変数にアクセスする場合は注意が必要です。Request.Form コレクションが検索の対象になると、エラーが発生するからです。</P>
+
+<H6>例</H6>
+
+<P>次の例は、BinaryRead メソッドを使用して、要求の内容をセーフ配列に格納します。</P>
+
+<PRE><CODE>&lt;%
+  Dim vntPostedData, lngCount
+
+  lngCount = Request.TotalBytes
+  vntPostedData = Request.BinaryRead(lngCount)
+%&gt;
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Request オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob1whf.htm"><B>TotalBytes</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob8q5h.htm"><B>ClientCertificate</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob0z3o.htm"><B>Cookies</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob4fl9.htm"><B>Form</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob53hj.htm"><B>QueryString</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob5vsj.htm"><B>ServerVariables</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

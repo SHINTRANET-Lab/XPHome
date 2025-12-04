@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Redirect</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_redirect"></A><SUP></SUP>Redirect</H4>
+
+<P>Redirect メソッドは、ブラウザが別の URL への接続を試みるようにします。 </P>
+
+<H6>構文</H6>
+
+<P>Response.<B>Redirect</B> <I>URL</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>URL</I></DT>
+
+<DD>ブラウザのリダイレクト先を指定する URL です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>ページ内で明示的に設定されている応答本文のコンテンツはすべて無視されます。ただし、このページで設定されたほかの HTTP ヘッダーはクライアントに送信され、リダイレクト先の URL がリンクとして含まれる自動応答本文が生成されます。Redirect メソッドは次の明示的なヘッダーを送信します。<i>URL</i> は、メソッドに渡された値です。</P>
+
+<PRE><CODE>HTTP 1.0 302 Object Moved
+Location <I>URL</I>
+</CODE></PRE>
+
+<H6>例</H6>
+
+<P>次の例は、ユーザーを Microsoft の主要 Web サイトにリダイレクトします。</P>
+
+<PRE><CODE>&lt;% Response.Redirect "http://www.microsoft.com" %&gt; </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

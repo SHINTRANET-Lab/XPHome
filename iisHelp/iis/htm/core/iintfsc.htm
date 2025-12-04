@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>NTFS でファイルを保護する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="NTFS セキュリティ機能により、Web サーバーのファイルとディレクトリに対するアクセスを制限する方法について説明します。ファイルおよびディレクトリのアクセス権を構成し、特定のユーザー アカウントまたはユーザー グループに対してアクセス レベルを設定することができます。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37718788">NTFS でファイルを保護する</a></h1>
+
+<p>NTFS を使用して、Web サーバーのファイルやディレクトリへのアクセスを制限することができます。ファイルおよびディレクトリのアクセス権を構成し、特定のユーザー アカウントまたはユーザー グループに対してアクセス レベルを設定することができます。たとえば、一部のユーザーにはファイルの表示と実行を許可し、それ以外のすべてのユーザーにはそのファイルへのアクセスを禁止するように、Web サーバーを構成できます。</p>
+
+<big>NTFS でファイルを保護するには</big><br>
+
+<ol>
+<li>使用するハード ディスクを NTFS パーティションに変換します。変換には、Windows の変換ユーティリティを使用します。詳細については、Windows のマニュアルを参照してください。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;NTFS のハード ディスク パーティションを使うと、アクセス制御によるセキュリティを利用できます。これにより、ファイル アロケーション テーブル (FAT) パーティションより効率的に情報を保存できます。</p>
+
+<li>Windows のユーザー アカウントまたはユーザー グループを作成します。
+<ol>
+<li>[スタート] ボタンをクリックし、[マイ コンピュータ] を右クリックして、[管理] を選択します。[コンピュータの管理] ウィンドウが表示されます。</li> 
+<li>[システム ツール] の [ローカル ユーザーとグループ] をクリックします。
+<li>ユーザー アカウントを新規作成するには、まず [ユーザー] をクリックし、[操作] メニューの [新しいユーザー] をクリックします。ユーザー グループを新規作成する場合は、[グループ] をクリックし、[操作] メニューの [新しいグループ] をクリックします。</li>
+<li>ユーザーを適切なユーザー グループに追加します。</li>
+</ol> 
+</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;[ローカル ユーザーとグループ] でユーザー アカウントを構成するには、管理者権限でログオンする必要があります。詳細については、Windows のマニュアルを参照してください。</p>
+
+<li>Windows エクスプローラで、ファイルおよびディレクトリにアクセス権を設定します。設定の手順については、「<a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a>」を参照してください。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;Web サーバーに NTFS のアクセス権を設定する際には注意が必要です。アクセス権が正しく設定されていないと、必要なファイルやディレクトリにユーザーがアクセスできなくなる場合があります。たとえば、プログラムの表示と実行の権限を持っていても、プログラムの実行に必要な特定のダイナミックリンク ライブラリ (DLL) へのアクセス権がなければ、プログラムを実行できません。ユーザーが支障なく安全にファイルにアクセスできるようにするには、関連するファイル群を同じディレクトリに配置し、適切な NTFS のアクセス権を割り当てます。</p>
+</ol>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アプリケーションを作成する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="開始点ディレクトリ (アプリケーション ルート) の指定方法と、アプリケーションの境界の設定方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37777837">アプリケーションを作成する</a></h1>
+
+<p>アプリケーションを作成するには、特定のディレクトリをそのアプリケーションの開始点、つまりアプリケーション ルートとして指定します。次に、アプリケーションのプロパティを設定します。各アプリケーションには、わかりやすい名前を付けることができます。この名前は、<a href="iiabuti.htm">IIS スナップイン</a>に表示され、アプリケーションを識別することができます。このアプリケーション名は、ほかの場所では使用されません。</p>
+
+<p>アプリケーションの境界からディレクトリを削除して、そのディレクトリおよびサブディレクトリ内のファイルへの要求によりアプリケーションを起動できないようにすることができます。アプリケーションの境界からディレクトリを削除しても、Web サイトやコンピュータのハード ディスクからそのディレクトリが削除されることはありません。</p>
+
+<big>アプリケーションを作成するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、アプリケーションの開始点になるディレクトリを選択します。Web サイトのホーム ディレクトリをアプリケーション開始点として指定できます。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li>[作成] をクリックします。</li>
+<li>[アプリケーション名] ボックスに、アプリケーション名を入力します。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;[作成] ではなく [削除] が表示された場合は、既にアプリケーションが作成されています。 </p>
+
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>アプリケーションからディレクトリを削除するには</big><!--</p>--><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、削除するディレクトリをクリックします。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li> [削除] をクリックします。</li>
+</ol>
+
+<p><strong>ヒント</strong></p>
+<ul>
+<li>アプリケーションを停止し、メモリからアンロードするには、[アンロード] をクリックします。[アンロード] ボタンが淡色表示されている場合は、現在のディレクトリがアプリケーション開始点ディレクトリでないことを示します。</li>
+<li>このホーム ディレクトリとアプリケーションを分離するには、[削除] をクリックします。</li>
+<li>アプリケーションを Web サーバー プロセスから独立したプロセスで実行するには、[高 (分離プロセス)] をクリックします。独立したプロセスで実行すると、アプリケーション上で障害が発生したり、応答が停止した場合でも、Web サーバー自体、またほかのアプリケーションは影響を受けずに保護されます。</li>
+</ul>
+
+<big>アプリケーションにアクセス権を設定するには次のいずれかの操作を行います。</big><!--</p>--><br>
+
+<ul>
+<li> プログラムやスクリプトを実行できないようにするには、アクセス権を [なし] に設定します。<br>または、次の操作を実行します。</li>
+<li> スクリプト エンジンにマップされたアプリケーションを、実行可能ファイルのそのディレクトリで実行できるようにするには、アクセス権を [スクリプトのみ] に設定します。ASP スクリプト、Internet Database Connector (IDC) スクリプト、その他のスクリプトを含むディレクトリには、[スクリプトのみ] アクセス権を使用します。[スクリプトのみ] アクセス権はディレクトリ内のアプリケーションの実行を制限できるため、実行可能ファイルのアクセス権よりもセキュリティ上の危険性が減少します。アプリケーションのスクリプト エンジンへのマッピングについては、[<a href="iipy_34.htm">アプリケーションのマッピング</a>] プロパティ シートを参照してください。<br>または、次の操作を実行します。</li>
+<li>スクリプト エンジンにマップされたアプリケーションや Windows のバイナリ ファイル (.dll ファイルと .exe ファイル) を含め、すべてのアプリケーションにそのディレクトリ内での実行を許可するには、アクセス権を [スクリプトおよび実行可能ファイル] に設定します。</li>
+</ul>
+
+<hr class="iis" size="1"><p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

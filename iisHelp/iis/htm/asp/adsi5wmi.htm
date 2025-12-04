@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>GetPropertyAttribObj</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_k2_getpropertyattribobj"></A>GetPropertyAttribObj</H4>
+
+<P>このメソッドは、個々の ADSI プロパティの属性に関する情報にアクセスするためのものです。<B>GetPropertyAttribObj</B> は、次のように機能します。
+
+<UL type=disc>
+	<LI>プロパティがそのノードまたはある親ノードに設定され、かつ継承可能である場合は、プロパティの属性を含む <B>PropettyAttribute</B> オブジェクトを返します。</li>
+
+	<LI>プロパティがそのノードまたはその親ノードに設定されておらず、かつ継承可能である場合は、エラーを返します。</li>
+
+	<LI>プロパティがそのノードではなく親ノードに設定されていて、かつ継承可能でない場合は、エラーを返します。</li>
+</UL>
+
+<H6>構文</H6>
+
+<P>初期化時</P>
+
+<P><I>PropAttObj = object.</I><B>GetPropertyAttribObj</B>(<I>property</I>)</P>
+
+<P>使用時</P>
+
+<P><I>RetBool</I> = <I>PropAttObj</I>.<I>Attribute</i></P>
+
+<P>&nbsp;</P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>PropAttObj</I></DT>
+
+<DD>IIS Admin オブジェクトの指定メタベース <I>property</I> の属性を返す <B>PropertyAttribute</B> オブジェクトへの参照です。 <BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIS Admin オブジェクトを含んでいます。<BR>
+</DD>
+
+<DT><I>property</I></DT>
+
+<DD>属性を要求されているプロパティの名前を含む文字列です。<BR>
+</DD>
+
+<DT><I>RetBool</I></DT>
+
+<DD><I>Attribute</I> で指定された属性が有効か無効かを示すブール値です。<BR>
+</DD>
+
+<DT><I>Attribute</I></DT>
+
+<DD>照会中の属性を示します。照会可能な属性は、次のとおりです。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=52%><B>属性</B></TD>
+<TD class=blue width=48%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>Inherit</B></TD>
+<TD width=48%>プロパティが継承可能かどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>PartialPath</B></TD>
+<TD width=48%>部分パスが存在するかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>Secure</B></TD>
+<TD width=48%>プロパティが安全かどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>Reference</B></TD>
+<TD width=48%>リファレンスがプロパティを受け取ったかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>Volatile</B></TD>
+<TD width=48%>プロパティが揮発性であるかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>IsInherit</B></TD>
+<TD width=48%>プロパティが継承されているかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>InsertPath</B></TD>
+<TD width=48%>プロパティ内の文字列に、特殊な挿入値が含まれているかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>AllAttributes</B></TD>
+<TD width=48%>この表に列挙されているすべての属性を、1 つの長整数型に格納します。</TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>ほかのほとんどの ADSI オブジェクトとは異なり、プロパティ属性オブジェクトは Get および Set メソッドをサポートしていません。プロパティ属性オブジェクトの個々の属性にアクセスするには、<I>object.property</I> 構文を使用する必要があります。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>AppCreate または AppCreate2 を呼び出すと、オブジェクト パスの情報は保持されますが、指定したオブジェクトが作成される前に SetInfo を呼び出す必要があります。SetInfo を呼び出さない場合、作成されたオブジェクトに対する後続の呼び出しが失敗します。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP スクリプトの例</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_asp_script_examples"></A><SUP></SUP>ASP スクリプトの例</H1>
+
+<P>Active Server Pages (ASP) は、IIS の主要な機能の 1 つです。ASP によって、プログラミングの経験がほとんどないユーザーでも、有用な対話型の Web ベース アプリケーションをこれまでにないほど簡単に作成できるようになりました。経験を積んだユーザーであれば、ASP によって洗練された強固な Web アプリケーションを短時間で作成できます。その場合、C++ や Java などの従来のプログラミング言語環境での開発に必要な、大量のリソースを確保する必要はありません。</P>
+
+<P>ここでは、サーバー側スクリプト作成の全般的な機能の概要と ASP の詳細について説明します。同時に、ASP で何ができるかを模索する熟練開発者のために、より高度な例を提供します。 </P>
+
+<P>各サンプル スクリプトには、次の処理を行うことができるメニュー バーが用意されています。
+
+<UL type=disc>
+	<LI>サンプルの処理内容、サンプルの機能、および検索対象を調べるための概要を読み取ります。</li>
+
+	<LI>ソースを表示します。VBScript 版と JScript 版の両方で提供されるサンプル スクリプトは、正確に、そして綿密に構成されています。</li>
+
+	<LI>サンプルの VBScript 版を実行します。</li>
+</UL>
+
+<P>ここで提供するサンプル スクリプトは、いくつかのカテゴリに分類されます。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps1lrn.htm">簡単なスクリプト</A>」では、スクリプト構文、フロー制御、関数、およびプロシージャの基本について学びます。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps3n5f.htm">ASP アプリケーションを作成する</A>」では、Web ベース アプリケーションの構造と機能を紹介するサンプルを学習します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps3fsg.htm">ASP による Web 対話機能</A>」では、cookie の組み込みやクライアント側スクリプト作成などのテクニックを使用して、より有用で柔軟なアプリケーションを開発する方法を学びます。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps473n.htm">インストール可能なコンポーネントを使用する</A>」では、IIS と共にインストールされる Active Server Pages コンポーネントの機能を利用する方法を学びます。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps2os9.htm">データベースの接続</A>」では、付属のデータベース アクセス コンポーネント ActiveX<sup>&reg;</sup> Data Objects (ADO) の機能を示す例を学習します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/asps6243.htm">ASP トランザクション サービス</A>」では、コンポーネント サービスと ASP スクリプトの間の連携を示すサンプルを学習します。</li>
+</UL>
+
+<P>ここで紹介するサンプルは学習用ですが、ASP スクリプトやアプリケーションの作成に関するチュートリアルではありません。詳細については、「<A HREF="/iishelp/iis/htm/asp/iiwawelc.htm">Active Server Pages</A>」および「<A HREF="/iishelp/iis/htm/asp/eadg01v7.htm">Web アプリケーションを開発する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

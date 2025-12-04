@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ProcessForm</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_processform"></A><SUP></SUP>ProcessForm</H2>
+
+<P>ProcessForm メソッドは、ユーザーから送信されたフォーム データを持つテンプレート ファイルからデータをマージし、新しいファイルを作成します。ユーザーから送信されたデータは、テンプレート ファイル内でスクリプトを使用して操作できます。</P>
+
+<H6>構文</H6>
+
+<P><I>oTools</I><B>.ProcessForm(</B><I>OutputFileURL</I>, <I>TemplateURL</I>, [<I>InsertionPoint</I>]<B>)</B></P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>OutputFileURL</I></DT>
+
+<DD>マージされたデータが書き込まれるファイルの相対 URL を表す文字列です。 <BR>
+</DD>
+
+<DT><I>TemplateURL </I></DT>
+
+<DD>テンプレート ファイルの関連 URL を含む文字列です。 <BR>
+</DD>
+
+<DT><I>InsertionPoint </I></DT>
+
+<DD>処理データをテンプレート ファイルのどの位置に挿入するかを示す省略可能なパラメータです。このパラメータは実装されていません。このパラメータに値を指定しても無視されます。<BR>
+</DD>
+
+<DT></DT>
+</DL>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>テンプレート ファイルには ASP スクリプトを格納できます。 </P>
+
+<P>デリミタ &lt;% と %&gt; の間のスクリプトは、テンプレート内のほかのテキストと同じように扱われ、出力ファイルにコピーされます。出力ファイルが ASP ドキュメントである場合は、出力ファイルが実行されるときにスクリプトが実行されます。</P>
+
+<P>ProcessForm への呼び出し中にテンプレート内のスクリプトを実行する場合は、コードを特殊な &lt;%% と %% &gt;デリミタで囲みます。これらのスクリプトはテンプレート データが出力ファイルに保存される前に実行されるため、その結果は通常、標準テキストとして出力ファイルに保存されます。 </P>
+
+<P>指定された出力ファイルが存在する場合、サーバーは出力ファイルを上書きします。</P>
+
+<P><I>InsertionPoint</I> パラメータが存在しない場合、Tools.ProcessForm は出力ファイル全体を置換します。<I>InsertionPoint</I> パラメータが存在し、このパラメータがアスタリスク (*) で始まっていない場合、Tools.ProcessForm は出力ファイル内で文字列 <I>InsertionPoint</I> を検索し、その直後にデータを挿入します。<I>InsertionPoint</I> パラメータがアスタリスク (*) で始まっている場合、Tools.ProcessForm は出力ファイル内で文字列 <I>InsertionPoint</I> を検索し、その直前にデータを挿入します。<I>InsertionPoint</I> パラメータが存在し、該当する文字列が出力ファイル内に見つからない場合、データはファイルの最後に追加されます。</P>
+
+<H6>例</H6>
+
+<P>次の例は、2 つのファイルを使用します。Tools_Template.asp は、個人 Web ページのテンプレート ファイルです。Tools_ProcessForm.asp は、ユーザーからの入力を受け入れ、ProcessForm を呼び出して、ユーザーによって指定された更新内容とともにテンプレート データを新しいファイルにコピーします。Tools_ProcessForm.asp に移動して例を実行します。</P>
+
+<P>--- Tools_Template.asp ---</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;&lt;%% =Request.Form("company") %%&gt;&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor="&lt;%% =Request.Form("bgcolor") %%&gt;"&gt;
+&lt;FONT face="&lt;%% =Request.Form("fface") %%&gt;" size=&lt;%% =Request.Form("fsize") %%&gt;&gt;
+
+&lt;H5 align=center&gt;This file was created on &lt;%% =Date %%&gt; at &lt;%% =Time %%&gt;&lt;/H5&gt;
+
+&lt;%
+  Response.Write "&lt;H3 align=center&gt;Welcome to the home page for:&lt;/H3&gt;"
+  Response.Write "&lt;H1 align=center&gt;&lt;%% =Request.Form("company") %%&gt;&lt;/H1&gt;"
+  Set MyPageCounter = Server.CreateObject("MSWC.PageCounter") 
+  MyPageCounter.PageHit
+  Response.Write "&lt;P align=center&gt;This page has been hit " &amp; MyPageCounter.Hits &amp; " times."
+%&gt;
+
+&lt;P&gt;&lt;B&gt;About my Company:&lt;/B&gt;
+&lt;P&gt;&lt;%% =Request.Form("about") %%&gt;
+
+&lt;/FONT&gt;
+&lt;/BODY&gt;
+
+&lt;/HTML&gt;</CODE></PRE>
+
+<P>--- Tools_ProcessForm.asp ---</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;%
+  OutputURL = Request.Form("outputurl")
+  BGColor   = Request.Form("bgcolor")
+  FFace     = Request.Form("fface")
+  FSize     = Request.Form("fsize")
+  Company   = Request.Form("company")
+  About     = Request.Form("about")
+
+  Process = True
+  If "" = OutputURL Then Process = False
+  If "" = BGColor Then Process = False
+  If "" = FFace Then Process = False
+  If "" = FSize Then Process = False
+  If "" = Company Then Process = False
+  If "" = About Then Process = False
+%&gt;
+
+&lt;H3&gt;Create a Default Company Page Using the Tools_Template.asp Template&lt;/H3&gt;
+
+Please fill out the form.  All fields are required.
+&lt;FORM NAME="GetTemplateStuff" METHOD="POST" ACTION="Tools_ProcessForm.asp"&gt;
+&lt;input type="TEXT" NAME="outputurl" size=70 value="&lt;%=OutputURL%&gt;"&gt; Relative Output URL&lt;BR&gt;
+&lt;input type="TEXT" NAME="bgcolor" size=70 value="&lt;%=BGColor%&gt;"&gt; Background Color&lt;BR&gt;
+&lt;input type="TEXT" NAME="fface" size=70 value="&lt;%=FFace%&gt;"&gt; Font Face&lt;BR&gt;
+&lt;input type="TEXT" NAME="fsize" size=70 value="&lt;%=FSize%&gt;"&gt; Font Size&lt;BR&gt;&lt;BR&gt;
+&lt;input type="TEXT" NAME="company" size=70 value="&lt;%=Company%&gt;"&gt; Company Name&lt;BR&gt;
+&lt;input type="TEXT" NAME="about" size=70 value="&lt;%=About%&gt;"&gt; About Your Company&lt;BR&gt;&lt;BR&gt;
+&lt;INPUT type="SUBMIT" VALUE="Create File"&gt;
+&lt;/FORM&gt;
+
+&lt;%
+  If Process Then
+    Set oTools = Server.CreateObject("MSWC.Tools")
+    oTools.ProcessForm OutputURL,"Tools_Template.asp","&lt;HTML*&gt;"
+%&gt;
+    &lt;P&gt;&lt;A href="&lt;%=OutputURL%&gt;"&gt;&lt;%=OutputURL%&gt;&lt;/A&gt; was created.
+&lt;%
+  Else
+    Response.Write "No file was created because of missing inputs."
+  End If
+%&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp1d9v.htm"><B>FileExists</B></A>、<A HREF="/iishelp/iis/htm/asp/comp8kdp.htm"><B>Random</B></A> </P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

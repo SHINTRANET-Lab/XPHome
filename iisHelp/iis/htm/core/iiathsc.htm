@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>認証</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="認証についての参照先を示します。 認証は、Web サーバーのコンテンツにアクセスを試みるユーザーに、通常はユーザー名とパスワードの提示を要求し、その身元を確認する処理です。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="Authentication">認証</a></h1>
+
+<p>ユーザーにサーバーとのネットワーク接続を許可する前に &quot;認証&quot;、つまりユーザーの Windows ユーザー アカウントの識別を行うよう、IIS を構成できます。ただし、ユーザーの認証が行われるのは、匿名アクセスが無効になっている場合、または NTFS のアクセス権の設定により、ユーザーが有効な Windows ユーザー アカウントのユーザー名およびパスワードで身元を証明する必要がある場合に限られます。</p>
+
+<p>IIS によって提供される認証オプションを使用すると、セキュリティに必要な条件およびユーザーの Web ブラウザの機能に合った認証方法を選択することができます。</p>
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><a href="iiabasc.htm">認証について</a></strong>」では、認証の概要について説明します。</li>
+<li>「<strong><a href="iiauths.htm">認証を有効にし、構成する</a></strong>」では、基本認証、ダイジェスト認証、および統合 Windows 認証を有効にし、構成する手順について説明します。</li>			
+<li>「<strong><a href="iidlgsc.htm">既定のログオン ドメインを設定する</a></strong>」では、基本認証のログオン ドメインを構成する手順について説明します。</li>
+<li>「<strong><a href="iiftzsc.htm">IIS で Fortezza セキュリティを使用する</a></strong>」では、IIS の Fortezza セキュリティ機能を構成する手順について説明します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>Web サーバーのファイルおよびディレクトリに対するアクセスを制御する方法については、「<a href="iiaclsc.htm">アクセス制御</a>」を参照してください。</li>
+<li>SSL または証明書の使用方法については、「<a href="iicerts.htm">証明書</a>」を参照してください。</li>
+</ul>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

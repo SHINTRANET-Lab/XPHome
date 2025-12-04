@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIS とコンポーネント サービス</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iis_and_component_services"></A><SUP></SUP>IIS とコンポーネント サービス</H2>
+
+<P>IIS とコンポーネント サービスを一緒に使用して、Web アプリケーションを構築するための基本アーキテクチャを形成します。IIS は、コンポーネント サービスが提供する機能を使用して、次のことを実行します。
+
+<UL type=disc>
+	<LI>アプリケーションを個別プロセスに分離します。</li>
+
+	<LI>ASP 組み込みオブジェクトを含む、COM コンポーネント間の通信を管理します。</li>
+
+	<LI>トランザクション ASP アプリケーションのためのトランザクション処理を調整します。</li>
+</UL>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>IIS Version&nbsp;4.0 では、MTS (Microsoft Transaction Server) がトランザクション サポートを提供しました。IIS&nbsp;5.1 および Windows&nbsp;XP では、コンポーネント サービスがコンポーネントの開発および配置のためのそのほかの多数の機能に加えて、MTS のトランザクション サポートをすべて提供します。</P>
+
+<P>IIS は、Web アプリケーションをリソース ファイルの集合として定義し、これらのファイルは論理名前空間にグループ化されます。リソースをアプリケーションにグループ化することにより、名前空間内でデータを共有し、分離プロセスでアプリケーションを実行することが可能になります。</P>
+
+<P>IIS の内部では、分離されたアプリケーションを Web Application Manager と呼ばれるオブジェクトを通して調整します。このオブジェクトには、パブリック インターフェイス IWAMAdmin が含まれ、これを使用して Web アプリケーションを管理するプログラムを作成できます。分離プロセスで Web アプリケーションを実行すると、IIS はコンポーネント サービスを使用してリソースに対する同時アクセスを調整し、COM コンポーネント間でコンテキスト情報を受け渡します。</P>
+
+<P>IIS は、コンポーネント サービスの ObjectContext オブジェクトを使用して、ASP 組み込みオブジェクトに対する ASP アクセスで呼び出される COM コンポーネントを提供します。たとえば、Visual Basic で COM コンポーネントを構築し、そのコンポーネントで HTML ファイルからのフォームにアクセスする必要がある場合、コードは次のようになります。</P>
+
+<PRE><CODE>Dim objObjectContext As ObjectContext
+Dim vntIn As Variant 
+Set objObjectContext = GetObjectContext ()
+vntIn = objObjectContext.Item("Request").Form("Field1")
+</CODE></PRE>
+
+<P>コンポーネント サービスは、ObjectContext を使用して、COM コンポーネントの特定のインスタンスに関する情報を維持します。IIS は、ASP スクリプトをコンパイルする際に、コンポーネント サービスを呼び出し、ASP スクリプトに関する情報を追跡するための ObjectContext を作成します。ObjectContext には、ASP スクリプトのインスタンスを一意に識別する ID プロパティが含まれます。たとえば、ASP スクリプトがコンポーネント サービスに登録されている COM コンポーネントのインスタンスを作成する場合、これらのオブジェクトは、それぞれ ASP スクリプトの ObjectContext に関連付けられます。同様に、<A HREF="/iishelp/iis/htm/asp/dire5t0u.htm">@TRANSACTION ディレクティブ</A> を使用したトランザクション ASP スクリプトを作成するときは、コンポーネント サービスに通知され、新しいトランザクションが開始されます。この後、コンポーネント サービスは、管理するあらゆるリソースの更新を調整します。コンポーネント サービスは、維持するリソースに加えられた変更をすべて追跡することにより、トランザクションの一貫性を保証します。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>IIS Version 4.0 では、トランザクション サポートは MTS が行いました。IIS&nbsp;5.1 および Windows&nbsp;XP では、コンポーネント サービスがほかの多数の機能に加えて、MTS のすべてのトランザクション サポートを行います。</P>
+
+<P>アプリケーションの分離と管理の詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg7lpv.htm">アプリケーションの境界を定義する</A>」を参照してください。</P>
+
+<P>トランザクション処理の詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg8nlf.htm">トランザクション処理</A>」、「<A HREF="iiaptran.htm">トランザクションを理解する</A>」、および Platform SDK にあるコンポーネント サービスのマニュアルを参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>グローバル レジストリ エントリ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="グローバル レジストリ エントリの詳細など、レジストリのリファレンス ページです。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37745306">グローバル レジストリ エントリ</a></h1>
+
+<p>レジストリ パス</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br> &nbsp;\CurrentControlSet<br> &nbsp;&nbsp;\Services<br> &nbsp;&nbsp;&nbsp;\InetInfo<br> &nbsp;&nbsp;&nbsp;&nbsp;\Parameters</p>
+
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> CacheSecurityDescriptor </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0、1 <br><strong>既定値 :</strong> 1 (有効)</td></tr>
+<tr><td width=100%>ファイル オブジェクトのセキュリティ記述子をキャッシュするかどうかを指定します。値を 1 にして有効にした場合、IIS はファイル オブジェクトのキャッシュ時にセキュリティ アクセス権を取り出し、ファイル オブジェクトへアクセスせずに新しいユーザーのアクセス権をチェックできるようになります。この機能は、匿名認証だけを使用する場合ではなく、複数のユーザー アカウントを持つ場合のみ効果があります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>CheckCertRevocation</strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0、1 <br><strong>既定値 :</strong> 0 (無効)</td></tr>
+<tr><td width=100%>クライアント証明書の失効を、IIS がチェックするかどうかを指定します。通常、一般の証明書発行元のチェックはインターネットを通して行われ、パフォーマンスに大きな影響を与えるため、この設定は既定で無効になっています。ただし、独自に証明書を発行し、失効の処理をローカルで行う場合は、チェックを有効にすると効果的な場合があります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>DisableMemoryCache </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (無効)</td></tr>
+<tr><td width=100%>サーバーのキャッシングを無効にします。このキーは、<a href="iiabuti.htm">IIS スナップイン</a>では構成できません。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>ListenBackLog </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 1 ～ 250<br>  <strong>既定値 :</strong> 15</td></tr>
+<tr><td width=100%>サーバーの応答待ちキューに保管できるアクティブ接続の最大数を指定します。IIS では機能が強化されているので、通常はこのエントリを使ったり変更したりする必要はありません。ただし、非常に負荷の高い環境では、値を 50 まで上げることによって効果が得られる場合があります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> MaxCachedFileSize </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 <br><strong>既定値 :</strong> 256KB (262,144 バイト)</td></tr>
+<tr><td width=100%>キャッシュ ファイルの最大サイズを制御します。値が指定されていない場合の既定値は 256KB です。 </td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>MaxConcurrency </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 無制限<br> <strong>既定値 :</strong> 0</td></tr>
+<tr><td width=100%>システムが提供する同時実行数を指定します。IIS では、入出力 (I/O) 処理に完了ポートが使用されます。一般に、共有メモリや共有ロックで複数のスレッドが実行され、競合するのは好ましくありません。このキーでは、保留中の I/O 操作がある場合に、同時に実行できるプロセッサあたりのスレッド数を指定します。0 を指定した場合、使用する最適なスレッド数が選択されます。0 以外の値を指定した場合、プロセッサごとに指定した数のスレッドが同時実行されます。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>MaxPoolThreads</strong><br> REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 無制限<br> <strong>既定値 :</strong> 4</td></tr>
+<tr><td width=100%>プロセッサごとに作成するプール スレッドの数を指定します。各プール スレッドは、ネットワーク要求を待ち、その要求を処理します。<strong>MaxPoolThreads</strong> の数に、ISAPI アプリケーションが使用するスレッドは含まれません。既定では、4 つの CGI アプレットだけを同時に実行できます。多数の CGI アプリケーションを実行する場合は、この値を増やしてスループットを上げる必要があります。オプションで、..\Services\W3SVC\Parameters の下の UsePoolThreadForCGI の値を FALSE (0) に設定する方法もありますが、多数の CGI アプリケーションが実行されるとパフォーマンスが大幅に低下する可能性があるため、この方法はやや危険です。一般には、プロセッサあたり 20 を超えるスレッドを作成することは好ましくありません。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> MemCacheSize </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 2.500MB<br><strong>既定値 :</strong> 利用可能な物理メモリの約半分でメガバイトに調整されます。</td></tr>
+<tr><td width=100%>キャッシュのサイズを制御します。既定値は 60 秒ごとに動的に調整されます。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>PoolThreadLimit </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 無制限<br><strong>既定値 :</strong> 2 * # MB</td></tr>
+<tr><td width=100%>システムで作成できるプール スレッドの最大数を指定します。各プール スレッドは、ネットワーク要求を待ち、その要求を処理します。PoolThreadLimit は、IIS のすべてのスレッドを含むハード リミットです。PoolThreadLimit は、必ず MaxPoolThreads 以上になります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> MinFileKbSec </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 1 ～ 8192<br> <strong>既定値 :</strong> 1000</td></tr>
+<tr><td width=100%>Web サーバーがクライアントにファイルを送るときに、ファイルの転送をサーバーが中止するまでのタイムアウトが設定されます。タイムアウトは、<a href="iiabuti.htm">IIS スナップイン</a>で指定した接続のタイムアウトの最大値にファイルのサイズを加えた値を MinFileKbSecs で指定された値で割ったサイズによって決まります。たとえば、ファイルのサイズが 100 KB であれば、タイムアウトは 100 秒になります。接続のタイムアウトで指定した値の方が大きい場合は、その値がタイムアウトになります。このレジストリ名は誤解を招きやすいのですが、実際の値はキロバイト単位ではなく、バイト単位になります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>ObjectCacheTTL </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 無制限<br><strong>既定値 :</strong> 30 秒</td></tr>
+<tr><td width=100%>このレジストリ エントリは、生存期間 (TTL) を制御します。生存期間 (TTL) とは、オブジェクトがキャッシュ メモリに保管される時間です。キャッシュされたオブジェクトが指定した時間内に参照されなかった場合、そのオブジェクトはキャッシュから消去されます。システム メモリが少ない場合やサーバーのコンテンツが動的である場合は、TTL の値を下げて、システム メモリを大量の揮発性オブジェクトのキャッシングに使わないようにすることができます。値を 0xFFFFFFFF に設定すると、オブジェクト キャッシュ消去ルーチンが無効になり、キャッシュされたオブジェクトは上書きされるまでキャッシュに残ります。サーバーのシステム メモリに余裕があり、静的なデータが多い場合は、オブジェクト キャッシュ消去ルーチンを無効にすると効果があります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0">
+<strong>ThreadTimeout</strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 無制限<br> <strong>既定値 :</strong> 24 * 60 * 60 (24 時間)</td></tr>
+<tr><td width=100%>システムで I/O のアクティビティが発生していなくても、I/O 処理用のスレッドが保持される時間を指定します。通常、I/O のアクティビティが発生せず、未処理の要求がない場合、サーバーはアイドル状態になり、メモリは消費されません。ただし、この状態が長時間継続し、ThreadTimeout の時間を超過した場合、スレッドは停止します。単位は秒です。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>UserTokenTTL </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 0 ～ 0x7FFFFFFF <br><strong><strong>既定値 :</strong></strong> 15 * 60 (15 分)</td></tr>
+<tr><td width=100%>サーバーに対する要求があると、その要求または構成された匿名ユーザーのセキュリティ資格情報を使って、サーバー上にユーザー トークンが作成されます。サーバーは、このユーザー トークンを装い、ファイルやその他のシステム リソースにアクセスします (CacheSecurityDescriptor を参照)。このトークンはキャッシュされるため、Windows ログオンが実行されるのは、ユーザーが最初にシステムにアクセスするとき、またはユーザー トークンがキャッシュから消去された後だけです。統合 Windows 認証のトークンはキャッシュされません。単位は秒です。</td></tr>
+</table>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

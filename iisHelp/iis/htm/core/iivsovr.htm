@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Web サイトおよび FTP サイトについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サイトおよび FTP サイト (仮想サーバー) について説明します。Web サイトの既定の設定がどのように継承されるか、リモート管理オプション、Web サイト オペレータ グループに与えられる制限付き管理権限について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37761870">Web サイトおよび FTP サイトについて</a></h1>
+
+<p>ここでは、Web サイトおよび FTP サイト (仮想サーバー) について概要を説明します。ここでは、Web サイトおよび FTP サイトのプロパティ、管理者の権限、およびリモート管理に関する概念を紹介します。ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li><a href="#virtualservers">Web サイトと FTP サイト</a></li>
+<li><a href="#propertiesandinheritanceofpropertiesonvirtualservers">プロパティおよびサイトのプロパティの継承</a></li>
+
+<li><a href="#ftpresume">FTP の再開</a></li>
+<li><a href="#mimemap">MIME マップ</a></li>
+</ul>
+
+
+
+
+<h2><a name="virtualservers">Web サイトと FTP サイト</a></h2>
+
+<p>Windows XP Professional では、1 台のコンピュータで Web サイトと FTP サイトを 1 つずつホストできます。次に示すイントラネット環境の例では、システム管理者は、IIS を部門のワークステーションにインストールし、Web サイトと FTP サイト、合計 2 つの既定サイトを作成しています。</p>
+
+<img src="iivsovr2.gif" alt="物理サーバーと 2 つのサイト">
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;1 台のコンピュータで複数の Web サイトまたは FTP サイトをホストする場合は、Windows Server 製品の 1 つをインストールする必要があります。</p>
+
+<h2><a name="propertiesandinheritanceofpropertiesonvirtualservers">プロパティおよびサイトのプロパティの継承</a></h2>
+
+<p>プロパティは、Web サイトに設定できる値です。たとえば、<a href="iiabuti.htm">IIS スナップイン</a>を使用すると、既定の Web サイトに割り当てられている TCP ポートを、既定値の 80 から別のポート番号に変更できます。サイトのプロパティはプロパティ シートに表示され、&quot;メタベース&quot; と呼ばれるデータベースに格納されます。</p>
+
+<p>IIS のインストール時に、プロパティ シートのさまざまなプロパティに既定値が割り当てられます。IIS の既定の設定を使用することも、また Web を公開するときのニーズに合うようにこれらの設定をカスタマイズすることもできます。既定の設定を調整して、付加価値を提供し、パフォーマンスを向上させ、セキュリティを強化することも可能です。</p>
+
+<p>プロパティはサイト レベル、ディレクトリ レベル、またはファイル レベルで設定できます。上位レベル (サイト レベルなど) の設定は、下位レベル (ディレクトリ レベルなど) に自動的に適用、つまり &quot;継承&quot; されます。ただし、下位レベルで個別にプロパティを変更することも可能です。個々のサイト、ディレクトリ、またはファイルのプロパティが既に変更されている場合は、マスタの既定値を変更しても、個々の設定が自動的に既定の設定に置き換わることはありません。代わりに、サイト、ディレクトリ、またはファイルの設定を、新しい既定に合う設定に変更するかどうかを確認するメッセージが表示されます。</p>
+
+<p>プロパティの中には、リスト形式の値を持つものがあります。たとえば、既定のドキュメントの値は、ユーザーが URL にファイルを指定していない場合に読み込まれるドキュメントのリストです。カスタム エラー メッセージ、TCP/IP のアクセス制御、スクリプト マッピング、MIME マッピングなども、リスト形式で格納されるプロパティの例です。これらのリストには複数のエントリが含まれていますが、IIS はリスト全体を 1 つのプロパティとして扱います。あるディレクトリでリストを編集しても、その後サイト レベルでグローバルな変更を行うと、ディレクトリ レベルのリストはすべてサイト レベルから継承された新しいリストに置換され、リストがマージされることはありません。また、リストの値を持つプロパティでは、リストはマスタ レベル、または既定値から変更されているサイトやディレクトリでのみ表示されます。継承されたリストの値は表示されません。</p>
+
+<p><a href="iiwarndg.htm">フィルタ</a>は、リスト形式で表示されますが、リストとしては扱われません。サイト レベルでフィルタを追加した場合、新しいフィルタはマスタ レベルから継承されたフィルタのリストにマージされます。2 つのフィルタの優先順位の設定が同一の場合は、マスタ レベルから継承されたフィルタがサイト レベルのフィルタより先に読み込まれます。</p>
+
+
+
+<p>次の図は、Web サイトのすべてのプロパティを設定するときに使用するプロパティ シートです。</p>
+
+<img src="iivsovr3.gif" alt="Web サイトのプロパティ シート">
+
+<p>個々のプロパティの設定については、<a href="iiabuti.htm">IIS スナップイン</a>で、プロパティ シートの [ヘルプ] をクリックし、表示される説明を参照してください。</p>
+
+
+
+
+<h2><a name="ftpresume">FTP の再開</a></h2>
+
+<p> FTP の再開を実行することで、ファイルのダウンロード中にネットワークの接続が切断されるという問題に対処することができます。FTP の再開をサポートするクライアントは、REST コマンドを使って FTP 接続を再確立するだけで、転送が中断されたところから自動的にファイル転送を再開することができます。 </p> 
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;FTP を使用して、ワイルドカード要求のダウンロード (MGET)、サーバーへのファイルのアップロード (PUT)、または 4&nbsp;GB を超えるファイルのダウンロードを行う場合、IIS&nbsp;5.1 に実装されている FTP の再開は無効になります。  </p>
+
+
+<h2><a name="mimemap">MIME マップ</a></h2>
+
+<p>Multipurpose Internet Mail Extensions (MIME) は、複数の形式で構成されているファイルを Web ブラウザで表するためのインターネット標準です。Windows XP に既定でインストールされている登録済みファイルの種類は、<a href="iipx.htm">インターネット インフォメーション サービス</a>のプロパティ シートの [ファイルの種類] ダイアログ ボックスに一覧で表示されています。</p>
+
+<p>MIME マッピングは、コンピュータ、Web サイト、仮想ディレクトリ、ディレクトリ、ファイルの各レベルで構成できます。コンピュータ レベルで MIME マッピングを構成するには、<a href="iipx.htm">インターネット インフォメーション サービス</a>のプロパティ シートを使用します。そのほかのレベルで MIME マッピングを構成するときは、[<a href="iipy_9.htm">HTTP ヘッダー</a>] プロパティ シートを使用します。</p>  
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;コンピュータ レベルで MIME マッピングを構成しても、下位レベルで設定された構成が自動的に置換されることはありません。</p> 
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[HTTP ヘッダー] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[HTTP ヘッダー] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、HTML ページのヘッダー内で、ブラウザに返す値を設定するために使用します。</p>
+
+<p><strong>[コンテンツに有効期限を設定する]</strong></p>
+
+<p>有効期限の情報を入れる場合は、このチェック ボックスをオンにします。特別サービスやイベントの案内など、期間限定の情報に日付を入れます。ブラウザは、現在の日付と有効期限の日付を比較し、キャッシュされたページを表示するか、更新されたページをサーバーに要求するかを決定します。</p>
+
+<p><strong>[カスタム ヘッダー]</strong></p>
+
+<p>このプロパティは、Web サーバーからクライアントのブラウザに、カスタム HTTP ヘッダーを送信するために使用します。たとえば、カスタム HTTP ヘッダーを使って、クライアントのブラウザにページのキャッシュを許可し、プロキシ サーバーにはページのキャッシュを禁止することができます。カスタム ヘッダーは、メタベースで記述されています。</p>
+
+<p>Web サーバーからヘッダーを送信するには、[追加] をクリックし、テキスト ボックスにヘッダーの名前と値を入力します。</p>
+
+<p>ヘッダーの送信を停止するには、ヘッダーを選択して、[削除] をクリックします。</p>
+
+<p><strong>[コンテンツの規制]</strong></p>
+
+<p>Web ページの HTTP ヘッダーに、ページの内容を示すラベルを埋め込むことができます。Internet Explorer Version 3.0 以降などのブラウザでは、コンテンツの規制を検出して、有害な情報を含む可能性のある Web コンテンツをユーザーが識別できるようにします。</p>
+
+<p>Web サイト、ディレクトリ、またはファイルのコンテンツの規制を設定するには、[編集] をクリックします。</p>
+
+<p><strong>[MIME マップ]</strong></p>
+
+<p>Multipurpose Internet Mail Extensions (MIME) マッピングを構成するには、[編集] をクリックします。このマッピングでは、Web サービスがブラウザに返すさまざまなファイルの種類を設定します。</p>
+
+<p>マスタ プロパティ シートで MIME マッピングを設定すると、そのコンピュータの Web サイトおよびディレクトリに同じマッピングが適用されます。Web サイトやディレクトリの MIME マッピングは、変更可能です。ただし、その後でマスタ プロパティをもう一度適用すると、Web サイトやディレクトリの変更したプロパティの値はすべてマスタ プロパティの値に置き換わります。つまり、プロパティはマージされません。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

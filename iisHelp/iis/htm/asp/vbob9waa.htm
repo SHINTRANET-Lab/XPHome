@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Transfer</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_transfer"></A><SUP></SUP>Transfer</H4>
+
+<P>Transfer メソッドは、ある .asp ファイルで処理するためにアセンブルされたすべての情報を、別の .asp ファイルに送信します。</P>
+
+<H6>構文</H6>
+
+<P>Server.<B>Transfer</B>(<I>path</I>)</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Path</I></DT>
+
+<DD>制御の転送先の .asp ファイルの場所です。</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>Server.Transfer を呼び出すと、組み込みオブジェクトの状態の情報すべてが転送されます。つまり、セッションまたはアプリケーション スコープで、値に割り当てられた変数やオブジェクトは保持されます。さらに、要求コレクションの現在のコンテンツはすべて転送先の .asp ファイルで利用できます。</P>
+
+<P>入力パラメータで指定したパスが別のアプリケーションの .asp ファイルへのパスである場合、.asp ファイルは、Server.Transfer コマンドを含むアプリケーション内にあるかのように実行します。つまり、アプリケーションのほかの .asp ファイルやアプリケーションの Global.asa ファイルによってアプリケーション スコープを与えられた変数およびオブジェクトはすべて、呼出し先の .asp ファイルでも利用できます。ただし、<I>Path</I> パラメータにクエリ文字列を指定することはできません。指定した場合、ASP はエラーを返します。</P>
+
+<P>Server.Transfer は、Response.Redirect の代わりになるというだけでなく、より優れた機能があります。Response.Redirect では、ブラウザに別のページを要求するように指示します。リダイレクトは新しいページの要求を強制するため、ブラウザでは Web サーバーとの間を 2 往復しなければならず、Web サーバーでは余計な要求を処理しなければなりません。IIS 5.0 で導入された Server.Transfer メソッドでは、実行を &quot;サーバー上の&quot; 別の ASP ページに転送します。これにより、余計なやり取りは回避され、システム パフォーマンス全般が改善されるだけでなく、ユーザーに与える印象も良くなります。</P>
+
+<H6>例</H6>
+
+<P>次の例は、ある .asp ファイルから別の .asp ファイルへの転送、およびセッション識別子のクライアントへの送信を示します。</P>
+
+<P>これらのスクリプトの出力は、次のようになります。</P>
+
+<P>A session ID</P>
+
+<P>I am going to ASP2</P>
+
+<P>The same session ID</P>
+
+<P><B>ASP1</B></P>
+
+<PRE><CODE>&lt;HTML&gt;&lt;BODY&gt;&lt;%
+  Dim sessvar1
+  Response.Write Session.SessionID
+  Response.Write ("&lt;BR&gt;")
+  Response.Write("I am going to ASP2 &lt;BR&gt;")
+  Server.Transfer("/Myasps/ASP2.asp")
+%&gt;
+</CODE></PRE>
+
+<P><B>ASP2</B></P>
+
+<P><CODE>&lt;HTML&gt;</CODE></P>
+
+<P><CODE>&lt;BODY&gt;&lt;% Response.Write Session.SessionID %&gt;&lt;/BODY&gt;&lt;/HTML&gt;</CODE></P>
+
+<H6>対象</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server オブジェクト</A></P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob9pid.htm"><B>Execute</B></A>、<A HREF="/iishelp/iis/htm/asp/glob63vp.htm"><B>Global.asa リファレンス</B></A>、<B><A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm"><U>Application</U></B> <B>オブジェクト</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

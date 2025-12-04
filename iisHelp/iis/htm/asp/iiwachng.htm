@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR>
+<head>
+<title>ASP における重要な変更箇所</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="既定の設定や動作など、Active Server Pages の、以前のバージョンとの重要な相違点について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="whatschanged">ASP における重要な変更箇所</a></h1>
+
+
+<P>ASP では、いくつかの重要な変更および拡張が行われています。アプリケーションを ASP の以前のバージョンから更新する場合は、次の変更箇所に注意してください。</P>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ASP の新機能については、「<A HREF="iiwanew.htm">ASP の新機能</A>」を参照してください。</p>
+
+<UL>
+
+<LI><STRONG>バッファ処理が既定でオンに設定されている</STRONG>&nbsp;IIS&nbsp;4.0 では、応答のバッファ処理は既定でオフになっていました。IIS&nbsp;5.1 では、スクリプトでバッファ処理をオフにしない限り、出力に対して必ずバッファ処理が行われます。つまり、最終的な出力がクライアントに送られるのは、処理が完了したとき、またはスクリプトが <STRONG>Response.Flush</STRONG>メソッドを呼び出したときになります。IIS&nbsp;4.0 から IIS&nbsp;5.1 にアップグレードするときに、IIS&nbsp;4.0 設定が維持されます。したがって、応答バッファ処理は、オンにするまでオフのままです。詳細については、「ブラウザにコンテンツを送信する」の「<A HREF="iiwacont.htm#buffcnt">コンテンツのバッファ処理を行う</A>」を参照してください。</LI><BR><BR>
+
+
+<LI><STRONG>Response.IsClientConnected</STRONG>&nbsp;&nbsp;IIS&nbsp;4.0 では、<STRONG>Response.IsClientConnected</STRONG> は、ASP ファイルがブラウザにコンテンツを送った場合に限り、正しい情報を返しました。IIS&nbsp;5.1 では、ASP ファイルはブラウザにコンテンツを送る前に <STRONG>IsClientConnected</STRONG>&nbsp;プロパティを使用できます。詳細については、「<A HREF="vbob1d0k.htm"><STRONG>IsClientConnected</STRONG></A>」を参照してください。</LI><BR><BR>
+
+
+<LI><STRONG>インクルード ファイルのセキュリティの向上</STRONG>&nbsp;&nbsp;IIS&nbsp;4.0 では、物理パスにマップされている仮想ルートにインクルード ファイルを格納している場合、ASP はファイルを処理する際に、物理パスのセキュリティ資格情報を使用していませんでした。IIS&nbsp;5.1 では、ASP はインクルード ファイルを処理する際に、物理パスの資格情報を使用します。詳細については、「<A HREF="iiwainc.htm">ファイルをインクルードする</A>」を参照してください。</LI><BR><BR>
+
+<LI><STRONG>既定のドキュメントとクエリ文字列の動作</STRONG>&nbsp;&nbsp;IIS&nbsp;5.1 では、.asp ( .cdx) ファイルが既定のドキュメントとして構成されている場合、URL に既定のドキュメントが指定されていなくても、クエリ文字列を受け付けることができます。たとえば、URL <CODE>http://www.microsoft.com/default.asp?newuser=true</CODE> と <CODE>http://www.microsoft.com/?newuser=true</CODE> はいずれも、クエリ文字列値を既定の .asp ファイルに送ります。</LI><BR><BR>
+
+
+<LI><STRONG>トランザクション フラグ</STRONG>&nbsp;&nbsp;IIS&nbsp;4.0 では、ASP が新しいトランザクションを開始していることを示すために、「<STRONG>必要</STRONG>」、「<STRONG>新しく必要</STRONG>」、および「<STRONG>未サポート</STRONG>」のトランザクション フラグを使用していました。IIS&nbsp;5.1 でも、この動作に変更はありません。ただし、.asp ファイルが新しい <STRONG>Server.Execute</STRONG> メソッド、または <STRONG>Server.Transfer</STRONG> メソッドを使用して、トランザクションが完了している .asp ファイルを実行する場合、トランザクション フラグの状態は、次の .asp ファイルのために保持されます。2 番目の .asp ファイルのトランザクション フラグが、トランザクションがサポートされているか、またはトランザクションが必要であることを示す場合は、既存のトランザクションが使用され、新しいトランザクションは開始されません。</LI><BR><BR>
+
+<LI><STRONG>Both-Modeled オブジェクトの動作</STRONG>&nbsp;&nbsp;Both-Modeled COM オブジェクトがフリー スレッド マーシャラをサポートせずに Application の状態に格納されている場合、エラーが発生します。Both-Modeled コンポーネントは、フリー スレッド マーシャラと統合したうえで、Application の状態に格納する必要があります。</LI><BR><BR> 
+
+<LI><STRONG>メタベースに移動した構成可能なエントリ</STRONG>&nbsp;&nbsp;次に示す IIS&nbsp;4.0 のレジストリ エントリは、メタベースに移動しました。</LI>
+<UL>
+	<LI>ProcessorThreadMax</li>
+	<LI>ErrorsToNTLog</li>
+</UL>
+
+<P>IIS&nbsp;5.1 では、構成可能な ASP に関するパラメータはすべてメタベースから変更することができます。詳細については、「<A HREF="../core/iimbsovr.htm">メタベースについて</A>」を参照してください。</P>
+
+<LI><STRONG>ローカル サーバー COM オブジェクトのセキュリティ</STRONG>&nbsp;&nbsp;IIS は、&quot;クローキング&quot; と呼ばれる Windows の新しい COM 機能を使用すると、.asp ファイルがインスタンスを作成するローカル サーバーのアプリケーションに、作成元のクライアントのセキュリティ コンテキストを適用できるようになります。以前のバージョンでは、ローカル サーバー COM オブジェクトに割り当てられる識別情報は、オブジェクト インスタンスを作成したユーザーの識別情報に依存していました。</LI><BR><BR>
+
+<LI><STRONG>オブジェクトをより早く解放する</STRONG>&nbsp;&nbsp;IIS&nbsp;4.0 では、COM オブジェクトが解放されるのは、ASP がページの処理を終了したときに限られていました。IIS&nbsp;5.1 では、COM オブジェクトが <STRONG>OnEndPage</STRONG> メソッドを使用しない場合、およびオブジェクトの参照カウントが 0 の場合に、オブジェクトは処理が完了する前に解放されます。</LI><BR><BR>
+
+</UL><BR><BR>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

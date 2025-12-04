@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Database Access コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_database_access_component"></a>Database Access コンポーネント</H1>
+
+<P>Database Access コンポーネント (DAC) は、データベースまたはその他の表形式のデータ構造に格納された情報へのアクセスを提供します。&nbsp;DAC には、ActiveX<sup>&reg;</sup> Data Objects (ADO)、オープン データベース コネクティビティ (ODBC)、および Object Linking and Embedding for Databases (OLEDB) が含まれます。 ASP では、これらのコンポーネントを使用して Microsoft&reg; Access、SQL、Excel およびその他のテクノロジなどのさまざまなデータベース ソースからの情報を簡単に統合できます。複数のタイプのデータ格納領域へのアクセスを、Universal Data Access と呼びます。</P>
+
+<P>Universal Data Access を使用するアプリケーションの開発については、<a HREF="http://www.microsoft.com/isapi/redir.dll?prd=mdac" target=_blank><b><span class=le>Universal Data Access の Web サイト</span></b></a>または Platform SDK の「Microsoft Data Access SDK」を参照してください。</P>
+
+<P>ADO は、簡単に使用できるため、最も一般的に使用される Data Access コンポーネントです。ADO には、データへのアクセスを支援するためのメソッドとプロパティを備えた 7 つのオブジェクトのライブラリがあります。各オブジェクトは、Server.CreateObject を使用して作成できます。</P>
+
+<PRE><CODE>&lt;% 
+   ' Create two of the seven ADO objects.
+   Set conn = Server.CreateObject("ADODB.Connection")
+   Set rs = Server.CreateObject("ADODB.RecordSet")
+%&gt;</CODE></PRE>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>ADO では、タイプ ライブラリ内に定義済みの多数の定数を使用するので、ユーザーが特定の値を記憶する必要がありません。ADO Referenceに指定された定数を使用するには、ADO 定数に関する情報が入ったファイルをインクルードするか、または ADO タイプ ライブラリへの参照を Global.asa ファイルにインクルードする必要があります。次の例では、ADO タイプ ライブラリを使用して定数にアクセスします。</P>
+
+<P>たとえば、この行を ASP ファイルで使用するには、3 は Open Static および Lock Optimistic を示すことを記憶する必要があります。</P>
+
+<PRE><CODE>&lt;% rs.Open "Customers", Conn, 3, 3 %&gt;
+</CODE></PRE>
+
+<P>ADO 用のタイプ ライブラリをインクルードする場合は、このコードを使用できます。</P>
+
+<PRE><CODE>&lt;% rs.Open "Customers", Conn, adOpenStatic, adLockOptimistic %&gt;
+</CODE></PRE>
+
+<P>アプリケーションに次のタイプ ライブラリをインクルードするには、この宣言を Global.asa ファイルに配置します。</P>
+
+<PRE><CODE>&lt;!-- METADATA TYPE="typelib" FILE="c:\program files\common files\system\ado\msado20.dll"--&gt;
+</CODE></PRE>
+
+<P>タイプ ライブラリと定数の詳細については、「<A HREF="iiwavar.htm">変数と定数を使用する</A>」を参照してください。データ アクセスの詳細については、「<A HREF="iiwadata.htm">データ ソースにアクセスする</A>」および「<A HREF="/iishelp/iis/htm/asp/eadg3l80.htm">ASPでデータにアクセスする</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

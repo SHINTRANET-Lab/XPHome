@@ -1,0 +1,74 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>データベースへのアクセスを制御する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="Web サーバーのデータベース ファイルへのアクセスを効果的に制限するための、基本的なガイドラインについて説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">	
+
+<h1><a name="H1_37696546">データベースへのアクセスを制御する</a></h1>
+
+<p>さまざまな手法を使って、データベース ファイルへのアクセスを効果的に制限できます。このような制御手法としては、データベース ソフトウェアが備えるセキュリティ機能の構成、データベース ファイルへの NTFS のアクセス権の設定などがあります。ここでは、Web サーバーのデータベース ファイルへのアクセスを効果的に制限する基本的なガイドラインについて解説します。</p>
+
+<big><strong>データベースへのアクセスを制御するには</strong></big><br>
+
+<ol>
+<li>データベース ファイルを作成するときに、データベース ソフトウェアのセキュリティ機能を構成します。データベース ソフトウェアのいくつかのバージョンでは、データベース ファイルへのアクセスを厳密に制御するセキュリティ機能が提供されます。たとえば、Microsoft SQL Server のセキュリティ機能を使用すると、特定のデータベース ファイル、テーブル、レコード、フィールドなどについて、ユーザーに許可するアクセスの内容を制御できます。詳細については、データベース ソフトウェアのマニュアルを参照してください。</li>
+
+<li>適切な NTFS のアクセス権を設定し、Web サーバーに格納されているデータベース ファイルとディレクトリを保護します。データベース ファイルを更新する必要のある信頼できるユーザーに、適切なアクセス権が与えられていることを確認します。詳細については、「<a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a>」を参照してください。</li>
+
+<li>ファイルベースのデータ ソース名 (DSN) には、ユーザー ID とパスワードが含まれる場合があるので、NTFS の適切なアクセス権で保護します。</li>
+<li>データベースにユーザー名とパスワードの情報を渡すスクリプトを含む .asp ファイルを、適切な NTFS アクセス権で保護します。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;ASP データベース スクリプトについては、セキュリティで保護された COM サーバー コンポーネントへの変換を検討する必要があります。特に、ユーザー名とパスワードの情報を含むスクリプトには必須です。詳細については、Platform SDK と共に提供される「Internet Information Services SDK」を参照してください。</p>
+
+<li>適切な Web サーバーの認証方法を選択し、データベースにアクセスするユーザーを識別します。データベースのユーザー認証は、データベースの接続に用いるプロトコルに大きく依存します。たとえば、SQL Server で名前付きパイプの既定の接続プロトコルを使用すると、Windows ユーザーのアカウント情報による認証が SQL Server の認証に追加されます。異なる認証方法の統合の指針については、使用しているデータベース ソフトウェアのマニュアルを詳細に検討してください。</li>
+</ol>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>クライアント/サーバー処理を調整する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_coordinating_client_server_processing"></A><SUP></SUP>クライアント/サーバー処理を調整する</H2>
+
+<P>Web アプリケーションは、本質的に分散されます。クライアントの処理能力が向上するにつれて、クライアントとサーバー間で処理を分散できる割合も高まります。処理を部分的にクライアントに分散することにより、アプリケーションの応答のパフォーマンスを上げることができます。ただし処理の分散は、アプリケーションの設計をより複雑にします。</P>
+
+<P>クライアントとサーバーに処理を分散させるときは、2 つの設計目標があります。まず第 1 に、HTTP 接続を介した通信を最小限にとどめることです。確立した接続の速度がいかに速くても、ローカル処理は常にそれより速くなります。クライアントとサーバー間の情報の受け渡しは、必要な場合だけにとどめます。</P>
+
+<P>第 2 の設計目標は、クライアントに公開するサーバー リソースを、処理を完了するのに必要なものだけに限ることです。クライアントからの各要求は完全に修飾したものを提示し、その結果サーバーが応答時にさらに情報を要求する必要がないようにして、HTTP 接続を介したやり取りが増えないようにします。たとえば、クライアントが要求を出すときにサーバーに対して自分の機能を完全に記述できる場合は、サーバーは補足情報をクライアントに要求する代わりに、クライアントの機能に合う応答を直ちに送ることができます。これは、データベース アクセスをサポートする Web アプリケーションの設計にも適用できます。たとえば、クライアントが注文の状態を確認している場合、注文表にあるすべてのレコードではなく、対象となる特定の注文についてのみ記述しているレコードセットをクライアントに提供するべきです。
+
+<UL type=disc>
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg6cbl.htm">データをキャッシュする</A>」では、HTTP 接続を介した通信を最小にするための方法を紹介します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg6isz.htm">クライアント機能</A>」では、クライアントの要求を完全に修飾するための設計ツールを提供する機能について説明します。</li>
+
+	<LI>「<A HREF="/iishelp/iis/htm/asp/eadg9mp1.htm">RDS によるリモート データ バインド</A>」では、クライアントのアクセスを適切なデータ リソースに制限する方法について説明します。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

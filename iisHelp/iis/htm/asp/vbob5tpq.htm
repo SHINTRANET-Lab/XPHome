@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Abandon</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_abandon"></A><SUP></SUP>Abandon</H4>
+
+<P>Abandon メソッドは、Session オブジェクトに格納されているすべてのオブジェクトを破棄し、リソースを解放します。Abandon メソッドを明示的に呼び出さない場合、サーバーは、セッションがタイムアウトになった時点でそれらのオブジェクトを破棄します。</P>
+
+<H6>構文</H6>
+
+<P><B>Session.<B>Abandon</B></B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>解説</H6>
+
+<P>Abandon メソッドを呼び出すと、現在の Session オブジェクトが削除のためにキューに退避されますが、実際に削除されるのは現在のページのスクリプト コマンドの処理がすべて完了した時点です。つまり、Abandon を呼び出したページ内であれば Session オブジェクト内の変数にはまだアクセスすることができますが、その後の Web ページではアクセスできなくなります。</P>
+
+<P>たとえば、次のスクリプトの 3 行目は値 <CODE>Mary</CODE> を出力します。これは、Session オブジェクトはサーバーがスクリプトの処理を完了するまで破棄されないためです。 </P>
+
+<PRE><CODE>&lt;%
+  Session.Abandon 
+  Session("MyName") = "Mary"
+  Reponse.Write(Session("MyName"))
+%&gt;
+ </CODE></PRE>
+
+<P>しかし、後続の Web ページで変数 <CODE>MyName</CODE> にアクセスした場合、変数は空になっています。これは、上のスクリプトのあるページの処理が完了した時点で <CODE>MyName</CODE> と前の Session オブジェクトが破棄されたためです。 </P>
+
+<P>セッションを放棄した後に後続の Web ページを開くと、サーバーは新しい Session オブジェクトを作成します。この新しい Session オブジェクトには、変数やオブジェクトを格納することができます。 </P>
+
+<H6>例</H6>
+
+<P>次の例は、サーバーが現在のページの処理を完了したときにセッション状態が解放されるようにします。</P>
+
+<PRE><CODE>&lt;% Session.Abandon %&gt;
+ </CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Session オブジェクト </P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob04vo.htm"><B>Timeout</B></A> </P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

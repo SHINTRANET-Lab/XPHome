@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>AccessFlags</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_accessflags"></A><SUP></SUP>AccessFlags</H3>
+
+<P>この単一のプロパティには、次のファイル アクセス許可フラグが含まれます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro2an9.htm"><B>AccessExecute</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6grp.htm"><B>AccessNoRemoteWrite</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1xb9.htm"><B>AccessNoRemoteExecute</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5wv8.htm"><B>AccessRead</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5jj8.htm"><B>AccessNoRemoteRead</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro0i5w.htm"><B>AccessScript</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3gtw.htm"><B>AccessNoRemoteScript</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro063p.htm"><B>AccessWrite</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro39d1.htm"><B>AccessSource</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<P>AccessExecute、AccessScript、AccessNoRemoteExecute、AccessNoRemoteScript フラグを TRUE に設定することによって確立されたアクセス許可は FTP サーバー ファイルには適用されません。</P>
+
+<P><span class=le><B>注意&nbsp;&nbsp;&nbsp;</B></span><I></I>書き込み許可と実行許可の両方を同時に設定することは危険です。ユーザーにより内部ファイルが書き換えられ、システムに有害なスクリプトが実行される可能性があります。</P>
+
+<P>リモート アクセス フラグは、対応する一般アクセス フラグが設定されている場合にのみ動作します。たとえば、AccessRead が設定されていなければ、AccessNoRemoteRead を設定しても意味がありません。この両方が設定されていると、ローカル ホストでファイルを読めるようになりますが、リモート クライアントから同じファイルを読むことはできません。</P>
+
+<P>AccessSource フラグが設定されている場合、Web Distributed Authoring and Versioning (WebDAV) 標準で説明されている HTTP 拡張機能を使用して、クライアントへのソース アクセスが許可されます。WebDAV の詳細については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=external&sbp=webdav&pver=1.0&ar=ietforg" target=_blank><b>WWW Distributed Authoring and Versioning</b></a> の Web サイトと「<A HREF="..\core\wcwbdav.htm"><B>WebDAV の発行</B></A>」を参照してください。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>すべてのアクセス許可が、Web サービス、Web サーバー、Web ディレクトリ、および  Web ファイルに適用されます。FTP サービス、FTP サーバー、FTP ディレクトリについては、AccessRead 許可と AccessWrite 許可だけが適用されます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=43%>データ型</TD>
+<TD width=57%>長整数型</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=43%>既定値</TD>
+<TD width=57%>AccessRead = TRUE</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=43%>継承</TD>
+<TD width=57%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/MSFTPSVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore32n9.htm"><B>IIsFtpService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/MSFTPSVC/<I>N</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore43si.htm"><B>IIsFtpServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/MSFTPSVC/<I>N</I>/ROOT</B> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore20mq.htm"><B>IIsFtpVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/MSFTPSVC/<I>N</I>/ROOT/<I>FtpVirtualDir</I></B> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore20mq.htm"><B>IIsFtpVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I>/<I>WebFile</I></B></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore136t.htm"><B>IIsWebFile</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=52%>メタベース識別子</TD>
+<TD width=48%><B>MD_ACCESS_PERM</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%>既定のビットマスク設定</TD>
+<TD width=48%><B>MD_ACCESS_READ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%>ユーザー タイプ</TD>
+<TD width=48%><B>IIS_MD_UT_FILE</B></TD>
+</TR>
+</TABLE><BR>
+
+<H6>ビットマスク値</H6>
+
+<TABLE border=0 cellpadding=5 cols=3 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>定数</B></TD>
+<TD class=blue width=18%><B>値</B></TD>
+<TD class=blue width=32%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_READ</B></TD>
+<TD width=18%>0x00000001</TD>
+<TD width=32%>読み取りアクセスを許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_WRITE</B></TD>
+<TD width=18%>0x00000002</TD>
+<TD width=32%>書き込みアクセスを許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_EXECUTE</B></TD>
+<TD width=18%>0x00000004</TD>
+<TD width=32%>ファイルの実行を許可します (スクリプトの実行許可を含む)。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_SOURCE</B></TD>
+<TD width=18%>0x00000010</TD>
+<TD width=32%>ソースへのアクセスを許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_SCRIPT</B></TD>
+<TD width=18%>0x00000200</TD>
+<TD width=32%>スクリプトの実行を許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_NO_REMOTE_WRITE</B></TD>
+<TD width=18%>0x00000400</TD>
+<TD width=32%>ローカル書き込みアクセスのみを許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_NO_REMOTE_READ</B></TD>
+<TD width=18%>0x00001000</TD>
+<TD width=32%>ローカル読み込みアクセスのみを許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_NO_REMOTE_EXECUTE</B></TD>
+<TD width=18%>0x00002000</TD>
+<TD width=32%>ローカルでの実行のみを許可します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_ACCESS_NO_REMOTE_SCRIPT</B></TD>
+<TD width=18%>0x00004000</TD>
+<TD width=32%>ローカルでのホスト アクセスのみを許可します。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

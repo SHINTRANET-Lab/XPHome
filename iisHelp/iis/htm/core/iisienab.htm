@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サーバー側インクルードを有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="サーバー側インクルード ディレクティブを有効/無効に設定する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+
+<h1><a name="H1_37753133">サーバー側インクルードを有効にする</a></h1>
+
+<p>Web サーバーは、ファイルを処理する前に、サーバー側インクルード コマンドがファイルに含まれていることを検出する必要があります。既定では、Web サーバーは、.stm、.shtm、または .shtml のファイル名拡張子を持つファイルを処理するように設定されています。Web サーバー全体、1 つの Web サイト、1 つのアプリケーション、または各ディレクトリに対し、サーバー側インクルード ディレクティブの処理を無効にするよう設定できます。</p> 
+
+<big>サーバー側インクルードを有効にするには</big><br>
+
+<ol>
+<li>SSI ディレクティブが含まれるファイルに、SSI ファイル名拡張子 (.stm、.shtm、または .shtml) を付けます。</li>
+<p>拡張子は追加することもできます。「<a href="iiwarndf.htm">アプリケーションのマッピングを設定する</a>」を参照してください。</p>
+<li>スクリプト アクセス権または実行アクセス権を持つディレクトリに SSI ファイルを格納します。詳細については、「<a href="iidfpsc.htm">ディレクトリおよびファイルに対する NTFS のアクセス権を設定する</a>」を参照してください。</li>
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>サーバー側インクルードを無効にするには</big>
+<p>Web サーバーが、削除された SSI ファイル名拡張子の付いたページの要求を受け取った場合、ページ内のサーバー側インクルード ディレクティブは処理されなくなります。  
+<ol>
+
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはディレクトリを選択し、そのプロパティ シートを開き、[ホーム ディレクトリ] タブまたは [ディレクトリ] タブをクリックします。特定のアプリケーションに対して SSI を無効にするには、アプリケーション開始点ディレクトリを選択します。</li>
+<li>[構成] をクリックします。</li>
+<li>[アプリケーションのマッピング] タブで、拡張子を選択して、[削除] をクリックします。</li>
+</ol>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

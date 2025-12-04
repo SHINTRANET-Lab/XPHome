@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>CodePage</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_response_codepage"></A><SUP></SUP>CodePage</H4>
+
+<P>CodePage プロパティは、組み込みオブジェクトにおける文字列のエンコード方式を指定します。コードページは、数字、区切り記号、およびその他の記号を含む文字セットです。コードページは、各言語によって異なります。日本語やヒンディー語などマルチバイト系の文字がある一方で、英語やドイツ語などシングルバイト系の文字もあります。CodePage プロパティには、読み取り/書き込みが許可されます。</P>
+
+<H6>構文</H6>
+
+<P>Response.<B>CodePage </B>[= <I>CodePageID </I>]</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>CodePageID</I></DT>
+</DL>
+
+<P>文字書式のコードページを表す整数です。コードページを表す整数については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&sbp=workshop&pver=6.0&ar=reference&sba=charsets" target=_blank>MSDN Web Workshop</a> の FamilyCodePage の列を参照してください。</P>
+
+<H6>注</H6>
+
+<P>Response.CodePage を明示的に設定すると、単一のページに対して適用されます。Session.CodePage は、セッション内の応答全体に適用されます。 </P>
+
+<P>ページ内で Response.CodePage を明示的に設定しない場合、セッションが有効である限り、Session.CodePage によって暗黙的に設定されます。セッションが有効でない場合、ページ内に @CodePage が存在すれば、@CodePage によって Response.CodePage が設定されます。ページ内に @CodePage がない場合、AspCodePage メタベース プロパティによって Response.CodePage が設定されます。AspCodePage メタベース プロパティが設定されていないか、0 に設定されている場合、システムの ANSI コードページによって Response.CodePage が設定されます。</P>
+
+<P>応答の本体ごとに、設定できるコードページは 1 つだけです。複数あった場合、不適切な文字が表示されます。2 つのページでコードページを明示的に設定しており、一方のページからもう一方のページを #include、Server.Execute、または Server.Transfer で呼び出している場合、通常は、親ページのコードページが有効になります。この唯一の例外は、Server.Execute 呼び出しの親ページで Response.CodePage が明示的に設定されている場合です。この場合には、子ページにおける @CodePage コマンドによって、親ページのコードーページが上書きされます。</P>
+
+<P>スクリプト内のリテラル文字列は、現在でも、@CodePage (存在する場合)、AspCodePage メタベース値 (設定されている場合)、またはシステムの ANSI コードページを使用してエンコードされます。Response.CodePage または Session.CodePage を明示的に設定する場合は、非リテラル文字列をクライアントに送信する前に設定を行います。同一ページでリテラル文字列と非リテラル文字列を使用する場合、@CodePage のコードページが Response.CodePage のコードページと一致していることを確認します。一致していないと、リテラル文字列と非リテラル文字列のエンコード方式が異なってしまい、正しく表示されません。</P>
+
+<P>Web ページのコードページが Web クライアントにおけるシステムの既定値と一致する場合、Web ページでのコードページ設定は必須ではありませんが、設定することをお勧めします。</P>
+
+<P>ページ内でコードページが設定されている場合、Response.Charset も設定する必要があります。コードページの値は、応答を作成する段階で、データのエンコード方式を IIS に指定します。Charset の値は、応答を表示する段階で、データのデコード方式をブラウザに指定します。Response.Charset の <I>CharsetName</I> は、コードページの値と一致していることが必要です。一致していない場合、ブラウザで表示する文字が統一されません。<I>CharsetNames</I> と対応するコードページの値の一覧については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&sbp=workshop&pver=6.0&ar=reference&sba=charsets " target=_blank>MSDN Web Workshop</a> の Preferred Charset Label および FamilyCodePage の各列を参照してください。</P>
+
+<P>Web ページのファイル形式は、ページ内で使用する @CodePage と一致させる必要があります。Notepad.exe では、ファイルを UTF-8 形式またはシステムの ANSI 形式で保存できます。たとえば、@CodePage が UTF-8 を表す 65001 に設定されている場合、Web ファイルは UTF-8 形式で保存します。@CodePage が英語かドイツ語を表す 1252 に設定されている場合、Web ファイルは英語かドイツ語システムの ANSI 形式で保存します。システム言語とは異なる言語の ANSI 形式でページを保存する場合、[コントロール パネル] の [地域のオプション] で既定のシステム ロケールを変更できます。たとえば、システム ロケールを日本語に変更した後は、ANSI 形式で保存されるすべてのファイルに日本語のコードページが使用され、日本語のシステム ロケールによってのみ判読可能になります。</P>
+
+<P>複数言語対応の Web サイトなどで、各種のコードページおよび文字セットを使用する Web ページを作成し、テストする場合、テストを実施するクライアント コンピュータには、表示したい各言語の言語パックをインストールしておく必要があります。言語パックは、[コントロール パネル] の [地域のオプション] からインストールします。</P>
+
+<H6>例</H6>
+
+<P>次の例では、複数言語対応の Web サイトにおけるホーム ページを示します。ホーム ページは UTF-8 形式で保存されるため、あらゆる言語の文字が表示できます。このホーム ページでは、クライアントの言語を識別するために ServerVariable HTTP_ACCEPT_LANGUAGE を使用して、クライアントをそれぞれの言語のページにリダイレクトしています。</P>
+
+<P>--- Default.asp ---</P>
+
+<PRE><CODE>&lt;%@ CodePage=65001 Language="VBScript"%&gt;
+
+&lt;% 
+' Default.asp
+' This file is saved in UTF-8 format.
+' The codepage of the system doesn't matter because
+' you are setting @CodePage, Response.CodePage, and Response.Charset.
+' Otherwise, the system codepage of the server would be the default.
+
+Response.CodePage = 65001
+Response.CharSet = "utf-8"
+
+' Redirect to the correct home page based on the client language.
+Select Case Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")
+
+  Case "en-us", "en", "fr", "fr-fr", "es", "es-es", "zh", "zh-cn", "zh-tw"
+    Response.Redirect Request.ServerVariables("HTTP_ACCEPT_LANGUAGE") &amp; "Start.asp"
+
+  Case Else
+    %&gt;
+    Welcome.  Click &lt;a href="enStart.asp"&gt;here&lt;/a&gt; to go to the English Web site.&lt;BR&gt;&lt;BR&gt;
+    Bienvenue. Cliquetez &lt;a href="frStart.asp"&gt;ici&lt;/a&gt; pour aller au Web site francais.&lt;BR&gt;&lt;BR&gt;
+    Recepcion. Haga clic &lt;a href="esStart.asp"&gt;aqui&lt;/a&gt; para ir al Web site espanol.&lt;BR&gt;&lt;BR&gt;
+    [Chinese characters with a link]&lt;BR&gt;&lt;BR&gt;
+    [Chinese - Taiwan characters with a link]&lt;BR&gt;&lt;BR&gt;
+    &lt;%
+
+End Select
+%&gt;</CODE></PRE>
+
+<P>--- En-usStart.asp ---</P>
+
+<PRE><CODE>&lt;%@ Language="VBScript" %&gt;
+&lt;% Response.Redirect "enStart.asp" %&gt;</CODE></PRE>
+
+<P>--- EnStart.asp ---</P>
+
+<PRE><CODE>&lt;%@ CodePage=1252 Language="VBScript"%&gt;
+
+&lt;% 
+' enStart.asp
+' This file is saved in ANSI format on US English system locale.
+' The language of the system doesn't matter
+'  because you are setting @CodePage and Response.CodePage.
+' Otherwise, the system codepage of the server would be the default.
+
+Response.CodePage = 1252
+Response.CharSet = "windows-1252" 
+
+Response.Write "&lt;H1 align=center&gt;News for Today&lt;/H1&gt;"
+%&gt;
+
+You can insert more content here, possibly using the &lt;BR&gt;
+IIS Content Linking component, the &lt;BR&gt;
+IIS Content Rotator component, or the &lt;BR&gt;
+IIS Ad Rotator component.&lt;BR&gt;</CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7fw4.htm"><B>Charset</B></A>、<A HREF="eadg4o37.htm">インターナショナル クライアントに適応させる</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

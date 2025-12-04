@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Windows XP による発行</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Windows&nbsp;XP によって、WebDAV ディレクトリにドキュメントを発行する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="PublishingthroughWindows2000">Windows XP による発行</a></h1>
+
+<p>Windows XP Professional から、別のサーバー上にある WebDAV 発行ディレクトリに接続できるようになりました。Windows XP&nbsp;Professional の既定の設定では、IIS&nbsp;5.1 はインストールされません。したがって、インストールのオプションで IIS&nbsp;5.1 を選択しなかった場合は、手動でインストールする必要があります。IIS のインストール方法については、「<a href="iiiisin.htm">IIS のインストール</a>」を参照してください。</p>
+
+
+<big>Windows XP を使用した WebDAV ディレクトリへの接続</big>
+<ol>
+<li>[スタート] ボタンをクリックし、[マイ コンピュータ] をクリックして、[マイ ネットワーク] をクリックします。 </li>
+<li>[ネットワーク プレースの追加] をダブルクリックします。</li>
+<li>ネットワーク プレースの追加 ウィザードで、接続する WebDAV ディレクトリの URL を入力します。</li>
+<li>[次へ] をクリックします。</li>
+<li>接続するディレクトリの登録名を入力します。</li>
+<li>[完了] をクリックします。</li>
+<li>[マイ ネットワーク] をダブルクリックします。WebDAV サイトの Web フォルダの登録名が表示されます。たとえば、登録名として、My Publishing Folder と入力すると、&quot;My Publishing Folder へのショートカット&quot; と表示されます。
+<li>Web フォルダの名称をダブルクリックします。 </li>
+<li>[My Publishing Folder へのショートカット] をダブルクリックします。ディレクトリに含まれるファイルの一覧が表示されます。</li>
+</ol>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

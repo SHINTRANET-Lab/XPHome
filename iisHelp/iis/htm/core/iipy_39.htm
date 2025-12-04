@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[コンテンツの規制] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="ＭＳ Ｐゴシック">
+
+<p><strong>[コンテンツの規制] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、特定の Web サイト、ディレクトリ、またはファイルに対して、Web サーバーのコンテンツ規制機能を構成するときに使用します。</p>
+ 
+<p>Web サーバーの Platform for Internet Content Selection (PICS) システムでは、Recreational Software Advisory Council (RSAC) が開発した規制システムを採用しています。このシステムでは、暴力、性的な描写、および不快な言葉のレベルに応じてコンテンツを規制します。</p>
+
+<p>コンテンツの規制を Web コンテンツに適用するには、[このリソースの規制を有効にする] チェック ボックスをオンにします。</p>
+
+<p>コンテンツの規制を設定するには、[分類] ボックスで、[言葉]、[ヌード]、[セックス]、[暴力] の中から、規制するカテゴリをクリックします。そのカテゴリについて内容が不快感を与える可能性のレベルを設定するには、規制のスライダを使用します。各設定で、規制レベルの説明が表示されます。</p>
+
+<p>コンテンツを規制した人を明らかにするには、[電子メール アドレス] ボックスに電子メールのアドレスを入力します。</p>
+
+<p>規制されたコンテンツに有効期限を設定するには、[規制の有効期限] ボックスの右にあるボタンをクリックします。カレンダーが表示されるので、有効期限の日付を指定します。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

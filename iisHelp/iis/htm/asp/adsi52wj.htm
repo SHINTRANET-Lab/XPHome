@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>GetDataPaths</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_k2_getdatapaths"></A><SUP></SUP>GetDataPaths</H4>
+
+<P>ADSI の GetDataPaths メソッドは、指定されたプロパティが存在するメタベース キーへのパスを検索するもので、すべての IIS Admin オブジェクトで使用できます。このメソッドを使用して、サブキーでの値の継承を妨げているプロパティを探すことができます。パスの検索は、GetDataPaths を使用するオブジェクトに関連付けられたキーから開始され、そのキーにプロパティが見つかった場合は、開始パスを返します。たとえば、3 番目の Web サーバーの IIsWebServer オブジェクトに GetDataPaths を使用する場合、検索パスは IIS://LocalHost/W3SVC/3 から開始され、IIS://LocalHost/W3SVC/3、IIS://LocalHost/W3SVC/3/ROOT/VDir1、および IIS://LocalHost/W3SVC/3/ROOT/VDir1/Dir1/File1 の各パスがプロパティを含むキーであれば、それらのパスを返します。</P>
+
+<P>このメソッドのパラメータは、継承可能なプロパティのパスのみを検索するのか、またはすべてのプロパティ パスを検索するのかを指定できます。GetDataPaths では、プロパティが出現する箇所と共に、プロパティが継承可能かどうかを調べることができます。</P>
+
+<H6>構文</H6>
+
+<P><I>PathList</I> = <i>object</I>.<B>GetDataPaths</B>( <i>property</I>,<I>AttributeFlag</I> )</P>
+
+<P>&nbsp;</P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>PathList</I></DT>
+
+<DD>指定されたプロパティが出現する位置へのパスの一覧を受け取ります。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIS Admin オブジェクトを含んでいます。<BR>
+</DD>
+
+<DT><I>property</I></DT>
+
+<DD>パスを検索するプロパティの名前です。<BR>
+</DD>
+
+<DT><I>AttributeFlag</I></DT>
+
+<DD>次のいずれかのフラグを指定します。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=52%><B>IIS_ANY_PROPERTY</B></TD>
+<TD width=48%>プロパティが継承可能かどうかに関係なくパスを取得します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=52%><B>IIS_INHERITABLE_ONLY</B></TD>
+<TD width=48%>プロパティが継承可能である場合のみパスを取得します。継承可能でない場合は、MD_ERROR_DATA_NOT_FOUND を返します。 </TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>&quot;For each Path in PathList...Next&quot; ステートメントを使用して、<I>PathList</I> から個々のパスを取得できます。 </P>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;% 
+  Const IIS_ANY_PROPERTY = 0 
+  Const IIS_INHERITABLE_ONLY = 1 
+  Const MD_ERROR_DATA_NOT_FOUND = &amp;H800CC801 
+  Dim WebSvrObj, PathList, vProperty 
+  On Error Resume Next 
+'Get the object for the first Web server. 
+  Set WebSvrObj = GetObject("IIS://<I>LocalHost</I>/W3SVC/1") 
+'Get the paths where a property is located. 
+  vProperty = "AccessFlags" 
+  PathList = WebSvrObj.GetDataPaths(vProperty, IIS_INHERITABLE_ONLY) 
+  If Err.Number = 0 Then 
+    Response.Write "Paths for property " &amp; vProperty &amp; "&lt;BR&gt;" 
+    For each Path in PathList 
+      Response.Write Path &amp; "&lt;BR&gt;" 
+    Next 
+  ElseIf Err.Number = MD_ERROR_DATA_NOT_FOUND Then 
+    Response.Write "Property is not inheritable.&lt;BR&gt;" 
+  ElseIf Err.Number = &amp;H80005006 Then 
+    Response.Write "Property does not exist.&lt;BR&gt;" 
+  Else 
+    Response.Write "Error " &amp; Err.Number &amp; "  " &amp; Err.Description 
+  End If
+%&gt; 
+</CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

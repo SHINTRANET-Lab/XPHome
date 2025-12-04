@@ -1,0 +1,145 @@
+<!doctype html public "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>監査を構成および監視する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="Windows エクスプローラと Microsoft 管理コンソール (MMC) を使用して、特定のファイルまたはディレクトリの監査を設定し、Web サーバーのセキュリティに関連するイベントを監視する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37709189">監査を構成および監視する</a></h1>
+
+<p>Windows エクスプローラ、<a href="iiabuti.htm">IIS スナップイン</a>、および Microsoft 管理コンソール (MMC) を使用して、Web サーバーのセキュリティに関連するイベントを監視し、特定のファイルやディレクトリに対するセキュリティの侵害を検出することができます。監査の詳細については、Windows のマニュアルを参照してください。ここでは、ディレクトリやファイルへのアクセス、およびサーバーのイベントに対して監査を構成する手順について説明します。</p>
+
+<p>IIS のログ機能の詳細については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</p>
+
+<h3>グループ ポリシー スナップインをインストールする</H3>
+<p>監査機能を使用するためには、グループ ポリシー スナップインをインストールする必要があります。このスナップインは、コンピュータ管理コンソール (Computer Management console) には含まれません。グループ ポリシー スナップインのための新しいコンソールを作成する必要があります。MMC スナップインの追加に関する詳細については、Windows XP のマニュアルを参照してください。</P>
+ 
+<p class="bigfix">&nbsp;</p>
+
+<big><a name="deligateAudit">新しい MMC コンソールを作成し、グループ ポリシー スナップインを追加する</a></big>
+
+<OL>
+<LI>[スタート] ボタンをクリックし、[ファイル名を指定して実行] をクリックします。[ファイル名を指定して実行] ダイアログ ボックスで、「<code><STRONG>mmc</STRONG></code>」と入力します。これにより、新しい MMC コンソールが開始されます。</LI>
+<li>[ファイル] メニューの [スナップインの追加と削除] を選択します。</LI>
+<LI>[スナップインの追加と削除] ダイアログ ボックスの [追加] をクリックします。</LI>
+<LI>[スタンドアロン スナップインの追加] ダイアログ ボックスのスナップインのリストから [グループ ポリシー] を選択します。[追加] をクリックします。</LI>
+<LI>[グループ ポリシー オブジェクトの選択] ダイアログ ボックスの [完了] をクリックして、ローカル コンピュータの監査を行うか、または [参照] をクリックして、監査を行うコンピュータを選択します。</LI>
+<LI>[参照] をクリックした場合、手順 7 へ進み、それ以外は、手順 9 に進みます。</LI>
+<LI>[グループ ポリシー オブジェクトの参照] ダイアログ ボックスの [コンピュータ] タブをクリックします。次に、[別のコンピュータ] をクリックして監査を行うコンピュータを選択し、[OK] をクリックします。</LI>
+<LI>[グループ ポリシー オブジェクトの選択] ダイアログ ボックスの [完了] をクリックします。</LI>
+<LI>[スタンドアロン スナップインの追加] ダイアログ ボックスを閉じます。</LI>
+<LI>[OK] をクリックします。</LI>
+<LI>[コンソール] メニューの [上書き保存] をクリックし、ハード ディスクに新しいコンソールを保存します。監査の構成に、このコンソールを使用します。</LI>
+</OL>
+
+
+
+<p class="bigfix">&nbsp;</p>
+
+<big><a name="deligateAudit">別のアカウントで監査を構成するには</a></big>
+
+<p>既定では、Administrators グループのメンバだけが監査を構成する権限を持っています。サーバーのイベントの監査を構成する作業を、別のユーザー アカウントに任せることができます。別のアカウントに監査の構成を許可する手順は、次のとおりです。</p>
+<ol>
+<li>作成したグループ ポリシー コンソールで、[コンピュータの構成]、[Windows の設定]、[セキュリティの設定]、[ローカル ポリシー]、[ユーザー権利の割り当て] の順にクリックします。</li>
+<li>[監査とセキュリティ ログの管理] を右クリックして、[プロパティ] を選択します。</li>
+<li>[監査とセキュリティ ログの管理] ダイアログ ボックスの [追加] をクリックします。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;[追加] が選択できない場合は、[ローカル ポリシーから除外する] チェック ボックスをオフにして、このボタンをアクティブにします。</p>
+<li>一覧から適切なユーザーまたはユーザー グループを選択して、[追加] をクリックし、[OK] をクリックします。</li>
+
+</ol> 
+
+
+
+
+
+
+<p class="bigfix">&nbsp;</p>
+<big><a name="auditset">ディレクトリまたはファイルへのアクセスを監査するには</a></big>
+<p>次の監査機能を使用するには、NTFS ファイル システムが必要です。詳細については、「<a href="iintfsc.htm">NTFS でファイルを保護する</a>」を参照してください。</p>
+<ol>
+	<li>Windows エクスプローラで、監査するディレクトリまたはファイルを指定して、そのプロパティ シートを開きます。</li>
+	
+	<li>[セキュリティ] タブをクリックします。</li>
+	
+	<p><strong>注</strong>&nbsp;&nbsp;&nbsp;サーバーのファイル システムが FAT に設定されている場合は、[セキュリティ] タブが表示されません。FAT から NTFS への変換については、Windows のマニュアルを参照してください。</p>
+
+	<li>[詳細] をクリックし、[セキュリティの詳細設定] ダイアログ ボックスの [監査] タブをクリックします。</li>
+
+	<li>監査するグループ、ユーザーまたはコンピュータを追加するには、[追加] をクリックします。一覧からユーザー、コンタクト、グループ、またはコンピュータを選択して、[OK] をクリックします。
+
+	<li>[監査エントリ] ダイアログ ボックスの [アクセス] ボックスで、適切なオプションを選択します。これらのオプションの詳細については、Windows のマニュアルを参照してください。</li>
+
+	<li>監査するリソースの範囲を変更するには、[適用先] ボックスで、適切な監査レベルを選択します。これらのレベルの詳細については、Windows のマニュアルを参照してください。</li>
+
+	<li>選択した範囲のみに適用されるオブジェクトを監査する場合、[これらの監査エントリを、このコンテナの中にあるオブジェクトやコンテナにのみ適用する] チェック ボックスをオンにします。このチェック ボックスをオンにすると、選択範囲内で作成したオブジェクトでも、その範囲外で実行する場合は監査されなくなります。</li></ol>
+
+<p><strong>注</strong>
+<ul>
+<li>監査には、コンピュータ リソースが使用されます。サーバーのパフォーマンスを最適化するため、監査対象はできるだけ絞り込みます。たとえば、100 個のファイルを含むディレクトリの監査対象がそのうちの数ファイルのみである場合、ディレクトリ全体ではなく、対象ファイルに対してのみ監査を設定します。</li>
+<li>ディレクトリまたはファイルを共有して、そのディレクトリやファイルへのアクセスの監査をリモートに構成することができます。リモート ユーザーは、上記の手順を使用できます。ディレクトリやファイルの共有の詳細については、Windows のマニュアルを参照してください。</li>
+</ul>
+
+
+<p class="bigfix">&nbsp;</p>
+<big>サーバーのイベント監査を構成するには</big><br>
+<ol>
+<li>作成したグループ ポリシー コンソールで、[コンピュータの構成]、[Windows の設定]、[セキュリティの設定]、[ローカル ポリシー]、[監査ポリシー] の順にクリックします。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;プライマリ ドメイン コントローラ (PDC) またはバックアップ ドメイン コントローラ (BDC) 上のドメインに対してセキュリティ ポリシーを構成する場合は、[ローカル ポリシー] の代わりに [ドメイン ポリシー] をクリックします。</p>
+
+<li>詳細ウィンドウで、監査するイベントを右クリックし、[プロパティ] を選択します。</li> 監査ポリシーを変更するダイアログ ボックスが表示されます。
+<li>必要に応じて、チェック ボックスをオンまたはオフにします。監査オプションの詳細については、Windows のマニュアルを参照してください。</li>
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;オプションが選択できない場合は、[ローカル ポリシーから除外する] チェック ボックスをオフにして、それらのオプションをアクティブにします。</p>
+<li>[OK] をクリックします。</li>
+</ol>
+
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

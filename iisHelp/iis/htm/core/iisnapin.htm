@@ -1,0 +1,81 @@
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS スナップインを開く</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web サイトおよびサービスを構成、管理できる IIS スナップインを開く方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="snapin">IIS スナップインを開く</a></h1>
+
+<p>Microsoft 管理コンソール (MMC) 内にホストされているインターネット インフォメーション サービス スナップインは、Web サイトまたは FTP サイトのコンテンツおよびアクセスを制御するために、サーバー管理機能を提供します。以前のバージョンでは、インターネット サービス マネージャと呼ばれていました。 </p>
+
+<h3>インターネット インフォメーション サービス スナップインを開くには</h3><br>
+
+
+<ol>
+<li>[スタート] メニューの [ファイル名を指定して実行] をクリックします。[ファイル名を指定して実行] ダイアログ ボックスが表示されます。</li>
+<li>[名前] ボックスに「inetmgr」と入力して Enter キーを押します。インターネット インフォメーション サービス スナップインが表示されます。</li>
+</ol>
+
+または、[コンピュータの管理] ダイアログ ボックスから IIS にアクセスすることもできます。この方法で IIS にアクセスすると IIS スナップインの管理オプションは使用できませんが、素早くアクセスでき、Web サイト用のいくつかの管理オプションが使用できます。
+
+<ol>
+<li>[マイ コンピュータ] を右クリックして、[管理] をクリックします。[コンピュータの管理] ダイアログ ボックスが表示されます。</li>
+<li>左側のウィンドウで、[サービスとアプリケーション] ツリーをクリックします。</li>
+<li>[インターネット インフォメーション サービス] をクリックします。ユーザーの Web サイトの名前と状態が右側のウィンドウに表示されます。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp; 左側ウィンドウのインターネット インフォメーション サービス ツリーおよびその下の Web サイト ツリーをクリックすると、その Web ページのディレクトリと仮想ディレクトリの一覧が表示されます。</p>
+</ol>
+
+<p>IIS スナップインの使い方および管理方法の詳細については、「<a href="iinewtp2.htm">管理</a>」を参照してください。</p>
+
+
+
+<hr class="iis" size="1">
+
+</font>
+</body>
+</html>

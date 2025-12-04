@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>プロセスの分離により開発を簡素化する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_simplify_development_with_process_isolation"></A><SUP></SUP>プロセスの分離により開発を簡素化する</H2>
+
+<P>IIS の従来のバージョンでは、ASP を含むすべての ISAPI アプリケーションで、サーバー プロセスのリソースとメモリを共有していました。これにより、パフォーマンスはより高速でしたが、不安定なコンポーネントにより、サーバーがクラッシュする可能性がありました。さらに悪いことには、サーバーが再起動されるまで、インプロセス コンポーネントをアンロードできませんでした。これは、アップグレードによって、直接影響を受けていたかどうかに関係なく、既存のコンポーネントを修正した結果、同じサーバーを共有するすべてのサイトが影響を受けたということを意味します。</P>
+
+<P>コンポーネント サービスと密接に統合された結果、IIS 4.0 以降で実行されるアプリケーションは独立したプロセスで起動できます。これを行う理由には次の 2 つがあります。
+
+<OL>
+	<LI>コンポーネントの開発。1 つのコンポーネントをアップデートするために、サーバー全体を停止する代わりに、アプリケーションを 1 つだけ停止し、再起動することができます。IIS の従来のバージョンでは、アプリケーション、またはまったく新しいアプリケーションに、更新されたコンポーネントを追加する場合、Web サーバーを停止し、サーバーの共有場所にある新しいバージョンで、古い DLL を置き換えてから、Web サービスをもう一度開始しなければなりませんでした。今回のバージョンからは独立したプロセスを使用することにより、すべてのアプリケーションをシャット ダウンすることなく、Web サイトを更新することができます。</li>
+
+	<LI>プロセスの分離。これにより、クラッシュの原因となったアプリケーションだけに、その影響を制限できます。主要な Web サービスをクラッシュから保護することに加え、アプリケーションが必要な回数だけ自動的に再開始されるように構成できます。アプリケーションで致命的なエラーが発生した場合は、このアプリケーションのプロセスは自動的に停止されます。このアプリケーションは、コンポーネント サービス システム プロセスで実行されているので、処理中のトランザクションはすべてその時点で停止されます。このイベントは Windows イベント ログに記録され、アプリケーションはコンポーネント サービスによって再起動されます。この問題によって影響を受けるクライアントは、このアプリケーションに対して送信した要求が未処理になっているものだけです。</li>
+</OL>
+
+<H4>&nbsp;プロセスの分離</H4>
+
+<P>アプリケーションを独立したプロセスとして実行する場合、または 1 つのプール プロセスでほかのアプリケーションと一緒に実行する場合は、[ホーム ディレクトリ] プロパティ シート、または [仮想ディレクトリ] プロパティ シートの [アプリケーション保護] ボックスで [高 (分離プロセス)] または [中 (プール)] を選択する必要があります。アプリケーション開始点ディレクトリにアプリケーションが作成されていなければ、これを最初に作成しなければなりません。新しいプロセスで実行されるコンポーネントは、適切な COM アプリケーションにインストールする必要があります。詳細については、コンポーネント サービスのマニュアルを参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

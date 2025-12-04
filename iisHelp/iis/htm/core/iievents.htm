@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>IIS の Windows イベント</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="IIS の Windows イベントについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="registry">IIS の Windows イベント</a></h1>
+
+<p>IIS がイベント ビューアに生成するイベントにより、IIS のパフォーマンスを確認することができます。イベント ビューアは、重要度の高いものから順に、エラー イベント、警告イベント、および情報イベントを追跡します。イベント ビューアのログは、すべての Windows サービス、およびログオン時間や接続時間などのプロセスに関する監査記録です。</p>
+
+<p>ここで説明する項目は、次のとおりです。</p>
+
+<ul>
+<li>「<strong><a href="iievtabt.htm">Windows イベントについて</a></strong>」では、Windows イベントに関連する項目を説明します。</li>
+<li>「<strong><a href="iievwwws.htm">Web サービス イベント</a></strong>」では、Web サービスで生成されるイベントの一覧を示します。</li>
+<li>「<strong><a href="iievftps.htm">FTP サービス イベント</a></strong>」では、FTP サービスで生成されるイベントの一覧を示します。</li>
+<li>「<strong><a href="iievtasp.htm">Active Server Pages イベント</a></strong>」では、ASP で生成されるイベントの一覧を示します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>クライアントのブラウザで表示されるエラー メッセージについては、「<a href="iierrcst.htm">カスタム エラー メッセージ</a>」を参照してください。</li>
+<li>クライアントの要求に関するログ収集については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

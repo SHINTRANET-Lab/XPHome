@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Request オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_request_object"></A><SUP></SUP>Request オブジェクト</H2>
+
+<P>Request オブジェクトは、HTTP 要求の中でクライアント ブラウザがサーバーに渡した値を取得します。</P>
+
+<H6>構文</H6>
+
+<P><B>Request</B>[.<I>collection</I>|<I>property</I>|<I>method</I>]( <I>variable</I> )</P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>コレクション</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob8q5h.htm"><B>ClientCertificate</B></A> </TD>
+<TD width=69%>HTTP 要求の中で送信されたクライアント証明書に格納されているフィールドの値です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob0z3o.htm"><B>Cookies</B></A></TD>
+<TD width=69%>HTTP 要求の中で送信された cookie の値です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob4fl9.htm"><B>Form</B></A></TD>
+<TD width=69%>HTTP 要求本体のフォーム要素の値です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob53hj.htm"><B>QueryString</B></A></TD>
+<TD width=69%>HTTP クエリ文字列の中の変数の値です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob5vsj.htm"><B>ServerVariables</B></A></TD>
+<TD width=69%>定義済み環境変数の値です。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob1whf.htm"><B>TotalBytes</B></A></TD>
+<TD width=69%>読み取り専用です。クライアントが要求本体の中で送信した合計バイト数を指定します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=31%><A HREF="/iishelp/iis/htm/asp/vbob8rl0.htm"><B>BinaryRead</B></A></TD>
+<TD width=69%>POST 要求の一部としてクライアントからサーバーに送信されたデータを取得します。</TD>
+</TR>
+</TABLE><BR>
+
+<P><i>variable</i> パラメータは、コレクションから取得する項目、またはメソッドやプロパティへの入力として使用する項目を指定する文字列です。<i>variable</i> パラメータの詳細については、各コレクションの説明を参照してください。</P>
+
+<H6>解説</H6>
+
+<P>指定された変数が、上に示した 5 つのコレクションのいずれにもない場合、Request オブジェクトは EMPTY を返します。</P>
+
+<P>コレクション名を指定せずに Request(<i>variable</i>) という呼び出しを使用して変数に直接アクセスすることもできます。この場合、Web サーバーは次の順序でコレクションを探します。
+
+<OL>
+	<LI><B>QueryString</B></li>
+
+	<LI><B>Form</B></li>
+
+	<LI><B>Cookies</B></li>
+
+	<LI><B>ClientCertificate</B></li>
+
+	<LI><B>ServerVariables</B></li>
+</OL>
+
+<P>同じ名前を持つ変数が複数のコレクションにある場合、Request オブジェクトは、最初に見つけたインスタンスを返します。</P>
+
+<P>コレクションのメンバを参照するときは、完全な名前を使用してください。たとえば、Request.(AUTH_USER) ではなく、Request.ServerVariables(AUTH_USER) のように指定してください。完全な名前を使用すると、サーバーはより速く項目を探すことができます。</P>
+
+<H6>関連項目</H6>
+
+<P>Response オブジェクト</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

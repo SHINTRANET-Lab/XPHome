@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>拡張性のあるコンポーネントを開発する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_developing_scalable_components"></A><SUP></SUP>拡張性のあるコンポーネントを開発する</H1>
+
+<P>ビジネス ロジックの大部分を COM コンポーネントにカプセル化するため、コンポーネントは高いパフォーマンスと容易な拡張性を備えるように設計することが重要になります。</P>
+
+<P>ここでは、拡張性のあるコンポーネントを作成するための提案をいくつか示します。
+
+<UL type=disc>
+	<LI><B>アルゴリズムを最適化する</B></li>
+
+	<LI><B>コンポーネントを適切なスレッドに結び付ける</B>ページスコープ を持つコンポーネントにはアパートメント スレッド モデルまたはボース スレッド モデルのいずれかを使用します。アプリケーションスコープを持つコンポーネントには、ボース スレッド モデルを使用し、フリー スレッド マーシャラも統合します。コンポーネントのスレッド問題の詳細については、Platform SDK の「Selecting a Threading Model」を参照してください。</li>
+
+	<LI><B>コンポーネントでヒープを頻繁に使用する場合は、ヒープに代わる方法をとる  </B>Windows<sup>&reg;</sup> ヒープを頻繁に使用すると、リソースの競合が発生する可能性があります。メモリ割り当ての代替方法をいくつかお勧めします。これには、次の方法が挙げられます。
+<UL type=disc>
+	<LI><B>ヒープの分割  </B>これは、既定のプロセス ヒープのほかにカスタム ヒープを複数作成することにより実施できます。次に各カスタム ヒープを、個別の非グローバルなロックで制御して、ロックの競合を減少させます。</li>
+
+	<LI><B>キャッシュされた割り当て  </B>これには、オブジェクト ユーザーとヒープの間の中間層で動作するカスタム割り当て動作を含みます。Win32 ヒープの呼び出しはあまり頻繁には発生せず、大きなメモリ ブロックについてのみです。これらのブロックは下位に区分化され、カスタム アロケータにより管理されます。</li>
+
+	<LI><B>スタック割り当て  </B>これは、C ランタイム関数である _alloca を使用して、オブジェクト用のメモリをヒープではなくスタック上に割り当てます。このメソッドは、スタック上で使用できるスペースが限られているために、比較的小さなオブジェクトにだけ適しています。さらに、新しく割り当てられたオブジェクトは、現在の関数、またはその関数が呼び出した関数の中でのみ使用されます。現在の関数が戻った後は、スタック上に割り当てられた記憶は消失します。</li>
+
+	<LI><B>オブジェクトのカプセル化  </B>これは、単にバッファをコンポーネント クラスのメンバ データ構造として組み込むだけで実施できます。次に、本来ならば Win32 ヒープへのアクセスを要求するタスクについて、このバッファが使用されます。</li>
+</UL>
+</li>
+
+	<LI><B>可能な場合は、コンポーネント内でのグローバル ロックの使用を避ける  </B>グローバル ロックは、コンポーネントの拡張性に悪影響を与えることがよくあります。</li>
+
+	<LI><B>コンポーネントがアプリケーションの一部として実行されている場合は、そのアプリケーションをアプリケーション デバッグ専用のアウトプロセスとして指定する  </B>IIS 4.0. で導入されたプロセス分離は、役に立つ機能です。ただし、プロセス分離のサポートに必要なプロセス間マーシャリングにより、コンポーネントの実行に一定量のオーバーヘッドが発生します。このオーバーヘッドの違いは、簡単なコンポーネントにとっては最も重要であり、複雑なコンポーネントではそれほど問題になりません。ただし、拡張性とパフォーマンスを最大にするには、アプリケーションのアウトプロセスでの実行を、アプリケーションが十分にデバッグされ、IIS によりインプロセスで実行できるくらいに安定するまでとします。</li>
+
+	<LI><B>コンポーネントをライブラリ (インプロセス) COM+ アプリケーションに配置することを検討する  </B>コンポーネント サービスのジャスト イン タイム アクティベーション機能の一部として、コンポーネントの COM クラス ファクトリがキャッシュされ、CreateInstance による各インスタンスの生成要求に再利用されます。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>&lt;OBJECT&gt; 宣言</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="__object_declarations"></A><SUP></SUP>&lt;OBJECT&gt; 宣言</H2>
+
+<P>拡張 &lt;OBJECT&gt; タグを使用して、セッション スコープまたはアプリケーション スコープを持つオブジェクトを Global.asa ファイルに作成できます。このタグは独立していて、すべての &lt;SCRIPT&gt; タグの外側にあります。 </P>
+
+<P>Global.asa ファイルで宣言されたオブジェクトは、そのオブジェクトを呼び出すスクリプトをサーバーが処理するまで作成されません。必要なオブジェクトだけしか作成されないため、リソースの節約になります。</P>
+
+<H6>構文</H6>
+
+<P><B>&lt;OBJECT</B> RUNAT=Server SCOPE=<I>Scope</I> ID=<I>Identifier</I> {PROGID="<I>progID</I>"|CLASSID="<I>ClassID</I>"}&gt;<BR> . . .</P>
+
+<P>&nbsp;</P>
+
+<P><B>&lt;/OBJECT&gt;</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>Scope</I></DT>
+
+<DD>オブジェクトのスコープを指定します。Global.asa ファイルで、<i>Scope </i>は「Session」または「Application」に設定されます。<br> <BR>
+</DD>
+
+<DT><I>Identifier</I></DT>
+
+<DD>オブジェクト インスタンスの名前を指定します。<br>
+</DD>
+
+<DT><I>progID</I></DT>
+
+<DD>クラス識別子に関連付けられた識別子です。&lt;&lt;OBJECT&gt; タグには <i>ProgID </i>または <i>ClassID </i> を指定する必要があります。<i>ProgID </i>の形式は [Vendor<b>.</b>]Component[<b>.</b>Version] です。<br>
+</DD>
+
+<DT><I>ClassID</I></DT>
+
+<DD>COM クラス オブジェクトに対して一意の識別子を指定します。&lt;OBJECT&gt; タグには <i>ProgID </i>または <i>ClassID </i> を指定する必要があります。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>次の例のうち、最初の例では <i>ProgID </i>パラメータを使用して、セッション スコープの <CODE>MyConnection</CODE> というオブジェクトを作成します。2 番目の例では、<i>ClassID </i>を使用します。</P>
+
+<PRE><CODE>&lt;OBJECT RUNAT=Server SCOPE=Session ID=MyConnection 
+PROGID="ADODB.Connection"&gt;
+REM Object Script
+&lt;/OBJECT&gt;
+
+&lt;OBJECT RUNAT=Server SCOPE=Session ID=MyConnection 
+CLASSID="Clsid:8AD3067A-B3FC-11CF-A560-00A0C9081C21"&gt;
+REM Object Script
+&lt;/OBJECT&gt;
+ </CODE></PRE>
+
+<H6>解説</H6>
+
+<P>Global.asa で宣言されたオブジェクトは、アプリケーションの任意のスクリプトで使用できます。たとえば、次のオブジェクトを宣言したとします。</P>
+
+<PRE><CODE>---GLOBAL.ASA---
+&lt;OBJECT RUNAT=Server SCOPE=Session ID=MyAd PROGID="MSWC.AdRotator"&gt;
+&lt;/OBJECT&gt;
+ </CODE></PRE>
+
+<P>この場合、<CODE>MyAd</CODE> オブジェクトはアプリケーションの任意のページから参照できます。</P>
+
+<PRE><CODE>---SOME.ASP---
+&lt;%= MyAd.GetAdvertisement("/ads/adrot.txt") %&gt;  
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

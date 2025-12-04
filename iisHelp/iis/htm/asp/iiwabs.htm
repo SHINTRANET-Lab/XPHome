@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>クライアント側のスクリプトと対話する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="クライアントのブラウザによって処理されるクライアント側スクリプトの、ASP による作成方法について説明します。サーバー側のスクリプトには、ブラウザに送信されるスクリプト コマンドも含めて記述できます。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37766214">クライアント側のスクリプトと対話する</a></h1>
+
+
+<p>ASP を使用してクライアント側のスクリプトを生成または操作すると、ASP の有効性を高めることができます。たとえば、サーバー固有の変数、ユーザーのブラウザの種類、または HTTP 要求パラメータを基に、クライアント側のスクリプトをアセンブルするサーバー側のスクリプトを作成することができます。</p>
+
+<p>サーバー側スクリプト ステートメントを HTML &lt;SCRIPT&gt; タグで囲まれたクライアント側のスクリプト内に記述することで、次のテンプレートの例に示すように、クライアント側のスクリプトの要求時に動的に初期化および変更することができます。</p>
+
+<pre>&lt;SCRIPT LANGUAGE="VBScript"&gt;	
+&lt;!--
+
+<EM>variable</EM> = &lt;%=<Em>server defined value</Em> %&gt;
+.
+.
+.
+
+<Em>client-side script</Em>
+
+&lt;% <Em>server-side script used to generate a client-side statement</Em> %&gt; 
+
+<Em>client-side script</Em>
+.
+.
+.
+--&gt;
+&lt;/SCRIPT&gt;</pre>
+
+<p>この機能を組み込むと、有益で魅力的なアプリケーションを作成できます。たとえば、次の例では、簡単なサーバー側のスクリプトを VBScript で作成して、JScript で作成されたクライアント側のスクリプトを操作します。</p>
+
+<pre>&lt;%
+  Dim dtmTime, strServerName, strServerSoftware, intGreeting
+ 
+  dtmTime = Time()
+  strServerName = Request.ServerVariables("SERVER_NAME") 
+  strServerSoftware = Request.ServerVariables("SERVER_SOFTWARE") 
+
+  'Generate a random number. 		
+  Randomize
+  intGreeting = int(rnd * 3)
+%&gt;
+
+  &lt;SCRIPT LANGUAGE="JScript"&gt;
+  &lt;!--
+
+  //Call function to display greeting
+  showIntroMsg()
+
+  function showIntroMsg()
+  {  
+    switch(&lt;%= intGreeting %&gt;)
+    {
+    case 0:
+      msg =  "This is the &lt;%= strServerName%&gt; Web server running &lt;%= strServerSoftware %&gt;."
+      break
+    case 1:			
+      msg = "Welcome to the &lt;%= strServerName%&gt; Web server. The local time is &lt;%= dtmTime %&gt;."
+      break
+    case 2:
+      msg = "This server is running &lt;%= strServerSoftware %&gt;."
+      break
+    } 
+
+  document.write(msg)
+
+  }
+
+--&gt;
+&lt;/SCRIPT&gt;
+</pre>
+
+<p>この種のスクリプトを拡張して、たとえば、クライアント側のデータベースや DHTML のカスタマイズ スクリプトを構成することができます。この新しい技法を使用すると、ラウンドトリップおよびサーバーでの処理時間を減らすこともできます。</p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

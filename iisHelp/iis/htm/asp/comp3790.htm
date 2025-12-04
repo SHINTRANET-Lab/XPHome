@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Counters コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_counters_component"></a>Counters コンポーネント</H1>
+
+<P>Counters コンポーネントは、Counters オブジェクトを作成します。このオブジェクトは、任意の数のカウンタの作成、格納、インクリメント、および取得を行います。 </P>
+
+<P>カウンタは永続的な値で、整数を含んでいます。カウンタを操作するには、Counters オブジェクトの Get メソッド、Increment メソッド、Set メソッド、および Remove メソッドを使用します。作成したカウンタは、削除するまで持続します。</P>
+
+<P>カウンタの値は、ページ ヒットなどのイベントで自動的には増加しません。<A HREF="/iishelp/iis/htm/asp/comp1q0j.htm">Set</A> メソッドおよび <A HREF="/iishelp/iis/htm/asp/comp46lv.htm">Increment</A> メソッドを使用して、手動でカウンタを設定またはインクリメントする必要があります。</P>
+
+<P>カウンタは、スコープの制限を受けません。いったんカウンタを作成すると、サイト上の任意のページからカウンタの値を取得したり操作したりできます。たとえば、Page1.asp というページで <i>hits</i> という名前のカウンタの値をインクリメントして表示し、別の Page2.asp というページで <i>hits</i> の値をインクリメントする場合、どちらのページも同じカウンタの値をインクリメントすることになります。Page1.asp にヒットして <i>hits</i> の値を 34 にインクリメントした場合、Page2.asp にヒットすると <i>hits</i> の値は 35 にインクリメントします。次に Page1.asp にヒットすると、<i>hits</i> の値は 36 にインクリメントします。</P>
+
+<P>すべてのカウンタは、単一のテキスト ファイル、Counters.txt に格納されます。このファイルは、counters.dll ファイルと同じディレクトリに配置されています。 </P>
+
+<P>カウンタを更新、作成または削除した後に、Counters.txt ファイル内に変更を反映するには IIS サービスを再起動する必要があります。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=22%><B>ファイル名</B></TD>
+<TD class=blue width=78%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%>counters.dll</TD>
+<TD width=78%>Counters コンポーネントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%>counters.txt</TD>
+<TD width=78%>サイト上のすべてのカウンタを格納するファイルです。Counters.txt は、UTF8 でエンコードされたファイルです。カウンタ名には、任意の Unicode 文字を使用できます。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P>次の文を Global.asa ファイルに追加し、サーバー上で 1 回だけ Counters オブジェクトを作成します。</P>
+
+<PRE><CODE><B>&lt;OBJECT 
+RUNAT=Server 
+SCOPE=Application 
+ID=</B><I>Counter</I><B> </B>
+<B>PROGID="MSWC.Counters"&gt; </B>
+<B>&lt;/OBJECT&gt;</B>
+</CODE></PRE>
+
+<P><span class=le><B>重要</B></span></P>
+
+<P>サイト上では 1 つだけ Counters オブジェクトを作成するようにしてください。1 つの Counters オブジェクトだけで、任意の数のカウンタを作成できます。</P>
+
+<P>Windows<sup>&reg;</sup>&nbsp;95 以降のインターネット インフォメーション サービスでは、Counters コンポーネントは、既定の仮想ディレクトリ内の Global.asa ファイルで既に指定されています。Counters.Get、Counters.Increment、Counters.Remove、および Counters.Set を呼び出すことで、コンポーネントが作成する Counters オブジェクトを組み込みオブジェクトであるかのように使用できます。Counters オブジェクトの別のインスタンスを作成する必要はありません。</P>
+
+<H6>メソッド </H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=22%><A HREF="/iishelp/iis/htm/asp/comp1c37.htm">Get</A> </TD>
+<TD width=78%>カウンタの値を返します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%><A HREF="/iishelp/iis/htm/asp/comp46lv.htm">Increment</A></TD>
+<TD width=78%>カウンタの値を 1 つインクリメントします。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%><A HREF="/iishelp/iis/htm/asp/comp02cz.htm">Remove</A></TD>
+<TD width=78%>Counters.txt ファイルからカウンタを削除します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=22%><A HREF="/iishelp/iis/htm/asp/comp1q0j.htm">Set</A></TD>
+<TD width=78%>指定した整数をカウンタの値に設定します。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>例</H6>
+
+<P>ID 属性に <CODE>Counter</CODE> を設定し、global.asa ファイル内で Counters オブジェクトのインスタンスを作成します。 </P>
+
+<P>--- Global.asa ---</P>
+
+<PRE><CODE>&lt;OBJECT 
+RUNAT=Server 
+SCOPE=Application 
+ID=Counters 
+PROGID="MSWC.Counters"&gt; 
+&lt;/OBJECT&gt;
+ </CODE></PRE>
+
+<P>作成した Counters オブジェクトをページ上で使用し、必要なすべてのカウンタを作成します。</P>
+
+<PRE><CODE>  Setting the Site Counter to &lt;%= Counters.Set("SiteCounter", 1).
+ </CODE></PRE>
+
+<P>別のページでカウンタの値をインクリメントします。</P>
+
+<PRE><CODE>  You are visitor number&lt;%= Counters.Increment("SiteCounter ") %&gt; to this page.
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

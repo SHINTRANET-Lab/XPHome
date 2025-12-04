@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>メタベースのバックアップ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="メタベースのバックアップ">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="bak">メタベースのバックアップ</a></h1>
+
+<p>IIS では、メタベースをバックアップするための 3 つの方法を提供しています。[構成のバックアップ/復元] を使用すると、メタベースの、パスワードで保護されたバックアップまたはパスワードで保護されていないバックアップを作成できます。<a href="iiabuti.htm">IIS スナップイン</a>の [構成のバックアップ/復元] の新しい機能を使用すると、Web サイト管理者はメタベースのコピーをほかのコンピュータに復元することもできます。これらのバックアップ方法は、メタベース設定のみを復元する方法であり、コンテンツ ファイルの復元は行いません。以前のバージョンの IIS の場合と同様に、プログラムによってメタベースのレガシー バックアップを作成できますが、ほかのコンピュータにはメタベースのレガシー バックアップを復元することはできません。</p>
+
+「<strong>パスワードで保護されたバックアップ</strong>」では、Web サイト管理者がメタベースのバックアップを暗号化するために使用するパスワードを提供します。パスワード情報は、メタベース バックアップ ヘッダーに格納されます。ヘッダーにはバックアップを作成するためにパスワードが使用されたことが示されます。パスワードが暗号化されてメタベース バックアップに格納された後は、変更することはできません。パスワードを知っている管理者のみがメタベース バックアップを復元できます。「<a href="#TocreateabackupwithaPassword">パスワードで保護されたバックアップを作成するには (パスワード必須)</a>」を参照してください。
+
+<p>「<strong>パスワードで保護されていないバックアップ</strong>」では、Web サイト管理者はパスワードを提供しません。メタベース バックアップは空白のパスワードで暗号化され、誰でもそのメタベース バックアップを復元できます。「<a href="#TocreateabackupwithoutaPassword">パスワードで保護されていないバックアップを作成するには (パスワード不要)</a>」を参照してください。</li>
+<p>
+「<strong>レガシー バックアップ</strong>」では、Web サイト管理者はプログラムによってメタベース バックアップを作成できます。ただし、復元するときにはプログラムを使用するか、または<a href="iiabuti.htm">IIS スナップイン</a>から [構成のバックアップ/復元] を使用する必要があります。
+<p>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp;レガシー バックアップ方式は、推奨されないため、説明を省略します。バックアップをプログラムによって作成すると、IIS では IIS 5.0 で使用されたレガシー方式を実装します。したがって、レガシー メタベース バックアップを復元できるのは、バックアップが作成されたオペレーティング システム上のみです。
+</li>
+</ul>
+
+
+<h3><a name="TocreateabackupwithaPassword">パスワードで保護されたバックアップを作成するには (パスワード必須)</h3>
+
+<ol>
+<li> <a href="iiabuti.htm">IIS スナップイン</a>で、[インターネット インフォメーション サービス] の [コンピュータ] アイコンをクリックします。</li>
+<li>[操作] メニューの [すべてのタスク] をポイントし、[構成のバックアップ/復元] をクリックします。</li>
+<li>[バックアップの作成] をクリックします。</li>
+<li>[構成のバックアップ名] ボックスに名前を入力します。</li>
+<li>[パスワードを使用してバックアップを暗号化する] チェック ボックスをオンにして、[パスワード] ボックスにパスワードを入力します。</li>
+<li>[OK] をクリックして、[閉じる] をクリックします。既定では、バックアップ ファイルは、\Winnt\System32\Inetsrv\MetaBack ディレクトリに格納されます。</li>
+</ol>
+
+
+<a name="TocreateabackupwithoutaPassword"><h3>パスワードで保護されていないバックアップを作成するには (パスワード不要)</h3>
+<ol>
+<li> <a href="iiabuti.htm">IIS スナップイン</a>で、[インターネット インフォメーション サービス] の [コンピュータ] アイコンをクリックします。</li>
+<li>[操作] メニューの [すべてのタスク] をポイントし、[構成のバックアップ/復元] をクリックします。</li>
+<li>[バックアップの作成] をクリックします。</li>
+<li>[構成のバックアップ名] ボックスに名前を入力します。</li>
+<li>[OK] をクリックして、[閉じる] をクリックします。</li>
+</ol>
+
+<p><a name="RelatedTopics"><strong>関連項目</strong></p>
+<ul>
+<li>メタベースのキー名とパス、プロパティの継承、およびセキュリティと信頼性については、「<a href="../asp/aint1aud.htm">IIS メタベースの紹介</a>」を参照してください。</li>
+<li>メタベースの復元の詳細については、「<a href="iirestore.htm">メタベースを復元する</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

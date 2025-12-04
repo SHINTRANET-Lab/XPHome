@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP スクリプティングの最適化</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_asp_scripting_optimization"></A><SUP></SUP>ASP スクリプティングの最適化</H2>
+
+<P>コードの最適化は、慎重に行う必要があります。ASP スクリプティングでは、ほかのプログラミング言語と同様、時間とリソースを最も費やしているアプリケーションの部分を特定することが重要です。次にこの情報を使用して、最適化のために重要な部分を効率的に特定できます。</P>
+
+<P>ASP スクリプトのパフォーマンス問題を減らすために役に立つヒントを次に示します。
+
+<UL type=disc>
+	<LI><B>アプリケーション スコープ内のオブジェクトとデータをキャッシュする  </B>これは、Global.asa の中にオブジェクトを作成するか、または個々の ASP スクリプトの中で要求に合わせてオブジェクトを作成し、作成したオブジェクトをアプリケーション スコープ内に配置することにより実施します。</li>
+
+	<LI><B>Response.Write 呼び出しの出力を結合する  </B>これは、特に指定しない限り IIS&nbsp;5.1 の ASP バッファリングに依存します。ただし、時間がかかる動作の実行中にバッファリングされた出力を使用するアプリケーションについて、認知されたパフォーマンスを向上させるためには、アプリケーションで定期的に Reponse.Flush を使用して、ユーザーとのつながりを維持する必要があります。
+<P class=tl>Web アプリケーションで ASP バッファリングが使用不能になっている場合、個別の出力文字列を 1 つの大きな文字列に結合して、Response.Write の個々の呼び出しの数を最少にすることにより、パフォーマンスを向上させることができます。ただし、これを実行するために集中的に文字列処理を実行する必要がある場合、おそらくパフォーマンスの向上は文字列処理にかかる時間により相殺されます。
+</li>
+
+	<LI><B>Response オブジェクトの Buffer プロパティを設定する  </B>IIS 4.0 では、ASP Response オブジェクトの Buffer プロパティが既定で FALSE に設定されていました。IIS 5.1 を新しくインストールすると、Buffer プロパティは既定で TRUE に設定されます。以前のバージョンの IIS から IIS 5.1 にアップグレードする過程では、Buffer プロパティの前の設定が更新されません。<BR><BR>Buffer プロパティを TRUE に設定することで、主にモデムを使用して接続される大規模な ASP アプリケーションのパフォーマンスが大幅に改善されます。アプリケーションでバッファを有効にするには、IIS スナップインを使用するか、選択したページに &lt;% Response.Buffer = True %&gt; ステートメントを追加します。IIS スナップインを使用すれば、アプリケーション全体のプロパティを変更することも可能です。 </li>
+
+	<LI><B>アプリケーション スコープまたはセッション スコープでオブジェクトのインスタンスを生成するときに、Server.CreateObject の代わりに &lt;OBJECT&gt; タグを使用する  </B>これは、&lt;OBJECT&gt; タグで指定されたオブジェクトが実際に使用されるまで、IIS がこのオブジェクトのインスタンスの実際の生成を遅らせるためです。&lt;OBJECT&gt; タグを使用したときに、スクリプトがそのオブジェクトをまったく使用しない場合は、アプリケーションはオブジェクトのインスタンスを生成しません。これに対して、Server.CreateObject は、オブジェクトがスクリプトで使用されるかどうかにかかわらず、IIS に直ちにオブジェクトのインスタンスを生成させます。</li>
+
+	<LI><B>ローカル変数を使用し、パブリック変数の使用を避ける  </B>ローカル変数はパブリック変数より ASP スクリプト エンジンで速くアクセスできます。これは、ローカル変数の値にアクセスするために名前空間全体を検索する必要がないためです。</li>
+
+	<LI><B>可能な場合は、ユーザー入力について、クライアント側の入力検査を使用する  </B>これによって、必要な HTTP のやり取りを最小限にとどめます。ブラウザに完全な機能が備わっている場合は、ブラウザの能力を十分活かし、サーバー側のリソースを重要なタスクのために解放します。もちろん、アプリケーションによっては、データ破損を予防するためにある種の統合性チェックをサーバー側で実行する必要があります。</li>
+
+	<LI><B>コレクションから個々の値をローカル変数にコピーする  </B>これは、値を繰り返して参照する場合に行います。これにより、ASP が参照のたびにコレクションで検索処理を実行する必要がなくなります。</li>
+
+	<LI><B>可能な場合は、アプリケーション全体でセッション状態をオフにする  </B>アプリケーションで IIS セッションを使用する必要がない場合は、インターネット インフォメーション サービス スナップインを使用して、アプリケーション全体のセッション状態を無効にできます。IIS のセッションはメモリに保持され、セッション用に割り当てられたメモリは、セッションが終了するかタイムアウトになるまで解放されません。アプリケーションが同時に多数のユーザーにより使用される場合は、サーバーのリソースが使い果たされ、パフォーマンスに影響が出る可能性があります。<B></B>アプリケーションの一部がセッション状態を必要としない場合、<A HREF="/iishelp/iis/htm/asp/dire92zp.htm">@ENABLESESSIONSTATE</A> ディレクティブを使用してセッション状態を無効にします。
+<P class=tl>可能な部分のセッション状態をオフにすることは、ページに &lt;FRAMESET&gt; 要素が含まれている場合に特に便利です。Internet Explorer を含むある種のブラウザでは、フレームセットの個々のフレームの処理に個別のスレッドを使用します。フレームセット ページについてセッション状態がオンになっている場合、これらの並列スレッドにより得られるクライアント側のパフォーマンスの利点はなくなります。これは、個々の要求を処理するスレッドを IIS が順次実行することになるためです。
+</li>
+
+	<LI><B>セッション状態に依存する場合は、Session オブジェクトおよびセッション状態に大量のデータを配置することを避ける  </B>IIS のセッションは持続します。また、セッションに割り当てられたメモリは、セッションが終了するかタイムアウトになるまで解放されません。アプリケーションが同時に多数のユーザーにより使用される場合は、サーバーのリソースが使い果たされ、パフォーマンスに影響が出る可能性があります。</li>
+
+	<LI><B>空の Session_OnStart または Session_OnEnd を提供しない </B> </li>
+
+	<LI><B>IIS および ASP の構成変更の影響には十分な注意を払う  </B>詳細については、「<A HREF="/iishelp/iis/htm/asp/perf24dq.htm">IIS 構成の最適化</A>」を参照してください。</li>
+
+	<LI><B>ASP ページがアプリケーションの一部として実行されている場合は、アプリケーションをアプリケーション デバッグ専用のアウトプロセスとして指定する  </B>IIS 4.0 で導入されたプロセス分離は、役に立つ機能です。ただし、プロセス分離のサポートに必要なプロセス間マーシャリングにより、ASP 処理の実行に一定量のオーバーヘッドが発生します。このオーバーヘッドの違いは、簡単な ASP ページにとっては最も重要であり、複雑なページではそれほど問題になりません。ただし、拡張性とパフォーマンスを最大にするには、アプリケーションのアウトプロセスでの実行を、アプリケーションが十分にデバッグされ、IIS によりインプロセスで実行できるくらいに安定するまでとします。</li>
+
+	<LI><B>可能な場合は、ReDimming 配列を避ける  </B>配列が初めて初期化されるときに、完全なサイズの配列を単純に割り当てるほうが効率的です。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

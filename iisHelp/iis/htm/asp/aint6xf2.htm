@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>プログラム管理の選択</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_development_choices_for_programmatic_administration"></A>プログラム管理の選択</H1>
+
+<P>「<A HREF="/iishelp/iis/htm/asp/aint1aud.htm">IIS メタベースの紹介</A>」で説明したように、メタベースには、IIS が正常に機能するために必要な構成情報のほとんどが含まれています。このメタベースを、同じように IWamAdmin インターフェイスを使用する IIS Admin Base オブジェクトを使ってプログラム管理することができます。開発者は、このオブジェクトを使用するアプリケーションを作成するか、またはアプリケーションの実装がより簡単な <A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクト</A> を使用するアプリケーションを作成できます。次の図は、メタベース、IIS Admin Base オブジェクト、および IIS ADSI Admin オブジェクトの間の関係を示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/meta1.gif" ALT="IIS Admin オブジェクトの関係" BORDER=0></P>
+
+<P>メタベースに格納された情報にプログラムからアクセスするための 2 つの方法が提供されています。
+
+<OL>
+	<LI><A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクト</A>&nbsp;&nbsp;これらのオブジェクトは、IIS インストール環境の各ブロックを構築するキーに対応しています。つまり、&quot;IIsWebServer&quot; という名前の IIS Admin オブジェクトは Web サーバーに適用されるプロパティとメソッドを公開し、&quot;IIsFtpServer&quot; という名前の IIS Admin オブジェクトは FTP サーバーに適用されます。
+<P class=tl>IIS Admin オブジェクトは、Visual Basic、VBScript、JScript などのオートメーション対応言語で使用するのが最も適しています。詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</A>」を参照してください。
+</li>
+
+	<LI><B>IIS Admin Base オブジェクト</B>&nbsp;&nbsp;このオブジェクトは、より高度な開発を行う場合に選択します。詳細については、Platform SDK の 「Advanced Programmatic Administration」 を参照してください。</li>
+</OL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

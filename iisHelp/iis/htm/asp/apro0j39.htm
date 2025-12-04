@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>LogExtFileComputerName</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_logextfilecomputername"></A><SUP></SUP>LogExtFileComputerName</H3>
+
+<P>このプロパティは、ログ収集イベント中に、ローカル コンピュータ名がログに記録されるようにします。このプロパティは、<A HREF="/iishelp/iis/htm/asp/apro5ak3.htm">LogExtFileFlags</A> プロパティに含まれるフラグの 1 つです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%>ブール型</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定値</TD>
+<TD width=50%>FALSE</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>継承</TD>
+<TD width=50%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/MSFTPSVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore32n9.htm"><B>IIsFtpService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/MSFTPSVC/<I>N</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore43si.htm"><B>IIsFtpServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;このプロパティは、MD_LOGEXT_FIELD_MASK 識別子のビットマスク フラグです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース識別子</TD>
+<TD width=50%><B>MD_LOGEXT_FIELD_MASK</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース ビットマスク識別子</TD>
+<TD width=50%><B>MD_EXTLOG_COMPUTER_NAME</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%><B>DWORD_METADATA</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ユーザー タイプ</TD>
+<TD width=50%><B>IIS_MD_UT_SERVER</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース ビットマスク値</TD>
+<TD width=50%>0x00000020</TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/apro5ak3.htm"><B>LogExtFileFlags</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

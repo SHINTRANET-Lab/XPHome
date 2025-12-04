@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Buffer</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_buffer"></A><SUP></SUP>Buffer</H4>
+
+<P>Buffer プロパティは、ページ出力をバッファに格納するかどうかを示します。ページ出力がバッファに格納されると、サーバーは現在のページのサーバー スクリプトの処理がすべて完了するまで、あるいは Flush メソッドまたは End メソッドが呼び出されるまで、クライアントに応答を送信しません。</P>
+
+<P>Buffer プロパティは、サーバーがクライアントに出力を送信した後で設定することはできません。このため、Response.Buffer の呼び出しは、.asp ファイルの先頭行に記述してください。</P>
+
+<H6>構文</H6>
+
+<P><B>Response.Buffer </B>[<B>=</B> <I>flag</I>]</P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>flag</I></DT>
+
+<DD>ページ出力をバッファに格納するかどうかを指定します。次のいずれかの値を指定できます。
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=25%><B>値</B></TD>
+<TD class=blue width=75%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>FALSE</TD>
+<TD width=75%>バッファに格納しません。サーバーは出力を処理と同時にクライアントに送信します。IIS Version 4.0 以前では、これが既定値です。IIS Version 5.0 以降では、既定値は TRUE です。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%>TRUE</TD>
+<TD width=75%>サーバーは、現在のページの ASP スクリプトの処理がすべて完了するまで、あるいは Flush メソッドまたは End メソッドが呼び出されるまで、クライアントに出力を送信しません。</TD>
+</TR>
+</TABLE><BR>
+
+</DD>
+</DL>
+
+<H6>解説</H6>
+
+<P>現在の .asp ファイルのバッファ処理が TRUE に設定されている場合、<A HREF="/iishelp/iis/htm/asp/vbob74tk.htm">Flush</A> メソッドを呼び出さなければ、サーバーはクライアントからのキープアライブ要求を優先します。これにより、サーバーはクライアント要求ごとに新しい接続を作成する必要がなくなるため、動作が速くなります。</P>
+
+<P>ただし、バッファ処理を行うと、サーバーが現在のページのスクリプト処理をすべて完了するまで、クライアントに応答が表示されなくなります。このため、長いスクリプトでは処理の遅れが目立つことがあります。</P>
+
+<P>メタベース内の <A HREF="/iishelp/iis/htm/asp/apro719q.htm">ASPBufferingOn</A> プロパティを使用すると、スクリプトのバッファ処理の既定値を設定できます。メタベースの使い方の詳細については、「<A HREF="/iishelp/iis/htm/asp/aogu2wab.htm">IIS Admin オブジェクトを使用する</A>」を参照してください。</P>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob74tk.htm"><B>Flush</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob2sis.htm"><B>End</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

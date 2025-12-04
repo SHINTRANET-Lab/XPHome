@@ -1,0 +1,964 @@
+<!DOCtype HTML PUBLIC "-//W3C//Dtd HTML 3.2//EN">
+<html dir=LTR><head><title>モジュール 3 : Web アプリケーション内のセッションの状態を維持する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//-->
+</SCRIPT>
+
+<META NAME="ROBOTS" CONTENT="NOINDEX"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis"></head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+ 
+<h1><a name="maintainingsessionstate">モジュール 3 : セッションの状態を維持する</a></h1>
+
+<p>
+このモジュールでは、Active Server Pages (ASP) 内のセッションの状態を維持するプロセスを説明します。セッションとは、特定のユーザーがアクティブに Web サイトのコンテンツを表示している時間セグメントのことです。セッションは、ユーザーがサイト上の最初のページにアクセスしたときに始まり、ユーザーがサイトを離れた数分後に終了します。特定のセッションに関連するユーザー固有情報の断片は、集合的に &quot;セッション状態&quot; と呼ばれます。
+</p> 
+
+<p>HTTP は状態を保持しないプロトコルであるため、Web サイトを訪問したユーザーの状態を維持しようとすると問題が発生します。Web サーバーは、各 HTTP 要求を固有の要求として扱い、前の要求とは関連付けません。したがって、ユーザーがあるページに入力した情報 (たとえば、フォームを通じて) は、次のページが要求されたときに自動的には利用可能になりません。Web サーバーはセッション状態を維持して、ユーザーが Web サイト上の複数のページを移動するのに伴ってユーザーを識別し、追跡する必要があります。
+</p> 
+
+<p>1 つの解決法としては、&quot;cookie&quot; を使用する方法があります。cookie は、あるページでのユーザーに関する情報を記録し、その情報をサイト内の別のページに転送します。ただし、cookie を認識しないブラウザや、ユーザーが cookie を無効にできるブラウザがあります。このような cookie を保存できない Web ユーザーに関する情報を収集する場合は、cookie を使わずに HTTP POST を使用してセッション状態を維持することができます。
+</p> 
+
+<p>
+このモジュールには、次に示す演習が含まれています。
+</p>
+
+<ul>
+<li>
+<a href="#with">cookie を使用してセッションの状態を維持する</a>&nbsp;&nbsp;&nbsp;ASP Response オブジェクトおよび Request オブジェクトを使用する例と ASP Session オブジェクトを使用する例の 2 つの cookie の例を示します。
+</li><li>
+<a href="#without">cookie を使用しないでセッションの状態を維持する</a>&nbsp;&nbsp;&nbsp;cookie を使用してセッションの状態を維持する方法の代替として HTTP POST を使用する例を示します。
+</li>
+</ul>
+
+<BR><h2><a name="with">cookie を使用してセッションの状態を維持する</a></h2>
+
+<p>
+cookie はクレジット カード番号やパスワードなどのユーザー固有の情報セットを保存します。Web サーバーによって cookie がユーザーの Web ブラウザに埋め込まれ、ユーザーの情報をサイト内のほかのページで利用できるようにするので、表示する各ページでユーザーが情報を再入力する必要がありません。cookie は、Web ベースの商品購入、Web ユーザー個人の嗜好の保持、ユーザーに関する状態を維持するための顧客情報の収集に適しています。
+</p>
+
+<p>
+cookie には、次の 2 つの種類があります。
+</p>
+
+<ul>
+<li>
+<B>メモリ内 cookie</b>&nbsp;&nbsp;&nbsp;メモリ内 cookie は、ユーザーがブラウザをシャットダウンしたときに破棄されます。
+</li><li>
+<B>永続 cookie</b>&nbsp;&nbsp;&nbsp;永続 cookie は、ユーザーのハードディスク内に常駐し、ユーザーが同じ Web ページを表示したときに検索されます。
+</li>
+</ul>
+
+<p>
+有効期限を指定しないで cookie を作成した場合は、メモリ内 cookie となり、そのブラウザ セッションの間のみ保持されます。メモリ内 cookie で使用されるスクリプトを次に示します。
+</p>
+
+<code>
+<p>
+&nbsp;&nbsp;&nbsp;Response.Cookies("SiteArea") = "TechNet"
+</p>
+</code>
+
+<p>
+セッションを終了した後も cookie 情報を維持する場合は、有効期限を指定して永続 cookie を作成します。有効期限を指定すると、ブラウザによって cookie がクライアント コンピュータ上に保存されます。永続 cookie 内のデータは、cookie の有効期限が切れるまでクライアント マシン内に保持されます。オリジナルの Web サイトに対する要求は、そのサイトによって作成された cookie に自動的に付加されます。cookie 内のデータは Web サイト名の一部と ASP ファイルで構成されるため、cookie は作成されたサイトでのみ使用されます。<BR>永続 cookie の作成に使用されるスクリプトを次に示します。
+</p>
+
+<code>
+<p>
+&nbsp;&nbsp;&nbsp;Response.Cookies("SiteArea") = "TechNet"
+<br>&nbsp;&nbsp;&nbsp;Response.Cookies("SiteArea").Expires = "August 15, 2000"
+</p>
+</code>
+
+<p>cookie を作成するスクリプトは、ASP ファイルの最初に配置する必要があります。これは、HTML テキストをブラウザに送信する前に cookie を生成する必要があるためです。
+</p>
+
+<BR><h3>Response オブジェクトおよび Request オブジェクトを使用する cookie</h3>
+
+<p>
+永続 cookie は、<b>Response</b> オブジェクトおよび <b>Request</b> オブジェクトを使用して生成されますが、これらのオブジェクトはメモリ内 cookie の作成にも使用されます。Web アプリケーションの多くは、これらのオブジェクトを使用してセッションの状態を維持しています。
+</p>
+
+<ul>
+<li>
+<B>Response オブジェクト</B>&nbsp;&nbsp;&nbsp;<b>Response</b> オブジェクトは、cookie を作成して値を設定するときに使用します。
+</li><li>
+<B>Request オブジェクト</B>&nbsp;&nbsp;&nbsp;<b>Req</b>uest オブジェクトは、以前の Web セッションで作成された cookie の値を検索するときに使用します。
+</li>
+</ul>
+
+<p>
+このレッスンでは、<b>Response</b> オブジェクトおよび <b>Request</b> オブジェクトを使用して次のファイルを作成します。これらのファイルの中には、ほかのファイルを必要とするものがあるので、すべてを一度に作成してください。ファイルをすべて作成したら、ブラウザに <b>http://LocalHost/Tutorial/Frame.htm</b> と入力して、アプリケーションを実行します。
+</p>
+
+<ul>
+<li>
+<B>Frame.htm</B>&nbsp;&nbsp;&nbsp;ユーザーのビューを 2 つのウィンドウに分割するページです。このページでは、Menu.htm および CustomGreeting.asp が必要です。
+</li><li>
+<B>Menu.htm</B>&nbsp;&nbsp;&nbsp;このレッスン用のサンプルへのリンクを含むページです。このページのリンクを使用するには、ほかのページすべてが作成されていることが必要です。
+</li><li>
+<B>CustomGreeting.asp</B>&nbsp;&nbsp;&nbsp;ユーザーの名前をフォームに取り込んでメモリ内 cookie に設定する ASP スクリプトです。
+</li><li>
+<B>DeleteGreetingCookie.asp</B>&nbsp;&nbsp;&nbsp;ユーザーの名前を含む cookie を削除する ASP スクリプトです。cookie が設定されていない場合は、警告が表示されます。
+</li><li>
+<B>SelectColors.asp</B>&nbsp;&nbsp;&nbsp;ユーザーのカラー選択用の cookie を設定する ASP スクリプトです。
+</li><li>
+<B>DeleteColorCookie.asp</B>&nbsp;&nbsp;&nbsp;以前に選択された Web カラーを削除する ASP スクリプトです。何も選択されていない場合は、警告が表示されます。
+</li><li>
+<B>Cookie.asp</B>&nbsp;&nbsp;&nbsp;ユーザーが訪問した現在の日時を保持し、合計訪問数を記録する永続 cookie を設定する ASP スクリプトです。
+</li><li>
+<B>DeleteCookies.asp</B>&nbsp;&nbsp;&nbsp;この ASP スクリプトでは、Cookie.asp に設定されている cookie を削除します。 cookie が何も設定されていない場合は、警告が表示されます。
+</li></ul>
+
+<BR><h4>Frame.htm</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <b>C:\Inetpub\Wwwroot\Tutorial\Frame.htm</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;html&gt;
+<BR>&nbsp; &lt;head&gt;
+<BR>&nbsp; &lt;title&gt;Customized Greeting and Colors Using In-Memory and Persistent Cookies&lt;/title&gt; 
+<BR>&nbsp; &lt;/head&gt;
+<BR>
+<BR>&nbsp; &lt;frameset cols="40%,60%"&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;frame src="menu.htm" name="left" marginheight="5" marginwidth="5"&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;frame src="CustomGreeting.asp" name="right" marginheight="5" marginwidth="5"&gt;
+<BR>&nbsp; &lt;/frameset&gt;
+<BR>
+<BR>&nbsp; &lt;noframes&gt;
+<BR>&nbsp;&nbsp;&nbsp; Sorry, your browser does not support frames.  Please go to the &lt;a href="menu.htm"&gt;Menu&lt;/a&gt;.
+<BR>&nbsp; &lt;/noframes&gt;
+<BR>
+<BR>&nbsp; &lt;/html&gt;
+</p>
+</code>
+
+<BR><h4>Menu.htm</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <b>C:\Inetpub\Wwwroot\Tutorial\Menu.htm</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;html&gt;
+<BR>&nbsp; &lt;head&gt;
+<BR>&nbsp; &lt;title&gt;Maintaining Session State With Cookies&lt;/title&gt;
+<BR>&nbsp; &lt;/head&gt;
+<BR>&nbsp; &lt;body&gt;
+<BR>&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>
+<BR>&nbsp; &lt;h2 align="center"&gt;Cookie Examples&lt;/h2&gt;
+<BR>
+<BR>&nbsp; &lt;table align=center border=1 cellpadding=4&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;a href="CustomGreeting.asp" target="right"&gt;&lt;b&gt;Custom Greeting Page&lt;/b&gt;&lt;/a&gt;&lt;/td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt;&lt;tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;a href="DeleteGreetingCookie.asp" target="right"&gt;&lt;b&gt;Delete the Greetings Cookie&lt;/b&gt;&lt;/a&gt;&lt;/td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt;&lt;tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;a href="SelectColors.asp" target="right"&gt;&lt;b&gt;Set Page Colors&lt;/b&gt;&lt;/a&gt;&lt;/td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt;&lt;tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;a href="DeleteColorCookie.asp" target="right"&gt;&lt;b&gt;Delete Page Colors Cookies&lt;/b&gt;&lt;/a&gt;&lt;/td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt;&lt;tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;a href="Cookie.asp" target="right"&gt;&lt;b&gt;Set Cookies for Date, Time and Total Visits&lt;/b&gt;&lt;/a&gt;&lt;/td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt;&lt;tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;td&gt;&lt;a href="DeleteCookies.asp" target="right"&gt;&lt;b&gt;Delete Cookies for Date, Time and Total Visits&lt;/b&gt;&lt;/a&gt;&lt;/td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt;
+<BR>&nbsp; &lt;/table&gt;
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt;
+<BR>&nbsp; &lt;/html&gt;
+</p>
+</code>
+
+<BR><h4>CustomGreeting.asp</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <b>C:\Inetpub\Wwwroot\Tutorial\CustomGreeting.asp</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;%@ Language="VBScript" %&gt; 
+<BR>&nbsp;  &lt;% 
+<BR>&nbsp;&nbsp; 'If the user has selected text and background colors, 
+<BR>&nbsp;&nbsp; ' cookies are used to remember the values between HTTP sessions.
+<BR>&nbsp;&nbsp; 'Do this first so that your page can use use the values if they are set.
+<BR>&nbsp;&nbsp; If Not (Request.QueryString("Text")="") Then 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("TextColor") = Request.QueryString("Text") 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("BackgroundColor") = Request.QueryString("Background") 
+<BR>&nbsp;&nbsp; End If 
+<BR>
+<BR>&nbsp;&nbsp; ' If the user has typed in a name, a cookie is created. 
+<BR>&nbsp;&nbsp; If Not (Request.QueryString("Name")="") Then 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies ("Name") = Request.QueryString("Name")
+<BR>
+<BR>&nbsp;&nbsp; ' If the user does not give his/her name, a cookie 
+<BR>&nbsp;&nbsp; ' is created so that we do not keep asking for the name. 
+<BR>&nbsp;&nbsp; ElseIf (InStr(Request.QueryString,"Name")=1) Then 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies ("NoUserInput") = "TRUE" 
+<BR>
+<BR>&nbsp;&nbsp; End If 
+<BR>&nbsp; %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp; 'Set colors according to existing previous user input.
+<BR>&nbsp;&nbsp; If (Request.Cookies ("TextColor")="") Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body&gt; 
+<BR>&nbsp;&nbsp; &lt;% Else %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body bgcolor=&lt;%=Request.Cookies("BackgroundColor")%&gt; text=&lt;%=Request.Cookies("TextColor")%&gt;&gt; 
+<BR>&nbsp;&nbsp; &lt;% End If
+<BR>&nbsp; %&gt;
+<BR>
+<BR>&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp; 'If there is no name cookie set, no name entered by the user, 
+<BR>&nbsp;&nbsp; ' and there was no user input at all, get the user's name.
+<BR>&nbsp;&nbsp; If ( (Request.Cookies("Name")="") And ((Request.QueryString("Name"))="")) And (Not(Request.Cookies("NoUserInput")="TRUE") ) Then %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;FORM ACTION="CustomGreeting.asp" METHOD="GET" NAME="DataForm"&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;table align=center&gt;&lt;tr&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=TEXTBOX NAME="Name" SIZE=33&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=Submit VALUE="Please Enter Your Name"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/FORM&gt; 
+<BR>
+<BR>&nbsp;&nbsp; &lt;% ElseIf Not(Request.Cookies("Name")="") Then %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;H2 align=center&gt;Greetings &lt;%=Request.Cookies("Name")%&gt;&lt;/H2&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% Else %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;H2&gt;Hello!&lt;/H2&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;H3&gt;You did not give us your name so we are not able to greet you by name.&lt;/H3&gt; 
+<BR>
+<BR>&nbsp;&nbsp; &lt;% End If
+<BR>&nbsp; %&gt; 
+<BR>
+<BR>&nbsp; &lt;H3&gt;In-Memory Cookie Example&lt;/H3&gt;
+<BR>&nbsp; &lt;P&gt;
+<BR>&nbsp; Once you enter your name:
+<BR>&nbsp; &lt;UL&gt;
+<BR>&nbsp; &lt;LI&gt;If you hit &lt;B&gt;Refresh&lt;/B&gt; in your browser, you should still see your name.&lt;/LI&gt;
+<BR>&nbsp; &lt;LI&gt;If you close your browser, the cookie is deleted. When you re-open your browser to this page, you should be asked for your name again.&lt;/LI&gt;
+<BR>&nbsp; &lt;LI&gt;If you click on &lt;B&gt;Delete the Greetings Cookie&lt;/B&gt;, and click on &lt;B&gt;Custom Greeting Page&lt;/B&gt;, you should be asked for your name again.&lt;/LI&gt;
+<BR>&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt; 
+<BR>&nbsp; &lt;/html&gt; 
+</p>
+</code>
+
+<BR><h4>DeleteGreetingCookie.asp</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Tutorial\DeleteGreetingCookie.asp</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;%@ Language="VBScript" %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>
+<BR>&nbsp; &lt;% If (Request.Cookies ("TextColor")="") Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>&nbsp; &lt;% Else %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body bgcolor=&lt;%=Request.Cookies("BackgroundColor")%&gt; text=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;font face="MS Gothic" color=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp; &lt;% End If %&gt;
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp; If Not ("" = Request.Cookies("Name")) Then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies ("Name").Expires = "January 1, 1992" 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies ("NoUserInput").Expires = "January 1, 1992" %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;h2 align=center&gt;In-Memory Greeting Cookie Deleted&lt;/h2&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;P&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; The cookie used to keep track of your name has been deleted.&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Please click on &lt;B&gt;Custom Greeting Page&lt;/B&gt; to be asked for your name again.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% Else %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;h2 align=center&gt;No In-Memory Greeting Cookie Deleted&lt;/h2&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;P&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; There was no cookie set with your name.&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Please click on &lt;B&gt;Custom Greeting Page&lt;/B&gt; to enter your name.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% End If
+<BR>&nbsp; %&gt;
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt; 
+<BR>&nbsp; &lt;/html&gt; 
+</p>
+</code>
+
+<br><h4>SelectColors.asp</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Tutorial\SelectColors.asp</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;%@ Language="VBScript" %&gt; 
+<BR>
+<BR>&nbsp; &lt;% 
+<BR>&nbsp;&nbsp;&nbsp; ' If the user has selected text and background colors, 
+<BR>&nbsp;&nbsp;&nbsp; ' cookies are used to remember the values between HTTP sessions. 
+<BR>&nbsp;&nbsp;&nbsp; If Not (Request.QueryString("Text")="") Then 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies ("TextColor") = Request.QueryString("Text") 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies ("BackgroundColor") = Request.QueryString("Background") 
+<BR>&nbsp;&nbsp;&nbsp; End If 
+<BR>&nbsp; %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp;&nbsp; 'Set colors according to existing previous user input.
+<BR>&nbsp;&nbsp;&nbsp; If (Request.Cookies ("TextColor")="") Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;% Else %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body bgcolor=&lt;%=Request.Cookies("BackgroundColor")%&gt; text=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;% End If
+<BR>&nbsp; %&gt; 
+<BR>
+<BR>&nbsp; &lt;font face="MS Gothic"&gt; 
+<BR>
+<BR>&nbsp; &lt;H2 align=center&gt;Select the colors for your Web page&lt;/H2&gt;
+<BR>&nbsp; &lt;P&gt;
+<BR>&nbsp; In Memory Cookies will be used to store these values.
+<BR>&nbsp; &lt;/P&gt;
+<BR>&nbsp; &lt;FORM ACTION="SelectColors.asp" METHOD="GET" NAME="DataForm"&gt;
+<BR>&nbsp; &lt;table border="1" width="450" cellpadding=0&gt;
+<BR>&nbsp; &lt;tr&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;table&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td BGCOLOR=99FF99&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;B&gt;&lt;font color=000000&gt;Please select the background color&lt;/font&gt;&lt;/B&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=FFFFFF&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Background" VALUE="FFFFFF" CHECKED&gt;&lt;font COLOR=000000&gt; FFFFFF &lt;/font&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=D98719&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Background" VALUE="D98719"&gt; D98719
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=D9D919&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Background" VALUE="D9D919"&gt; D9D919
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=00FFFF&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Background" VALUE="00FFFF"&gt; 00FFFF
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=FF00FF&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Background" VALUE="FF00FF"&gt; FF00FF
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=000000&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Background" VALUE="000000"&gt; &lt;font COLOR=FFFFFF&gt;000000&lt;/font&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt; 
+<BR>&nbsp; &lt;/table&gt;
+<BR>&nbsp; &lt;/td&gt;&lt;td&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;table&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td BGCOLOR=99FF99&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;B&gt;&lt;font color=000000&gt;Please select the text color&lt;/font&gt;&lt;/B&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=FFFFFF&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Text" VALUE="FFFFFF" CHECKED&gt;&lt;font COLOR=000000&gt; FFFFFF &lt;/font&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=D98719&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Text" VALUE="D98719"&gt; D98719 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=D9D919&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Text" VALUE="D9D919"&gt; D9D919 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=00FFFF&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Text" VALUE="00FFFF"&gt; 00FFFF 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=FF00FF&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Text" VALUE="FF00FF"&gt; FF00FF 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td BGCOLOR=000000&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;input type="RADIO" NAME="Text" VALUE="000000" CHECKED&gt;&lt;font COLOR=FFFFFF&gt; 000000 &lt;/font&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/table&gt; 
+<BR>&nbsp; &lt;/td&gt;&lt;/tr&gt; 
+<BR>&nbsp; &lt;/table&gt;
+<BR>&nbsp; &lt;P&gt;
+<BR>&nbsp; &lt;input type=Submit VALUE="Submit selected colors"&gt; 
+<BR>&nbsp; &lt;/FORM&gt; 
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt; 
+<BR>&nbsp; &lt;/html&gt; 
+</p>
+</code>
+
+<br><h4>DeleteColorCookie.asp</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Tutorial\DeleteColorCookie.asp</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;%@ Language="VBScript" %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp;  &lt;head&gt; 
+<BR>&nbsp;  &lt;/head&gt; 
+<BR>&nbsp;  &lt;body&gt; 
+<BR>&nbsp;  &lt;font face="MS Gothic"&gt;
+<BR>
+<BR>&nbsp;  &lt;% 
+<BR>&nbsp;&nbsp; If Not ("" = Request.Cookies("TextColor")) Then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("TextColor").Expires = "January 1, 1992" 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("BackgroundColor").Expires = "January 1, 1992" %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;h2 align=center&gt;In-Memory Color Cookie Deleted&lt;/h2&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;P&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; The cookie used to keep track of your display colors has been deleted.&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Please click on &lt;B&gt;Set Page Colors&lt;/B&gt; to set your colors again.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% Else %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;h2 align=center&gt;No In-Memory Color Cookie Deleted&lt;/h2&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;P&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; There was no cookie set with your color choices.&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Please click on &lt;B&gt;Set Page Colors&lt;/B&gt; to set display colors.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% End If
+<BR>&nbsp;  %&gt;
+<BR>
+<BR>&nbsp;  &lt;/font&gt;
+<BR>&nbsp;  &lt;/body&gt; 
+<BR>&nbsp;  &lt;/html&gt;
+</p>
+</code>
+
+<BR><h4>Cookie.asp</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Tutorial\Cookie.asp</b> という名前で保存します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;%@ Language="VBScript" %&gt; 
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp; LastAccessTime = Request.Cookies("LastTime")
+<BR>&nbsp;&nbsp; LastAccessDate = Request.Cookies("LastDate")
+<BR>
+<BR>&nbsp;&nbsp; 'If the NumVisits cookie is empty, set to 0, else increment it.
+<BR>&nbsp;&nbsp; If (Request.Cookies("NumVisits")="") Then 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("NumVisits") = 0 
+<BR>&nbsp;&nbsp; Else 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("NumVisits") = Request.Cookies("NumVisits") + 1 
+<BR>&nbsp;&nbsp; End If 
+<BR>
+<BR>&nbsp;&nbsp; Response.Cookies("LastDate") = Date
+<BR>&nbsp;&nbsp; Response.Cookies("LastTime") = Time
+<BR>
+<BR>&nbsp;&nbsp; 'Setting an expired date past the present date creates a persistent cookie.
+<BR>&nbsp;&nbsp; Response.Cookies("LastDate").Expires = "January 15, 2001"
+<BR>&nbsp;&nbsp; Response.Cookies("LastTime").Expires = "January 15, 2001"
+<BR>&nbsp;&nbsp; Response.Cookies("NumVisits").Expires = "January 15, 2001"
+<BR>&nbsp; %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>&nbsp; &lt;% If (Request.Cookies ("TextColor")="") Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>&nbsp; &lt;% Else %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body bgcolor=&lt;%=Request.Cookies("BackgroundColor")%&gt; text=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;font face="MS Gothic" color=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp; &lt;% End If %&gt;
+<BR>
+<BR>&nbsp; &lt;H2 align=center&gt;Persistent Client-Side Cookies!&lt;/H2&gt; 
+<BR>
+<BR>&nbsp; &lt;P&gt;
+<BR>&nbsp; Three persistent client-side cookies are created.
+<BR>&nbsp; &lt;UL&gt;
+<BR>&nbsp; &lt;LI&gt;A cookie to count the number of times you visited the Web page.&lt;/LI&gt;
+<BR>&nbsp; &lt;LI&gt;A cookie to determine the date of your visit.&lt;/LI&gt;
+<BR>&nbsp; &lt;LI&gt;A cookie to determine the time of your visit.&lt;/LI&gt;
+<BR>&nbsp; &lt;/UL&gt;
+<BR>&nbsp; &lt;/P&gt; 
+<BR>
+<BR>&nbsp;&lt;table border="1" width="300" cellpadding=4 align=center&gt; 
+<BR>&nbsp;&lt;tr&gt;&lt;td&gt;
+<BR>&nbsp;&lt;% If (Request.Cookies ("NumVisits")=0) Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp; Welcome! This is your first visit to this Web page! 
+<BR>&nbsp;&lt;% Else %&gt; 
+<BR>&nbsp;&nbsp;&nbsp; Thank you for visiting again! You have been to this Web page a total of &lt;B&gt;&lt;%=Request.Cookies("NumVisits")%&gt;&lt;/B&gt; time(s).
+<BR>&nbsp;&lt;% End If %&gt; 
+<BR>&nbsp;&lt;/td&gt;&lt;/tr&gt;
+<BR>&nbsp;&lt;/table&gt; 
+<BR>
+<BR>&nbsp;&lt;P&gt; 
+<BR>&nbsp;&lt;B&gt;The Current time is &lt;%=Time%&gt; on &lt;%=Date%&gt;&lt;BR&gt;
+<BR>&nbsp;&lt;% If (Request.Cookies ("NumVisits")&gt;0) Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; You last visited this Web page at &lt;%=LastAccessTime%&gt; on &lt;%=LastAccessDate%&gt; 
+<BR>&nbsp;&lt;% End If %&gt; 
+<BR>&nbsp;&lt;/strong&gt; 
+<BR>&nbsp;&lt;/P&gt;
+<BR>
+<BR>&nbsp;&lt;/font&gt;
+<BR>&nbsp;&lt;/body&gt; 
+<BR>&nbsp;&lt;/html&gt; 
+</p>
+</code>
+
+<br><h4>DeleteCookies.asp</h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを DeleteCookies.asp という名前で保存します。
+</p>
+
+<code>
+<p>
+<BR>&nbsp; &lt;%@ Language="VBScript" %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt;
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>
+<BR>&nbsp; &lt;% If (Request.Cookies ("TextColor")="") Then %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>&nbsp; &lt;% Else %&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;body bgcolor=&lt;%=Request.Cookies("BackgroundColor")%&gt; text=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;font face="MS Gothic" color=&lt;%=Request.Cookies("TextColor")%&gt;&gt;
+<BR>&nbsp; &lt;% End If %&gt;
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp; If Not ("" = Request.Cookies("NumVisits")) Then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("NumVisits").Expires = "January 1, 1993"
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("LastDate").Expires = "January 1, 1993" 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Response.Cookies("LastTime").Expires = "January 1, 1993" %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;H2 align=center&gt;Persistent Cookies Are Deleted&lt;/H2&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;P&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; The cookies used to keep track of your visits and date and time of last visit have been deleted.&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Please click on &lt;B&gt;Set Cookies for Date, Time and Total Visits&lt;/B&gt; to set your cookies again.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% Else %&gt;
+<BR> 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;H2 align=center&gt;No Persistent Cookies Are Deleted&lt;/H2&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;P&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; There were no cookies set to keep track of your visits, and date and time of last visit.&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Please click on &lt;B&gt;Set Cookies for Date, Time and Total Visits&lt;/B&gt; to set your colors again.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp;&nbsp; &lt;% End If %&gt;
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt; 
+<BR>&nbsp; &lt;/html&gt; 
+</p>
+</code>
+
+<BR><h3>Session オブジェクトを使用する cookie</h3>
+
+<p>
+<b>Session</b> オブジェクトを使用すると、メモリ内 cookie のみを作成できます。<b>Session</b> オブジェクトが正常に機能するには、サイトへのユーザーの訪問の開始時と終了時を判別する必要があります。IIS では、ユーザーに関する情報セットを保持するために使用される ASP Session ID を保存する cookie を使用して、これを行います。ASP Session ID が存在しない場合は、サーバーでは現在の要求を訪問の開始時と見なします。訪問は、ASP ファイルに対する要求が一定の時間行われなかったときに終了します。既定の時間は 20 分です。
+</p>
+
+<p>
+このレッスンでは、次のファイルを作成します。
+</p>
+
+<ul>
+<li>
+<B>Global.asa</B>&nbsp;&nbsp;&nbsp;Global.asa は、アプリケーションの開始時と各セッションの開始時に一般的なアクションを実行できるようにするファイルです。アプリケーションは、最初のユーザーが初めてページを要求したときに開始され、アプリケーションがアンロードされたとき、またはサーバーがオフラインになったときに終了します。固有のセッションは、各ユーザーに対して開始され、ユーザーが最後のページを要求してから 20 分後に終了します。Global.asa で実行できる一般アクションには、アプリケーションまたはセッション変数の設定、ユーザーの認証、ユーザーが接続した日時のログ、アプリケーションまたはセッションの間アクティブにしたままにする COM オブジェクトのインスタンスの作成などが含まれます。 
+</li><li>
+<B>VisitCount.asp</B>&nbsp;&nbsp;&nbsp;この ASP スクリプトでは、<b>Session</b> オブジェクトを使用して、メモリ内 cookie を作成します。
+</li></ul>
+
+<p>
+アプリケーションまたはセッションが開始または終了すると、それがイベントと見なされます。Global.asa ファイルを使用すると、イベントに応答して実行する定義済みイベント プロシージャを使用できます。
+</p>
+
+<BR><h4>Global.asa  </h4>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Global.asa</b> という名前で保存します。
+</P><P>
+<B>重要 :</B> Global.asa ファイルを ASP で使用するには、アプリケーションのルート ディレクトリに保存する必要があります。Test という名前の仮想パスが C:\Inetpub\Wwwroot\Test にマップされている場合は、URL は http://LocalHost/Test になり、Global.asa ファイルは C:\Inetpub\Wwwroot\Test に配置する必要があります。ここでは、仮想パスを C:\Inetpub\Wwwroot\Tutorial にマップしていないので、ルート ディレクトリは C:\Inetpub\Wwwroot になります。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;SCRIPT LANGUAGE=VBScript RUNAT=Server&gt;
+<BR>
+<BR>&nbsp; 'Using application-level variables to track the number of users 
+<BR>&nbsp;  ' that are currently looking at the site and the number that have 
+<BR>&nbsp;  ' accessed the site. 
+<BR>&nbsp;  Sub Application_OnStart
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Get the physical path to this vdir, and append a filename.
+<BR>&nbsp;&nbsp;&nbsp; Application("PhysPath") = Server.MapPath(".") & "\hits.txt"
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Set some Visual Basic constants, and instantiate the FileSystemObject object.
+<BR>&nbsp;&nbsp;&nbsp; Const cForReading = 1
+<BR>&nbsp;&nbsp;&nbsp; Const cTristateUseDefault = -2
+<BR>&nbsp;&nbsp;&nbsp; Set fsoObject = Server.CreateObject("Scripting.FileSystemObject")
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Get the last saved value of page hits and the date that it happened.
+<BR>&nbsp;&nbsp;&nbsp; If fsoObject.FileExists(Application("PhysPath")) Then
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  'If the file hits.txt exists, set the Application variables.  
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Set tsObject = fsoObject.OpenTextFile(Application("PhysPath"), cForReading, cTristateUseDefault)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Application("HitCounter") = tsObject.ReadLine
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Application("AppStartDate") = tsObject.ReadLine
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  tsObject.Close  
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Else 'No file has been saved, so reset the values.
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Application("HitCounter") = 0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Application("AppStartDate") = Date
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; End If
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Application("CurrentUsers") = 0
+<BR>
+<BR>&nbsp;  End Sub
+<BR>
+<BR>
+<BR>&nbsp;  Sub Application_OnEnd 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Const cForWriting = 2
+<BR>&nbsp;&nbsp;&nbsp; Const cTristateUseDefault = -2
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Set fsoObject = Server.CreateObject("Scripting.FileSystemObject")
+<BR>&nbsp;&nbsp;&nbsp; If fsoObject.FileExists(Application("PhysPath")) Then
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  'If the file exists, open it for writing.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  set tsObject = fsoObject.OpenTextFile(Application("PhysPath"), cForWriting, cTristateUseDefault)
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Else
+<BR>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  'If the file doesn't exist, create a new one. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  set tsObject = fsoObject.CreateTextFile(Application("PhysPath"))
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; End If
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Write the total number of site hits and the last day recorded to the file.
+<BR>&nbsp;&nbsp;&nbsp; tsObject.WriteLine(Application("HitCounter"))
+<BR>&nbsp;&nbsp;&nbsp; tsObject.WriteLine(Application("AppStartDate"))
+<BR>&nbsp;&nbsp;&nbsp; tsObject.Close  
+<BR>
+<BR>&nbsp;  End Sub 
+<BR>
+<BR>
+<BR>&nbsp;  Sub Session_OnStart 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'The Session time-out default is changed to 1 for the purposes of 
+<BR>&nbsp;&nbsp;&nbsp; ' this example.
+<BR>&nbsp;&nbsp;&nbsp; Session.Timeout = 1 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'When you change Application variables, you must lock them so that other 
+<BR>&nbsp;&nbsp;&nbsp; ' sessions cannot change them at the same time.
+<BR>&nbsp;&nbsp;&nbsp; Application.Lock
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Increment the site hit counter.
+<BR>&nbsp;&nbsp;&nbsp; Application("HitCounter") = Application("HitCounter") + 1	
+<BR>&nbsp;&nbsp;&nbsp; Application("CurrentUsers") = Application("CurrentUsers") + 1
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Application.UnLock
+<BR>
+<BR>&nbsp;  End Sub 
+<BR>
+<BR>
+<BR>&nbsp;  Sub Session_OnEnd 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Application.Lock
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Decrement the current user counter.
+<BR>&nbsp;&nbsp;&nbsp; Application("CurrentUsers") = Application("CurrentUsers") - 1
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Application.UnLock
+<BR>
+<BR>&nbsp;  End Sub 
+<BR>
+<BR>&nbsp;  &lt;/SCRIPT&gt; 
+</p>
+</code>
+
+<BR><h4>VisitCount.asp</h4>
+
+<p>
+Global.asa に設定した変数を使用して、訪問およびセッションを数えることができます。
+</p>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Tutorial\VisitCount.asp</B> という名前で保存します。ブラウザで http://Localhost/Tutorial/VisitCount.asp と入力して、ファイルを表示します。 </p>
+<p>ブラウザで http://Localhost/Tutorial/VisitCount.asp への 2 番目のインスタンスを開き、最初のブラウザ画面で [更新] をクリックします。[Total Visitors] および [Active Visitors] の値が、1 増加します。2 番目のブラウザ画面を閉じ、1 分間待ってから、最初のブラウザ画面で [更新] をクリックします。[Active Visitors] の値が 1 つ減ります。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;% Response.Buffer = True%&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;title&gt;Retrieving Variables Set in Global.asa&lt;/title&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>&nbsp; &lt;body&gt; 
+<BR>&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>
+<BR>&nbsp; &lt;H3 align=center&gt;Retrieving Variables Set in Global.asa&lt;/H3&gt;
+<BR>&nbsp; &lt;P&gt;
+<BR>&nbsp; Total Visitors = &lt;%=Application("HitCounter")%&gt; since &lt;%=Application("AppStartDate")%&gt;&lt;BR&gt;
+<BR>&nbsp; Active Visitors = &lt;%=Application("CurrentUsers")%&gt;
+<BR>&nbsp; &lt;/P&gt;
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt; 
+<BR>&nbsp; &lt;/html&gt; 
+</p>
+</code>
+
+<BR><h2><a name="without">クッキーを使用しないでセッションの状態を維持する</a></h2>
+
+<p>
+ブラウザには、cookie を認識しないものや、ユーザーが cookie を無効にできるブラウザもあります。HTTP POST メソッドは、cookie の代替としてセッション状態を維持する方法を提供します。HTTP POST メソッドでは、cookie と同じ状態情報が提供されますが、cookie が利用できないときでも機能するという利点があります。このメソッドは、実際には一般的ではありませんが、学習に適しています。HTTP POST メソッドは、メモリ内 cookie と類似しています。ユーザー情報は訪問の間のみ保持され、セッション状態情報はユーザーがブラウザをオフにすると破棄されます。
+</p>
+
+<BR><h3>DataEntry.asp</h3>
+
+<p>
+テキスト エディタで新しいファイルを開き、次のスクリプトを貼り付けて、ファイルを <B>C:\Inetpub\Wwwroot\Tutorial\DataEntry.asp</b> という名前で保存します。ブラウザで http://Localhost/Tutorial/DataEntry.asp と入力して、ファイルを表示します。
+</p>
+
+<code>
+<p>
+&nbsp; &lt;%@ Language=VBScript %&gt; 
+<BR>
+<BR>&nbsp; &lt;html&gt; 
+<BR>&nbsp; &lt;head&gt; 
+<BR>&nbsp; &lt;title&gt;Data Entry Without Cookies&lt;/title&gt; 
+<BR>&nbsp; &lt;/head&gt; 
+<BR>&nbsp; &lt;body&gt;
+<BR>&nbsp; &lt;font face="MS Gothic"&gt;
+<BR>
+<BR>&nbsp; &lt;!-- In this example, subroutines are listed first. 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; There's a subroutine for each page of the order process.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The main calling code is at the bottom. --&gt; 
+<BR>
+<BR>&nbsp; &lt;% Sub DisplayInitialPage %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;table border=1 cellpadding=3 cellspacing=0 width=500 bordercolor=#808080 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td bgColor=#004080 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;font color=#ffffff&gt;&lt;H2&gt;Order Form&lt;/H2&gt;&lt;/font&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td bgColor=#e1e1e1 align=left&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;&lt;B&gt;Step 1 of 4&lt;/B&gt;&lt;/P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;P align=center&gt;
+<BR>&nbsp;&nbsp;&nbsp; This form uses the HTTP POST method to pass along hidden values that contain 
+<BR>&nbsp;&nbsp;&nbsp; your order information. This form does not use cookies. 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt; 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;FORM METHOD=POST ACTION="DataEntry.asp" NAME=DataEntryForm&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;Enter your name 
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="TEXT" NAME=FullName&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;BR&gt;Enter your imaginary credit card number 
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="TEXT" NAME=CreditCard&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;!-- Keeps track of the information by using the hidden HTML form variable Next Page. --&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="HIDDEN" NAME=NextPage VALUE=2&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="SUBMIT" VALUE="Next -&gt;" NAME=NextButton&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/FORM&gt; 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/table&gt;
+<BR>
+<BR>&nbsp; &lt;% End Sub %&gt;
+<BR>
+<BR>
+<BR>&nbsp; &lt;% Sub DisplayDogBreed %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;table border=1 cellpadding=3 cellspacing=0 width=500 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td bgColor=#004080 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;font color=#ffffff&gt;&lt;H2&gt;Order Form&lt;/H2&gt;&lt;/font&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td bgColor=#e1e1e1&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;&lt;B&gt;Step 2 of 4&lt;/B&gt;&lt;/P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;P align=center&gt;
+<BR>&nbsp;&nbsp;&nbsp; Please select the type of dog you want. 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt; 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;FORM METHOD=POST ACTION="DataEntry.asp" NAME=DataEntryForm&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=DogSelected VALUE="Cocker Spaniel" CHECKED&gt;Cocker Spaniel&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=DogSelected VALUE="Doberman"&gt;Doberman&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=DogSelected VALUE="Timber Wolf"&gt;Timber Wolf&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=DogSelected VALUE="Mastiff"&gt;Mastiff&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;!--Keeps track of the information by using the hidden HTML form variable Next Page. --&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="HIDDEN" NAME=NextPage VALUE=3&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="SUBMIT" VALUE="Next -&gt;" NAME=NextButton&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/FORM&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/table&gt; 
+<BR>
+<BR>&nbsp; &lt;% End Sub %&gt;
+<BR>
+<BR>
+<BR>&nbsp; &lt;% Sub DisplayCity %&gt; 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;table border=1 cellpadding=3 cellspacing=0 width=500 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td bgColor=#004080 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;font color=#ffffff&gt;&lt;H2&gt;Order Form&lt;/H2&gt;&lt;/font&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td bgColor=#e1e1e1&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;&lt;B&gt;Step 3 of 4&lt;/B&gt;&lt;/P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;P align=center&gt;
+<BR>&nbsp;&nbsp;&nbsp; We deliver from the following cities. Please choose the one closest to you.
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt; 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;FORM METHOD=POST ACTION="DataEntry.asp" NAME=DataEntryForm&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=CitySelected VALUE="Seattle" CHECKED&gt;Seattle&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=CitySelected VALUE="Los Angeles"&gt;Los Angeles&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=CitySelected VALUE="Boston"&gt;Boston&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE=RADIO NAME=CitySelected VALUE="New York"&gt;New York&lt;BR&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;!--Keeps track of the information by using the hidden HTML form variable Next Page. --&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="HIDDEN" NAME=NextPage VALUE=4&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;INPUT TYPE="SUBMIT" VALUE="Next -&gt;" NAME=NextButton&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/FORM&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;/table&gt; 
+<BR>
+<BR>&nbsp; &lt;% End Sub %&gt;
+<BR>
+<BR>
+<BR>&nbsp; &lt;% Sub DisplaySummary %&gt;
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; &lt;table border=1 cellpadding=3 cellspacing=0 width=500 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td bgColor=#004080 align=center&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;font color=#ffffff&gt;&lt;H2&gt;Order Form Completed&lt;/H2&gt;&lt;/font&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td bgColor=#e1e1e1&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;P&gt;&lt;B&gt;Step 4 of 4&lt;/B&gt;&lt;/P&gt;
+<BR>&nbsp;&nbsp;&nbsp; &lt;P align=center&gt;
+<BR>&nbsp;&nbsp;&nbsp; The following information was entered.&lt;BR&gt; 
+<BR>&nbsp;&nbsp;&nbsp; A transaction will now be executed to complete your order if your name and 
+<BR>&nbsp;&nbsp;&nbsp; credit card are valid.
+<BR>&nbsp;&nbsp;&nbsp; &lt;/P&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;table cellpadding=4&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr bgcolor=#ffffcc&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Name
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;%=Session.Value("FullName")%&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr bgcolor=Beige&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Credit Card 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;%=Session.Value("CreditCard")%&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr bgcolor=Beige&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dog Ordered 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;%=Session.Value("DogSelected")%&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt;&lt;tr bgcolor=Beige&gt;&lt;td&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; City Ordered From 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;td&gt;  
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;%=Session.Value("CitySelected")%&gt;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;&lt;/tr&gt; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/table&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/td&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/tr&gt; 
+<BR>&nbsp;&nbsp;&nbsp; &lt;/table&gt; 
+<BR>
+<BR>&nbsp; &lt;% End Sub %&gt;
+<BR>
+<BR>
+<BR>&nbsp; &lt;% Sub StoreUserDataInSessionObject  %&gt;
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp;&nbsp; Dim FormKey
+<BR>&nbsp;&nbsp;&nbsp; For Each FormKey in Request.Form
+<BR>&nbsp;&nbsp;&nbsp; Session(FormKey) = Request.Form.Item(FormKey)
+<BR>&nbsp;&nbsp;&nbsp; Next 
+<BR>&nbsp; %&gt;
+<BR>&nbsp; &lt;% End Sub  %&gt;
+<BR>
+<BR>
+<BR>&nbsp; &lt;%
+<BR>&nbsp;&nbsp;&nbsp; 'This is the main code that calls all the subroutines depending on the
+<BR>&nbsp;&nbsp;&nbsp; ' hidden form elements.
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Dim CurrentPage 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; If Request.Form.Item("NextPage") = "" Then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CurrentPage = 1 
+<BR>&nbsp;&nbsp;&nbsp; Else
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CurrentPage = Request.Form.Item("NextPage")
+<BR>&nbsp;&nbsp;&nbsp; End If 
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; 'Save all user data so far.
+<BR>&nbsp;&nbsp;&nbsp; Call StoreUserDataInSessionObject
+<BR>
+<BR>&nbsp;&nbsp;&nbsp; Select Case CurrentPage 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case 1 : Call DisplayInitialPage 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case 2 : Call DisplayDogBreed 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case 3 : Call DisplayCity 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case 4 : Call DisplaySummary 
+<BR>&nbsp;&nbsp;&nbsp; End Select %&gt; 
+<BR>
+<BR>&nbsp; &lt;BR&gt; 
+<BR>&nbsp; &lt;HR&gt; 
+<BR>&nbsp; &lt;H3 align=center&gt;&lt;A HREF="DataEntry.asp"&gt;Reset Order&lt;/A&gt;&lt;/H3&gt; 
+<BR>
+<BR>&nbsp; &lt;/font&gt;
+<BR>&nbsp; &lt;/body&gt; 
+<BR>&nbsp; &lt;/html&gt; 
+</p>
+</code>
+
+
+
+<hr class="iis" size="1">
+<p align=center><a href="/iishelp/common/colegal.htm"><em>&copy; 1997-2001 Microsoft Corporation. All rights reserved.</em></a></p>
+</font>
+</body>
+</html>

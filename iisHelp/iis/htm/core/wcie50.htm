@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Internet Explorer&nbsp;5.0 による発行</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Internet Explorer 5.0 によって、WebDAV ディレクトリにドキュメントを発行する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="PublishingthroughInternetExplorer5"> Internet Explorer&nbsp;5.0 による発行</a></h1>
+
+<p>Windows XP、Windows&nbsp;2000、Windows NT&nbsp;4.0、Windows&nbsp;98、または Windows&nbsp;95 のオペレーティングシステムで Internet Explorer&nbsp;5 により WebDAV ディレクトリへの接続が可能です。Windows&nbsp;2000 による接続後の操作と同じように、Internet Explorer 5 による接続後、ファイルを操作しディレクトリに発行します。 </p>
+
+<big>Internet Explorer による WebDAV ディレクトリへの接続</big>
+<ol>
+<li>Internet Explorer&nbsp;5 の [ファイル] メニューで、[開く] をクリックします。</li> 
+<li>[開く] ボックスに、接続する WebDAV ディレクトリの URL を入力します。</li>
+<li>[Web フォルダを開く] チェック ボックスをオンにし、[OK] をクリックします。ディレクトリにファイルの一覧が表示されます。</li>
+</ol>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

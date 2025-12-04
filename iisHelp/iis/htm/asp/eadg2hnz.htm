@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ADOでストアド プロシージャを使用する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_using_stored_procedures_with_ado"></A><SUP></SUP>ADO でストアド プロシージャを使用する</H2>
+
+<P>&quot;ストアド プロシージャ&quot; は、1 つの名前の下に格納された、あらかじめコンパイルされている SQL ステートメントとオプションのフロー制御ステートメントの集まりで、1 つの単位として処理されます。接続プール機能を有効にしてストアド プロシージャを作成する際には考慮すべき点がいくつかあります。たとえば、ODBC データ ソース アドミニストレータを使用して、あらかじめ準備されている SQL ステートメントの一時ストアド プロシージャを作成することができます。SQL Server 2.65 と 3.5 ドライバでは、このオプションの既定の設定は &quot;オン&quot; です。これは、SQL ステートメントが準備された時に、一時ストアド プロシージャが作成、コンパイルされることを意味します。ADO メソッドの 1 つにより、準備されたコマンドが呼び出されると、この一時ストアド プロシージャが実行されるので、SQL ステートメントの解析とコンパイルに必要なオーバーヘッドを削減することができます。したがって、この機能を正しく使用すると、アプリケーションのパフォーマンスを向上させることができます。同じ SQL ステートメントを 3 回以上実行する場合、または、パラメータを持つ SQL ステートメントを複数回実行する場合は、このステートメントを準備しておく必要があります。SQL ステートメントを準備する場合、初めて実行された時にこのステートメントがコンパイルされ、データベースから切断すると同時に、準備したステートメントは失われるということを忘れないでください。</P>
+
+<P>接続プール機能が有効になっている場合、いつ一時ストアド プロシージャを削除するかを決める必要があります。SQL Server 2.65 ドライバでは、接続が解放されると同時に、ストアド プロシージャも解放されます。SQL Server 3.5 ドライバでは、接続が解放された時に削除するか、接続中に必要に応じて削除するかを選択することができます。</P>
+
+<P>一時ストアド プロシージャと接続プール機能を使用していると、格納に問題が発生することがあります。既定の設定をそのまま使用している場合、一時ストアド プロシージャが作成、格納される TempDB のスペースが足りなくなる危険性があります。接続プール機能が有効になっている場合、データベースに接続されますが、クライアントがデータベースでの作業を終了し、これを解放すると、この接続はプールに戻ります。この場合、クライアントとの関係がなくなり、再び呼び出しが実行されないとしても、接続は解放されず、ストアド プロシージャは TempDB から削除されません。</P>
+
+<P>したがって、SQL Server 2.65 ドライバを実行する場合、接続プール機能が有効ならば、ストアド プロシージャを準備、作成する機能は無効にすることをお勧めします。SQL Server 3.5 ドライバでは、接続プール機能を実行する場合は、一時ストアド プロシージャを作成するオプションをオフにするか、[接続解除した場合、または、接続している間でも適切な場合] を選択します。[接続解除した場合、または、接続している間でも適切な場合] を選択するということは、一時ストアド プロシージャを作成した OLE DB ICommand オブジェクトが解放された時に、ODBC SQL Server ドライバにより接続が切断されることを意味します。クライアント コードで ADO が使用されている場合は、ストアド プロシージャは、ADODB.Recordset および ICommand オブジェクトが閉じられた時に解放されます。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

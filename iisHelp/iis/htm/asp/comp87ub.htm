@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>HasAccess</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_hasaccess"></A><SUP></SUP>HasAccess</H2>
+
+<P>HasAccess メソッドは、指定されたファイルにアクセスするためのアクセス権をユーザーが持っているかどうかを調べます。</P>
+
+<H6>構文</H6>
+
+<P><I>OVar</I><B>.HasAccess( </B><I>FilePath </I><B>)</B></P>
+
+<P><B>&nbsp;</B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>FilePath</I></DT>
+
+<DD>ファイルのパスと名前を指定する文字列です。物理パスまたは仮想パスを指定できます。 </DD>
+</DL>
+
+<H6>戻り値</H6>
+
+<P>指定されたファイルに Web ユーザーがアクセスできるかどうかを示すブール型の値を返します。ファイルが存在しない場合、またはディレクトリが指定されている場合は、PermissionChecker オブジェクトは FALSE を返します。</P>
+
+<H6>例</H6>
+
+<P>
+次の例は、PermissionChecker オブジェクトを使用して、Web ユーザーがファイル C:\pages\private\default.htm にアクセスできるかどうかを調べます。アクセスできる場合は、スクリプトがファイルへのハイパーリンクを作成します。それ以外の場合は、メッセージを表示します。この例では、仮想パスを使用します。</P>
+
+<P>--- PermChecker.asp ---</P>
+
+<PRE><CODE>&lt;% 
+If "" = Request.ServerVariables("LOGON_USER") Then
+
+  Response.Write "&lt;H3&gt;Please disable Anonymous Access for this Virtual Directory&lt;/H3&gt;"
+
+Else
+
+  Set oPermChecker = Server.CreateObject("MSWC.PermissionChecker")
+%&gt;
+
+  &lt;H3&gt;Checking Permissions&lt;/H3&gt;
+
+
+
+  &lt;P&gt;Logged On User =
+  &lt;%=Request.ServerVariables("LOGON_USER")%&gt;
+
+  &lt;P&gt;
+  Access to Physical Path 
+  &lt;%=Request.ServerVariables("PATH_TRANSLATED")%&gt;
+  = 
+  &lt;%=oPermChecker.HasAccess(Request.ServerVariables("PATH_TRANSLATED"))%&gt;
+
+  &lt;P&gt;
+  Access to Virtual Path 
+  &lt;%=Request.ServerVariables("PATH_INFO")%&gt;
+  = 
+  &lt;%=oPermChecker.HasAccess(Request.ServerVariables("PATH_INFO"))%&gt;
+
+  &lt;P&gt;
+  If you have access to 
+  http://&lt;%=Request.ServerVariables("SERVER_NAME")%&gt;/iissamples/sdk/asp/simple/Variables_VBScript.asp
+  then you will see a link below:&lt;BR&gt;
+
+&lt;%
+  If oPermChecker.HasAccess("/iissamples/sdk/asp/simple/Variables_VBScript.asp") Then
+%&gt;
+    &lt;A href="http://localhost/iissamples/sdk/asp/simple/Variables_VBScript.asp"&gt;
+    http://localhost/iissamples/sdk/asp/simple/Variables_VBScript.asp
+    &lt;/A&gt;
+&lt;%
+  End If
+
+End if
+%&gt;
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

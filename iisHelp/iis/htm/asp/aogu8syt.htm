@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>メタベースを操作する</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_manipulating_the_metabase"></A><SUP></SUP>メタベースを操作する</H2>
+
+<P>IIS Admin オブジェクトは、オブジェクトの階層的な名前空間を公開しています。この名前空間では、各オブジェクトに ADsPath プロパティが設定されています。ADsPath の構文は、Uniform Resource Locator (URL) に似た、IIS://[path] という形式で、[path] はアクセスされているオブジェクトのディレクトリ パスを表します。たとえば、IIS://MyComputer/W3SVC は、MyComputer というコンピュータの IIsWebService オブジェクトを表します。MyComputer に関連付けられているオブジェクトは IIsComputer オブジェクトで、ほかのすべての IIS Admin オブジェクトを含んでいます。</P>
+
+<P>特定のオブジェクトへの参照を取得するには、Visual Basic または VBScript の GetObject 関数を使用します。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>ほかのスクリプト言語も使用できます。詳細については、スクリプト言語のマニュアル、および「<A HREF="/iishelp/iis/htm/asp/adsi0aat.htm">ADSI リファレンス</A>」を参照してください。</P>
+
+<P>たとえば、MaxBandWidth の現在の値を取得するには、.asp ファイルに次の VBScript を挿入します。この例では、IIS を実行するコンピュータへアクセスするのに、&quot;MyComputer&quot; という具体的な名前ではなく、&quot;LocalHost&quot; という文字列を使用しています。</P>
+
+<PRE><CODE>&lt;% 
+  Dim ComputerObj 
+  Dim MaxBW 
+  Set ComputerObj = GetObject("IIS://LocalHost") 
+  MaxBW = ComputerObj.Get("MaxBandwidth") 
+%&gt; 
+</CODE></PRE>
+
+<P>この処理は、次の例のように <I>object.property</I> 構文を使って実装することもできます。</P>
+
+<PRE><CODE>&lt;%
+  Dim ComputerObj
+  Dim MaxBW
+  Set ComputerObj = GetObject("IIS://LocalHost")
+  MaxBW = ComputerObj.MaxBandwidth
+%&gt;
+ </CODE></PRE>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>メタベースにアクセスする ASP ページには、IIS を実行するコンピュータ上での管理者権限が必要です。これは、ASP アプリケーションをアウト プロセスで実行する場合も同様です。リモート コンピュータからスクリプトを実行するときは、統合 Windows 認証 (&quot;NTLM 認証&quot; とも呼ばれる) で保護された接続のような、安全な接続を使用する必要があります。管理用 .asp ファイルのためのサーバーまたはディレクトリを作成し、そのサーバーまたはディレクトリに統合 Windows 認証を使用する認証方式を設定することをお勧めします。</P>
+
+<P>セキュリティの関係から、アウト プロセス アプリケーションがメタベースにアクセスするには、<A HREF="/iishelp/iis/htm/asp/apro22hx.htm">WamUserName</A> が管理者として認識される必要があります。この既定の動作は、特別なことがない限り変更しないことをお勧めします。</P>
+
+<P>このアウト プロセスの動作は 2 とおりの方法で変更できますが、いずれの方法も多少のセキュリティ上のリスクを伴います。
+
+<UL type=disc>
+	<LI>IWAM_<I>machinename</I> アカウントに、メタベースに対する匿名または NTLM のアクセス権を与えることができます。ただしこれにより、この既定の識別情報で作成されたすべてのアウト プロセス アプリケーションに、メタベースに対するアクセスが許可されます。 </li>
+
+	<LI>または、特定のアウト プロセス パッケージの識別情報をほかのアカウントの識別情報に変更し、そのアカウントだけにメタベースに対する管理者レベルのアクセス権を与えることができます。この方法でリスクは低くなりますが、アウト プロセス パッケージごとにこの方法を実装する必要があります。</li>
+</UL>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

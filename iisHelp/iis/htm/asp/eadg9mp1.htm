@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>RDS によるリモート データ バインド</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_remote_data_binding_with_remote_data_service"></A><SUP></SUP>RDS によるリモート データ バインド</H1>
+
+<P>Web アプリケーションでクライアントにデータのアクセス機能を提供する場合は、RDS (Remote Data Service) を使用して、そのデータの処理をクライアントとサーバー間で分散させることができます。クライアント側の RDS コンポーネントは、Web サーバーにクエリを送信します。サーバー側の RDS コンポーネントはこれらの要求を処理し、ビジネス オブジェクトを使用してこれらの要求をデータベース管理システム (DBMS) に送信します。DBMS は要求に応答して、データを Web サーバーに送り返します。Web サーバー上の RDS コンポーネントは、そのデータを ADO の Recordset オブジェクトに変換します。データはクライアントへの転送のために解析され、ネットワークを介してクライアント コンピュータに戻されます。クライアント コンピュータで、データはテキスト ボックスまたはコンボ ボックスなどのデータ連結コントロールに表示されます。</P>
+
+<P>リモート データ バインドを実行するための 2 つの主なオブジェクトは、RDS.DataControl と RDS.DataFactory です。最初に、HTML ページにオブジェクト タグを挿入して、RDS.DataControl オブジェクトのコピーをクライアント コンピュータ上に作成します。たとえば、次のように指定します。</P>
+
+<PRE><CODE>&lt;OBJECT CLASSID="clsid:BD96C556-65A3-11D0-983A-00C04FC29E33" ID="RDSDC1"&gt;
+   &lt;PARAM NAME="SQL" VALUE="SELECT Author, ID FROM Authors"&gt;
+   &lt;PARAM NAME="CONNECT" VALUE="DSN=Pubs;"&gt;
+   &lt;PARAM NAME="SERVER" VALUE=http://Bookweb/&gt;
+&lt;/OBJECT&gt;
+</CODE></PRE>
+
+<P>先行するオブジェクト タグは RDS.DataControl オブジェクトのインスタンスを作成し、このインスタンスの SQL、Connect、および Server の各パラメータを設定します。このタグを HTML ページに追加する場合、データ コントロール オブジェクトを HTML ページの複数のデータ連結コントロールにバインドできます。たとえば、次の HTML タグは、上記の RDS.DataControl オブジェクトにバインドされた HTML テーブルを表示します。</P>
+
+<PRE><CODE>&lt;TABLE id=Tasks DataSrc=#RDSDC1 WIDTH=100% BORDER=1 style="display: none"&gt;
+&lt;THEAD ALIGN=left&gt;
+    &lt;TR&gt;
+        &lt;TH&gt;&lt;em&gt;ID&lt;/TH&gt; 
+        &lt;TH&gt;&lt;em&gt;Author&lt;/TH&gt; 
+&lt;/TR&gt;
+&lt;/THEAD&gt;
+    &lt;TR&gt;
+        &lt;TD&gt;&lt;DIV DATAFLD=ID&gt;&lt;/DIV&gt;&lt;/TD&gt;
+        &lt;TD&gt;&lt;DIV DATAFLD=Author&gt;&lt;/DIV&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/TABLE&gt;
+</CODE></PRE>
+
+<P>RDS.DataControl オブジェクトと通信するサーバー上のオブジェクトは、RDS.DataFactory またはビジネス コンポーネントのいずれかです。最初にクライアント上に RDS.DataSpace オブジェクトを作成して RDS.DataFactory オブジェクトのインスタンスを生成し、次に CreateObject メソッドでサーバー上に  DataFactory オブジェクトのインスタンスを作成します。次のスクリプト例で、この方法を示します。</P>
+
+<P>データ アクセスが RDS.DataFactory オブジェクトで処理できない場合は、カスタム ビジネス コンポーネントを作成してクライアントと通信するか、または ASP スクリプトの中で ADO を直接使用してデータを取得します。次の例では、カスタム ビジネス コンポーネントの Inventory が &quot;getQuantityonHand&quot; と呼ばれるメソッドを公開します。RDS.DataControl オブジェクトは、サーバー上で Inventory のインスタンスを作成し、次に、getQuantityonHand メソッドを呼び出してレコードを取得します。</P>
+
+<PRE><CODE>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;!-- RDS.DataControl --&gt; 
+&lt;OBJECT classid="clsid:BD96C556-65A3-11D0-983A-00C04FC29E33" ID=ADC1&gt;&lt;/OBJECT&gt;
+&lt;!-- RDS.DataSpace --&gt;
+&lt;OBJECT ID="ADS1" WIDTH=1 HEIGHT=1 CLASSID="CLSID:BD96C556-65A3-11D0-983A-00C04FC29E36"&gt; 
+&lt;/OBJECT&gt;
+
+&lt;SCRIPT LANGUAGE="VBScript"&gt;
+  Option Explicit
+  Sub GetRecords() 
+  Dim objInventory, myRS 
+  Set objInventory =
+  ADS1.CreateObject("Company.Inventory", _
+  "http://&lt;%=Request.ServerVariables("SERVER_NAME")%&gt;") 
+  ' Inventory exposes a method called 
+  ' getQuantityonHand that takes connection string and SQL parameters. 
+  Set myRS = objInventory.getQuantityonHand _
+  ("DSN=pubs;UID=sa;PWD=permission;","Select Quantity From Inventory") 
+  ' Assign the returned recordset to SourceRecordset. 
+  ADC1.SourceRecordset = myRS
+  End Sub
+&lt;/SCRIPT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</CODE></PRE>
+
+<P>Platform SDK の IIS マニュアルの「Component Design Guidelines」で説明された同じ問題が、RDS.DataControl と通信するために作成したカスタム データ ビジネス コンポーネントのすべてに当てはまります。たとえば、コンポーネントがアパートメント スレッド モデルまたはボース スレッド モデルのいずれかを必ずサポートするようにします。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>RDS (Remote Data Service) は、現在では旧式となった ADC (Advanced Data Connector) を置き換えます。特に、ADC のリモート機能 (クライアントからレコード セットの処理と変更を行う機能) は、RDS として ADO に統合されました。</P>
+
+<P>詳細については、Platform SDK の「Remote Data Service」のマニュアルを参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

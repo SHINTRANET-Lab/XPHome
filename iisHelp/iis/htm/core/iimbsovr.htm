@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>メタベースについて</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="メタベースの概要について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37713458">メタベースについて</a></h1>
+
+<p></p>
+
+<p>メタベースの構成は、<a href="iiabuti.htm">IIS スナップイン</a>などの管理ツールを使って変更できます。また、IIS Admin オブジェクトや ADSI を使って、メタベースの構成をプログラムによって変更することもできます。</p>
+
+<p>メタベースの構造、メタベースのキーとパス、プロパティの継承、およびメタベースのセキュリティについては、「<a href="../asp/aint1aud.htm">IIS メタベースの紹介</a>」を参照してください。</p>
+
+<p>IIS Admin オブジェクト および IIS Admin Base オブジェクト を使って、IIS をプログラムによって管理する方法については、「<a href="../asp/aint7e9l.htm">IIS をプログラム管理する</a>」を参照してください。</p>
+
+<p>メタベースの構成可能なプロパティすべての包括的な情報については、「<a href="../asp/apro3usl.htm">管理プロパティ リファレンス</a>」を参照してください。</p>
+
+<ul>
+<li><a href="#namespace">名前空間</a></li>
+<li><a href="#inheritance">継承</a></li>
+</ul>
+
+<strong><font color="Blue">重要</font></strong>
+
+
+&nbsp;&nbsp;&nbsp;メタベースを直接編集するときには、十分な注意が必要です。メタベースのプロパティが正しく構成されていない場合、Web サイトや FTP サイトに障害が発生するなどの問題が生じる可能性があります。誤った設定を行うと、Web サイトや FTP サイトの構成が壊れることがあります。メタベースのプロパティを直接編集するのは、<a href="iiabuti.htm">IIS スナップイン</a>で設定を調整できない場合のみにしてください。
+</p>
+
+<h2><a name="namespace">名前空間</a></h2>
+
+<p>名前空間は、メタベース プロパティの場所を指定するもので、次のように構成されています。</p>
+
+<p>LM/<em>Service</em>/<em>Website</em>/Root/<em>virtual directory</em>/<em>dir</em>/<em>file</em><p>
+LM = ローカル コンピュータ<br> <em>Service</em> = インターネット サービス (W3SVC または MSFTPSVC)<br> <em>Website</em> = Web サイト<br> Root = 仮想ディレクトリ ルート<br> <em>virtual directory</em> = 仮想ディレクトリ<br> <em>dir</em> = ディレクトリ<br> <em>file</em> = ファイル
+</p>
+
+<p>たとえば、メタベース パスの名前空間<br> LM/W3SVC/Website1/Root</p>
+
+<p>が、パス<br> C:\Inetpub\wwwroot</p>
+
+<p>に関連付けられている場合、<br> http://domain.com/default.htm</p>
+
+<p>という URL は、次の物理ファイル パスにマップされます。<br> C:\Inetpub\wwwroot\default.htm</p>
+
+<h2><a name="inheritance">継承</a></h2>
+
+<p>Web サイト レベルなどの上位レベルで構成されたメタベース プロパティを、ディレクトリ レベルなどの下位レベルが引き継ぐ、つまり継承することができます。これらの継承されたプロパティは、下位レベルでも同様に個別に編集できます。サーバー、ディレクトリ、ファイルなどの下位レベルで個別に変更されたプロパティの設定は、上位レベルで設定が変更されても、自動的に無効になることはありません。</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

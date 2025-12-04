@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>マニュアルを使用する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="マニュアルの検索機能について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37672043">マニュアルを使用する</a></h1>
+
+<p>インターネット インフォメーション サービスのオンライン マニュアルには、必要な情報を簡単に検索するための機能がいくつかあります。</p>
+
+<p><strong>ナビゲーション</strong></p>
+
+<ul>
+<li>使用できるすべての機能とトピックが記載された目次を、ナビゲーションのウィンドウに表示します。</li>
+<li>最上位レベルのトピック タイトルをクリックすると、そのセクションの内容を記述するページがトピックのウィンドウに表示されます。</li>
+<li>トピック タイトルのプラス記号をクリックすると、目次が開いてそのセクションのすべてのトピックが表示されます。</li>
+</ul>
+
+<p><strong>検索</strong></p>
+
+<ul>
+<li>ナビゲーションのウィンドウの [検索] タブをクリックします。</li>
+<li>[検索] のテキスト ボックスに語句を入力します。</li>
+<li>既定の [標準検索] では、語または句のいくつかのバリエーションを検索します。[完全一致]、[いずれかの語を含む]、[すべての語を含む]、または [論理検索] を選択して、検索の範囲を限定することができます。</li>
+</ul>
+
+<p><strong>索引</strong></p>
+
+<ul>
+<li>索引を表示するには、ナビゲーションのウィンドウの [索引] タブをクリックします。</li>
+<li>テキスト ボックスに語を入力して、その語に最も近いキーワードを表示します。</li>
+<li>キーワードをダブルクリックすると、そのファイルを表示するか、またはキーワードに関連する情報が含まれたトピックの一覧を表示します。</li>
+</ul>
+
+<p><strong>印刷</strong></p>
+
+<p> <img src="../../misc/print.gif" border="0" alt="[印刷] ボタン"> 必要に応じてトピックを印刷するには、[印刷] をクリックします。</p>
+
+<p><strong>目次の同期化</strong></p>
+
+<p> <img src="../../misc/synch.gif" border="0" alt="[同期] ボタン"> トピックが表示されている目次内の箇所を見るには、[同期] をクリックします。 </p>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

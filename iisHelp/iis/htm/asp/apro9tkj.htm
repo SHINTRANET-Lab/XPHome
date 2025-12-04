@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ScriptMaps</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_scriptmaps"></A><SUP></SUP>ScriptMaps</H3>
+
+<P>このメタベース プロパティは、スクリプト プロセッサ マッピング用に、アプリケーションのファイル名拡張子を指定します。リスト型の文字列では、<I>Extension</I>、<I> ScriptProcessor</I>、<I>Flags</I>、<I>IncludedVerbs</I> が必要です。<I>Extension</I> は .htm などのファイル名拡張子、<I>ScriptProcessor</I> は DLL へのフル パス、<I>Flags</I> は以下で説明する要求された動作に対応する整数値、そして <I>IncludedVerbs</I> は、この ISAPI DLL を処理する動詞の一覧です。 </P>
+
+<P><span class=le><B>注</B></span>&nbsp;&nbsp;&nbsp;IIS Version 4.0 以前では、この構文は、&quot;含まれている&quot; 動詞ではなく、&quot;除外される&quot; 動詞を一覧で表示するためのものでした。IIS Version 5.1 では、動詞が一覧にない場合には、"すべての動詞" という値であると見なされます。ISAPI フィルタや拡張子で処理する動詞を一覧に表示することをお勧めします。</P>
+
+<P>拡張子のマッピングごとに 3 つのフラグを指定することができますが、指定できる 3 つの値の 1 つを <I>Flags</I> 属性に割り当てることができます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>指定できる <I>Flag</I> の値</B></TD>
+<TD class=blue width=50%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>1</TD>
+<TD width=50%>スクリプト アクセス権が与えられたディレクトリで、スクリプトを実行することが許可されます。この値が設定されていない場合は、実行アクセス権のフラグが立てられたディレクトリでのみ、スクリプトを実行できます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>4</TD>
+<TD width=50%>サーバーは、ファイルと同様に、URL の PATH_INFO 部にアクセスを試みてから、スクリプト エンジンを起動します。ファイルが開かれなかったり、存在していない場合は、クライアントにエラーが返されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>5</TD>
+<TD width=50%>上の条件が両方とも TRUE の場合です。</TD>
+</TR>
+</TABLE><BR>
+
+<P>たとえば、".htm" のファイル拡張子を付けて、ISAPI "Test.dll" のファイル拡張子を指定するには、次のリスト (文字列) を指定します。<BR>
+</P>
+
+<PRE>".htm,C:\WINNT40\System32\inetsrv\Test.dll,5,GET, HEAD, POST"
+</PRE>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%>リスト (文字列型)</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定値</TD>
+<TD width=50%>空リスト</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>継承</TD>
+<TD width=50%>継承可能</TD>
+</TR>
+</TABLE><BR>
+
+<P><span class=le><B>注</B></span>  IIS では、ファイル名拡張子として &quot;*&quot; を指定し、指定された <I>ScriptProcessor</I> を通してすべての要求を効率的に送ることが可能です。あらゆる種類のファイルの要求を処理するカスタム ISAPI 拡張子を使用する場合に、この機能は有用です。</P>
+
+<H6>アクセス場所</H6>
+
+<P>このプロパティには、次の場所でアクセスできます。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>メタベース パス</B></TD>
+<TD class=blue width=50%><B>キー タイプ</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1p5x.htm"><B>IIsWebService</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore7zn6.htm"><B>IIsWebServer</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT</TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore8v5e.htm"><B>IIsWebVirtualDir</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I> </TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm"><B>IIsWebDirectory</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>/LM/W3SVC/<I>N</I>/ROOT/<I>WebVirtualDir</I>/<I>WebDirectory</I>/<I>WebFile</I></B></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/aore136t.htm"><B>IIsWebFile</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>IIS Admin Base オブジェクトの追加情報</H6>
+
+<P>次の表は、IIS Admin Base オブジェクトを使用するコードで必要な追加情報の一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%>メタベース識別子</TD>
+<TD width=50%><B>MD_SCRIPT_MAPS</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>データ型</TD>
+<TD width=50%><B>MULTISZ_METADATA</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>既定のビットマスク値</TD>
+<TD width=50%>空 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%>ユーザー タイプ</TD>
+<TD width=50%><B>IIS_MD_UT_FILE</B></TD>
+</TR>
+</TABLE><BR>
+
+<H6>ビットマスク値</H6>
+
+<TABLE border=0 cellpadding=5 cols=3 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=50%><B>定数</B></TD>
+<TD class=blue width=18%><B>値</B></TD>
+<TD class=blue width=32%><B>説明</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_SCRIPTMAPFLAG_SCRIPT</B></TD>
+<TD width=18%>0x00000001</TD>
+<TD width=32%>スクリプト アクセス権に設定されている場合に、実行が許可されます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><B>MD_SCRIPTMAPFLAG_CHECK_PATH_INFO</B></TD>
+<TD width=18%>0x00000004</TD>
+<TD width=32%>サーバーが PATH_INFO をチェックします。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

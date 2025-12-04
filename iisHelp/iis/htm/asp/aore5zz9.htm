@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>AppCreate</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_iiswebdirectory_appcreate"></A><SUP></SUP>AppCreate</H3>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore1jw9.htm">IIsWebDirectory</A> オブジェクトまたは <A HREF="/iishelp/iis/htm/asp/aore8v5e.htm">IIsWebVirtualDir</A> オブジェクトの AppCreate メソッドは、Web アプリケーションの定義を作成し、そのアプリケーションをインプロセスで実行するか、アウト プロセスで実行するかを指定します。指定したパスに既にアプリケーションが存在している場合は、このメソッドを使用して、そのアプリケーションをインプロセスからアウト プロセスに、またはその逆に再設定することができます。</P>
+
+<H6>構文</H6>
+
+<P><I>DirObj</I>.<B>AppCreate</B> <I>InProcFlag</I> </P>
+
+<P>&nbsp;</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>DirObj</I></DT>
+
+<DD>IIsWebDirectory または IIsWebVirtualDir タイプの IIS Admin オブジェクトです。<BR>
+</DD>
+
+<DT><I>InProcFlag</I></DT>
+
+<DD>作成中のアプリケーションをインプロセス (TRUE) で実行するかアウト プロセス (FALSE) で実行するかを指定します。アプリケーションが既に存在してインプロセスで実行されている場合は、このフラグを FALSE に指定すると、アプリケーションの定義が削除され、アウト プロセスで動作するアプリケーションが作成されます。アプリケーションが既に存在してアウト プロセスで実行されている場合は、このフラグを TRUE に指定すると、アプリケーションの定義が削除され、インプロセスで動作するアプリケーションが作成されます。アプリケーションが存在し、イン プロセスまたはアウト プロセスというアプリケーションの現在の状態と <I>InProcFlag</I> の設定が一致する場合、このメソッドはアプリケーションの定義を変更しません。</DD>
+</DL>
+
+<H6>コード例</H6>
+
+<PRE><CODE>&lt;% 
+  Dim DirObj 
+  Const INPROC = True 
+  Const OUTPROC = False 
+  Set DirObj = GetObject("IIS://LocalHost/W3SVC/1/ROOT/MyAppDir") 
+  'Create an application in-process. 
+  DirObj.AppCreate INPROC 
+%&gt; 
+ </CODE></PRE>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/aore3ype.htm"><B>AppCreate2</B></A>、<A HREF="/iishelp/iis/htm/asp/aore4z1h.htm"><B>AppDelete</B></A>、<A HREF="/iishelp/iis/htm/asp/aore77mt.htm"><B>AppDeleteRecursive</B></A>、<A HREF="/iishelp/iis/htm/asp/aore0ejo.htm"><B>AppUnload</B></A>、<A HREF="/iishelp/iis/htm/asp/aore3q79.htm"><B>AppUnloadRecursive</B></A>、<A HREF="/iishelp/iis/htm/asp/aore0x0z.htm"><B>AppGetStatus</B></A>、<A HREF="/iishelp/iis/htm/asp/aore7gpx.htm"><B>AppDisable</B></A>、<A HREF="/iishelp/iis/htm/asp/aore65b9.htm"><B>AppDisableRecursive</B></A>、<A HREF="/iishelp/iis/htm/asp/aore3945.htm"><B>AppEnable</B></A>、<A HREF="/iishelp/iis/htm/asp/aore45ph.htm"><B>AppEnableRecursive</B></A>、<A HREF="/iishelp/iis/htm/asp/aore5xis.htm"><B>AspAppRestart</B></A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

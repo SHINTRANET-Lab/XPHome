@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>新しいセキュリティ機能ウィザードを使用する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="サーバー証明書ウィザード、証明書信頼リスト ウィザード、アクセス許可ウィザードの概念と使用方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="managingkeypairs">新しいセキュリティ機能ウィザードを使用する</a></h1>
+
+<p>インターネット インフォメーション サービスには、3 つの新しいセキュリティ機能ウィザードが用意されています。これらのウィザードは、Web サイトのセキュリティ維持に必要な作業の大部分を簡素化します。サーバー証明書ウィザードでは、IIS の Secure Sockets Layer (SSL) 機能およびサーバー証明書を管理します。証明書は、サーバーとユーザーのブラウザとの間で保護されたリンクをネゴシエートするときに使用されます。証明書信頼リスト ウィザードでは、証明書信頼リスト (CTL) を管理します。証明書信頼リストとは、各 Web サイトまたは仮想ディレクトリで使用される、信頼されている証明機関の一覧です。アクセス許可ウィザードでは、Web および NTFS のアクセス権をサーバー上の Web サイト、仮想ディレクトリ、およびファイルに割り当てます。</p>
+
+<ul>
+<li><A href="#aboutwizard">ウィザードについて</a>
+<li><A href="#accesswizard">ウィザードにアクセスする</a></li>
+</ul>
+
+<a name="aboutwizard"></a>
+<H2><A NAME="H2_448403304"></A>ウィザードについて</H2>
+<P>サーバー証明書ウィザード、証明書信頼リスト ウィザード、およびアクセス許可ウィザードによって、これまで <a href="iiabuti.htm">IIS スナップイン</a>で実行されていた作業の多くを実行できます。アクセス許可ウィザードを除き、これらの機能は <a href="iiabuti.htm">IIS スナップイン</a>では利用できなくなりました。</P>
+
+<a name="TheWebServerCertificateWizard"></a>
+<H3>サーバー証明書ウィザード</H3>
+<P>サーバー証明書の取得、構成、および更新は、すべてサーバー証明書ウィザードの 1 つのインターフェイスから実行できます。このウィザードでは、サーバー証明書が既にインストールされているかどうか、および期限切れが近いかどうかを検出できます。このウィザードを使って、サーバー証明書を別の証明書に置き換えることができます。別の証明書は、証明機関 (CA)、Microsoft 証明書サービスなどのオンライン CA、またはキー マネージャで以前に取得したファイルから取得します。また、証明書の割り当てを、ある Web サイトから別の Web サイトに変更することもできます。さらに、このウィザードで証明書を表示することもできます。</P>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;サーバー証明書のオンライン要求は、複数台ある環境のエンタプライズ証明書サービスに対してのみ可能です。IIS のサーバー証明書ウィザードは、同じコンピュータ上のスタンドアロン証明書サービスを認識しません。オフラインの証明書要求を使って要求をファイルに保存してから、オフライン要求として処理します。証明書サービスのマニュアルを参照してください。ローカルのエンタプライズ証明書サービスを使ったオンライン登録に影響はありません。</p>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;オンライン証明機関を使用していない場合は、サーバー証明書ウィザードで生成された要求ファイルをディスクに保存し、CA に送る必要があります。CA からの応答を受け取り、ウィザードを開始すると、ウィザードは前に終了した箇所から再開します。証明書を置き換える場合、IIS は新しい要求が完了するまで、前の証明書を使用し続けます。インターネット インフォメーション サービスをサポートする証明機関の一覧については、「<A href="iiocrsc.htm">サーバー証明書を取得する</a>」を参照してください。</P>
+
+<H3>証明書信頼リスト ウィザード</H3>
+<P>証明書信頼リスト ウィザードでは、証明書信頼リスト (CTL) を作成および構成することができます。CTL は、特定の Web サイトで使用される信頼できる証明機関 (CA) の一覧です。CTL を独自に構成することにより、ある CA が発行する証明書の使用を許可し、別の CA が発行する証明書の使用を禁止できます。サーバー上に複数の Web サイトを持ち、承認された証明機関の一覧がサイトごとに異なるインターネット サービス プロバイダ (ISP) にとって、CTL は特に役立ちます。CTL は、Web サイト レベルでのみ使用でき、FTP サイトには使用できません。</P>
+
+<H3>アクセス許可ウィザード</H3>
+<P>アクセス許可ウィザードにより、Web と FTP のアクセス権、NTFS のアクセス権、および認証方法をシナリオに沿って設定します。各領域を個別のユーザー インターフェイスで設定する代わりに、サイトのニーズに最も近いシナリオを選択すると、ウィザードがすべてのアクセス権と認証方法を設定します。この方法の大きな利点の 1 つは、Web (または FTP) および NTFS のアクセス権が適切に調整され、正しい認証方法が使用される点です。すべての設定は、<a href="iiabuti.htm">IIS スナップイン</a>で変更できます。シナリオは次のとおりです。</P>
+<OL>
+<LI><STRONG>公開された Web サイト</STRONG> サイトの情報をインターネット上で一般に公開する、最も一般的な構成です。匿名認証が使用され、ユーザーは Web サーバーのすべてのファイルを表示すること、また Active Server Pages アプリケーションにアクセスすることができます。管理者は、サイトを完全に制御できます。 
+  
+
+<LI><STRONG>セキュリティで保護された Web サイト</STRONG>&nbsp;&nbsp;企業のエクストラネットに使用される構成です。エクストラネットとは、インターネットを通じてアクセスできるイントラネットです。サイト上の情報の使用は制限されます。このサイトには、基本認証、ダイジェスト認証、または統合 Windows 認証が使用されます。認証されたユーザーのみが Web サーバー上のすべてのファイルを表示し、Active Server Pages アプリケーションにアクセスすることができます。管理者は、サイトを完全に制御できます。</LI></OL>
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;アクセス許可ウィザードを実行しているときにすべてのセキュリティ設定を継承するよう選択した場合は、顧客による Web サイトへのアクセスが拒否される場合があります。これを修正するには、Web サイトの [ホーム ディレクトリ] プロパティ シートを開き、[読み取り] および [スクリプトのみ] アクセス権を選択します。指示に従って、すべての仮想ディレクトリおよびファイルにこれらの設定を継承させます。</P>
+
+
+
+<a name="accesswizard"></a><h2><A NAME="H2_448406908"></A>ウィザードにアクセスする</h2>
+<p><a href="iiabuti.htm">IIS スナップイン</a>からサーバー証明書ウィザードおよび証明書信頼リスト ウィザードにアクセスするには</p>
+<ol>
+<li>サイト、ディレクトリ、またはファイルを選択し、プロパティ シートを開きます。</li>
+<li>[ディレクトリ セキュリティ] プロパティ シートの [セキュリティ保護された通信] で、[サーバー証明書] をクリックしてサーバー証明書ウィザードにアクセスし、証明書に関する設定を変更します。 
+  
+<li>[ディレクトリ セキュリティ] プロパティ シートまたは [ファイル セキュリティ] プロパティ シートの [セキュリティ保護された通信] で、[編集] をクリックします。[証明書信頼リストを有効にする] で、[新規作成] または [編集] をクリックして証明書信頼リスト ウィザードにアクセスし、証明書信頼リストに関する設定を変更します。</li>             
+</ol>
+
+<p><strong>注</strong></p>
+<ul>
+<li>サーバー証明書ウィザードまたは証明書信頼リスト ウィザードにアクセスするには、サーバー証明書をインストールする必要があります。 
+  
+<li>[新規作成] および [編集] の各ボタンを使用するには、証明書信頼リストを有効にする必要があります。</li>
+</ul>
+
+<p><b><a href="iiabuti.htm">IIS スナップイン</a>からアクセス許可ウィザードにアクセスするには</b></p>
+<ol>
+<li>Web サイトまたは FTP サイトを選択し、[操作] メニューをクリックします。 
+  
+<li>ボックスの一覧で [すべてのタスク] をポイントし、[アクセス許可ウィザード] をクリックします。</li>
+</ol>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;サーバー証明書に IP アドレス、Web サイト、および SSL ポートを割り当てる際は、次の基準に従います。</p>
+
+<ul>
+	<li>1 つの Web サイトに複数のサーバー証明書を割り当てることは &quot;できません&quot;。 
+  
+	<li> 複数の Web サイトに 1 つの証明書を割り当てることが &quot;できます&quot;。
+	<li>1 つの Web サイトに複数の IP アドレスを割り当てることが &quot;できます&quot;。 
+  
+	<li>1 つの Web サイトに複数の SSL ポートを割り当てることが &quot;できます&quot;。</li>
+</ul>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><A href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

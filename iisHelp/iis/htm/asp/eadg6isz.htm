@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>クライアント機能</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H3><A NAME="_k2_client_capabilities"></A><SUP></SUP>クライアント機能</H3>
+
+<P>作成するアプリケーションがさまざまなクライアント機能に対応する方法は、設計時の重要な決定事項の 1 つです。たとえば、ユーザーにとって最も重要な問題の 1 つに接続速度があります。アプリケーションでこの速度を決定することができれば、クライアント機能に合わせて、応答を調節することができます。クライアントからの要求の一部に、この情報が含まれている場合のみ、現在の接続速度をアプリケーションに認識させることができます。</P>
+
+<P>クライアント機能に関する問題は、クライアント側、またはサーバー側のどちらかで解決できます。クライアント側のソリューションとしては、<A HREF="/iishelp/iis/htm/asp/eadg39v0.htm">ダイナミック HTML</A> (DHTML) を使用して、下の図にあるように、クライアントの現在の構成に関する記述を要求の一部として加えます。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/browcap3.gif" ALT="Browser Capabilities" BORDER=0></P>
+
+<P>この方法の利点は、次のとおりです。
+
+<UL type=disc>
+	<LI>クライアントとサーバー間の往復を減らすことができる</li>
+
+	<LI>サーバーにかかる負荷を軽減できる</li>
+
+	<LI>プロキシ サーバー キャッシュ技術により、アプリケーションをより敏感に反応させることができる</li>
+</UL>
+
+<P>クライアント側でスクリプト機能がサポートされていない場合もあります。たとえば、インターネットに公開されているアプリケーションでは、クライアントでスクリプトがサポートされているかどうかを保証することはできません。つまり、一部のクライアントでは、このアプリケーションの実行は失敗に終わる可能性があります。また、セキュリティ上の理由から、スクリプトの実行が許可されていないネットワークにクライアントが存在する場合は、クライアント側からサーバー側リソースへはアクセスできません。</P>
+
+<P>サーバー側では <A HREF="/iishelp/iis/htm/asp/comp3xx0.htm">Browser Capabilities コンポーネント</A>が使用されます。このコンポーネントにより要求に含まれている User Agent HTTP ヘッダーが読み込まれ、クライアントの機能が判別されます。IIS 3.0 および 4.0 に用意されていたバージョンの Browser Capabilities コンポーネントでは、クライアントの機能は静的リストから検索、確認されていました。次の図は、イベント シーケンスを示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/browcap1.gif" ALT="Browser Capabilities" BORDER=0></P>
+
+<P>この方法では、リストが古くなった場合に、対処が難しくなり、アプリケーション設計者の負担となっていました。さらに重要なことに、この方法では、クライアントの機能にある構成可能な側面が考慮されていないので、要求が出されたときに実際に &quot;有効&quot; である設定を調べる方法が提供されていませんでした。</P>
+
+<P>IIS 5.0 では、このような初期の設計上の制限を克服するために Browser Capabilities コンポーネントが改善されました。このコンポーネントは、クライアントの機能を表す cookie を返すクライアントからの個々の要求に合わせることができます。さらに、.asp ファイルに対する最初の要求に cookie が含まれていない場合は、クライアントでこれから実行されるスクリプトを呼び戻して、cookie を作成することができます。次の図は、イベント シーケンスを示しています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/browcap2.gif" ALT="Browser Capabilities" BORDER=0></P>
+
+<P>このように Browser Capabilities コンポーネントが改善されたことにより、サーバー側ソリューションが 1 つ増えました。このテクニックでは、cookie が含まれていない要求がきたときに、特別のステータス コードを使用してクライアントへコール バックすることができます。このステータス コードを生成するには、.asp ファイルの先頭行に特別なメタ タグを記述します。たとえば、次のように指定します。</P>
+
+<PRE><CODE>&lt;!-- METADATA TYPE="Cookie" NAME="BrowsCap" SRC="sendcook.htm" --&gt;
+ </CODE></PRE>
+
+<P>上の例は、IIS に対して、特別なステータス コード (HTTP 449 ステータス コード) を Internet Explorer 5 へ送信するように指示しています。続けて、このタグは、Internet Explorer 5 に対して、Sendcook.htm にあるスクリプトを実行するように指示しています。このスクリプトにより、クライアントの機能を表す cookie が生成されます。この cookie を受信したサーバーは、Browser Capabilirities コンポーネントとこの cookie を一緒に使用して、クライアントにどのように応答を返すかを決定します。</P>
+
+<P><span class=le><B>重要&nbsp;&nbsp;&nbsp;</B></span><A HREF="/iishelp/iis/htm/asp/vbob9waa.htm">Server.Transfer</A> メソッド、または <A HREF="/iishelp/iis/htm/asp/vbob9pid.htm">Server.Execute</A> メソッドを使用したリダイレクトの結果として、クライアントにより要求されたファイルに METADATA メタ タグが存在する場合、このメタ タグは IIS では無視されます。ただし、実際にリダイレクトを含むファイルにある METADATA メタ タグは通常どおり処理されます。</P>
+
+<P>この機能の使用方法の詳細については「<A HREF="/iishelp/iis/htm/asp/comp1vol.htm">cookie から Browser Capabilities を取得する</A>」を参照してください。</P>
+
+<P>DHTML クライアント機能の詳細については、<a HREF="http://www.microsoft.com/japan/developer/library/default.asp" target="_blank">MSDN Online</a> の「DHTML reference information」を参照してください。新しい Browser Capabilities コンポーネント機能の例については、「<A HREF="/iishelp/iis/htm/asp/comp3xx0.htm">Browser Capabilities コンポーネント</A>」とPlatform SDK の IIS セクションにある <b>ASP Samples</b> または <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

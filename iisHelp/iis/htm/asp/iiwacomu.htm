@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML DIR=LTR><HEAD><TITLE>コンポーネントとオブジェクトを使用する</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+ 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ASP サーバー側スクリプトの COM コンポーネントのインスタンスを作成、またコンポーネント スコープを設定する方法について説明します。Java クラス、Java モニカによる作業と スクリプト作成による COM コンポーネントのための VBScript サンプル コードも示します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><FONT FACE="ＭＳ Ｐゴシック">	
+
+<H1><A NAME="H1_37767305">コンポーネントとオブジェクトを使用する</A></H1>
+
+
+<P>COM コンポーネントは、強力で実用的な Web アプリケーションの構築に不可欠な要素です。コンポーネントが提供する機能は、金融トランザクションの実行またはデータの入力検査などの、専門化された作業を実行するためにスクリプトの中で使用できます。ASP も、スクリプトの機能を大きく拡張する基本的なコンポーネントを提供します。  
+
+<H2><A NAME="H2_37767923">コンポーネントについて</A></H2>
+
+<P>&quot;COM コンポーネント&quot; とは、1 つの作業または一連の作業を実行するためのコードを含む、プログラムにより構築される再利用可能なブロックのことです。コンポーネントをほかのコンポーネントと組み合わせて Web アプリケーションを作成することができます。この組み合わせは、ネットワークを介しても可能です。COM コンポーネントは、一般的な作業を実行するためのものであるため、これらの作業を実行するために独自にコードを記述する必要はありません。たとえば、株価情報コンポーネントは最新の株価を Web ページに表示します。しかし、スクリプトのみで同じものを作成することは容易なことではありません。また、スクリプトはコンポーネントとは異なり、再利用できません。
+
+<P>スクリプトを作成した経験がない場合でも、コンポーネントの動作に関する知識なしに、コンポーネントを使用するスクリプトを記述することができます。ASP には、ユーザーがすぐに使用できる基本コンポーネントが備わっています。たとえば、ActiveX Data Objects (ADO) コンポーネントを使用して、データベース接続を Web ページに追加できます。また、サードパーティから追加コンポーネントを入手することもできます。</P>
+
+<P>Web アプリケーションの開発者にとって、コンポーネントは、ビジネス ロジックを再利用可能な保護されたモジュールにカプセル化する最適な方法です。たとえば、クレジット カード番号の有効性を確認するコンポーネントを、注文を処理するスクリプトから呼び出して使用することができます。番号の確認と注文の処理を分離することにより、クレジット カード番号の確認方法が変更された場合でも、注文の処理は変更する必要がありません。また、COM コンポーネントは再利用可能であるため、コンポーネントを別のスクリプトおよびアプリケーションで再利用することができます。コンポーネントを Web サーバーにインストールした後は、ASP サーバー側スクリプト、ISAPI 拡張機能、サーバー上の別のコンポーネント、またはほかの COM 互換言語で記述されたプログラムから、コンポーネントを呼び出すことができます。</P>
+
+<P>コンポーネントは、C、C++、Java、Visual Basic、または多数のスクリプト言語など、Component Object Model (COM) をサポートする任意のプログラミング言語で作成できます。(COM プログラミングに習熟しているユーザーには、COM コンポーネントはオートメーション サーバーとしても知られています。)COM コンポーネントを Web サーバー上で実行できるようにするには、コンポーネントがグラフィカル ユーザー インターフェイスの要素 (Visual Basic の <strong>MsgBox</strong> 関数など) を持たないようにする必要があります。 グラフィカル インターフェイスの要素はサーバー上でのみ表示でき、ブラウザ上では表示できません。</P> 
+
+<H2><A NAME="H2_37769966">コンポーネントが提供するオブジェクトのインスタンスを作成する</A></H2>
+
+<P>コンポーネントは、ダイナミックリンク ライブラリ (.dll) または実行可能(.exe) ファイルに含まれる実行可能コードです。コンポーネントは、1 つまたは複数の "オブジェクト" を提供します。 オブジェクトとは、コンポーネント内に組み込まれて特定の機能を実行するコードの単位です。各オブジェクトは、プログラム化された手順であるメソッド、および動作の属性であるプロパティを持ちます。コンポーネントが提供するオブジェクトを使用するには、オブジェクトのインスタンスを作成し、作成した新しいインスタンスを変数名に割り当てます。オブジェクトのインスタンスを作成するには、ASP の <STRONG>Server.CreateObject</STRONG> メソッド、または HTML の &lt;OBJECT&gt; タグを使用します。オブジェクトのインスタンスに名前を付けるには、使用するスクリプト言語の変数代入ステートメントを使用します。オブジェクトのインスタンスを作成するときは、そのオブジェクトの登録名 (PROGID) を指定する必要があります。ASP に備わる基本コンポーネントについては、リファレンス ページでオブジェクトの PROGID を知ることができます  (「<A HREF="comp275c.htm">ASP で利用可能なコンポーネント</A>)」を参照してください)。</P>
+
+<P>たとえば、Ad Rotator コンポーネントは、一連のグラフィカルな広告をランダムに切り替えて表示します。Ad Rotator コンポーネントは Ad Rotator オブジェクトという名前の 1 つのオブジェクトを提供しています。このオブジェクトの PROGID は、"MSWC.AdRotator" です。Ad Rotator オブジェクトのインスタンスを作成するには、次のいずれかのステートメントを使用します。</P>
+
+<P><STRONG>VBScript:</STRONG></P>
+
+<PRE>&lt;% Set MyAds = Server.CreateObject("MSWC.AdRotator") %&gt;</PRE>
+
+<P><STRONG>JScript:</STRONG></P> 
+
+<PRE>&lt;% var MyAds = Server.CreateObject("MSWC.AdRotator") %&gt;</PRE>
+
+<P>VBScript または JScript について既によく知っている場合は、それぞれのスクリプト言語に用意されている、新しいオブジェクトのインスタンスを作成するための関数 (VBScript では <STRONG>CreateObject</STRONG>、JScript では <STRONG>New</STRONG>) を使用していない点に注意してください。代わりに ASP の <STRONG>Server.CreateObject</STRONG> メソッドを使用する必要があります。これは、Server.CreateObject メソッドを使用しないと、ASP がスクリプト内でオブジェクトを追跡することができなくなるためです。</P>
+
+<P>HTML の &lt;OBJECT&gt; タグを使用してオブジェクトのインスタンスを作成することもできます。この場合は、値に Server を設定した RUNAT 属性を指定すると共に、スクリプト内で使用する変数名を設定した ID 属性を指定する必要があります。オブジェクトを識別するには、オブジェクトの登録名 (PROGID) またはオブジェクトの登録番号 (CLSID) を使用することができます。次の例は、登録名 (PROGID) を使って Ad Rotator オブジェクトのインスタンスを作成する場合です。</P>
+
+<PRE>&lt;OBJECT RUNAT=Server ID=MyAds PROGID="MSWC.AdRotator"&gt;&lt;/OBJECT&gt;</PRE>
+
+<P>次の例は、登録番号 (CLSID) を使って Ad Rotator オブジェクトのインスタンスを作成する場合です。</P>
+
+<PRE>&lt;OBJECT RUNAT=SERVER ID=MyAds 
+CLASSID="Clsid:1621F7C0-60AC-11CF-9427-444553540000"&gt;&lt;/OBJECT&gt; </PRE>
+
+<H2><A NAME="scriptlets">スクリプトを使って COM コンポーネントを作成する</A></H2>
+
+<P>ASP は、Microsoft の強力なスクリプト テクノロジである Windows Script Components をサポートします。これを使って、COM コンポーネントを作成できます。特に、データベースのアクセスまたはコンテンツの生成などに使用される一般的なスクリプトを、任意の .asp ファイルまたはプログラムからアクセスできる再利用可能なコンポーネントにカプセル化することができます。Windows Script Components は、VBScript または JScript などの言語でスクリプトを記述して作成できるため、特別な開発ツールは必要ありません。また、Visual Basic、C++、または Java などの COM 準拠のプログラミング言語で記述されたプログラムに組み込むことができます。</P>
+
+<P>次の例は、VBScript で記述された Windows Script Components です。これは、測定温度の摂氏と華氏を変換するメソッドを定義します。</P>
+
+<PRE>&lt;SCRIPTLET&gt;
+
+&lt;Registration
+	Description="ConvertTemp"
+	ProgID="ConvertTemp.Scriptlet"
+	Version="1.00"
+&gt;
+&lt;/Registration&gt;
+
+&lt;implements id=Automation type=Automation&gt;
+	&lt;method name=Celsius&gt;
+		&lt;PARAMETER name=F/&gt;
+	&lt;/method&gt;
+	&lt;method name=Fahrenheit&gt;
+		&lt;PARAMETER name=C/&gt;
+	&lt;/method&gt;
+&lt;/implements&gt;
+
+&lt;SCRIPT LANGUAGE=VBScript&gt;
+
+  Function Celsius(F)
+	  Celsius = 5/9 * (F - 32)
+  End Function
+
+  Function Fahrenheit(C)
+	  Fahrenheit = (9/5 * C) + 32
+  End Function
+
+&lt;/SCRIPT&gt;
+&lt;/SCRIPTLET&gt;</PRE>
+
+
+<P>この Windows Script Components を実装する前に、このファイルに .sct 拡張子を付けて保存し、次に Windows エクスプローラでファイルを右クリックして [登録] をクリックする必要があります。Web ページで使用するには、次のサーバー側スクリプトを使用します。</P>
+
+<PRE>&lt;%
+  Option Explicit
+
+  Dim objConvert
+  Dim sngFvalue, sngCvalue
+
+  sngFvalue = 50
+  sngCvalue = 21 
+
+  Set objConvert = Server.CreateObject("ConvertTemp.Scriptlet")
+%&gt;
+
+&lt;%= sngFvalue %&gt; degrees Fahrenheit is equivalent to &lt;%= objConvert.Celsius(sngFvalue) %&gt; degrees Celsius&lt;BR&gt;
+
+&lt;%= sngCvalue %&gt; degrees Celsius is equivalent to &lt;%= objConvert.Fahrenheit(sngCValue) %&gt; degrees Fahrenheit&lt;BR&gt;</PRE>
+
+<H2><A NAME="H2_37773690">ASP の組み込みオブジェクトを使用する</A></H2>
+
+<P>ASP は、Web の開発を簡素化するための便利な機能を提供する組み込みオブジェクトも備えています。たとえば、<STRONG>Request</STRONG> オブジェクトは、HTML フォームまたは cookie からのユーザー入力などの HTTP 要求に関連付けされた情報に簡単にアクセスすることができます。COM コンポーネントが提供するオブジェクトを使用する場合とは異なり、ASP の組み込みオブジェクトは、インスタンスを作成しなくてもスクリプトの中で使用できます。ASP 要求が処理を開始すると、これらのオブジェクトが自動的に作成されます。組み込みオブジェクトのメソッドとプロパティは、コンポーネントが提供するオブジェクトのメソッドとプロパティにアクセスする方法 (このトピックで解説) と同様の方法でアクセスできます。組み込みオブジェクトの詳細な説明については、「<A HREF="iiwaref.htm">Active Server Pages オブジェクト クイック リファレンス ページ</A>」を参照してください。</P>
+
+<H2><A NAME="H2_37774333">オブジェクトのメソッドを呼び出す</A></H2>
+
+<P>&quot;メソッド&quot; とは、オブジェクトに対して実行する、またはオブジェクトを使って実行する操作のことです。メソッドを呼び出すには、次の構文を使用します。</P>
+
+<P><strong>Object.Method</strong>&nbsp;<em>parameters</em></P>
+
+<P><em>parameters</em> は、メソッドによって異なります。</P>
+
+
+<P>たとえば、次のステートメントのように、<strong>Response</strong> 組み込みオブジェクトの <strong>Write</strong> メソッドを使用すると、ブラウザに情報を送信できます。</P>
+
+<PRE>&lt;% Response.Write "Hello World" %&gt;</PRE>
+
+<P><STRONG>注</STRONG>&nbsp;&nbsp;&nbsp;スクリプト言語の中には、<STRONG>Object.Method</STRONG> の構文をサポートしないものもあります。使用する言語がこの構文をサポートしない場合は、その言語を主要スクリプト言語として使用するために、レジストリにエントリを追加する必要があります。詳細については、「<A HREF="iiwascln.htm">スクリプト言語を使用する</A>」を参照してください。</P>
+
+<H2><A NAME="H2_37775276">オブジェクトのプロパティを設定する</A></H2>
+
+<P>&quot;プロパティ&quot; とは、オブジェクトを説明する属性のことです。プロパティは、オブジェクトの特徴 (オブジェクトの種類など) を定義したり、オブジェクトの状態 (有効または無効など) を記述したりします。次の構文を使用します。</P>
+
+<P><STRONG>Object.Property</STRONG></P>
+
+<P>プロパティでは、値の読み取りや設定ができます。オブジェクトによっては、新しいプロパティを追加できるものもあります。</P>
+
+<P>たとえば、Ad Rotator コンポーネントには、広告の回りを枠で囲むかどうかや、枠の太さを指定するための <strong>Border</strong> プロパティがあります。次の式は、広告を枠なしで表示することを指定します。</P>
+
+<PRE>&lt;% MyAds.Border = 0 %&gt;</PRE>
+
+<P>一部のプロパティでは、ASP の出力ディレクティブを使って現在の値を表示できます。たとえば、ブラウザがサーバーにまだ接続している場合は、次のステートメントは、TRUE を返します。</P>
+
+<PRE>&lt;%= Response.IsClientConnected %&gt;</PRE>
+
+<H2><A NAME="H2_37772661">Java クラスからオブジェクトを作成する</A></H2>
+
+<P><STRONG>Server.CreateObject</STRONG> を使って Java クラスのインスタンスを作成するには、JavaReg プログラムを使って Java クラスを COM コンポーネントとして登録する必要があります。登録後は、PROGID または CLSID を指定して <STRONG>Server.CreateObject</STRONG> メソッドまたは HTML &lt;OBJECT&gt; タグを使用できます。</P>
+
+<P>上記の方法の代わりに、Java モニカが提供するメカニズムを使って、JavaReg プログラムを使わずに直接 Java クラスのインスタンスを生成することができます。モニカを使ってクラスのインスタンス生成を行うには、VBScript または JScript の <strong>GetObject</strong> ステートメントを使用し、Java クラスの完全な名前を <CODE>java:<EM>classname</EM></CODE> という形式で指定します。次の VBScript の例は、Java の <STRONG>Date</STRONG> クラスのインスタンスを作成する場合です。</P>
+
+<PRE>&lt;% 
+  Dim dtmDate
+  Set dtmDate = GetObject("java:java.util.Date")
+%&gt;
+
+The date is &lt;%= dtmDate.toString() %&gt;</PRE>
+
+<P><strong>Server.CreateObject</strong> ではなく、<strong>GetObject</strong> を呼び出して作成したオブジェクトも、ASP の組み込みオブジェクトにアクセスすることができ、トランザクションに加えることができます。ただし、Java モニカを使用するには、Microsoft 仮想マシン Version&nbsp;2.0 以降を使用している必要があります。</P>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</FONT>
+</BODY>
+</HTML>

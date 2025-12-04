@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IISLog コンポーネントのプロパティ</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_logging_utility_properties"></A><SUP></SUP>IISLog コンポーネントのプロパティ</H2>
+
+<P><A HREF="/iishelp/iis/htm/asp/comp6i5w.htm">IISLog</A> コンポーネントに含まれるプロパティは、次のとおりです。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6xt0.htm">BytesReceived</A></TD>
+<TD width=50%>受信したバイト数を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp7dv8.htm">Bytessent</A></TD>
+<TD width=50%>送信したバイト数を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp4d2o.htm">ClientIP</A></TD>
+<TD width=50%>クライアントのホスト名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp8wf9.htm">Cookie</A></TD>
+<TD width=50%>クライアントの cookie を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp7k37.htm">CustomFields</A></TD>
+<TD width=50%>カスタム ヘッダーの配列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp5smd.htm">DateTime</A></TD>
+<TD width=50%>日付と時刻を GMT で示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp0xpg.htm">Method</A></TD>
+<TD width=50%>操作の種類を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp735f.htm">ProtocolStatus</A></TD>
+<TD width=50%>プロトコルの状態を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp0g8e.htm">ProtocolVersion</A></TD>
+<TD width=50%>バージョン文字列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp3epe.htm">Referer</A></TD>
+<TD width=50%>参照元 (履歴) ページを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp7ohc.htm">Serverip</A></TD>
+<TD width=50%>サーバーの IP アドレスを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp4dk5.htm">ServerName</A></TD>
+<TD width=50%>サーバー名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6ulw.htm">ServerPort</A></TD>
+<TD width=50%>ポート番号を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp32g5.htm">ServiceName</A></TD>
+<TD width=50%>サービス名およびサーバー インスタンスを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp052m.htm">TimeTaken</A></TD>
+<TD width=50%>総処理時間を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp254p.htm">URIQuery</A></TD>
+<TD width=50%>要求と共に渡されたパラメータを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp3u7h.htm">URIStem</A></TD>
+<TD width=50%>宛先の URL を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp20hg.htm">UserAgent</A></TD>
+<TD width=50%>ユーザー エージェントの文字列を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp2vc5.htm">UserName</A></TD>
+<TD width=50%>ユーザー名を示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/comp6yer.htm">Win32status</A></TD>
+<TD width=50%>Win32 状態コードを示します。</TD>
+</TR>
+</TABLE><BR>
+
+<P><span class=le><B>注</B></span></P>
+
+<P>ログ ファイルにプロパティを記録するよう Web サーバーを構成している場合は、これらのプロパティは、値のみを返します。[スタート]、[プログラム]、[管理ツール]、[インターネット インフォメーション サービス] の順にクリックします。[既定の Web サイト] を右クリックして、[プロパティ] をクリックします。[Web サイト] タブで、[ログ収集を有効にする] をオンにしてログ形式を選択し、[プロパティ] をクリックします。[拡張プロパティ] タブで、各ユーザー要求に対してログ ファイルに記録するプロパティを選択できます。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

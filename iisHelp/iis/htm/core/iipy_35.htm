@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html dir=LTR>
+<head>
+
+<title>[処理オプション] プロパティ シート</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX">
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<FONT FACE="ＭＳ Ｐゴシック"><p>
+<strong>[処理オプション] プロパティ シート</strong></p>
+
+<p>このプロパティ シートは、単一プロセスで動作するアプリケーションの設定を変更するときに使用します。このプロパティ シートでは、Web サーバーのプロセス、およびアプリケーションの分離プロセスの 2 種類のプロセスの設定を変更できます。Web サイトに設定されたオプションは、Web サーバーのインプロセスで動作するすべてのアプリケーションに適用されます。独立したアプリケーションの分離プロセスに設定されたオプションは、そのアプリケーションにのみ適用されます。</p>
+
+<p><strong>[失敗したクライアント要求をイベント ログに書き込む]</strong></p>
+
+<p>このチェック ボックスをオンにすると、Web サーバーは、失敗したクライアント要求を Windows イベント ログに書き込みます。</p>
+
+<p><strong>[デバッグ例外の受け取りを有効にする]</strong></p>
+
+<p>このチェック ボックスをオンにすると、ASP は、ActiveX コンポーネント (Server.CreateObject の呼び出し) によって提供されるオブジェクトのインスタンスを作成できない場合に、一般エラー メッセージを送信します。チェック ボックスをオフにすると、ASP は、コンポーネントからの詳細なエラー メッセージを送信します。コンポーネントのデバッグ時には、このオプションをオフにします。デバッグが終了したら、再びオプションをオンにします。</p>
+
+<p><strong>[キャッシュされるスクリプト エンジンの数]</strong></p>
+
+<p>Active Server Pages がメモリにキャッシュする ActiveX スクリプト エンジンの最大数を指定します。</p>
+
+<p><strong>[スクリプト ファイルのキャッシュ]</strong></p>
+
+<p>メモリにキャッシュする、前処理済みの .asp ファイルの数を指定します。キャッシュするファイルの数を増やすと、Active Server Pages のパフォーマンスが向上します。すべての .asp ファイルをキャッシュするには、[すべての要求された ASP ファイルをキャッシュする] をクリックします。キャッシュするスクリプト ファイルの最大数を指定するには、[キャッシュする ASP ファイルの最大数] をクリックして、テキスト ボックスに値を入力します。</p>
+
+<p><strong>[CGI スクリプトのタイムアウト]</strong></p>
+
+<p>タイムアウト値を設定または変更できます。この値は、CGI スクリプトの実行に対して与えられる時間です。また、処理が停止する前に値を返す時間です。</p>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;[アプリケーションの設定] のプロパティは、Web サイト、仮想ディレクトリ、およびディレクトリの各レベルで設定できます。</p>
+
+<p><hr class="iis" size="1"></p>
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>メタベース構造</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_metabase_structure"></A>メタベース構造</H2>
+
+<P>IIS の構成設定のほとんどは、&quot;メタベース&quot; と呼ばれる、Windows レジストリに似た記憶機構に格納されています。メタベースの動作、メタベースにおける情報の格納方法、およびその情報にアクセスする方法についての知識が必要です。</P>
+
+<P>メタベースは、IIS インストール環境の構造を反映した階層構造になっています。メタベース構造の各ノードは &quot;キー&quot; と呼ばれ、各キーには &quot;メタベース プロパティ&quot; と呼ばれる 1 つまたは複数の IIS 構成値が含まれています。IIS のメタベース キーは IIS の各要素に対応し、各キーには、関連する要素の構成に影響を与えるプロパティが含まれています。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/metaprop.gif" ALT="IIS メタベース プロパティ" BORDER=0></P>
+
+<P>IIS の以前のバージョンではシステム レジストリに格納されていた IIS 構成キーおよび値のほとんどが、プロパティとしてメタベースに格納されるようになりました。また、新しい値やキーが追加されて、IIS をより細かく、柔軟に制御できるようになりました。メタベースは、同じプロパティの設定をノードごとに変えられるように設計されています。たとえば、MaxBandWidth プロパティの設定を、サーバーごとに変えることができます。</P>
+
+<P>次の図は、キー タイプ別に整理した IIS の一般的な構造です。IIS インストール環境のメタベース構造を構成する要素の数は、各インストール環境に依存します。IIS の要素に関連付けられたメタベース キーは、メタベースにおけるそのキーのパスで参照できます。「<A HREF="/iishelp/iis/htm/asp/aint59pv.htm">キー名とパス</A>」を参照してください。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/iisaostr.gif" ALT="IIS メタベース構造" BORDER=0></P>
+
+<P>最上位のメタベース キーは、&quot; IISComputer&quot; という名前で、MaxBandWidth などのプロパティを含んでいます。これらのプロパティは、コンピュータにおける IIS の実行全般に影響します。Computer キーの 2 つのサブキーは、それぞれ FTP サービスと Web サービスに関連付けられていて、そのコンピュータにホストされているすべての FTP サーバーと Web サーバーに影響を与えるプロパティを含んでいます。</P>
+
+<P>FTP サービス キーのサブキーは、個々の FTP サーバーと関連付けられ、それぞれの FTP サーバー固有のプロパティを含んでいます。各 FTP サーバー キーのサブキーの 1 つは、そのサーバーのルート仮想ディレクトリに関連付けられています。このルート仮想ディレクトリ キーには、FTP サーバーに仮想ディレクトリが追加されるたびにサブキーが追加されます。これらのサブキーはそれぞれ、関連する仮想ディレクトリの操作や構成に影響を与えるプロパティを含んでいます。FTP サービス キーに直接従属する Info キーにも、FTP サービスに関連するいくつかのプロパティが含まれます。</P>
+
+<P>Web サービス キーのサブキーは、個々の Web サーバー、それらのルート仮想ディレクトリ、従属する仮想ディレクトリ、ディスク ディレクトリ、およびファイルに関連付けられています。Web サービス キーのサブキーは、Web サービスの操作で使用されるフィルタの構成に影響します。Web サービス キーに直接従属する Info キーにも、Web サービスに関連するいくつかのプロパティが含まれています。</P>
+
+<P>最上位のキーに直接従属するその他のキーには、ログ収集と MIME マッピングに影響するプロパティが含まれています。IISADMIN キーは、DCOM の拡張機能を IIS に記録するために使用されます。</P>
+
+<P>キーには、IIS Admin オブジェクトが使用するオブジェクトへの参照が含まれている場合もあります。たとえば CertMapper キーは、メタベース プロパティを含んでいませんが、IIsCertMapper オブジェクトおよび証明書をマップするそのオブジェクトのメソッドへのアクセスを提供します。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

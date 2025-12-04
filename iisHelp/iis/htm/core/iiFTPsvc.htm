@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML dir=LTR><HEAD><TITLE>FTP サービス</TITLE>
+<SCRIPT language=JavaScript>
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT>
+
+<SCRIPT language=VBScript>
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META content="FTP サービスをインストールし、既定の FTP サイトを設定する方法について説明します。" 
+name=DESCRIPTION>
+<META http-equiv=Content-Type content="text/html; charset=shift_jis">
+<META http-equiv=PICS-Label 
+content='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META content=JA name=MS.LOCALE>
+<META content="インターネット インフォメーション サービス" name=MS-IT-LOC>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY text=#000000 bgColor=#ffffff>
+<H1><A name=H1_37679962>FTP サービス</A></H1>
+
+
+
+<p>
+特に指定しない限り、IIS 5.1 をインストールしても FTP サービスはインストールされません。FTP サービスがインストールされると、<I>x</I>:\Inetpub\Ftproot に既定の FTP サイトが作成されます (<I>x</I> は IIS をインストールしたドライブ名です)。IIS をインストールしている状態で FTP サービスをアンインストールした場合、次の手順に従って FTP サービスを再インストールすることができます。</p>
+
+<A name=#EnablingFTP><BIG>FTP サービスをインストールするには</BIG><!--</p>--><BR>
+<OL>
+<LI>[コントロール パネル] で [プログラムの追加と削除] をクリックします。 
+<LI>[Windows コンポーネントの追加と削除] をクリックします。 
+<LI>一覧から [インターネット インフォメーション サービス (IIS)] を選択して、[詳細] をクリックします。  
+<LI>[FTP (File Transfer Protocol) サービス] チェック ボックスをオンにします。 
+<LI>[OK] をクリックします (Windows XP の CD を使用するか、インストールするネットワーク上のパス名を指定するように要求するメッセージが表示されます)。 
+<LI>[次へ] をクリックします。 
+<LI>[完了] をクリックします。 </LI></OL>
+
+
+<P><STRONG>関連項目</STRONG></P>
+<UL>
+<LI>IIS をインストールするには、「<a href="iiiisin.htm">IIS のインストール</a>」を参照してください。</li>
+<LI>既定の設定を使用してサイトをすばやく構築するには、「<A    href="iitstart.htm">IIS によるサイトのクイック セットアップ</A>」を参照してください。</Li> 
+<LI>既存の Web サイトまたは FTP サイトのプロパティを変更するには、「<A    href="iivspro.htm">継承された既定の設定を変更する</A>」を参照してください。</Li>
+<LI>仮想ディレクトリを追加するには、「<A    href="iicodirv.htm">仮想ディレクトリを作成する</A>」を参照してください。</Li>
+</UL>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<SCRIPT language=javascript>
+<!--
+function Activate() {
+if (navigator.appName == "Microsoft Internet Explorer"){
+	window.open("iisnapin.htm", "NewWin", 'toolbar=no, left=200, top=200, scrollbars=no, resizeable=no,  width=350, height=350');
+	}
+	else if (navigator.appName == "Netscape") {
+		window.open("iisnapin.htm", "NewWin",  'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=yes,resizable=0,width=350,height=350,top=200,left=200');
+	}
+}
+//-->
+</SCRIPT></FONT></BODY></HTML>

@@ -1,0 +1,182 @@
+<html dir=LTR><head><title>IIS 管理スクリプト ユーティリティ (adsutil)</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<meta name="description" content="ここでは、IIS 管理スクリプト ユーティリティ (adsutil) の概念と使用方法について説明します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="ＭＳ Ｐゴシック">
+
+<h1 align="left">IIS 管理スクリプト ユーティリティ (adsutil)</h1>
+
+<p><STRONG>概要</STRONG></p>
+
+<p>これは、IIS の構成を操作するために VBScript を ADSI (Active Directory Service Interfaces) と共に使用する、IIS の管理ユーティリティです。このスクリプトは、Windows スクリプティング ホストと共にインストールされる CScript を使って実行する必要があります。</p>
+
+<p><STRONG>用法</STRONG></p>
+ 
+<p>Cscript.exe adsutil.vbs COMMAND &lt;path&gt; [&lt;param&gt;...]</p>
+<p>Cscript.exe adsutil.vbs COMMAND [&lt;path&gt; [&lt;parameters&gt;...]]</p>
+<p><strong>コマンド</strong></p>
+
+<table cellspacing="2" cellpadding="5">
+
+<tr>
+	<td>GET <em> Path</em></td>
+	<td>選択されたパラメータを表示します。</td>
+</tr>
+
+<tr>
+<td>SET <em>Path Value</em></td>
+<td>新しい値を割り当てます。</td>
+</tr>
+
+<tr>
+	<td valign="TOP">ENUM <em>path &quot;/P&quot; </em></td>
+	<td>パスのすべてのパラメータを列挙します。<br>/P - データを含めずにパスのみを列挙します。</td>
+</tr>
+
+<tr>
+	<td valign="TOP">ENUM_ALL <em>&quot;/P&quot; </em></td>
+	<td>すべてのパラメータを列挙します。<br>/P - データを含めずにパスのみを列挙します。</td>
+</tr>
+
+<tr>
+<td>DELETE <em>path</em></td>
+<td>パスまたはパラメータを削除します。</td>
+</tr>
+
+<tr>
+<td valign="TOP">CREATE <em>path [KeyType]</em></td>
+<td>パスを作成し、そのパスに KeyType を割り当てます。</td>
+</tr>
+
+<tr>
+<td>APPCREATEINPROC <em>Path</em></td>
+<td>インプロセス アプリケーションを作成します。</td>
+</tr>
+
+<tr>
+<td valign="TOP">APPCREATEOUTPROC <em>Path</em></td>
+<td>アウト プロセス アプリケーションを作成します。</td>
+</tr>
+
+<tr>
+<td>APPDELETE <em>Path</em></td>
+<td>既存のアプリケーションを削除します。</td>
+</tr>
+
+<tr>
+<td>APPUNLOAD <em>Path</em></td>
+<td>アウト プロセス アプリケーションをアンロードします。</td>
+</tr>
+
+<tr>
+<td>APPGETSTATUS <em>Path</em></td>
+<td>アプリケーションのステータスを取得します。</td>
+</tr>
+
+<tr>
+<td valign="TOP">FIND <em>Path</em></td>
+<td>パラメータが設定されているパスを検索します。</td>
+</tr>
+
+<tr>
+<td valign="TOP">START_SERVER <em>Path</em></td>
+<td>サーバーを起動します。</td>
+</tr>
+
+<tr>
+<td>STOP_SERVER <em>Path</em></td>
+<td>Web サイトを停止します。</td>
+</tr>
+
+<tr>
+<td>PAUSE_SERVER <em>Path</em></td>
+<td>Web サイトを一時停止します。</td>
+</tr>
+
+<tr>
+<td>CONTINUE_SERVER <em>Path</em></td>
+<td>Web サイトの一時停止を解除します。</td>
+</tr>
+
+<tr>
+<td>HELP</td>
+<td>使用可能なすべてのコマンドを表示します。</td>
+</tr>
+
+</table>
+
+<p><strong>注</strong></p>
+
+<ul>
+<li><EM>&lt;Path&gt;</EM> は、プロパティを設定するノードのパスに、設定中のプロパティの名前を結合したものです。たとえば、Web サーバー 1 に ServerComment を設定する場合、コマンドは次のようになります。</li>
+
+<p><em><strong>adsutil SET w3svc/1/ServerComment &quot;Web Server Number 1&quot;</strong></em></p>
+
+<p>IIS スナップインを次に開くときには、Web サーバーの名前が &quot;Web Server Number 1&quot; と表示されます。</p>
+
+<li>どのコマンドも、末尾にスイッチ &quot;-s:<em>server name</em>&quot; を付加することで、リモート コンピュータ上で実行できます。次の例の 1 番目を参照してください。</li>
+</ul>
+
+<p><strong>使用例</strong></p>
+
+<p>Cscript.exe adsutil.vbs GET W3SVC/1/ServerBindings -s:remotecomputer1</p>
+
+<p>Cscript.exe adsutil.vbs SET W3SVC/1/ServerBindings &quot;:81:&quot;</p>
+
+<p>Cscript.exe adsutil.vbs CREATE W3SVC/1/Root/MyVdir &quot;IIsWebVirtualDir&quot;</p>
+
+<p>Cscript.exe adsutil.vbs START_SERVER W3SVC/1&nbsp;</p>
+
+<p>Cscript.exe adsutil.vbs ENUM /P W3SVC</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

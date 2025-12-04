@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>ASP 組み込みオブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_asp_built-in_objects_"></A><SUP></SUP>ASP 組み込みオブジェクト </H1>
+
+<P>Active Server Pages (ASP) は、クラスを実装し、コンポーネントが ASP 組み込みオブジェクトのプロパティおよびメソッドにアクセスできるようにします。ObjectContext オブジェクトは、ASP 組み込みオブジェクトのいずれかに対するインターフェイスを返すメソッドを公開します。コンポーネントはこれらのインターフェイスを使用して、組み込みオブジェクトのメソッドおよびプロパティにアクセスすることができます。</P>
+
+<P>次の表は、組み込みオブジェクト クラスの一覧です。</P>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD class=blue width=38%><B>Class</B></TD>
+<TD class=blue width=62%><B>機能</B></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm"><B>Application オブジェクト</B></A></TD>
+<TD width=62%><A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm">Application</A> オブジェクトのメソッドおよびプロパティを呼び出します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob1dtg.htm"><B>ASPError オブジェクト</B></A></TD>
+<TD width=62%><A HREF="/iishelp/iis/htm/asp/vbob1dtg.htm">ASPError</A> オブジェクトのメソッドおよびプロパティを呼び出します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob554k.htm"><B>ObjectContext オブジェクト</B></A></TD>
+<TD width=62%>組み込みオブジェクトを返し、トランザクション処理に使用するメソッドを提供します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob5ulw.htm"><B>Request オブジェクト</B></A></TD>
+<TD width=62%><A HREF="/iishelp/iis/htm/asp/vbob5ulw.htm">Request</A> オブジェクトのメソッドおよびプロパティを呼び出します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob5sj8.htm"><B>Response オブジェクト</B></A></TD>
+<TD width=62%><A HREF="/iishelp/iis/htm/asp/vbob5sj8.htm">Response</A> オブジェクトのメソッドおよびプロパティを呼び出します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%>ScriptingContext</TD>
+<TD width=62%>組み込みオブジェクト、<A HREF="/iishelp/iis/htm/asp/vbob8zw4.htm">Application</A>、<A HREF="/iishelp/iis/htm/asp/vbob5ulw.htm">Request</A>、<A HREF="/iishelp/iis/htm/asp/vbob5sj8.htm">Response</A>、<A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server</A>、または <A HREF="/iishelp/iis/htm/asp/vbob12d0.htm">Session</A> を返します。これは、旧式の方法ですので、代わりに ObjectContext を使用してください。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob7838.htm"><B>Server オブジェクト</B></A></TD>
+<TD width=62%><A HREF="/iishelp/iis/htm/asp/vbob7838.htm">Server</A> オブジェクトのメソッドおよびプロパティを呼び出します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=38%><A HREF="/iishelp/iis/htm/asp/vbob12d0.htm"><B>Session オブジェクト</B></A></TD>
+<TD width=62%><A HREF="/iishelp/iis/htm/asp/vbob12d0.htm">Session</A> オブジェクトのメソッドおよびプロパティを呼び出します。</TD>
+</TR>
+</TABLE><BR>
+
+<P>ObjectContext および組み込みオブジェクトを Visual Basic コンポーネントで使用するには、Visual Basic プロジェクトに Microsoft<sup>&reg;</sup> ASP Object Library への参照を含める必要があります。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

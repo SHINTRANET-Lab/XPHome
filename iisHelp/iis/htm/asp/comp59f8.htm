@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Ad Rotator コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_ad_rotator_component"></a>Ad Rotator コンポーネント</H1>
+
+<P>Ad Rotator コンポーネントは、Ad Rotator オブジェクトを作成します。このオブジェクトは、Web ページ上の広告イメージを自動的に交換します。ユーザーが Web ページを開いたり、Web ページを読み込み直すたびに、Ad Rotator コンポーネントは、<A HREF="/iishelp/iis/htm/asp/comp6okl.htm">ロテータ スケジュール ファイル</A>に指定された情報に基づき、新しい広告を表示します。</P>
+
+<P>各広告をクリックしたユーザー数を記録できます。それには、ロテータ スケジュール ファイルの URL パラメータを設定して、ユーザーをリダイレクト ファイルに送ります。このパラメータを指定すると、広告主の URL へのジャンプはすべて Web サーバーの利用状況のログに記録されます。 </P>
+
+<H6>ファイル名</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=25%>adrot.dll </TD>
+<TD width=75%>Ad Rotator<b> </b>コンポーネントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/comp6okl.htm">ロテータ スケジュール ファイル</A></TD>
+<TD width=75%>広告の表示スケジュールとファイル情報が設定されたテキスト ファイルです。このファイルは、Web サーバーの仮想パスに置く必要があります。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=25%><A HREF="/iishelp/iis/htm/asp/comp0hr9.htm">リダイレクト ファイル</A></TD>
+<TD width=75%>リダイレクトを実装する省略可能なファイルです。このファイルによって、Ad Rotator コンポーネントは、各広告をクリックしたユーザー数を記録できるようになります。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P>Set <I>AdRotator</I> = Server.CreateObject( "MSWC.AdRotator" )</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>AdRotator</I></DT>
+
+<DD>Server.CreateObject を呼び出して作成する AdRotator オブジェクトの名前を指定します。</DD>
+</DL>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=48%><A HREF="/iishelp/iis/htm/asp/comp14fm.htm"><B>Border</B></A></TD>
+<TD width=52%>広告を囲む枠のサイズを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><A HREF="/iishelp/iis/htm/asp/comp5279.htm"><B>Clickable</B></A></TD>
+<TD width=52%>広告がハイパーリンクかどうかを指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=48%><A HREF="/iishelp/iis/htm/asp/comp1ag5.htm"><B>TargetFrame</B></A> </TD>
+<TD width=52%>広告を表示するフレームの名前を指定します。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=48%><A HREF="/iishelp/iis/htm/asp/comp4z90.htm"><B>GetAdvertisement</B></A></TD>
+<TD width=52%>データ ファイルから次に予定されている広告の指定を取得し、HTML 形式で返します。</TD>
+</TR>
+</TABLE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

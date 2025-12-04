@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Browser Capabilities コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><a name="_browser_capabilities_component"></a>Browser Capabilities コンポーネント</H1>
+
+<P>Browser Capabilities コンポーネントは、BrowserType オブジェクトを作成します。BrowserType オブジェクトを使用すると、スクリプトにクライアントの Web ブラウザの機能を記述できます。</P>
+
+<P>ブラウザが Web サーバーに接続すると、ブラウザは HTTP User Agent ヘッダーを自動的に送信します。このヘッダーは、ブラウザとそのバージョン番号を識別する ASCII 文字列です。BrowserType オブジェクトは、このヘッダーと Browscap.ini ファイルのエントリを比較します。</P>
+
+<P>一致するエントリが見つかった場合、BrowserType オブジェクトは User Agent ヘッダーと一致するブラウザ一覧のプロパティを使用します。</P>
+
+<P>Browscap.ini ファイルにヘッダーと一致するエントリが見つからない場合、BrowserType オブジェクトは * と ? のワイルドカードを使用して、最も近いエントリを探します。ワイルドカードを使用しても見つからない場合、Browscap.ini ファイルに既定のブラウザ設定が指定されているときは、オブジェクトはそれらの設定を使用します。一致するエントリが見つからず、Browscap.ini ファイルに既定のブラウザ設定が指定されていないときは、すべてのプロパティが文字列「UNKNOWN」に設定されます。</P>
+
+<P>このコンポーネントにプロパティや新しいブラウザ定義を追加するには、Browscap.ini ファイルを更新します。</P>
+
+<H6>ファイル名</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=28%>browscap.dll</TD>
+<TD width=72%>Browser Capabilities コンポーネントです。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=28%><A HREF="/iishelp/iis/htm/asp/comp1g11.htm">Browscap.ini ファイル</A></TD>
+<TD width=72%>ブラウザの機能を HTTP User Agent ヘッダーにマップするテキスト ファイルです。このファイルは、browscap.dll と同じディレクトリに置く必要があります。</TD>
+</TR>
+</TABLE><BR>
+
+<H6>構文</H6>
+
+<P><B>Set </B><I>BrowserType </I><B>= Server.CreateObject("MSWC.BrowserType") </B></P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>BrowserType </I></DT>
+
+<DD>Server.CreateObject を呼び出して作成する BrowserType オブジェクトの名前を指定します。</DD>
+</DL>
+
+<H6>例</H6>
+
+<P>次の例は、BrowserType オブジェクトを使用して、現在のブラウザの機能の一部を示す表を表示します。 </P>
+
+<P>--- Browscap.asp ---</P>
+
+<PRE><CODE>&lt;%  Set bc = Server.CreateObject("MSWC.BrowserType") %&gt;  
+
+&lt;TABLE BORDER=1 CELLPADDING=4&gt; 
+  &lt;TR&gt;
+  &lt;TD&gt;Browser&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.browser %&gt;  
+  &lt;TR&gt;
+  &lt;TD&gt;Version&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.version %&gt;&lt;/TD&gt;
+  &lt;/TR&gt;
+  &lt;TR&gt;
+  &lt;TD&gt;Frames&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.frames %&gt;&lt;/TD&gt;
+  &lt;/TR&gt;
+  &lt;TR&gt;
+  &lt;TD&gt;Tables&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.tables  %&gt;&lt;/TD&gt;
+  &lt;/TR&gt;
+  &lt;TR&gt;
+  &lt;TD&gt;Cookies&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.cookies  %&gt;&lt;/TD&gt;
+  &lt;/TR&gt;
+  &lt;TR&gt;
+  &lt;TD&gt;BackgroundSounds&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.BackgroundSounds %&gt;&lt;/TD&gt;
+  &lt;/TR&gt; 
+  &lt;TR&gt;
+  &lt;TD&gt;VBScript&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.vbscript %&gt;&lt;/TD&gt;
+  &lt;/TR&gt;
+  &lt;TR&gt;
+  &lt;TD&gt;JScript&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.javascript %&gt;&lt;/TD&gt;
+  &lt;/TR&gt; 
+  &lt;TR&gt;
+  &lt;TD&gt;ActiveX Controls&lt;/TD&gt;
+  &lt;TD&gt;&lt;%= bc.ActiveXControls %&gt;&lt;/TD&gt;
+  &lt;/TR&gt; 
+&lt;/TABLE&gt;
+ </CODE></PRE>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

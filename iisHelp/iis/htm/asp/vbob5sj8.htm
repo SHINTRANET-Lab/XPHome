@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Response オブジェクト</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_response_object"></A><SUP></SUP>Response オブジェクト</H2>
+
+<P>Response オブジェクトは、クライアントに出力を送信します。</P>
+
+<H6>構文</H6>
+
+<P><B>Response.</B><I>collection</I>|<I>property</I>|<I>method</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>コレクション</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob87j9.htm"><B>Cookies</B></A></TD>
+<TD width=70%>cookie の値を指定します。このコレクションを使用して cookie の値を設定できます。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob1fsi.htm"><B>Buffer</B></A></TD>
+<TD width=70%>ページ出力をバッファに格納するかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob0rvw.htm"><B>CacheControl</B></A></TD>
+<TD width=70%>プロキシ サーバーやほかのキャッシュ メカニズムで ASP が生成する出力をキャッシュできるかどうかを示すヘッダーを設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob7fw4.htm"><B>Charset</B></A></TD>
+<TD width=70%>文字セット名を Content-Type ヘッダーに追加します。この文字セットにより、文字の表示方式をブラウザに指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob150l.htm"><B>CodePage</B></A></TD>
+<TD width=70%>単一の応答における組み込みオブジェクト内のデータにコードページを設定します。コードページにより、各国の文字に関するエンコード方式をサーバーに指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob67ol.htm"><B>ContentType</B></A></TD>
+<TD width=70%>応答の HTTP コンテンツ タイプを指定します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob8o4z.htm"><B>Expires</B></A></TD>
+<TD width=70%>ブラウザ上にキャッシュされるページの有効期限が切れるまでの時間を指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob1qzp.htm"><B>ExpiresAbsolute</B></A></TD>
+<TD width=70%>ブラウザ上にキャッシュされるページの有効期限が切れる日時を指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob1d0k.htm"><B>IsClientConnected</B></A></TD>
+<TD width=70%>クライアントがサーバーから切断しているかどうかを示します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob055w.htm"><B>LCID</B></A></TD>
+<TD width=70%>単一の応答におけるデータに LCID を設定します。LCID では、特定地域のロケールについて日付、時刻および通貨の書式を指定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob02lv.htm"><B>PICS</B></A></TD>
+<TD width=70%>PICS 内容規制を示す pics-label 応答ヘッダーの値を設定します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob38hf.htm"><B>Status</B></A></TD>
+<TD width=70%>サーバーから返されるステータス行の値です。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob7yya.htm"><B>AddHeader</B></A></TD>
+<TD width=70%>HTML ヘッダー <i>name</i> を <i>value</i> に設定します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob4eg7.htm"><B>AppendToLog</B></A></TD>
+<TD width=70%>この要求の Web サーバー ログ エントリの終端に文字列を追加します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob2rxh.htm"><B>BinaryWrite</B></A></TD>
+<TD width=70%>指定した情報を、文字セットを変換せずに現在の HTTP 出力に書き込みます。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob6x82.htm"><B>Clear</B></A></TD>
+<TD width=70%>バッファに格納されている HTML 出力を消去します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob2sis.htm"><B>End</B></A></TD>
+<TD width=70%>.asp ファイルの処理を中止し、現在までの処理結果を返します。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob74tk.htm"><B>Flush</B></A></TD>
+<TD width=70%>バッファに格納されている出力を直ちに送信します。</TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob8h10.htm"><B>Redirect</B></A></TD>
+<TD width=70%>ブラウザにリダイレクト メッセージを送信し、ブラウザが別の URL に接続するようにします。 </TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=30%><A HREF="/iishelp/iis/htm/asp/vbob2w2t.htm"><B>Write</B></A></TD>
+<TD width=70%>現在の HTTP 出力に変数またはテキストを文字列として書き込みます。 </TD>
+</TR>
+</TABLE><BR>
+
+<H6>関連項目</H6>
+
+<P>Request オブジェクト</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

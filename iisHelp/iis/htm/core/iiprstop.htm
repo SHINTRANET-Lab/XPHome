@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR>
+<head>
+<title>ASP エラー処理を有効にする</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="500-100.asp カスタム エラー ファイルを使用して、ASP エラーを処理する方法について説明します。">
+
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><A NAME="H1_325765828"></A>ASP エラー処理を有効にする</h1>
+
+<p>既定では、&quot;既定の Web サイト&quot; とすべてのアプリケーションは、ASP エラーの処理を 500-100.asp ファイルに転送します。ただし、ユーザーによって作成される新しい Web サイトおよびアプリケーションは 500-100 エラーの処理をカスタム エラー ファイルではなく、Default ファイルへ転送します。.asp ファイルのエラー処理を追加で開発する場合は、500-100 エラーを 500-100.asp ファイルにマップするか、またはエラー処理用の .asp ファイルを独自に作成することができます。</p>
+
+<p>ファイル 500-100.asp は、.asp ファイルのコンパイル中または実行中に発生したエラーを処理します。ASP エラーが発生すると、IIS は 500-100.asp ファイルを返します。このファイルには、エラーが発生した行の番号やエラーの説明など、エラーに関する詳細情報が含まれています。</p>
+
+<p>ASP エラー処理ファイルを独自に作成した場合は、<a href="iiabuti.htm">IIS スナップイン</a>でカスタム エラー ファイルを有効にする必要があります。詳細については、「<a href="iierradd.htm">カスタム エラー メッセージを追加する</a>」を参照してください。</p>
+
+<p>ASP エラーを処理するための <strong>ASPError</strong> オブジェクトの使い方については、「<a href="../asp/vbob1dtg.htm">ASPError</a>」を参照してください。</p>
+
+<p><strong>注</strong></p>
+
+<ul>
+<li>500-100.asp ファイル自体に ASP エラーがある場合は、ASP が別の 500-100.asp ファイルを返すのではなく、500-100 エラーに対するカスタム エラー ファイルが存在しないものとして、エラーが報告されます。</li>
+
+<li>エラー処理ファイル (既定では 500-100.asp) に実行時エラーが含まれている場合は、要求された .asp ファイルのエラーの種類に関係なく、その実行時エラーだけが表示されます。エラー処理ファイルにプリプロセッサ エラーまたはコンパイル エラーが含まれている場合は、両方のエラーがブラウザに表示されます。つまり、500-100.asp ファイルのエラーと共に、要求された .asp ファイルのエラーが表示されます。</li>
+</ul>
+ 
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

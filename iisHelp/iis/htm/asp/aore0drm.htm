@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>IIsFilter</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_iisfilter"></A><SUP></SUP>IIsFilter</H2>
+
+<P>IIsFilter オブジェクトは、ISAPI フィルタの動作に影響するメタベース プロパティを設定します。フィルタ プロパティは、Web サービス レベルでも、または個々の Web サーバーに対しても設定できます。</P>
+
+<P>IIsFilter オブジェクトは ADSI オブジェクトですが、ADSI コンテナ オブジェクトではありません。</P>
+
+<H6>ADsPath</H6>
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/Filters/<I>FilterName</I></DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または "LocalHost" を指定できます。</P>
+
+<P>または
+
+<DL>
+<DT>IIS://<I>MachineName</I>/W3SVC/<I>N</I>/Filters/<I>FilterName</I></DT>
+
+<DT></DT>
+</DL>
+
+<P><I>MachineName </I>には、任意の名前、または &quot;LocalHost&quot; を指定できます。<I>N</I> は Web サーバーの番号です。</P>
+
+<H6>構文</H6>
+
+<P><I>varReturn</I> = <I>object</I>.<I>Method</I></P>
+
+<P><I>&nbsp;</I></P>
+
+<H6>要素</H6>
+
+<DL>
+<DT><I>varReturn</I></DT>
+
+<DD>メソッドからの戻り値を受け取る変数です。<BR>
+</DD>
+
+<DT><I>object</I></DT>
+
+<DD>通常は、直前の GetObject 操作の結果として、IIsFilter オブジェクトを含んでいる変数です。<BR>
+</DD>
+
+<DT><I>Method</I></DT>
+
+<DD>選択したオブジェクト メソッドです。</DD>
+</DL>
+
+<H6>プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi57hv.htm"><B>ADSI オブジェクト プロパティ</B></A></TD>
+<TD width=50%>&nbsp;</TD>
+</TR>
+</TABLE><BR>
+
+<H6>メタベース プロパティ</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=all>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4mcu.htm"><B>FilterDescription</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9mk4.htm"><B>NotifyNonSecurePort</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro799g.htm"><B>FilterEnabled</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8mco.htm"><B>NotifyOrderHigh</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro1b5f.htm"><B>FilterFlags</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro6fjr.htm"><B>NotifyOrderLow</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5qi0.htm"><B>FilterPath</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro68bx.htm"><B>NotifyOrderMedium</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro0zxh.htm"><B>FilterState</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3z3n.htm"><B>NotifyPreProcHeaders</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4xlw.htm"><B>NotifyAccessDenied</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4lpd.htm"><B>NotifyReadRawData</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro5vse.htm"><B>NotifyAuthentication</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro473o.htm"><B>NotifySecurePort</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8p7y.htm"><B>NotifyEndOfNetSession</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro4li9.htm"><B>NotifySendRawData</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3c50.htm"><B>NotifyEndOfRequest</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro8zad.htm"><B>NotifySendResponse</B></A></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro3ovb.htm"><B>NotifyLog</B></A></TD>
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/apro9lf4.htm"><B>NotifyUrlMap</B></A></TD>
+</TR>
+</TABLE><BR>
+
+<H6>メソッド</H6>
+
+<TABLE border=0 cellpadding=5 cols=2 frame=box rules=cols>
+
+<TR VALIGN="top">
+<TD width=50%><A HREF="/iishelp/iis/htm/asp/adsi0ewj.htm"><B>ADSI オブジェクト メソッド</B></A></TD>
+<TD width=50%>ADSI オブジェクトの標準メソッドです。</TD>
+</TR>
+</TABLE><BR>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><HEAD><TITLE>ASP を使用して Web サイト コンテンツを管理する</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="ASP を使用して、定期的なコンテンツの更新、Web サイトのすべてのページの外観の維持、複数の作者によるコンテンツの統合、さまざまな Web ブラウザのサポート、その他のサイト管理業務支援などを自動化して集中管理する方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><A NAME="H1_448394830"></A>ASP を使用して Web サイト コンテンツを管理する</h1>
+
+<p>HTML を習得し、Web ページを作成した後は、Web サイトを設計します。ただし、Web サイトを設計する前に、次の問題を検討する必要があります。</p>
+
+<ul>
+	<li>サイト全体にわたる一貫した外観をどのように維持するか。</li> 
+	<li>著作権情報やロゴ イメージなど、すべてのページに表示されるコンテンツをどのように更新するか。</li>
+	<li>複数の人が作成した Web コンテンツをどのように統合するか。</li> 
+</ul>
+
+<p>こうした Web 管理の問題の解決には、小規模なサイトでも時間がかかる場合があります。Web サーバーには、Web サイト管理作業の多くを自動化および集中化する  &quot;サーバー側&quot; のスクリプト作成環境である、Microsoft&nbsp;Active Server Pages (ASP) が含まれています。</p>  
+
+<h2><A NAME="H2_448395770"></A>スクリプト作成について理解する</h2>
+<p>&quot;スクリプト&quot; は、Web ページのコンテンツをプログラムによって変更するために使用する一連の指示およびコマンドです。商品の検索や在庫確認が可能なオンライン ストアを一度でも訪れたことがあれば、間違いなくある種のスクリプトを経験していることになります。スクリプトの作成について理解すれば、Web を使った情報発信の可能性をさらに実感できます。</P>
+
+<P>まず、スクリプト作成には、クライアント側とサーバー側の 2 種類があります。</p> クライアント側スクリプトは、Web ブラウザで実行されます。Web ページでは、このスクリプトを &lt;SCRIPT&gt; および &lt;/SCRIPT&gt; という HTML タグの間に埋め込みます。極めて動的な Web ページの HTML ソースを見ると、ほとんどの場合、クライアント側スクリプトが含まれています。
+
+<p>サーバー側スクリプトは、Web サーバー上のみで実行されます。このスクリプトは、通常ブラウザに配信する Web ページを変更するために使用されます。サーバー側スクリプトによって、Web サーバー上でユーザーの入力を処理したり、ユーザーが Web サイトにアクセスした回数をログに記録したりすることができます。サーバー側スクリプトは、Web サーバーがブラウザに送る Web ページをどのように &quot;組み立てる&quot; かを左右するものと考えることができます。データの処理や Web ページの自動更新に役立つサーバー側スクリプトによって、Web コンテンツの管理が簡単になります。</p>
+
+<h2><A NAME="H2_448397151"></A>ASP の概要</h2>
+<p>カスタム マクロを作成して、表計算やワープロでの繰り返し作業を自動化するように、サーバー側スクリプトを作成して、Web 管理における複雑な作業や繰り返し作業を自動的に実行できます。たとえば、署名、企業ロゴ、著作権情報などの同じ形式の情報を含む多数のページから構成される Web サイトを更新する必要があるとします。通常、この作業には時間がかかり、各ページを手動で更新しテストする必要があります。ASP を使用することにより、これらの作業を自動化できます。</p>
+
+<p>ASP は、強力なサーバー側のスクリプト作成環境です。メモ帳などの標準的なテキスト エディタさえあれば、ASP を使用してスクリプトを作成できます。たとえば、ASP を使用して、Web サイトのすべてのページに共通する情報を含む中心ファイルを作成できます。Web サイトを設計する際に、この中心ファイルの内容を挿入する 1 行のスクリプト コマンドを各ページに追加します。たとえば、サイトの案内メニューを更新する場合でも、中心ファイルのみを更新するだけで済みます。中心ファイルに対する変更は、次にユーザーが Web コンテンツを再読み込みして表示するときに、自動的に表示されます。</p>
+
+<p>ASP では、&quot;区切り記号&quot; を使用して、通常のテキストおよび HTML をスクリプト コマンドと区別します。HTML が、&lt; および &gt; という区切り記号を使って、Web ブラウザで解析されるタグを表すのに対し、&lt;% および %&gt; という区切り記号を使って、サーバーで実行するスクリプト コマンドを囲みます。</p>
+
+<p>次の例は ASP のしくみを示しています。</p> 
+
+<pre>&lt;%
+  author = &quot;Kim Yoshida&quot; 
+  department= &quot;Quality Assurance&quot;
+%&gt;
+
+This page was updated &lt;B&gt;today&lt;/B&gt;, by &lt;%= author %&gt; from 
+the &lt;%= department %&gt; Department.
+</pre>
+
+<p>Web ブラウザでは、このスクリプトを含むページが次のように表示されます。</p>
+
+<pre>This page was updated <strong>today</strong>, by Kim Yoshida from the Quality 
+Assurance Department.</pre>
+
+<p>ただし、ユーザーがこのページのソースを表示すると、次のテキストと HTML のみが表示されます。</p>
+
+<pre>This page was updated &lt;B&gt;today&lt;/B&gt;, by Kim Yoshida from the Quality 
+Assurance Department.</pre>
+
+<p>スクリプトはサーバーで実行され、ユーザーのブラウザには HTML のみが返されます。つまり、区切り記号 &lt;% および %&gt; の中のコマンドはサーバー上で実行されます。</p>
+
+<p>すべての ASP ファイルには .asp という拡張子が付けられ、Microsoft Visual Basic&reg; Scripting Edition (VBScript) や Microsoft JScript などのスクリプト言語で記述されたスクリプト コマンドが含まれていなければなりません。スクリプトを作成した経験がなく、基本から学ぶ必要がある場合は、まずは市販の書籍か、または <a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&pver=6.0&ar=scripting" target=_blank>Windows Script Technologies の Web サイト</a>を参照することをお勧めします。</p>
+
+<p>スクリプト言語を習得した後は、「<a href="../asp/iiwawelc.htm">Active Server Pages</a>」にある ASP のサーバー側スクリプト作成の基本を参照してください。ここには、実践的なチュートリアルも用意されています。詳細については、「<a href="../asp/asptut02.htm">ASP チュートリアル</a>」を参照してください。</p>
+
+<h2><A NAME="H2_448400575"></A>ASP ソリューション</h2>
+
+<p>次の表は、Web の管理作業とそれに対する ASP ソリューションの提案の一覧です。 </p>
+
+<table border="1" cellpadding="5" cellspacing="1" width="100%">
+<tr>
+<th width=20% bgcolor="#c0c0c0">Web 作業</th>
+<th width=80% bgcolor="#c0c0c0">ASP ソリューション</th>
+</tr>
+<tr>
+	<td valign="top">Web ページの形式を更新する</td>
+	<td valign="top"><p>ASP のサーバー側 <strong>#include</strong> ディレクティブを使用して、1 つの中心ファイルから各ページに情報を挿入します。たとえば、サイトを設計する際に、Web ページのテンプレートに次のステートメントを挿入します。</p>
+<pre>&lt;!-&nbsp;- #include file=&quot;Logo.txt&quot;  -&nbsp;-&gt;</pre>
+<p>サイトが公開されてから、ロゴ イメージを更新する必要が生じた場合は、ロゴ イメージの情報を含む Logo.txt ファイルを更新するだけで済みます。詳細については、「<a href="../asp/iiwainc.htm">ファイルをインクルードする</a>」を参照してください。</p></td>
+</tr>
+<tr>
+	<td valign="top">移動した Web コンテンツについてユーザーに知らせる</td>
+	<td valign="top">ユーザーに知らせるのではなく、ユーザーを &quot;リダイレクト&quot; します。ASP の <strong>Redirect</strong> メソッドを使用して、ブラウザを別の Web ページや別の Web サイトに自動的にリダイレクト、つまり転送します。たとえば、ユーザーを別のページにリダイレクトするには、Web ページの 1 行目に次のステートメントを挿入します。<pre>&lt;% Response.Redirect(<em>URL of new Web page</em>) %&gt;</pre> 詳細については、「<a href="../asp/iiwacont.htm">ブラウザにコンテンツを送信する</a>」を参照してください。</td>
+</tr>
+<tr>
+	<td valign="top">バージョンおよび種類の異なる Web ブラウザをサポートする</td>
+	<td valign="top">ASP の Browser Capabilities コンポーネント機能を使用して、ブラウザの機能に合わせて Web コンテンツを調整します。たとえば、ユーザーのブラウザでフレーム機能がサポートされているかどうかを確認し、サポートされていない場合は、適切な Web コンテンツに差し替えることができます。詳細については、「ASP チュートリアル」の「<a href="../asp/iiatmd2.asp">COM コンポーネントの使用</a>」を参照してください。
+</td>
+</tr>
+<tr>
+	<td valign="top">ユーザーの嗜好や動きを監視する</td>
+	<td valign="top">ユーザーが、Web サイトのどの部分にアクセスしたのか、特定の Web ページをどのくらいの時間参照したのかを調べるために、ASP を使用して &quot;cookie&quot; を配置することができます。&quot;cookie&quot; は、サーバーが、ユーザーのブラウザに格納する小さなテキスト ファイルです。詳細については、「<a href="../asp/iiapsess.htm">セッションを管理する</a>」を参照してください。</td>
+</tr>
+<tr>
+	<td valign="top">ユーザーからフィードバックを得る</td>
+	<td valign="top">ASP の <strong>Form</strong> および <strong>QueryString</strong> コレクションを使用して、HTML フォームからのユーザーの入力を収集します。これらのコレクションによって、部門別の掲示板、オンライン調査、データ検索システムなどの、ユーザーからのフィードバックを処理する Web サイトを簡単に作成できます。詳細については、「<a href="../asp/iiwaform.htm">ユーザーからの入力を処理する</a>」を参照してください。</td>
+</tr>
+</table>
+
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</font>
+</BODY>
+</HTML>

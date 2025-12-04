@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML dir=LTR><HEAD><TITLE>証明書について</TITLE>
+<SCRIPT language=JavaScript>
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</SCRIPT>
+
+<SCRIPT language=VBScript>
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META 
+content="サーバーおよびクライアントの証明書認証について説明します。接続が確立する前に、Web サーバーおよびユーザーは証明書によってその相手の身元を認証または確認することができます。" 
+name=description>
+<META content="text/html; charset=shift_jis" http-equiv=Content-Type>
+<META 
+content='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))' 
+http-equiv=PICS-Label>
+<META content=JA name=MS.LOCALE>
+<META content="インターネット インフォメーション サービス" name=MS-IT-LOC>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff text=#000000><font face="ＭＳ Ｐゴシック">
+<H1><A name=H1_37676752>証明書について</A></H1>
+<P>証明書には、認証と呼ばれる、ネットワーク上での身元を証明する情報が含まれています。証明書の機能は従来の ID の形式と似ています。 証明書を使用することで、Web サーバーとユーザーは接続を確立する前に互いを認証することができます。証明書には、暗号化された値である &quot;キー&quot; も含まれており、クライアントとサーバーとの間で Secure Sockets Layer (SSL) 接続を確立する際に使用されます。この SSL 接続を通して送られるクレジット カード番号などの情報は、権限のない第三者によって悪用されないように暗号化されています。</P>
+<P>SSL で使用する証明書は 2 種類あり、それぞれに独自の形式と目的があります。&quot;クライアント証明書&quot; には、サイトへのアクセスを要求するクライアントに関する個人的な情報が含まれています。 この情報により、サイトへのアクセスを許可する前に、サーバー側からクライアントを識別することができます。&quot;サーバー証明書&quot; には、サーバーに関する情報が含まれています。 この情報により、重要な情報を共有する前に、クライアント側からサーバーを識別することができます。 
+<UL>
+<LI><A href="iiabcsc.htm#server">サーバー証明書</A> 
+<LI><A href="iiabcsc.htm#H2_37677634">クライアント証明書</A> 
+<LI><A 
+  href="iiabcsc.htm#H2_20495411">証明機関</A> 
+<LI><A href="iiabcsc.htm#ctl">証明書信頼リスト</A> 
+<LI><A href="iiabcsc.htm#H2_37679028">無効なクライアント証明書の検出</A> </LI></UL>
+<H2><A name=server>サーバー証明書</A></H2>
+<P>Web サーバーの SSL&nbsp;3.0 セキュリティ機能を使用するには、有効なサーバー証明書を取得してインストールする必要があります。サーバー証明書はデジタル識別情報であり、Web サーバーの情報とサーバーの Web コンテンツを提供している組織の情報が含まれています。サーバー証明書によって、ユーザーはサーバーを認証し、Web コンテンツの有効性を確認し、セキュリティで保護された接続を確立します。サーバー証明書には、クライアントとサーバーの間で安全な接続を確立するために使用される &quot;公開キー&quot; も含まれています。</P>
+<P>サーバー証明書が識別の手段に成り得るかどうかは、証明書に含まれる情報の有効性をユーザーが信頼するか否かによります。たとえば、ある企業の Web サイトにログオンしたユーザーは、その企業のサーバー証明書の内容を確認した後でも、クレジット カード情報の提示を拒否する場合があります。新しい企業や知名度の低い企業の場合はなおさらです。</P>
+<P>このため、<A href="iiabcsc.htm#H2_20495411">証明機関</A> (CA) と呼ばれる、双方が信頼できる第三者機関が発行し、承認した証明書が使われる場合があります。証明機関の主な役割は、証明書を要求している企業や個人の身元を証明し、それに基づいて証明書に含まれる識別情報の有効性を保証することです。</P>
+<P>Web サイトを運営する組織と Web サイトのユーザーとの関係によっては、運営組織が独自のサーバー証明書を発行することもできます。たとえば、社員の給与や手当の情報を扱う大規模な企業イントラネットの場合、独自に証明書サーバーを管理し、識別情報の有効性検査とサーバー証明書の発行を責任を持って行うことができます。詳細については、「<A  href="iiocrsc.htm">サーバー証明書を取得する</A>」を参照してください。</P>
+
+<H4><A NAME="H2_448415275"></A>SGC (Server-Gated Cryptography)</H4>
+<P>SGC は、128 ビット暗号化により、安全性の高い世界規模の金融取引を実現するソリューションを金融機関に提供します。SGC は SSL (Secure Sockets Layer) の拡張機能であり、これにより金融機関は IIS での強力な暗号化が可能となります。</P>
+
+<P>SGC ではクライアントのブラウザでアプリケーションを動作させる必要はなく、通常の IIS Version&nbsp;4.0 以降で使用できます。SGC 対応のサーバーでは、128 ビットと 40 ビットの両方の暗号化セッションが容易になるため、複数のバージョンの IIS を必要としません。SGC 機能は IIS 4.0 以降のバージョンに組み込まれていますが、SGC を使用するには特殊な SGC 証明書が必要です。入手方法については、証明機関にお問い合わせください。SGC の詳細については、「<a href="http://www.microsoft.com/isapi/redir.dll?prd=msft&sbp=sgc&pver=1.0&ar=security" target=_blank>Server-Gated Cryptography (SGC)</a>」を参照してください。</P>
+
+<H2><A name=H2_37677634>クライアント証明書</A></H2>
+<P>クライアント証明書は、クライアントに関する情報が含まれている電子ドキュメントです。クライアント証明書には、サーバー証明書と同様、クライアントに関する情報に加えて、IIS の SSL&nbsp;3.0 セキュリティ機能の一部を構成する暗号化キーも含まれています。サーバー証明書およびクライアント証明書の暗号化キー、つまり暗号化コードは、インターネットなどのオープンなネットワーク上で伝送されたデータの暗号化および解読を容易にする &quot;キー ペア&quot; を構成します。暗号化の詳細については、「<A  href="iicrysc.htm">暗号化について</A>」を参照してください。</P>
+<P>一般的なクライアント証明書には、ユーザーの識別情報、証明機関の識別情報、保護された通信を確立するために使われる &quot;公開キー&quot;、有効期限の日付やシリアル番号などの入力検査情報などが含まれます。証明機関が提供するクライアント証明書にはさまざまな種類があり、それぞれ含まれる情報量や要求される認証のレベルが異なります。詳細については、「<A  href="iiclisc.htm">クライアント証明書を取得する</A>」を参照してください。</P>
+<H2><A name=H2_20495411>証明機関</A></H2>
+<P>クライアント証明書は、&quot;証明機関&quot; と呼ばれる相互に信頼できる民間組織から入手できます。証明書の発行には、名前、住所、組織名などの識別情報の提供が必要です。必要な情報の種類は、証明書で保証される識別情報の要件により異なる場合があります。ユーザーの身元を全面的に保証する証明書が必要な場合、証明機関はそのために必要な十分な量の情報の提供をユーザーに求めます。情報収集の手段には、ユーザー個人へのインタビューや公証人による署名が含まれる場合があります。</P>
+<P>証明機関の一覧については、「<A  href="iiocrsc.htm">サーバー証明書を取得する</A>」を参照してください。</P>
+<P><strong>注</strong>&nbsp;&nbsp;&nbsp;最終的に、証明書による認証が成功するかどうかは、証明書を受け取る側が証明書を発行した証明機関を信頼するかどうか、また証明機関が証明書の所有者の識別情報を正しく検証できるかどうかに依存します。しかし、相互に信頼が成立しても、証明書はクライアントまたはサーバーの身元、信頼性、目的に関する絶対的な証明にはなりません。</P>
+<H2><A name=ctl>証明書信頼リスト</A></H2>
+<P>証明書信頼リスト (CTL) を管理することで、Web サイトの管理者は事前に定義した信頼できる証明機関のリストに対し、クライアント証明書を自動的に検証することができます。</P>
+<P>たとえば、イントラネットの管理者は、ネットワーク上の部門ごとに、信頼できる証明機関のリストを作成することができます。IIS は、その部門の CTL に含まれている証明機関によって提供されたクライアント証明書のみを受け付けます。詳細については、「<A  href="iicarsc.htm">証明書信頼リストを使用する</A>」を参照してください。</P>
+<H2><A name=H2_37679028>無効なクライアント証明書の検出</A></H2>
+<P>信頼できる証明機関の多くは、証明書無効リスト (CRL) を管理しています。 CRL は、設定されている有効期限より前に取り消されたクライアント証明書の一覧です。</P>
+<P>たとえば、ユーザーにクライアント証明書を発行した後で、ユーザーから提出された個人情報が虚偽であることが判明した場合、証明機関はユーザーのクライアント証明書を無効にすることができます。ただし、クライアント証明書の使用を物理的に禁止することはできないため、証明機関は無効になったクライアント証明書の情報を CRL に追加して、Web 管理者に警告します。詳細については、証明機関にお問い合わせください。</P>
+<HR class=iis SIZE=1>
+
+<P align=center><EM><A href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</A></EM></P></FONT></BODY></HTML>

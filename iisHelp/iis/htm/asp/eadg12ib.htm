@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Windows スクリプト コンポーネント</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_k2_windows_script_components"></A><SUP></SUP>Windows スクリプト コンポーネント</H1>
+
+<P>Windows スクリプト コンポーネントを使用すると、Microsoft<sup>&reg;</sup> Visual Basic<sup>&reg;</sup> Scripting Edition (VBScript) や、ECMA 262 言語仕様と互換性を持つそのほかの言語 (Microsoft<sup>&reg;</sup> JScript<sup>&reg;</sup> 2.0、JavaScript 1.1 など) などのスクリプト作成言語を使用して、Component Object Model (COM) コンポーネントを簡単に作成することができます。インターネット インフォメーション サービス (IIS)、Microsoft Windows スクリプティング ホスト (WSH) など、COM コンポーネントをサポートしているすべてのアプリケーションで、COM コンポーネントのようなスクリプト コンポーネントを使用できます。</P>
+
+<P>スクリプト コンポーネント テクノロジの構成要素は、次のとおりです。
+
+<UL type=disc>
+	<LI>スクリプト コンポーネント ランタイム (Scrobj.dll)。</li>
+
+	<LI>&quot;インターフェイス ハンドラ&quot;。スクリプト コンポーネント ランタイムを拡張するコンポーネントです。インターフェイス ハンドラは、通常、C++ で書かれているコンパイル済みコンポーネントで、特定の COM インターフェイスを実装します。スクリプト コンポーネント ランタイムをインストールすると、オートメーション インターフェイス ハンドラを受けとることができるようになり、スクリプト コンポーネントを .asp ファイルから呼び出せるようになります。</li>
+
+	<LI>作成したスクリプト コンポーネント ファイル (.sct ファイル)。作成したスクリプト コンポーネントで、使用するインターフェイス ハンドラを指定します。また、目的とする機能を実行するために、.asp ファイルから呼び出すメソッドも、スクリプト ファイルで定義します。</li>
+</UL>
+
+<P>スクリプト コンポーネントは、COM コンポーネントのプロトタイプ開発のための、優れたテクノロジです。スクリプト コンポーネントをトランザクションに利用したり、コンポーネント サービス ランタイム環境を有効活用したりする予定がある場合は、ほかの COM コンポーネントと同様、スクリプト コンポーネントをコンポーネント サービスに登録することができます。スクリプト コンポーネントは COM コンポーネントなので、組み込み ASP オブジェクトにアクセスできます。</P>
+
+<P>スクリプト コンポーネントの詳細については、<a HREF="http://www.microsoft.com/japan/developer/library/default.asp" target="_blank">MSDN Online</a> を参照してください。スクリプト コンポーネント作成の詳細については、Platform SDK を参照してください。スクリプト コンポーネントの例については、「<A HREF="iiwacomu.htm">コンポーネントとオブジェクトを使用する</A> 」、および Platform SDK を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

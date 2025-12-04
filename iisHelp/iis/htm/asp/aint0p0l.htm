@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>プロパティの継承</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_property_inheritance"></A><SUP></SUP>プロパティの継承</H2>
+
+<P>メタベースのプロパティ継承機能を使って、IIS インストール環境をわずかな設定で構成し、メタベースに必要なメモリ量を最小限に抑えることができます。メタベース プロパティのほとんどは継承可能であるため、特定のキーで明示的に設定されずに、上位のキーで割り当てられた値を継承します。たとえば、ファイルおよびディレクトリに、AccessScript、AccessExecute、AccessWrite などのアクセス権を W3SVC レベルで設定し、すべてのサーバー インスタンスのすべてのファイルとディレクトリに適用させることができます。あるいは、それらのアクセス権を W3SVC/2/ROOT レベルで設定して、2 番目の Web サーバーのすべてのファイルとディレクトリのみに適用させることができます。その後、下位レベルで個々のサブディレクトリやファイルに別のアクセス権を設定できます。たとえば、...W3SVC/1/ROOT/VDir1/VDir1a、...W3SVC/1/ROOT/VDir2/Dir2d、...W3SVC/1/ROOT/VDir2/Dir3/File1 などの特定のディレクトリ、仮想ディレクトリ、またはファイルに対して、AccessExecute アクセス権プロパティを TRUE に設定することが可能です。 </P>
+
+<P>AccessScript、AccessExecute、および AccessWrite の既定の設定は FALSE です。継承のしくみとして、継承可能プロパティの値を設定すると、それより下位のすべてのサブノードで、そのプロパティのインスタンスが自動的に設定されます。IIS スナップイン (インターネット サービス マネージャ) を使って継承可能プロパティを設定する場合は、すべてのサブノードの値を変更するかどうかを確認するダイアログ ボックスが表示されます。一方、スクリプトやコマンド ラインを使って継承可能プロパティを設定すると、値が直ちに伝播します。</P>
+
+<P>次の例では、Web サービス レベル (.../W3SVC) で AccessScript を TRUE に設定し、ルート レベル (.../W3SVC/1/ROOT) で AccessExecute を TRUE に設定し、さらにファイル レベル (.../W3SVC/<I>n</I>/ROOT/<I>VDir/Dir/File</I>) で AccessWrite を TRUE に設定します。丸印は、ユーザーがプロパティ値を設定した場所を表し、矢印は、値がサブノード間に伝播されるときの継承の経路を表します。</P>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/inherit.gif" ALT="継承の例" BORDER=0></P>
+
+<P>特定のキーのみで使用されるものを除いて、ほとんどのメタベース プロパティは継承可能です。ServerBindings などの、メタベース内の一部のプロパティは、値の一覧で構成されます。</P>
+
+<P>ファイルのアクセス権などのフラグ プロパティは、ビットマスクを使って 1 つの DWORD に結合されることがよくあります。フラグのセット全体が同時に格納され、同時に継承されます。たとえば、あるディレクトリに対して AccessExecute など、ファイル アクセス権の 1 つを変更した場合でも、そのディレクトリのメタベース キーにファイル アクセス権のセット全体が格納されます。</P>
+
+<P>各メタベース プロパティについては、「<A HREF="/iishelp/iis/htm/asp/apro3usl.htm">管理プロパティ リファレンス</A>」で詳しく説明されています。このリファレンスには、各プロパティが継承可能であるかどうかが記載されています。また、大きなセットの一部として格納されるプロパティは、フラグとして区別されます。<A HREF="/iishelp/iis/htm/asp/apro2n1v.htm">AccessFlags</A> プロパティなどを参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

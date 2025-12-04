@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>LCID</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H4><A NAME="_response_lcid"></A><SUP></SUP>LCID</H4>
+
+<P>LCID プロパティは、日付、時刻および通貨の書式を指定します。LCID は、各地域のロケールによって異なります。ロケールによっては、日付が YY-MM-DD 形式になったり、MM-DD-YYYY 形式になったりします。LCID プロパティには、読み取り/書き込みが許可されます。</P>
+
+<H6>構文</H6>
+
+<P>Response.<B>lcid </B>[= <I>LocaleID </I>]</P>
+
+<H6>パラメータ</H6>
+
+<DL>
+<DT><I>LocaleID</I></DT>
+</DL>
+
+<P>各地域のロケールを表す整数です。ロケールを表す整数については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&sbp=library&pver=6.0&ar=appendix&sba=locale" target=_blank>MSDN Library</a> を参照してください。</P>
+
+<H6>注</H6>
+
+<P>Response.LCID を明示的に設定すると、単一のページに対して適用されます。Session.LCID は、セッション内の応答全体に適用されます。 </P>
+
+<P>ページ内で Response.LCID を明示的に設定しない場合、セッションが有効である限り、Session.LCID によって暗黙的に設定されます。セッションが有効でない場合、ページ内に @LCID が存在すれば、@LCID によって Response.LCID が設定されます。ページ内に @LCID がない場合、AspLCID メタベース プロパティによって Response.LCID が設定されます。AspLCID プロパティが設定されていないか、0 に設定されている場合、既定のシステム ロケールによって Response.LCID が設定されます。</P>
+
+<P>Response.LCID は、1 つの Web ページ内で複数回設定し、データを書式設定するたびに使用できます。一部のロケールでは、文字を適切に表示するために対応するコードページを設定する必要があります。たとえば、あるページで複数のロケールに基づいて日付と時刻を表示する場合、すべての文字を表示するためにコードページを UTF-8 (65001) に設定します。</P>
+
+<P>Response.LCID または Session.LCID を明示的に設定する場合は、書式付き出力を表示する前に行います。Response.LCID を設定すると、ASP アプリケーションとスクリプト エンジンの両方に関してロケールが変更されます。&nbsp;VBScript 関数 setLocale() を使用すれば、スクリプト エンジンのロケールのみが変更されます。</P>
+
+<P>Web ページのロケールが Web クライアントにおけるシステムの既定値と一致する場合、Web ページでのロケール設定は必須ではありませんが、設定することをお勧めします。</P>
+
+<P>ページ内でロケールが設定されており、文字を適切に表示するためのコードページが設定されている場合、Response.Charset も設定する必要があります。コードページの値は、応答を作成する段階で、データのエンコード方式を IIS に指定します。Charset の値は、応答を表示する段階で、データのデコード方式をブラウザに指定します。Response.Charset の <I>CharsetName</I> は、コードページの値と一致していることが必要です。一致していない場合、ブラウザで表示する文字が統一されません。<I>CharsetNames</I> と対応するコードページの値の一覧については、<a href="http://www.microsoft.com/isapi/redir.dll?prd=msdn&sbp=workshop&pver=6.0&ar=reference&sba=charsets " target=_blank>MSDN Web Workshop</a> の Preferred Charset Label および FamilyCodePage の各列を参照してください。</P>
+
+<P>複数言語対応の Web サイトなどで、各種のロケール、コードページ、および文字セットを使用する Web ページを作成し、テストする場合、テストを実施するクライアント コンピュータには、表示したい各言語の言語パックをインストールしておく必要があります。言語パックは、[コントロール パネル] の [地域のオプション] からインストールします。</P>
+
+<H6>例</H6>
+
+<P>次の例は、日付、時刻、通貨、および数字をさまざまなロケールで表示します。すべての文字を適切に表示するため、コードページは UTF-8 に設定しています。</P>
+
+<P>--- Response_LCID.asp ---</P>
+
+<PRE><CODE>&lt;%
+' This file does not need @LCID or @CODEPAGE and
+'  it does not need to be saved in UTF-8 format because 
+'  there are no literal strings that need formatting or encoding.
+
+Response.Codepage = 65001
+Response.Charset = "utf-8"
+
+' See what happens when you uncomment the lines below.
+'Response.Codepage = 1252
+'Response.Charset = "windows-1252"
+
+ShowDateTimeCurrency 1033, "North America"
+ShowDateTimeCurrency 1041, "Japan"
+ShowDateTimeCurrency 1049, "Russia"
+ShowDateTimeCurrency 1031, "Germany"
+ShowDateTimeCurrency 1025, "Saudi Arabia"
+ShowDateTimeCurrency 1081, "India"
+ShowDateTimeCurrency 2052, "China"
+ShowDateTimeCurrency 1042, "Korea"
+
+Sub ShowDateTimeCurrency(iLCID, sLocale)
+  Response.LCID = iLCID
+  Response.Write "&lt;B&gt;" &amp; sLocale &amp; "&lt;/B&gt;&lt;BR&gt;"
+  Response.Write FormatDateTime(Date, 1) &amp; "&lt;BR&gt;"
+  Response.Write FormatDateTime(Time, 3) &amp; "&lt;BR&gt;"
+  Response.Write FormatCurrency(1000) &amp; "&lt;BR&gt;"
+  Response.Write FormatNumber(50, 3, 0, 0, -1) &amp; " &amp; " &amp; FormatNumber(.02, 3, 0, 0, -1) &amp; "&lt;BR&gt;&lt;BR&gt;"
+End Sub
+%&gt;
+</CODE></PRE>
+
+<H6>対象</H6>
+
+<P>Response オブジェクト</P>
+
+<H6>関連項目</H6>
+
+<P><A HREF="/iishelp/iis/htm/asp/vbob7fw4.htm"><B>Charset</B></A>、<A HREF="/iishelp/iis/htm/asp/vbob150l.htm"><B>CodePage</B></A>、<A HREF="eadg4o37.htm">インターナショナル クライアントに適応させる</A></P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

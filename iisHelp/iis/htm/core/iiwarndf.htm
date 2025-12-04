@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アプリケーションのマッピングを設定する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ファイル名拡張子を、ASP プログラム、ISAPI プログラム、CGI プログラムのそれぞれに関連付ける、アプリケーション マッピングの設定方法について説明します。IIS は、一般に使われるアプリケーションのマッピングをサポートするようにあらかじめ構成されています。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37778069">アプリケーションのマッピングを設定する</a></h1>
+
+<p>Web アプリケーションの開発には、さまざまなプログラミング言語およびスクリプト言語を使用できます。インターネット インフォメーション サービス (IIS) は、Web サイトで要求されたリソースのファイル名の拡張子を使って、ISAPI プログラムと CGI プログラムのどちらを実行して要求を処理するかを決定します。たとえば、拡張子が .asp というファイルに対する要求では、Web サーバーは ASP プログラム (Asp.dll) を呼び出してその要求を処理します。ファイル名の拡張子を ISAPI プログラムまたは CGI プログラムと関連付けることを、&quot;アプリケーションのマッピング&quot; と呼びます。IIS は、一般に使われるアプリケーションのマッピングをサポートするようにあらかじめ構成されています。Web サイトのすべてのアプリケーションあるいは個々のアプリケーションのマッピングを、追加または解除できます。</p>
+
+<big>拡張子をアプリケーションにマップするには</big><br>
+
+<ol>
+<li><a href="iiabuti.htm">IIS スナップイン</a>で、Web サイトまたはアプリケーションの開始点ディレクトリを選択します。</li>
+<li>ディレクトリのプロパティ シートを開き、[ホーム ディレクトリ] タブ、[仮想ディレクトリ] タブ、または [ディレクトリ] タブをクリックします。</li>
+<li>[構成] をクリックします。</li>
+<li>[<a href="iipy_34.htm">マッピング</a>] タブで [追加] をクリックします。</li>
+<li>[実行ファイル] ボックスに、ファイルを処理する ISAPI プログラムまたは CGI プログラムのパスを入力します。Web サーバーのローカル ディレクトリにあるプログラムを指定する必要があります。</li>
+<li>[拡張子] ボックスに、ISAPI プログラムまたは CGI プログラムに関連付けるファイル名の拡張子を入力します。この拡張子を持つファイルを示す URL を受け取ると、Web サーバーは関連付けられたプログラムを呼び出して要求を処理します。</li>
+<li> スクリプトのアクセス権が設定されたディレクトリで、この種類のファイルの処理を許可するには、[スクリプト エンジン] チェック ボックスをオンにします。実行のアクセス権ではなく、スクリプトのアクセス権がディレクトリに設定されている場合、そのディレクトリ内では、指定されたスクリプト エンジンであるアプリケーションに関連付けられたファイルだけを処理できます。</li>
+
+<p><strong><span style="color: #0000FF"><font color="#0000FF">重要</font> </span></strong>&nbsp;&nbsp;&nbsp; [アプリケーションのマッピング] プロパティ シートに [動詞] というタイトルの列があります。IIS&nbsp;4.0 では、この列に [除外] というタイトルが付いていました。今後新しい HTTP 動詞が Hypertext Transport Protocol (HTTP) に追加された場合に互換性が保たれるように、[動詞] に変更されています。 </p>
+
+</ol>
+
+<p class="bigfix">&nbsp;</p>
+
+<big>アプリケーションのマッピングを解除するには</big>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top"><IMG SRC="../../../common/onestep.gif" border="0" alt="行頭文字"></td>
+<td>[マッピング] プロパティ シートでファイル名の拡張子を選択し、[削除] をクリックします。削除した拡張子を持つファイルに対する要求があっても、この Web サイトまたはディレクトリ内では処理されません。</td>
+</tr>
+</table>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+</font>
+</body>
+</html>

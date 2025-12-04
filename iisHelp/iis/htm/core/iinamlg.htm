@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>ログ ファイルを保存する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="ログ ファイルを保存するディレクトリを指定、新しいログ ファイル (既にあるファイルに追加する場合ではなく) 作成基準の指定の方法について説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37716023">ログ ファイルを保存する</a></h1>
+
+<p>ログ ファイルを保存するディレクトリを指定し、ログ ファイルを新しく作成するタイミングを設定することができます。</p>
+
+<big>ログ ファイルの保存オプションを設定するには</big><br>
+
+<ol>
+<li>Web サイトまたは FTP サイトを選択し、そのプロパティ シートを開きます。</li>
+
+<li>[Web サイト] プロパティ シートまたは [FTP サイト] プロパティ シートの [プロパティ] をクリックします。</li>
+
+<li>[全般] プロパティ シートで、新しいログ ファイルを作成するタイミングを指定するオプションを選択します。選択できるオプションは、次のとおりです。</li>
+
+<ul>
+<li><strong>[毎時間]</strong>&nbsp;&nbsp;ログ ファイルが 1 時間ごとに作成されます。ログの収集は、各時間で最初に発生したエントリから開始されます。通常このオプションは、大規模な Web サイトで使用します。</li>
+
+<li><strong>[毎日]</strong>&nbsp;&nbsp;ログ ファイルが毎日作成されます。ログの収集は、午前 0 時以降に発生した最初のエントリから開始されます。</li>
+
+<li><strong>[毎週]</strong>&nbsp;&nbsp;ログ ファイルが毎週作成されます。ログの収集は、日曜日の午前 0 時以降に最初に発生したエントリから開始されます。</li>
+
+<li><strong>[毎月]</strong>&nbsp;&nbsp;ログ ファイルが毎月作成されます。ログの収集は、各月の初日の午前 0 時以降に最初に発生したエントリから開始されます。</li>
+
+<p><strong>注</strong>&nbsp;&nbsp;&nbsp;W3C 拡張形式を除くすべてのログ ファイル形式では、&quot;午前 0 時&quot; は現地時間の午前 0 時となります。W3C 拡張形式のログ ファイルでは、既定では、&quot;午前 0 時&quot; はグリニッジ標準時 (GMT) の午前 0 時ですが、現地時間の午前 0 時に変更することもできます。W3C 拡張形式の新しいログで現地時間を使用するには、[ファイル名およびロールオーバーに地域設定を使用する] チェック ボックスをオンにします。これによって新しいログが現地時間の午前 0 時から開始されますが、ログ ファイルに記録される時間は GMT のままです。 </p>
+
+<li><strong>[ファイル サイズを限定しない]</strong> データは常に同じログ ファイルに追加されます。サイトを停止しないと、このファイルにはアクセスできません。</li>
+
+<li><strong>[ファイル サイズが次のバイト数に達したとき]</strong>&nbsp;&nbsp;現在のログ ファイルが所定のサイズに達すると、新しいログ ファイルが作成されます。サイズを指定します。</li>
+</ul>
+
+<li>[ログ ファイル ディレクトリ] に、ログ ファイルの保存先のディレクトリを入力します。保存先のディレクトリはローカル ドライブに置きます。相対パスは指定できません。ログ ファイル ディレクトリを指定する場合、マップされたドライブ、&quot;\\server1\share1\&quot; などの UNC パス、または文字列 &quot;. .\ &quot; などは使用できません。ネットワーク ドライブにマップする方法については、Windows&nbsp;XP のマニュアルを参照してください。
+
+<li>[適用] をクリックします。</li>
+</ol>
+
+<p><strong>関連項目</strong></p>
+
+<ul>
+<li>指定可能なログ ファイル形式については、「<a href="iiabtlg.htm">サイトの利用状況のログ収集について</a>」を参照してください。</li>
+<li>ログ プロパティの参照リストについては、「<a href="iiintlg.htm">ログ収集プロパティ リファレンス</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1"><p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

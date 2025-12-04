@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>アプリケーション コントロールの方法</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H2><A NAME="_k2_application_control_techniques"></A><SUP></SUP>アプリケーション コントロールの方法</H2>
+
+<P>ASP が一般の実行フローに影響を与えるメソッドには 6 種類あります。ここでは、これらの 6 つのメソッドについて、図を用いて説明します。図に表示された矢印は、実行フローを表しています。</P>
+
+<H4>リダイレクト</H4>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/pf_redir.gif" ALT="処理の流れ - リダイレクト" BORDER=0></P>
+
+<P>リダイレクトは要求を別の場所へ方向転換させる処理です。リダイレクトでは、新しい要求を特定のサーバーへ送信するように命令されます。しかし、一般的には、クライアントとサーバーの間での通信量を最小限に抑えられるようにアプリケーションを設計することが大切です。これまでに、リダイレクトによって対処されてきた設計上の問題の多くは、現在では転送によって解決されているので、新しい要求は開始されません。この側面から見たアプリケーション設計に関する詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg9947.htm">クライアント/サーバー処理を調整する</A>」を参照してください。</P>
+
+<P>リダイレクトには、<A HREF="/iishelp/iis/htm/asp/vbob8h10.htm">Response.Redirect</A> メソッドを使用します。</P>
+
+<H4>転送 </H4>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/pf_trans.gif" ALT="処理の流れ - 転送" BORDER=0></P>
+
+<P>要求をある ASP ページから別の ASP ページへ転送する機能は、IIS&nbsp;5.0 で新たに導入されました。転送とリダイレクトは似ていますが、転送では、新しい要求は開始されません。このため、アプリケーション フローのコントロールがより効率的に行えます。アプリケーション境界外にある ASP ページへ要求を転送する場合、この境界は外部 ASP ページを含むように、一時的に拡張されます。この外部 ASP ページは、呼び出し側の ASP ページのアプリケーション境界内にあるように動作します。したがって、転送される ASP ページでも、このアプリケーション スコープにあるオブジェクトや変数を使用することができます。転送はリダイレクトよりも高速に行なわれるだけではなく、HTTP ポストからのフォーム値を含む、元々の要求にあるすべての組み込み ASP オブジェクトが維持されます。</P>
+
+<P>転送には、<A HREF="/iishelp/iis/htm/asp/vbob9waa.htm">Server.Transfer</A> メソッドを使用します。</P>
+
+<H4>実行</H4>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/pf_exec.gif" ALT="処理の流れ - 実行" BORDER=0></P>
+
+<P>特定の ASP スクリプトを実行し、結果を返す機能は、IIS&nbsp;5.0 で導入されたものです。実行とは、多くのプログラミング言語に見られるプロシージャ コールのようなものです。取り入れる必要があり、まだコンポーネントに組み込まれていない機能を完了するための ASP アプリケーションを開発した場合は、このアプリケーション フロー コントロール メソッドが適しています。</P>
+
+<P>実行には、<A HREF="/iishelp/iis/htm/asp/vbob9pid.htm">Server.Execute</A> メソッドを使用します。</P>
+
+<H4>コンポーネントの呼び出し </H4>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/pf_comp.gif" ALT="処理の流れ - コンポーネントの呼び出し" BORDER=0></P>
+
+<P>コンポーネントの呼び出しは、アプリケーション フローを制御する方法のうち、最も一般的な方法です。COM プログラミング モデルは Windows DNA には欠かせない部分で、設計上の問題の大半に対応しています。IIS&nbsp;5.1 でサポートされているスクリプト コンポーネント テクノロジにより、既存のスクリプトをコンポーネントに変換することが容易になりました。</P>
+
+<P>コンポーネントの呼び出しには、<A HREF="/iishelp/iis/htm/asp/vbob0ss4.htm">Server.CreateObject</A> メソッドを使用します。スクリプト コンポーネントの詳細については、「<A HREF="/iishelp/iis/htm/asp/eadg12ib.htm">Windows スクリプト コンポーネント</A>」、および「<A HREF="iiwacomu.htm">コンポーネントとオブジェクトを使用する</A>」を参照してください。</P>
+
+<H4>終了</H4>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/pf_exit.gif" ALT="処理の流れ - 終了" BORDER=0></P>
+
+<P>正常な状況では、ASP アプリケーションに、ページに記述されているスクリプトの各行を完了させる必要があります。しかし、場合によっては、単に、応答を終わらせることが必要な場合もあります。たとえば、<A HREF="/iishelp/iis/htm/asp/vbob1d0k.htm">Response.IsClientConnected</A> メソッドを使用した結果、クライアントがこれ以上の応答を待っていないということが検出された場合、ASP アプリケーションを終了することが必要になります。</P>
+
+<P>ASP の終了には、<A HREF="/iishelp/iis/htm/asp/vbob2sis.htm">Response.End</A> メソッドを使用します。</P>
+
+<H4>手順の処理</H4>
+
+<P><IMG SRC="/iishelp/iis/htm/asp/art/pf_proc.gif" ALT="処理の流れ - 手順" BORDER=0></P>
+
+<P>.asp ファイルにサブルーチンや関数を定義する場合、使用しているスクリプト記述言語に適したプロシージャ構文を使用することができます。たとえば、VBScript では、サブルーチンの定義には Sub ... End Sub 構文、関数の定義には Function ... End Function 構文が使用されます。一方、JScript では、関数呼び出しによる手順の処理がサポートされています。サブルーチン処理の詳細については、「<A HREF="iiwaproc.htm">プロシージャを記述する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>Active Server Pages</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="ASP の新機能、データベースの接続方法、複雑なアプリケーションで状態を維持する方法など、ASP スクリプト作成環境について説明します。"><META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37780812">Active Server Pages</a></h1>
+
+
+<p>Microsoft&reg; Active Server Pages (ASP) は、対話型の Web ページの作成、および強力な Web アプリケーションの構築に使用できるサーバー側スクリプトの作成環境です。サーバーは、ASP ファイルの要求を受け取ると、そのファイルに含まれているサーバー側スクリプトを処理し、Web ページを作成してブラウザに送信します。ASP ファイルには、サーバー側スクリプトのほかに、関連するクライアント側スクリプトを含む HTML、およびデータベースへの接続やビジネス ロジックの処理などのさまざまなタスクを実行する COM コンポーネントへの呼び出しも含まれます。</p>
+
+<p>ここでは、Active Server Pages について紹介し、Active Server Pages を使用したスクリプト作成の基礎について説明します。 また、状態を維持する方法など、より複雑なアプリケーションの問題についても検討します。</p>
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><a href="iiwaaspw.htm">Active Server Pages を理解する</a></strong>」では、ASP を紹介し、今回のリリースにおける新機能を説明します。対話型チュートリアルも用意されています。</li>
+<li>「<strong><a href="iiwauslw.htm">ASP ページを構築する</a></strong>」では、スクリプトの記述に必要な基本情報を提供し、基本構文からトランザクション スクリプトの作成までのトピックを紹介します。</li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>Web アプリケーションの設計および構築などの、より高度な内容については、「<a href="eadg8qpj.htm">Web アプリケーションの概要</a>」を参照してください。</li>
+<li>組み込み ASP オブジェクトのリファレンスについては、「<a href="vbob6zkv.htm">ASP 組み込みオブジェクト</a>」を参照してください。</li>
+<li>ASP に付属するコンポーネントのリファレンスについては、「<a href="comp275c.htm">ASP で利用可能なコンポーネント</a>」を参照してください。</li>
+
+<li>サンプル スクリプトについては、Platform SDK の IIS セクションにある <b>ASP Samples</b> または <a href="http://go.microsoft.com/fwlink/?LinkId=1753" target="_blank">MSDN Online - Internet Information Services</a> を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

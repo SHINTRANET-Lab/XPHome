@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>アプリケーションを構成する</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="Web ベースのアプリケーションの作成方法、構成方法についての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="primarynodetoplevel">アプリケーションを構成する</a></h1>
+
+<p>ここでは、<a href="iiabuti.htm">IIS スナップイン</a>を使って Web ベースのアプリケーションを構成する方法について説明します。</p>
+
+
+<p>ここでは、次の項目について説明します。</p>
+
+<ul>
+<li>「<strong><a href="iiwarndc.htm">アプリケーションについて</a></strong>」では、Web ベースのアプリケーションを定義し、サイトのディレクトリ構造がアプリケーションの定義とどのように関連しているかについて説明します。</li>
+<li>「<strong><a href="iiwarnde.htm">アプリケーションを作成する</a></strong>」では、ディレクトリをアプリケーションの開始点、つまりルートとしてセットアップする方法について説明します。</li>
+<li>「<strong><a href="iiwarndf.htm">アプリケーションのマッピングを設定する</a></strong>」では、ファイル名の拡張子を、そのファイルを処理するプログラムに関連付ける方法について説明します。</li>
+<li>「<strong><a href="iiisol.htm">アプリケーションを分離する</a></strong>」では、アプリケーションを Web サーバーとは別のメモリ領域で実行する方法について説明します。</li>
+<li>「<strong><a href="iipoolc.htm">アプリケーションをキャッシュする</a></strong>」では、CGI スクリプトのタイムアウトを設定し、ISAPI の DLL をキャッシュし、ASP ページのキャッシュを変更する方法について説明します。 </li>
+<li>「<strong><a href="iiwarndi.htm">分離プロセスで動作するアプリケーションを停止する</a></strong>」では、分離プロセスで動作するアプリケーションを停止する方法について説明します。 </li>
+<li>「<strong><a href="iioop.htm">プロセスの再利用</a></strong>」では、アプリケーションの再利用方法、構成可能イベント、プログラミング、およびセットアップに関する考慮事項について説明します。</li>
+<li>「<strong><a href="iiwarndh.htm">ASP アプリケーションを構成する</a></strong>」では、ASP アプリケーションのプロパティを設定する方法について説明します。</li>
+<li>「<strong><a href="iiwarndd.htm">ASP のデバッグを有効にする</a></strong>」では、ASP ページのチェックと修正を行うために Web サーバーでデバッグを有効にする方法について説明します。</li>
+<li>「<strong><a href="iicacgia.htm">CGI アプリケーションを構成する</a></strong>」では、Web サーバーに CGI アプリケーションをインストールし、構成する方法について説明します。</li>
+<li>「<strong><a href="iiwarndg.htm">ISAPI フィルタをインストールする</a></strong>」では、ISAPI フィルタについて、およびISAPI フィルタを Web サーバーのイベントに関連付ける方法について説明します。 </li>
+</ul>
+
+<p>関連するその他の項目</p>
+
+<ul>
+<li>ASP アプリケーションを記述する方法については、「<a href="../asp/iiwawelc.htm">Active Server Pages</a>」を参照してください。</li>
+<li>証明書の使い方については、「<a href="iicerts.htm">証明書</a>」を参照してください。</li>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+configure, configuration, configuring, web app, web apps, web applications, program, programs, programmer, develop, developer, code, coder, coders, development, application root, directory, starting-point directory, create, write, map, mapping, mappings, associate, associating, association, file name, filename, extension, dll, .dll, .exe, exe, isolate, isolated, isolation, out of process, out-of-process, oop, out-of-proc, crash, reliable, stable, reliability, stability, availability, available, uptime, downtime, protection, separate, memory space, cgi, script, time out, time-out, times out, time-outs, timeouts, cache, caching, isapi, extensions, scriptless asp, flow control, enhanced, objects, self-tuning, fine-tune, tune-up, tune up, automatic, threads, error-handling, line, number, .asp, file, server scriptlets, business logic, reusable, com, components, j++, vb, vba, visual basic, jscript, javascript, filters, install, set up, setup, asp, active server pages, automate, administration tasks, properties, property sheet, start, stop, starting, stopping, pause, pausing, debug, debugging, step through, errors, links, more information
+</layer></span></font>
+</body>
+</html>

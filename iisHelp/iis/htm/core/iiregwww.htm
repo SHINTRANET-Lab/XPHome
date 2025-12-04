@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>WWW サービスのレジストリ エントリ</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="DESCRIPTION" CONTENT="WWW サービスのレジストリ エントリの詳細など、システム レジストリについて説明します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="H1_37747197">WWW サービスのレジストリ エントリ</a></h1>
+
+<p>「<a href="iiregssp.htm">サービス固有のレジストリ エントリ</a>」に記載されているパラメータに加えて、WWW サービスでは、次のパラメータが保持されます。</p>
+
+<p>レジストリ パス</p>
+
+<p>HKEY_LOCAL_MACHINE\SYSTEM<br> \CurrentControlSet<br> &nbsp;\Services<br> &nbsp;&nbsp;\W3SVC<br> &nbsp;&nbsp;&nbsp;\Parameters</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<td width=100% bgcolor="#C0C0C0"><strong>AcceptByteRanges</strong><br> REG_DWORD</td>
+</tr>
+<tr>
+<td width=100%> <strong>範囲 :</strong> 1、0 <br> <strong>既定値 :</strong> 1 (有効)</td>
+</tr>
+<tr>
+<td width=100%>この値は、HTTP サーバーが &quot;bytes:&quot; タイプの &quot;Range&quot; ヘッダーを処理するかどうかを指定します。値を有効にした場合、サーバーは &quot;Accept-Range: bytes&quot; ヘッダー フィールドを送信し、範囲指定要求を受け付けていることを通知します。&quot;Range: bytes&quot; ヘッダー フィールドが指定された要求を受け取ると、サーバーはインターネット ドラフトの &quot;Byte range extension to HTTP&quot;に従って処理を行います。</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<td width=100% bgcolor="#C0C0C0"><strong>AllowSpecialCharsInShell</strong><br> REG_DWORD</td>
+</tr>
+<tr>
+<td width=100%> <strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (無効)</td>
+</tr>
+<tr>
+<td width=100%>この値は、バッチ ファイル (.bat ファイルおよび .cmd ファイル) の実行時に、コマンド ラインで Cmd.exe の特殊文字 [ | (  , ; % &lt; and &gt; ] を使用できるかどうかを指定します。これらの特殊文字は、重大なセキュリティ リスクを招くおそれがあります。このエントリの値を 1 に設定すると、悪意のある第三者がサーバー上でコマンドを実行できるようになります。したがって、この設定は、既定の 0 のままにしておくことを強くお勧めします。既定では、これらの特殊文字を、スクリプトにマップされた CGI アプレットに渡すことはできません。値を 1 に設定すると、これらの特殊文字をスクリプトにマップされた CGI アプレットに渡すことが可能になります。ただし、コマンド プロセッサにとって特別な意味を持つ、パイプ文字 (|) および標準 I/O リダイレクト文字の &quot;&lt;&quot; と &quot;&gt;&quot; は除きます。 </td>
+</tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<td width=100% bgcolor="#C0C0C0"><strong>DLCSupport</strong><br>REG_DWORD</td>
+</tr>
+<tr>
+<td width=100%><strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (無効)</td>
+</tr>
+<tr>
+<td width=100%>この値は、ダウンレベルのクライアントのサポートを有効にするかどうかを示します。旧バージョンのブラウザの中には、HOST ヘッダーをサポートしないものがあります。HOST ヘッダーは、1 つの IP アドレスを共有する複数の Web サイトにクライアントからアクセスする場合に使われます。値を 0 に設定すると、ダウンレベルのクライアントのサポートが無効になり、値を 1 に設定すると、ダウンレベルのクライアントのサポートが有効になります。 </td>
+</tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<td width=100% bgcolor="#C0C0C0"><strong>DLCCookieNameString</strong><br>REG_STRING</td>
+</tr>
+<tr>
+<td width=100%><strong>範囲 :</strong> 文字列<br> <strong>既定値 :</strong> なし</td>
+</tr>
+<tr>
+<td width=100%>この値は、サーバーが、ダウンレベルのクライアントに送信する HTTP cookie の名前を指定します。ダウンレベルのクライアントに送られる cookie は、&quot;疑似&quot; HOST ヘッダーとして機能します。サーバーは、これを使ってクライアントの HTTP 要求を適切な Web サイトにルーティングすることができます。</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<td width=100% bgcolor="#C0C0C0"><strong>DLCHostNameString</strong><br>REG_STRING</td>
+</tr>
+<tr>
+<td width=100%><strong>範囲 :</strong> 文字列<br> <strong>既定値 :</strong> なし</td>
+</tr>
+<tr>
+<td width=100%>この値は、<STRONG>DLCCookieMenuDocumentString</STRONG> に格納されている、ダウンレベル ホスト メニューを含む Web サイトの名前を示します。ダウンレベル ホスト メニューは、HTML ファイルや .asp ファイルなど、1 つの IP アドレスを共有するすべての Web サイトの一覧が記載されたドキュメントです。ユーザーは、このメニューから適切なサーバー インスタンスを選びます。</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<td width=100% bgcolor="#C0C0C0"><strong>DLCCookieMenuDocumentString</strong><br>REG_STRING</td>
+</tr>
+<tr>
+<td width=100%><strong>範囲 :</strong> 文字列<br> <strong>既定値 :</strong> なし</td>
+</tr>
+<tr>
+<td width=100%>この値は、cookie をサポートし、HOST ヘッダーをサポートしていないクライアントのためのホスト メニューのファイル名を指定します。cookie は、&quot;疑似&quot; HOST ヘッダーとして機能し、ホスト メニューには 1 つの IP アドレスを共有するすべての Web サイトの一覧が表示されます。この cookie は、ブラウザのセッションが終了するまで、ホストに対するすべての要求にアタッチされます。ただし、ブラウザのセッションが終了しても cookie は削除されません。</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>DLCMungeMenuDocumentString</strong><br>REG_STRING</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 文字列<br> <strong>既定値 :</strong> なし</td></tr>
+<tr><td width=100%>この値は、cookie をサポートしていないクライアントのためのホスト メニューのファイル名を指定します。このファイルは、URL にホスト名を埋め込むことによって、ダウンレベルのクライアントから要求された URL を解決するために使われます。</td></tr>
+</table>
+<p>&nbsp;</p>
+  
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong>DLCMenuString</strong><br>REG_STRING</td></tr>
+<tr><td width=100%><strong>範囲 :</strong> 文字列<br> <strong>既定値 :</strong> なし</td></tr>
+<tr><td width=100%>この値は、ダウンレベルのクライアントから要求される URL の特別な接頭語を指定します。サーバーは、ダウンレベルの要求をすべてこの文字列と照合します。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> LogSuccessfulRequests </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 1 (有効)</td></tr>
+<tr><td width=100%>正常に終了したアクティビティをログ ファイルに記録するかどうかを指定します。値を 1 に設定すると、正常に終了したアクティビティの記録が有効になり、0 に設定すると、無効になります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> SSIEnableCmdDirective </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (有効)</td></tr>
+<tr><td width=100%>シェル コマンドを実行するには、サーバー側インクルードの <STRONG>#exec cmd</STRONG> ディレクティブを使用します。セキュリティを重視するサイト、特に信頼できるユーザー以外のユーザーがサーバーにファイルを書き込めるようになっているサイトの場合には、セキュリティ強化のためにこの値を 0 に設定し、<STRONG>#exec cmd</STRONG> ディレクティブを無効にすることをお勧めします。既定では、この値はレジストリに存在しません。このディレクティブにシェル コマンドの実行を許可する場合は、まずこの値を作成し、次に値を 1 に設定します。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> TryExceptDisable </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 0、1 <br> <strong>既定値 :</strong> 0 (無効)</td></tr>
+<tr><td width=100%>このパラメータは、ISAPI アプリケーションの HttpExtensionproc() を呼び出すときの例外キャッシングを無効にします。TryExceptDisable を 1 に設定すると、ISAPI アプリケーションの誤動作によって例外が発生した場合、サーバーが停止します。これによって、開発者は、その場ですぐにデバッグを行うことができます。このパラメータは、ISAPI アプリケーションのデバッグをするときだけ 1 に設定します。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> UploadReadAhead </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 0 ～ 0x80000000<br> <strong>既定値 :</strong> 48 KB</td></tr>
+<tr><td width=100%>クライアントがサーバーにデータをポストすると、サーバーは既定でこのサイズのデータを読み込んだ後、アプリケーションに制御を渡します。アプリケーションは残りのデータを読み込みます。このサイズを増やす場合は、サーバーの RAM の容量を大きくする必要があります。 
+</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><td width=100% bgcolor="#C0C0C0"><strong> UsePoolThreadForCGI </strong><br>REG_DWORD</td></tr>
+<tr><td width=100%> <strong>範囲 :</strong> 1、0 <br><strong>既定値 :</strong> 1 (有効)</td></tr>
+<tr><td width=100%> 既定では、IIS は、サーバー プール スレッドを使って CGI の処理を行います。つまり、時間のかかる CGI 要求では、サーバー プール スレッドを消費することがあります。</td></tr>
+</table>
+<p>&nbsp;</p>
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE> 
+(The following words are used by Search; they are not intended to be displayed on the page.)
+W3SVC
+</layer></span>
+
+</font>
+</body>
+</html>

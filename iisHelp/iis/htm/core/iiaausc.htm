@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>監査について</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+<META NAME="description" CONTENT="ユーザーと Web サーバー のセキュリティ関連アクティビティを広範囲に監視する、監査技術の概念と使用方法について説明します。"> 
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="Auditing">監査について</a></h1>
+
+<p>監査の技術を使用して、セキュリティ関連アクティビティを広範囲に監視できます。監査は、ディレクトリおよびファイルへのアクセスまたはサーバー イベントに対する監査のポリシーの作成と、権限を持たないアクセスを検出するセキュリティ ログの監視から構成されます。</p>
+
+<p>セキュリティ ログを構成して、ディレクトリおよびファイルへのアクセス、またはサーバー イベントの一方、あるいは両方の情報を記録することができます。これらの情報は、Windows セキュリティ ログに記録されます。また、IIS のログ機能を使用して、IIS 固有のイベントを記録することもできます。ログ ファイルを定期的に確認することで、侵入を受けたり、ほかのセキュリティ問題が生じる可能性のあるサーバーやサイトの領域を検出することができます。ログの確認の詳細については、「<a href="iidetsc.htm">権限のないアクセスを検出する</a>」を参照してください。IIS のログ機能の詳細については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</p>
+
+
+
+<h2><a name="FileAccess">ディレクトリやファイルへのアクセスを監査する</a></h2>
+<p>ディレクトリまたはファイルに対して試みられたアクセスを、その成功か失敗かに関係なく監視できます。イベントには、ファイルの読み込み、ファイルへの書き込み、ディレクトリの参照などがあります。あらゆるファイルやディレクトリに対して、監査するイベントを選択できます。監査レベルは、Windows エクスプローラを使用して設定します。詳細については、「<a href="iimacsc.htm#auditset">監査を構成および監視する</a>」を参照してください。</p>
+
+<p><strong><font color="#0000FF">重要</font></strong>&nbsp;&nbsp;&nbsp; この監査機能を使用するには、サーバーのファイル システムが NTFS である必要があります。ファイル システムの変換については、Windows のマニュアルを参照してください。</p>
+
+<h2><a name="ServerEvents">サーバー イベントを監査する</a></h2>
+
+<p>Web サーバーへのログオンおよび Web サーバーからのログオフ、Web サーバーのセキュリティ ポリシーの変更、サーバー コンピュータのシャット ダウンなどのサーバー側イベントを監視できます。イベントは特定のディレクトリやファイルではなく、コンピュータ全体について監査されます。監査レベルは、Microsoft 管理コンソールの監査の原則を使用して設定します。詳細については、「<a href="iimacsc.htm#H1_37709189">監査を構成および監視する</a>」を参照してください。</p>
+
+
+<h2><a name="IISlogs">Web や FTP サイトへのアクセスを監査する</a></h2>
+<p>Web や FTP サイト、仮想ディレクトリ、またはファイルへのアクセスを、その成功か失敗かに関係なく監視できます。イベントには、ファイルの読み込み、ファイルへの書き込みなどがあります。あらゆるサイトや仮想ディレクトリ、またはファイルに対して監査するイベントを、選択できます。監査レベルは、<a href="iiabuti.htm">IIS スナップイン</a>を使用して設定します。詳細については、「<a href="iilogsa.htm">サイトの利用状況のログを収集する</a>」を参照してください。</p>
+
+
+<hr class="iis" size="1"><p align=center><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

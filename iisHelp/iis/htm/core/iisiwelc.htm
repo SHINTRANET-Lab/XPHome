@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html dir=LTR><head><title>サーバー側インクルード</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT>
+
+
+<META NAME="DESCRIPTION" CONTENT="サーバー側インクルードについての参照先を示します。">
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=shift_jis">
+
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><font face="ＭＳ Ｐゴシック">
+
+<h1><a name="serversideincludes">サーバー側インクルード</a></h1>
+
+<p>&quot;サーバー側インクルード (SSI)&quot; ディレクティブは、別ファイルの内容を HTML ページに挿入するよう、Web サーバーに命令します。インクルード ファイルを使うと、多くの Web ページで使う情報を単一のファイルに格納できます。たとえば、SSI ディレクティブを使って、Web サイトのすべてのドキュメントに著作権情報を挿入できます。 
+
+<p>ここでは、次の項目について説明します。</p>
+<ul>
+<li>「<strong><a href="iisiabt.htm">サーバー側インクルードについて</a></strong>」では、サーバー側インクルード ディレクティブについて説明します。</li>
+<li>「<strong><a href="iisienab.htm">サーバー側インクルードを有効にする</a></strong>」では、SSI ディレクティブの処理を有効にする方法について説明します。</li>
+<li>「<strong><a href="iisincf.htm">サーバー側インクルード ディレクティブの使い方</a></strong>」では、SSI ディレクティブを HTML ページに挿入する方法について説明します。</li>
+<li>「<STRONG><A HREF="iisiref.htm">サーバー側インクルード リファレンス</A></STRONG>」では、SSI ディレクティブを使用するときのリファレンス情報を紹介します。</li>
+</ul>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+
+<span style="display:none"><LAYER VISIBILITY=HIDE>
+(The following words are used by Search; they are not intended to be displayed on the page.)
+ssi, server-side, server side, include, includes, header, footer, directives, add, on the fly, preprocess, pre-process, logo, timestamp, date, time, copyright, boiler, boilerplate, notice, automatic, automatically, site-wide, every, each, enable, enabling, properties, property sheet
+</layer></span></font>
+</body>
+</html>

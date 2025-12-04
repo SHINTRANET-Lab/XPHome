@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML DIR=LTR>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=shift_jis">
+<TITLE>Global.asa リファレンス</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+//-->
+</script> <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub Window_OnLoad()
+   Dim frmContents
+   On Error Resume Next
+   If Not Parent Is Nothing Then
+      Set frmContents = Parent.Contents
+      If Not frmContents Is Nothing Then
+            frmContents.Window.TOCSynch_Click
+      End If
+   End If
+End Sub
+//--></SCRIPT><META NAME="DESCRIPTION" CONTENT="インターネット インフォメーション サービス リファレンス情報">
+<META HTTP-EQUIV="PICS-Label" CONTENT='(PICS-1.1 "<http://www.rsac.org/ratingsv01.html>" l comment "RSACi North America Server" by "inet@microsoft.com <mailto:inet@microsoft.com>" r (n 0 s 0 v 0 l 0))'>
+<META NAME="MS.LOCALE" CONTENT="JA">
+<META NAME="MS-IT-LOC" Content="インターネット インフォメーション サービス"> 
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<H1><A NAME="_global.asa_reference"></A><SUP></SUP>Global.asa リファレンス</H1>
+
+<P>Global.asa ファイルは省略可能なファイルです。このファイルには、イベント スクリプトを指定したり、セッション スコープまたはアプリケーション スコープを持つオブジェクトを宣言したりできます。Global.asa ファイルは、ユーザーに表示されるコンテンツ ファイルではありません。代わりに、このファイルには、アプリケーション全体で使われるイベント情報とオブジェクトが格納されます。このファイルの名前は、必ず Global.asa とします。また、アプリケーションのルート ディレクトリに格納する必要があります。1 つのアプリケーションは 1 つの Global.asa ファイルしか持つことができません。</P>
+
+<P>Global.asa ファイルには、次のものしか指定できません。
+
+<UL type=disc>
+	<LI><A HREF="/iishelp/iis/htm/asp/glob3gj7.htm">アプリケーション イベント</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/glob5j03.htm">セッション イベント</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/glob822b.htm">&lt;OBJECT&gt; 宣言</A></li>
+
+	<LI><A HREF="/iishelp/iis/htm/asp/glob4b5f.htm">TypeLibrary 宣言</A></li>
+</UL>
+
+<P>&lt;SCRIPT&gt; タグで囲まれていないスクリプト、またはセッション スコープかアプリケーション スコープを持たないオブジェクトを定義するスクリプトを指定した場合、サーバーはエラーを返します。アプリケーション イベントまたはセッション イベントでは使用されないタグ付きスクリプトは、サーバーによって無視されます。また、ファイル内の HTML もすべて無視されます。</P>
+
+<P>Global.asa ファイルに指定するスクリプトは、サポートされている任意のスクリプト言語で作成できます。複数のイベント スクリプトまたはオブジェクト スクリプトが同じスクリプト言語を使っている場合、単独の &lt;SCRIPT&gt; タグ セット内に一緒に指定できます。</P>
+
+<P>Global.asa ファイルの変更を保存すると、サーバーは Global.asa ファイルを再コンパイルする前に、現在のアプリケーション要求の処理をすべて終了します。その間、サーバーでは新しい要求を拒否し、アプリケーションの再開中に要求は処理されない、というメッセージが表示されます。</P>
+
+<P>現在のユーザー要求がすべて処理されると、サーバーはアクティブなすべてのセッションを削除し、削除するセッションごとに Session_OnEnd イベントを呼び出します。その後、アプリケーションを閉じ、Application_OnEnd イベントを呼び出します。次に、Global.asa ファイルが再コンパイルされます。その後、ユーザー要求があるとアプリケーションが起動し、新しいセッションが作成され、Application_OnStart イベントと Session_OnStart イベントが発生します。</P>
+
+<P>Global.asa ファイルで宣言されたプロシージャは、Application_OnStart、Application_OnEnd、Session_OnStart、および Session_OnEnd の各イベントに関連付けられた 1 つまたは複数のスクリプトからしか呼び出すことはできません。ASP ベースのアプリケーションの ASP ページでは利用できません。 </P>
+
+<P>アプリケーションの中でプロシージャを共有するには、まず別ファイルでプロシージャを宣言します。次に、サーバー側インクルード (SSI) ステートメントを使用して、プロシージャの呼び出し元の ASP ページにファイルをインクルードします。通常、インクルード ファイルの拡張子は、.inc です。</P>
+
+<P><span class=le><B>注&nbsp;&nbsp;&nbsp;</B></span>このマニュアルで使用する例では、Microsoft<sup>&reg;</sup> Visual Basic<sup>&reg;</sup> Scripting Edition (VBScript) を主要スクリプト言語として使用します。ただし、ASP スクリプトは JScript<sup>&reg;</sup> などのサポートされる任意のスクリプト言語で作成できます。主要スクリプト言語の変更方法の詳細については、「<A HREF="iiwascln.htm">スクリプト言語を使用する</A>」を参照してください。</P>
+<hr class="iis" size="1">
+<p align="center"><em><a href="../../../common/colegal.htm">&copy; 1997-2001 Microsoft Corporation.All rights reserved.</a></em></p>
+</BODY>
+</HTML>
