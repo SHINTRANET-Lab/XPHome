@@ -15,6 +15,7 @@
         <h1><img src="mmc.gif"> SHINTRANET.EU.JP.ORG</h1>
         
         <p><em>SINCE 2025/12/4;Last Update 2025/12/12</em></p>
+        <p id="visit-counter"><strong>アクセスカウンタ:</strong> <span id="visit-count">読み込み中...</span></p>
         <p>このサイトはWindowsXP上のIIS 5.1によってホストされています。</p>
         <h2>コンテンツ</h2>
         <p><a href="http://shinanomai.xyz">モダン ホームページ</a></p>
@@ -68,5 +69,59 @@
         <hr>
         <img src="winxp.gif" alt="Windows XP Logo" width="240">
         <p>Powered by Microsoft WindowsXP</p>
+        <script>
+            (function () {
+                var endpoint = 'acc.json';
+                var counterEl = document.getElementById('visit-count');
+                var backupKey = 'shintranet-visit-count';
+
+                function setDisplay(count) {
+                    counterEl.textContent = count.toLocaleString();
+                }
+
+                function handleError(message) {
+                    console.error(message);
+                    var cached = window.localStorage ? window.localStorage.getItem(backupKey) : null;
+                    if (cached) {
+                        setDisplay(parseInt(cached, 10));
+                        return;
+                    }
+                    counterEl.textContent = '----';
+                }
+
+                function updateServer(nextCount) {
+                    return fetch(endpoint, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ count: nextCount })
+                    });
+                }
+
+                fetch(endpoint + '?ts=' + Date.now(), { cache: 'no-store' })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('Failed to load current count');
+                        }
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        var base = (data && typeof data.count === 'number' && data.count >= 0) ? data.count : 0;
+                        var nextCount = base + 1;
+                        setDisplay(nextCount);
+                        if (window.localStorage) {
+                            window.localStorage.setItem(backupKey, nextCount);
+                        }
+                        return updateServer(nextCount);
+                    })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('Failed to persist updated count');
+                        }
+                    })
+                    .catch(function (error) {
+                        handleError(error.message);
+                    });
+            })();
+        </script>
     </body>
 </html>
