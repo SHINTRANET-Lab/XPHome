@@ -8,3 +8,7 @@
 body {
     background-color: rgb(204, 255, 255);
 }
+dt {
+    color: blue;
+    font-size: 20px;
+}
