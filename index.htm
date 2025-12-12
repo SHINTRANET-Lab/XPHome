@@ -71,9 +71,13 @@
         <p>Powered by Microsoft WindowsXP</p>
         <script>
             (function () {
-                var endpoint = 'acc.json';
+                var endpoint = 'cgi/counter.vbs';
                 var counterEl = document.getElementById('visit-count');
-                var backupKey = 'shintranet-visit-count';
+
+                if (!counterEl) {
+                    console.warn('visit-count element is missing');
+                    return;
+                }
 
                 function setDisplay(count) {
                     counterEl.textContent = count.toLocaleString();
@@ -81,20 +85,7 @@
 
                 function handleError(message) {
                     console.error(message);
-                    var cached = window.localStorage ? window.localStorage.getItem(backupKey) : null;
-                    if (cached) {
-                        setDisplay(parseInt(cached, 10));
-                        return;
-                    }
                     counterEl.textContent = '----';
-                }
-
-                function updateServer(nextCount) {
-                    return fetch(endpoint, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ count: nextCount })
-                    });
                 }
 
                 fetch(endpoint + '?ts=' + Date.now(), { cache: 'no-store' })
@@ -105,18 +96,10 @@
                         return response.json();
                     })
                     .then(function (data) {
-                        var base = (data && typeof data.count === 'number' && data.count >= 0) ? data.count : 0;
-                        var nextCount = base + 1;
-                        setDisplay(nextCount);
-                        if (window.localStorage) {
-                            window.localStorage.setItem(backupKey, nextCount);
+                        if (!data || typeof data.count !== 'number') {
+                            throw new Error('Counter payload is invalid');
                         }
-                        return updateServer(nextCount);
-                    })
-                    .then(function (response) {
-                        if (!response.ok) {
-                            throw new Error('Failed to persist updated count');
-                        }
+                        setDisplay(data.count);
                     })
                     .catch(function (error) {
                         handleError(error.message);
