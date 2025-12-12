@@ -20,7 +20,7 @@
         <p><a href="http://shinanomai.xyz">モダン ホームページ</a></p>
         <p><a href="http://shinanomai.xyz/static/HTML1.html">Quirks ホームページ</a></p>
         <p><a href="/iis.html">IIS デフォルト ホームページ</a></p>
-        <p><a href="/lib/index.htm">しなの用語集</a></p>
+        <p><a href="/lib/index.htm">しなの用語集(工事中)</a></p>
         <h2>自己紹介</h2>
         <p>信濃眞伊と申します。しなのまいと呼んでくれると助かります。2025年現在、現役の工業高校生です。</p>
         <p>よく<a href="https://misskey.shinanomai.xyz/@SHINANOMAI">Misskey(自鯖)</a>や<a href="https://vrchat.com/home/user/usr_ba9a668e-e4d6-4efd-ae2f-bc5e35602696">VRChat</a>に潜んでいます。</p>
@@ -69,42 +69,5 @@
         <hr>
         <img src="winxp.gif" alt="Windows XP Logo" width="240">
         <p>Powered by Microsoft WindowsXP</p>
-        <script>
-            (function () {
-                var endpoint = 'cgi/counter.vbs';
-                var counterEl = document.getElementById('visit-count');
-
-                if (!counterEl) {
-                    console.warn('visit-count element is missing');
-                    return;
-                }
-
-                function setDisplay(count) {
-                    counterEl.textContent = count.toLocaleString();
-                }
-
-                function handleError(message) {
-                    console.error(message);
-                    counterEl.textContent = '----';
-                }
-
-                fetch(endpoint + '?ts=' + Date.now(), { cache: 'no-store' })
-                    .then(function (response) {
-                        if (!response.ok) {
-                            throw new Error('Failed to load current count');
-                        }
-                        return response.json();
-                    })
-                    .then(function (data) {
-                        if (!data || typeof data.count !== 'number') {
-                            throw new Error('Counter payload is invalid');
-                        }
-                        setDisplay(data.count);
-                    })
-                    .catch(function (error) {
-                        handleError(error.message);
-                    });
-            })();
-        </script>
     </body>
 </html>
